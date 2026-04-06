@@ -1,0 +1,18 @@
+for i in $(seq 1 48); do
+    defects4j checkout -p Compress -v ${i}b -w ~/Documents/IPACO/Project2/dataset_analysis/d4j_bugs/Compress/Compress_${i}_buggy
+    defects4j checkout -p Compress -v ${i}f -w ~/Documents/IPACO/Project2/dataset_analysis/d4j_bugs/Compress/Compress_${i}_fixed
+    echo "✅ Done Compress $i"
+done
+
+
+for i in $(seq 1 48); do 
+echo "=== Compress Bug ${i} ===" 
+diff -rq ~/Documents/IPACO/Project2/dataset_analysis/d4j_bugs/Compress/Compress_${i}_buggy/src ~/Documents/IPACO/Project2/dataset_analysis/d4j_bugs/Compress/Compress_${i}_fixed/src 2>/dev/null 
+done
+
+
+diff /home/rajatvarshney/Documents/IPACO/Project2/dataset_analysis/d4j_bugs/Closure/Closure_43_buggy/src/com/google/javascript/jscomp/TypedScopeCreator.java /home/rajatvarshney/Documents/IPACO/Project2/dataset_analysis/d4j_bugs/Closure/Closure_43_fixed/src/com/google/javascript/jscomp/TypedScopeCreator.java
+
+
+git difftool --tool=vscode --no-index  ~/Documents/IPACO/Project_2/dataset_analysis/d4j_bugs/Cli/Cli_19_buggy ~/Documents/IPACO/Project_2/dataset_analysis/d4j_bugs/Cli/Cli_19_fixed
+
