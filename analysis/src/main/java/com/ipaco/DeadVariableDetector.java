@@ -190,7 +190,7 @@ public class DeadVariableDetector {
                         Body body = method.getBody();
                         logInfo("\nMethod: " + method.getName());
                         // Call the dead variable analysis for each method body.
-                        detectDeadAssignments(body);
+                        detectDeadAssignments(body, className, method.getName());
                     }
                 }
             }
@@ -207,7 +207,7 @@ public class DeadVariableDetector {
      *
      * @param body The Jimple body of the method to analyze.
      */
-    private static void detectDeadAssignments(Body body) {
+    private static void detectDeadAssignments(Body body, String className, String methodName) {
         logInfo("\n--- Dead variable analysis for " + body.getMethodSignature().getName() + " ---");
 
         // 1. Get the control flow graph as a list of statements.
@@ -299,11 +299,39 @@ public class DeadVariableDetector {
                     sootup.core.jimple.basic.Local definedVar = (sootup.core.jimple.basic.Local) leftOp;
                     // A definition is dead if the variable is NOT live after this statement
                     if (!out.get(i).contains(definedVar)) {
-                        logInfo("Dead assignment at line " + i + ": " + stmt);
+                        String sourceLocation = formatSourceLocation(stmt);
+                        logInfo("Dead assignment [class=" + className
+                                + ", method=" + methodName
+                                + ", jimpleIndex=" + i
+                                + ", source=" + sourceLocation
+                                + "]: " + stmt);
                     }
                 }
             }
         }
+    }
+
+    private static String formatSourceLocation(sootup.core.jimple.common.stmt.Stmt stmt) {
+        sootup.core.model.Position pos = stmt.getPositionInfo().getStmtPosition();
+        int firstLine = pos.getFirstLine();
+        int firstCol = pos.getFirstCol();
+        int lastLine = pos.getLastLine();
+        int lastCol = pos.getLastCol();
+
+        if (firstLine <= 0) {
+            return "line=unknown";
+        }
+
+        if (lastLine > 0 && (lastLine != firstLine || lastCol > 0)) {
+            return "line=" + firstLine + ":" + Math.max(firstCol, 1)
+                    + "-" + lastLine + ":" + Math.max(lastCol, 1);
+        }
+
+        if (firstCol > 0) {
+            return "line=" + firstLine + ":" + firstCol;
+        }
+
+        return "line=" + firstLine;
     }
 
 }
