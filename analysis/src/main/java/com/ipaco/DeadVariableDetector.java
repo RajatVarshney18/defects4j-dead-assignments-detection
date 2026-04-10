@@ -19,6 +19,22 @@ import java.util.*;
 public class DeadVariableDetector {
     private static PrintWriter reportWriter;
 
+    static class DeadAssignment {
+        String className;
+        String methodName;
+        int jimpleIndex;
+        String sourceLocation;
+        String jimpleStmt;
+
+        DeadAssignment(String className, String methodName, int jimpleIndex, String sourceLocation, String jimpleStmt) {
+            this.className = className;
+            this.methodName = methodName;
+            this.jimpleIndex = jimpleIndex;
+            this.sourceLocation = sourceLocation;
+            this.jimpleStmt = jimpleStmt;
+        }
+    }
+
     public static void main(String[] args) throws IOException {
         if (args.length == 0 || "--help".equals(args[0]) || "-h".equals(args[0])) {
             printUsage();
@@ -124,6 +140,45 @@ public class DeadVariableDetector {
         }
     }
 
+    private static String repeatString(String s, int count) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < count; i++) {
+            sb.append(s);
+        }
+        return sb.toString();
+    }
+
+    private static String inferJavaFilename(String className) {
+        int lastDot = className.lastIndexOf('.');
+        String simpleClassName = lastDot >= 0 ? className.substring(lastDot + 1) : className;
+        return simpleClassName + ".java";
+    }
+
+    private static void printMethodWithFindings(Body body, String className, String methodName, List<DeadAssignment> findings) {
+        String javaFilename = inferJavaFilename(className);
+        String separator = repeatString("=", 80);
+        logInfo("\n" + separator);
+        logInfo("CLASS: " + className + " (file: " + javaFilename + ")");
+        logInfo("METHOD: " + methodName);
+        logInfo(separator);
+
+        // Print Jimple body
+        logInfo("\n--- Jimple IR ---");
+        List<sootup.core.jimple.common.stmt.Stmt> stmts = body.getStmtGraph().getStmts();
+        for (int i = 0; i < stmts.size(); i++) {
+            logInfo(String.format("  [%3d] %s", i, stmts.get(i)));
+        }
+
+        // Print findings
+        logInfo("\n--- Dead Variable Findings (" + findings.size() + " found) ---");
+        for (DeadAssignment finding : findings) {
+            logInfo(String.format("  [jimpleIndex=%d, source=%s] %s",
+                    finding.jimpleIndex,
+                    finding.sourceLocation,
+                    finding.jimpleStmt));
+        }
+    }
+
     // ... (findClassNamesInDirectory, getAllJarFiles methods remain the same as before) ...
     /**
      * Recursively walks a directory, finds all .class files, and converts their
@@ -188,9 +243,11 @@ public class DeadVariableDetector {
                 if (method.isConcrete()) {
                     if (method.hasBody()) {
                         Body body = method.getBody();
-                        logInfo("\nMethod: " + method.getName());
                         // Call the dead variable analysis for each method body.
-                        detectDeadAssignments(body, className, method.getName());
+                        List<DeadAssignment> findings = detectDeadAssignments(body, className, method.getName());
+                        if (!findings.isEmpty()) {
+                            printMethodWithFindings(body, className, method.getName(), findings);
+                        }
                     }
                 }
             }
@@ -202,13 +259,14 @@ public class DeadVariableDetector {
     // --- Core Liveness Analysis Logic (SootUp 2.0.0 Compatible) ---
 
     /**
-     * Performs a live variable analysis on the given Jimple body and prints
+     * Performs a live variable analysis on the given Jimple body and returns
      * any statements that constitute a dead assignment.
      *
      * @param body The Jimple body of the method to analyze.
+     * @return list of dead assignments found
      */
-    private static void detectDeadAssignments(Body body, String className, String methodName) {
-        logInfo("\n--- Dead variable analysis for " + body.getMethodSignature().getName() + " ---");
+    private static List<DeadAssignment> detectDeadAssignments(Body body, String className, String methodName) {
+        List<DeadAssignment> findings = new ArrayList<>();
 
         // 1. Get the control flow graph as a list of statements.
         sootup.core.graph.StmtGraph<?> stmtGraph = body.getStmtGraph();
@@ -300,15 +358,12 @@ public class DeadVariableDetector {
                     // A definition is dead if the variable is NOT live after this statement
                     if (!out.get(i).contains(definedVar)) {
                         String sourceLocation = formatSourceLocation(stmt);
-                        logInfo("Dead assignment [class=" + className
-                                + ", method=" + methodName
-                                + ", jimpleIndex=" + i
-                                + ", source=" + sourceLocation
-                                + "]: " + stmt);
+                        findings.add(new DeadAssignment(className, methodName, i, sourceLocation, stmt.toString()));
                     }
                 }
             }
         }
+        return findings;
     }
 
     private static String formatSourceLocation(sootup.core.jimple.common.stmt.Stmt stmt) {
