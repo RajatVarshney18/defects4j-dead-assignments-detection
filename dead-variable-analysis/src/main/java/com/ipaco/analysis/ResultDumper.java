@@ -38,7 +38,7 @@ public class ResultDumper {
                                .format(new Date());
 
         writer.println("================================================================");
-        writer.println("  DEAD VARIABLE ANALYSIS — PASS 1 RESULTS");
+        writer.println("  DEAD VARIABLE ANALYSIS — RESULTS");
         writer.println("  Generated : " + timestamp);
         writer.println("================================================================");
         writer.println();
