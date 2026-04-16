@@ -57,7 +57,6 @@ public class Main {
         System.out.println();
 
         int totalMethods        = 0;
-        int totalDeadStatements = 0;
 
         // ----------------------------------------------------------------
         // Step 5: iterate every class and every method
@@ -119,7 +118,6 @@ public class Main {
         // ----------------------------------------------------------------
         System.out.println("==============================");
         System.out.println("Methods analyzed  : " + totalMethods);
-        System.out.println("Dead assignments  : " + totalDeadStatements);
 
         dumper.close(totalMethods);
 
