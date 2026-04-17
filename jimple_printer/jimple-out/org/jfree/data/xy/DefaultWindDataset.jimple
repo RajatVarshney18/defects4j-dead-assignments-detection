@@ -1,0 +1,455 @@
+// ========================================================================
+// CLASS : org.jfree.data.xy.DefaultWindDataset
+// ========================================================================
+
+[PUBLIC, SUPER] class org.jfree.data.xy.DefaultWindDataset extends org.jfree.data.xy.AbstractXYDataset implements org.jfree.chart.util.PublicCloneable, org.jfree.data.xy.WindDataset {
+
+    // ---- method: <org.jfree.data.xy.DefaultWindDataset: void <init>()> ----
+    {
+        java.lang.Object $stack1, $stack2;
+        java.util.ArrayList #l0, #l1;
+        org.jfree.data.xy.DefaultWindDataset this;
+    
+    
+        this := @this: org.jfree.data.xy.DefaultWindDataset;
+        specialinvoke this.<org.jfree.data.xy.AbstractXYDataset: void <init>()>();
+        $stack1 = new java.util.ArrayList;
+        #l1 = (java.util.ArrayList) $stack1;
+        specialinvoke #l1.<java.util.ArrayList: void <init>()>();
+        this.<org.jfree.data.xy.DefaultWindDataset: java.util.List seriesKeys> = (java.util.List) $stack1;
+        $stack2 = new java.util.ArrayList;
+        #l0 = (java.util.ArrayList) $stack2;
+        specialinvoke #l0.<java.util.ArrayList: void <init>()>();
+        this.<org.jfree.data.xy.DefaultWindDataset: java.util.List allSeriesData> = (java.util.List) $stack2;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.xy.DefaultWindDataset: java.lang.Comparable getSeriesKey(int)> ----
+    {
+        int $stack7, series;
+        java.lang.Comparable $stack10;
+        java.lang.IllegalArgumentException #l0;
+        java.lang.Object $stack6, $stack9;
+        java.lang.String $stack5;
+        java.lang.StringBuffer $stack2, $stack3, $stack4;
+        java.lang.Throwable #l1;
+        java.util.List $stack8;
+        org.jfree.data.xy.DefaultWindDataset this;
+    
+    
+        this := @this: org.jfree.data.xy.DefaultWindDataset;
+        series := @parameter0: int;
+    
+        if series < 0 goto label1;
+        $stack7 = virtualinvoke this.<org.jfree.data.xy.DefaultWindDataset: int getSeriesCount()>();
+    
+        if series < $stack7 goto label2;
+    
+      label1:
+        $stack6 = new java.lang.IllegalArgumentException;
+        $stack2 = new java.lang.StringBuffer;
+        specialinvoke $stack2.<java.lang.StringBuffer: void <init>()>();
+        $stack3 = virtualinvoke $stack2.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>("Invalid series index: ");
+        $stack4 = virtualinvoke $stack3.<java.lang.StringBuffer: java.lang.StringBuffer append(int)>(series);
+        $stack5 = virtualinvoke $stack4.<java.lang.StringBuffer: java.lang.String toString()>();
+        #l0 = (java.lang.IllegalArgumentException) $stack6;
+        specialinvoke #l0.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>($stack5);
+        #l1 = (java.lang.Throwable) $stack6;
+    
+        throw #l1;
+    
+      label2:
+        $stack8 = this.<org.jfree.data.xy.DefaultWindDataset: java.util.List seriesKeys>;
+        $stack9 = interfaceinvoke $stack8.<java.util.List: java.lang.Object get(int)>(series);
+        $stack10 = (java.lang.Comparable) $stack9;
+    
+        return $stack10;
+    }
+
+    // ---- method: <org.jfree.data.xy.DefaultWindDataset: java.lang.Number getWindForce(int,int)> ----
+    {
+        int item, series;
+        java.lang.Number $stack8;
+        java.lang.Object $stack6, $stack7;
+        java.util.List $stack5, oneSeriesData;
+        org.jfree.data.xy.DefaultWindDataset this;
+        org.jfree.data.xy.WindDataItem windItem;
+    
+    
+        this := @this: org.jfree.data.xy.DefaultWindDataset;
+        series := @parameter0: int;
+        item := @parameter1: int;
+        $stack5 = this.<org.jfree.data.xy.DefaultWindDataset: java.util.List allSeriesData>;
+        $stack6 = interfaceinvoke $stack5.<java.util.List: java.lang.Object get(int)>(series);
+        oneSeriesData = (java.util.List) $stack6;
+        $stack7 = interfaceinvoke oneSeriesData.<java.util.List: java.lang.Object get(int)>(item);
+        windItem = (org.jfree.data.xy.WindDataItem) $stack7;
+        $stack8 = virtualinvoke windItem.<org.jfree.data.xy.WindDataItem: java.lang.Number getWindForce()>();
+    
+        return $stack8;
+    }
+
+    // ---- method: <org.jfree.data.xy.DefaultWindDataset: void <init>(java.util.List,java.lang.Object[][][])> ----
+    {
+        boolean $stack20, $stack21;
+        int $stack12, $stack13, itemIndex, maxItemCount, seriesCount, seriesIndex;
+        java.lang.IllegalArgumentException #l6, #l8;
+        java.lang.Integer $stack22;
+        java.lang.Long $stack31;
+        java.lang.Number #l2, windForce, xDate#1;
+        java.lang.Object $stack14, $stack15, $stack25, $stack28, $stack32, $stack33, xNumber, xObject;
+        java.lang.Object[] $stack19, $stack24, $stack27;
+        java.lang.Object[][] $stack16, $stack18, $stack23, $stack26;
+        java.lang.Object[][][] data;
+        java.lang.Throwable #l0, #l7;
+        java.util.ArrayList #l1, #l5, oneSeriesData;
+        java.util.Date xDate#0;
+        java.util.List #l3, #l4, $stack17, seriesKeys;
+        long $stack30;
+        org.jfree.data.xy.DefaultWindDataset this;
+        org.jfree.data.xy.WindDataItem $stack29;
+    
+    
+        this := @this: org.jfree.data.xy.DefaultWindDataset;
+        seriesKeys := @parameter0: java.util.List;
+        data := @parameter1: java.lang.Object[][][];
+        specialinvoke this.<org.jfree.data.xy.AbstractXYDataset: void <init>()>();
+    
+        if seriesKeys != null goto label01;
+        $stack33 = new java.lang.IllegalArgumentException;
+        #l6 = (java.lang.IllegalArgumentException) $stack33;
+        specialinvoke #l6.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'seriesKeys\' argument.");
+        #l0 = (java.lang.Throwable) $stack33;
+    
+        throw #l0;
+    
+      label01:
+        $stack13 = interfaceinvoke seriesKeys.<java.util.List: int size()>();
+        $stack12 = lengthof data;
+    
+        if $stack13 == $stack12 goto label02;
+        $stack32 = new java.lang.IllegalArgumentException;
+        #l8 = (java.lang.IllegalArgumentException) $stack32;
+        specialinvoke #l8.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("The number of series keys does not match the number of series in the data array.");
+        #l7 = (java.lang.Throwable) $stack32;
+    
+        throw #l7;
+    
+      label02:
+        this.<org.jfree.data.xy.DefaultWindDataset: java.util.List seriesKeys> = seriesKeys;
+        seriesCount = lengthof data;
+        $stack14 = new java.util.ArrayList;
+        #l5 = (java.util.ArrayList) $stack14;
+        specialinvoke #l5.<java.util.ArrayList: void <init>(int)>(seriesCount);
+        this.<org.jfree.data.xy.DefaultWindDataset: java.util.List allSeriesData> = (java.util.List) $stack14;
+        seriesIndex = 0;
+    
+      label03:
+        if seriesIndex >= seriesCount goto label10;
+        $stack15 = new java.util.ArrayList;
+        #l1 = (java.util.ArrayList) $stack15;
+        specialinvoke #l1.<java.util.ArrayList: void <init>()>();
+        oneSeriesData = (java.util.ArrayList) $stack15;
+        $stack16 = data[seriesIndex];
+        maxItemCount = lengthof $stack16;
+        itemIndex = 0;
+    
+      label04:
+        if itemIndex >= maxItemCount goto label09;
+        $stack18 = data[seriesIndex];
+        $stack19 = $stack18[itemIndex];
+        xObject = $stack19[0];
+    
+        if xObject == null goto label08;
+        $stack20 = xObject instanceof java.lang.Number;
+    
+        if $stack20 == 0 goto label05;
+        xNumber = (java.lang.Number) xObject;
+    
+        goto label07;
+    
+      label05:
+        $stack21 = xObject instanceof java.util.Date;
+    
+        if $stack21 == 0 goto label06;
+        xDate#0 = (java.util.Date) xObject;
+        $stack31 = new java.lang.Long;
+        $stack30 = virtualinvoke xDate#0.<java.util.Date: long getTime()>();
+        specialinvoke $stack31.<java.lang.Long: void <init>(long)>($stack30);
+        xNumber = $stack31;
+    
+        goto label07;
+    
+      label06:
+        $stack22 = new java.lang.Integer;
+        specialinvoke $stack22.<java.lang.Integer: void <init>(int)>(0);
+        xNumber = $stack22;
+    
+      label07:
+        $stack23 = data[seriesIndex];
+        $stack24 = $stack23[itemIndex];
+        $stack25 = $stack24[1];
+        xDate#1 = (java.lang.Number) $stack25;
+        $stack26 = data[seriesIndex];
+        $stack27 = $stack26[itemIndex];
+        $stack28 = $stack27[2];
+        windForce = (java.lang.Number) $stack28;
+        $stack29 = new org.jfree.data.xy.WindDataItem;
+        #l2 = (java.lang.Number) xNumber;
+        specialinvoke $stack29.<org.jfree.data.xy.WindDataItem: void <init>(java.lang.Number,java.lang.Number,java.lang.Number)>(#l2, xDate#1, windForce);
+        #l3 = (java.util.List) $stack15;
+        interfaceinvoke #l3.<java.util.List: boolean add(java.lang.Object)>($stack29);
+    
+      label08:
+        itemIndex = itemIndex + 1;
+    
+        goto label04;
+    
+      label09:
+        #l4 = (java.util.List) $stack15;
+        staticinvoke <java.util.Collections: void sort(java.util.List)>(#l4);
+        $stack17 = this.<org.jfree.data.xy.DefaultWindDataset: java.util.List allSeriesData>;
+        interfaceinvoke $stack17.<java.util.List: void add(int,java.lang.Object)>(seriesIndex, $stack15);
+        seriesIndex = seriesIndex + 1;
+    
+        goto label03;
+    
+      label10:
+        return;
+    }
+
+    // ---- method: <org.jfree.data.xy.DefaultWindDataset: java.lang.Number getX(int,int)> ----
+    {
+        int item, series;
+        java.lang.Number $stack8;
+        java.lang.Object $stack6, $stack7;
+        java.util.List $stack5, oneSeriesData;
+        org.jfree.data.xy.DefaultWindDataset this;
+        org.jfree.data.xy.WindDataItem windItem;
+    
+    
+        this := @this: org.jfree.data.xy.DefaultWindDataset;
+        series := @parameter0: int;
+        item := @parameter1: int;
+        $stack5 = this.<org.jfree.data.xy.DefaultWindDataset: java.util.List allSeriesData>;
+        $stack6 = interfaceinvoke $stack5.<java.util.List: java.lang.Object get(int)>(series);
+        oneSeriesData = (java.util.List) $stack6;
+        $stack7 = interfaceinvoke oneSeriesData.<java.util.List: java.lang.Object get(int)>(item);
+        windItem = (org.jfree.data.xy.WindDataItem) $stack7;
+        $stack8 = virtualinvoke windItem.<org.jfree.data.xy.WindDataItem: java.lang.Number getX()>();
+    
+        return $stack8;
+    }
+
+    // ---- method: <org.jfree.data.xy.DefaultWindDataset: java.util.List seriesNameListFromDataArray(java.lang.Object[][])> ----
+    {
+        int $stack6, i, seriesCount;
+        java.lang.Object $stack4;
+        java.lang.Object[][] data;
+        java.lang.String $stack9;
+        java.lang.StringBuffer $stack5, $stack7, $stack8;
+        java.util.ArrayList #l2, seriesNameList;
+        java.util.List #l0, #l1;
+    
+    
+        data := @parameter0: java.lang.Object[][];
+        seriesCount = lengthof data;
+        $stack4 = new java.util.ArrayList;
+        #l2 = (java.util.ArrayList) $stack4;
+        specialinvoke #l2.<java.util.ArrayList: void <init>(int)>(seriesCount);
+        seriesNameList = (java.util.ArrayList) $stack4;
+        i = 0;
+    
+      label1:
+        if i >= seriesCount goto label2;
+        $stack5 = new java.lang.StringBuffer;
+        specialinvoke $stack5.<java.lang.StringBuffer: void <init>()>();
+        $stack7 = virtualinvoke $stack5.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>("Series ");
+        $stack6 = i + 1;
+        $stack8 = virtualinvoke $stack7.<java.lang.StringBuffer: java.lang.StringBuffer append(int)>($stack6);
+        $stack9 = virtualinvoke $stack8.<java.lang.StringBuffer: java.lang.String toString()>();
+        #l0 = (java.util.List) $stack4;
+        interfaceinvoke #l0.<java.util.List: boolean add(java.lang.Object)>($stack9);
+        i = i + 1;
+    
+        goto label1;
+    
+      label2:
+        #l1 = (java.util.List) $stack4;
+    
+        return #l1;
+    }
+
+    // ---- method: <org.jfree.data.xy.DefaultWindDataset: int getItemCount(int)> ----
+    {
+        int $stack11, $stack8, series;
+        java.lang.IllegalArgumentException #l0;
+        java.lang.Object $stack10, $stack7;
+        java.lang.String $stack6;
+        java.lang.StringBuffer $stack3, $stack4, $stack5;
+        java.lang.Throwable #l1;
+        java.util.List $stack9, oneSeriesData;
+        org.jfree.data.xy.DefaultWindDataset this;
+    
+    
+        this := @this: org.jfree.data.xy.DefaultWindDataset;
+        series := @parameter0: int;
+    
+        if series < 0 goto label1;
+        $stack8 = virtualinvoke this.<org.jfree.data.xy.DefaultWindDataset: int getSeriesCount()>();
+    
+        if series < $stack8 goto label2;
+    
+      label1:
+        $stack7 = new java.lang.IllegalArgumentException;
+        $stack3 = new java.lang.StringBuffer;
+        specialinvoke $stack3.<java.lang.StringBuffer: void <init>()>();
+        $stack4 = virtualinvoke $stack3.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>("Invalid series index: ");
+        $stack5 = virtualinvoke $stack4.<java.lang.StringBuffer: java.lang.StringBuffer append(int)>(series);
+        $stack6 = virtualinvoke $stack5.<java.lang.StringBuffer: java.lang.String toString()>();
+        #l0 = (java.lang.IllegalArgumentException) $stack7;
+        specialinvoke #l0.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>($stack6);
+        #l1 = (java.lang.Throwable) $stack7;
+    
+        throw #l1;
+    
+      label2:
+        $stack9 = this.<org.jfree.data.xy.DefaultWindDataset: java.util.List allSeriesData>;
+        $stack10 = interfaceinvoke $stack9.<java.util.List: java.lang.Object get(int)>(series);
+        oneSeriesData = (java.util.List) $stack10;
+        $stack11 = interfaceinvoke oneSeriesData.<java.util.List: int size()>();
+    
+        return $stack11;
+    }
+
+    // ---- method: <org.jfree.data.xy.DefaultWindDataset: boolean equals(java.lang.Object)> ----
+    {
+        boolean $stack3, $stack6, $stack9;
+        java.lang.Object obj;
+        java.util.List $stack4, $stack5, $stack7, $stack8;
+        org.jfree.data.xy.DefaultWindDataset that, this;
+    
+    
+        this := @this: org.jfree.data.xy.DefaultWindDataset;
+        obj := @parameter0: java.lang.Object;
+    
+        if this != obj goto label1;
+    
+        return 1;
+    
+      label1:
+        $stack3 = obj instanceof org.jfree.data.xy.DefaultWindDataset;
+    
+        if $stack3 != 0 goto label2;
+    
+        return 0;
+    
+      label2:
+        that = (org.jfree.data.xy.DefaultWindDataset) obj;
+        $stack5 = this.<org.jfree.data.xy.DefaultWindDataset: java.util.List seriesKeys>;
+        $stack4 = that.<org.jfree.data.xy.DefaultWindDataset: java.util.List seriesKeys>;
+        $stack6 = interfaceinvoke $stack5.<java.util.List: boolean equals(java.lang.Object)>($stack4);
+    
+        if $stack6 != 0 goto label3;
+    
+        return 0;
+    
+      label3:
+        $stack8 = this.<org.jfree.data.xy.DefaultWindDataset: java.util.List allSeriesData>;
+        $stack7 = that.<org.jfree.data.xy.DefaultWindDataset: java.util.List allSeriesData>;
+        $stack9 = interfaceinvoke $stack8.<java.util.List: boolean equals(java.lang.Object)>($stack7);
+    
+        if $stack9 != 0 goto label4;
+    
+        return 0;
+    
+      label4:
+        return 1;
+    }
+
+    // ---- method: <org.jfree.data.xy.DefaultWindDataset: int getSeriesCount()> ----
+    {
+        int $stack2;
+        java.util.List $stack1;
+        org.jfree.data.xy.DefaultWindDataset this;
+    
+    
+        this := @this: org.jfree.data.xy.DefaultWindDataset;
+        $stack1 = this.<org.jfree.data.xy.DefaultWindDataset: java.util.List allSeriesData>;
+        $stack2 = interfaceinvoke $stack1.<java.util.List: int size()>();
+    
+        return $stack2;
+    }
+
+    // ---- method: <org.jfree.data.xy.DefaultWindDataset: void <init>(java.lang.String[],java.lang.Object[][][])> ----
+    {
+        java.lang.Object[][][] data;
+        java.lang.String[] seriesNames;
+        java.util.List $stack3;
+        org.jfree.data.xy.DefaultWindDataset this;
+    
+    
+        this := @this: org.jfree.data.xy.DefaultWindDataset;
+        seriesNames := @parameter0: java.lang.String[];
+        data := @parameter1: java.lang.Object[][][];
+        $stack3 = staticinvoke <java.util.Arrays: java.util.List asList(java.lang.Object[])>(seriesNames);
+        specialinvoke this.<org.jfree.data.xy.DefaultWindDataset: void <init>(java.util.List,java.lang.Object[][][])>($stack3, data);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.xy.DefaultWindDataset: void <init>(java.lang.Object[][][])> ----
+    {
+        java.lang.Object[][][] data;
+        java.util.List $stack2;
+        org.jfree.data.xy.DefaultWindDataset this;
+    
+    
+        this := @this: org.jfree.data.xy.DefaultWindDataset;
+        data := @parameter0: java.lang.Object[][][];
+        $stack2 = staticinvoke <org.jfree.data.xy.DefaultWindDataset: java.util.List seriesNameListFromDataArray(java.lang.Object[][])>(data);
+        specialinvoke this.<org.jfree.data.xy.DefaultWindDataset: void <init>(java.util.List,java.lang.Object[][][])>($stack2, data);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.xy.DefaultWindDataset: java.lang.Number getY(int,int)> ----
+    {
+        int item, series;
+        java.lang.Number $stack3;
+        org.jfree.data.xy.DefaultWindDataset this;
+    
+    
+        this := @this: org.jfree.data.xy.DefaultWindDataset;
+        series := @parameter0: int;
+        item := @parameter1: int;
+        $stack3 = virtualinvoke this.<org.jfree.data.xy.DefaultWindDataset: java.lang.Number getWindForce(int,int)>(series, item);
+    
+        return $stack3;
+    }
+
+    // ---- method: <org.jfree.data.xy.DefaultWindDataset: java.lang.Number getWindDirection(int,int)> ----
+    {
+        int item, series;
+        java.lang.Number $stack8;
+        java.lang.Object $stack6, $stack7;
+        java.util.List $stack5, oneSeriesData;
+        org.jfree.data.xy.DefaultWindDataset this;
+        org.jfree.data.xy.WindDataItem windItem;
+    
+    
+        this := @this: org.jfree.data.xy.DefaultWindDataset;
+        series := @parameter0: int;
+        item := @parameter1: int;
+        $stack5 = this.<org.jfree.data.xy.DefaultWindDataset: java.util.List allSeriesData>;
+        $stack6 = interfaceinvoke $stack5.<java.util.List: java.lang.Object get(int)>(series);
+        oneSeriesData = (java.util.List) $stack6;
+        $stack7 = interfaceinvoke oneSeriesData.<java.util.List: java.lang.Object get(int)>(item);
+        windItem = (org.jfree.data.xy.WindDataItem) $stack7;
+        $stack8 = virtualinvoke windItem.<org.jfree.data.xy.WindDataItem: java.lang.Number getWindDirection()>();
+    
+        return $stack8;
+    }
+
+}

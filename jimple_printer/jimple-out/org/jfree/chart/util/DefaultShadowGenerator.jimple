@@ -1,0 +1,458 @@
+// ========================================================================
+// CLASS : org.jfree.chart.util.DefaultShadowGenerator
+// ========================================================================
+
+[PUBLIC, SUPER] class org.jfree.chart.util.DefaultShadowGenerator extends java.lang.Object implements org.jfree.chart.util.ShadowGenerator, java.io.Serializable {
+
+    // ---- method: <org.jfree.chart.util.DefaultShadowGenerator: void <init>(int,java.awt.Color,float,int,double)> ----
+    {
+        double angle;
+        float opacity;
+        int distance, size;
+        java.awt.Color color;
+        java.lang.IllegalArgumentException #l0;
+        java.lang.Object $stack7;
+        java.lang.Throwable #l1;
+        org.jfree.chart.util.DefaultShadowGenerator this;
+    
+    
+        this := @this: org.jfree.chart.util.DefaultShadowGenerator;
+        size := @parameter0: int;
+        color := @parameter1: java.awt.Color;
+        opacity := @parameter2: float;
+        distance := @parameter3: int;
+        angle := @parameter4: double;
+        specialinvoke this.<java.lang.Object: void <init>()>();
+    
+        if color != null goto label1;
+        $stack7 = new java.lang.IllegalArgumentException;
+        #l0 = (java.lang.IllegalArgumentException) $stack7;
+        specialinvoke #l0.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'color\' argument.");
+        #l1 = (java.lang.Throwable) $stack7;
+    
+        throw #l1;
+    
+      label1:
+        this.<org.jfree.chart.util.DefaultShadowGenerator: int shadowSize> = size;
+        this.<org.jfree.chart.util.DefaultShadowGenerator: java.awt.Color shadowColor> = color;
+        this.<org.jfree.chart.util.DefaultShadowGenerator: float shadowOpacity> = opacity;
+        this.<org.jfree.chart.util.DefaultShadowGenerator: int distance> = distance;
+        this.<org.jfree.chart.util.DefaultShadowGenerator: double angle> = angle;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.util.DefaultShadowGenerator: int calculateOffsetX()> ----
+    {
+        double $stack1, $stack3, $stack4, $stack5;
+        int $stack2, $stack6, $stack7, $stack8;
+        org.jfree.chart.util.DefaultShadowGenerator this;
+    
+    
+        this := @this: org.jfree.chart.util.DefaultShadowGenerator;
+        $stack1 = this.<org.jfree.chart.util.DefaultShadowGenerator: double angle>;
+        $stack3 = staticinvoke <java.lang.Math: double cos(double)>($stack1);
+        $stack2 = this.<org.jfree.chart.util.DefaultShadowGenerator: int distance>;
+        $stack4 = (double) $stack2;
+        $stack5 = $stack3 * $stack4;
+        $stack6 = (int) $stack5;
+        $stack7 = this.<org.jfree.chart.util.DefaultShadowGenerator: int shadowSize>;
+        $stack8 = $stack6 - $stack7;
+    
+        return $stack8;
+    }
+
+    // ---- method: <org.jfree.chart.util.DefaultShadowGenerator: int hashCode()> ----
+    {
+        double $stack5, $stack7;
+        float $stack4;
+        int $stack2, $stack6, hash#0, hash#1, hash#2, hash#3, hash#4;
+        java.awt.Paint #l0;
+        java.lang.Object $stack3;
+        org.jfree.chart.util.DefaultShadowGenerator this;
+    
+    
+        this := @this: org.jfree.chart.util.DefaultShadowGenerator;
+        $stack2 = this.<org.jfree.chart.util.DefaultShadowGenerator: int shadowSize>;
+        hash#0 = staticinvoke <org.jfree.chart.util.HashUtilities: int hashCode(int,int)>(17, $stack2);
+        $stack3 = this.<org.jfree.chart.util.DefaultShadowGenerator: java.awt.Color shadowColor>;
+        #l0 = (java.awt.Paint) $stack3;
+        hash#1 = staticinvoke <org.jfree.chart.util.HashUtilities: int hashCode(int,java.awt.Paint)>(hash#0, #l0);
+        $stack4 = this.<org.jfree.chart.util.DefaultShadowGenerator: float shadowOpacity>;
+        $stack5 = (double) $stack4;
+        hash#2 = staticinvoke <org.jfree.chart.util.HashUtilities: int hashCode(int,double)>(hash#1, $stack5);
+        $stack6 = this.<org.jfree.chart.util.DefaultShadowGenerator: int distance>;
+        hash#3 = staticinvoke <org.jfree.chart.util.HashUtilities: int hashCode(int,int)>(hash#2, $stack6);
+        $stack7 = this.<org.jfree.chart.util.DefaultShadowGenerator: double angle>;
+        hash#4 = staticinvoke <org.jfree.chart.util.HashUtilities: int hashCode(int,double)>(hash#3, $stack7);
+    
+        return hash#4;
+    }
+
+    // ---- method: <org.jfree.chart.util.DefaultShadowGenerator: java.awt.Color getShadowColor()> ----
+    {
+        java.awt.Color $stack1;
+        org.jfree.chart.util.DefaultShadowGenerator this;
+    
+    
+        this := @this: org.jfree.chart.util.DefaultShadowGenerator;
+        $stack1 = this.<org.jfree.chart.util.DefaultShadowGenerator: java.awt.Color shadowColor>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.util.DefaultShadowGenerator: boolean equals(java.lang.Object)> ----
+    {
+        boolean $stack3, $stack8;
+        byte $stack11, $stack16;
+        double $stack14, $stack15;
+        float $stack10, $stack9;
+        int $stack12, $stack13, $stack4, $stack5;
+        java.awt.Color $stack6, $stack7;
+        java.lang.Object obj;
+        org.jfree.chart.util.DefaultShadowGenerator that, this;
+    
+    
+        this := @this: org.jfree.chart.util.DefaultShadowGenerator;
+        obj := @parameter0: java.lang.Object;
+    
+        if obj != this goto label1;
+    
+        return 1;
+    
+      label1:
+        $stack3 = obj instanceof org.jfree.chart.util.DefaultShadowGenerator;
+    
+        if $stack3 != 0 goto label2;
+    
+        return 0;
+    
+      label2:
+        that = (org.jfree.chart.util.DefaultShadowGenerator) obj;
+        $stack5 = this.<org.jfree.chart.util.DefaultShadowGenerator: int shadowSize>;
+        $stack4 = that.<org.jfree.chart.util.DefaultShadowGenerator: int shadowSize>;
+    
+        if $stack5 == $stack4 goto label3;
+    
+        return 0;
+    
+      label3:
+        $stack7 = this.<org.jfree.chart.util.DefaultShadowGenerator: java.awt.Color shadowColor>;
+        $stack6 = that.<org.jfree.chart.util.DefaultShadowGenerator: java.awt.Color shadowColor>;
+        $stack8 = virtualinvoke $stack7.<java.awt.Color: boolean equals(java.lang.Object)>($stack6);
+    
+        if $stack8 != 0 goto label4;
+    
+        return 0;
+    
+      label4:
+        $stack9 = this.<org.jfree.chart.util.DefaultShadowGenerator: float shadowOpacity>;
+        $stack10 = that.<org.jfree.chart.util.DefaultShadowGenerator: float shadowOpacity>;
+        $stack11 = $stack9 cmpl $stack10;
+    
+        if $stack11 == 0 goto label5;
+    
+        return 0;
+    
+      label5:
+        $stack13 = this.<org.jfree.chart.util.DefaultShadowGenerator: int distance>;
+        $stack12 = that.<org.jfree.chart.util.DefaultShadowGenerator: int distance>;
+    
+        if $stack13 == $stack12 goto label6;
+    
+        return 0;
+    
+      label6:
+        $stack14 = this.<org.jfree.chart.util.DefaultShadowGenerator: double angle>;
+        $stack15 = that.<org.jfree.chart.util.DefaultShadowGenerator: double angle>;
+        $stack16 = $stack14 cmpl $stack15;
+    
+        if $stack16 == 0 goto label7;
+    
+        return 0;
+    
+      label7:
+        return 1;
+    }
+
+    // ---- method: <org.jfree.chart.util.DefaultShadowGenerator: int getDistance()> ----
+    {
+        int $stack1;
+        org.jfree.chart.util.DefaultShadowGenerator this;
+    
+    
+        this := @this: org.jfree.chart.util.DefaultShadowGenerator;
+        $stack1 = this.<org.jfree.chart.util.DefaultShadowGenerator: int distance>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.util.DefaultShadowGenerator: void <init>()> ----
+    {
+        java.awt.Color $stack1;
+        org.jfree.chart.util.DefaultShadowGenerator this;
+    
+    
+        this := @this: org.jfree.chart.util.DefaultShadowGenerator;
+        $stack1 = <java.awt.Color: java.awt.Color black>;
+        specialinvoke this.<org.jfree.chart.util.DefaultShadowGenerator: void <init>(int,java.awt.Color,float,int,double)>(5, $stack1, 0.5F, 5, -0.7853981633974483);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.util.DefaultShadowGenerator: double getAngle()> ----
+    {
+        double $stack1;
+        org.jfree.chart.util.DefaultShadowGenerator this;
+    
+    
+        this := @this: org.jfree.chart.util.DefaultShadowGenerator;
+        $stack1 = this.<org.jfree.chart.util.DefaultShadowGenerator: double angle>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.util.DefaultShadowGenerator: java.awt.image.BufferedImage createDropShadow(java.awt.image.BufferedImage)> ----
+    {
+        int $stack10, $stack11, $stack13, $stack14, $stack4, $stack5, $stack6, $stack7, $stack8, $stack9;
+        java.awt.Graphics2D g2;
+        java.awt.image.BufferedImage $stack12, source, subject;
+        org.jfree.chart.util.DefaultShadowGenerator this;
+    
+    
+        this := @this: org.jfree.chart.util.DefaultShadowGenerator;
+        source := @parameter0: java.awt.image.BufferedImage;
+        $stack12 = new java.awt.image.BufferedImage;
+        $stack5 = virtualinvoke source.<java.awt.image.BufferedImage: int getWidth()>();
+        $stack4 = this.<org.jfree.chart.util.DefaultShadowGenerator: int shadowSize>;
+        $stack6 = $stack4 * 2;
+        $stack11 = $stack5 + $stack6;
+        $stack8 = virtualinvoke source.<java.awt.image.BufferedImage: int getHeight()>();
+        $stack7 = this.<org.jfree.chart.util.DefaultShadowGenerator: int shadowSize>;
+        $stack9 = $stack7 * 2;
+        $stack10 = $stack8 + $stack9;
+        specialinvoke $stack12.<java.awt.image.BufferedImage: void <init>(int,int,int)>($stack11, $stack10, 2);
+        subject = $stack12;
+        g2 = virtualinvoke $stack12.<java.awt.image.BufferedImage: java.awt.Graphics2D createGraphics()>();
+        $stack14 = this.<org.jfree.chart.util.DefaultShadowGenerator: int shadowSize>;
+        $stack13 = this.<org.jfree.chart.util.DefaultShadowGenerator: int shadowSize>;
+        virtualinvoke g2.<java.awt.Graphics2D: void drawImage(java.awt.image.BufferedImage,java.awt.image.BufferedImageOp,int,int)>(source, null, $stack14, $stack13);
+        virtualinvoke g2.<java.awt.Graphics2D: void dispose()>();
+        virtualinvoke this.<org.jfree.chart.util.DefaultShadowGenerator: void applyShadow(java.awt.image.BufferedImage)>($stack12);
+    
+        return $stack12;
+    }
+
+    // ---- method: <org.jfree.chart.util.DefaultShadowGenerator: int getShadowSize()> ----
+    {
+        int $stack1;
+        org.jfree.chart.util.DefaultShadowGenerator this;
+    
+    
+        this := @this: org.jfree.chart.util.DefaultShadowGenerator;
+        $stack1 = this.<org.jfree.chart.util.DefaultShadowGenerator: int shadowSize>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.util.DefaultShadowGenerator: float getShadowOpacity()> ----
+    {
+        float $stack1;
+        org.jfree.chart.util.DefaultShadowGenerator this;
+    
+    
+        this := @this: org.jfree.chart.util.DefaultShadowGenerator;
+        $stack1 = this.<org.jfree.chart.util.DefaultShadowGenerator: float shadowOpacity>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.util.DefaultShadowGenerator: int calculateOffsetY()> ----
+    {
+        double $stack1, $stack3, $stack4, $stack5;
+        int $stack2, $stack6, $stack7, $stack8, $stack9;
+        org.jfree.chart.util.DefaultShadowGenerator this;
+    
+    
+        this := @this: org.jfree.chart.util.DefaultShadowGenerator;
+        $stack1 = this.<org.jfree.chart.util.DefaultShadowGenerator: double angle>;
+        $stack3 = staticinvoke <java.lang.Math: double sin(double)>($stack1);
+        $stack2 = this.<org.jfree.chart.util.DefaultShadowGenerator: int distance>;
+        $stack4 = (double) $stack2;
+        $stack5 = $stack3 * $stack4;
+        $stack6 = (int) $stack5;
+        $stack7 = neg $stack6;
+        $stack8 = this.<org.jfree.chart.util.DefaultShadowGenerator: int shadowSize>;
+        $stack9 = $stack7 - $stack8;
+    
+        return $stack9;
+    }
+
+    // ---- method: <org.jfree.chart.util.DefaultShadowGenerator: void applyShadow(java.awt.image.BufferedImage)> ----
+    {
+        boolean historyIdx#0;
+        float $stack31, $stack32, $stack34, $stack35, $stack45, $stack46, sumDivider;
+        int $stack21, $stack22, $stack23, $stack25, $stack26, $stack30, $stack33, $stack36, $stack37, $stack38, $stack39, $stack40, $stack41, $stack42, $stack43, $stack44, $stack47, $stack48, $stack49, $stack50, $stack51, $stack52, $stack53, $stack54, a#0, a#1, a#2, a#3, a#4, a#5, aSum#0, aSum#1, aSum#2, aSum#3, bufferOffset#0, bufferOffset#1, bufferOffset#2, bufferOffset#3, dstHeight, dstWidth, historyIdx#1, historyIdx#2, lastPixelOffset, left, right, shadowRgb, x#0, x#1, x#2, x#3, xStart, xStop, y#0, y#1, yStart, yStop;
+        int[] aHistory, dataBuffer;
+        java.awt.Color $stack24;
+        java.awt.image.BufferedImage image;
+        java.awt.image.DataBuffer $stack28;
+        java.awt.image.DataBufferInt $stack29;
+        java.awt.image.WritableRaster $stack27;
+        org.jfree.chart.util.DefaultShadowGenerator this;
+    
+    
+        this := @this: org.jfree.chart.util.DefaultShadowGenerator;
+        image := @parameter0: java.awt.image.BufferedImage;
+        dstWidth = virtualinvoke image.<java.awt.image.BufferedImage: int getWidth()>();
+        dstHeight = virtualinvoke image.<java.awt.image.BufferedImage: int getHeight()>();
+        $stack21 = this.<org.jfree.chart.util.DefaultShadowGenerator: int shadowSize>;
+        $stack22 = $stack21 - 1;
+        left = $stack22 >> 1;
+        $stack23 = this.<org.jfree.chart.util.DefaultShadowGenerator: int shadowSize>;
+        right = $stack23 - left;
+        xStart = left;
+        xStop = dstWidth - right;
+        yStart = left;
+        yStop = dstHeight - right;
+        $stack24 = this.<org.jfree.chart.util.DefaultShadowGenerator: java.awt.Color shadowColor>;
+        $stack25 = virtualinvoke $stack24.<java.awt.Color: int getRGB()>();
+        shadowRgb = $stack25 & 16777215;
+        $stack26 = this.<org.jfree.chart.util.DefaultShadowGenerator: int shadowSize>;
+        aHistory = newarray (int)[$stack26];
+        historyIdx#0 = 0;
+        $stack27 = virtualinvoke image.<java.awt.image.BufferedImage: java.awt.image.WritableRaster getRaster()>();
+        $stack28 = virtualinvoke $stack27.<java.awt.image.WritableRaster: java.awt.image.DataBuffer getDataBuffer()>();
+        $stack29 = (java.awt.image.DataBufferInt) $stack28;
+        dataBuffer = virtualinvoke $stack29.<java.awt.image.DataBufferInt: int[] getData()>();
+        lastPixelOffset = right * dstWidth;
+        $stack31 = this.<org.jfree.chart.util.DefaultShadowGenerator: float shadowOpacity>;
+        $stack30 = this.<org.jfree.chart.util.DefaultShadowGenerator: int shadowSize>;
+        $stack32 = (float) $stack30;
+        sumDivider = $stack31 / $stack32;
+        y#0 = 0;
+        bufferOffset#0 = 0;
+    
+      label01:
+        if y#0 >= dstHeight goto label07;
+        aSum#0 = 0;
+        historyIdx#1 = 0;
+        x#0 = 0;
+    
+      label02:
+        $stack44 = this.<org.jfree.chart.util.DefaultShadowGenerator: int shadowSize>;
+    
+        if x#0 >= $stack44 goto label03;
+        $stack54 = dataBuffer[bufferOffset#0];
+        a#0 = $stack54 >>> 24;
+        aHistory[x#0] = a#0;
+        aSum#0 = aSum#0 + a#0;
+        x#0 = x#0 + 1;
+        bufferOffset#0 = bufferOffset#0 + 1;
+    
+        goto label02;
+    
+      label03:
+        bufferOffset#1 = bufferOffset#0 - right;
+        x#1 = left;
+    
+      label04:
+        if x#1 >= xStop goto label06;
+        $stack45 = (float) aSum#0;
+        $stack46 = $stack45 * sumDivider;
+        a#1 = (int) $stack46;
+        $stack47 = a#1 << 24;
+        $stack48 = $stack47 | shadowRgb;
+        dataBuffer[bufferOffset#1] = $stack48;
+        $stack49 = aHistory[historyIdx#1];
+        aSum#1 = aSum#0 - $stack49;
+        $stack50 = bufferOffset#1 + right;
+        $stack51 = dataBuffer[$stack50];
+        a#2 = $stack51 >>> 24;
+        aHistory[historyIdx#1] = a#2;
+        aSum#0 = aSum#1 + a#2;
+        historyIdx#1 = historyIdx#1 + 1;
+        $stack52 = this.<org.jfree.chart.util.DefaultShadowGenerator: int shadowSize>;
+    
+        if historyIdx#1 < $stack52 goto label05;
+        $stack53 = this.<org.jfree.chart.util.DefaultShadowGenerator: int shadowSize>;
+        historyIdx#1 = historyIdx#1 - $stack53;
+    
+      label05:
+        x#1 = x#1 + 1;
+        bufferOffset#1 = bufferOffset#1 + 1;
+    
+        goto label04;
+    
+      label06:
+        y#0 = y#0 + 1;
+        bufferOffset#0 = y#0 * dstWidth;
+    
+        goto label01;
+    
+      label07:
+        y#1 = 0;
+        bufferOffset#2 = 0;
+    
+      label08:
+        if y#1 >= dstWidth goto label14;
+        aSum#2 = 0;
+        historyIdx#2 = 0;
+        x#2 = 0;
+    
+      label09:
+        $stack33 = this.<org.jfree.chart.util.DefaultShadowGenerator: int shadowSize>;
+    
+        if x#2 >= $stack33 goto label10;
+        $stack43 = dataBuffer[bufferOffset#2];
+        a#3 = $stack43 >>> 24;
+        aHistory[x#2] = a#3;
+        aSum#2 = aSum#2 + a#3;
+        x#2 = x#2 + 1;
+        bufferOffset#2 = bufferOffset#2 + dstWidth;
+    
+        goto label09;
+    
+      label10:
+        bufferOffset#3 = bufferOffset#2 - lastPixelOffset;
+        x#3 = left;
+    
+      label11:
+        if x#3 >= yStop goto label13;
+        $stack34 = (float) aSum#2;
+        $stack35 = $stack34 * sumDivider;
+        a#4 = (int) $stack35;
+        $stack36 = a#4 << 24;
+        $stack37 = $stack36 | shadowRgb;
+        dataBuffer[bufferOffset#3] = $stack37;
+        $stack38 = aHistory[historyIdx#2];
+        aSum#3 = aSum#2 - $stack38;
+        $stack39 = bufferOffset#3 + lastPixelOffset;
+        $stack40 = dataBuffer[$stack39];
+        a#5 = $stack40 >>> 24;
+        aHistory[historyIdx#2] = a#5;
+        aSum#2 = aSum#3 + a#5;
+        historyIdx#2 = historyIdx#2 + 1;
+        $stack41 = this.<org.jfree.chart.util.DefaultShadowGenerator: int shadowSize>;
+    
+        if historyIdx#2 < $stack41 goto label12;
+        $stack42 = this.<org.jfree.chart.util.DefaultShadowGenerator: int shadowSize>;
+        historyIdx#2 = historyIdx#2 - $stack42;
+    
+      label12:
+        x#3 = x#3 + 1;
+        bufferOffset#3 = bufferOffset#3 + dstWidth;
+    
+        goto label11;
+    
+      label13:
+        y#1 = y#1 + 1;
+        bufferOffset#2 = y#1;
+    
+        goto label08;
+    
+      label14:
+        return;
+    }
+
+}

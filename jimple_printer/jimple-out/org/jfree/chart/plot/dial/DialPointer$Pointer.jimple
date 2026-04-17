@@ -1,0 +1,403 @@
+// ========================================================================
+// CLASS : org.jfree.chart.plot.dial.DialPointer$Pointer
+// ========================================================================
+
+[PUBLIC, SUPER] class org.jfree.chart.plot.dial.DialPointer$Pointer extends org.jfree.chart.plot.dial.DialPointer {
+
+    // ---- method: <org.jfree.chart.plot.dial.DialPointer$Pointer: void <init>(int)> ----
+    {
+        int datasetIndex;
+        java.lang.Object $stack2, $stack3;
+        org.jfree.chart.plot.dial.DialPointer$Pointer this;
+    
+    
+        this := @this: org.jfree.chart.plot.dial.DialPointer$Pointer;
+        datasetIndex := @parameter0: int;
+        specialinvoke this.<org.jfree.chart.plot.dial.DialPointer: void <init>(int)>(datasetIndex);
+        this.<org.jfree.chart.plot.dial.DialPointer$Pointer: double widthRadius> = 0.05;
+        $stack2 = <java.awt.Color: java.awt.Color gray>;
+        this.<org.jfree.chart.plot.dial.DialPointer$Pointer: java.awt.Paint fillPaint> = (java.awt.Paint) $stack2;
+        $stack3 = <java.awt.Color: java.awt.Color black>;
+        this.<org.jfree.chart.plot.dial.DialPointer$Pointer: java.awt.Paint outlinePaint> = (java.awt.Paint) $stack3;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.plot.dial.DialPointer$Pointer: void writeObject(java.io.ObjectOutputStream)> ----
+    {
+        java.awt.Paint $stack2, $stack3;
+        java.io.ObjectOutputStream stream;
+        org.jfree.chart.plot.dial.DialPointer$Pointer this;
+    
+    
+        this := @this: org.jfree.chart.plot.dial.DialPointer$Pointer;
+        stream := @parameter0: java.io.ObjectOutputStream;
+        virtualinvoke stream.<java.io.ObjectOutputStream: void defaultWriteObject()>();
+        $stack2 = this.<org.jfree.chart.plot.dial.DialPointer$Pointer: java.awt.Paint fillPaint>;
+        staticinvoke <org.jfree.chart.util.SerialUtilities: void writePaint(java.awt.Paint,java.io.ObjectOutputStream)>($stack2, stream);
+        $stack3 = this.<org.jfree.chart.plot.dial.DialPointer$Pointer: java.awt.Paint outlinePaint>;
+        staticinvoke <org.jfree.chart.util.SerialUtilities: void writePaint(java.awt.Paint,java.io.ObjectOutputStream)>($stack3, stream);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.plot.dial.DialPointer$Pointer: void setOutlinePaint(java.awt.Paint)> ----
+    {
+        java.awt.Paint paint;
+        java.lang.IllegalArgumentException #l0;
+        java.lang.Object $stack3;
+        java.lang.Throwable #l1;
+        org.jfree.chart.plot.dial.DialLayerChangeEvent $stack2;
+        org.jfree.chart.plot.dial.DialPointer$Pointer this;
+    
+    
+        this := @this: org.jfree.chart.plot.dial.DialPointer$Pointer;
+        paint := @parameter0: java.awt.Paint;
+    
+        if paint != null goto label1;
+        $stack3 = new java.lang.IllegalArgumentException;
+        #l0 = (java.lang.IllegalArgumentException) $stack3;
+        specialinvoke #l0.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'paint\' argument.");
+        #l1 = (java.lang.Throwable) $stack3;
+    
+        throw #l1;
+    
+      label1:
+        this.<org.jfree.chart.plot.dial.DialPointer$Pointer: java.awt.Paint outlinePaint> = paint;
+        $stack2 = new org.jfree.chart.plot.dial.DialLayerChangeEvent;
+        specialinvoke $stack2.<org.jfree.chart.plot.dial.DialLayerChangeEvent: void <init>(org.jfree.chart.plot.dial.DialLayer)>(this);
+        virtualinvoke this.<org.jfree.chart.plot.dial.DialPointer$Pointer: void notifyListeners(org.jfree.chart.plot.dial.DialLayerChangeEvent)>($stack2);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.plot.dial.DialPointer$Pointer: void readObject(java.io.ObjectInputStream)> ----
+    {
+        java.awt.Paint $stack2, $stack3;
+        java.io.ObjectInputStream stream;
+        org.jfree.chart.plot.dial.DialPointer$Pointer this;
+    
+    
+        this := @this: org.jfree.chart.plot.dial.DialPointer$Pointer;
+        stream := @parameter0: java.io.ObjectInputStream;
+        virtualinvoke stream.<java.io.ObjectInputStream: void defaultReadObject()>();
+        $stack2 = staticinvoke <org.jfree.chart.util.SerialUtilities: java.awt.Paint readPaint(java.io.ObjectInputStream)>(stream);
+        this.<org.jfree.chart.plot.dial.DialPointer$Pointer: java.awt.Paint fillPaint> = $stack2;
+        $stack3 = staticinvoke <org.jfree.chart.util.SerialUtilities: java.awt.Paint readPaint(java.io.ObjectInputStream)>(stream);
+        this.<org.jfree.chart.plot.dial.DialPointer$Pointer: java.awt.Paint outlinePaint> = $stack3;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.plot.dial.DialPointer$Pointer: boolean equals(java.lang.Object)> ----
+    {
+        boolean $stack12, $stack13, $stack3, $stack9;
+        byte $stack6;
+        double $stack4, $stack5;
+        java.awt.Paint $stack10, $stack11, $stack7, $stack8;
+        java.lang.Object obj;
+        org.jfree.chart.plot.dial.DialPointer$Pointer that, this;
+    
+    
+        this := @this: org.jfree.chart.plot.dial.DialPointer$Pointer;
+        obj := @parameter0: java.lang.Object;
+    
+        if obj != this goto label1;
+    
+        return 1;
+    
+      label1:
+        $stack3 = obj instanceof org.jfree.chart.plot.dial.DialPointer$Pointer;
+    
+        if $stack3 != 0 goto label2;
+    
+        return 0;
+    
+      label2:
+        that = (org.jfree.chart.plot.dial.DialPointer$Pointer) obj;
+        $stack4 = this.<org.jfree.chart.plot.dial.DialPointer$Pointer: double widthRadius>;
+        $stack5 = that.<org.jfree.chart.plot.dial.DialPointer$Pointer: double widthRadius>;
+        $stack6 = $stack4 cmpl $stack5;
+    
+        if $stack6 == 0 goto label3;
+    
+        return 0;
+    
+      label3:
+        $stack8 = this.<org.jfree.chart.plot.dial.DialPointer$Pointer: java.awt.Paint fillPaint>;
+        $stack7 = that.<org.jfree.chart.plot.dial.DialPointer$Pointer: java.awt.Paint fillPaint>;
+        $stack9 = staticinvoke <org.jfree.chart.util.PaintUtilities: boolean equal(java.awt.Paint,java.awt.Paint)>($stack8, $stack7);
+    
+        if $stack9 != 0 goto label4;
+    
+        return 0;
+    
+      label4:
+        $stack11 = this.<org.jfree.chart.plot.dial.DialPointer$Pointer: java.awt.Paint outlinePaint>;
+        $stack10 = that.<org.jfree.chart.plot.dial.DialPointer$Pointer: java.awt.Paint outlinePaint>;
+        $stack12 = staticinvoke <org.jfree.chart.util.PaintUtilities: boolean equal(java.awt.Paint,java.awt.Paint)>($stack11, $stack10);
+    
+        if $stack12 != 0 goto label5;
+    
+        return 0;
+    
+      label5:
+        $stack13 = specialinvoke this.<org.jfree.chart.plot.dial.DialPointer: boolean equals(java.lang.Object)>(obj);
+    
+        return $stack13;
+    }
+
+    // ---- method: <org.jfree.chart.plot.dial.DialPointer$Pointer: java.awt.Paint getOutlinePaint()> ----
+    {
+        java.awt.Paint $stack1;
+        org.jfree.chart.plot.dial.DialPointer$Pointer this;
+    
+    
+        this := @this: org.jfree.chart.plot.dial.DialPointer$Pointer;
+        $stack1 = this.<org.jfree.chart.plot.dial.DialPointer$Pointer: java.awt.Paint outlinePaint>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.plot.dial.DialPointer$Pointer: void setFillPaint(java.awt.Paint)> ----
+    {
+        java.awt.Paint paint;
+        java.lang.IllegalArgumentException #l1;
+        java.lang.Object $stack3;
+        java.lang.Throwable #l0;
+        org.jfree.chart.plot.dial.DialLayerChangeEvent $stack2;
+        org.jfree.chart.plot.dial.DialPointer$Pointer this;
+    
+    
+        this := @this: org.jfree.chart.plot.dial.DialPointer$Pointer;
+        paint := @parameter0: java.awt.Paint;
+    
+        if paint != null goto label1;
+        $stack3 = new java.lang.IllegalArgumentException;
+        #l1 = (java.lang.IllegalArgumentException) $stack3;
+        specialinvoke #l1.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'paint\' argument.");
+        #l0 = (java.lang.Throwable) $stack3;
+    
+        throw #l0;
+    
+      label1:
+        this.<org.jfree.chart.plot.dial.DialPointer$Pointer: java.awt.Paint fillPaint> = paint;
+        $stack2 = new org.jfree.chart.plot.dial.DialLayerChangeEvent;
+        specialinvoke $stack2.<org.jfree.chart.plot.dial.DialLayerChangeEvent: void <init>(org.jfree.chart.plot.dial.DialLayer)>(this);
+        virtualinvoke this.<org.jfree.chart.plot.dial.DialPointer$Pointer: void notifyListeners(org.jfree.chart.plot.dial.DialLayerChangeEvent)>($stack2);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.plot.dial.DialPointer$Pointer: void draw(java.awt.Graphics2D,org.jfree.chart.plot.dial.DialPlot,java.awt.geom.Rectangle2D,java.awt.geom.Rectangle2D)> ----
+    {
+        double $stack23, $stack24, $stack25, $stack26, $stack30, $stack32, $stack35, $stack36, $stack39, $stack40, $stack43, $stack44, $stack47, $stack48, $stack53, $stack54, $stack55, $stack56, angle, value;
+        float $stack37, $stack38, $stack41, $stack42, $stack45, $stack46, $stack49, $stack50;
+        int $stack27, $stack28;
+        java.awt.BasicStroke #l11;
+        java.awt.Graphics2D g2;
+        java.awt.Paint #l14, $stack51, $stack52;
+        java.awt.Shape #l12, #l18, #l24, #l25, #l3, #l5, #l8;
+        java.awt.Stroke #l17;
+        java.awt.geom.Arc2D #l27, #l28, #l6, #l7;
+        java.awt.geom.Arc2D$Double #l1, #l15, #l4, arc1, arc2, arc3;
+        java.awt.geom.GeneralPath #l16, #l20, #l21, #l22, #l26, #l9, gp;
+        java.awt.geom.Line2D #l0, #l10, #l13, #l2, #l23;
+        java.awt.geom.Line2D$Double #l19, line;
+        java.awt.geom.Point2D pt1, pt2, pt3, pt4;
+        java.awt.geom.Rectangle2D frame, lengthRect, view, widthRect;
+        java.lang.Object $stack21, $stack22, $stack29, $stack31, $stack33, $stack34, $stack57;
+        org.jfree.chart.plot.dial.DialPlot plot;
+        org.jfree.chart.plot.dial.DialPointer$Pointer this;
+        org.jfree.chart.plot.dial.DialScale scale;
+    
+    
+        this := @this: org.jfree.chart.plot.dial.DialPointer$Pointer;
+        g2 := @parameter0: java.awt.Graphics2D;
+        plot := @parameter1: org.jfree.chart.plot.dial.DialPlot;
+        frame := @parameter2: java.awt.geom.Rectangle2D;
+        view := @parameter3: java.awt.geom.Rectangle2D;
+        $stack21 = <java.awt.Color: java.awt.Color blue>;
+        #l14 = (java.awt.Paint) $stack21;
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>(#l14);
+        $stack22 = new java.awt.BasicStroke;
+        #l11 = (java.awt.BasicStroke) $stack22;
+        specialinvoke #l11.<java.awt.BasicStroke: void <init>(float)>(1.0F);
+        #l17 = (java.awt.Stroke) $stack22;
+        virtualinvoke g2.<java.awt.Graphics2D: void setStroke(java.awt.Stroke)>(#l17);
+        $stack24 = this.<org.jfree.chart.plot.dial.DialPointer$Pointer: double radius>;
+        $stack23 = this.<org.jfree.chart.plot.dial.DialPointer$Pointer: double radius>;
+        lengthRect = staticinvoke <org.jfree.chart.plot.dial.DialPlot: java.awt.geom.Rectangle2D rectangleByRadius(java.awt.geom.Rectangle2D,double,double)>(frame, $stack24, $stack23);
+        $stack26 = this.<org.jfree.chart.plot.dial.DialPointer$Pointer: double widthRadius>;
+        $stack25 = this.<org.jfree.chart.plot.dial.DialPointer$Pointer: double widthRadius>;
+        widthRect = staticinvoke <org.jfree.chart.plot.dial.DialPlot: java.awt.geom.Rectangle2D rectangleByRadius(java.awt.geom.Rectangle2D,double,double)>(frame, $stack26, $stack25);
+        $stack27 = this.<org.jfree.chart.plot.dial.DialPointer$Pointer: int datasetIndex>;
+        value = virtualinvoke plot.<org.jfree.chart.plot.dial.DialPlot: double getValue(int)>($stack27);
+        $stack28 = this.<org.jfree.chart.plot.dial.DialPointer$Pointer: int datasetIndex>;
+        scale = virtualinvoke plot.<org.jfree.chart.plot.dial.DialPlot: org.jfree.chart.plot.dial.DialScale getScaleForDataset(int)>($stack28);
+        angle = interfaceinvoke scale.<org.jfree.chart.plot.dial.DialScale: double valueToAngle(double)>(value);
+        $stack29 = new java.awt.geom.Arc2D$Double;
+        #l4 = (java.awt.geom.Arc2D$Double) $stack29;
+        specialinvoke #l4.<java.awt.geom.Arc2D$Double: void <init>(java.awt.geom.Rectangle2D,double,double,int)>(lengthRect, angle, 0.0, 0);
+        arc1 = (java.awt.geom.Arc2D$Double) $stack29;
+        #l27 = (java.awt.geom.Arc2D) $stack29;
+        pt1 = virtualinvoke #l27.<java.awt.geom.Arc2D: java.awt.geom.Point2D getEndPoint()>();
+        $stack31 = new java.awt.geom.Arc2D$Double;
+        $stack30 = angle - 90.0;
+        #l1 = (java.awt.geom.Arc2D$Double) $stack31;
+        specialinvoke #l1.<java.awt.geom.Arc2D$Double: void <init>(java.awt.geom.Rectangle2D,double,double,int)>(widthRect, $stack30, 180.0, 0);
+        arc2 = (java.awt.geom.Arc2D$Double) $stack31;
+        #l6 = (java.awt.geom.Arc2D) $stack31;
+        pt2 = virtualinvoke #l6.<java.awt.geom.Arc2D: java.awt.geom.Point2D getStartPoint()>();
+        #l7 = (java.awt.geom.Arc2D) $stack31;
+        pt3 = virtualinvoke #l7.<java.awt.geom.Arc2D: java.awt.geom.Point2D getEndPoint()>();
+        $stack33 = new java.awt.geom.Arc2D$Double;
+        $stack32 = angle - 180.0;
+        #l15 = (java.awt.geom.Arc2D$Double) $stack33;
+        specialinvoke #l15.<java.awt.geom.Arc2D$Double: void <init>(java.awt.geom.Rectangle2D,double,double,int)>(widthRect, $stack32, 0.0, 0);
+        arc3 = (java.awt.geom.Arc2D$Double) $stack33;
+        #l28 = (java.awt.geom.Arc2D) $stack33;
+        pt4 = virtualinvoke #l28.<java.awt.geom.Arc2D: java.awt.geom.Point2D getStartPoint()>();
+        $stack34 = new java.awt.geom.GeneralPath;
+        #l26 = (java.awt.geom.GeneralPath) $stack34;
+        specialinvoke #l26.<java.awt.geom.GeneralPath: void <init>()>();
+        gp = (java.awt.geom.GeneralPath) $stack34;
+        $stack35 = virtualinvoke pt1.<java.awt.geom.Point2D: double getX()>();
+        $stack38 = (float) $stack35;
+        $stack36 = virtualinvoke pt1.<java.awt.geom.Point2D: double getY()>();
+        $stack37 = (float) $stack36;
+        #l20 = (java.awt.geom.GeneralPath) $stack34;
+        virtualinvoke #l20.<java.awt.geom.GeneralPath: void moveTo(float,float)>($stack38, $stack37);
+        $stack39 = virtualinvoke pt2.<java.awt.geom.Point2D: double getX()>();
+        $stack42 = (float) $stack39;
+        $stack40 = virtualinvoke pt2.<java.awt.geom.Point2D: double getY()>();
+        $stack41 = (float) $stack40;
+        #l9 = (java.awt.geom.GeneralPath) $stack34;
+        virtualinvoke #l9.<java.awt.geom.GeneralPath: void lineTo(float,float)>($stack42, $stack41);
+        $stack43 = virtualinvoke pt4.<java.awt.geom.Point2D: double getX()>();
+        $stack46 = (float) $stack43;
+        $stack44 = virtualinvoke pt4.<java.awt.geom.Point2D: double getY()>();
+        $stack45 = (float) $stack44;
+        #l21 = (java.awt.geom.GeneralPath) $stack34;
+        virtualinvoke #l21.<java.awt.geom.GeneralPath: void lineTo(float,float)>($stack46, $stack45);
+        $stack47 = virtualinvoke pt3.<java.awt.geom.Point2D: double getX()>();
+        $stack50 = (float) $stack47;
+        $stack48 = virtualinvoke pt3.<java.awt.geom.Point2D: double getY()>();
+        $stack49 = (float) $stack48;
+        #l16 = (java.awt.geom.GeneralPath) $stack34;
+        virtualinvoke #l16.<java.awt.geom.GeneralPath: void lineTo(float,float)>($stack50, $stack49);
+        #l22 = (java.awt.geom.GeneralPath) $stack34;
+        virtualinvoke #l22.<java.awt.geom.GeneralPath: void closePath()>();
+        $stack51 = this.<org.jfree.chart.plot.dial.DialPointer$Pointer: java.awt.Paint fillPaint>;
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>($stack51);
+        #l8 = (java.awt.Shape) $stack34;
+        virtualinvoke g2.<java.awt.Graphics2D: void fill(java.awt.Shape)>(#l8);
+        $stack52 = this.<org.jfree.chart.plot.dial.DialPointer$Pointer: java.awt.Paint outlinePaint>;
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>($stack52);
+        $stack57 = new java.awt.geom.Line2D$Double;
+        $stack56 = virtualinvoke frame.<java.awt.geom.Rectangle2D: double getCenterX()>();
+        $stack55 = virtualinvoke frame.<java.awt.geom.Rectangle2D: double getCenterY()>();
+        $stack54 = virtualinvoke pt1.<java.awt.geom.Point2D: double getX()>();
+        $stack53 = virtualinvoke pt1.<java.awt.geom.Point2D: double getY()>();
+        #l19 = (java.awt.geom.Line2D$Double) $stack57;
+        specialinvoke #l19.<java.awt.geom.Line2D$Double: void <init>(double,double,double,double)>($stack56, $stack55, $stack54, $stack53);
+        line = (java.awt.geom.Line2D$Double) $stack57;
+        #l12 = (java.awt.Shape) $stack57;
+        virtualinvoke g2.<java.awt.Graphics2D: void draw(java.awt.Shape)>(#l12);
+        #l23 = (java.awt.geom.Line2D) $stack57;
+        virtualinvoke #l23.<java.awt.geom.Line2D: void setLine(java.awt.geom.Point2D,java.awt.geom.Point2D)>(pt2, pt3);
+        #l24 = (java.awt.Shape) $stack57;
+        virtualinvoke g2.<java.awt.Graphics2D: void draw(java.awt.Shape)>(#l24);
+        #l2 = (java.awt.geom.Line2D) $stack57;
+        virtualinvoke #l2.<java.awt.geom.Line2D: void setLine(java.awt.geom.Point2D,java.awt.geom.Point2D)>(pt3, pt1);
+        #l3 = (java.awt.Shape) $stack57;
+        virtualinvoke g2.<java.awt.Graphics2D: void draw(java.awt.Shape)>(#l3);
+        #l10 = (java.awt.geom.Line2D) $stack57;
+        virtualinvoke #l10.<java.awt.geom.Line2D: void setLine(java.awt.geom.Point2D,java.awt.geom.Point2D)>(pt2, pt1);
+        #l5 = (java.awt.Shape) $stack57;
+        virtualinvoke g2.<java.awt.Graphics2D: void draw(java.awt.Shape)>(#l5);
+        #l13 = (java.awt.geom.Line2D) $stack57;
+        virtualinvoke #l13.<java.awt.geom.Line2D: void setLine(java.awt.geom.Point2D,java.awt.geom.Point2D)>(pt2, pt4);
+        #l18 = (java.awt.Shape) $stack57;
+        virtualinvoke g2.<java.awt.Graphics2D: void draw(java.awt.Shape)>(#l18);
+        #l0 = (java.awt.geom.Line2D) $stack57;
+        virtualinvoke #l0.<java.awt.geom.Line2D: void setLine(java.awt.geom.Point2D,java.awt.geom.Point2D)>(pt3, pt4);
+        #l25 = (java.awt.Shape) $stack57;
+        virtualinvoke g2.<java.awt.Graphics2D: void draw(java.awt.Shape)>(#l25);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.plot.dial.DialPointer$Pointer: java.awt.Paint getFillPaint()> ----
+    {
+        java.awt.Paint $stack1;
+        org.jfree.chart.plot.dial.DialPointer$Pointer this;
+    
+    
+        this := @this: org.jfree.chart.plot.dial.DialPointer$Pointer;
+        $stack1 = this.<org.jfree.chart.plot.dial.DialPointer$Pointer: java.awt.Paint fillPaint>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.plot.dial.DialPointer$Pointer: int hashCode()> ----
+    {
+        double $stack2;
+        int result#0, result#1, result#2, result#3;
+        java.awt.Paint $stack3, $stack4;
+        org.jfree.chart.plot.dial.DialPointer$Pointer this;
+    
+    
+        this := @this: org.jfree.chart.plot.dial.DialPointer$Pointer;
+        result#0 = specialinvoke this.<org.jfree.chart.plot.dial.DialPointer: int hashCode()>();
+        $stack2 = this.<org.jfree.chart.plot.dial.DialPointer$Pointer: double widthRadius>;
+        result#1 = staticinvoke <org.jfree.chart.util.HashUtilities: int hashCode(int,double)>(result#0, $stack2);
+        $stack3 = this.<org.jfree.chart.plot.dial.DialPointer$Pointer: java.awt.Paint fillPaint>;
+        result#2 = staticinvoke <org.jfree.chart.util.HashUtilities: int hashCode(int,java.awt.Paint)>(result#1, $stack3);
+        $stack4 = this.<org.jfree.chart.plot.dial.DialPointer$Pointer: java.awt.Paint outlinePaint>;
+        result#3 = staticinvoke <org.jfree.chart.util.HashUtilities: int hashCode(int,java.awt.Paint)>(result#2, $stack4);
+    
+        return result#3;
+    }
+
+    // ---- method: <org.jfree.chart.plot.dial.DialPointer$Pointer: void setWidthRadius(double)> ----
+    {
+        double radius;
+        org.jfree.chart.plot.dial.DialLayerChangeEvent $stack3;
+        org.jfree.chart.plot.dial.DialPointer$Pointer this;
+    
+    
+        this := @this: org.jfree.chart.plot.dial.DialPointer$Pointer;
+        radius := @parameter0: double;
+        this.<org.jfree.chart.plot.dial.DialPointer$Pointer: double widthRadius> = radius;
+        $stack3 = new org.jfree.chart.plot.dial.DialLayerChangeEvent;
+        specialinvoke $stack3.<org.jfree.chart.plot.dial.DialLayerChangeEvent: void <init>(org.jfree.chart.plot.dial.DialLayer)>(this);
+        virtualinvoke this.<org.jfree.chart.plot.dial.DialPointer$Pointer: void notifyListeners(org.jfree.chart.plot.dial.DialLayerChangeEvent)>($stack3);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.plot.dial.DialPointer$Pointer: double getWidthRadius()> ----
+    {
+        double $stack1;
+        org.jfree.chart.plot.dial.DialPointer$Pointer this;
+    
+    
+        this := @this: org.jfree.chart.plot.dial.DialPointer$Pointer;
+        $stack1 = this.<org.jfree.chart.plot.dial.DialPointer$Pointer: double widthRadius>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.plot.dial.DialPointer$Pointer: void <init>()> ----
+    {
+        org.jfree.chart.plot.dial.DialPointer$Pointer this;
+    
+    
+        this := @this: org.jfree.chart.plot.dial.DialPointer$Pointer;
+        specialinvoke this.<org.jfree.chart.plot.dial.DialPointer$Pointer: void <init>(int)>(0);
+    
+        return;
+    }
+
+}

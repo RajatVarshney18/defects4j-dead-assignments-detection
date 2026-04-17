@@ -1,0 +1,367 @@
+// ========================================================================
+// CLASS : org.jfree.chart.ui.FontChooserPanel
+// ========================================================================
+
+[PUBLIC, SUPER] class org.jfree.chart.ui.FontChooserPanel extends javax.swing.JPanel {
+
+    // ---- method: <org.jfree.chart.ui.FontChooserPanel: void <clinit>()> ----
+    {
+        java.lang.String[] $stack0;
+        java.util.ResourceBundle $stack1;
+    
+    
+        $stack0 = newarray (java.lang.String)[14];
+        $stack0[0] = "9";
+        $stack0[1] = "10";
+        $stack0[2] = "11";
+        $stack0[3] = "12";
+        $stack0[4] = "14";
+        $stack0[5] = "16";
+        $stack0[6] = "18";
+        $stack0[7] = "20";
+        $stack0[8] = "22";
+        $stack0[9] = "24";
+        $stack0[10] = "28";
+        $stack0[11] = "36";
+        $stack0[12] = "48";
+        $stack0[13] = "72";
+        <org.jfree.chart.ui.FontChooserPanel: java.lang.String[] SIZES> = $stack0;
+        $stack1 = staticinvoke <org.jfree.chart.util.ResourceBundleWrapper: java.util.ResourceBundle getBundle(java.lang.String)>("org.jfree.chart.ui.LocalizationBundle");
+        <org.jfree.chart.ui.FontChooserPanel: java.util.ResourceBundle localizationResources> = $stack1;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.ui.FontChooserPanel: int getSelectedSize()> ----
+    {
+        int $stack4;
+        java.lang.Object $stack3;
+        java.lang.String selected;
+        javax.swing.JList $stack2;
+        org.jfree.chart.ui.FontChooserPanel this;
+    
+    
+        this := @this: org.jfree.chart.ui.FontChooserPanel;
+        $stack2 = this.<org.jfree.chart.ui.FontChooserPanel: javax.swing.JList sizelist>;
+        $stack3 = virtualinvoke $stack2.<javax.swing.JList: java.lang.Object getSelectedValue()>();
+        selected = (java.lang.String) $stack3;
+    
+        if selected == null goto label1;
+        $stack4 = staticinvoke <java.lang.Integer: int parseInt(java.lang.String)>(selected);
+    
+        return $stack4;
+    
+      label1:
+        return 10;
+    }
+
+    // ---- method: <org.jfree.chart.ui.FontChooserPanel: void setSelectedFont(java.awt.Font)> ----
+    {
+        boolean $stack18, $stack21, $stack7, $stack9;
+        int $stack12, $stack13, $stack16, i#0, i_1;
+        java.awt.Font font;
+        java.lang.NullPointerException #l1;
+        java.lang.Object $stack17, $stack20, $stack23;
+        java.lang.String fontName, i#1;
+        java.lang.Throwable #l0;
+        javax.swing.JCheckBox $stack6, $stack8;
+        javax.swing.JList $stack10, $stack11, $stack14, $stack15, $stack19, $stack22;
+        javax.swing.ListModel model#0, model#1;
+        org.jfree.chart.ui.FontChooserPanel this;
+    
+    
+        this := @this: org.jfree.chart.ui.FontChooserPanel;
+        font := @parameter0: java.awt.Font;
+    
+        if font != null goto label1;
+        $stack23 = new java.lang.NullPointerException;
+        #l1 = (java.lang.NullPointerException) $stack23;
+        specialinvoke #l1.<java.lang.NullPointerException: void <init>()>();
+        #l0 = (java.lang.Throwable) $stack23;
+    
+        throw #l0;
+    
+      label1:
+        $stack6 = this.<org.jfree.chart.ui.FontChooserPanel: javax.swing.JCheckBox bold>;
+        $stack7 = virtualinvoke font.<java.awt.Font: boolean isBold()>();
+        virtualinvoke $stack6.<javax.swing.JCheckBox: void setSelected(boolean)>($stack7);
+        $stack8 = this.<org.jfree.chart.ui.FontChooserPanel: javax.swing.JCheckBox italic>;
+        $stack9 = virtualinvoke font.<java.awt.Font: boolean isItalic()>();
+        virtualinvoke $stack8.<javax.swing.JCheckBox: void setSelected(boolean)>($stack9);
+        fontName = virtualinvoke font.<java.awt.Font: java.lang.String getName()>();
+        $stack10 = this.<org.jfree.chart.ui.FontChooserPanel: javax.swing.JList fontlist>;
+        model#0 = virtualinvoke $stack10.<javax.swing.JList: javax.swing.ListModel getModel()>();
+        $stack11 = this.<org.jfree.chart.ui.FontChooserPanel: javax.swing.JList fontlist>;
+        virtualinvoke $stack11.<javax.swing.JList: void clearSelection()>();
+        i#0 = 0;
+    
+      label2:
+        $stack12 = interfaceinvoke model#0.<javax.swing.ListModel: int getSize()>();
+    
+        if i#0 >= $stack12 goto label4;
+        $stack20 = interfaceinvoke model#0.<javax.swing.ListModel: java.lang.Object getElementAt(int)>(i#0);
+        $stack21 = virtualinvoke fontName.<java.lang.String: boolean equals(java.lang.Object)>($stack20);
+    
+        if $stack21 == 0 goto label3;
+        $stack22 = this.<org.jfree.chart.ui.FontChooserPanel: javax.swing.JList fontlist>;
+        virtualinvoke $stack22.<javax.swing.JList: void setSelectedIndex(int)>(i#0);
+    
+        goto label4;
+    
+      label3:
+        i#0 = i#0 + 1;
+    
+        goto label2;
+    
+      label4:
+        $stack13 = virtualinvoke font.<java.awt.Font: int getSize()>();
+        i#1 = staticinvoke <java.lang.String: java.lang.String valueOf(int)>($stack13);
+        $stack14 = this.<org.jfree.chart.ui.FontChooserPanel: javax.swing.JList sizelist>;
+        model#1 = virtualinvoke $stack14.<javax.swing.JList: javax.swing.ListModel getModel()>();
+        $stack15 = this.<org.jfree.chart.ui.FontChooserPanel: javax.swing.JList sizelist>;
+        virtualinvoke $stack15.<javax.swing.JList: void clearSelection()>();
+        i_1 = 0;
+    
+      label5:
+        $stack16 = interfaceinvoke model#1.<javax.swing.ListModel: int getSize()>();
+    
+        if i_1 >= $stack16 goto label7;
+        $stack17 = interfaceinvoke model#1.<javax.swing.ListModel: java.lang.Object getElementAt(int)>(i_1);
+        $stack18 = virtualinvoke i#1.<java.lang.String: boolean equals(java.lang.Object)>($stack17);
+    
+        if $stack18 == 0 goto label6;
+        $stack19 = this.<org.jfree.chart.ui.FontChooserPanel: javax.swing.JList sizelist>;
+        virtualinvoke $stack19.<javax.swing.JList: void setSelectedIndex(int)>(i_1);
+    
+        goto label7;
+    
+      label6:
+        i_1 = i_1 + 1;
+    
+        goto label5;
+    
+      label7:
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.ui.FontChooserPanel: int getSelectedStyle()> ----
+    {
+        boolean $stack2, $stack4, $stack6, $stack8;
+        javax.swing.JCheckBox $stack1, $stack3, $stack5, $stack7;
+        org.jfree.chart.ui.FontChooserPanel this;
+    
+    
+        this := @this: org.jfree.chart.ui.FontChooserPanel;
+        $stack1 = this.<org.jfree.chart.ui.FontChooserPanel: javax.swing.JCheckBox bold>;
+        $stack2 = virtualinvoke $stack1.<javax.swing.JCheckBox: boolean isSelected()>();
+    
+        if $stack2 == 0 goto label1;
+        $stack7 = this.<org.jfree.chart.ui.FontChooserPanel: javax.swing.JCheckBox italic>;
+        $stack8 = virtualinvoke $stack7.<javax.swing.JCheckBox: boolean isSelected()>();
+    
+        if $stack8 == 0 goto label1;
+    
+        return 3;
+    
+      label1:
+        $stack3 = this.<org.jfree.chart.ui.FontChooserPanel: javax.swing.JCheckBox bold>;
+        $stack4 = virtualinvoke $stack3.<javax.swing.JCheckBox: boolean isSelected()>();
+    
+        if $stack4 == 0 goto label2;
+    
+        return 1;
+    
+      label2:
+        $stack5 = this.<org.jfree.chart.ui.FontChooserPanel: javax.swing.JCheckBox italic>;
+        $stack6 = virtualinvoke $stack5.<javax.swing.JCheckBox: boolean isSelected()>();
+    
+        if $stack6 == 0 goto label3;
+    
+        return 2;
+    
+      label3:
+        return 0;
+    }
+
+    // ---- method: <org.jfree.chart.ui.FontChooserPanel: java.lang.String getSelectedName()> ----
+    {
+        java.lang.Object $stack2;
+        java.lang.String $stack3;
+        javax.swing.JList $stack1;
+        org.jfree.chart.ui.FontChooserPanel this;
+    
+    
+        this := @this: org.jfree.chart.ui.FontChooserPanel;
+        $stack1 = this.<org.jfree.chart.ui.FontChooserPanel: javax.swing.JList fontlist>;
+        $stack2 = virtualinvoke $stack1.<javax.swing.JList: java.lang.Object getSelectedValue()>();
+        $stack3 = (java.lang.String) $stack2;
+    
+        return $stack3;
+    }
+
+    // ---- method: <org.jfree.chart.ui.FontChooserPanel: void <init>(java.awt.Font)> ----
+    {
+        java.awt.BorderLayout #l25, #l26, #l3, #l32;
+        java.awt.Component #l11, #l13, #l16, #l19, #l29, #l31, #l36, #l38, #l7, #l9;
+        java.awt.Font font;
+        java.awt.GraphicsEnvironment g;
+        java.awt.GridLayout #l39;
+        java.awt.LayoutManager #l1, #l14, #l21, #l24, #l5;
+        java.lang.Object $stack10, $stack11, $stack12, $stack13, $stack14, $stack18, $stack20, $stack21, $stack23, $stack24, $stack28, $stack31, $stack32, $stack34, $stack35, $stack42, $stack43, $stack47;
+        java.lang.String $stack16, $stack26, $stack37, $stack40, $stack45;
+        java.lang.String[] $stack29, fonts;
+        java.util.ResourceBundle $stack15, $stack25, $stack36, $stack39, $stack44;
+        javax.swing.JCheckBox $stack38, $stack41;
+        javax.swing.JList $stack19, $stack30;
+        javax.swing.JPanel #l0, #l10, #l12, #l15, #l17, #l20, #l23, #l27, #l33, #l35, #l37, #l4, #l8, attributes, fontPanel, right, sizePanel;
+        javax.swing.JScrollPane #l2, #l22, #l30, #l6, fontpane, sizepane;
+        javax.swing.border.Border #l18, #l28, #l34, $stack17, $stack22, $stack27, $stack33, $stack46;
+        org.jfree.chart.ui.FontChooserPanel this;
+    
+    
+        this := @this: org.jfree.chart.ui.FontChooserPanel;
+        font := @parameter0: java.awt.Font;
+        specialinvoke this.<javax.swing.JPanel: void <init>()>();
+        g = staticinvoke <java.awt.GraphicsEnvironment: java.awt.GraphicsEnvironment getLocalGraphicsEnvironment()>();
+        fonts = virtualinvoke g.<java.awt.GraphicsEnvironment: java.lang.String[] getAvailableFontFamilyNames()>();
+        $stack10 = new java.awt.BorderLayout;
+        #l3 = (java.awt.BorderLayout) $stack10;
+        specialinvoke #l3.<java.awt.BorderLayout: void <init>()>();
+        #l14 = (java.awt.LayoutManager) $stack10;
+        virtualinvoke this.<org.jfree.chart.ui.FontChooserPanel: void setLayout(java.awt.LayoutManager)>(#l14);
+        $stack12 = new javax.swing.JPanel;
+        $stack11 = new java.awt.BorderLayout;
+        #l25 = (java.awt.BorderLayout) $stack11;
+        specialinvoke #l25.<java.awt.BorderLayout: void <init>()>();
+        #l1 = (java.awt.LayoutManager) $stack11;
+        #l0 = (javax.swing.JPanel) $stack12;
+        specialinvoke #l0.<javax.swing.JPanel: void <init>(java.awt.LayoutManager)>(#l1);
+        right = (javax.swing.JPanel) $stack12;
+        $stack14 = new javax.swing.JPanel;
+        $stack13 = new java.awt.BorderLayout;
+        #l32 = (java.awt.BorderLayout) $stack13;
+        specialinvoke #l32.<java.awt.BorderLayout: void <init>()>();
+        #l4 = (javax.swing.JPanel) $stack14;
+        #l5 = (java.awt.LayoutManager) $stack13;
+        specialinvoke #l4.<javax.swing.JPanel: void <init>(java.awt.LayoutManager)>(#l5);
+        fontPanel = (javax.swing.JPanel) $stack14;
+        $stack17 = staticinvoke <javax.swing.BorderFactory: javax.swing.border.Border createEtchedBorder()>();
+        $stack15 = <org.jfree.chart.ui.FontChooserPanel: java.util.ResourceBundle localizationResources>;
+        $stack16 = virtualinvoke $stack15.<java.util.ResourceBundle: java.lang.String getString(java.lang.String)>("Font");
+        $stack18 = staticinvoke <javax.swing.BorderFactory: javax.swing.border.TitledBorder createTitledBorder(javax.swing.border.Border,java.lang.String)>($stack17, $stack16);
+        #l17 = (javax.swing.JPanel) $stack14;
+        #l18 = (javax.swing.border.Border) $stack18;
+        virtualinvoke #l17.<javax.swing.JPanel: void setBorder(javax.swing.border.Border)>(#l18);
+        $stack19 = new javax.swing.JList;
+        specialinvoke $stack19.<javax.swing.JList: void <init>(java.lang.Object[])>(fonts);
+        this.<org.jfree.chart.ui.FontChooserPanel: javax.swing.JList fontlist> = $stack19;
+        $stack21 = new javax.swing.JScrollPane;
+        $stack20 = this.<org.jfree.chart.ui.FontChooserPanel: javax.swing.JList fontlist>;
+        #l31 = (java.awt.Component) $stack20;
+        #l30 = (javax.swing.JScrollPane) $stack21;
+        specialinvoke #l30.<javax.swing.JScrollPane: void <init>(java.awt.Component)>(#l31);
+        fontpane = (javax.swing.JScrollPane) $stack21;
+        $stack22 = staticinvoke <javax.swing.BorderFactory: javax.swing.border.Border createEtchedBorder()>();
+        #l22 = (javax.swing.JScrollPane) $stack21;
+        virtualinvoke #l22.<javax.swing.JScrollPane: void setBorder(javax.swing.border.Border)>($stack22);
+        #l9 = (java.awt.Component) $stack21;
+        #l8 = (javax.swing.JPanel) $stack14;
+        virtualinvoke #l8.<javax.swing.JPanel: java.awt.Component add(java.awt.Component)>(#l9);
+        #l29 = (java.awt.Component) $stack14;
+        virtualinvoke this.<org.jfree.chart.ui.FontChooserPanel: java.awt.Component add(java.awt.Component)>(#l29);
+        $stack24 = new javax.swing.JPanel;
+        $stack23 = new java.awt.BorderLayout;
+        #l26 = (java.awt.BorderLayout) $stack23;
+        specialinvoke #l26.<java.awt.BorderLayout: void <init>()>();
+        #l21 = (java.awt.LayoutManager) $stack23;
+        #l20 = (javax.swing.JPanel) $stack24;
+        specialinvoke #l20.<javax.swing.JPanel: void <init>(java.awt.LayoutManager)>(#l21);
+        sizePanel = (javax.swing.JPanel) $stack24;
+        $stack27 = staticinvoke <javax.swing.BorderFactory: javax.swing.border.Border createEtchedBorder()>();
+        $stack25 = <org.jfree.chart.ui.FontChooserPanel: java.util.ResourceBundle localizationResources>;
+        $stack26 = virtualinvoke $stack25.<java.util.ResourceBundle: java.lang.String getString(java.lang.String)>("Size");
+        $stack28 = staticinvoke <javax.swing.BorderFactory: javax.swing.border.TitledBorder createTitledBorder(javax.swing.border.Border,java.lang.String)>($stack27, $stack26);
+        #l28 = (javax.swing.border.Border) $stack28;
+        #l27 = (javax.swing.JPanel) $stack24;
+        virtualinvoke #l27.<javax.swing.JPanel: void setBorder(javax.swing.border.Border)>(#l28);
+        $stack30 = new javax.swing.JList;
+        $stack29 = <org.jfree.chart.ui.FontChooserPanel: java.lang.String[] SIZES>;
+        specialinvoke $stack30.<javax.swing.JList: void <init>(java.lang.Object[])>($stack29);
+        this.<org.jfree.chart.ui.FontChooserPanel: javax.swing.JList sizelist> = $stack30;
+        $stack32 = new javax.swing.JScrollPane;
+        $stack31 = this.<org.jfree.chart.ui.FontChooserPanel: javax.swing.JList sizelist>;
+        #l6 = (javax.swing.JScrollPane) $stack32;
+        #l7 = (java.awt.Component) $stack31;
+        specialinvoke #l6.<javax.swing.JScrollPane: void <init>(java.awt.Component)>(#l7);
+        sizepane = (javax.swing.JScrollPane) $stack32;
+        $stack33 = staticinvoke <javax.swing.BorderFactory: javax.swing.border.Border createEtchedBorder()>();
+        #l2 = (javax.swing.JScrollPane) $stack32;
+        virtualinvoke #l2.<javax.swing.JScrollPane: void setBorder(javax.swing.border.Border)>($stack33);
+        #l15 = (javax.swing.JPanel) $stack24;
+        #l16 = (java.awt.Component) $stack32;
+        virtualinvoke #l15.<javax.swing.JPanel: java.awt.Component add(java.awt.Component)>(#l16);
+        $stack35 = new javax.swing.JPanel;
+        $stack34 = new java.awt.GridLayout;
+        #l39 = (java.awt.GridLayout) $stack34;
+        specialinvoke #l39.<java.awt.GridLayout: void <init>(int,int)>(1, 2);
+        #l23 = (javax.swing.JPanel) $stack35;
+        #l24 = (java.awt.LayoutManager) $stack34;
+        specialinvoke #l23.<javax.swing.JPanel: void <init>(java.awt.LayoutManager)>(#l24);
+        attributes = (javax.swing.JPanel) $stack35;
+        $stack38 = new javax.swing.JCheckBox;
+        $stack36 = <org.jfree.chart.ui.FontChooserPanel: java.util.ResourceBundle localizationResources>;
+        $stack37 = virtualinvoke $stack36.<java.util.ResourceBundle: java.lang.String getString(java.lang.String)>("Bold");
+        specialinvoke $stack38.<javax.swing.JCheckBox: void <init>(java.lang.String)>($stack37);
+        this.<org.jfree.chart.ui.FontChooserPanel: javax.swing.JCheckBox bold> = $stack38;
+        $stack41 = new javax.swing.JCheckBox;
+        $stack39 = <org.jfree.chart.ui.FontChooserPanel: java.util.ResourceBundle localizationResources>;
+        $stack40 = virtualinvoke $stack39.<java.util.ResourceBundle: java.lang.String getString(java.lang.String)>("Italic");
+        specialinvoke $stack41.<javax.swing.JCheckBox: void <init>(java.lang.String)>($stack40);
+        this.<org.jfree.chart.ui.FontChooserPanel: javax.swing.JCheckBox italic> = $stack41;
+        $stack42 = this.<org.jfree.chart.ui.FontChooserPanel: javax.swing.JCheckBox bold>;
+        #l36 = (java.awt.Component) $stack42;
+        #l35 = (javax.swing.JPanel) $stack35;
+        virtualinvoke #l35.<javax.swing.JPanel: java.awt.Component add(java.awt.Component)>(#l36);
+        $stack43 = this.<org.jfree.chart.ui.FontChooserPanel: javax.swing.JCheckBox italic>;
+        #l10 = (javax.swing.JPanel) $stack35;
+        #l11 = (java.awt.Component) $stack43;
+        virtualinvoke #l10.<javax.swing.JPanel: java.awt.Component add(java.awt.Component)>(#l11);
+        $stack46 = staticinvoke <javax.swing.BorderFactory: javax.swing.border.Border createEtchedBorder()>();
+        $stack44 = <org.jfree.chart.ui.FontChooserPanel: java.util.ResourceBundle localizationResources>;
+        $stack45 = virtualinvoke $stack44.<java.util.ResourceBundle: java.lang.String getString(java.lang.String)>("Attributes");
+        $stack47 = staticinvoke <javax.swing.BorderFactory: javax.swing.border.TitledBorder createTitledBorder(javax.swing.border.Border,java.lang.String)>($stack46, $stack45);
+        #l33 = (javax.swing.JPanel) $stack35;
+        #l34 = (javax.swing.border.Border) $stack47;
+        virtualinvoke #l33.<javax.swing.JPanel: void setBorder(javax.swing.border.Border)>(#l34);
+        #l38 = (java.awt.Component) $stack24;
+        #l37 = (javax.swing.JPanel) $stack12;
+        virtualinvoke #l37.<javax.swing.JPanel: void add(java.awt.Component,java.lang.Object)>(#l38, "Center");
+        #l13 = (java.awt.Component) $stack35;
+        #l12 = (javax.swing.JPanel) $stack12;
+        virtualinvoke #l12.<javax.swing.JPanel: void add(java.awt.Component,java.lang.Object)>(#l13, "South");
+        #l19 = (java.awt.Component) $stack12;
+        virtualinvoke this.<org.jfree.chart.ui.FontChooserPanel: void add(java.awt.Component,java.lang.Object)>(#l19, "East");
+        virtualinvoke this.<org.jfree.chart.ui.FontChooserPanel: void setSelectedFont(java.awt.Font)>(font);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.ui.FontChooserPanel: java.awt.Font getSelectedFont()> ----
+    {
+        int $stack1, $stack2;
+        java.awt.Font $stack4;
+        java.lang.String $stack3;
+        org.jfree.chart.ui.FontChooserPanel this;
+    
+    
+        this := @this: org.jfree.chart.ui.FontChooserPanel;
+        $stack4 = new java.awt.Font;
+        $stack3 = virtualinvoke this.<org.jfree.chart.ui.FontChooserPanel: java.lang.String getSelectedName()>();
+        $stack2 = virtualinvoke this.<org.jfree.chart.ui.FontChooserPanel: int getSelectedStyle()>();
+        $stack1 = virtualinvoke this.<org.jfree.chart.ui.FontChooserPanel: int getSelectedSize()>();
+        specialinvoke $stack4.<java.awt.Font: void <init>(java.lang.String,int,int)>($stack3, $stack2, $stack1);
+    
+        return $stack4;
+    }
+
+}

@@ -1,0 +1,544 @@
+// ========================================================================
+// CLASS : org.jfree.chart.axis.PeriodAxisLabelInfo
+// ========================================================================
+
+[PUBLIC, SUPER] class org.jfree.chart.axis.PeriodAxisLabelInfo extends java.lang.Object implements java.lang.Cloneable, java.io.Serializable {
+
+    // ---- method: <org.jfree.chart.axis.PeriodAxisLabelInfo: void <init>(java.lang.Class,java.text.DateFormat)> ----
+    {
+        java.awt.Font $stack6;
+        java.awt.Paint $stack3, $stack5;
+        java.awt.Stroke $stack4;
+        java.lang.Class periodClass;
+        java.text.DateFormat dateFormat;
+        org.jfree.chart.axis.PeriodAxisLabelInfo this;
+        org.jfree.chart.util.RectangleInsets $stack7;
+    
+    
+        this := @this: org.jfree.chart.axis.PeriodAxisLabelInfo;
+        periodClass := @parameter0: java.lang.Class;
+        dateFormat := @parameter1: java.text.DateFormat;
+        $stack7 = <org.jfree.chart.axis.PeriodAxisLabelInfo: org.jfree.chart.util.RectangleInsets DEFAULT_INSETS>;
+        $stack6 = <org.jfree.chart.axis.PeriodAxisLabelInfo: java.awt.Font DEFAULT_FONT>;
+        $stack5 = <org.jfree.chart.axis.PeriodAxisLabelInfo: java.awt.Paint DEFAULT_LABEL_PAINT>;
+        $stack4 = <org.jfree.chart.axis.PeriodAxisLabelInfo: java.awt.Stroke DEFAULT_DIVIDER_STROKE>;
+        $stack3 = <org.jfree.chart.axis.PeriodAxisLabelInfo: java.awt.Paint DEFAULT_DIVIDER_PAINT>;
+        specialinvoke this.<org.jfree.chart.axis.PeriodAxisLabelInfo: void <init>(java.lang.Class,java.text.DateFormat,org.jfree.chart.util.RectangleInsets,java.awt.Font,java.awt.Paint,boolean,java.awt.Stroke,java.awt.Paint)>(periodClass, dateFormat, $stack7, $stack6, $stack5, 1, $stack4, $stack3);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.axis.PeriodAxisLabelInfo: java.text.DateFormat getDateFormat()> ----
+    {
+        java.text.DateFormat $stack1;
+        org.jfree.chart.axis.PeriodAxisLabelInfo this;
+    
+    
+        this := @this: org.jfree.chart.axis.PeriodAxisLabelInfo;
+        $stack1 = this.<org.jfree.chart.axis.PeriodAxisLabelInfo: java.text.DateFormat dateFormat>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.axis.PeriodAxisLabelInfo: void readObject(java.io.ObjectInputStream)> ----
+    {
+        java.awt.Paint $stack2, $stack4;
+        java.awt.Stroke $stack3;
+        java.io.ObjectInputStream stream;
+        org.jfree.chart.axis.PeriodAxisLabelInfo this;
+    
+    
+        this := @this: org.jfree.chart.axis.PeriodAxisLabelInfo;
+        stream := @parameter0: java.io.ObjectInputStream;
+        virtualinvoke stream.<java.io.ObjectInputStream: void defaultReadObject()>();
+        $stack2 = staticinvoke <org.jfree.chart.util.SerialUtilities: java.awt.Paint readPaint(java.io.ObjectInputStream)>(stream);
+        this.<org.jfree.chart.axis.PeriodAxisLabelInfo: java.awt.Paint labelPaint> = $stack2;
+        $stack3 = staticinvoke <org.jfree.chart.util.SerialUtilities: java.awt.Stroke readStroke(java.io.ObjectInputStream)>(stream);
+        this.<org.jfree.chart.axis.PeriodAxisLabelInfo: java.awt.Stroke dividerStroke> = $stack3;
+        $stack4 = staticinvoke <org.jfree.chart.util.SerialUtilities: java.awt.Paint readPaint(java.io.ObjectInputStream)>(stream);
+        this.<org.jfree.chart.axis.PeriodAxisLabelInfo: java.awt.Paint dividerPaint> = $stack4;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.axis.PeriodAxisLabelInfo: java.awt.Paint getDividerPaint()> ----
+    {
+        java.awt.Paint $stack1;
+        org.jfree.chart.axis.PeriodAxisLabelInfo this;
+    
+    
+        this := @this: org.jfree.chart.axis.PeriodAxisLabelInfo;
+        $stack1 = this.<org.jfree.chart.axis.PeriodAxisLabelInfo: java.awt.Paint dividerPaint>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.axis.PeriodAxisLabelInfo: org.jfree.data.time.RegularTimePeriod createInstance(java.util.Date,java.util.TimeZone,java.util.Locale)> ----
+    {
+        java.lang.Class $stack10, $stack11, $stack12, $stack13, $stack6, $stack8, $stack9;
+        java.lang.Class[] $stack7;
+        java.lang.Object $stack15, $stack16, $stack17, $stack18;
+        java.lang.Object[] $stack14;
+        java.lang.Throwable $stack19, c#0;
+        java.lang.reflect.Constructor c#1;
+        java.util.Date millisecond;
+        java.util.Locale locale;
+        java.util.TimeZone zone;
+        org.jfree.chart.axis.PeriodAxisLabelInfo this;
+        org.jfree.data.time.RegularTimePeriod result;
+    
+    
+        this := @this: org.jfree.chart.axis.PeriodAxisLabelInfo;
+        millisecond := @parameter0: java.util.Date;
+        zone := @parameter1: java.util.TimeZone;
+        locale := @parameter2: java.util.Locale;
+        result = null;
+    
+      label01:
+        $stack13 = this.<org.jfree.chart.axis.PeriodAxisLabelInfo: java.lang.Class periodClass>;
+        $stack7 = newarray (java.lang.Class)[3];
+        $stack6 = <org.jfree.chart.axis.PeriodAxisLabelInfo: java.lang.Class class$java$util$Date>;
+    
+        if $stack6 != null goto label04;
+        $stack8 = staticinvoke <org.jfree.chart.axis.PeriodAxisLabelInfo: java.lang.Class class$(java.lang.String)>("java.util.Date");
+        <org.jfree.chart.axis.PeriodAxisLabelInfo: java.lang.Class class$java$util$Date> = $stack8;
+    
+        goto label05;
+    
+      label02:
+        $stack19 := @caughtexception;
+        c#0 = $stack19;
+    
+      label03:
+        return result;
+    
+      label04:
+        $stack8 = <org.jfree.chart.axis.PeriodAxisLabelInfo: java.lang.Class class$java$util$Date>;
+    
+      label05:
+        $stack7[0] = $stack8;
+        $stack9 = <org.jfree.chart.axis.PeriodAxisLabelInfo: java.lang.Class class$java$util$TimeZone>;
+    
+        if $stack9 != null goto label06;
+        $stack10 = staticinvoke <org.jfree.chart.axis.PeriodAxisLabelInfo: java.lang.Class class$(java.lang.String)>("java.util.TimeZone");
+        <org.jfree.chart.axis.PeriodAxisLabelInfo: java.lang.Class class$java$util$TimeZone> = $stack10;
+    
+        goto label07;
+    
+      label06:
+        $stack10 = <org.jfree.chart.axis.PeriodAxisLabelInfo: java.lang.Class class$java$util$TimeZone>;
+    
+      label07:
+        $stack7[1] = $stack10;
+        $stack11 = <org.jfree.chart.axis.PeriodAxisLabelInfo: java.lang.Class class$java$util$Locale>;
+    
+        if $stack11 != null goto label08;
+        $stack12 = staticinvoke <org.jfree.chart.axis.PeriodAxisLabelInfo: java.lang.Class class$(java.lang.String)>("java.util.Locale");
+        <org.jfree.chart.axis.PeriodAxisLabelInfo: java.lang.Class class$java$util$Locale> = $stack12;
+    
+        goto label09;
+    
+      label08:
+        $stack12 = <org.jfree.chart.axis.PeriodAxisLabelInfo: java.lang.Class class$java$util$Locale>;
+    
+      label09:
+        $stack7[2] = $stack12;
+        c#1 = virtualinvoke $stack13.<java.lang.Class: java.lang.reflect.Constructor getDeclaredConstructor(java.lang.Class[])>($stack7);
+        $stack14 = newarray (java.lang.Object)[3];
+        $stack14[0] = millisecond;
+        $stack14[1] = zone;
+        $stack14[2] = locale;
+        $stack15 = virtualinvoke c#1.<java.lang.reflect.Constructor: java.lang.Object newInstance(java.lang.Object[])>($stack14);
+        result = (org.jfree.data.time.RegularTimePeriod) $stack15;
+    
+      label10:
+        goto label03;
+    
+     catch java.lang.Exception from label01 to label02 with label02;
+     catch java.lang.Exception from label04 to label10 with label02;
+    }
+
+    // ---- method: <org.jfree.chart.axis.PeriodAxisLabelInfo: java.awt.Paint getLabelPaint()> ----
+    {
+        java.awt.Paint $stack1;
+        org.jfree.chart.axis.PeriodAxisLabelInfo this;
+    
+    
+        this := @this: org.jfree.chart.axis.PeriodAxisLabelInfo;
+        $stack1 = this.<org.jfree.chart.axis.PeriodAxisLabelInfo: java.awt.Paint labelPaint>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.axis.PeriodAxisLabelInfo: java.awt.Stroke getDividerStroke()> ----
+    {
+        java.awt.Stroke $stack1;
+        org.jfree.chart.axis.PeriodAxisLabelInfo this;
+    
+    
+        this := @this: org.jfree.chart.axis.PeriodAxisLabelInfo;
+        $stack1 = this.<org.jfree.chart.axis.PeriodAxisLabelInfo: java.awt.Stroke dividerStroke>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.axis.PeriodAxisLabelInfo: java.lang.Class getPeriodClass()> ----
+    {
+        java.lang.Class $stack1;
+        org.jfree.chart.axis.PeriodAxisLabelInfo this;
+    
+    
+        this := @this: org.jfree.chart.axis.PeriodAxisLabelInfo;
+        $stack1 = this.<org.jfree.chart.axis.PeriodAxisLabelInfo: java.lang.Class periodClass>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.axis.PeriodAxisLabelInfo: java.lang.Class class$(java.lang.String)> ----
+    {
+        java.lang.Class $stack2;
+        java.lang.NoClassDefFoundError $stack4;
+        java.lang.String x0;
+        java.lang.Throwable $stack3, $stack5, x1;
+    
+    
+        x0 := @parameter0: java.lang.String;
+    
+      label1:
+        $stack2 = staticinvoke <java.lang.Class: java.lang.Class forName(java.lang.String)>(x0);
+    
+      label2:
+        return $stack2;
+    
+      label3:
+        $stack3 := @caughtexception;
+        x1 = $stack3;
+        $stack4 = new java.lang.NoClassDefFoundError;
+        specialinvoke $stack4.<java.lang.NoClassDefFoundError: void <init>()>();
+        $stack5 = virtualinvoke $stack4.<java.lang.NoClassDefFoundError: java.lang.Throwable initCause(java.lang.Throwable)>($stack3);
+    
+        throw $stack5;
+    
+     catch java.lang.ClassNotFoundException from label1 to label2 with label3;
+    }
+
+    // ---- method: <org.jfree.chart.axis.PeriodAxisLabelInfo: java.lang.Object clone()> ----
+    {
+        java.lang.Object $stack1;
+        org.jfree.chart.axis.PeriodAxisLabelInfo this;
+    
+    
+        this := @this: org.jfree.chart.axis.PeriodAxisLabelInfo;
+        $stack1 = specialinvoke this.<java.lang.Object: java.lang.Object clone()>();
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.axis.PeriodAxisLabelInfo: void <clinit>()> ----
+    {
+        java.awt.BasicStroke #l0;
+        java.awt.Font $stack1;
+        java.lang.Object $stack2, $stack3, $stack4;
+        org.jfree.chart.util.RectangleInsets $stack0;
+    
+    
+        $stack0 = new org.jfree.chart.util.RectangleInsets;
+        specialinvoke $stack0.<org.jfree.chart.util.RectangleInsets: void <init>(double,double,double,double)>(2.0, 2.0, 2.0, 2.0);
+        <org.jfree.chart.axis.PeriodAxisLabelInfo: org.jfree.chart.util.RectangleInsets DEFAULT_INSETS> = $stack0;
+        $stack1 = new java.awt.Font;
+        specialinvoke $stack1.<java.awt.Font: void <init>(java.lang.String,int,int)>("Tahoma", 0, 10);
+        <org.jfree.chart.axis.PeriodAxisLabelInfo: java.awt.Font DEFAULT_FONT> = $stack1;
+        $stack2 = <java.awt.Color: java.awt.Color black>;
+        <org.jfree.chart.axis.PeriodAxisLabelInfo: java.awt.Paint DEFAULT_LABEL_PAINT> = (java.awt.Paint) $stack2;
+        $stack3 = new java.awt.BasicStroke;
+        #l0 = (java.awt.BasicStroke) $stack3;
+        specialinvoke #l0.<java.awt.BasicStroke: void <init>(float)>(0.5F);
+        <org.jfree.chart.axis.PeriodAxisLabelInfo: java.awt.Stroke DEFAULT_DIVIDER_STROKE> = (java.awt.Stroke) $stack3;
+        $stack4 = <java.awt.Color: java.awt.Color gray>;
+        <org.jfree.chart.axis.PeriodAxisLabelInfo: java.awt.Paint DEFAULT_DIVIDER_PAINT> = (java.awt.Paint) $stack4;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.axis.PeriodAxisLabelInfo: org.jfree.chart.util.RectangleInsets getPadding()> ----
+    {
+        org.jfree.chart.axis.PeriodAxisLabelInfo this;
+        org.jfree.chart.util.RectangleInsets $stack1;
+    
+    
+        this := @this: org.jfree.chart.axis.PeriodAxisLabelInfo;
+        $stack1 = this.<org.jfree.chart.axis.PeriodAxisLabelInfo: org.jfree.chart.util.RectangleInsets padding>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.axis.PeriodAxisLabelInfo: boolean equals(java.lang.Object)> ----
+    {
+        boolean $stack12, $stack15, $stack18, $stack19, $stack20, $stack23, $stack26, $stack3, $stack6, $stack9;
+        java.awt.Font $stack13, $stack14;
+        java.awt.Paint $stack16, $stack17, $stack24, $stack25;
+        java.awt.Stroke $stack21, $stack22;
+        java.lang.Class $stack4, $stack5;
+        java.lang.Object obj;
+        java.text.DateFormat $stack7, $stack8;
+        org.jfree.chart.axis.PeriodAxisLabelInfo info, this;
+        org.jfree.chart.util.RectangleInsets $stack10, $stack11;
+    
+    
+        this := @this: org.jfree.chart.axis.PeriodAxisLabelInfo;
+        obj := @parameter0: java.lang.Object;
+    
+        if obj != this goto label01;
+    
+        return 1;
+    
+      label01:
+        $stack3 = obj instanceof org.jfree.chart.axis.PeriodAxisLabelInfo;
+    
+        if $stack3 == 0 goto label09;
+        info = (org.jfree.chart.axis.PeriodAxisLabelInfo) obj;
+        $stack5 = info.<org.jfree.chart.axis.PeriodAxisLabelInfo: java.lang.Class periodClass>;
+        $stack4 = this.<org.jfree.chart.axis.PeriodAxisLabelInfo: java.lang.Class periodClass>;
+        $stack6 = virtualinvoke $stack5.<java.lang.Object: boolean equals(java.lang.Object)>($stack4);
+    
+        if $stack6 != 0 goto label02;
+    
+        return 0;
+    
+      label02:
+        $stack8 = info.<org.jfree.chart.axis.PeriodAxisLabelInfo: java.text.DateFormat dateFormat>;
+        $stack7 = this.<org.jfree.chart.axis.PeriodAxisLabelInfo: java.text.DateFormat dateFormat>;
+        $stack9 = virtualinvoke $stack8.<java.text.DateFormat: boolean equals(java.lang.Object)>($stack7);
+    
+        if $stack9 != 0 goto label03;
+    
+        return 0;
+    
+      label03:
+        $stack11 = info.<org.jfree.chart.axis.PeriodAxisLabelInfo: org.jfree.chart.util.RectangleInsets padding>;
+        $stack10 = this.<org.jfree.chart.axis.PeriodAxisLabelInfo: org.jfree.chart.util.RectangleInsets padding>;
+        $stack12 = virtualinvoke $stack11.<org.jfree.chart.util.RectangleInsets: boolean equals(java.lang.Object)>($stack10);
+    
+        if $stack12 != 0 goto label04;
+    
+        return 0;
+    
+      label04:
+        $stack14 = info.<org.jfree.chart.axis.PeriodAxisLabelInfo: java.awt.Font labelFont>;
+        $stack13 = this.<org.jfree.chart.axis.PeriodAxisLabelInfo: java.awt.Font labelFont>;
+        $stack15 = virtualinvoke $stack14.<java.awt.Font: boolean equals(java.lang.Object)>($stack13);
+    
+        if $stack15 != 0 goto label05;
+    
+        return 0;
+    
+      label05:
+        $stack17 = info.<org.jfree.chart.axis.PeriodAxisLabelInfo: java.awt.Paint labelPaint>;
+        $stack16 = this.<org.jfree.chart.axis.PeriodAxisLabelInfo: java.awt.Paint labelPaint>;
+        $stack18 = virtualinvoke $stack17.<java.lang.Object: boolean equals(java.lang.Object)>($stack16);
+    
+        if $stack18 != 0 goto label06;
+    
+        return 0;
+    
+      label06:
+        $stack20 = info.<org.jfree.chart.axis.PeriodAxisLabelInfo: boolean drawDividers>;
+        $stack19 = this.<org.jfree.chart.axis.PeriodAxisLabelInfo: boolean drawDividers>;
+    
+        if $stack20 == $stack19 goto label07;
+    
+        return 0;
+    
+      label07:
+        $stack22 = info.<org.jfree.chart.axis.PeriodAxisLabelInfo: java.awt.Stroke dividerStroke>;
+        $stack21 = this.<org.jfree.chart.axis.PeriodAxisLabelInfo: java.awt.Stroke dividerStroke>;
+        $stack23 = virtualinvoke $stack22.<java.lang.Object: boolean equals(java.lang.Object)>($stack21);
+    
+        if $stack23 != 0 goto label08;
+    
+        return 0;
+    
+      label08:
+        $stack25 = info.<org.jfree.chart.axis.PeriodAxisLabelInfo: java.awt.Paint dividerPaint>;
+        $stack24 = this.<org.jfree.chart.axis.PeriodAxisLabelInfo: java.awt.Paint dividerPaint>;
+        $stack26 = virtualinvoke $stack25.<java.lang.Object: boolean equals(java.lang.Object)>($stack24);
+    
+        if $stack26 != 0 goto label10;
+    
+        return 0;
+    
+      label09:
+        return 0;
+    
+      label10:
+        return 1;
+    }
+
+    // ---- method: <org.jfree.chart.axis.PeriodAxisLabelInfo: void writeObject(java.io.ObjectOutputStream)> ----
+    {
+        java.awt.Paint $stack2, $stack4;
+        java.awt.Stroke $stack3;
+        java.io.ObjectOutputStream stream;
+        org.jfree.chart.axis.PeriodAxisLabelInfo this;
+    
+    
+        this := @this: org.jfree.chart.axis.PeriodAxisLabelInfo;
+        stream := @parameter0: java.io.ObjectOutputStream;
+        virtualinvoke stream.<java.io.ObjectOutputStream: void defaultWriteObject()>();
+        $stack2 = this.<org.jfree.chart.axis.PeriodAxisLabelInfo: java.awt.Paint labelPaint>;
+        staticinvoke <org.jfree.chart.util.SerialUtilities: void writePaint(java.awt.Paint,java.io.ObjectOutputStream)>($stack2, stream);
+        $stack3 = this.<org.jfree.chart.axis.PeriodAxisLabelInfo: java.awt.Stroke dividerStroke>;
+        staticinvoke <org.jfree.chart.util.SerialUtilities: void writeStroke(java.awt.Stroke,java.io.ObjectOutputStream)>($stack3, stream);
+        $stack4 = this.<org.jfree.chart.axis.PeriodAxisLabelInfo: java.awt.Paint dividerPaint>;
+        staticinvoke <org.jfree.chart.util.SerialUtilities: void writePaint(java.awt.Paint,java.io.ObjectOutputStream)>($stack4, stream);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.axis.PeriodAxisLabelInfo: void <init>(java.lang.Class,java.text.DateFormat,org.jfree.chart.util.RectangleInsets,java.awt.Font,java.awt.Paint,boolean,java.awt.Stroke,java.awt.Paint)> ----
+    {
+        boolean drawDividers;
+        java.awt.Font labelFont;
+        java.awt.Paint dividerPaint, labelPaint;
+        java.awt.Stroke dividerStroke;
+        java.lang.Class periodClass;
+        java.lang.IllegalArgumentException #l1, #l12, #l3, #l4, #l5, #l8, #l9;
+        java.lang.Object $stack10, $stack11, $stack12, $stack13, $stack14, $stack15, $stack9;
+        java.lang.Throwable #l0, #l10, #l11, #l13, #l2, #l6, #l7;
+        java.text.DateFormat dateFormat;
+        org.jfree.chart.axis.PeriodAxisLabelInfo this;
+        org.jfree.chart.util.RectangleInsets padding;
+    
+    
+        this := @this: org.jfree.chart.axis.PeriodAxisLabelInfo;
+        periodClass := @parameter0: java.lang.Class;
+        dateFormat := @parameter1: java.text.DateFormat;
+        padding := @parameter2: org.jfree.chart.util.RectangleInsets;
+        labelFont := @parameter3: java.awt.Font;
+        labelPaint := @parameter4: java.awt.Paint;
+        drawDividers := @parameter5: boolean;
+        dividerStroke := @parameter6: java.awt.Stroke;
+        dividerPaint := @parameter7: java.awt.Paint;
+        specialinvoke this.<java.lang.Object: void <init>()>();
+    
+        if periodClass != null goto label1;
+        $stack15 = new java.lang.IllegalArgumentException;
+        #l1 = (java.lang.IllegalArgumentException) $stack15;
+        specialinvoke #l1.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'periodClass\' argument.");
+        #l7 = (java.lang.Throwable) $stack15;
+    
+        throw #l7;
+    
+      label1:
+        if dateFormat != null goto label2;
+        $stack14 = new java.lang.IllegalArgumentException;
+        #l4 = (java.lang.IllegalArgumentException) $stack14;
+        specialinvoke #l4.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'dateFormat\' argument.");
+        #l13 = (java.lang.Throwable) $stack14;
+    
+        throw #l13;
+    
+      label2:
+        if padding != null goto label3;
+        $stack13 = new java.lang.IllegalArgumentException;
+        #l3 = (java.lang.IllegalArgumentException) $stack13;
+        specialinvoke #l3.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'padding\' argument.");
+        #l11 = (java.lang.Throwable) $stack13;
+    
+        throw #l11;
+    
+      label3:
+        if labelFont != null goto label4;
+        $stack12 = new java.lang.IllegalArgumentException;
+        #l9 = (java.lang.IllegalArgumentException) $stack12;
+        specialinvoke #l9.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'labelFont\' argument.");
+        #l0 = (java.lang.Throwable) $stack12;
+    
+        throw #l0;
+    
+      label4:
+        if labelPaint != null goto label5;
+        $stack11 = new java.lang.IllegalArgumentException;
+        #l5 = (java.lang.IllegalArgumentException) $stack11;
+        specialinvoke #l5.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'labelPaint\' argument.");
+        #l10 = (java.lang.Throwable) $stack11;
+    
+        throw #l10;
+    
+      label5:
+        if dividerStroke != null goto label6;
+        $stack10 = new java.lang.IllegalArgumentException;
+        #l8 = (java.lang.IllegalArgumentException) $stack10;
+        specialinvoke #l8.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'dividerStroke\' argument.");
+        #l6 = (java.lang.Throwable) $stack10;
+    
+        throw #l6;
+    
+      label6:
+        if dividerPaint != null goto label7;
+        $stack9 = new java.lang.IllegalArgumentException;
+        #l12 = (java.lang.IllegalArgumentException) $stack9;
+        specialinvoke #l12.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'dividerPaint\' argument.");
+        #l2 = (java.lang.Throwable) $stack9;
+    
+        throw #l2;
+    
+      label7:
+        this.<org.jfree.chart.axis.PeriodAxisLabelInfo: java.lang.Class periodClass> = periodClass;
+        this.<org.jfree.chart.axis.PeriodAxisLabelInfo: java.text.DateFormat dateFormat> = dateFormat;
+        this.<org.jfree.chart.axis.PeriodAxisLabelInfo: org.jfree.chart.util.RectangleInsets padding> = padding;
+        this.<org.jfree.chart.axis.PeriodAxisLabelInfo: java.awt.Font labelFont> = labelFont;
+        this.<org.jfree.chart.axis.PeriodAxisLabelInfo: java.awt.Paint labelPaint> = labelPaint;
+        this.<org.jfree.chart.axis.PeriodAxisLabelInfo: boolean drawDividers> = drawDividers;
+        this.<org.jfree.chart.axis.PeriodAxisLabelInfo: java.awt.Stroke dividerStroke> = dividerStroke;
+        this.<org.jfree.chart.axis.PeriodAxisLabelInfo: java.awt.Paint dividerPaint> = dividerPaint;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.axis.PeriodAxisLabelInfo: boolean getDrawDividers()> ----
+    {
+        boolean $stack1;
+        org.jfree.chart.axis.PeriodAxisLabelInfo this;
+    
+    
+        this := @this: org.jfree.chart.axis.PeriodAxisLabelInfo;
+        $stack1 = this.<org.jfree.chart.axis.PeriodAxisLabelInfo: boolean drawDividers>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.axis.PeriodAxisLabelInfo: int hashCode()> ----
+    {
+        byte result#0;
+        int $stack3, $stack5, result#1, result#2;
+        java.lang.Class $stack2;
+        java.text.DateFormat $stack4;
+        org.jfree.chart.axis.PeriodAxisLabelInfo this;
+    
+    
+        this := @this: org.jfree.chart.axis.PeriodAxisLabelInfo;
+        result#0 = 41;
+        $stack2 = this.<org.jfree.chart.axis.PeriodAxisLabelInfo: java.lang.Class periodClass>;
+        $stack3 = virtualinvoke $stack2.<java.lang.Object: int hashCode()>();
+        result#1 = 37 * $stack3;
+        $stack4 = this.<org.jfree.chart.axis.PeriodAxisLabelInfo: java.text.DateFormat dateFormat>;
+        $stack5 = virtualinvoke $stack4.<java.text.DateFormat: int hashCode()>();
+        result#2 = 37 * $stack5;
+    
+        return result#2;
+    }
+
+    // ---- method: <org.jfree.chart.axis.PeriodAxisLabelInfo: java.awt.Font getLabelFont()> ----
+    {
+        java.awt.Font $stack1;
+        org.jfree.chart.axis.PeriodAxisLabelInfo this;
+    
+    
+        this := @this: org.jfree.chart.axis.PeriodAxisLabelInfo;
+        $stack1 = this.<org.jfree.chart.axis.PeriodAxisLabelInfo: java.awt.Font labelFont>;
+    
+        return $stack1;
+    }
+
+}

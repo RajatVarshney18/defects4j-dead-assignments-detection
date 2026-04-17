@@ -1,0 +1,689 @@
+// ========================================================================
+// CLASS : org.jfree.chart.renderer.category.ScatterRenderer
+// ========================================================================
+
+[PUBLIC, SUPER] class org.jfree.chart.renderer.category.ScatterRenderer extends org.jfree.chart.renderer.category.AbstractCategoryItemRenderer implements org.jfree.chart.util.PublicCloneable, java.lang.Cloneable, java.io.Serializable {
+
+    // ---- method: <org.jfree.chart.renderer.category.ScatterRenderer: void setUseSeriesOffset(boolean)> ----
+    {
+        boolean offset;
+        org.jfree.chart.renderer.category.ScatterRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.category.ScatterRenderer;
+        offset := @parameter0: boolean;
+        this.<org.jfree.chart.renderer.category.ScatterRenderer: boolean useSeriesOffset> = offset;
+        virtualinvoke this.<org.jfree.chart.renderer.category.ScatterRenderer: void fireChangeEvent()>();
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.category.ScatterRenderer: void setItemMargin(double)> ----
+    {
+        byte $stack3, $stack5;
+        double margin;
+        java.lang.IllegalArgumentException #l0;
+        java.lang.Object $stack4;
+        java.lang.Throwable #l1;
+        org.jfree.chart.renderer.category.ScatterRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.category.ScatterRenderer;
+        margin := @parameter0: double;
+        $stack3 = margin cmpg 0.0;
+    
+        if $stack3 < 0 goto label1;
+        $stack5 = margin cmpl 1.0;
+    
+        if $stack5 < 0 goto label2;
+    
+      label1:
+        $stack4 = new java.lang.IllegalArgumentException;
+        #l0 = (java.lang.IllegalArgumentException) $stack4;
+        specialinvoke #l0.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Requires 0.0 <= margin < 1.0.");
+        #l1 = (java.lang.Throwable) $stack4;
+    
+        throw #l1;
+    
+      label2:
+        this.<org.jfree.chart.renderer.category.ScatterRenderer: double itemMargin> = margin;
+        virtualinvoke this.<org.jfree.chart.renderer.category.ScatterRenderer: void fireChangeEvent()>();
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.category.ScatterRenderer: void writeObject(java.io.ObjectOutputStream)> ----
+    {
+        java.io.ObjectOutputStream stream;
+        org.jfree.chart.renderer.category.ScatterRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.category.ScatterRenderer;
+        stream := @parameter0: java.io.ObjectOutputStream;
+        virtualinvoke stream.<java.io.ObjectOutputStream: void defaultWriteObject()>();
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.category.ScatterRenderer: boolean getBaseShapesFilled()> ----
+    {
+        boolean $stack1;
+        org.jfree.chart.renderer.category.ScatterRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.category.ScatterRenderer;
+        $stack1 = this.<org.jfree.chart.renderer.category.ScatterRenderer: boolean baseShapesFilled>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.category.ScatterRenderer: void drawItem(java.awt.Graphics2D,org.jfree.chart.renderer.category.CategoryItemRendererState,java.awt.geom.Rectangle2D,org.jfree.chart.plot.CategoryPlot,org.jfree.chart.axis.CategoryAxis,org.jfree.chart.axis.ValueAxis,org.jfree.data.category.CategoryDataset,int,int,boolean,int)> ----
+    {
+        boolean $stack27, $stack28, $stack35, $stack36, $stack37, $stack41, selected;
+        double $stack44, value, x1, y1;
+        int $stack30, $stack46, column, i, pass, row, valueCount, visibleRow, visibleRowCount;
+        java.awt.Graphics2D g2;
+        java.awt.Paint $stack38, $stack40, $stack42, $stack43;
+        java.awt.Shape shape;
+        java.awt.Stroke $stack39;
+        java.awt.geom.Rectangle2D dataArea;
+        java.lang.Number n;
+        java.lang.Object $stack31;
+        java.util.List values;
+        org.jfree.chart.axis.CategoryAxis domainAxis;
+        org.jfree.chart.axis.ValueAxis rangeAxis;
+        org.jfree.chart.plot.CategoryPlot plot;
+        org.jfree.chart.plot.PlotOrientation $stack33, $stack34, orientation;
+        org.jfree.chart.renderer.category.CategoryItemRendererState state;
+        org.jfree.chart.renderer.category.ScatterRenderer this;
+        org.jfree.chart.util.RectangleEdge $stack29, $stack32, $stack45;
+        org.jfree.data.category.CategoryDataset dataset;
+        org.jfree.data.statistics.MultiValueCategoryDataset d;
+    
+    
+        this := @this: org.jfree.chart.renderer.category.ScatterRenderer;
+        g2 := @parameter0: java.awt.Graphics2D;
+        state := @parameter1: org.jfree.chart.renderer.category.CategoryItemRendererState;
+        dataArea := @parameter2: java.awt.geom.Rectangle2D;
+        plot := @parameter3: org.jfree.chart.plot.CategoryPlot;
+        domainAxis := @parameter4: org.jfree.chart.axis.CategoryAxis;
+        rangeAxis := @parameter5: org.jfree.chart.axis.ValueAxis;
+        dataset := @parameter6: org.jfree.data.category.CategoryDataset;
+        row := @parameter7: int;
+        column := @parameter8: int;
+        selected := @parameter9: boolean;
+        pass := @parameter10: int;
+        $stack27 = virtualinvoke this.<org.jfree.chart.renderer.category.ScatterRenderer: boolean getItemVisible(int,int)>(row, column);
+    
+        if $stack27 != 0 goto label01;
+    
+        return;
+    
+      label01:
+        visibleRow = virtualinvoke state.<org.jfree.chart.renderer.category.CategoryItemRendererState: int getVisibleSeriesIndex(int)>(row);
+    
+        if visibleRow >= 0 goto label02;
+    
+        return;
+    
+      label02:
+        visibleRowCount = virtualinvoke state.<org.jfree.chart.renderer.category.CategoryItemRendererState: int getVisibleSeriesCount()>();
+        orientation = virtualinvoke plot.<org.jfree.chart.plot.CategoryPlot: org.jfree.chart.plot.PlotOrientation getOrientation()>();
+        d = (org.jfree.data.statistics.MultiValueCategoryDataset) dataset;
+        values = interfaceinvoke d.<org.jfree.data.statistics.MultiValueCategoryDataset: java.util.List getValues(int,int)>(row, column);
+    
+        if values != null goto label03;
+    
+        return;
+    
+      label03:
+        valueCount = interfaceinvoke values.<java.util.List: int size()>();
+        i = 0;
+    
+      label04:
+        if i >= valueCount goto label15;
+        $stack28 = this.<org.jfree.chart.renderer.category.ScatterRenderer: boolean useSeriesOffset>;
+    
+        if $stack28 == 0 goto label05;
+        $stack46 = interfaceinvoke dataset.<org.jfree.data.category.CategoryDataset: int getColumnCount()>();
+        $stack44 = this.<org.jfree.chart.renderer.category.ScatterRenderer: double itemMargin>;
+        $stack45 = virtualinvoke plot.<org.jfree.chart.plot.CategoryPlot: org.jfree.chart.util.RectangleEdge getDomainAxisEdge()>();
+        x1 = virtualinvoke domainAxis.<org.jfree.chart.axis.CategoryAxis: double getCategorySeriesMiddle(int,int,int,int,double,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)>(column, $stack46, visibleRow, visibleRowCount, $stack44, dataArea, $stack45);
+    
+        goto label06;
+    
+      label05:
+        $stack30 = virtualinvoke this.<org.jfree.chart.renderer.category.ScatterRenderer: int getColumnCount()>();
+        $stack29 = virtualinvoke plot.<org.jfree.chart.plot.CategoryPlot: org.jfree.chart.util.RectangleEdge getDomainAxisEdge()>();
+        x1 = virtualinvoke domainAxis.<org.jfree.chart.axis.CategoryAxis: double getCategoryMiddle(int,int,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)>(column, $stack30, dataArea, $stack29);
+    
+      label06:
+        $stack31 = interfaceinvoke values.<java.util.List: java.lang.Object get(int)>(i);
+        n = (java.lang.Number) $stack31;
+        value = virtualinvoke n.<java.lang.Number: double doubleValue()>();
+        $stack32 = virtualinvoke plot.<org.jfree.chart.plot.CategoryPlot: org.jfree.chart.util.RectangleEdge getRangeAxisEdge()>();
+        y1 = virtualinvoke rangeAxis.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)>(value, dataArea, $stack32);
+        shape = virtualinvoke this.<org.jfree.chart.renderer.category.ScatterRenderer: java.awt.Shape getItemShape(int,int,boolean)>(row, column, selected);
+        $stack33 = <org.jfree.chart.plot.PlotOrientation: org.jfree.chart.plot.PlotOrientation HORIZONTAL>;
+    
+        if orientation != $stack33 goto label07;
+        shape = staticinvoke <org.jfree.chart.util.ShapeUtilities: java.awt.Shape createTranslatedShape(java.awt.Shape,double,double)>(shape, y1, x1);
+    
+        goto label08;
+    
+      label07:
+        $stack34 = <org.jfree.chart.plot.PlotOrientation: org.jfree.chart.plot.PlotOrientation VERTICAL>;
+    
+        if orientation != $stack34 goto label08;
+        shape = staticinvoke <org.jfree.chart.util.ShapeUtilities: java.awt.Shape createTranslatedShape(java.awt.Shape,double,double)>(shape, x1, y1);
+    
+      label08:
+        $stack35 = virtualinvoke this.<org.jfree.chart.renderer.category.ScatterRenderer: boolean getItemShapeFilled(int,int)>(row, column);
+    
+        if $stack35 == 0 goto label11;
+        $stack41 = this.<org.jfree.chart.renderer.category.ScatterRenderer: boolean useFillPaint>;
+    
+        if $stack41 == 0 goto label09;
+        $stack43 = virtualinvoke this.<org.jfree.chart.renderer.category.ScatterRenderer: java.awt.Paint getItemFillPaint(int,int,boolean)>(row, column, selected);
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>($stack43);
+    
+        goto label10;
+    
+      label09:
+        $stack42 = virtualinvoke this.<org.jfree.chart.renderer.category.ScatterRenderer: java.awt.Paint getItemPaint(int,int,boolean)>(row, column, selected);
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>($stack42);
+    
+      label10:
+        virtualinvoke g2.<java.awt.Graphics2D: void fill(java.awt.Shape)>(shape);
+    
+      label11:
+        $stack36 = this.<org.jfree.chart.renderer.category.ScatterRenderer: boolean drawOutlines>;
+    
+        if $stack36 == 0 goto label14;
+        $stack37 = this.<org.jfree.chart.renderer.category.ScatterRenderer: boolean useOutlinePaint>;
+    
+        if $stack37 == 0 goto label12;
+        $stack40 = virtualinvoke this.<org.jfree.chart.renderer.category.ScatterRenderer: java.awt.Paint getItemOutlinePaint(int,int,boolean)>(row, column, selected);
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>($stack40);
+    
+        goto label13;
+    
+      label12:
+        $stack38 = virtualinvoke this.<org.jfree.chart.renderer.category.ScatterRenderer: java.awt.Paint getItemPaint(int,int,boolean)>(row, column, selected);
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>($stack38);
+    
+      label13:
+        $stack39 = virtualinvoke this.<org.jfree.chart.renderer.category.ScatterRenderer: java.awt.Stroke getItemOutlineStroke(int,int,boolean)>(row, column, selected);
+        virtualinvoke g2.<java.awt.Graphics2D: void setStroke(java.awt.Stroke)>($stack39);
+        virtualinvoke g2.<java.awt.Graphics2D: void draw(java.awt.Shape)>(shape);
+    
+      label14:
+        i = i + 1;
+    
+        goto label04;
+    
+      label15:
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.category.ScatterRenderer: boolean getSeriesShapesFilled(int)> ----
+    {
+        boolean $stack4, $stack5;
+        int series;
+        java.lang.Boolean flag;
+        org.jfree.chart.renderer.category.ScatterRenderer this;
+        org.jfree.chart.util.BooleanList $stack3;
+    
+    
+        this := @this: org.jfree.chart.renderer.category.ScatterRenderer;
+        series := @parameter0: int;
+        $stack3 = this.<org.jfree.chart.renderer.category.ScatterRenderer: org.jfree.chart.util.BooleanList seriesShapesFilled>;
+        flag = virtualinvoke $stack3.<org.jfree.chart.util.BooleanList: java.lang.Boolean getBoolean(int)>(series);
+    
+        if flag == null goto label1;
+        $stack5 = virtualinvoke flag.<java.lang.Boolean: boolean booleanValue()>();
+    
+        return $stack5;
+    
+      label1:
+        $stack4 = this.<org.jfree.chart.renderer.category.ScatterRenderer: boolean baseShapesFilled>;
+    
+        return $stack4;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.category.ScatterRenderer: void setUseFillPaint(boolean)> ----
+    {
+        boolean flag;
+        org.jfree.chart.renderer.category.ScatterRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.category.ScatterRenderer;
+        flag := @parameter0: boolean;
+        this.<org.jfree.chart.renderer.category.ScatterRenderer: boolean useFillPaint> = flag;
+        virtualinvoke this.<org.jfree.chart.renderer.category.ScatterRenderer: void fireChangeEvent()>();
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.category.ScatterRenderer: boolean getDrawOutlines()> ----
+    {
+        boolean $stack1;
+        org.jfree.chart.renderer.category.ScatterRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.category.ScatterRenderer;
+        $stack1 = this.<org.jfree.chart.renderer.category.ScatterRenderer: boolean drawOutlines>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.category.ScatterRenderer: void setSeriesShapesFilled(int,boolean)> ----
+    {
+        boolean filled;
+        int series;
+        java.lang.Boolean $stack4;
+        org.jfree.chart.renderer.category.ScatterRenderer this;
+        org.jfree.chart.util.BooleanList $stack3;
+    
+    
+        this := @this: org.jfree.chart.renderer.category.ScatterRenderer;
+        series := @parameter0: int;
+        filled := @parameter1: boolean;
+        $stack3 = this.<org.jfree.chart.renderer.category.ScatterRenderer: org.jfree.chart.util.BooleanList seriesShapesFilled>;
+        $stack4 = staticinvoke <java.lang.Boolean: java.lang.Boolean valueOf(boolean)>(filled);
+        virtualinvoke $stack3.<org.jfree.chart.util.BooleanList: void setBoolean(int,java.lang.Boolean)>(series, $stack4);
+        virtualinvoke this.<org.jfree.chart.renderer.category.ScatterRenderer: void fireChangeEvent()>();
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.category.ScatterRenderer: boolean equals(java.lang.Object)> ----
+    {
+        boolean $stack10, $stack11, $stack12, $stack13, $stack14, $stack15, $stack16, $stack20, $stack3, $stack6, $stack7, $stack8, $stack9;
+        byte $stack19;
+        double $stack17, $stack18;
+        java.lang.Object obj;
+        org.jfree.chart.renderer.category.ScatterRenderer that, this;
+        org.jfree.chart.util.BooleanList $stack4, $stack5;
+    
+    
+        this := @this: org.jfree.chart.renderer.category.ScatterRenderer;
+        obj := @parameter0: java.lang.Object;
+    
+        if obj != this goto label1;
+    
+        return 1;
+    
+      label1:
+        $stack3 = obj instanceof org.jfree.chart.renderer.category.ScatterRenderer;
+    
+        if $stack3 != 0 goto label2;
+    
+        return 0;
+    
+      label2:
+        that = (org.jfree.chart.renderer.category.ScatterRenderer) obj;
+        $stack5 = this.<org.jfree.chart.renderer.category.ScatterRenderer: org.jfree.chart.util.BooleanList seriesShapesFilled>;
+        $stack4 = that.<org.jfree.chart.renderer.category.ScatterRenderer: org.jfree.chart.util.BooleanList seriesShapesFilled>;
+        $stack6 = staticinvoke <org.jfree.chart.util.ObjectUtilities: boolean equal(java.lang.Object,java.lang.Object)>($stack5, $stack4);
+    
+        if $stack6 != 0 goto label3;
+    
+        return 0;
+    
+      label3:
+        $stack8 = this.<org.jfree.chart.renderer.category.ScatterRenderer: boolean baseShapesFilled>;
+        $stack7 = that.<org.jfree.chart.renderer.category.ScatterRenderer: boolean baseShapesFilled>;
+    
+        if $stack8 == $stack7 goto label4;
+    
+        return 0;
+    
+      label4:
+        $stack10 = this.<org.jfree.chart.renderer.category.ScatterRenderer: boolean useFillPaint>;
+        $stack9 = that.<org.jfree.chart.renderer.category.ScatterRenderer: boolean useFillPaint>;
+    
+        if $stack10 == $stack9 goto label5;
+    
+        return 0;
+    
+      label5:
+        $stack12 = this.<org.jfree.chart.renderer.category.ScatterRenderer: boolean drawOutlines>;
+        $stack11 = that.<org.jfree.chart.renderer.category.ScatterRenderer: boolean drawOutlines>;
+    
+        if $stack12 == $stack11 goto label6;
+    
+        return 0;
+    
+      label6:
+        $stack14 = this.<org.jfree.chart.renderer.category.ScatterRenderer: boolean useOutlinePaint>;
+        $stack13 = that.<org.jfree.chart.renderer.category.ScatterRenderer: boolean useOutlinePaint>;
+    
+        if $stack14 == $stack13 goto label7;
+    
+        return 0;
+    
+      label7:
+        $stack16 = this.<org.jfree.chart.renderer.category.ScatterRenderer: boolean useSeriesOffset>;
+        $stack15 = that.<org.jfree.chart.renderer.category.ScatterRenderer: boolean useSeriesOffset>;
+    
+        if $stack16 == $stack15 goto label8;
+    
+        return 0;
+    
+      label8:
+        $stack17 = this.<org.jfree.chart.renderer.category.ScatterRenderer: double itemMargin>;
+        $stack18 = that.<org.jfree.chart.renderer.category.ScatterRenderer: double itemMargin>;
+        $stack19 = $stack17 cmpl $stack18;
+    
+        if $stack19 == 0 goto label9;
+    
+        return 0;
+    
+      label9:
+        $stack20 = specialinvoke this.<org.jfree.chart.renderer.category.AbstractCategoryItemRenderer: boolean equals(java.lang.Object)>(obj);
+    
+        return $stack20;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.category.ScatterRenderer: java.lang.Object clone()> ----
+    {
+        java.lang.Object $stack2, $stack4;
+        org.jfree.chart.renderer.category.ScatterRenderer clone, this;
+        org.jfree.chart.util.BooleanList $stack3, $stack5;
+    
+    
+        this := @this: org.jfree.chart.renderer.category.ScatterRenderer;
+        $stack2 = specialinvoke this.<org.jfree.chart.renderer.category.AbstractCategoryItemRenderer: java.lang.Object clone()>();
+        clone = (org.jfree.chart.renderer.category.ScatterRenderer) $stack2;
+        $stack3 = this.<org.jfree.chart.renderer.category.ScatterRenderer: org.jfree.chart.util.BooleanList seriesShapesFilled>;
+        $stack4 = virtualinvoke $stack3.<org.jfree.chart.util.BooleanList: java.lang.Object clone()>();
+        $stack5 = (org.jfree.chart.util.BooleanList) $stack4;
+        clone.<org.jfree.chart.renderer.category.ScatterRenderer: org.jfree.chart.util.BooleanList seriesShapesFilled> = $stack5;
+    
+        return clone;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.category.ScatterRenderer: void setDrawOutlines(boolean)> ----
+    {
+        boolean flag;
+        org.jfree.chart.renderer.category.ScatterRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.category.ScatterRenderer;
+        flag := @parameter0: boolean;
+        this.<org.jfree.chart.renderer.category.ScatterRenderer: boolean drawOutlines> = flag;
+        virtualinvoke this.<org.jfree.chart.renderer.category.ScatterRenderer: void fireChangeEvent()>();
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.category.ScatterRenderer: void <init>()> ----
+    {
+        org.jfree.chart.renderer.category.ScatterRenderer this;
+        org.jfree.chart.util.BooleanList $stack1;
+    
+    
+        this := @this: org.jfree.chart.renderer.category.ScatterRenderer;
+        specialinvoke this.<org.jfree.chart.renderer.category.AbstractCategoryItemRenderer: void <init>()>();
+        $stack1 = new org.jfree.chart.util.BooleanList;
+        specialinvoke $stack1.<org.jfree.chart.util.BooleanList: void <init>()>();
+        this.<org.jfree.chart.renderer.category.ScatterRenderer: org.jfree.chart.util.BooleanList seriesShapesFilled> = $stack1;
+        this.<org.jfree.chart.renderer.category.ScatterRenderer: boolean baseShapesFilled> = 1;
+        this.<org.jfree.chart.renderer.category.ScatterRenderer: boolean useFillPaint> = 0;
+        this.<org.jfree.chart.renderer.category.ScatterRenderer: boolean drawOutlines> = 0;
+        this.<org.jfree.chart.renderer.category.ScatterRenderer: boolean useOutlinePaint> = 0;
+        this.<org.jfree.chart.renderer.category.ScatterRenderer: boolean useSeriesOffset> = 1;
+        this.<org.jfree.chart.renderer.category.ScatterRenderer: double itemMargin> = 0.2;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.category.ScatterRenderer: void readObject(java.io.ObjectInputStream)> ----
+    {
+        java.io.ObjectInputStream stream;
+        org.jfree.chart.renderer.category.ScatterRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.category.ScatterRenderer;
+        stream := @parameter0: java.io.ObjectInputStream;
+        virtualinvoke stream.<java.io.ObjectInputStream: void defaultReadObject()>();
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.category.ScatterRenderer: boolean getUseOutlinePaint()> ----
+    {
+        boolean $stack1;
+        org.jfree.chart.renderer.category.ScatterRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.category.ScatterRenderer;
+        $stack1 = this.<org.jfree.chart.renderer.category.ScatterRenderer: boolean useOutlinePaint>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.category.ScatterRenderer: void setSeriesShapesFilled(int,java.lang.Boolean)> ----
+    {
+        int series;
+        java.lang.Boolean filled;
+        org.jfree.chart.renderer.category.ScatterRenderer this;
+        org.jfree.chart.util.BooleanList $stack3;
+    
+    
+        this := @this: org.jfree.chart.renderer.category.ScatterRenderer;
+        series := @parameter0: int;
+        filled := @parameter1: java.lang.Boolean;
+        $stack3 = this.<org.jfree.chart.renderer.category.ScatterRenderer: org.jfree.chart.util.BooleanList seriesShapesFilled>;
+        virtualinvoke $stack3.<org.jfree.chart.util.BooleanList: void setBoolean(int,java.lang.Boolean)>(series, filled);
+        virtualinvoke this.<org.jfree.chart.renderer.category.ScatterRenderer: void fireChangeEvent()>();
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.category.ScatterRenderer: void setBaseShapesFilled(boolean)> ----
+    {
+        boolean flag;
+        org.jfree.chart.renderer.category.ScatterRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.category.ScatterRenderer;
+        flag := @parameter0: boolean;
+        this.<org.jfree.chart.renderer.category.ScatterRenderer: boolean baseShapesFilled> = flag;
+        virtualinvoke this.<org.jfree.chart.renderer.category.ScatterRenderer: void fireChangeEvent()>();
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.category.ScatterRenderer: boolean getItemShapeFilled(int,int)> ----
+    {
+        boolean $stack3;
+        int item, series;
+        org.jfree.chart.renderer.category.ScatterRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.category.ScatterRenderer;
+        series := @parameter0: int;
+        item := @parameter1: int;
+        $stack3 = virtualinvoke this.<org.jfree.chart.renderer.category.ScatterRenderer: boolean getSeriesShapesFilled(int)>(series);
+    
+        return $stack3;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.category.ScatterRenderer: boolean getUseSeriesOffset()> ----
+    {
+        boolean $stack1;
+        org.jfree.chart.renderer.category.ScatterRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.category.ScatterRenderer;
+        $stack1 = this.<org.jfree.chart.renderer.category.ScatterRenderer: boolean useSeriesOffset>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.category.ScatterRenderer: org.jfree.data.Range findRangeBounds(org.jfree.data.category.CategoryDataset)> ----
+    {
+        org.jfree.chart.renderer.category.ScatterRenderer this;
+        org.jfree.data.Range $stack2;
+        org.jfree.data.category.CategoryDataset dataset;
+    
+    
+        this := @this: org.jfree.chart.renderer.category.ScatterRenderer;
+        dataset := @parameter0: org.jfree.data.category.CategoryDataset;
+        $stack2 = virtualinvoke this.<org.jfree.chart.renderer.category.ScatterRenderer: org.jfree.data.Range findRangeBounds(org.jfree.data.category.CategoryDataset,boolean)>(dataset, 1);
+    
+        return $stack2;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.category.ScatterRenderer: void setUseOutlinePaint(boolean)> ----
+    {
+        boolean use;
+        org.jfree.chart.renderer.category.ScatterRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.category.ScatterRenderer;
+        use := @parameter0: boolean;
+        this.<org.jfree.chart.renderer.category.ScatterRenderer: boolean useOutlinePaint> = use;
+        virtualinvoke this.<org.jfree.chart.renderer.category.ScatterRenderer: void fireChangeEvent()>();
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.category.ScatterRenderer: org.jfree.chart.LegendItem getLegendItem(int,int)> ----
+    {
+        boolean $stack17, $stack18, $stack22, $stack23, $stack27, shapeOutlineVisible;
+        int datasetIndex, series;
+        java.awt.Font $stack29;
+        java.awt.Paint $stack25, fillPaint, labelPaint, outlinePaint, paint;
+        java.awt.Shape #l1, shape;
+        java.awt.Stroke $stack26, outlineStroke;
+        java.awt.geom.Line2D$Double #l0;
+        java.lang.Comparable $stack30;
+        java.lang.Object $stack24;
+        java.lang.String description, label, toolTipText, urlText;
+        org.jfree.chart.LegendItem $stack28, result;
+        org.jfree.chart.labels.CategorySeriesLabelGenerator $stack19, $stack20, $stack21, $stack31, $stack32;
+        org.jfree.chart.plot.CategoryPlot cp;
+        org.jfree.chart.renderer.category.ScatterRenderer this;
+        org.jfree.data.category.CategoryDataset dataset;
+    
+    
+        this := @this: org.jfree.chart.renderer.category.ScatterRenderer;
+        datasetIndex := @parameter0: int;
+        series := @parameter1: int;
+        cp = virtualinvoke this.<org.jfree.chart.renderer.category.ScatterRenderer: org.jfree.chart.plot.CategoryPlot getPlot()>();
+    
+        if cp != null goto label1;
+    
+        return null;
+    
+      label1:
+        $stack17 = virtualinvoke this.<org.jfree.chart.renderer.category.ScatterRenderer: boolean isSeriesVisible(int)>(series);
+    
+        if $stack17 == 0 goto label9;
+        $stack18 = virtualinvoke this.<org.jfree.chart.renderer.category.ScatterRenderer: boolean isSeriesVisibleInLegend(int)>(series);
+    
+        if $stack18 == 0 goto label9;
+        dataset = virtualinvoke cp.<org.jfree.chart.plot.CategoryPlot: org.jfree.data.category.CategoryDataset getDataset(int)>(datasetIndex);
+        $stack19 = virtualinvoke this.<org.jfree.chart.renderer.category.ScatterRenderer: org.jfree.chart.labels.CategorySeriesLabelGenerator getLegendItemLabelGenerator()>();
+        label = interfaceinvoke $stack19.<org.jfree.chart.labels.CategorySeriesLabelGenerator: java.lang.String generateLabel(org.jfree.data.category.CategoryDataset,int)>(dataset, series);
+        description = label;
+        toolTipText = null;
+        $stack20 = virtualinvoke this.<org.jfree.chart.renderer.category.ScatterRenderer: org.jfree.chart.labels.CategorySeriesLabelGenerator getLegendItemToolTipGenerator()>();
+    
+        if $stack20 == null goto label2;
+        $stack32 = virtualinvoke this.<org.jfree.chart.renderer.category.ScatterRenderer: org.jfree.chart.labels.CategorySeriesLabelGenerator getLegendItemToolTipGenerator()>();
+        toolTipText = interfaceinvoke $stack32.<org.jfree.chart.labels.CategorySeriesLabelGenerator: java.lang.String generateLabel(org.jfree.data.category.CategoryDataset,int)>(dataset, series);
+    
+      label2:
+        urlText = null;
+        $stack21 = virtualinvoke this.<org.jfree.chart.renderer.category.ScatterRenderer: org.jfree.chart.labels.CategorySeriesLabelGenerator getLegendItemURLGenerator()>();
+    
+        if $stack21 == null goto label3;
+        $stack31 = virtualinvoke this.<org.jfree.chart.renderer.category.ScatterRenderer: org.jfree.chart.labels.CategorySeriesLabelGenerator getLegendItemURLGenerator()>();
+        urlText = interfaceinvoke $stack31.<org.jfree.chart.labels.CategorySeriesLabelGenerator: java.lang.String generateLabel(org.jfree.data.category.CategoryDataset,int)>(dataset, series);
+    
+      label3:
+        shape = virtualinvoke this.<org.jfree.chart.renderer.category.ScatterRenderer: java.awt.Shape lookupLegendShape(int)>(series);
+        paint = virtualinvoke this.<org.jfree.chart.renderer.category.ScatterRenderer: java.awt.Paint lookupSeriesPaint(int)>(series);
+        $stack22 = this.<org.jfree.chart.renderer.category.ScatterRenderer: boolean useFillPaint>;
+    
+        if $stack22 == 0 goto label4;
+        fillPaint = virtualinvoke this.<org.jfree.chart.renderer.category.ScatterRenderer: java.awt.Paint getItemFillPaint(int,int,boolean)>(series, 0, 0);
+    
+        goto label5;
+    
+      label4:
+        fillPaint = paint;
+    
+      label5:
+        shapeOutlineVisible = this.<org.jfree.chart.renderer.category.ScatterRenderer: boolean drawOutlines>;
+        $stack23 = this.<org.jfree.chart.renderer.category.ScatterRenderer: boolean useOutlinePaint>;
+    
+        if $stack23 == 0 goto label6;
+        outlinePaint = virtualinvoke this.<org.jfree.chart.renderer.category.ScatterRenderer: java.awt.Paint getItemOutlinePaint(int,int,boolean)>(series, 0, 0);
+    
+        goto label7;
+    
+      label6:
+        outlinePaint = paint;
+    
+      label7:
+        outlineStroke = virtualinvoke this.<org.jfree.chart.renderer.category.ScatterRenderer: java.awt.Stroke lookupSeriesOutlineStroke(int)>(series);
+        $stack28 = new org.jfree.chart.LegendItem;
+        $stack27 = virtualinvoke this.<org.jfree.chart.renderer.category.ScatterRenderer: boolean getItemShapeFilled(int,int)>(series, 0);
+        $stack24 = new java.awt.geom.Line2D$Double;
+        #l0 = (java.awt.geom.Line2D$Double) $stack24;
+        specialinvoke #l0.<java.awt.geom.Line2D$Double: void <init>(double,double,double,double)>(-7.0, 0.0, 7.0, 0.0);
+        $stack26 = virtualinvoke this.<org.jfree.chart.renderer.category.ScatterRenderer: java.awt.Stroke getItemStroke(int,int,boolean)>(series, 0, 0);
+        $stack25 = virtualinvoke this.<org.jfree.chart.renderer.category.ScatterRenderer: java.awt.Paint getItemPaint(int,int,boolean)>(series, 0, 0);
+        #l1 = (java.awt.Shape) $stack24;
+        specialinvoke $stack28.<org.jfree.chart.LegendItem: void <init>(java.lang.String,java.lang.String,java.lang.String,java.lang.String,boolean,java.awt.Shape,boolean,java.awt.Paint,boolean,java.awt.Paint,java.awt.Stroke,boolean,java.awt.Shape,java.awt.Stroke,java.awt.Paint)>(label, label, toolTipText, urlText, 1, shape, $stack27, fillPaint, shapeOutlineVisible, outlinePaint, outlineStroke, 0, #l1, $stack26, $stack25);
+        result = $stack28;
+        $stack29 = virtualinvoke this.<org.jfree.chart.renderer.category.ScatterRenderer: java.awt.Font lookupLegendTextFont(int)>(series);
+        virtualinvoke $stack28.<org.jfree.chart.LegendItem: void setLabelFont(java.awt.Font)>($stack29);
+        labelPaint = virtualinvoke this.<org.jfree.chart.renderer.category.ScatterRenderer: java.awt.Paint lookupLegendTextPaint(int)>(series);
+    
+        if labelPaint == null goto label8;
+        virtualinvoke $stack28.<org.jfree.chart.LegendItem: void setLabelPaint(java.awt.Paint)>(labelPaint);
+    
+      label8:
+        virtualinvoke $stack28.<org.jfree.chart.LegendItem: void setDataset(org.jfree.data.general.Dataset)>(dataset);
+        virtualinvoke $stack28.<org.jfree.chart.LegendItem: void setDatasetIndex(int)>(datasetIndex);
+        $stack30 = interfaceinvoke dataset.<org.jfree.data.category.CategoryDataset: java.lang.Comparable getRowKey(int)>(series);
+        virtualinvoke $stack28.<org.jfree.chart.LegendItem: void setSeriesKey(java.lang.Comparable)>($stack30);
+        virtualinvoke $stack28.<org.jfree.chart.LegendItem: void setSeriesIndex(int)>(series);
+    
+        return $stack28;
+    
+      label9:
+        return null;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.category.ScatterRenderer: boolean getUseFillPaint()> ----
+    {
+        boolean $stack1;
+        org.jfree.chart.renderer.category.ScatterRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.category.ScatterRenderer;
+        $stack1 = this.<org.jfree.chart.renderer.category.ScatterRenderer: boolean useFillPaint>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.category.ScatterRenderer: double getItemMargin()> ----
+    {
+        double $stack1;
+        org.jfree.chart.renderer.category.ScatterRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.category.ScatterRenderer;
+        $stack1 = this.<org.jfree.chart.renderer.category.ScatterRenderer: double itemMargin>;
+    
+        return $stack1;
+    }
+
+}

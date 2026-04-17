@@ -1,0 +1,4094 @@
+// ========================================================================
+// CLASS : org.jfree.chart.renderer.AbstractRenderer
+// ========================================================================
+
+[PUBLIC, SUPER, ABSTRACT] class org.jfree.chart.renderer.AbstractRenderer extends java.lang.Object implements java.lang.Cloneable, java.io.Serializable {
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: void setSeriesCreateEntities(int,java.lang.Boolean)> ----
+    {
+        int series;
+        java.lang.Boolean create;
+        org.jfree.chart.renderer.AbstractRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        series := @parameter0: int;
+        create := @parameter1: java.lang.Boolean;
+        virtualinvoke this.<org.jfree.chart.renderer.AbstractRenderer: void setSeriesCreateEntities(int,java.lang.Boolean,boolean)>(series, create, 1);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.plot.DrawingSupplier getDrawingSupplier()> ----
+    // (abstract or native – no body)
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: void clearSeriesStrokes(boolean)> ----
+    {
+        boolean notify;
+        org.jfree.chart.renderer.AbstractRenderer this;
+        org.jfree.chart.util.StrokeList $stack2;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        notify := @parameter0: boolean;
+        $stack2 = this.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.util.StrokeList strokeList>;
+        virtualinvoke $stack2.<org.jfree.chart.util.StrokeList: void clear()>();
+    
+        if notify == 0 goto label1;
+        virtualinvoke this.<org.jfree.chart.renderer.AbstractRenderer: void fireChangeEvent()>();
+    
+      label1:
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: void setBaseItemLabelPaint(java.awt.Paint,boolean)> ----
+    {
+        boolean notify;
+        java.awt.Paint paint;
+        java.lang.IllegalArgumentException #l1;
+        java.lang.Object $stack3;
+        java.lang.Throwable #l0;
+        org.jfree.chart.renderer.AbstractRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        paint := @parameter0: java.awt.Paint;
+        notify := @parameter1: boolean;
+    
+        if paint != null goto label1;
+        $stack3 = new java.lang.IllegalArgumentException;
+        #l1 = (java.lang.IllegalArgumentException) $stack3;
+        specialinvoke #l1.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'paint\' argument.");
+        #l0 = (java.lang.Throwable) $stack3;
+    
+        throw #l0;
+    
+      label1:
+        this.<org.jfree.chart.renderer.AbstractRenderer: java.awt.Paint baseItemLabelPaint> = paint;
+    
+        if notify == 0 goto label2;
+        virtualinvoke this.<org.jfree.chart.renderer.AbstractRenderer: void fireChangeEvent()>();
+    
+      label2:
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: void setBaseOutlinePaint(java.awt.Paint)> ----
+    {
+        java.awt.Paint paint;
+        org.jfree.chart.renderer.AbstractRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        paint := @parameter0: java.awt.Paint;
+        virtualinvoke this.<org.jfree.chart.renderer.AbstractRenderer: void setBaseOutlinePaint(java.awt.Paint,boolean)>(paint, 1);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: void setSeriesVisible(int,java.lang.Boolean)> ----
+    {
+        int series;
+        java.lang.Boolean visible;
+        org.jfree.chart.renderer.AbstractRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        series := @parameter0: int;
+        visible := @parameter1: java.lang.Boolean;
+        virtualinvoke this.<org.jfree.chart.renderer.AbstractRenderer: void setSeriesVisible(int,java.lang.Boolean,boolean)>(series, visible, 1);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: java.awt.geom.Point2D calculateLabelAnchorPoint(org.jfree.chart.labels.ItemLabelAnchor,double,double,org.jfree.chart.plot.PlotOrientation)> ----
+    {
+        double $stack100, $stack101, $stack102, $stack103, $stack104, $stack105, $stack106, $stack107, $stack108, $stack109, $stack111, $stack112, $stack113, $stack115, $stack116, $stack117, $stack118, $stack119, $stack120, $stack121, $stack122, $stack123, $stack124, $stack126, $stack127, $stack128, $stack129, $stack130, $stack131, $stack132, $stack133, $stack134, $stack135, $stack137, $stack138, $stack140, $stack141, $stack142, $stack143, $stack144, $stack145, $stack146, $stack147, $stack149, $stack150, $stack151, $stack152, $stack153, $stack154, $stack155, $stack156, $stack158, $stack159, $stack161, $stack162, $stack163, $stack164, $stack165, $stack166, $stack167, $stack168, $stack170, $stack171, $stack172, $stack173, $stack174, $stack175, $stack176, $stack177, $stack179, $stack180, $stack182, $stack183, $stack184, $stack185, $stack186, $stack187, $stack188, $stack189, $stack191, $stack192, $stack193, $stack194, $stack195, $stack196, $stack197, $stack198, $stack200, $stack201, $stack203, $stack204, $stack205, $stack206, $stack207, $stack208, $stack209, $stack210, $stack212, $stack213, $stack214, $stack215, $stack216, $stack217, $stack218, $stack219, $stack33, $stack34, $stack35, $stack37, $stack38, $stack39, $stack40, $stack41, $stack42, $stack43, $stack44, $stack45, $stack46, $stack48, $stack49, $stack50, $stack51, $stack52, $stack53, $stack54, $stack55, $stack56, $stack57, $stack59, $stack60, $stack61, $stack63, $stack64, $stack65, $stack66, $stack67, $stack68, $stack69, $stack70, $stack71, $stack72, $stack74, $stack75, $stack76, $stack77, $stack78, $stack79, $stack80, $stack81, $stack82, $stack83, $stack85, $stack86, $stack87, $stack89, $stack90, $stack91, $stack92, $stack93, $stack94, $stack95, $stack96, $stack97, $stack98, x, y;
+        java.awt.geom.Point2D #l0;
+        java.awt.geom.Point2D$Double $stack110, $stack114, $stack125, $stack136, $stack139, $stack148, $stack157, $stack160, $stack169, $stack178, $stack181, $stack190, $stack199, $stack202, $stack211, $stack220, $stack221, $stack36, $stack47, $stack58, $stack62, $stack73, $stack84, $stack88, $stack99;
+        java.lang.Object result;
+        org.jfree.chart.labels.ItemLabelAnchor $stack10, $stack11, $stack12, $stack13, $stack14, $stack15, $stack16, $stack17, $stack18, $stack19, $stack20, $stack21, $stack22, $stack23, $stack24, $stack25, $stack26, $stack27, $stack28, $stack29, $stack30, $stack31, $stack32, $stack8, $stack9, anchor;
+        org.jfree.chart.plot.PlotOrientation orientation;
+        org.jfree.chart.renderer.AbstractRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        anchor := @parameter0: org.jfree.chart.labels.ItemLabelAnchor;
+        x := @parameter1: double;
+        y := @parameter2: double;
+        orientation := @parameter3: org.jfree.chart.plot.PlotOrientation;
+        result = null;
+        $stack8 = <org.jfree.chart.labels.ItemLabelAnchor: org.jfree.chart.labels.ItemLabelAnchor CENTER>;
+    
+        if anchor != $stack8 goto label01;
+        $stack221 = new java.awt.geom.Point2D$Double;
+        specialinvoke $stack221.<java.awt.geom.Point2D$Double: void <init>(double,double)>(x, y);
+        result = $stack221;
+    
+        goto label25;
+    
+      label01:
+        $stack9 = <org.jfree.chart.labels.ItemLabelAnchor: org.jfree.chart.labels.ItemLabelAnchor INSIDE1>;
+    
+        if anchor != $stack9 goto label02;
+        $stack220 = new java.awt.geom.Point2D$Double;
+        $stack212 = <org.jfree.chart.renderer.AbstractRenderer: double OPP>;
+        $stack213 = this.<org.jfree.chart.renderer.AbstractRenderer: double itemLabelAnchorOffset>;
+        $stack214 = $stack212 * $stack213;
+        $stack219 = x + $stack214;
+        $stack215 = <org.jfree.chart.renderer.AbstractRenderer: double ADJ>;
+        $stack216 = this.<org.jfree.chart.renderer.AbstractRenderer: double itemLabelAnchorOffset>;
+        $stack217 = $stack215 * $stack216;
+        $stack218 = y - $stack217;
+        specialinvoke $stack220.<java.awt.geom.Point2D$Double: void <init>(double,double)>($stack219, $stack218);
+        result = $stack220;
+    
+        goto label25;
+    
+      label02:
+        $stack10 = <org.jfree.chart.labels.ItemLabelAnchor: org.jfree.chart.labels.ItemLabelAnchor INSIDE2>;
+    
+        if anchor != $stack10 goto label03;
+        $stack211 = new java.awt.geom.Point2D$Double;
+        $stack203 = <org.jfree.chart.renderer.AbstractRenderer: double ADJ>;
+        $stack204 = this.<org.jfree.chart.renderer.AbstractRenderer: double itemLabelAnchorOffset>;
+        $stack205 = $stack203 * $stack204;
+        $stack210 = x + $stack205;
+        $stack206 = <org.jfree.chart.renderer.AbstractRenderer: double OPP>;
+        $stack207 = this.<org.jfree.chart.renderer.AbstractRenderer: double itemLabelAnchorOffset>;
+        $stack208 = $stack206 * $stack207;
+        $stack209 = y - $stack208;
+        specialinvoke $stack211.<java.awt.geom.Point2D$Double: void <init>(double,double)>($stack210, $stack209);
+        result = $stack211;
+    
+        goto label25;
+    
+      label03:
+        $stack11 = <org.jfree.chart.labels.ItemLabelAnchor: org.jfree.chart.labels.ItemLabelAnchor INSIDE3>;
+    
+        if anchor != $stack11 goto label04;
+        $stack202 = new java.awt.geom.Point2D$Double;
+        $stack200 = this.<org.jfree.chart.renderer.AbstractRenderer: double itemLabelAnchorOffset>;
+        $stack201 = x + $stack200;
+        specialinvoke $stack202.<java.awt.geom.Point2D$Double: void <init>(double,double)>($stack201, y);
+        result = $stack202;
+    
+        goto label25;
+    
+      label04:
+        $stack12 = <org.jfree.chart.labels.ItemLabelAnchor: org.jfree.chart.labels.ItemLabelAnchor INSIDE4>;
+    
+        if anchor != $stack12 goto label05;
+        $stack199 = new java.awt.geom.Point2D$Double;
+        $stack191 = <org.jfree.chart.renderer.AbstractRenderer: double ADJ>;
+        $stack192 = this.<org.jfree.chart.renderer.AbstractRenderer: double itemLabelAnchorOffset>;
+        $stack193 = $stack191 * $stack192;
+        $stack198 = x + $stack193;
+        $stack194 = <org.jfree.chart.renderer.AbstractRenderer: double OPP>;
+        $stack195 = this.<org.jfree.chart.renderer.AbstractRenderer: double itemLabelAnchorOffset>;
+        $stack196 = $stack194 * $stack195;
+        $stack197 = y + $stack196;
+        specialinvoke $stack199.<java.awt.geom.Point2D$Double: void <init>(double,double)>($stack198, $stack197);
+        result = $stack199;
+    
+        goto label25;
+    
+      label05:
+        $stack13 = <org.jfree.chart.labels.ItemLabelAnchor: org.jfree.chart.labels.ItemLabelAnchor INSIDE5>;
+    
+        if anchor != $stack13 goto label06;
+        $stack190 = new java.awt.geom.Point2D$Double;
+        $stack182 = <org.jfree.chart.renderer.AbstractRenderer: double OPP>;
+        $stack183 = this.<org.jfree.chart.renderer.AbstractRenderer: double itemLabelAnchorOffset>;
+        $stack184 = $stack182 * $stack183;
+        $stack189 = x + $stack184;
+        $stack185 = <org.jfree.chart.renderer.AbstractRenderer: double ADJ>;
+        $stack186 = this.<org.jfree.chart.renderer.AbstractRenderer: double itemLabelAnchorOffset>;
+        $stack187 = $stack185 * $stack186;
+        $stack188 = y + $stack187;
+        specialinvoke $stack190.<java.awt.geom.Point2D$Double: void <init>(double,double)>($stack189, $stack188);
+        result = $stack190;
+    
+        goto label25;
+    
+      label06:
+        $stack14 = <org.jfree.chart.labels.ItemLabelAnchor: org.jfree.chart.labels.ItemLabelAnchor INSIDE6>;
+    
+        if anchor != $stack14 goto label07;
+        $stack181 = new java.awt.geom.Point2D$Double;
+        $stack179 = this.<org.jfree.chart.renderer.AbstractRenderer: double itemLabelAnchorOffset>;
+        $stack180 = y + $stack179;
+        specialinvoke $stack181.<java.awt.geom.Point2D$Double: void <init>(double,double)>(x, $stack180);
+        result = $stack181;
+    
+        goto label25;
+    
+      label07:
+        $stack15 = <org.jfree.chart.labels.ItemLabelAnchor: org.jfree.chart.labels.ItemLabelAnchor INSIDE7>;
+    
+        if anchor != $stack15 goto label08;
+        $stack178 = new java.awt.geom.Point2D$Double;
+        $stack170 = <org.jfree.chart.renderer.AbstractRenderer: double OPP>;
+        $stack171 = this.<org.jfree.chart.renderer.AbstractRenderer: double itemLabelAnchorOffset>;
+        $stack172 = $stack170 * $stack171;
+        $stack177 = x - $stack172;
+        $stack173 = <org.jfree.chart.renderer.AbstractRenderer: double ADJ>;
+        $stack174 = this.<org.jfree.chart.renderer.AbstractRenderer: double itemLabelAnchorOffset>;
+        $stack175 = $stack173 * $stack174;
+        $stack176 = y + $stack175;
+        specialinvoke $stack178.<java.awt.geom.Point2D$Double: void <init>(double,double)>($stack177, $stack176);
+        result = $stack178;
+    
+        goto label25;
+    
+      label08:
+        $stack16 = <org.jfree.chart.labels.ItemLabelAnchor: org.jfree.chart.labels.ItemLabelAnchor INSIDE8>;
+    
+        if anchor != $stack16 goto label09;
+        $stack169 = new java.awt.geom.Point2D$Double;
+        $stack161 = <org.jfree.chart.renderer.AbstractRenderer: double ADJ>;
+        $stack162 = this.<org.jfree.chart.renderer.AbstractRenderer: double itemLabelAnchorOffset>;
+        $stack163 = $stack161 * $stack162;
+        $stack168 = x - $stack163;
+        $stack164 = <org.jfree.chart.renderer.AbstractRenderer: double OPP>;
+        $stack165 = this.<org.jfree.chart.renderer.AbstractRenderer: double itemLabelAnchorOffset>;
+        $stack166 = $stack164 * $stack165;
+        $stack167 = y + $stack166;
+        specialinvoke $stack169.<java.awt.geom.Point2D$Double: void <init>(double,double)>($stack168, $stack167);
+        result = $stack169;
+    
+        goto label25;
+    
+      label09:
+        $stack17 = <org.jfree.chart.labels.ItemLabelAnchor: org.jfree.chart.labels.ItemLabelAnchor INSIDE9>;
+    
+        if anchor != $stack17 goto label10;
+        $stack160 = new java.awt.geom.Point2D$Double;
+        $stack158 = this.<org.jfree.chart.renderer.AbstractRenderer: double itemLabelAnchorOffset>;
+        $stack159 = x - $stack158;
+        specialinvoke $stack160.<java.awt.geom.Point2D$Double: void <init>(double,double)>($stack159, y);
+        result = $stack160;
+    
+        goto label25;
+    
+      label10:
+        $stack18 = <org.jfree.chart.labels.ItemLabelAnchor: org.jfree.chart.labels.ItemLabelAnchor INSIDE10>;
+    
+        if anchor != $stack18 goto label11;
+        $stack157 = new java.awt.geom.Point2D$Double;
+        $stack149 = <org.jfree.chart.renderer.AbstractRenderer: double ADJ>;
+        $stack150 = this.<org.jfree.chart.renderer.AbstractRenderer: double itemLabelAnchorOffset>;
+        $stack151 = $stack149 * $stack150;
+        $stack156 = x - $stack151;
+        $stack152 = <org.jfree.chart.renderer.AbstractRenderer: double OPP>;
+        $stack153 = this.<org.jfree.chart.renderer.AbstractRenderer: double itemLabelAnchorOffset>;
+        $stack154 = $stack152 * $stack153;
+        $stack155 = y - $stack154;
+        specialinvoke $stack157.<java.awt.geom.Point2D$Double: void <init>(double,double)>($stack156, $stack155);
+        result = $stack157;
+    
+        goto label25;
+    
+      label11:
+        $stack19 = <org.jfree.chart.labels.ItemLabelAnchor: org.jfree.chart.labels.ItemLabelAnchor INSIDE11>;
+    
+        if anchor != $stack19 goto label12;
+        $stack148 = new java.awt.geom.Point2D$Double;
+        $stack140 = <org.jfree.chart.renderer.AbstractRenderer: double OPP>;
+        $stack141 = this.<org.jfree.chart.renderer.AbstractRenderer: double itemLabelAnchorOffset>;
+        $stack142 = $stack140 * $stack141;
+        $stack147 = x - $stack142;
+        $stack143 = <org.jfree.chart.renderer.AbstractRenderer: double ADJ>;
+        $stack144 = this.<org.jfree.chart.renderer.AbstractRenderer: double itemLabelAnchorOffset>;
+        $stack145 = $stack143 * $stack144;
+        $stack146 = y - $stack145;
+        specialinvoke $stack148.<java.awt.geom.Point2D$Double: void <init>(double,double)>($stack147, $stack146);
+        result = $stack148;
+    
+        goto label25;
+    
+      label12:
+        $stack20 = <org.jfree.chart.labels.ItemLabelAnchor: org.jfree.chart.labels.ItemLabelAnchor INSIDE12>;
+    
+        if anchor != $stack20 goto label13;
+        $stack139 = new java.awt.geom.Point2D$Double;
+        $stack137 = this.<org.jfree.chart.renderer.AbstractRenderer: double itemLabelAnchorOffset>;
+        $stack138 = y - $stack137;
+        specialinvoke $stack139.<java.awt.geom.Point2D$Double: void <init>(double,double)>(x, $stack138);
+        result = $stack139;
+    
+        goto label25;
+    
+      label13:
+        $stack21 = <org.jfree.chart.labels.ItemLabelAnchor: org.jfree.chart.labels.ItemLabelAnchor OUTSIDE1>;
+    
+        if anchor != $stack21 goto label14;
+        $stack136 = new java.awt.geom.Point2D$Double;
+        $stack126 = <org.jfree.chart.renderer.AbstractRenderer: double OPP>;
+        $stack127 = 2.0 * $stack126;
+        $stack128 = this.<org.jfree.chart.renderer.AbstractRenderer: double itemLabelAnchorOffset>;
+        $stack129 = $stack127 * $stack128;
+        $stack135 = x + $stack129;
+        $stack130 = <org.jfree.chart.renderer.AbstractRenderer: double ADJ>;
+        $stack131 = 2.0 * $stack130;
+        $stack132 = this.<org.jfree.chart.renderer.AbstractRenderer: double itemLabelAnchorOffset>;
+        $stack133 = $stack131 * $stack132;
+        $stack134 = y - $stack133;
+        specialinvoke $stack136.<java.awt.geom.Point2D$Double: void <init>(double,double)>($stack135, $stack134);
+        result = $stack136;
+    
+        goto label25;
+    
+      label14:
+        $stack22 = <org.jfree.chart.labels.ItemLabelAnchor: org.jfree.chart.labels.ItemLabelAnchor OUTSIDE2>;
+    
+        if anchor != $stack22 goto label15;
+        $stack125 = new java.awt.geom.Point2D$Double;
+        $stack115 = <org.jfree.chart.renderer.AbstractRenderer: double ADJ>;
+        $stack116 = 2.0 * $stack115;
+        $stack117 = this.<org.jfree.chart.renderer.AbstractRenderer: double itemLabelAnchorOffset>;
+        $stack118 = $stack116 * $stack117;
+        $stack124 = x + $stack118;
+        $stack119 = <org.jfree.chart.renderer.AbstractRenderer: double OPP>;
+        $stack120 = 2.0 * $stack119;
+        $stack121 = this.<org.jfree.chart.renderer.AbstractRenderer: double itemLabelAnchorOffset>;
+        $stack122 = $stack120 * $stack121;
+        $stack123 = y - $stack122;
+        specialinvoke $stack125.<java.awt.geom.Point2D$Double: void <init>(double,double)>($stack124, $stack123);
+        result = $stack125;
+    
+        goto label25;
+    
+      label15:
+        $stack23 = <org.jfree.chart.labels.ItemLabelAnchor: org.jfree.chart.labels.ItemLabelAnchor OUTSIDE3>;
+    
+        if anchor != $stack23 goto label16;
+        $stack114 = new java.awt.geom.Point2D$Double;
+        $stack111 = this.<org.jfree.chart.renderer.AbstractRenderer: double itemLabelAnchorOffset>;
+        $stack112 = 2.0 * $stack111;
+        $stack113 = x + $stack112;
+        specialinvoke $stack114.<java.awt.geom.Point2D$Double: void <init>(double,double)>($stack113, y);
+        result = $stack114;
+    
+        goto label25;
+    
+      label16:
+        $stack24 = <org.jfree.chart.labels.ItemLabelAnchor: org.jfree.chart.labels.ItemLabelAnchor OUTSIDE4>;
+    
+        if anchor != $stack24 goto label17;
+        $stack110 = new java.awt.geom.Point2D$Double;
+        $stack100 = <org.jfree.chart.renderer.AbstractRenderer: double ADJ>;
+        $stack101 = 2.0 * $stack100;
+        $stack102 = this.<org.jfree.chart.renderer.AbstractRenderer: double itemLabelAnchorOffset>;
+        $stack103 = $stack101 * $stack102;
+        $stack109 = x + $stack103;
+        $stack104 = <org.jfree.chart.renderer.AbstractRenderer: double OPP>;
+        $stack105 = 2.0 * $stack104;
+        $stack106 = this.<org.jfree.chart.renderer.AbstractRenderer: double itemLabelAnchorOffset>;
+        $stack107 = $stack105 * $stack106;
+        $stack108 = y + $stack107;
+        specialinvoke $stack110.<java.awt.geom.Point2D$Double: void <init>(double,double)>($stack109, $stack108);
+        result = $stack110;
+    
+        goto label25;
+    
+      label17:
+        $stack25 = <org.jfree.chart.labels.ItemLabelAnchor: org.jfree.chart.labels.ItemLabelAnchor OUTSIDE5>;
+    
+        if anchor != $stack25 goto label18;
+        $stack99 = new java.awt.geom.Point2D$Double;
+        $stack89 = <org.jfree.chart.renderer.AbstractRenderer: double OPP>;
+        $stack90 = 2.0 * $stack89;
+        $stack91 = this.<org.jfree.chart.renderer.AbstractRenderer: double itemLabelAnchorOffset>;
+        $stack92 = $stack90 * $stack91;
+        $stack98 = x + $stack92;
+        $stack93 = <org.jfree.chart.renderer.AbstractRenderer: double ADJ>;
+        $stack94 = 2.0 * $stack93;
+        $stack95 = this.<org.jfree.chart.renderer.AbstractRenderer: double itemLabelAnchorOffset>;
+        $stack96 = $stack94 * $stack95;
+        $stack97 = y + $stack96;
+        specialinvoke $stack99.<java.awt.geom.Point2D$Double: void <init>(double,double)>($stack98, $stack97);
+        result = $stack99;
+    
+        goto label25;
+    
+      label18:
+        $stack26 = <org.jfree.chart.labels.ItemLabelAnchor: org.jfree.chart.labels.ItemLabelAnchor OUTSIDE6>;
+    
+        if anchor != $stack26 goto label19;
+        $stack88 = new java.awt.geom.Point2D$Double;
+        $stack85 = this.<org.jfree.chart.renderer.AbstractRenderer: double itemLabelAnchorOffset>;
+        $stack86 = 2.0 * $stack85;
+        $stack87 = y + $stack86;
+        specialinvoke $stack88.<java.awt.geom.Point2D$Double: void <init>(double,double)>(x, $stack87);
+        result = $stack88;
+    
+        goto label25;
+    
+      label19:
+        $stack27 = <org.jfree.chart.labels.ItemLabelAnchor: org.jfree.chart.labels.ItemLabelAnchor OUTSIDE7>;
+    
+        if anchor != $stack27 goto label20;
+        $stack84 = new java.awt.geom.Point2D$Double;
+        $stack74 = <org.jfree.chart.renderer.AbstractRenderer: double OPP>;
+        $stack75 = 2.0 * $stack74;
+        $stack76 = this.<org.jfree.chart.renderer.AbstractRenderer: double itemLabelAnchorOffset>;
+        $stack77 = $stack75 * $stack76;
+        $stack83 = x - $stack77;
+        $stack78 = <org.jfree.chart.renderer.AbstractRenderer: double ADJ>;
+        $stack79 = 2.0 * $stack78;
+        $stack80 = this.<org.jfree.chart.renderer.AbstractRenderer: double itemLabelAnchorOffset>;
+        $stack81 = $stack79 * $stack80;
+        $stack82 = y + $stack81;
+        specialinvoke $stack84.<java.awt.geom.Point2D$Double: void <init>(double,double)>($stack83, $stack82);
+        result = $stack84;
+    
+        goto label25;
+    
+      label20:
+        $stack28 = <org.jfree.chart.labels.ItemLabelAnchor: org.jfree.chart.labels.ItemLabelAnchor OUTSIDE8>;
+    
+        if anchor != $stack28 goto label21;
+        $stack73 = new java.awt.geom.Point2D$Double;
+        $stack63 = <org.jfree.chart.renderer.AbstractRenderer: double ADJ>;
+        $stack64 = 2.0 * $stack63;
+        $stack65 = this.<org.jfree.chart.renderer.AbstractRenderer: double itemLabelAnchorOffset>;
+        $stack66 = $stack64 * $stack65;
+        $stack72 = x - $stack66;
+        $stack67 = <org.jfree.chart.renderer.AbstractRenderer: double OPP>;
+        $stack68 = 2.0 * $stack67;
+        $stack69 = this.<org.jfree.chart.renderer.AbstractRenderer: double itemLabelAnchorOffset>;
+        $stack70 = $stack68 * $stack69;
+        $stack71 = y + $stack70;
+        specialinvoke $stack73.<java.awt.geom.Point2D$Double: void <init>(double,double)>($stack72, $stack71);
+        result = $stack73;
+    
+        goto label25;
+    
+      label21:
+        $stack29 = <org.jfree.chart.labels.ItemLabelAnchor: org.jfree.chart.labels.ItemLabelAnchor OUTSIDE9>;
+    
+        if anchor != $stack29 goto label22;
+        $stack62 = new java.awt.geom.Point2D$Double;
+        $stack59 = this.<org.jfree.chart.renderer.AbstractRenderer: double itemLabelAnchorOffset>;
+        $stack60 = 2.0 * $stack59;
+        $stack61 = x - $stack60;
+        specialinvoke $stack62.<java.awt.geom.Point2D$Double: void <init>(double,double)>($stack61, y);
+        result = $stack62;
+    
+        goto label25;
+    
+      label22:
+        $stack30 = <org.jfree.chart.labels.ItemLabelAnchor: org.jfree.chart.labels.ItemLabelAnchor OUTSIDE10>;
+    
+        if anchor != $stack30 goto label23;
+        $stack58 = new java.awt.geom.Point2D$Double;
+        $stack48 = <org.jfree.chart.renderer.AbstractRenderer: double ADJ>;
+        $stack49 = 2.0 * $stack48;
+        $stack50 = this.<org.jfree.chart.renderer.AbstractRenderer: double itemLabelAnchorOffset>;
+        $stack51 = $stack49 * $stack50;
+        $stack57 = x - $stack51;
+        $stack52 = <org.jfree.chart.renderer.AbstractRenderer: double OPP>;
+        $stack53 = 2.0 * $stack52;
+        $stack54 = this.<org.jfree.chart.renderer.AbstractRenderer: double itemLabelAnchorOffset>;
+        $stack55 = $stack53 * $stack54;
+        $stack56 = y - $stack55;
+        specialinvoke $stack58.<java.awt.geom.Point2D$Double: void <init>(double,double)>($stack57, $stack56);
+        result = $stack58;
+    
+        goto label25;
+    
+      label23:
+        $stack31 = <org.jfree.chart.labels.ItemLabelAnchor: org.jfree.chart.labels.ItemLabelAnchor OUTSIDE11>;
+    
+        if anchor != $stack31 goto label24;
+        $stack47 = new java.awt.geom.Point2D$Double;
+        $stack37 = <org.jfree.chart.renderer.AbstractRenderer: double OPP>;
+        $stack38 = 2.0 * $stack37;
+        $stack39 = this.<org.jfree.chart.renderer.AbstractRenderer: double itemLabelAnchorOffset>;
+        $stack40 = $stack38 * $stack39;
+        $stack46 = x - $stack40;
+        $stack41 = <org.jfree.chart.renderer.AbstractRenderer: double ADJ>;
+        $stack42 = 2.0 * $stack41;
+        $stack43 = this.<org.jfree.chart.renderer.AbstractRenderer: double itemLabelAnchorOffset>;
+        $stack44 = $stack42 * $stack43;
+        $stack45 = y - $stack44;
+        specialinvoke $stack47.<java.awt.geom.Point2D$Double: void <init>(double,double)>($stack46, $stack45);
+        result = $stack47;
+    
+        goto label25;
+    
+      label24:
+        $stack32 = <org.jfree.chart.labels.ItemLabelAnchor: org.jfree.chart.labels.ItemLabelAnchor OUTSIDE12>;
+    
+        if anchor != $stack32 goto label25;
+        $stack36 = new java.awt.geom.Point2D$Double;
+        $stack33 = this.<org.jfree.chart.renderer.AbstractRenderer: double itemLabelAnchorOffset>;
+        $stack34 = 2.0 * $stack33;
+        $stack35 = y - $stack34;
+        specialinvoke $stack36.<java.awt.geom.Point2D$Double: void <init>(double,double)>(x, $stack35);
+        result = $stack36;
+    
+      label25:
+        #l0 = (java.awt.geom.Point2D) result;
+    
+        return #l0;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: java.awt.Paint getSeriesItemLabelPaint(int)> ----
+    {
+        int series;
+        java.awt.Paint $stack3;
+        org.jfree.chart.renderer.AbstractRenderer this;
+        org.jfree.chart.util.PaintList $stack2;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        series := @parameter0: int;
+        $stack2 = this.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.util.PaintList itemLabelPaintList>;
+        $stack3 = virtualinvoke $stack2.<org.jfree.chart.util.PaintList: java.awt.Paint getPaint(int)>(series);
+    
+        return $stack3;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: boolean getBaseSeriesVisible()> ----
+    {
+        boolean $stack1;
+        org.jfree.chart.renderer.AbstractRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        $stack1 = this.<org.jfree.chart.renderer.AbstractRenderer: boolean baseSeriesVisible>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: void setBaseStroke(java.awt.Stroke,boolean)> ----
+    {
+        boolean notify;
+        java.awt.Stroke stroke;
+        java.lang.IllegalArgumentException #l1;
+        java.lang.Object $stack3;
+        java.lang.Throwable #l0;
+        org.jfree.chart.renderer.AbstractRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        stroke := @parameter0: java.awt.Stroke;
+        notify := @parameter1: boolean;
+    
+        if stroke != null goto label1;
+        $stack3 = new java.lang.IllegalArgumentException;
+        #l1 = (java.lang.IllegalArgumentException) $stack3;
+        specialinvoke #l1.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'stroke\' argument.");
+        #l0 = (java.lang.Throwable) $stack3;
+    
+        throw #l0;
+    
+      label1:
+        this.<org.jfree.chart.renderer.AbstractRenderer: java.awt.Stroke baseStroke> = stroke;
+    
+        if notify == 0 goto label2;
+        virtualinvoke this.<org.jfree.chart.renderer.AbstractRenderer: void fireChangeEvent()>();
+    
+      label2:
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: boolean equals(java.lang.Object)> ----
+    {
+        boolean $stack101, $stack104, $stack107, $stack110, $stack12, $stack13, $stack14, $stack17, $stack18, $stack19, $stack22, $stack25, $stack28, $stack3, $stack31, $stack34, $stack37, $stack4, $stack40, $stack43, $stack46, $stack49, $stack5, $stack52, $stack55, $stack58, $stack59, $stack6, $stack60, $stack63, $stack66, $stack69, $stack7, $stack72, $stack75, $stack78, $stack81, $stack84, $stack90, $stack91, $stack92, $stack95, $stack98;
+        byte $stack87;
+        double $stack85, $stack86;
+        int $stack8, $stack9;
+        java.awt.Font $stack102, $stack103, $stack64, $stack65;
+        java.awt.Paint $stack108, $stack109, $stack23, $stack24, $stack29, $stack30, $stack35, $stack36, $stack70, $stack71;
+        java.awt.Shape $stack53, $stack54, $stack96, $stack97;
+        java.awt.Stroke $stack41, $stack42, $stack47, $stack48;
+        java.lang.Object obj;
+        org.jfree.chart.labels.ItemLabelPosition $stack76, $stack77, $stack82, $stack83;
+        org.jfree.chart.renderer.AbstractRenderer that, this;
+        org.jfree.chart.util.BooleanList $stack10, $stack11, $stack15, $stack16, $stack56, $stack57, $stack88, $stack89;
+        org.jfree.chart.util.ObjectList $stack100, $stack61, $stack62, $stack73, $stack74, $stack79, $stack80, $stack99;
+        org.jfree.chart.util.PaintList $stack105, $stack106, $stack20, $stack21, $stack26, $stack27, $stack32, $stack33, $stack67, $stack68;
+        org.jfree.chart.util.ShapeList $stack50, $stack51, $stack93, $stack94;
+        org.jfree.chart.util.StrokeList $stack38, $stack39, $stack44, $stack45;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        obj := @parameter0: java.lang.Object;
+    
+        if obj != this goto label01;
+    
+        return 1;
+    
+      label01:
+        $stack3 = obj instanceof org.jfree.chart.renderer.AbstractRenderer;
+    
+        if $stack3 != 0 goto label02;
+    
+        return 0;
+    
+      label02:
+        that = (org.jfree.chart.renderer.AbstractRenderer) obj;
+        $stack5 = this.<org.jfree.chart.renderer.AbstractRenderer: boolean dataBoundsIncludesVisibleSeriesOnly>;
+        $stack4 = that.<org.jfree.chart.renderer.AbstractRenderer: boolean dataBoundsIncludesVisibleSeriesOnly>;
+    
+        if $stack5 == $stack4 goto label03;
+    
+        return 0;
+    
+      label03:
+        $stack7 = this.<org.jfree.chart.renderer.AbstractRenderer: boolean treatLegendShapeAsLine>;
+        $stack6 = that.<org.jfree.chart.renderer.AbstractRenderer: boolean treatLegendShapeAsLine>;
+    
+        if $stack7 == $stack6 goto label04;
+    
+        return 0;
+    
+      label04:
+        $stack9 = this.<org.jfree.chart.renderer.AbstractRenderer: int defaultEntityRadius>;
+        $stack8 = that.<org.jfree.chart.renderer.AbstractRenderer: int defaultEntityRadius>;
+    
+        if $stack9 == $stack8 goto label05;
+    
+        return 0;
+    
+      label05:
+        $stack11 = this.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.util.BooleanList seriesVisibleList>;
+        $stack10 = that.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.util.BooleanList seriesVisibleList>;
+        $stack12 = virtualinvoke $stack11.<org.jfree.chart.util.BooleanList: boolean equals(java.lang.Object)>($stack10);
+    
+        if $stack12 != 0 goto label06;
+    
+        return 0;
+    
+      label06:
+        $stack14 = this.<org.jfree.chart.renderer.AbstractRenderer: boolean baseSeriesVisible>;
+        $stack13 = that.<org.jfree.chart.renderer.AbstractRenderer: boolean baseSeriesVisible>;
+    
+        if $stack14 == $stack13 goto label07;
+    
+        return 0;
+    
+      label07:
+        $stack16 = this.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.util.BooleanList seriesVisibleInLegendList>;
+        $stack15 = that.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.util.BooleanList seriesVisibleInLegendList>;
+        $stack17 = virtualinvoke $stack16.<org.jfree.chart.util.BooleanList: boolean equals(java.lang.Object)>($stack15);
+    
+        if $stack17 != 0 goto label08;
+    
+        return 0;
+    
+      label08:
+        $stack19 = this.<org.jfree.chart.renderer.AbstractRenderer: boolean baseSeriesVisibleInLegend>;
+        $stack18 = that.<org.jfree.chart.renderer.AbstractRenderer: boolean baseSeriesVisibleInLegend>;
+    
+        if $stack19 == $stack18 goto label09;
+    
+        return 0;
+    
+      label09:
+        $stack21 = this.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.util.PaintList paintList>;
+        $stack20 = that.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.util.PaintList paintList>;
+        $stack22 = staticinvoke <org.jfree.chart.util.ObjectUtilities: boolean equal(java.lang.Object,java.lang.Object)>($stack21, $stack20);
+    
+        if $stack22 != 0 goto label10;
+    
+        return 0;
+    
+      label10:
+        $stack24 = this.<org.jfree.chart.renderer.AbstractRenderer: java.awt.Paint basePaint>;
+        $stack23 = that.<org.jfree.chart.renderer.AbstractRenderer: java.awt.Paint basePaint>;
+        $stack25 = staticinvoke <org.jfree.chart.util.PaintUtilities: boolean equal(java.awt.Paint,java.awt.Paint)>($stack24, $stack23);
+    
+        if $stack25 != 0 goto label11;
+    
+        return 0;
+    
+      label11:
+        $stack27 = this.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.util.PaintList fillPaintList>;
+        $stack26 = that.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.util.PaintList fillPaintList>;
+        $stack28 = staticinvoke <org.jfree.chart.util.ObjectUtilities: boolean equal(java.lang.Object,java.lang.Object)>($stack27, $stack26);
+    
+        if $stack28 != 0 goto label12;
+    
+        return 0;
+    
+      label12:
+        $stack30 = this.<org.jfree.chart.renderer.AbstractRenderer: java.awt.Paint baseFillPaint>;
+        $stack29 = that.<org.jfree.chart.renderer.AbstractRenderer: java.awt.Paint baseFillPaint>;
+        $stack31 = staticinvoke <org.jfree.chart.util.PaintUtilities: boolean equal(java.awt.Paint,java.awt.Paint)>($stack30, $stack29);
+    
+        if $stack31 != 0 goto label13;
+    
+        return 0;
+    
+      label13:
+        $stack33 = this.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.util.PaintList outlinePaintList>;
+        $stack32 = that.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.util.PaintList outlinePaintList>;
+        $stack34 = staticinvoke <org.jfree.chart.util.ObjectUtilities: boolean equal(java.lang.Object,java.lang.Object)>($stack33, $stack32);
+    
+        if $stack34 != 0 goto label14;
+    
+        return 0;
+    
+      label14:
+        $stack36 = this.<org.jfree.chart.renderer.AbstractRenderer: java.awt.Paint baseOutlinePaint>;
+        $stack35 = that.<org.jfree.chart.renderer.AbstractRenderer: java.awt.Paint baseOutlinePaint>;
+        $stack37 = staticinvoke <org.jfree.chart.util.PaintUtilities: boolean equal(java.awt.Paint,java.awt.Paint)>($stack36, $stack35);
+    
+        if $stack37 != 0 goto label15;
+    
+        return 0;
+    
+      label15:
+        $stack39 = this.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.util.StrokeList strokeList>;
+        $stack38 = that.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.util.StrokeList strokeList>;
+        $stack40 = staticinvoke <org.jfree.chart.util.ObjectUtilities: boolean equal(java.lang.Object,java.lang.Object)>($stack39, $stack38);
+    
+        if $stack40 != 0 goto label16;
+    
+        return 0;
+    
+      label16:
+        $stack42 = this.<org.jfree.chart.renderer.AbstractRenderer: java.awt.Stroke baseStroke>;
+        $stack41 = that.<org.jfree.chart.renderer.AbstractRenderer: java.awt.Stroke baseStroke>;
+        $stack43 = staticinvoke <org.jfree.chart.util.ObjectUtilities: boolean equal(java.lang.Object,java.lang.Object)>($stack42, $stack41);
+    
+        if $stack43 != 0 goto label17;
+    
+        return 0;
+    
+      label17:
+        $stack45 = this.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.util.StrokeList outlineStrokeList>;
+        $stack44 = that.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.util.StrokeList outlineStrokeList>;
+        $stack46 = staticinvoke <org.jfree.chart.util.ObjectUtilities: boolean equal(java.lang.Object,java.lang.Object)>($stack45, $stack44);
+    
+        if $stack46 != 0 goto label18;
+    
+        return 0;
+    
+      label18:
+        $stack48 = this.<org.jfree.chart.renderer.AbstractRenderer: java.awt.Stroke baseOutlineStroke>;
+        $stack47 = that.<org.jfree.chart.renderer.AbstractRenderer: java.awt.Stroke baseOutlineStroke>;
+        $stack49 = staticinvoke <org.jfree.chart.util.ObjectUtilities: boolean equal(java.lang.Object,java.lang.Object)>($stack48, $stack47);
+    
+        if $stack49 != 0 goto label19;
+    
+        return 0;
+    
+      label19:
+        $stack51 = this.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.util.ShapeList shapeList>;
+        $stack50 = that.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.util.ShapeList shapeList>;
+        $stack52 = staticinvoke <org.jfree.chart.util.ObjectUtilities: boolean equal(java.lang.Object,java.lang.Object)>($stack51, $stack50);
+    
+        if $stack52 != 0 goto label20;
+    
+        return 0;
+    
+      label20:
+        $stack54 = this.<org.jfree.chart.renderer.AbstractRenderer: java.awt.Shape baseShape>;
+        $stack53 = that.<org.jfree.chart.renderer.AbstractRenderer: java.awt.Shape baseShape>;
+        $stack55 = staticinvoke <org.jfree.chart.util.ShapeUtilities: boolean equal(java.awt.Shape,java.awt.Shape)>($stack54, $stack53);
+    
+        if $stack55 != 0 goto label21;
+    
+        return 0;
+    
+      label21:
+        $stack57 = this.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.util.BooleanList itemLabelsVisibleList>;
+        $stack56 = that.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.util.BooleanList itemLabelsVisibleList>;
+        $stack58 = staticinvoke <org.jfree.chart.util.ObjectUtilities: boolean equal(java.lang.Object,java.lang.Object)>($stack57, $stack56);
+    
+        if $stack58 != 0 goto label22;
+    
+        return 0;
+    
+      label22:
+        $stack60 = this.<org.jfree.chart.renderer.AbstractRenderer: boolean baseItemLabelsVisible>;
+        $stack59 = that.<org.jfree.chart.renderer.AbstractRenderer: boolean baseItemLabelsVisible>;
+    
+        if $stack60 == $stack59 goto label23;
+    
+        return 0;
+    
+      label23:
+        $stack62 = this.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.util.ObjectList itemLabelFontList>;
+        $stack61 = that.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.util.ObjectList itemLabelFontList>;
+        $stack63 = staticinvoke <org.jfree.chart.util.ObjectUtilities: boolean equal(java.lang.Object,java.lang.Object)>($stack62, $stack61);
+    
+        if $stack63 != 0 goto label24;
+    
+        return 0;
+    
+      label24:
+        $stack65 = this.<org.jfree.chart.renderer.AbstractRenderer: java.awt.Font baseItemLabelFont>;
+        $stack64 = that.<org.jfree.chart.renderer.AbstractRenderer: java.awt.Font baseItemLabelFont>;
+        $stack66 = staticinvoke <org.jfree.chart.util.ObjectUtilities: boolean equal(java.lang.Object,java.lang.Object)>($stack65, $stack64);
+    
+        if $stack66 != 0 goto label25;
+    
+        return 0;
+    
+      label25:
+        $stack68 = this.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.util.PaintList itemLabelPaintList>;
+        $stack67 = that.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.util.PaintList itemLabelPaintList>;
+        $stack69 = staticinvoke <org.jfree.chart.util.ObjectUtilities: boolean equal(java.lang.Object,java.lang.Object)>($stack68, $stack67);
+    
+        if $stack69 != 0 goto label26;
+    
+        return 0;
+    
+      label26:
+        $stack71 = this.<org.jfree.chart.renderer.AbstractRenderer: java.awt.Paint baseItemLabelPaint>;
+        $stack70 = that.<org.jfree.chart.renderer.AbstractRenderer: java.awt.Paint baseItemLabelPaint>;
+        $stack72 = staticinvoke <org.jfree.chart.util.PaintUtilities: boolean equal(java.awt.Paint,java.awt.Paint)>($stack71, $stack70);
+    
+        if $stack72 != 0 goto label27;
+    
+        return 0;
+    
+      label27:
+        $stack74 = this.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.util.ObjectList positiveItemLabelPositionList>;
+        $stack73 = that.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.util.ObjectList positiveItemLabelPositionList>;
+        $stack75 = staticinvoke <org.jfree.chart.util.ObjectUtilities: boolean equal(java.lang.Object,java.lang.Object)>($stack74, $stack73);
+    
+        if $stack75 != 0 goto label28;
+    
+        return 0;
+    
+      label28:
+        $stack77 = this.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.labels.ItemLabelPosition basePositiveItemLabelPosition>;
+        $stack76 = that.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.labels.ItemLabelPosition basePositiveItemLabelPosition>;
+        $stack78 = staticinvoke <org.jfree.chart.util.ObjectUtilities: boolean equal(java.lang.Object,java.lang.Object)>($stack77, $stack76);
+    
+        if $stack78 != 0 goto label29;
+    
+        return 0;
+    
+      label29:
+        $stack80 = this.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.util.ObjectList negativeItemLabelPositionList>;
+        $stack79 = that.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.util.ObjectList negativeItemLabelPositionList>;
+        $stack81 = staticinvoke <org.jfree.chart.util.ObjectUtilities: boolean equal(java.lang.Object,java.lang.Object)>($stack80, $stack79);
+    
+        if $stack81 != 0 goto label30;
+    
+        return 0;
+    
+      label30:
+        $stack83 = this.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.labels.ItemLabelPosition baseNegativeItemLabelPosition>;
+        $stack82 = that.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.labels.ItemLabelPosition baseNegativeItemLabelPosition>;
+        $stack84 = staticinvoke <org.jfree.chart.util.ObjectUtilities: boolean equal(java.lang.Object,java.lang.Object)>($stack83, $stack82);
+    
+        if $stack84 != 0 goto label31;
+    
+        return 0;
+    
+      label31:
+        $stack85 = this.<org.jfree.chart.renderer.AbstractRenderer: double itemLabelAnchorOffset>;
+        $stack86 = that.<org.jfree.chart.renderer.AbstractRenderer: double itemLabelAnchorOffset>;
+        $stack87 = $stack85 cmpl $stack86;
+    
+        if $stack87 == 0 goto label32;
+    
+        return 0;
+    
+      label32:
+        $stack89 = this.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.util.BooleanList createEntitiesList>;
+        $stack88 = that.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.util.BooleanList createEntitiesList>;
+        $stack90 = staticinvoke <org.jfree.chart.util.ObjectUtilities: boolean equal(java.lang.Object,java.lang.Object)>($stack89, $stack88);
+    
+        if $stack90 != 0 goto label33;
+    
+        return 0;
+    
+      label33:
+        $stack92 = this.<org.jfree.chart.renderer.AbstractRenderer: boolean baseCreateEntities>;
+        $stack91 = that.<org.jfree.chart.renderer.AbstractRenderer: boolean baseCreateEntities>;
+    
+        if $stack92 == $stack91 goto label34;
+    
+        return 0;
+    
+      label34:
+        $stack94 = this.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.util.ShapeList legendShapeList>;
+        $stack93 = that.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.util.ShapeList legendShapeList>;
+        $stack95 = staticinvoke <org.jfree.chart.util.ObjectUtilities: boolean equal(java.lang.Object,java.lang.Object)>($stack94, $stack93);
+    
+        if $stack95 != 0 goto label35;
+    
+        return 0;
+    
+      label35:
+        $stack97 = this.<org.jfree.chart.renderer.AbstractRenderer: java.awt.Shape baseLegendShape>;
+        $stack96 = that.<org.jfree.chart.renderer.AbstractRenderer: java.awt.Shape baseLegendShape>;
+        $stack98 = staticinvoke <org.jfree.chart.util.ShapeUtilities: boolean equal(java.awt.Shape,java.awt.Shape)>($stack97, $stack96);
+    
+        if $stack98 != 0 goto label36;
+    
+        return 0;
+    
+      label36:
+        $stack100 = this.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.util.ObjectList legendTextFont>;
+        $stack99 = that.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.util.ObjectList legendTextFont>;
+        $stack101 = staticinvoke <org.jfree.chart.util.ObjectUtilities: boolean equal(java.lang.Object,java.lang.Object)>($stack100, $stack99);
+    
+        if $stack101 != 0 goto label37;
+    
+        return 0;
+    
+      label37:
+        $stack103 = this.<org.jfree.chart.renderer.AbstractRenderer: java.awt.Font baseLegendTextFont>;
+        $stack102 = that.<org.jfree.chart.renderer.AbstractRenderer: java.awt.Font baseLegendTextFont>;
+        $stack104 = staticinvoke <org.jfree.chart.util.ObjectUtilities: boolean equal(java.lang.Object,java.lang.Object)>($stack103, $stack102);
+    
+        if $stack104 != 0 goto label38;
+    
+        return 0;
+    
+      label38:
+        $stack106 = this.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.util.PaintList legendTextPaint>;
+        $stack105 = that.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.util.PaintList legendTextPaint>;
+        $stack107 = staticinvoke <org.jfree.chart.util.ObjectUtilities: boolean equal(java.lang.Object,java.lang.Object)>($stack106, $stack105);
+    
+        if $stack107 != 0 goto label39;
+    
+        return 0;
+    
+      label39:
+        $stack109 = this.<org.jfree.chart.renderer.AbstractRenderer: java.awt.Paint baseLegendTextPaint>;
+        $stack108 = that.<org.jfree.chart.renderer.AbstractRenderer: java.awt.Paint baseLegendTextPaint>;
+        $stack110 = staticinvoke <org.jfree.chart.util.PaintUtilities: boolean equal(java.awt.Paint,java.awt.Paint)>($stack109, $stack108);
+    
+        if $stack110 != 0 goto label40;
+    
+        return 0;
+    
+      label40:
+        return 1;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: void setSeriesItemLabelsVisible(int,java.lang.Boolean,boolean)> ----
+    {
+        boolean notify;
+        int series;
+        java.lang.Boolean visible;
+        org.jfree.chart.renderer.AbstractRenderer this;
+        org.jfree.chart.util.BooleanList $stack4;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        series := @parameter0: int;
+        visible := @parameter1: java.lang.Boolean;
+        notify := @parameter2: boolean;
+        $stack4 = this.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.util.BooleanList itemLabelsVisibleList>;
+        virtualinvoke $stack4.<org.jfree.chart.util.BooleanList: void setBoolean(int,java.lang.Boolean)>(series, visible);
+    
+        if notify == 0 goto label1;
+        virtualinvoke this.<org.jfree.chart.renderer.AbstractRenderer: void fireChangeEvent()>();
+    
+      label1:
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.labels.ItemLabelPosition getBasePositiveItemLabelPosition()> ----
+    {
+        org.jfree.chart.labels.ItemLabelPosition $stack1;
+        org.jfree.chart.renderer.AbstractRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        $stack1 = this.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.labels.ItemLabelPosition basePositiveItemLabelPosition>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: double getItemLabelAnchorOffset()> ----
+    {
+        double $stack1;
+        org.jfree.chart.renderer.AbstractRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        $stack1 = this.<org.jfree.chart.renderer.AbstractRenderer: double itemLabelAnchorOffset>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: void setSeriesPaint(int,java.awt.Paint)> ----
+    {
+        int series;
+        java.awt.Paint paint;
+        org.jfree.chart.renderer.AbstractRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        series := @parameter0: int;
+        paint := @parameter1: java.awt.Paint;
+        virtualinvoke this.<org.jfree.chart.renderer.AbstractRenderer: void setSeriesPaint(int,java.awt.Paint,boolean)>(series, paint, 1);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: java.awt.Font getBaseItemLabelFont()> ----
+    {
+        java.awt.Font $stack1;
+        org.jfree.chart.renderer.AbstractRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        $stack1 = this.<org.jfree.chart.renderer.AbstractRenderer: java.awt.Font baseItemLabelFont>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: java.awt.Font getBaseLegendTextFont()> ----
+    {
+        java.awt.Font $stack1;
+        org.jfree.chart.renderer.AbstractRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        $stack1 = this.<org.jfree.chart.renderer.AbstractRenderer: java.awt.Font baseLegendTextFont>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: java.awt.Paint getBaseFillPaint()> ----
+    {
+        java.awt.Paint $stack1;
+        org.jfree.chart.renderer.AbstractRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        $stack1 = this.<org.jfree.chart.renderer.AbstractRenderer: java.awt.Paint baseFillPaint>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: void setSeriesItemLabelsVisible(int,boolean)> ----
+    {
+        boolean visible;
+        int series;
+        java.lang.Boolean $stack3;
+        org.jfree.chart.renderer.AbstractRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        series := @parameter0: int;
+        visible := @parameter1: boolean;
+        $stack3 = staticinvoke <java.lang.Boolean: java.lang.Boolean valueOf(boolean)>(visible);
+        virtualinvoke this.<org.jfree.chart.renderer.AbstractRenderer: void setSeriesItemLabelsVisible(int,java.lang.Boolean)>(series, $stack3);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.labels.ItemLabelPosition getBaseNegativeItemLabelPosition()> ----
+    {
+        org.jfree.chart.labels.ItemLabelPosition $stack1;
+        org.jfree.chart.renderer.AbstractRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        $stack1 = this.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.labels.ItemLabelPosition baseNegativeItemLabelPosition>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: void setSeriesPositiveItemLabelPosition(int,org.jfree.chart.labels.ItemLabelPosition)> ----
+    {
+        int series;
+        org.jfree.chart.labels.ItemLabelPosition position;
+        org.jfree.chart.renderer.AbstractRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        series := @parameter0: int;
+        position := @parameter1: org.jfree.chart.labels.ItemLabelPosition;
+        virtualinvoke this.<org.jfree.chart.renderer.AbstractRenderer: void setSeriesPositiveItemLabelPosition(int,org.jfree.chart.labels.ItemLabelPosition,boolean)>(series, position, 1);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: void setSeriesFillPaint(int,java.awt.Paint)> ----
+    {
+        int series;
+        java.awt.Paint paint;
+        org.jfree.chart.renderer.AbstractRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        series := @parameter0: int;
+        paint := @parameter1: java.awt.Paint;
+        virtualinvoke this.<org.jfree.chart.renderer.AbstractRenderer: void setSeriesFillPaint(int,java.awt.Paint,boolean)>(series, paint, 1);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: void setLegendTextPaint(int,java.awt.Paint)> ----
+    {
+        int series;
+        java.awt.Paint paint;
+        org.jfree.chart.renderer.AbstractRenderer this;
+        org.jfree.chart.util.PaintList $stack3;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        series := @parameter0: int;
+        paint := @parameter1: java.awt.Paint;
+        $stack3 = this.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.util.PaintList legendTextPaint>;
+        virtualinvoke $stack3.<org.jfree.chart.util.PaintList: void setPaint(int,java.awt.Paint)>(series, paint);
+        virtualinvoke this.<org.jfree.chart.renderer.AbstractRenderer: void fireChangeEvent()>();
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: void setBaseNegativeItemLabelPosition(org.jfree.chart.labels.ItemLabelPosition,boolean)> ----
+    {
+        boolean notify;
+        java.lang.IllegalArgumentException #l0;
+        java.lang.Object $stack3;
+        java.lang.Throwable #l1;
+        org.jfree.chart.labels.ItemLabelPosition position;
+        org.jfree.chart.renderer.AbstractRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        position := @parameter0: org.jfree.chart.labels.ItemLabelPosition;
+        notify := @parameter1: boolean;
+    
+        if position != null goto label1;
+        $stack3 = new java.lang.IllegalArgumentException;
+        #l0 = (java.lang.IllegalArgumentException) $stack3;
+        specialinvoke #l0.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'position\' argument.");
+        #l1 = (java.lang.Throwable) $stack3;
+    
+        throw #l1;
+    
+      label1:
+        this.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.labels.ItemLabelPosition baseNegativeItemLabelPosition> = position;
+    
+        if notify == 0 goto label2;
+        virtualinvoke this.<org.jfree.chart.renderer.AbstractRenderer: void fireChangeEvent()>();
+    
+      label2:
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: void setSeriesShape(int,java.awt.Shape,boolean)> ----
+    {
+        boolean notify;
+        int series;
+        java.awt.Shape shape;
+        org.jfree.chart.renderer.AbstractRenderer this;
+        org.jfree.chart.util.ShapeList $stack4;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        series := @parameter0: int;
+        shape := @parameter1: java.awt.Shape;
+        notify := @parameter2: boolean;
+        $stack4 = this.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.util.ShapeList shapeList>;
+        virtualinvoke $stack4.<org.jfree.chart.util.ShapeList: void setShape(int,java.awt.Shape)>(series, shape);
+    
+        if notify == 0 goto label1;
+        virtualinvoke this.<org.jfree.chart.renderer.AbstractRenderer: void fireChangeEvent()>();
+    
+      label1:
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: java.awt.Paint getItemFillPaint(int,int,boolean)> ----
+    {
+        boolean selected;
+        int item, series;
+        java.awt.Paint result;
+        org.jfree.chart.renderer.AbstractRenderer this;
+        org.jfree.chart.renderer.RenderAttributes $stack5;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        series := @parameter0: int;
+        item := @parameter1: int;
+        selected := @parameter2: boolean;
+        result = null;
+    
+        if selected == 0 goto label1;
+        $stack5 = this.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.renderer.RenderAttributes selectedItemAttributes>;
+        result = virtualinvoke $stack5.<org.jfree.chart.renderer.RenderAttributes: java.awt.Paint getItemFillPaint(int,int)>(series, item);
+    
+      label1:
+        if result != null goto label2;
+        result = virtualinvoke this.<org.jfree.chart.renderer.AbstractRenderer: java.awt.Paint lookupSeriesFillPaint(int)>(series);
+    
+      label2:
+        return result;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: void setSeriesItemLabelPaint(int,java.awt.Paint,boolean)> ----
+    {
+        boolean notify;
+        int series;
+        java.awt.Paint paint;
+        org.jfree.chart.renderer.AbstractRenderer this;
+        org.jfree.chart.util.PaintList $stack4;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        series := @parameter0: int;
+        paint := @parameter1: java.awt.Paint;
+        notify := @parameter2: boolean;
+        $stack4 = this.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.util.PaintList itemLabelPaintList>;
+        virtualinvoke $stack4.<org.jfree.chart.util.PaintList: void setPaint(int,java.awt.Paint)>(series, paint);
+    
+        if notify == 0 goto label1;
+        virtualinvoke this.<org.jfree.chart.renderer.AbstractRenderer: void fireChangeEvent()>();
+    
+      label1:
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: java.awt.Stroke getSeriesOutlineStroke(int)> ----
+    {
+        int series;
+        java.awt.Stroke $stack3;
+        org.jfree.chart.renderer.AbstractRenderer this;
+        org.jfree.chart.util.StrokeList $stack2;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        series := @parameter0: int;
+        $stack2 = this.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.util.StrokeList outlineStrokeList>;
+        $stack3 = virtualinvoke $stack2.<org.jfree.chart.util.StrokeList: java.awt.Stroke getStroke(int)>(series);
+    
+        return $stack3;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: java.awt.Shape getSeriesShape(int)> ----
+    {
+        int series;
+        java.awt.Shape $stack3;
+        org.jfree.chart.renderer.AbstractRenderer this;
+        org.jfree.chart.util.ShapeList $stack2;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        series := @parameter0: int;
+        $stack2 = this.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.util.ShapeList shapeList>;
+        $stack3 = virtualinvoke $stack2.<org.jfree.chart.util.ShapeList: java.awt.Shape getShape(int)>(series);
+    
+        return $stack3;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: boolean isSeriesVisible(int)> ----
+    {
+        boolean result;
+        int series;
+        java.lang.Boolean b;
+        org.jfree.chart.renderer.AbstractRenderer this;
+        org.jfree.chart.util.BooleanList $stack4;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        series := @parameter0: int;
+        result = this.<org.jfree.chart.renderer.AbstractRenderer: boolean baseSeriesVisible>;
+        $stack4 = this.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.util.BooleanList seriesVisibleList>;
+        b = virtualinvoke $stack4.<org.jfree.chart.util.BooleanList: java.lang.Boolean getBoolean(int)>(series);
+    
+        if b == null goto label1;
+        result = virtualinvoke b.<java.lang.Boolean: boolean booleanValue()>();
+    
+      label1:
+        return result;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: void setSeriesOutlineStroke(int,java.awt.Stroke)> ----
+    {
+        int series;
+        java.awt.Stroke stroke;
+        org.jfree.chart.renderer.AbstractRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        series := @parameter0: int;
+        stroke := @parameter1: java.awt.Stroke;
+        virtualinvoke this.<org.jfree.chart.renderer.AbstractRenderer: void setSeriesOutlineStroke(int,java.awt.Stroke,boolean)>(series, stroke, 1);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: void setBaseLegendShape(java.awt.Shape)> ----
+    {
+        java.awt.Shape shape;
+        org.jfree.chart.renderer.AbstractRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        shape := @parameter0: java.awt.Shape;
+        this.<org.jfree.chart.renderer.AbstractRenderer: java.awt.Shape baseLegendShape> = shape;
+        virtualinvoke this.<org.jfree.chart.renderer.AbstractRenderer: void fireChangeEvent()>();
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: java.awt.Stroke getBaseStroke()> ----
+    {
+        java.awt.Stroke $stack1;
+        org.jfree.chart.renderer.AbstractRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        $stack1 = this.<org.jfree.chart.renderer.AbstractRenderer: java.awt.Stroke baseStroke>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: boolean getAutoPopulateSeriesOutlinePaint()> ----
+    {
+        boolean $stack1;
+        org.jfree.chart.renderer.AbstractRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        $stack1 = this.<org.jfree.chart.renderer.AbstractRenderer: boolean autoPopulateSeriesOutlinePaint>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: java.awt.Paint getBaseOutlinePaint()> ----
+    {
+        java.awt.Paint $stack1;
+        org.jfree.chart.renderer.AbstractRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        $stack1 = this.<org.jfree.chart.renderer.AbstractRenderer: java.awt.Paint baseOutlinePaint>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: void setBaseItemLabelsVisible(boolean,boolean)> ----
+    {
+        boolean notify, visible;
+        org.jfree.chart.renderer.AbstractRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        visible := @parameter0: boolean;
+        notify := @parameter1: boolean;
+        this.<org.jfree.chart.renderer.AbstractRenderer: boolean baseItemLabelsVisible> = visible;
+    
+        if notify == 0 goto label1;
+        virtualinvoke this.<org.jfree.chart.renderer.AbstractRenderer: void fireChangeEvent()>();
+    
+      label1:
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: void setSeriesPositiveItemLabelPosition(int,org.jfree.chart.labels.ItemLabelPosition,boolean)> ----
+    {
+        boolean notify;
+        int series;
+        org.jfree.chart.labels.ItemLabelPosition position;
+        org.jfree.chart.renderer.AbstractRenderer this;
+        org.jfree.chart.util.ObjectList $stack4;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        series := @parameter0: int;
+        position := @parameter1: org.jfree.chart.labels.ItemLabelPosition;
+        notify := @parameter2: boolean;
+        $stack4 = this.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.util.ObjectList positiveItemLabelPositionList>;
+        virtualinvoke $stack4.<org.jfree.chart.util.ObjectList: void set(int,java.lang.Object)>(series, position);
+    
+        if notify == 0 goto label1;
+        virtualinvoke this.<org.jfree.chart.renderer.AbstractRenderer: void fireChangeEvent()>();
+    
+      label1:
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: void setBasePositiveItemLabelPosition(org.jfree.chart.labels.ItemLabelPosition)> ----
+    {
+        org.jfree.chart.labels.ItemLabelPosition position;
+        org.jfree.chart.renderer.AbstractRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        position := @parameter0: org.jfree.chart.labels.ItemLabelPosition;
+        virtualinvoke this.<org.jfree.chart.renderer.AbstractRenderer: void setBasePositiveItemLabelPosition(org.jfree.chart.labels.ItemLabelPosition,boolean)>(position, 1);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: java.awt.Paint lookupSeriesOutlinePaint(int)> ----
+    {
+        boolean $stack4;
+        int series;
+        java.awt.Paint seriesOutlinePaint;
+        org.jfree.chart.plot.DrawingSupplier supplier;
+        org.jfree.chart.renderer.AbstractRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        series := @parameter0: int;
+        seriesOutlinePaint = virtualinvoke this.<org.jfree.chart.renderer.AbstractRenderer: java.awt.Paint getSeriesOutlinePaint(int)>(series);
+    
+        if seriesOutlinePaint != null goto label1;
+        $stack4 = this.<org.jfree.chart.renderer.AbstractRenderer: boolean autoPopulateSeriesOutlinePaint>;
+    
+        if $stack4 == 0 goto label1;
+        supplier = virtualinvoke this.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.plot.DrawingSupplier getDrawingSupplier()>();
+    
+        if supplier == null goto label1;
+        seriesOutlinePaint = interfaceinvoke supplier.<org.jfree.chart.plot.DrawingSupplier: java.awt.Paint getNextOutlinePaint()>();
+        virtualinvoke this.<org.jfree.chart.renderer.AbstractRenderer: void setSeriesOutlinePaint(int,java.awt.Paint,boolean)>(series, seriesOutlinePaint, 0);
+    
+      label1:
+        if seriesOutlinePaint != null goto label2;
+        seriesOutlinePaint = this.<org.jfree.chart.renderer.AbstractRenderer: java.awt.Paint baseOutlinePaint>;
+    
+      label2:
+        return seriesOutlinePaint;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: void setBaseFillPaint(java.awt.Paint)> ----
+    {
+        java.awt.Paint paint;
+        org.jfree.chart.renderer.AbstractRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        paint := @parameter0: java.awt.Paint;
+        virtualinvoke this.<org.jfree.chart.renderer.AbstractRenderer: void setBaseFillPaint(java.awt.Paint,boolean)>(paint, 1);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: java.awt.Font getLegendTextFont(int)> ----
+    {
+        int series;
+        java.awt.Font $stack4;
+        java.lang.Object $stack3;
+        org.jfree.chart.renderer.AbstractRenderer this;
+        org.jfree.chart.util.ObjectList $stack2;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        series := @parameter0: int;
+        $stack2 = this.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.util.ObjectList legendTextFont>;
+        $stack3 = virtualinvoke $stack2.<org.jfree.chart.util.ObjectList: java.lang.Object get(int)>(series);
+        $stack4 = (java.awt.Font) $stack3;
+    
+        return $stack4;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: void setBaseSeriesVisible(boolean)> ----
+    {
+        boolean visible;
+        org.jfree.chart.renderer.AbstractRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        visible := @parameter0: boolean;
+        virtualinvoke this.<org.jfree.chart.renderer.AbstractRenderer: void setBaseSeriesVisible(boolean,boolean)>(visible, 1);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: void addChangeListener(org.jfree.chart.event.RendererChangeListener)> ----
+    {
+        java.lang.Class $stack2, $stack3;
+        java.lang.IllegalArgumentException #l0;
+        java.lang.Object $stack5, $stack6;
+        java.lang.Throwable #l1;
+        javax.swing.event.EventListenerList $stack4;
+        org.jfree.chart.event.RendererChangeListener listener;
+        org.jfree.chart.renderer.AbstractRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        listener := @parameter0: org.jfree.chart.event.RendererChangeListener;
+    
+        if listener != null goto label1;
+        $stack6 = new java.lang.IllegalArgumentException;
+        #l0 = (java.lang.IllegalArgumentException) $stack6;
+        specialinvoke #l0.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'listener\' argument.");
+        #l1 = (java.lang.Throwable) $stack6;
+    
+        throw #l1;
+    
+      label1:
+        $stack4 = this.<org.jfree.chart.renderer.AbstractRenderer: javax.swing.event.EventListenerList listenerList>;
+        $stack2 = <org.jfree.chart.renderer.AbstractRenderer: java.lang.Class class$org$jfree$chart$event$RendererChangeListener>;
+    
+        if $stack2 != null goto label2;
+        $stack3 = staticinvoke <org.jfree.chart.renderer.AbstractRenderer: java.lang.Class class$(java.lang.String)>("org.jfree.chart.event.RendererChangeListener");
+        <org.jfree.chart.renderer.AbstractRenderer: java.lang.Class class$org$jfree$chart$event$RendererChangeListener> = $stack3;
+    
+        goto label3;
+    
+      label2:
+        $stack3 = <org.jfree.chart.renderer.AbstractRenderer: java.lang.Class class$org$jfree$chart$event$RendererChangeListener>;
+    
+      label3:
+        virtualinvoke $stack4.<javax.swing.event.EventListenerList: void add(java.lang.Class,java.util.EventListener)>($stack3, listener);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: java.awt.Shape getBaseShape()> ----
+    {
+        java.awt.Shape $stack1;
+        org.jfree.chart.renderer.AbstractRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        $stack1 = this.<org.jfree.chart.renderer.AbstractRenderer: java.awt.Shape baseShape>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: boolean isSeriesVisibleInLegend(int)> ----
+    {
+        boolean result;
+        int series;
+        java.lang.Boolean b;
+        org.jfree.chart.renderer.AbstractRenderer this;
+        org.jfree.chart.util.BooleanList $stack4;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        series := @parameter0: int;
+        result = this.<org.jfree.chart.renderer.AbstractRenderer: boolean baseSeriesVisibleInLegend>;
+        $stack4 = this.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.util.BooleanList seriesVisibleInLegendList>;
+        b = virtualinvoke $stack4.<org.jfree.chart.util.BooleanList: java.lang.Boolean getBoolean(int)>(series);
+    
+        if b == null goto label1;
+        result = virtualinvoke b.<java.lang.Boolean: boolean booleanValue()>();
+    
+      label1:
+        return result;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: void setSeriesItemLabelPaint(int,java.awt.Paint)> ----
+    {
+        int series;
+        java.awt.Paint paint;
+        org.jfree.chart.renderer.AbstractRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        series := @parameter0: int;
+        paint := @parameter1: java.awt.Paint;
+        virtualinvoke this.<org.jfree.chart.renderer.AbstractRenderer: void setSeriesItemLabelPaint(int,java.awt.Paint,boolean)>(series, paint, 1);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: void setAutoPopulateSeriesPaint(boolean)> ----
+    {
+        boolean auto;
+        org.jfree.chart.renderer.AbstractRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        auto := @parameter0: boolean;
+        this.<org.jfree.chart.renderer.AbstractRenderer: boolean autoPopulateSeriesPaint> = auto;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: boolean getBaseCreateEntities()> ----
+    {
+        boolean $stack1;
+        org.jfree.chart.renderer.AbstractRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        $stack1 = this.<org.jfree.chart.renderer.AbstractRenderer: boolean baseCreateEntities>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: void setBasePaint(java.awt.Paint,boolean)> ----
+    {
+        boolean notify;
+        java.awt.Paint paint;
+        org.jfree.chart.renderer.AbstractRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        paint := @parameter0: java.awt.Paint;
+        notify := @parameter1: boolean;
+        this.<org.jfree.chart.renderer.AbstractRenderer: java.awt.Paint basePaint> = paint;
+    
+        if notify == 0 goto label1;
+        virtualinvoke this.<org.jfree.chart.renderer.AbstractRenderer: void fireChangeEvent()>();
+    
+      label1:
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: void setLegendShape(int,java.awt.Shape)> ----
+    {
+        int series;
+        java.awt.Shape shape;
+        org.jfree.chart.renderer.AbstractRenderer this;
+        org.jfree.chart.util.ShapeList $stack3;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        series := @parameter0: int;
+        shape := @parameter1: java.awt.Shape;
+        $stack3 = this.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.util.ShapeList legendShapeList>;
+        virtualinvoke $stack3.<org.jfree.chart.util.ShapeList: void setShape(int,java.awt.Shape)>(series, shape);
+        virtualinvoke this.<org.jfree.chart.renderer.AbstractRenderer: void fireChangeEvent()>();
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: void fireChangeEvent()> ----
+    {
+        org.jfree.chart.event.RendererChangeEvent $stack1;
+        org.jfree.chart.renderer.AbstractRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        $stack1 = new org.jfree.chart.event.RendererChangeEvent;
+        specialinvoke $stack1.<org.jfree.chart.event.RendererChangeEvent: void <init>(java.lang.Object)>(this);
+        virtualinvoke this.<org.jfree.chart.renderer.AbstractRenderer: void notifyListeners(org.jfree.chart.event.RendererChangeEvent)>($stack1);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: void setSeriesVisibleInLegend(int,java.lang.Boolean,boolean)> ----
+    {
+        boolean notify;
+        int series;
+        java.lang.Boolean visible;
+        org.jfree.chart.renderer.AbstractRenderer this;
+        org.jfree.chart.util.BooleanList $stack4;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        series := @parameter0: int;
+        visible := @parameter1: java.lang.Boolean;
+        notify := @parameter2: boolean;
+        $stack4 = this.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.util.BooleanList seriesVisibleInLegendList>;
+        virtualinvoke $stack4.<org.jfree.chart.util.BooleanList: void setBoolean(int,java.lang.Boolean)>(series, visible);
+    
+        if notify == 0 goto label1;
+        virtualinvoke this.<org.jfree.chart.renderer.AbstractRenderer: void fireChangeEvent()>();
+    
+      label1:
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: java.awt.Paint lookupLegendTextPaint(int)> ----
+    {
+        int series;
+        java.awt.Paint result;
+        org.jfree.chart.renderer.AbstractRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        series := @parameter0: int;
+        result = virtualinvoke this.<org.jfree.chart.renderer.AbstractRenderer: java.awt.Paint getLegendTextPaint(int)>(series);
+    
+        if result != null goto label1;
+        result = this.<org.jfree.chart.renderer.AbstractRenderer: java.awt.Paint baseLegendTextPaint>;
+    
+      label1:
+        return result;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: java.awt.Stroke getBaseOutlineStroke()> ----
+    {
+        java.awt.Stroke $stack1;
+        org.jfree.chart.renderer.AbstractRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        $stack1 = this.<org.jfree.chart.renderer.AbstractRenderer: java.awt.Stroke baseOutlineStroke>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: java.awt.Paint getSeriesOutlinePaint(int)> ----
+    {
+        int series;
+        java.awt.Paint $stack3;
+        org.jfree.chart.renderer.AbstractRenderer this;
+        org.jfree.chart.util.PaintList $stack2;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        series := @parameter0: int;
+        $stack2 = this.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.util.PaintList outlinePaintList>;
+        $stack3 = virtualinvoke $stack2.<org.jfree.chart.util.PaintList: java.awt.Paint getPaint(int)>(series);
+    
+        return $stack3;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: java.awt.Shape lookupSeriesShape(int)> ----
+    {
+        boolean $stack4;
+        int series;
+        java.awt.Shape result;
+        org.jfree.chart.plot.DrawingSupplier supplier;
+        org.jfree.chart.renderer.AbstractRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        series := @parameter0: int;
+        result = virtualinvoke this.<org.jfree.chart.renderer.AbstractRenderer: java.awt.Shape getSeriesShape(int)>(series);
+    
+        if result != null goto label1;
+        $stack4 = this.<org.jfree.chart.renderer.AbstractRenderer: boolean autoPopulateSeriesShape>;
+    
+        if $stack4 == 0 goto label1;
+        supplier = virtualinvoke this.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.plot.DrawingSupplier getDrawingSupplier()>();
+    
+        if supplier == null goto label1;
+        result = interfaceinvoke supplier.<org.jfree.chart.plot.DrawingSupplier: java.awt.Shape getNextShape()>();
+        virtualinvoke this.<org.jfree.chart.renderer.AbstractRenderer: void setSeriesShape(int,java.awt.Shape,boolean)>(series, result, 0);
+    
+      label1:
+        if result != null goto label2;
+        result = this.<org.jfree.chart.renderer.AbstractRenderer: java.awt.Shape baseShape>;
+    
+      label2:
+        return result;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: void setDataBoundsIncludesVisibleSeriesOnly(boolean)> ----
+    {
+        boolean visibleOnly;
+        org.jfree.chart.event.RendererChangeEvent $stack2;
+        org.jfree.chart.renderer.AbstractRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        visibleOnly := @parameter0: boolean;
+        this.<org.jfree.chart.renderer.AbstractRenderer: boolean dataBoundsIncludesVisibleSeriesOnly> = visibleOnly;
+        $stack2 = new org.jfree.chart.event.RendererChangeEvent;
+        specialinvoke $stack2.<org.jfree.chart.event.RendererChangeEvent: void <init>(java.lang.Object,boolean)>(this, 1);
+        virtualinvoke this.<org.jfree.chart.renderer.AbstractRenderer: void notifyListeners(org.jfree.chart.event.RendererChangeEvent)>($stack2);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: java.awt.Paint getBasePaint()> ----
+    {
+        java.awt.Paint $stack1;
+        org.jfree.chart.renderer.AbstractRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        $stack1 = this.<org.jfree.chart.renderer.AbstractRenderer: java.awt.Paint basePaint>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: void clearSeriesPaints(boolean)> ----
+    {
+        boolean notify;
+        org.jfree.chart.renderer.AbstractRenderer this;
+        org.jfree.chart.util.PaintList $stack2;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        notify := @parameter0: boolean;
+        $stack2 = this.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.util.PaintList paintList>;
+        virtualinvoke $stack2.<org.jfree.chart.util.PaintList: void clear()>();
+    
+        if notify == 0 goto label1;
+        virtualinvoke this.<org.jfree.chart.renderer.AbstractRenderer: void fireChangeEvent()>();
+    
+      label1:
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: java.awt.Shape lookupLegendShape(int)> ----
+    {
+        int series;
+        java.awt.Shape result;
+        org.jfree.chart.renderer.AbstractRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        series := @parameter0: int;
+        result = virtualinvoke this.<org.jfree.chart.renderer.AbstractRenderer: java.awt.Shape getLegendShape(int)>(series);
+    
+        if result != null goto label1;
+        result = this.<org.jfree.chart.renderer.AbstractRenderer: java.awt.Shape baseLegendShape>;
+    
+      label1:
+        if result != null goto label2;
+        result = virtualinvoke this.<org.jfree.chart.renderer.AbstractRenderer: java.awt.Shape lookupSeriesShape(int)>(series);
+    
+      label2:
+        return result;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: void setBaseLegendTextFont(java.awt.Font)> ----
+    {
+        java.awt.Font font;
+        org.jfree.chart.renderer.AbstractRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        font := @parameter0: java.awt.Font;
+        this.<org.jfree.chart.renderer.AbstractRenderer: java.awt.Font baseLegendTextFont> = font;
+        virtualinvoke this.<org.jfree.chart.renderer.AbstractRenderer: void fireChangeEvent()>();
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: java.awt.Stroke getSeriesStroke(int)> ----
+    {
+        int series;
+        java.awt.Stroke $stack3;
+        org.jfree.chart.renderer.AbstractRenderer this;
+        org.jfree.chart.util.StrokeList $stack2;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        series := @parameter0: int;
+        $stack2 = this.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.util.StrokeList strokeList>;
+        $stack3 = virtualinvoke $stack2.<org.jfree.chart.util.StrokeList: java.awt.Stroke getStroke(int)>(series);
+    
+        return $stack3;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: java.awt.Paint lookupSeriesFillPaint(int)> ----
+    {
+        boolean $stack4;
+        int series;
+        java.awt.Paint seriesFillPaint;
+        org.jfree.chart.plot.DrawingSupplier supplier;
+        org.jfree.chart.renderer.AbstractRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        series := @parameter0: int;
+        seriesFillPaint = virtualinvoke this.<org.jfree.chart.renderer.AbstractRenderer: java.awt.Paint getSeriesFillPaint(int)>(series);
+    
+        if seriesFillPaint != null goto label1;
+        $stack4 = this.<org.jfree.chart.renderer.AbstractRenderer: boolean autoPopulateSeriesFillPaint>;
+    
+        if $stack4 == 0 goto label1;
+        supplier = virtualinvoke this.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.plot.DrawingSupplier getDrawingSupplier()>();
+    
+        if supplier == null goto label1;
+        seriesFillPaint = interfaceinvoke supplier.<org.jfree.chart.plot.DrawingSupplier: java.awt.Paint getNextFillPaint()>();
+        virtualinvoke this.<org.jfree.chart.renderer.AbstractRenderer: void setSeriesFillPaint(int,java.awt.Paint,boolean)>(series, seriesFillPaint, 0);
+    
+      label1:
+        if seriesFillPaint != null goto label2;
+        seriesFillPaint = this.<org.jfree.chart.renderer.AbstractRenderer: java.awt.Paint baseFillPaint>;
+    
+      label2:
+        return seriesFillPaint;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: java.awt.Stroke lookupSeriesStroke(int)> ----
+    {
+        boolean $stack4;
+        int series;
+        java.awt.Stroke result;
+        org.jfree.chart.plot.DrawingSupplier supplier;
+        org.jfree.chart.renderer.AbstractRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        series := @parameter0: int;
+        result = virtualinvoke this.<org.jfree.chart.renderer.AbstractRenderer: java.awt.Stroke getSeriesStroke(int)>(series);
+    
+        if result != null goto label1;
+        $stack4 = this.<org.jfree.chart.renderer.AbstractRenderer: boolean autoPopulateSeriesStroke>;
+    
+        if $stack4 == 0 goto label1;
+        supplier = virtualinvoke this.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.plot.DrawingSupplier getDrawingSupplier()>();
+    
+        if supplier == null goto label1;
+        result = interfaceinvoke supplier.<org.jfree.chart.plot.DrawingSupplier: java.awt.Stroke getNextStroke()>();
+        virtualinvoke this.<org.jfree.chart.renderer.AbstractRenderer: void setSeriesStroke(int,java.awt.Stroke,boolean)>(series, result, 0);
+    
+      label1:
+        if result != null goto label2;
+        result = this.<org.jfree.chart.renderer.AbstractRenderer: java.awt.Stroke baseStroke>;
+    
+      label2:
+        return result;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: boolean getDataBoundsIncludesVisibleSeriesOnly()> ----
+    {
+        boolean $stack1;
+        org.jfree.chart.renderer.AbstractRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        $stack1 = this.<org.jfree.chart.renderer.AbstractRenderer: boolean dataBoundsIncludesVisibleSeriesOnly>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: void setBaseShape(java.awt.Shape)> ----
+    {
+        java.awt.Shape shape;
+        org.jfree.chart.renderer.AbstractRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        shape := @parameter0: java.awt.Shape;
+        virtualinvoke this.<org.jfree.chart.renderer.AbstractRenderer: void setBaseShape(java.awt.Shape,boolean)>(shape, 1);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: boolean getItemCreateEntity(int,int,boolean)> ----
+    {
+        boolean $stack5, $stack6, selected;
+        int item, series;
+        java.lang.Boolean b;
+        org.jfree.chart.renderer.AbstractRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        series := @parameter0: int;
+        item := @parameter1: int;
+        selected := @parameter2: boolean;
+        b = virtualinvoke this.<org.jfree.chart.renderer.AbstractRenderer: java.lang.Boolean getSeriesCreateEntities(int)>(series);
+    
+        if b == null goto label1;
+        $stack6 = virtualinvoke b.<java.lang.Boolean: boolean booleanValue()>();
+    
+        return $stack6;
+    
+      label1:
+        $stack5 = this.<org.jfree.chart.renderer.AbstractRenderer: boolean baseCreateEntities>;
+    
+        return $stack5;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: void setBaseStroke(java.awt.Stroke)> ----
+    {
+        java.awt.Stroke stroke;
+        org.jfree.chart.renderer.AbstractRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        stroke := @parameter0: java.awt.Stroke;
+        virtualinvoke this.<org.jfree.chart.renderer.AbstractRenderer: void setBaseStroke(java.awt.Stroke,boolean)>(stroke, 1);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: void notifyListeners(org.jfree.chart.event.RendererChangeEvent)> ----
+    {
+        int $stack5, $stack9, i;
+        java.lang.Class $stack6, $stack7;
+        java.lang.Object $stack10, $stack12, $stack8;
+        java.lang.Object[] ls;
+        javax.swing.event.EventListenerList $stack4;
+        org.jfree.chart.event.RendererChangeEvent event;
+        org.jfree.chart.event.RendererChangeListener $stack11;
+        org.jfree.chart.renderer.AbstractRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        event := @parameter0: org.jfree.chart.event.RendererChangeEvent;
+        $stack4 = this.<org.jfree.chart.renderer.AbstractRenderer: javax.swing.event.EventListenerList listenerList>;
+        ls = virtualinvoke $stack4.<javax.swing.event.EventListenerList: java.lang.Object[] getListenerList()>();
+        $stack5 = lengthof ls;
+        i = $stack5 - 2;
+    
+      label1:
+        if i < 0 goto label5;
+        $stack8 = ls[i];
+        $stack6 = <org.jfree.chart.renderer.AbstractRenderer: java.lang.Class class$org$jfree$chart$event$RendererChangeListener>;
+    
+        if $stack6 != null goto label2;
+        $stack7 = staticinvoke <org.jfree.chart.renderer.AbstractRenderer: java.lang.Class class$(java.lang.String)>("org.jfree.chart.event.RendererChangeListener");
+        <org.jfree.chart.renderer.AbstractRenderer: java.lang.Class class$org$jfree$chart$event$RendererChangeListener> = $stack7;
+    
+        goto label3;
+    
+      label2:
+        $stack7 = <org.jfree.chart.renderer.AbstractRenderer: java.lang.Class class$org$jfree$chart$event$RendererChangeListener>;
+    
+      label3:
+        if $stack8 != $stack7 goto label4;
+        $stack9 = i + 1;
+        $stack10 = ls[$stack9];
+        $stack11 = (org.jfree.chart.event.RendererChangeListener) $stack10;
+        interfaceinvoke $stack11.<org.jfree.chart.event.RendererChangeListener: void rendererChanged(org.jfree.chart.event.RendererChangeEvent)>(event);
+    
+      label4:
+        i = i + -2;
+    
+        goto label1;
+    
+      label5:
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: void setBaseFillPaint(java.awt.Paint,boolean)> ----
+    {
+        boolean notify;
+        java.awt.Paint paint;
+        java.lang.IllegalArgumentException #l1;
+        java.lang.Object $stack3;
+        java.lang.Throwable #l0;
+        org.jfree.chart.renderer.AbstractRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        paint := @parameter0: java.awt.Paint;
+        notify := @parameter1: boolean;
+    
+        if paint != null goto label1;
+        $stack3 = new java.lang.IllegalArgumentException;
+        #l1 = (java.lang.IllegalArgumentException) $stack3;
+        specialinvoke #l1.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'paint\' argument.");
+        #l0 = (java.lang.Throwable) $stack3;
+    
+        throw #l0;
+    
+      label1:
+        this.<org.jfree.chart.renderer.AbstractRenderer: java.awt.Paint baseFillPaint> = paint;
+    
+        if notify == 0 goto label2;
+        virtualinvoke this.<org.jfree.chart.renderer.AbstractRenderer: void fireChangeEvent()>();
+    
+      label2:
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: boolean getAutoPopulateSeriesFillPaint()> ----
+    {
+        boolean $stack1;
+        org.jfree.chart.renderer.AbstractRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        $stack1 = this.<org.jfree.chart.renderer.AbstractRenderer: boolean autoPopulateSeriesFillPaint>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.renderer.RenderAttributes getSelectedItemAttributes()> ----
+    {
+        org.jfree.chart.renderer.AbstractRenderer this;
+        org.jfree.chart.renderer.RenderAttributes $stack1;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        $stack1 = this.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.renderer.RenderAttributes selectedItemAttributes>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: java.awt.Paint getBaseItemLabelPaint()> ----
+    {
+        java.awt.Paint $stack1;
+        org.jfree.chart.renderer.AbstractRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        $stack1 = this.<org.jfree.chart.renderer.AbstractRenderer: java.awt.Paint baseItemLabelPaint>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: java.awt.Shape getLegendShape(int)> ----
+    {
+        int series;
+        java.awt.Shape $stack3;
+        org.jfree.chart.renderer.AbstractRenderer this;
+        org.jfree.chart.util.ShapeList $stack2;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        series := @parameter0: int;
+        $stack2 = this.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.util.ShapeList legendShapeList>;
+        $stack3 = virtualinvoke $stack2.<org.jfree.chart.util.ShapeList: java.awt.Shape getShape(int)>(series);
+    
+        return $stack3;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: void setAutoPopulateSeriesFillPaint(boolean)> ----
+    {
+        boolean auto;
+        org.jfree.chart.renderer.AbstractRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        auto := @parameter0: boolean;
+        this.<org.jfree.chart.renderer.AbstractRenderer: boolean autoPopulateSeriesFillPaint> = auto;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: void setBaseNegativeItemLabelPosition(org.jfree.chart.labels.ItemLabelPosition)> ----
+    {
+        org.jfree.chart.labels.ItemLabelPosition position;
+        org.jfree.chart.renderer.AbstractRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        position := @parameter0: org.jfree.chart.labels.ItemLabelPosition;
+        virtualinvoke this.<org.jfree.chart.renderer.AbstractRenderer: void setBaseNegativeItemLabelPosition(org.jfree.chart.labels.ItemLabelPosition,boolean)>(position, 1);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: void setTreatLegendShapeAsLine(boolean)> ----
+    {
+        boolean $stack2, treatAsLine;
+        org.jfree.chart.renderer.AbstractRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        treatAsLine := @parameter0: boolean;
+        $stack2 = this.<org.jfree.chart.renderer.AbstractRenderer: boolean treatLegendShapeAsLine>;
+    
+        if $stack2 == treatAsLine goto label1;
+        this.<org.jfree.chart.renderer.AbstractRenderer: boolean treatLegendShapeAsLine> = treatAsLine;
+        virtualinvoke this.<org.jfree.chart.renderer.AbstractRenderer: void fireChangeEvent()>();
+    
+      label1:
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: boolean getAutoPopulateSeriesStroke()> ----
+    {
+        boolean $stack1;
+        org.jfree.chart.renderer.AbstractRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        $stack1 = this.<org.jfree.chart.renderer.AbstractRenderer: boolean autoPopulateSeriesStroke>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: void setBaseItemLabelFont(java.awt.Font)> ----
+    {
+        java.awt.Font font;
+        java.lang.IllegalArgumentException #l0;
+        java.lang.Object $stack2;
+        java.lang.Throwable #l1;
+        org.jfree.chart.renderer.AbstractRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        font := @parameter0: java.awt.Font;
+    
+        if font != null goto label1;
+        $stack2 = new java.lang.IllegalArgumentException;
+        #l0 = (java.lang.IllegalArgumentException) $stack2;
+        specialinvoke #l0.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'font\' argument.");
+        #l1 = (java.lang.Throwable) $stack2;
+    
+        throw #l1;
+    
+      label1:
+        virtualinvoke this.<org.jfree.chart.renderer.AbstractRenderer: void setBaseItemLabelFont(java.awt.Font,boolean)>(font, 1);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: java.awt.Paint getSeriesFillPaint(int)> ----
+    {
+        int series;
+        java.awt.Paint $stack3;
+        org.jfree.chart.renderer.AbstractRenderer this;
+        org.jfree.chart.util.PaintList $stack2;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        series := @parameter0: int;
+        $stack2 = this.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.util.PaintList fillPaintList>;
+        $stack3 = virtualinvoke $stack2.<org.jfree.chart.util.PaintList: java.awt.Paint getPaint(int)>(series);
+    
+        return $stack3;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: void setSeriesItemLabelFont(int,java.awt.Font,boolean)> ----
+    {
+        boolean notify;
+        int series;
+        java.awt.Font font;
+        org.jfree.chart.renderer.AbstractRenderer this;
+        org.jfree.chart.util.ObjectList $stack4;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        series := @parameter0: int;
+        font := @parameter1: java.awt.Font;
+        notify := @parameter2: boolean;
+        $stack4 = this.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.util.ObjectList itemLabelFontList>;
+        virtualinvoke $stack4.<org.jfree.chart.util.ObjectList: void set(int,java.lang.Object)>(series, font);
+    
+        if notify == 0 goto label1;
+        virtualinvoke this.<org.jfree.chart.renderer.AbstractRenderer: void fireChangeEvent()>();
+    
+      label1:
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: int hashCode()> ----
+    {
+        boolean $stack17, $stack3, $stack5;
+        int result#1, result#10, result#11, result#12, result#13, result#14, result#15, result#16, result#2, result#3, result#4, result#5, result#6, result#7, result#8, result#9;
+        java.awt.Paint $stack11, $stack7, $stack9;
+        java.awt.Stroke $stack13, $stack15;
+        org.jfree.chart.renderer.AbstractRenderer this;
+        org.jfree.chart.util.BooleanList $stack16, $stack2, $stack4;
+        org.jfree.chart.util.PaintList $stack10, $stack6, $stack8;
+        org.jfree.chart.util.StrokeList $stack12, $stack14;
+        short result#0;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        result#0 = 193;
+        $stack2 = this.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.util.BooleanList seriesVisibleList>;
+        result#1 = staticinvoke <org.jfree.chart.util.HashUtilities: int hashCode(int,java.lang.Object)>(193, $stack2);
+        $stack3 = this.<org.jfree.chart.renderer.AbstractRenderer: boolean baseSeriesVisible>;
+        result#2 = staticinvoke <org.jfree.chart.util.HashUtilities: int hashCode(int,boolean)>(result#1, $stack3);
+        $stack4 = this.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.util.BooleanList seriesVisibleInLegendList>;
+        result#3 = staticinvoke <org.jfree.chart.util.HashUtilities: int hashCode(int,java.lang.Object)>(result#2, $stack4);
+        $stack5 = this.<org.jfree.chart.renderer.AbstractRenderer: boolean baseSeriesVisibleInLegend>;
+        result#4 = staticinvoke <org.jfree.chart.util.HashUtilities: int hashCode(int,boolean)>(result#3, $stack5);
+        $stack6 = this.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.util.PaintList paintList>;
+        result#5 = staticinvoke <org.jfree.chart.util.HashUtilities: int hashCode(int,java.lang.Object)>(result#4, $stack6);
+        $stack7 = this.<org.jfree.chart.renderer.AbstractRenderer: java.awt.Paint basePaint>;
+        result#6 = staticinvoke <org.jfree.chart.util.HashUtilities: int hashCode(int,java.awt.Paint)>(result#5, $stack7);
+        $stack8 = this.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.util.PaintList fillPaintList>;
+        result#7 = staticinvoke <org.jfree.chart.util.HashUtilities: int hashCode(int,java.lang.Object)>(result#6, $stack8);
+        $stack9 = this.<org.jfree.chart.renderer.AbstractRenderer: java.awt.Paint baseFillPaint>;
+        result#8 = staticinvoke <org.jfree.chart.util.HashUtilities: int hashCode(int,java.awt.Paint)>(result#7, $stack9);
+        $stack10 = this.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.util.PaintList outlinePaintList>;
+        result#9 = staticinvoke <org.jfree.chart.util.HashUtilities: int hashCode(int,java.lang.Object)>(result#8, $stack10);
+        $stack11 = this.<org.jfree.chart.renderer.AbstractRenderer: java.awt.Paint baseOutlinePaint>;
+        result#10 = staticinvoke <org.jfree.chart.util.HashUtilities: int hashCode(int,java.awt.Paint)>(result#9, $stack11);
+        $stack12 = this.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.util.StrokeList strokeList>;
+        result#11 = staticinvoke <org.jfree.chart.util.HashUtilities: int hashCode(int,java.lang.Object)>(result#10, $stack12);
+        $stack13 = this.<org.jfree.chart.renderer.AbstractRenderer: java.awt.Stroke baseStroke>;
+        result#12 = staticinvoke <org.jfree.chart.util.HashUtilities: int hashCode(int,java.awt.Stroke)>(result#11, $stack13);
+        $stack14 = this.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.util.StrokeList outlineStrokeList>;
+        result#13 = staticinvoke <org.jfree.chart.util.HashUtilities: int hashCode(int,java.lang.Object)>(result#12, $stack14);
+        $stack15 = this.<org.jfree.chart.renderer.AbstractRenderer: java.awt.Stroke baseOutlineStroke>;
+        result#14 = staticinvoke <org.jfree.chart.util.HashUtilities: int hashCode(int,java.awt.Stroke)>(result#13, $stack15);
+        $stack16 = this.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.util.BooleanList itemLabelsVisibleList>;
+        result#15 = staticinvoke <org.jfree.chart.util.HashUtilities: int hashCode(int,java.lang.Object)>(result#14, $stack16);
+        $stack17 = this.<org.jfree.chart.renderer.AbstractRenderer: boolean baseItemLabelsVisible>;
+        result#16 = staticinvoke <org.jfree.chart.util.HashUtilities: int hashCode(int,boolean)>(result#15, $stack17);
+    
+        return result#16;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: void setSeriesVisibleInLegend(int,java.lang.Boolean)> ----
+    {
+        int series;
+        java.lang.Boolean visible;
+        org.jfree.chart.renderer.AbstractRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        series := @parameter0: int;
+        visible := @parameter1: java.lang.Boolean;
+        virtualinvoke this.<org.jfree.chart.renderer.AbstractRenderer: void setSeriesVisibleInLegend(int,java.lang.Boolean,boolean)>(series, visible, 1);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.labels.ItemLabelPosition getSeriesNegativeItemLabelPosition(int)> ----
+    {
+        int series;
+        java.lang.Object $stack4;
+        org.jfree.chart.labels.ItemLabelPosition position;
+        org.jfree.chart.renderer.AbstractRenderer this;
+        org.jfree.chart.util.ObjectList $stack3;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        series := @parameter0: int;
+        $stack3 = this.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.util.ObjectList negativeItemLabelPositionList>;
+        $stack4 = virtualinvoke $stack3.<org.jfree.chart.util.ObjectList: java.lang.Object get(int)>(series);
+        position = (org.jfree.chart.labels.ItemLabelPosition) $stack4;
+    
+        if position != null goto label1;
+        position = this.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.labels.ItemLabelPosition baseNegativeItemLabelPosition>;
+    
+      label1:
+        return position;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: void setSeriesStroke(int,java.awt.Stroke)> ----
+    {
+        int series;
+        java.awt.Stroke stroke;
+        org.jfree.chart.renderer.AbstractRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        series := @parameter0: int;
+        stroke := @parameter1: java.awt.Stroke;
+        virtualinvoke this.<org.jfree.chart.renderer.AbstractRenderer: void setSeriesStroke(int,java.awt.Stroke,boolean)>(series, stroke, 1);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: void setSeriesNegativeItemLabelPosition(int,org.jfree.chart.labels.ItemLabelPosition)> ----
+    {
+        int series;
+        org.jfree.chart.labels.ItemLabelPosition position;
+        org.jfree.chart.renderer.AbstractRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        series := @parameter0: int;
+        position := @parameter1: org.jfree.chart.labels.ItemLabelPosition;
+        virtualinvoke this.<org.jfree.chart.renderer.AbstractRenderer: void setSeriesNegativeItemLabelPosition(int,org.jfree.chart.labels.ItemLabelPosition,boolean)>(series, position, 1);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: boolean getAutoPopulateSeriesOutlineStroke()> ----
+    {
+        boolean $stack1;
+        org.jfree.chart.renderer.AbstractRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        $stack1 = this.<org.jfree.chart.renderer.AbstractRenderer: boolean autoPopulateSeriesOutlineStroke>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: void setBaseSeriesVisibleInLegend(boolean)> ----
+    {
+        boolean visible;
+        org.jfree.chart.renderer.AbstractRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        visible := @parameter0: boolean;
+        virtualinvoke this.<org.jfree.chart.renderer.AbstractRenderer: void setBaseSeriesVisibleInLegend(boolean,boolean)>(visible, 1);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: void setSeriesCreateEntities(int,java.lang.Boolean,boolean)> ----
+    {
+        boolean notify;
+        int series;
+        java.lang.Boolean create;
+        org.jfree.chart.renderer.AbstractRenderer this;
+        org.jfree.chart.util.BooleanList $stack4;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        series := @parameter0: int;
+        create := @parameter1: java.lang.Boolean;
+        notify := @parameter2: boolean;
+        $stack4 = this.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.util.BooleanList createEntitiesList>;
+        virtualinvoke $stack4.<org.jfree.chart.util.BooleanList: void setBoolean(int,java.lang.Boolean)>(series, create);
+    
+        if notify == 0 goto label1;
+        virtualinvoke this.<org.jfree.chart.renderer.AbstractRenderer: void fireChangeEvent()>();
+    
+      label1:
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: void setBaseItemLabelsVisible(boolean)> ----
+    {
+        boolean visible;
+        org.jfree.chart.renderer.AbstractRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        visible := @parameter0: boolean;
+        virtualinvoke this.<org.jfree.chart.renderer.AbstractRenderer: void setBaseItemLabelsVisible(boolean,boolean)>(visible, 1);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: boolean getTreatLegendShapeAsLine()> ----
+    {
+        boolean $stack1;
+        org.jfree.chart.renderer.AbstractRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        $stack1 = this.<org.jfree.chart.renderer.AbstractRenderer: boolean treatLegendShapeAsLine>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: boolean isSeriesItemLabelsVisible(int)> ----
+    {
+        boolean $stack4, $stack5;
+        int series;
+        java.lang.Boolean b;
+        org.jfree.chart.renderer.AbstractRenderer this;
+        org.jfree.chart.util.BooleanList $stack3;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        series := @parameter0: int;
+        $stack3 = this.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.util.BooleanList itemLabelsVisibleList>;
+        b = virtualinvoke $stack3.<org.jfree.chart.util.BooleanList: java.lang.Boolean getBoolean(int)>(series);
+    
+        if b == null goto label1;
+        $stack5 = virtualinvoke b.<java.lang.Boolean: boolean booleanValue()>();
+    
+        return $stack5;
+    
+      label1:
+        $stack4 = this.<org.jfree.chart.renderer.AbstractRenderer: boolean baseItemLabelsVisible>;
+    
+        return $stack4;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: void setAutoPopulateSeriesOutlinePaint(boolean)> ----
+    {
+        boolean auto;
+        org.jfree.chart.renderer.AbstractRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        auto := @parameter0: boolean;
+        this.<org.jfree.chart.renderer.AbstractRenderer: boolean autoPopulateSeriesOutlinePaint> = auto;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: void setAutoPopulateSeriesOutlineStroke(boolean)> ----
+    {
+        boolean auto;
+        org.jfree.chart.renderer.AbstractRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        auto := @parameter0: boolean;
+        this.<org.jfree.chart.renderer.AbstractRenderer: boolean autoPopulateSeriesOutlineStroke> = auto;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: void setSeriesOutlineStroke(int,java.awt.Stroke,boolean)> ----
+    {
+        boolean notify;
+        int series;
+        java.awt.Stroke stroke;
+        org.jfree.chart.renderer.AbstractRenderer this;
+        org.jfree.chart.util.StrokeList $stack4;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        series := @parameter0: int;
+        stroke := @parameter1: java.awt.Stroke;
+        notify := @parameter2: boolean;
+        $stack4 = this.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.util.StrokeList outlineStrokeList>;
+        virtualinvoke $stack4.<org.jfree.chart.util.StrokeList: void setStroke(int,java.awt.Stroke)>(series, stroke);
+    
+        if notify == 0 goto label1;
+        virtualinvoke this.<org.jfree.chart.renderer.AbstractRenderer: void fireChangeEvent()>();
+    
+      label1:
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: void setLegendTextFont(int,java.awt.Font)> ----
+    {
+        int series;
+        java.awt.Font font;
+        org.jfree.chart.renderer.AbstractRenderer this;
+        org.jfree.chart.util.ObjectList $stack3;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        series := @parameter0: int;
+        font := @parameter1: java.awt.Font;
+        $stack3 = this.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.util.ObjectList legendTextFont>;
+        virtualinvoke $stack3.<org.jfree.chart.util.ObjectList: void set(int,java.lang.Object)>(series, font);
+        virtualinvoke this.<org.jfree.chart.renderer.AbstractRenderer: void fireChangeEvent()>();
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: java.awt.Paint getSeriesPaint(int)> ----
+    {
+        int series;
+        java.awt.Paint $stack3;
+        org.jfree.chart.renderer.AbstractRenderer this;
+        org.jfree.chart.util.PaintList $stack2;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        series := @parameter0: int;
+        $stack2 = this.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.util.PaintList paintList>;
+        $stack3 = virtualinvoke $stack2.<org.jfree.chart.util.PaintList: java.awt.Paint getPaint(int)>(series);
+    
+        return $stack3;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: void setAutoPopulateSeriesStroke(boolean)> ----
+    {
+        boolean auto;
+        org.jfree.chart.renderer.AbstractRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        auto := @parameter0: boolean;
+        this.<org.jfree.chart.renderer.AbstractRenderer: boolean autoPopulateSeriesStroke> = auto;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: java.awt.Shape getItemShape(int,int,boolean)> ----
+    {
+        boolean selected;
+        int item, series;
+        java.awt.Shape result;
+        org.jfree.chart.renderer.AbstractRenderer this;
+        org.jfree.chart.renderer.RenderAttributes $stack5;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        series := @parameter0: int;
+        item := @parameter1: int;
+        selected := @parameter2: boolean;
+        result = null;
+    
+        if selected == 0 goto label1;
+        $stack5 = this.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.renderer.RenderAttributes selectedItemAttributes>;
+        result = virtualinvoke $stack5.<org.jfree.chart.renderer.RenderAttributes: java.awt.Shape getItemShape(int,int)>(series, item);
+    
+      label1:
+        if result != null goto label2;
+        result = virtualinvoke this.<org.jfree.chart.renderer.AbstractRenderer: java.awt.Shape lookupSeriesShape(int)>(series);
+    
+      label2:
+        return result;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: java.awt.Paint getLegendTextPaint(int)> ----
+    {
+        int series;
+        java.awt.Paint $stack3;
+        org.jfree.chart.renderer.AbstractRenderer this;
+        org.jfree.chart.util.PaintList $stack2;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        series := @parameter0: int;
+        $stack2 = this.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.util.PaintList legendTextPaint>;
+        $stack3 = virtualinvoke $stack2.<org.jfree.chart.util.PaintList: java.awt.Paint getPaint(int)>(series);
+    
+        return $stack3;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: int getDefaultEntityRadius()> ----
+    {
+        int $stack1;
+        org.jfree.chart.renderer.AbstractRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        $stack1 = this.<org.jfree.chart.renderer.AbstractRenderer: int defaultEntityRadius>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: void setBaseOutlineStroke(java.awt.Stroke)> ----
+    {
+        java.awt.Stroke stroke;
+        org.jfree.chart.renderer.AbstractRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        stroke := @parameter0: java.awt.Stroke;
+        virtualinvoke this.<org.jfree.chart.renderer.AbstractRenderer: void setBaseOutlineStroke(java.awt.Stroke,boolean)>(stroke, 1);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: java.lang.Boolean getSeriesCreateEntities(int)> ----
+    {
+        int series;
+        java.lang.Boolean $stack3;
+        org.jfree.chart.renderer.AbstractRenderer this;
+        org.jfree.chart.util.BooleanList $stack2;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        series := @parameter0: int;
+        $stack2 = this.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.util.BooleanList createEntitiesList>;
+        $stack3 = virtualinvoke $stack2.<org.jfree.chart.util.BooleanList: java.lang.Boolean getBoolean(int)>(series);
+    
+        return $stack3;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: java.awt.Font getItemLabelFont(int,int,boolean)> ----
+    {
+        boolean selected;
+        int item, series;
+        java.awt.Font result;
+        org.jfree.chart.renderer.AbstractRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        series := @parameter0: int;
+        item := @parameter1: int;
+        selected := @parameter2: boolean;
+        result = virtualinvoke this.<org.jfree.chart.renderer.AbstractRenderer: java.awt.Font getSeriesItemLabelFont(int)>(series);
+    
+        if result != null goto label1;
+        result = this.<org.jfree.chart.renderer.AbstractRenderer: java.awt.Font baseItemLabelFont>;
+    
+      label1:
+        return result;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: void setBaseSeriesVisibleInLegend(boolean,boolean)> ----
+    {
+        boolean notify, visible;
+        org.jfree.chart.renderer.AbstractRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        visible := @parameter0: boolean;
+        notify := @parameter1: boolean;
+        this.<org.jfree.chart.renderer.AbstractRenderer: boolean baseSeriesVisibleInLegend> = visible;
+    
+        if notify == 0 goto label1;
+        virtualinvoke this.<org.jfree.chart.renderer.AbstractRenderer: void fireChangeEvent()>();
+    
+      label1:
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: void <init>()> ----
+    {
+        java.awt.Font $stack17;
+        java.awt.Paint #l0, $stack4, $stack8;
+        java.awt.Shape $stack14;
+        java.awt.Stroke $stack10, $stack12;
+        java.lang.Object $stack19, $stack34, $stack6;
+        javax.swing.event.EventListenerList $stack32;
+        org.jfree.chart.labels.ItemLabelAnchor $stack22, $stack26;
+        org.jfree.chart.labels.ItemLabelPosition $stack23, $stack27;
+        org.jfree.chart.renderer.AbstractRenderer this;
+        org.jfree.chart.renderer.RenderAttributes $stack33, $stack35;
+        org.jfree.chart.text.TextAnchor $stack21, $stack25;
+        org.jfree.chart.util.BooleanList $stack1, $stack15, $stack2, $stack28;
+        org.jfree.chart.util.ObjectList $stack16, $stack20, $stack24, $stack30;
+        org.jfree.chart.util.PaintList $stack18, $stack3, $stack31, $stack5, $stack7;
+        org.jfree.chart.util.ShapeList $stack13, $stack29;
+        org.jfree.chart.util.StrokeList $stack11, $stack9;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        specialinvoke this.<java.lang.Object: void <init>()>();
+        this.<org.jfree.chart.renderer.AbstractRenderer: double itemLabelAnchorOffset> = 2.0;
+        this.<org.jfree.chart.renderer.AbstractRenderer: boolean dataBoundsIncludesVisibleSeriesOnly> = 1;
+        $stack1 = new org.jfree.chart.util.BooleanList;
+        specialinvoke $stack1.<org.jfree.chart.util.BooleanList: void <init>()>();
+        this.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.util.BooleanList seriesVisibleList> = $stack1;
+        this.<org.jfree.chart.renderer.AbstractRenderer: boolean baseSeriesVisible> = 1;
+        $stack2 = new org.jfree.chart.util.BooleanList;
+        specialinvoke $stack2.<org.jfree.chart.util.BooleanList: void <init>()>();
+        this.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.util.BooleanList seriesVisibleInLegendList> = $stack2;
+        this.<org.jfree.chart.renderer.AbstractRenderer: boolean baseSeriesVisibleInLegend> = 1;
+        $stack3 = new org.jfree.chart.util.PaintList;
+        specialinvoke $stack3.<org.jfree.chart.util.PaintList: void <init>()>();
+        this.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.util.PaintList paintList> = $stack3;
+        $stack4 = <org.jfree.chart.renderer.AbstractRenderer: java.awt.Paint DEFAULT_PAINT>;
+        this.<org.jfree.chart.renderer.AbstractRenderer: java.awt.Paint basePaint> = $stack4;
+        this.<org.jfree.chart.renderer.AbstractRenderer: boolean autoPopulateSeriesPaint> = 1;
+        $stack5 = new org.jfree.chart.util.PaintList;
+        specialinvoke $stack5.<org.jfree.chart.util.PaintList: void <init>()>();
+        this.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.util.PaintList fillPaintList> = $stack5;
+        $stack6 = <java.awt.Color: java.awt.Color white>;
+        this.<org.jfree.chart.renderer.AbstractRenderer: java.awt.Paint baseFillPaint> = (java.awt.Paint) $stack6;
+        this.<org.jfree.chart.renderer.AbstractRenderer: boolean autoPopulateSeriesFillPaint> = 0;
+        $stack7 = new org.jfree.chart.util.PaintList;
+        specialinvoke $stack7.<org.jfree.chart.util.PaintList: void <init>()>();
+        this.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.util.PaintList outlinePaintList> = $stack7;
+        $stack8 = <org.jfree.chart.renderer.AbstractRenderer: java.awt.Paint DEFAULT_OUTLINE_PAINT>;
+        this.<org.jfree.chart.renderer.AbstractRenderer: java.awt.Paint baseOutlinePaint> = $stack8;
+        this.<org.jfree.chart.renderer.AbstractRenderer: boolean autoPopulateSeriesOutlinePaint> = 0;
+        $stack9 = new org.jfree.chart.util.StrokeList;
+        specialinvoke $stack9.<org.jfree.chart.util.StrokeList: void <init>()>();
+        this.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.util.StrokeList strokeList> = $stack9;
+        $stack10 = <org.jfree.chart.renderer.AbstractRenderer: java.awt.Stroke DEFAULT_STROKE>;
+        this.<org.jfree.chart.renderer.AbstractRenderer: java.awt.Stroke baseStroke> = $stack10;
+        this.<org.jfree.chart.renderer.AbstractRenderer: boolean autoPopulateSeriesStroke> = 1;
+        $stack11 = new org.jfree.chart.util.StrokeList;
+        specialinvoke $stack11.<org.jfree.chart.util.StrokeList: void <init>()>();
+        this.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.util.StrokeList outlineStrokeList> = $stack11;
+        $stack12 = <org.jfree.chart.renderer.AbstractRenderer: java.awt.Stroke DEFAULT_OUTLINE_STROKE>;
+        this.<org.jfree.chart.renderer.AbstractRenderer: java.awt.Stroke baseOutlineStroke> = $stack12;
+        this.<org.jfree.chart.renderer.AbstractRenderer: boolean autoPopulateSeriesOutlineStroke> = 0;
+        $stack13 = new org.jfree.chart.util.ShapeList;
+        specialinvoke $stack13.<org.jfree.chart.util.ShapeList: void <init>()>();
+        this.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.util.ShapeList shapeList> = $stack13;
+        $stack14 = <org.jfree.chart.renderer.AbstractRenderer: java.awt.Shape DEFAULT_SHAPE>;
+        this.<org.jfree.chart.renderer.AbstractRenderer: java.awt.Shape baseShape> = $stack14;
+        this.<org.jfree.chart.renderer.AbstractRenderer: boolean autoPopulateSeriesShape> = 1;
+        $stack15 = new org.jfree.chart.util.BooleanList;
+        specialinvoke $stack15.<org.jfree.chart.util.BooleanList: void <init>()>();
+        this.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.util.BooleanList itemLabelsVisibleList> = $stack15;
+        this.<org.jfree.chart.renderer.AbstractRenderer: boolean baseItemLabelsVisible> = 0;
+        $stack16 = new org.jfree.chart.util.ObjectList;
+        specialinvoke $stack16.<org.jfree.chart.util.ObjectList: void <init>()>();
+        this.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.util.ObjectList itemLabelFontList> = $stack16;
+        $stack17 = new java.awt.Font;
+        specialinvoke $stack17.<java.awt.Font: void <init>(java.lang.String,int,int)>("Tahoma", 0, 10);
+        this.<org.jfree.chart.renderer.AbstractRenderer: java.awt.Font baseItemLabelFont> = $stack17;
+        $stack18 = new org.jfree.chart.util.PaintList;
+        specialinvoke $stack18.<org.jfree.chart.util.PaintList: void <init>()>();
+        this.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.util.PaintList itemLabelPaintList> = $stack18;
+        $stack19 = <java.awt.Color: java.awt.Color black>;
+        this.<org.jfree.chart.renderer.AbstractRenderer: java.awt.Paint baseItemLabelPaint> = (java.awt.Paint) $stack19;
+        $stack20 = new org.jfree.chart.util.ObjectList;
+        specialinvoke $stack20.<org.jfree.chart.util.ObjectList: void <init>()>();
+        this.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.util.ObjectList positiveItemLabelPositionList> = $stack20;
+        $stack23 = new org.jfree.chart.labels.ItemLabelPosition;
+        $stack22 = <org.jfree.chart.labels.ItemLabelAnchor: org.jfree.chart.labels.ItemLabelAnchor OUTSIDE12>;
+        $stack21 = <org.jfree.chart.text.TextAnchor: org.jfree.chart.text.TextAnchor BOTTOM_CENTER>;
+        specialinvoke $stack23.<org.jfree.chart.labels.ItemLabelPosition: void <init>(org.jfree.chart.labels.ItemLabelAnchor,org.jfree.chart.text.TextAnchor)>($stack22, $stack21);
+        this.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.labels.ItemLabelPosition basePositiveItemLabelPosition> = $stack23;
+        $stack24 = new org.jfree.chart.util.ObjectList;
+        specialinvoke $stack24.<org.jfree.chart.util.ObjectList: void <init>()>();
+        this.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.util.ObjectList negativeItemLabelPositionList> = $stack24;
+        $stack27 = new org.jfree.chart.labels.ItemLabelPosition;
+        $stack26 = <org.jfree.chart.labels.ItemLabelAnchor: org.jfree.chart.labels.ItemLabelAnchor OUTSIDE6>;
+        $stack25 = <org.jfree.chart.text.TextAnchor: org.jfree.chart.text.TextAnchor TOP_CENTER>;
+        specialinvoke $stack27.<org.jfree.chart.labels.ItemLabelPosition: void <init>(org.jfree.chart.labels.ItemLabelAnchor,org.jfree.chart.text.TextAnchor)>($stack26, $stack25);
+        this.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.labels.ItemLabelPosition baseNegativeItemLabelPosition> = $stack27;
+        $stack28 = new org.jfree.chart.util.BooleanList;
+        specialinvoke $stack28.<org.jfree.chart.util.BooleanList: void <init>()>();
+        this.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.util.BooleanList createEntitiesList> = $stack28;
+        this.<org.jfree.chart.renderer.AbstractRenderer: boolean baseCreateEntities> = 1;
+        this.<org.jfree.chart.renderer.AbstractRenderer: int defaultEntityRadius> = 3;
+        $stack29 = new org.jfree.chart.util.ShapeList;
+        specialinvoke $stack29.<org.jfree.chart.util.ShapeList: void <init>()>();
+        this.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.util.ShapeList legendShapeList> = $stack29;
+        this.<org.jfree.chart.renderer.AbstractRenderer: java.awt.Shape baseLegendShape> = null;
+        this.<org.jfree.chart.renderer.AbstractRenderer: boolean treatLegendShapeAsLine> = 0;
+        $stack30 = new org.jfree.chart.util.ObjectList;
+        specialinvoke $stack30.<org.jfree.chart.util.ObjectList: void <init>()>();
+        this.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.util.ObjectList legendTextFont> = $stack30;
+        this.<org.jfree.chart.renderer.AbstractRenderer: java.awt.Font baseLegendTextFont> = null;
+        $stack31 = new org.jfree.chart.util.PaintList;
+        specialinvoke $stack31.<org.jfree.chart.util.PaintList: void <init>()>();
+        this.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.util.PaintList legendTextPaint> = $stack31;
+        this.<org.jfree.chart.renderer.AbstractRenderer: java.awt.Paint baseLegendTextPaint> = null;
+        $stack32 = new javax.swing.event.EventListenerList;
+        specialinvoke $stack32.<javax.swing.event.EventListenerList: void <init>()>();
+        this.<org.jfree.chart.renderer.AbstractRenderer: javax.swing.event.EventListenerList listenerList> = $stack32;
+        $stack33 = new org.jfree.chart.renderer.RenderAttributes;
+        specialinvoke $stack33.<org.jfree.chart.renderer.RenderAttributes: void <init>()>();
+        this.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.renderer.RenderAttributes selectedItemAttributes> = $stack33;
+        $stack35 = this.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.renderer.RenderAttributes selectedItemAttributes>;
+        $stack34 = <java.awt.Color: java.awt.Color WHITE>;
+        #l0 = (java.awt.Paint) $stack34;
+        virtualinvoke $stack35.<org.jfree.chart.renderer.RenderAttributes: void setDefaultFillPaint(java.awt.Paint)>(#l0);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: void setSeriesNegativeItemLabelPosition(int,org.jfree.chart.labels.ItemLabelPosition,boolean)> ----
+    {
+        boolean notify;
+        int series;
+        org.jfree.chart.labels.ItemLabelPosition position;
+        org.jfree.chart.renderer.AbstractRenderer this;
+        org.jfree.chart.util.ObjectList $stack4;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        series := @parameter0: int;
+        position := @parameter1: org.jfree.chart.labels.ItemLabelPosition;
+        notify := @parameter2: boolean;
+        $stack4 = this.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.util.ObjectList negativeItemLabelPositionList>;
+        virtualinvoke $stack4.<org.jfree.chart.util.ObjectList: void set(int,java.lang.Object)>(series, position);
+    
+        if notify == 0 goto label1;
+        virtualinvoke this.<org.jfree.chart.renderer.AbstractRenderer: void fireChangeEvent()>();
+    
+      label1:
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: void setDefaultEntityRadius(int)> ----
+    {
+        int radius;
+        org.jfree.chart.renderer.AbstractRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        radius := @parameter0: int;
+        this.<org.jfree.chart.renderer.AbstractRenderer: int defaultEntityRadius> = radius;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: java.awt.Paint getBaseLegendTextPaint()> ----
+    {
+        java.awt.Paint $stack1;
+        org.jfree.chart.renderer.AbstractRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        $stack1 = this.<org.jfree.chart.renderer.AbstractRenderer: java.awt.Paint baseLegendTextPaint>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.labels.ItemLabelPosition getPositiveItemLabelPosition(int,int,boolean)> ----
+    {
+        boolean selected;
+        int item, series;
+        org.jfree.chart.labels.ItemLabelPosition $stack4;
+        org.jfree.chart.renderer.AbstractRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        series := @parameter0: int;
+        item := @parameter1: int;
+        selected := @parameter2: boolean;
+        $stack4 = virtualinvoke this.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.labels.ItemLabelPosition getSeriesPositiveItemLabelPosition(int)>(series);
+    
+        return $stack4;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: java.awt.Stroke getItemOutlineStroke(int,int,boolean)> ----
+    {
+        boolean selected;
+        int item, series;
+        java.awt.Stroke $stack4;
+        org.jfree.chart.renderer.AbstractRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        series := @parameter0: int;
+        item := @parameter1: int;
+        selected := @parameter2: boolean;
+        $stack4 = virtualinvoke this.<org.jfree.chart.renderer.AbstractRenderer: java.awt.Stroke lookupSeriesOutlineStroke(int)>(series);
+    
+        return $stack4;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: void setSeriesItemLabelFont(int,java.awt.Font)> ----
+    {
+        int series;
+        java.awt.Font font;
+        org.jfree.chart.renderer.AbstractRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        series := @parameter0: int;
+        font := @parameter1: java.awt.Font;
+        virtualinvoke this.<org.jfree.chart.renderer.AbstractRenderer: void setSeriesItemLabelFont(int,java.awt.Font,boolean)>(series, font, 1);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: boolean hasListener(java.util.EventListener)> ----
+    {
+        boolean $stack5;
+        java.lang.Object[] $stack4;
+        java.util.EventListener listener;
+        java.util.List list;
+        javax.swing.event.EventListenerList $stack3;
+        org.jfree.chart.renderer.AbstractRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        listener := @parameter0: java.util.EventListener;
+        $stack3 = this.<org.jfree.chart.renderer.AbstractRenderer: javax.swing.event.EventListenerList listenerList>;
+        $stack4 = virtualinvoke $stack3.<javax.swing.event.EventListenerList: java.lang.Object[] getListenerList()>();
+        list = staticinvoke <java.util.Arrays: java.util.List asList(java.lang.Object[])>($stack4);
+        $stack5 = interfaceinvoke list.<java.util.List: boolean contains(java.lang.Object)>(listener);
+    
+        return $stack5;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: void setAutoPopulateSeriesShape(boolean)> ----
+    {
+        boolean auto;
+        org.jfree.chart.renderer.AbstractRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        auto := @parameter0: boolean;
+        this.<org.jfree.chart.renderer.AbstractRenderer: boolean autoPopulateSeriesShape> = auto;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: java.awt.Font getSeriesItemLabelFont(int)> ----
+    {
+        int series;
+        java.awt.Font $stack4;
+        java.lang.Object $stack3;
+        org.jfree.chart.renderer.AbstractRenderer this;
+        org.jfree.chart.util.ObjectList $stack2;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        series := @parameter0: int;
+        $stack2 = this.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.util.ObjectList itemLabelFontList>;
+        $stack3 = virtualinvoke $stack2.<org.jfree.chart.util.ObjectList: java.lang.Object get(int)>(series);
+        $stack4 = (java.awt.Font) $stack3;
+    
+        return $stack4;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: void setBasePositiveItemLabelPosition(org.jfree.chart.labels.ItemLabelPosition,boolean)> ----
+    {
+        boolean notify;
+        java.lang.IllegalArgumentException #l0;
+        java.lang.Object $stack3;
+        java.lang.Throwable #l1;
+        org.jfree.chart.labels.ItemLabelPosition position;
+        org.jfree.chart.renderer.AbstractRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        position := @parameter0: org.jfree.chart.labels.ItemLabelPosition;
+        notify := @parameter1: boolean;
+    
+        if position != null goto label1;
+        $stack3 = new java.lang.IllegalArgumentException;
+        #l0 = (java.lang.IllegalArgumentException) $stack3;
+        specialinvoke #l0.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'position\' argument.");
+        #l1 = (java.lang.Throwable) $stack3;
+    
+        throw #l1;
+    
+      label1:
+        this.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.labels.ItemLabelPosition basePositiveItemLabelPosition> = position;
+    
+        if notify == 0 goto label2;
+        virtualinvoke this.<org.jfree.chart.renderer.AbstractRenderer: void fireChangeEvent()>();
+    
+      label2:
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: void readObject(java.io.ObjectInputStream)> ----
+    {
+        java.awt.Paint $stack10, $stack2, $stack3, $stack4, $stack8;
+        java.awt.Shape $stack7, $stack9;
+        java.awt.Stroke $stack5, $stack6;
+        java.io.ObjectInputStream stream;
+        javax.swing.event.EventListenerList $stack11;
+        org.jfree.chart.renderer.AbstractRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        stream := @parameter0: java.io.ObjectInputStream;
+        virtualinvoke stream.<java.io.ObjectInputStream: void defaultReadObject()>();
+        $stack2 = staticinvoke <org.jfree.chart.util.SerialUtilities: java.awt.Paint readPaint(java.io.ObjectInputStream)>(stream);
+        this.<org.jfree.chart.renderer.AbstractRenderer: java.awt.Paint basePaint> = $stack2;
+        $stack3 = staticinvoke <org.jfree.chart.util.SerialUtilities: java.awt.Paint readPaint(java.io.ObjectInputStream)>(stream);
+        this.<org.jfree.chart.renderer.AbstractRenderer: java.awt.Paint baseFillPaint> = $stack3;
+        $stack4 = staticinvoke <org.jfree.chart.util.SerialUtilities: java.awt.Paint readPaint(java.io.ObjectInputStream)>(stream);
+        this.<org.jfree.chart.renderer.AbstractRenderer: java.awt.Paint baseOutlinePaint> = $stack4;
+        $stack5 = staticinvoke <org.jfree.chart.util.SerialUtilities: java.awt.Stroke readStroke(java.io.ObjectInputStream)>(stream);
+        this.<org.jfree.chart.renderer.AbstractRenderer: java.awt.Stroke baseStroke> = $stack5;
+        $stack6 = staticinvoke <org.jfree.chart.util.SerialUtilities: java.awt.Stroke readStroke(java.io.ObjectInputStream)>(stream);
+        this.<org.jfree.chart.renderer.AbstractRenderer: java.awt.Stroke baseOutlineStroke> = $stack6;
+        $stack7 = staticinvoke <org.jfree.chart.util.SerialUtilities: java.awt.Shape readShape(java.io.ObjectInputStream)>(stream);
+        this.<org.jfree.chart.renderer.AbstractRenderer: java.awt.Shape baseShape> = $stack7;
+        $stack8 = staticinvoke <org.jfree.chart.util.SerialUtilities: java.awt.Paint readPaint(java.io.ObjectInputStream)>(stream);
+        this.<org.jfree.chart.renderer.AbstractRenderer: java.awt.Paint baseItemLabelPaint> = $stack8;
+        $stack9 = staticinvoke <org.jfree.chart.util.SerialUtilities: java.awt.Shape readShape(java.io.ObjectInputStream)>(stream);
+        this.<org.jfree.chart.renderer.AbstractRenderer: java.awt.Shape baseLegendShape> = $stack9;
+        $stack10 = staticinvoke <org.jfree.chart.util.SerialUtilities: java.awt.Paint readPaint(java.io.ObjectInputStream)>(stream);
+        this.<org.jfree.chart.renderer.AbstractRenderer: java.awt.Paint baseLegendTextPaint> = $stack10;
+        $stack11 = new javax.swing.event.EventListenerList;
+        specialinvoke $stack11.<javax.swing.event.EventListenerList: void <init>()>();
+        this.<org.jfree.chart.renderer.AbstractRenderer: javax.swing.event.EventListenerList listenerList> = $stack11;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: java.lang.Boolean getSeriesVisibleInLegend(int)> ----
+    {
+        int series;
+        java.lang.Boolean $stack3;
+        org.jfree.chart.renderer.AbstractRenderer this;
+        org.jfree.chart.util.BooleanList $stack2;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        series := @parameter0: int;
+        $stack2 = this.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.util.BooleanList seriesVisibleInLegendList>;
+        $stack3 = virtualinvoke $stack2.<org.jfree.chart.util.BooleanList: java.lang.Boolean getBoolean(int)>(series);
+    
+        return $stack3;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: java.awt.Shape getBaseLegendShape()> ----
+    {
+        java.awt.Shape $stack1;
+        org.jfree.chart.renderer.AbstractRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        $stack1 = this.<org.jfree.chart.renderer.AbstractRenderer: java.awt.Shape baseLegendShape>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: void <clinit>()> ----
+    {
+        double $stack8, $stack9;
+        java.awt.BasicStroke #l0, #l1;
+        java.awt.Font $stack6;
+        java.awt.geom.Rectangle2D$Double #l2;
+        java.lang.Double $stack0;
+        java.lang.Object $stack1, $stack2, $stack3, $stack4, $stack5, $stack7;
+    
+    
+        $stack0 = new java.lang.Double;
+        specialinvoke $stack0.<java.lang.Double: void <init>(double)>(0.0);
+        <org.jfree.chart.renderer.AbstractRenderer: java.lang.Double ZERO> = $stack0;
+        $stack1 = <java.awt.Color: java.awt.Color blue>;
+        <org.jfree.chart.renderer.AbstractRenderer: java.awt.Paint DEFAULT_PAINT> = (java.awt.Paint) $stack1;
+        $stack2 = <java.awt.Color: java.awt.Color gray>;
+        <org.jfree.chart.renderer.AbstractRenderer: java.awt.Paint DEFAULT_OUTLINE_PAINT> = (java.awt.Paint) $stack2;
+        $stack3 = new java.awt.BasicStroke;
+        #l0 = (java.awt.BasicStroke) $stack3;
+        specialinvoke #l0.<java.awt.BasicStroke: void <init>(float)>(1.0F);
+        <org.jfree.chart.renderer.AbstractRenderer: java.awt.Stroke DEFAULT_STROKE> = (java.awt.Stroke) $stack3;
+        $stack4 = new java.awt.BasicStroke;
+        #l1 = (java.awt.BasicStroke) $stack4;
+        specialinvoke #l1.<java.awt.BasicStroke: void <init>(float)>(1.0F);
+        <org.jfree.chart.renderer.AbstractRenderer: java.awt.Stroke DEFAULT_OUTLINE_STROKE> = (java.awt.Stroke) $stack4;
+        $stack5 = new java.awt.geom.Rectangle2D$Double;
+        #l2 = (java.awt.geom.Rectangle2D$Double) $stack5;
+        specialinvoke #l2.<java.awt.geom.Rectangle2D$Double: void <init>(double,double,double,double)>(-3.0, -3.0, 6.0, 6.0);
+        <org.jfree.chart.renderer.AbstractRenderer: java.awt.Shape DEFAULT_SHAPE> = (java.awt.Shape) $stack5;
+        $stack6 = new java.awt.Font;
+        specialinvoke $stack6.<java.awt.Font: void <init>(java.lang.String,int,int)>("Tahoma", 0, 10);
+        <org.jfree.chart.renderer.AbstractRenderer: java.awt.Font DEFAULT_VALUE_LABEL_FONT> = $stack6;
+        $stack7 = <java.awt.Color: java.awt.Color black>;
+        <org.jfree.chart.renderer.AbstractRenderer: java.awt.Paint DEFAULT_VALUE_LABEL_PAINT> = (java.awt.Paint) $stack7;
+        $stack8 = staticinvoke <java.lang.Math: double cos(double)>(0.5235987755982988);
+        <org.jfree.chart.renderer.AbstractRenderer: double ADJ> = $stack8;
+        $stack9 = staticinvoke <java.lang.Math: double sin(double)>(0.5235987755982988);
+        <org.jfree.chart.renderer.AbstractRenderer: double OPP> = $stack9;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: void setBaseCreateEntities(boolean,boolean)> ----
+    {
+        boolean create, notify;
+        org.jfree.chart.renderer.AbstractRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        create := @parameter0: boolean;
+        notify := @parameter1: boolean;
+        this.<org.jfree.chart.renderer.AbstractRenderer: boolean baseCreateEntities> = create;
+    
+        if notify == 0 goto label1;
+        virtualinvoke this.<org.jfree.chart.renderer.AbstractRenderer: void fireChangeEvent()>();
+    
+      label1:
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: void setBaseLegendTextPaint(java.awt.Paint)> ----
+    {
+        java.awt.Paint paint;
+        org.jfree.chart.renderer.AbstractRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        paint := @parameter0: java.awt.Paint;
+        this.<org.jfree.chart.renderer.AbstractRenderer: java.awt.Paint baseLegendTextPaint> = paint;
+        virtualinvoke this.<org.jfree.chart.renderer.AbstractRenderer: void fireChangeEvent()>();
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: void writeObject(java.io.ObjectOutputStream)> ----
+    {
+        java.awt.Paint $stack10, $stack2, $stack3, $stack4, $stack8;
+        java.awt.Shape $stack7, $stack9;
+        java.awt.Stroke $stack5, $stack6;
+        java.io.ObjectOutputStream stream;
+        org.jfree.chart.renderer.AbstractRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        stream := @parameter0: java.io.ObjectOutputStream;
+        virtualinvoke stream.<java.io.ObjectOutputStream: void defaultWriteObject()>();
+        $stack2 = this.<org.jfree.chart.renderer.AbstractRenderer: java.awt.Paint basePaint>;
+        staticinvoke <org.jfree.chart.util.SerialUtilities: void writePaint(java.awt.Paint,java.io.ObjectOutputStream)>($stack2, stream);
+        $stack3 = this.<org.jfree.chart.renderer.AbstractRenderer: java.awt.Paint baseFillPaint>;
+        staticinvoke <org.jfree.chart.util.SerialUtilities: void writePaint(java.awt.Paint,java.io.ObjectOutputStream)>($stack3, stream);
+        $stack4 = this.<org.jfree.chart.renderer.AbstractRenderer: java.awt.Paint baseOutlinePaint>;
+        staticinvoke <org.jfree.chart.util.SerialUtilities: void writePaint(java.awt.Paint,java.io.ObjectOutputStream)>($stack4, stream);
+        $stack5 = this.<org.jfree.chart.renderer.AbstractRenderer: java.awt.Stroke baseStroke>;
+        staticinvoke <org.jfree.chart.util.SerialUtilities: void writeStroke(java.awt.Stroke,java.io.ObjectOutputStream)>($stack5, stream);
+        $stack6 = this.<org.jfree.chart.renderer.AbstractRenderer: java.awt.Stroke baseOutlineStroke>;
+        staticinvoke <org.jfree.chart.util.SerialUtilities: void writeStroke(java.awt.Stroke,java.io.ObjectOutputStream)>($stack6, stream);
+        $stack7 = this.<org.jfree.chart.renderer.AbstractRenderer: java.awt.Shape baseShape>;
+        staticinvoke <org.jfree.chart.util.SerialUtilities: void writeShape(java.awt.Shape,java.io.ObjectOutputStream)>($stack7, stream);
+        $stack8 = this.<org.jfree.chart.renderer.AbstractRenderer: java.awt.Paint baseItemLabelPaint>;
+        staticinvoke <org.jfree.chart.util.SerialUtilities: void writePaint(java.awt.Paint,java.io.ObjectOutputStream)>($stack8, stream);
+        $stack9 = this.<org.jfree.chart.renderer.AbstractRenderer: java.awt.Shape baseLegendShape>;
+        staticinvoke <org.jfree.chart.util.SerialUtilities: void writeShape(java.awt.Shape,java.io.ObjectOutputStream)>($stack9, stream);
+        $stack10 = this.<org.jfree.chart.renderer.AbstractRenderer: java.awt.Paint baseLegendTextPaint>;
+        staticinvoke <org.jfree.chart.util.SerialUtilities: void writePaint(java.awt.Paint,java.io.ObjectOutputStream)>($stack10, stream);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: java.lang.Boolean getSeriesItemLabelsVisible(int)> ----
+    {
+        int series;
+        java.lang.Boolean $stack3;
+        org.jfree.chart.renderer.AbstractRenderer this;
+        org.jfree.chart.util.BooleanList $stack2;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        series := @parameter0: int;
+        $stack2 = this.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.util.BooleanList itemLabelsVisibleList>;
+        $stack3 = virtualinvoke $stack2.<org.jfree.chart.util.BooleanList: java.lang.Boolean getBoolean(int)>(series);
+    
+        return $stack3;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: void setSeriesStroke(int,java.awt.Stroke,boolean)> ----
+    {
+        boolean notify;
+        int series;
+        java.awt.Stroke stroke;
+        org.jfree.chart.renderer.AbstractRenderer this;
+        org.jfree.chart.util.StrokeList $stack4;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        series := @parameter0: int;
+        stroke := @parameter1: java.awt.Stroke;
+        notify := @parameter2: boolean;
+        $stack4 = this.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.util.StrokeList strokeList>;
+        virtualinvoke $stack4.<org.jfree.chart.util.StrokeList: void setStroke(int,java.awt.Stroke)>(series, stroke);
+    
+        if notify == 0 goto label1;
+        virtualinvoke this.<org.jfree.chart.renderer.AbstractRenderer: void fireChangeEvent()>();
+    
+      label1:
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: void setSeriesFillPaint(int,java.awt.Paint,boolean)> ----
+    {
+        boolean notify;
+        int series;
+        java.awt.Paint paint;
+        org.jfree.chart.renderer.AbstractRenderer this;
+        org.jfree.chart.util.PaintList $stack4;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        series := @parameter0: int;
+        paint := @parameter1: java.awt.Paint;
+        notify := @parameter2: boolean;
+        $stack4 = this.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.util.PaintList fillPaintList>;
+        virtualinvoke $stack4.<org.jfree.chart.util.PaintList: void setPaint(int,java.awt.Paint)>(series, paint);
+    
+        if notify == 0 goto label1;
+        virtualinvoke this.<org.jfree.chart.renderer.AbstractRenderer: void fireChangeEvent()>();
+    
+      label1:
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: void setBaseShape(java.awt.Shape,boolean)> ----
+    {
+        boolean notify;
+        java.awt.Shape shape;
+        java.lang.IllegalArgumentException #l0;
+        java.lang.Object $stack3;
+        java.lang.Throwable #l1;
+        org.jfree.chart.renderer.AbstractRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        shape := @parameter0: java.awt.Shape;
+        notify := @parameter1: boolean;
+    
+        if shape != null goto label1;
+        $stack3 = new java.lang.IllegalArgumentException;
+        #l0 = (java.lang.IllegalArgumentException) $stack3;
+        specialinvoke #l0.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'shape\' argument.");
+        #l1 = (java.lang.Throwable) $stack3;
+    
+        throw #l1;
+    
+      label1:
+        this.<org.jfree.chart.renderer.AbstractRenderer: java.awt.Shape baseShape> = shape;
+    
+        if notify == 0 goto label2;
+        virtualinvoke this.<org.jfree.chart.renderer.AbstractRenderer: void fireChangeEvent()>();
+    
+      label2:
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: java.lang.Object clone()> ----
+    {
+        java.awt.Shape $stack11, $stack49, $stack50;
+        java.lang.Object $stack2, $stack23, $stack26, $stack29, $stack32, $stack35, $stack38, $stack41, $stack44, $stack47, $stack52, $stack55, $stack58, $stack61, $stack64, $stack67, $stack70, $stack73;
+        javax.swing.event.EventListenerList $stack21;
+        org.jfree.chart.renderer.AbstractRenderer clone, this;
+        org.jfree.chart.util.BooleanList $stack12, $stack17, $stack3, $stack31, $stack33, $stack4, $stack46, $stack48, $stack69, $stack71, $stack72, $stack74;
+        org.jfree.chart.util.ObjectList $stack13, $stack15, $stack16, $stack19, $stack25, $stack27, $stack34, $stack36, $stack37, $stack39, $stack43, $stack45;
+        org.jfree.chart.util.PaintList $stack14, $stack20, $stack22, $stack24, $stack40, $stack42, $stack5, $stack6, $stack60, $stack62, $stack63, $stack65, $stack66, $stack68, $stack7;
+        org.jfree.chart.util.ShapeList $stack10, $stack18, $stack28, $stack30, $stack51, $stack53;
+        org.jfree.chart.util.StrokeList $stack54, $stack56, $stack57, $stack59, $stack8, $stack9;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        $stack2 = specialinvoke this.<java.lang.Object: java.lang.Object clone()>();
+        clone = (org.jfree.chart.renderer.AbstractRenderer) $stack2;
+        $stack3 = this.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.util.BooleanList seriesVisibleList>;
+    
+        if $stack3 == null goto label01;
+        $stack72 = this.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.util.BooleanList seriesVisibleList>;
+        $stack73 = virtualinvoke $stack72.<org.jfree.chart.util.BooleanList: java.lang.Object clone()>();
+        $stack74 = (org.jfree.chart.util.BooleanList) $stack73;
+        clone.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.util.BooleanList seriesVisibleList> = $stack74;
+    
+      label01:
+        $stack4 = this.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.util.BooleanList seriesVisibleInLegendList>;
+    
+        if $stack4 == null goto label02;
+        $stack69 = this.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.util.BooleanList seriesVisibleInLegendList>;
+        $stack70 = virtualinvoke $stack69.<org.jfree.chart.util.BooleanList: java.lang.Object clone()>();
+        $stack71 = (org.jfree.chart.util.BooleanList) $stack70;
+        clone.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.util.BooleanList seriesVisibleInLegendList> = $stack71;
+    
+      label02:
+        $stack5 = this.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.util.PaintList paintList>;
+    
+        if $stack5 == null goto label03;
+        $stack66 = this.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.util.PaintList paintList>;
+        $stack67 = virtualinvoke $stack66.<org.jfree.chart.util.PaintList: java.lang.Object clone()>();
+        $stack68 = (org.jfree.chart.util.PaintList) $stack67;
+        clone.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.util.PaintList paintList> = $stack68;
+    
+      label03:
+        $stack6 = this.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.util.PaintList fillPaintList>;
+    
+        if $stack6 == null goto label04;
+        $stack63 = this.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.util.PaintList fillPaintList>;
+        $stack64 = virtualinvoke $stack63.<org.jfree.chart.util.PaintList: java.lang.Object clone()>();
+        $stack65 = (org.jfree.chart.util.PaintList) $stack64;
+        clone.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.util.PaintList fillPaintList> = $stack65;
+    
+      label04:
+        $stack7 = this.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.util.PaintList outlinePaintList>;
+    
+        if $stack7 == null goto label05;
+        $stack60 = this.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.util.PaintList outlinePaintList>;
+        $stack61 = virtualinvoke $stack60.<org.jfree.chart.util.PaintList: java.lang.Object clone()>();
+        $stack62 = (org.jfree.chart.util.PaintList) $stack61;
+        clone.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.util.PaintList outlinePaintList> = $stack62;
+    
+      label05:
+        $stack8 = this.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.util.StrokeList strokeList>;
+    
+        if $stack8 == null goto label06;
+        $stack57 = this.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.util.StrokeList strokeList>;
+        $stack58 = virtualinvoke $stack57.<org.jfree.chart.util.StrokeList: java.lang.Object clone()>();
+        $stack59 = (org.jfree.chart.util.StrokeList) $stack58;
+        clone.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.util.StrokeList strokeList> = $stack59;
+    
+      label06:
+        $stack9 = this.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.util.StrokeList outlineStrokeList>;
+    
+        if $stack9 == null goto label07;
+        $stack54 = this.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.util.StrokeList outlineStrokeList>;
+        $stack55 = virtualinvoke $stack54.<org.jfree.chart.util.StrokeList: java.lang.Object clone()>();
+        $stack56 = (org.jfree.chart.util.StrokeList) $stack55;
+        clone.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.util.StrokeList outlineStrokeList> = $stack56;
+    
+      label07:
+        $stack10 = this.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.util.ShapeList shapeList>;
+    
+        if $stack10 == null goto label08;
+        $stack51 = this.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.util.ShapeList shapeList>;
+        $stack52 = virtualinvoke $stack51.<org.jfree.chart.util.ShapeList: java.lang.Object clone()>();
+        $stack53 = (org.jfree.chart.util.ShapeList) $stack52;
+        clone.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.util.ShapeList shapeList> = $stack53;
+    
+      label08:
+        $stack11 = this.<org.jfree.chart.renderer.AbstractRenderer: java.awt.Shape baseShape>;
+    
+        if $stack11 == null goto label09;
+        $stack49 = this.<org.jfree.chart.renderer.AbstractRenderer: java.awt.Shape baseShape>;
+        $stack50 = staticinvoke <org.jfree.chart.util.ShapeUtilities: java.awt.Shape clone(java.awt.Shape)>($stack49);
+        clone.<org.jfree.chart.renderer.AbstractRenderer: java.awt.Shape baseShape> = $stack50;
+    
+      label09:
+        $stack12 = this.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.util.BooleanList itemLabelsVisibleList>;
+    
+        if $stack12 == null goto label10;
+        $stack46 = this.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.util.BooleanList itemLabelsVisibleList>;
+        $stack47 = virtualinvoke $stack46.<org.jfree.chart.util.BooleanList: java.lang.Object clone()>();
+        $stack48 = (org.jfree.chart.util.BooleanList) $stack47;
+        clone.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.util.BooleanList itemLabelsVisibleList> = $stack48;
+    
+      label10:
+        $stack13 = this.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.util.ObjectList itemLabelFontList>;
+    
+        if $stack13 == null goto label11;
+        $stack43 = this.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.util.ObjectList itemLabelFontList>;
+        $stack44 = virtualinvoke $stack43.<org.jfree.chart.util.ObjectList: java.lang.Object clone()>();
+        $stack45 = (org.jfree.chart.util.ObjectList) $stack44;
+        clone.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.util.ObjectList itemLabelFontList> = $stack45;
+    
+      label11:
+        $stack14 = this.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.util.PaintList itemLabelPaintList>;
+    
+        if $stack14 == null goto label12;
+        $stack40 = this.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.util.PaintList itemLabelPaintList>;
+        $stack41 = virtualinvoke $stack40.<org.jfree.chart.util.PaintList: java.lang.Object clone()>();
+        $stack42 = (org.jfree.chart.util.PaintList) $stack41;
+        clone.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.util.PaintList itemLabelPaintList> = $stack42;
+    
+      label12:
+        $stack15 = this.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.util.ObjectList positiveItemLabelPositionList>;
+    
+        if $stack15 == null goto label13;
+        $stack37 = this.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.util.ObjectList positiveItemLabelPositionList>;
+        $stack38 = virtualinvoke $stack37.<org.jfree.chart.util.ObjectList: java.lang.Object clone()>();
+        $stack39 = (org.jfree.chart.util.ObjectList) $stack38;
+        clone.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.util.ObjectList positiveItemLabelPositionList> = $stack39;
+    
+      label13:
+        $stack16 = this.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.util.ObjectList negativeItemLabelPositionList>;
+    
+        if $stack16 == null goto label14;
+        $stack34 = this.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.util.ObjectList negativeItemLabelPositionList>;
+        $stack35 = virtualinvoke $stack34.<org.jfree.chart.util.ObjectList: java.lang.Object clone()>();
+        $stack36 = (org.jfree.chart.util.ObjectList) $stack35;
+        clone.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.util.ObjectList negativeItemLabelPositionList> = $stack36;
+    
+      label14:
+        $stack17 = this.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.util.BooleanList createEntitiesList>;
+    
+        if $stack17 == null goto label15;
+        $stack31 = this.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.util.BooleanList createEntitiesList>;
+        $stack32 = virtualinvoke $stack31.<org.jfree.chart.util.BooleanList: java.lang.Object clone()>();
+        $stack33 = (org.jfree.chart.util.BooleanList) $stack32;
+        clone.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.util.BooleanList createEntitiesList> = $stack33;
+    
+      label15:
+        $stack18 = this.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.util.ShapeList legendShapeList>;
+    
+        if $stack18 == null goto label16;
+        $stack28 = this.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.util.ShapeList legendShapeList>;
+        $stack29 = virtualinvoke $stack28.<org.jfree.chart.util.ShapeList: java.lang.Object clone()>();
+        $stack30 = (org.jfree.chart.util.ShapeList) $stack29;
+        clone.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.util.ShapeList legendShapeList> = $stack30;
+    
+      label16:
+        $stack19 = this.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.util.ObjectList legendTextFont>;
+    
+        if $stack19 == null goto label17;
+        $stack25 = this.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.util.ObjectList legendTextFont>;
+        $stack26 = virtualinvoke $stack25.<org.jfree.chart.util.ObjectList: java.lang.Object clone()>();
+        $stack27 = (org.jfree.chart.util.ObjectList) $stack26;
+        clone.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.util.ObjectList legendTextFont> = $stack27;
+    
+      label17:
+        $stack20 = this.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.util.PaintList legendTextPaint>;
+    
+        if $stack20 == null goto label18;
+        $stack22 = this.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.util.PaintList legendTextPaint>;
+        $stack23 = virtualinvoke $stack22.<org.jfree.chart.util.PaintList: java.lang.Object clone()>();
+        $stack24 = (org.jfree.chart.util.PaintList) $stack23;
+        clone.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.util.PaintList legendTextPaint> = $stack24;
+    
+      label18:
+        $stack21 = new javax.swing.event.EventListenerList;
+        specialinvoke $stack21.<javax.swing.event.EventListenerList: void <init>()>();
+        clone.<org.jfree.chart.renderer.AbstractRenderer: javax.swing.event.EventListenerList listenerList> = $stack21;
+    
+        return clone;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: void setBaseSeriesVisible(boolean,boolean)> ----
+    {
+        boolean notify, visible;
+        org.jfree.chart.event.RendererChangeEvent $stack4, e;
+        org.jfree.chart.renderer.AbstractRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        visible := @parameter0: boolean;
+        notify := @parameter1: boolean;
+        this.<org.jfree.chart.renderer.AbstractRenderer: boolean baseSeriesVisible> = visible;
+    
+        if notify == 0 goto label1;
+        $stack4 = new org.jfree.chart.event.RendererChangeEvent;
+        specialinvoke $stack4.<org.jfree.chart.event.RendererChangeEvent: void <init>(java.lang.Object,boolean)>(this, 1);
+        e = $stack4;
+        virtualinvoke this.<org.jfree.chart.renderer.AbstractRenderer: void notifyListeners(org.jfree.chart.event.RendererChangeEvent)>($stack4);
+    
+      label1:
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: void setBaseOutlineStroke(java.awt.Stroke,boolean)> ----
+    {
+        boolean notify;
+        java.awt.Stroke stroke;
+        java.lang.IllegalArgumentException #l0;
+        java.lang.Object $stack3;
+        java.lang.Throwable #l1;
+        org.jfree.chart.renderer.AbstractRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        stroke := @parameter0: java.awt.Stroke;
+        notify := @parameter1: boolean;
+    
+        if stroke != null goto label1;
+        $stack3 = new java.lang.IllegalArgumentException;
+        #l0 = (java.lang.IllegalArgumentException) $stack3;
+        specialinvoke #l0.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'stroke\' argument.");
+        #l1 = (java.lang.Throwable) $stack3;
+    
+        throw #l1;
+    
+      label1:
+        this.<org.jfree.chart.renderer.AbstractRenderer: java.awt.Stroke baseOutlineStroke> = stroke;
+    
+        if notify == 0 goto label2;
+        virtualinvoke this.<org.jfree.chart.renderer.AbstractRenderer: void fireChangeEvent()>();
+    
+      label2:
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: java.awt.Font lookupLegendTextFont(int)> ----
+    {
+        int series;
+        java.awt.Font result;
+        org.jfree.chart.renderer.AbstractRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        series := @parameter0: int;
+        result = virtualinvoke this.<org.jfree.chart.renderer.AbstractRenderer: java.awt.Font getLegendTextFont(int)>(series);
+    
+        if result != null goto label1;
+        result = this.<org.jfree.chart.renderer.AbstractRenderer: java.awt.Font baseLegendTextFont>;
+    
+      label1:
+        return result;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: void setBaseOutlinePaint(java.awt.Paint,boolean)> ----
+    {
+        boolean notify;
+        java.awt.Paint paint;
+        java.lang.IllegalArgumentException #l1;
+        java.lang.Object $stack3;
+        java.lang.Throwable #l0;
+        org.jfree.chart.renderer.AbstractRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        paint := @parameter0: java.awt.Paint;
+        notify := @parameter1: boolean;
+    
+        if paint != null goto label1;
+        $stack3 = new java.lang.IllegalArgumentException;
+        #l1 = (java.lang.IllegalArgumentException) $stack3;
+        specialinvoke #l1.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'paint\' argument.");
+        #l0 = (java.lang.Throwable) $stack3;
+    
+        throw #l0;
+    
+      label1:
+        this.<org.jfree.chart.renderer.AbstractRenderer: java.awt.Paint baseOutlinePaint> = paint;
+    
+        if notify == 0 goto label2;
+        virtualinvoke this.<org.jfree.chart.renderer.AbstractRenderer: void fireChangeEvent()>();
+    
+      label2:
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: boolean getAutoPopulateSeriesShape()> ----
+    {
+        boolean $stack1;
+        org.jfree.chart.renderer.AbstractRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        $stack1 = this.<org.jfree.chart.renderer.AbstractRenderer: boolean autoPopulateSeriesShape>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: void setSeriesVisible(int,java.lang.Boolean,boolean)> ----
+    {
+        boolean notify;
+        int series;
+        java.lang.Boolean visible;
+        org.jfree.chart.event.RendererChangeEvent $stack6, e;
+        org.jfree.chart.renderer.AbstractRenderer this;
+        org.jfree.chart.util.BooleanList $stack5;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        series := @parameter0: int;
+        visible := @parameter1: java.lang.Boolean;
+        notify := @parameter2: boolean;
+        $stack5 = this.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.util.BooleanList seriesVisibleList>;
+        virtualinvoke $stack5.<org.jfree.chart.util.BooleanList: void setBoolean(int,java.lang.Boolean)>(series, visible);
+    
+        if notify == 0 goto label1;
+        $stack6 = new org.jfree.chart.event.RendererChangeEvent;
+        specialinvoke $stack6.<org.jfree.chart.event.RendererChangeEvent: void <init>(java.lang.Object,boolean)>(this, 1);
+        e = $stack6;
+        virtualinvoke this.<org.jfree.chart.renderer.AbstractRenderer: void notifyListeners(org.jfree.chart.event.RendererChangeEvent)>($stack6);
+    
+      label1:
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: void setItemLabelAnchorOffset(double)> ----
+    {
+        double offset;
+        org.jfree.chart.renderer.AbstractRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        offset := @parameter0: double;
+        this.<org.jfree.chart.renderer.AbstractRenderer: double itemLabelAnchorOffset> = offset;
+        virtualinvoke this.<org.jfree.chart.renderer.AbstractRenderer: void fireChangeEvent()>();
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: void setSeriesShape(int,java.awt.Shape)> ----
+    {
+        int series;
+        java.awt.Shape shape;
+        org.jfree.chart.renderer.AbstractRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        series := @parameter0: int;
+        shape := @parameter1: java.awt.Shape;
+        virtualinvoke this.<org.jfree.chart.renderer.AbstractRenderer: void setSeriesShape(int,java.awt.Shape,boolean)>(series, shape, 1);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: void setSeriesOutlinePaint(int,java.awt.Paint,boolean)> ----
+    {
+        boolean notify;
+        int series;
+        java.awt.Paint paint;
+        org.jfree.chart.renderer.AbstractRenderer this;
+        org.jfree.chart.util.PaintList $stack4;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        series := @parameter0: int;
+        paint := @parameter1: java.awt.Paint;
+        notify := @parameter2: boolean;
+        $stack4 = this.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.util.PaintList outlinePaintList>;
+        virtualinvoke $stack4.<org.jfree.chart.util.PaintList: void setPaint(int,java.awt.Paint)>(series, paint);
+    
+        if notify == 0 goto label1;
+        virtualinvoke this.<org.jfree.chart.renderer.AbstractRenderer: void fireChangeEvent()>();
+    
+      label1:
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: boolean getItemVisible(int,int)> ----
+    {
+        boolean $stack3;
+        int item, series;
+        org.jfree.chart.renderer.AbstractRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        series := @parameter0: int;
+        item := @parameter1: int;
+        $stack3 = virtualinvoke this.<org.jfree.chart.renderer.AbstractRenderer: boolean isSeriesVisible(int)>(series);
+    
+        return $stack3;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.labels.ItemLabelPosition getSeriesPositiveItemLabelPosition(int)> ----
+    {
+        int series;
+        java.lang.Object $stack4;
+        org.jfree.chart.labels.ItemLabelPosition position;
+        org.jfree.chart.renderer.AbstractRenderer this;
+        org.jfree.chart.util.ObjectList $stack3;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        series := @parameter0: int;
+        $stack3 = this.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.util.ObjectList positiveItemLabelPositionList>;
+        $stack4 = virtualinvoke $stack3.<org.jfree.chart.util.ObjectList: java.lang.Object get(int)>(series);
+        position = (org.jfree.chart.labels.ItemLabelPosition) $stack4;
+    
+        if position != null goto label1;
+        position = this.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.labels.ItemLabelPosition basePositiveItemLabelPosition>;
+    
+      label1:
+        return position;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: boolean getBaseItemLabelsVisible()> ----
+    {
+        boolean $stack1;
+        org.jfree.chart.renderer.AbstractRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        $stack1 = this.<org.jfree.chart.renderer.AbstractRenderer: boolean baseItemLabelsVisible>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: void setBasePaint(java.awt.Paint)> ----
+    {
+        java.awt.Paint paint;
+        org.jfree.chart.renderer.AbstractRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        paint := @parameter0: java.awt.Paint;
+        virtualinvoke this.<org.jfree.chart.renderer.AbstractRenderer: void setBasePaint(java.awt.Paint,boolean)>(paint, 1);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: void removeChangeListener(org.jfree.chart.event.RendererChangeListener)> ----
+    {
+        java.lang.Class $stack2, $stack3;
+        java.lang.IllegalArgumentException #l1;
+        java.lang.Object $stack5, $stack6;
+        java.lang.Throwable #l0;
+        javax.swing.event.EventListenerList $stack4;
+        org.jfree.chart.event.RendererChangeListener listener;
+        org.jfree.chart.renderer.AbstractRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        listener := @parameter0: org.jfree.chart.event.RendererChangeListener;
+    
+        if listener != null goto label1;
+        $stack6 = new java.lang.IllegalArgumentException;
+        #l1 = (java.lang.IllegalArgumentException) $stack6;
+        specialinvoke #l1.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'listener\' argument.");
+        #l0 = (java.lang.Throwable) $stack6;
+    
+        throw #l0;
+    
+      label1:
+        $stack4 = this.<org.jfree.chart.renderer.AbstractRenderer: javax.swing.event.EventListenerList listenerList>;
+        $stack2 = <org.jfree.chart.renderer.AbstractRenderer: java.lang.Class class$org$jfree$chart$event$RendererChangeListener>;
+    
+        if $stack2 != null goto label2;
+        $stack3 = staticinvoke <org.jfree.chart.renderer.AbstractRenderer: java.lang.Class class$(java.lang.String)>("org.jfree.chart.event.RendererChangeListener");
+        <org.jfree.chart.renderer.AbstractRenderer: java.lang.Class class$org$jfree$chart$event$RendererChangeListener> = $stack3;
+    
+        goto label3;
+    
+      label2:
+        $stack3 = <org.jfree.chart.renderer.AbstractRenderer: java.lang.Class class$org$jfree$chart$event$RendererChangeListener>;
+    
+      label3:
+        virtualinvoke $stack4.<javax.swing.event.EventListenerList: void remove(java.lang.Class,java.util.EventListener)>($stack3, listener);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: java.awt.Paint getItemOutlinePaint(int,int,boolean)> ----
+    {
+        boolean selected;
+        int item, series;
+        java.awt.Paint result;
+        org.jfree.chart.renderer.AbstractRenderer this;
+        org.jfree.chart.renderer.RenderAttributes $stack5;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        series := @parameter0: int;
+        item := @parameter1: int;
+        selected := @parameter2: boolean;
+        result = null;
+    
+        if selected == 0 goto label1;
+        $stack5 = this.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.renderer.RenderAttributes selectedItemAttributes>;
+        result = virtualinvoke $stack5.<org.jfree.chart.renderer.RenderAttributes: java.awt.Paint getItemOutlinePaint(int,int)>(series, item);
+    
+      label1:
+        if result != null goto label2;
+        result = virtualinvoke this.<org.jfree.chart.renderer.AbstractRenderer: java.awt.Paint lookupSeriesOutlinePaint(int)>(series);
+    
+      label2:
+        return result;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: java.awt.Paint getItemPaint(int,int,boolean)> ----
+    {
+        boolean selected;
+        int item, series;
+        java.awt.Paint result;
+        org.jfree.chart.renderer.AbstractRenderer this;
+        org.jfree.chart.renderer.RenderAttributes $stack5;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        series := @parameter0: int;
+        item := @parameter1: int;
+        selected := @parameter2: boolean;
+        result = null;
+    
+        if selected == 0 goto label1;
+        $stack5 = this.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.renderer.RenderAttributes selectedItemAttributes>;
+        result = virtualinvoke $stack5.<org.jfree.chart.renderer.RenderAttributes: java.awt.Paint getItemPaint(int,int)>(series, item);
+    
+      label1:
+        if result != null goto label2;
+        result = virtualinvoke this.<org.jfree.chart.renderer.AbstractRenderer: java.awt.Paint lookupSeriesPaint(int)>(series);
+    
+      label2:
+        return result;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: void setBaseItemLabelFont(java.awt.Font,boolean)> ----
+    {
+        boolean notify;
+        java.awt.Font font;
+        org.jfree.chart.renderer.AbstractRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        font := @parameter0: java.awt.Font;
+        notify := @parameter1: boolean;
+        this.<org.jfree.chart.renderer.AbstractRenderer: java.awt.Font baseItemLabelFont> = font;
+    
+        if notify == 0 goto label1;
+        virtualinvoke this.<org.jfree.chart.renderer.AbstractRenderer: void fireChangeEvent()>();
+    
+      label1:
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: boolean isItemLabelVisible(int,int,boolean)> ----
+    {
+        boolean $stack4, selected;
+        int item, series;
+        org.jfree.chart.renderer.AbstractRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        series := @parameter0: int;
+        item := @parameter1: int;
+        selected := @parameter2: boolean;
+        $stack4 = virtualinvoke this.<org.jfree.chart.renderer.AbstractRenderer: boolean isSeriesItemLabelsVisible(int)>(series);
+    
+        return $stack4;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: void setBaseItemLabelPaint(java.awt.Paint)> ----
+    {
+        java.awt.Paint paint;
+        org.jfree.chart.renderer.AbstractRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        paint := @parameter0: java.awt.Paint;
+        virtualinvoke this.<org.jfree.chart.renderer.AbstractRenderer: void setBaseItemLabelPaint(java.awt.Paint,boolean)>(paint, 1);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: java.awt.Stroke lookupSeriesOutlineStroke(int)> ----
+    {
+        boolean $stack4;
+        int series;
+        java.awt.Stroke result;
+        org.jfree.chart.plot.DrawingSupplier supplier;
+        org.jfree.chart.renderer.AbstractRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        series := @parameter0: int;
+        result = virtualinvoke this.<org.jfree.chart.renderer.AbstractRenderer: java.awt.Stroke getSeriesOutlineStroke(int)>(series);
+    
+        if result != null goto label1;
+        $stack4 = this.<org.jfree.chart.renderer.AbstractRenderer: boolean autoPopulateSeriesOutlineStroke>;
+    
+        if $stack4 == 0 goto label1;
+        supplier = virtualinvoke this.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.plot.DrawingSupplier getDrawingSupplier()>();
+    
+        if supplier == null goto label1;
+        result = interfaceinvoke supplier.<org.jfree.chart.plot.DrawingSupplier: java.awt.Stroke getNextOutlineStroke()>();
+        virtualinvoke this.<org.jfree.chart.renderer.AbstractRenderer: void setSeriesOutlineStroke(int,java.awt.Stroke,boolean)>(series, result, 0);
+    
+      label1:
+        if result != null goto label2;
+        result = this.<org.jfree.chart.renderer.AbstractRenderer: java.awt.Stroke baseOutlineStroke>;
+    
+      label2:
+        return result;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: java.awt.Paint getItemLabelPaint(int,int,boolean)> ----
+    {
+        boolean selected;
+        int item, series;
+        java.awt.Paint result;
+        org.jfree.chart.renderer.AbstractRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        series := @parameter0: int;
+        item := @parameter1: int;
+        selected := @parameter2: boolean;
+        result = virtualinvoke this.<org.jfree.chart.renderer.AbstractRenderer: java.awt.Paint getSeriesItemLabelPaint(int)>(series);
+    
+        if result != null goto label1;
+        result = this.<org.jfree.chart.renderer.AbstractRenderer: java.awt.Paint baseItemLabelPaint>;
+    
+      label1:
+        return result;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.labels.ItemLabelPosition getNegativeItemLabelPosition(int,int,boolean)> ----
+    {
+        boolean selected;
+        int item, series;
+        org.jfree.chart.labels.ItemLabelPosition $stack4;
+        org.jfree.chart.renderer.AbstractRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        series := @parameter0: int;
+        item := @parameter1: int;
+        selected := @parameter2: boolean;
+        $stack4 = virtualinvoke this.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.labels.ItemLabelPosition getSeriesNegativeItemLabelPosition(int)>(series);
+    
+        return $stack4;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: java.awt.Stroke getItemStroke(int,int,boolean)> ----
+    {
+        boolean selected;
+        int item, series;
+        java.awt.Stroke $stack4;
+        org.jfree.chart.renderer.AbstractRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        series := @parameter0: int;
+        item := @parameter1: int;
+        selected := @parameter2: boolean;
+        $stack4 = virtualinvoke this.<org.jfree.chart.renderer.AbstractRenderer: java.awt.Stroke lookupSeriesStroke(int)>(series);
+    
+        return $stack4;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: void setBaseCreateEntities(boolean)> ----
+    {
+        boolean create;
+        org.jfree.chart.renderer.AbstractRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        create := @parameter0: boolean;
+        virtualinvoke this.<org.jfree.chart.renderer.AbstractRenderer: void setBaseCreateEntities(boolean,boolean)>(create, 1);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: void setSeriesPaint(int,java.awt.Paint,boolean)> ----
+    {
+        boolean notify;
+        int series;
+        java.awt.Paint paint;
+        org.jfree.chart.renderer.AbstractRenderer this;
+        org.jfree.chart.util.PaintList $stack4;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        series := @parameter0: int;
+        paint := @parameter1: java.awt.Paint;
+        notify := @parameter2: boolean;
+        $stack4 = this.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.util.PaintList paintList>;
+        virtualinvoke $stack4.<org.jfree.chart.util.PaintList: void setPaint(int,java.awt.Paint)>(series, paint);
+    
+        if notify == 0 goto label1;
+        virtualinvoke this.<org.jfree.chart.renderer.AbstractRenderer: void fireChangeEvent()>();
+    
+      label1:
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: java.awt.Paint lookupSeriesPaint(int)> ----
+    {
+        boolean $stack4;
+        int series;
+        java.awt.Paint seriesPaint;
+        org.jfree.chart.plot.DrawingSupplier supplier;
+        org.jfree.chart.renderer.AbstractRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        series := @parameter0: int;
+        seriesPaint = virtualinvoke this.<org.jfree.chart.renderer.AbstractRenderer: java.awt.Paint getSeriesPaint(int)>(series);
+    
+        if seriesPaint != null goto label1;
+        $stack4 = this.<org.jfree.chart.renderer.AbstractRenderer: boolean autoPopulateSeriesPaint>;
+    
+        if $stack4 == 0 goto label1;
+        supplier = virtualinvoke this.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.plot.DrawingSupplier getDrawingSupplier()>();
+    
+        if supplier == null goto label1;
+        seriesPaint = interfaceinvoke supplier.<org.jfree.chart.plot.DrawingSupplier: java.awt.Paint getNextPaint()>();
+        virtualinvoke this.<org.jfree.chart.renderer.AbstractRenderer: void setSeriesPaint(int,java.awt.Paint,boolean)>(series, seriesPaint, 0);
+    
+      label1:
+        if seriesPaint != null goto label2;
+        seriesPaint = this.<org.jfree.chart.renderer.AbstractRenderer: java.awt.Paint basePaint>;
+    
+      label2:
+        return seriesPaint;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: boolean getAutoPopulateSeriesPaint()> ----
+    {
+        boolean $stack1;
+        org.jfree.chart.renderer.AbstractRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        $stack1 = this.<org.jfree.chart.renderer.AbstractRenderer: boolean autoPopulateSeriesPaint>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: void setSeriesItemLabelsVisible(int,java.lang.Boolean)> ----
+    {
+        int series;
+        java.lang.Boolean visible;
+        org.jfree.chart.renderer.AbstractRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        series := @parameter0: int;
+        visible := @parameter1: java.lang.Boolean;
+        virtualinvoke this.<org.jfree.chart.renderer.AbstractRenderer: void setSeriesItemLabelsVisible(int,java.lang.Boolean,boolean)>(series, visible, 1);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: boolean getBaseSeriesVisibleInLegend()> ----
+    {
+        boolean $stack1;
+        org.jfree.chart.renderer.AbstractRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        $stack1 = this.<org.jfree.chart.renderer.AbstractRenderer: boolean baseSeriesVisibleInLegend>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: java.lang.Boolean getSeriesVisible(int)> ----
+    {
+        int series;
+        java.lang.Boolean $stack3;
+        org.jfree.chart.renderer.AbstractRenderer this;
+        org.jfree.chart.util.BooleanList $stack2;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        series := @parameter0: int;
+        $stack2 = this.<org.jfree.chart.renderer.AbstractRenderer: org.jfree.chart.util.BooleanList seriesVisibleList>;
+        $stack3 = virtualinvoke $stack2.<org.jfree.chart.util.BooleanList: java.lang.Boolean getBoolean(int)>(series);
+    
+        return $stack3;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: void setSeriesOutlinePaint(int,java.awt.Paint)> ----
+    {
+        int series;
+        java.awt.Paint paint;
+        org.jfree.chart.renderer.AbstractRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.AbstractRenderer;
+        series := @parameter0: int;
+        paint := @parameter1: java.awt.Paint;
+        virtualinvoke this.<org.jfree.chart.renderer.AbstractRenderer: void setSeriesOutlinePaint(int,java.awt.Paint,boolean)>(series, paint, 1);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.AbstractRenderer: java.lang.Class class$(java.lang.String)> ----
+    {
+        java.lang.Class $stack2;
+        java.lang.NoClassDefFoundError $stack4;
+        java.lang.String x0;
+        java.lang.Throwable $stack3, $stack5, x1;
+    
+    
+        x0 := @parameter0: java.lang.String;
+    
+      label1:
+        $stack2 = staticinvoke <java.lang.Class: java.lang.Class forName(java.lang.String)>(x0);
+    
+      label2:
+        return $stack2;
+    
+      label3:
+        $stack3 := @caughtexception;
+        x1 = $stack3;
+        $stack4 = new java.lang.NoClassDefFoundError;
+        specialinvoke $stack4.<java.lang.NoClassDefFoundError: void <init>()>();
+        $stack5 = virtualinvoke $stack4.<java.lang.NoClassDefFoundError: java.lang.Throwable initCause(java.lang.Throwable)>($stack3);
+    
+        throw $stack5;
+    
+     catch java.lang.ClassNotFoundException from label1 to label2 with label3;
+    }
+
+}

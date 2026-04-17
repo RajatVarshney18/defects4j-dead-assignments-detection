@@ -1,0 +1,481 @@
+// ========================================================================
+// CLASS : org.jfree.data.DataUtilities
+// ========================================================================
+
+[PUBLIC, SUPER, ABSTRACT] class org.jfree.data.DataUtilities extends java.lang.Object {
+
+    // ---- method: <org.jfree.data.DataUtilities: org.jfree.data.KeyedValues getCumulativePercentages(org.jfree.data.KeyedValues)> ----
+    {
+        double $stack11, $stack14, $stack15, i#1, total;
+        int $stack10, $stack9, i#0, i_1;
+        java.lang.Comparable $stack13;
+        java.lang.Double #l1;
+        java.lang.IllegalArgumentException #l2;
+        java.lang.Number #l0, v, v_1;
+        java.lang.Object $stack12, $stack16;
+        java.lang.Throwable #l3;
+        org.jfree.data.DefaultKeyedValues $stack8, result;
+        org.jfree.data.KeyedValues data;
+    
+    
+        data := @parameter0: org.jfree.data.KeyedValues;
+    
+        if data != null goto label1;
+        $stack16 = new java.lang.IllegalArgumentException;
+        #l2 = (java.lang.IllegalArgumentException) $stack16;
+        specialinvoke #l2.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'data\' argument.");
+        #l3 = (java.lang.Throwable) $stack16;
+    
+        throw #l3;
+    
+      label1:
+        $stack8 = new org.jfree.data.DefaultKeyedValues;
+        specialinvoke $stack8.<org.jfree.data.DefaultKeyedValues: void <init>()>();
+        result = $stack8;
+        total = 0.0;
+        i#0 = 0;
+    
+      label2:
+        $stack9 = interfaceinvoke data.<org.jfree.data.KeyedValues: int getItemCount()>();
+    
+        if i#0 >= $stack9 goto label4;
+        v_1 = interfaceinvoke data.<org.jfree.data.KeyedValues: java.lang.Number getValue(int)>(i#0);
+    
+        if v_1 == null goto label3;
+        $stack15 = virtualinvoke v_1.<java.lang.Number: double doubleValue()>();
+        total = total + $stack15;
+    
+      label3:
+        i#0 = i#0 + 1;
+    
+        goto label2;
+    
+      label4:
+        i#1 = 0.0;
+        i_1 = 0;
+    
+      label5:
+        $stack10 = interfaceinvoke data.<org.jfree.data.KeyedValues: int getItemCount()>();
+    
+        if i_1 >= $stack10 goto label7;
+        v = interfaceinvoke data.<org.jfree.data.KeyedValues: java.lang.Number getValue(int)>(i_1);
+    
+        if v == null goto label6;
+        $stack14 = virtualinvoke v.<java.lang.Number: double doubleValue()>();
+        i#1 = i#1 + $stack14;
+    
+      label6:
+        $stack13 = interfaceinvoke data.<org.jfree.data.KeyedValues: java.lang.Comparable getKey(int)>(i_1);
+        $stack12 = new java.lang.Double;
+        $stack11 = i#1 / total;
+        #l1 = (java.lang.Double) $stack12;
+        specialinvoke #l1.<java.lang.Double: void <init>(double)>($stack11);
+        #l0 = (java.lang.Number) $stack12;
+        virtualinvoke $stack8.<org.jfree.data.DefaultKeyedValues: void addValue(java.lang.Comparable,java.lang.Number)>($stack13, #l0);
+        i_1 = i_1 + 1;
+    
+        goto label5;
+    
+      label7:
+        return $stack8;
+    }
+
+    // ---- method: <org.jfree.data.DataUtilities: double calculateRowTotal(org.jfree.data.Values2D,int)> ----
+    {
+        double $stack7, total;
+        int c, columnCount, row;
+        java.lang.IllegalArgumentException #l1;
+        java.lang.Number n;
+        java.lang.Object $stack8;
+        java.lang.Throwable #l0;
+        org.jfree.data.Values2D data;
+    
+    
+        data := @parameter0: org.jfree.data.Values2D;
+        row := @parameter1: int;
+    
+        if data != null goto label1;
+        $stack8 = new java.lang.IllegalArgumentException;
+        #l1 = (java.lang.IllegalArgumentException) $stack8;
+        specialinvoke #l1.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'data\' argument.");
+        #l0 = (java.lang.Throwable) $stack8;
+    
+        throw #l0;
+    
+      label1:
+        total = 0.0;
+        columnCount = interfaceinvoke data.<org.jfree.data.Values2D: int getColumnCount()>();
+        c = 0;
+    
+      label2:
+        if c >= columnCount goto label4;
+        n = interfaceinvoke data.<org.jfree.data.Values2D: java.lang.Number getValue(int,int)>(row, c);
+    
+        if n == null goto label3;
+        $stack7 = virtualinvoke n.<java.lang.Number: double doubleValue()>();
+        total = total + $stack7;
+    
+      label3:
+        c = c + 1;
+    
+        goto label2;
+    
+      label4:
+        return total;
+    }
+
+    // ---- method: <org.jfree.data.DataUtilities: void <init>()> ----
+    {
+        org.jfree.data.DataUtilities this;
+    
+    
+        this := @this: org.jfree.data.DataUtilities;
+        specialinvoke this.<java.lang.Object: void <init>()>();
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.DataUtilities: double calculateRowTotal(org.jfree.data.Values2D,int,int[])> ----
+    {
+        double $stack10, total;
+        int $stack9, col, colCount, row, v;
+        int[] validCols;
+        java.lang.IllegalArgumentException #l1;
+        java.lang.Number n;
+        java.lang.Object $stack11;
+        java.lang.Throwable #l0;
+        org.jfree.data.Values2D data;
+    
+    
+        data := @parameter0: org.jfree.data.Values2D;
+        row := @parameter1: int;
+        validCols := @parameter2: int[];
+    
+        if data != null goto label1;
+        $stack11 = new java.lang.IllegalArgumentException;
+        #l1 = (java.lang.IllegalArgumentException) $stack11;
+        specialinvoke #l1.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'data\' argument.");
+        #l0 = (java.lang.Throwable) $stack11;
+    
+        throw #l0;
+    
+      label1:
+        total = 0.0;
+        colCount = interfaceinvoke data.<org.jfree.data.Values2D: int getColumnCount()>();
+        v = 0;
+    
+      label2:
+        $stack9 = lengthof validCols;
+    
+        if v >= $stack9 goto label4;
+        col = validCols[v];
+    
+        if col >= colCount goto label3;
+        n = interfaceinvoke data.<org.jfree.data.Values2D: java.lang.Number getValue(int,int)>(row, col);
+    
+        if n == null goto label3;
+        $stack10 = virtualinvoke n.<java.lang.Number: double doubleValue()>();
+        total = total + $stack10;
+    
+      label3:
+        v = v + 1;
+    
+        goto label2;
+    
+      label4:
+        return total;
+    }
+
+    // ---- method: <org.jfree.data.DataUtilities: double calculateColumnTotal(org.jfree.data.Values2D,int,int[])> ----
+    {
+        double $stack10, total;
+        int $stack9, column, row, rowCount, v;
+        int[] validRows;
+        java.lang.IllegalArgumentException #l1;
+        java.lang.Number n;
+        java.lang.Object $stack11;
+        java.lang.Throwable #l0;
+        org.jfree.data.Values2D data;
+    
+    
+        data := @parameter0: org.jfree.data.Values2D;
+        column := @parameter1: int;
+        validRows := @parameter2: int[];
+    
+        if data != null goto label1;
+        $stack11 = new java.lang.IllegalArgumentException;
+        #l1 = (java.lang.IllegalArgumentException) $stack11;
+        specialinvoke #l1.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'data\' argument.");
+        #l0 = (java.lang.Throwable) $stack11;
+    
+        throw #l0;
+    
+      label1:
+        total = 0.0;
+        rowCount = interfaceinvoke data.<org.jfree.data.Values2D: int getRowCount()>();
+        v = 0;
+    
+      label2:
+        $stack9 = lengthof validRows;
+    
+        if v >= $stack9 goto label4;
+        row = validRows[v];
+    
+        if row >= rowCount goto label3;
+        n = interfaceinvoke data.<org.jfree.data.Values2D: java.lang.Number getValue(int,int)>(row, column);
+    
+        if n == null goto label3;
+        $stack10 = virtualinvoke n.<java.lang.Number: double doubleValue()>();
+        total = total + $stack10;
+    
+      label3:
+        v = v + 1;
+    
+        goto label2;
+    
+      label4:
+        return total;
+    }
+
+    // ---- method: <org.jfree.data.DataUtilities: boolean equal(double[][],double[][])> ----
+    {
+        boolean $stack8, $stack9;
+        double[] $stack6, $stack7;
+        double[][] a, b;
+        int $stack3, $stack4, $stack5, i;
+    
+    
+        a := @parameter0: double[][];
+        b := @parameter1: double[][];
+    
+        if a != null goto label3;
+    
+        if b != null goto label1;
+        $stack9 = 1;
+    
+        goto label2;
+    
+      label1:
+        $stack9 = 0;
+    
+      label2:
+        return $stack9;
+    
+      label3:
+        if b != null goto label4;
+    
+        return 0;
+    
+      label4:
+        $stack4 = lengthof a;
+        $stack3 = lengthof b;
+    
+        if $stack4 == $stack3 goto label5;
+    
+        return 0;
+    
+      label5:
+        i = 0;
+    
+      label6:
+        $stack5 = lengthof a;
+    
+        if i >= $stack5 goto label8;
+        $stack7 = a[i];
+        $stack6 = b[i];
+        $stack8 = staticinvoke <java.util.Arrays: boolean equals(double[],double[])>($stack7, $stack6);
+    
+        if $stack8 != 0 goto label7;
+    
+        return 0;
+    
+      label7:
+        i = i + 1;
+    
+        goto label6;
+    
+      label8:
+        return 1;
+    }
+
+    // ---- method: <org.jfree.data.DataUtilities: double[][] clone(double[][])> ----
+    {
+        double[] $stack11, $stack6, $stack7, $stack9, row;
+        double[][] clone, source;
+        int $stack10, $stack4, $stack5, $stack8, i;
+        java.lang.IllegalArgumentException #l0;
+        java.lang.Object $stack12;
+        java.lang.Throwable #l1;
+    
+    
+        source := @parameter0: double[][];
+    
+        if source != null goto label1;
+        $stack12 = new java.lang.IllegalArgumentException;
+        #l0 = (java.lang.IllegalArgumentException) $stack12;
+        specialinvoke #l0.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'source\' argument.");
+        #l1 = (java.lang.Throwable) $stack12;
+    
+        throw #l1;
+    
+      label1:
+        $stack4 = lengthof source;
+        clone = newarray (double[])[$stack4];
+        i = 0;
+    
+      label2:
+        $stack5 = lengthof source;
+    
+        if i >= $stack5 goto label4;
+        $stack6 = source[i];
+    
+        if $stack6 == null goto label3;
+        $stack7 = source[i];
+        $stack8 = lengthof $stack7;
+        row = newarray (double)[$stack8];
+        $stack11 = source[i];
+        $stack9 = source[i];
+        $stack10 = lengthof $stack9;
+        staticinvoke <java.lang.System: void arraycopy(java.lang.Object,int,java.lang.Object,int,int)>($stack11, 0, row, 0, $stack10);
+        clone[i] = row;
+    
+      label3:
+        i = i + 1;
+    
+        goto label2;
+    
+      label4:
+        return clone;
+    }
+
+    // ---- method: <org.jfree.data.DataUtilities: double calculateColumnTotal(org.jfree.data.Values2D,int)> ----
+    {
+        double $stack7, total;
+        int column, r, rowCount;
+        java.lang.IllegalArgumentException #l1;
+        java.lang.Number n;
+        java.lang.Object $stack8;
+        java.lang.Throwable #l0;
+        org.jfree.data.Values2D data;
+    
+    
+        data := @parameter0: org.jfree.data.Values2D;
+        column := @parameter1: int;
+    
+        if data != null goto label1;
+        $stack8 = new java.lang.IllegalArgumentException;
+        #l1 = (java.lang.IllegalArgumentException) $stack8;
+        specialinvoke #l1.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'data\' argument.");
+        #l0 = (java.lang.Throwable) $stack8;
+    
+        throw #l0;
+    
+      label1:
+        total = 0.0;
+        rowCount = interfaceinvoke data.<org.jfree.data.Values2D: int getRowCount()>();
+        r = 0;
+    
+      label2:
+        if r >= rowCount goto label4;
+        n = interfaceinvoke data.<org.jfree.data.Values2D: java.lang.Number getValue(int,int)>(r, column);
+    
+        if n == null goto label3;
+        $stack7 = virtualinvoke n.<java.lang.Number: double doubleValue()>();
+        total = total + $stack7;
+    
+      label3:
+        r = r + 1;
+    
+        goto label2;
+    
+      label4:
+        return total;
+    }
+
+    // ---- method: <org.jfree.data.DataUtilities: java.lang.Number[] createNumberArray(double[])> ----
+    {
+        double $stack5;
+        double[] data;
+        int $stack3, $stack4, i;
+        java.lang.Double $stack6;
+        java.lang.IllegalArgumentException #l0;
+        java.lang.Number[] #l2;
+        java.lang.Object $stack7;
+        java.lang.Object[] result;
+        java.lang.Throwable #l1;
+    
+    
+        data := @parameter0: double[];
+    
+        if data != null goto label1;
+        $stack7 = new java.lang.IllegalArgumentException;
+        #l0 = (java.lang.IllegalArgumentException) $stack7;
+        specialinvoke #l0.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'data\' argument.");
+        #l1 = (java.lang.Throwable) $stack7;
+    
+        throw #l1;
+    
+      label1:
+        $stack3 = lengthof data;
+        result = newarray (java.lang.Number)[$stack3];
+        i = 0;
+    
+      label2:
+        $stack4 = lengthof data;
+    
+        if i >= $stack4 goto label3;
+        $stack6 = new java.lang.Double;
+        $stack5 = data[i];
+        specialinvoke $stack6.<java.lang.Double: void <init>(double)>($stack5);
+        result[i] = $stack6;
+        i = i + 1;
+    
+        goto label2;
+    
+      label3:
+        #l2 = (java.lang.Number[]) result;
+    
+        return #l2;
+    }
+
+    // ---- method: <org.jfree.data.DataUtilities: java.lang.Number[][] createNumberArray2D(double[][])> ----
+    {
+        double[] $stack4;
+        double[][] data;
+        int i, l1;
+        java.lang.IllegalArgumentException #l1;
+        java.lang.Number[] $stack5;
+        java.lang.Number[][] result;
+        java.lang.Object $stack6;
+        java.lang.Throwable #l0;
+    
+    
+        data := @parameter0: double[][];
+    
+        if data != null goto label1;
+        $stack6 = new java.lang.IllegalArgumentException;
+        #l1 = (java.lang.IllegalArgumentException) $stack6;
+        specialinvoke #l1.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'data\' argument.");
+        #l0 = (java.lang.Throwable) $stack6;
+    
+        throw #l0;
+    
+      label1:
+        l1 = lengthof data;
+        result = newarray (java.lang.Number[])[l1];
+        i = 0;
+    
+      label2:
+        if i >= l1 goto label3;
+        $stack4 = data[i];
+        $stack5 = staticinvoke <org.jfree.data.DataUtilities: java.lang.Number[] createNumberArray(double[])>($stack4);
+        result[i] = $stack5;
+        i = i + 1;
+    
+        goto label2;
+    
+      label3:
+        return result;
+    }
+
+}

@@ -1,0 +1,227 @@
+// ========================================================================
+// CLASS : org.jfree.chart.ui.ProjectInfo
+// ========================================================================
+
+[PUBLIC, SUPER] class org.jfree.chart.ui.ProjectInfo extends org.jfree.chart.ui.BasicProjectInfo {
+
+    // ---- method: <org.jfree.chart.ui.ProjectInfo: void setLogo(java.awt.Image)> ----
+    {
+        java.awt.Image logo;
+        org.jfree.chart.ui.ProjectInfo this;
+    
+    
+        this := @this: org.jfree.chart.ui.ProjectInfo;
+        logo := @parameter0: java.awt.Image;
+        this.<org.jfree.chart.ui.ProjectInfo: java.awt.Image logo> = logo;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.ui.ProjectInfo: java.awt.Image getLogo()> ----
+    {
+        java.awt.Image $stack1;
+        org.jfree.chart.ui.ProjectInfo this;
+    
+    
+        this := @this: org.jfree.chart.ui.ProjectInfo;
+        $stack1 = this.<org.jfree.chart.ui.ProjectInfo: java.awt.Image logo>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.ui.ProjectInfo: java.lang.String toString()> ----
+    {
+        boolean $stack21;
+        int $stack12, $stack16, contributor#1;
+        java.lang.Object $stack22;
+        java.lang.String $stack11, $stack13, $stack14, $stack15, $stack17, $stack18, $stack19, $stack23, $stack24, $stack6, $stack7, $stack8, $stack9;
+        java.lang.StringBuffer $stack5, result;
+        java.util.Iterator iterator#0;
+        java.util.List $stack10, $stack20;
+        org.jfree.chart.ui.Contributor contributor#0;
+        org.jfree.chart.ui.Library lib;
+        org.jfree.chart.ui.Library[] iterator#1;
+        org.jfree.chart.ui.ProjectInfo this;
+    
+    
+        this := @this: org.jfree.chart.ui.ProjectInfo;
+        $stack5 = new java.lang.StringBuffer;
+        specialinvoke $stack5.<java.lang.StringBuffer: void <init>()>();
+        result = $stack5;
+        $stack6 = virtualinvoke this.<org.jfree.chart.ui.ProjectInfo: java.lang.String getName()>();
+        virtualinvoke $stack5.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>($stack6);
+        virtualinvoke $stack5.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>(" version ");
+        $stack7 = virtualinvoke this.<org.jfree.chart.ui.ProjectInfo: java.lang.String getVersion()>();
+        virtualinvoke $stack5.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>($stack7);
+        virtualinvoke $stack5.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>(".\n");
+        $stack8 = virtualinvoke this.<org.jfree.chart.ui.ProjectInfo: java.lang.String getCopyright()>();
+        virtualinvoke $stack5.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>($stack8);
+        virtualinvoke $stack5.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>(".\n");
+        virtualinvoke $stack5.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>("\n");
+        virtualinvoke $stack5.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>("For terms of use, see the licence below.\n");
+        virtualinvoke $stack5.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>("\n");
+        virtualinvoke $stack5.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>("FURTHER INFORMATION:");
+        $stack9 = virtualinvoke this.<org.jfree.chart.ui.ProjectInfo: java.lang.String getInfo()>();
+        virtualinvoke $stack5.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>($stack9);
+        virtualinvoke $stack5.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>("\n");
+        virtualinvoke $stack5.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>("CONTRIBUTORS:");
+        $stack10 = this.<org.jfree.chart.ui.ProjectInfo: java.util.List contributors>;
+    
+        if $stack10 == null goto label3;
+        $stack20 = this.<org.jfree.chart.ui.ProjectInfo: java.util.List contributors>;
+        iterator#0 = interfaceinvoke $stack20.<java.util.List: java.util.Iterator iterator()>();
+    
+      label1:
+        $stack21 = interfaceinvoke iterator#0.<java.util.Iterator: boolean hasNext()>();
+    
+        if $stack21 == 0 goto label2;
+        $stack22 = interfaceinvoke iterator#0.<java.util.Iterator: java.lang.Object next()>();
+        contributor#0 = (org.jfree.chart.ui.Contributor) $stack22;
+        $stack23 = virtualinvoke contributor#0.<org.jfree.chart.ui.Contributor: java.lang.String getName()>();
+        virtualinvoke $stack5.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>($stack23);
+        virtualinvoke $stack5.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>(" (");
+        $stack24 = virtualinvoke contributor#0.<org.jfree.chart.ui.Contributor: java.lang.String getEmail()>();
+        virtualinvoke $stack5.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>($stack24);
+        virtualinvoke $stack5.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>(").");
+    
+        goto label1;
+    
+      label2:
+        goto label4;
+    
+      label3:
+        virtualinvoke $stack5.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>("None");
+    
+      label4:
+        virtualinvoke $stack5.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>("\n");
+        virtualinvoke $stack5.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>("OTHER LIBRARIES USED BY ");
+        $stack11 = virtualinvoke this.<org.jfree.chart.ui.ProjectInfo: java.lang.String getName()>();
+        virtualinvoke $stack5.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>($stack11);
+        virtualinvoke $stack5.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>(":");
+        iterator#1 = virtualinvoke this.<org.jfree.chart.ui.ProjectInfo: org.jfree.chart.ui.Library[] getLibraries()>();
+        $stack12 = lengthof iterator#1;
+    
+        if $stack12 == 0 goto label7;
+        contributor#1 = 0;
+    
+      label5:
+        $stack16 = lengthof iterator#1;
+    
+        if contributor#1 >= $stack16 goto label6;
+        lib = iterator#1[contributor#1];
+        $stack17 = virtualinvoke lib.<org.jfree.chart.ui.Library: java.lang.String getName()>();
+        virtualinvoke $stack5.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>($stack17);
+        virtualinvoke $stack5.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>(" ");
+        $stack18 = virtualinvoke lib.<org.jfree.chart.ui.Library: java.lang.String getVersion()>();
+        virtualinvoke $stack5.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>($stack18);
+        virtualinvoke $stack5.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>(" (");
+        $stack19 = virtualinvoke lib.<org.jfree.chart.ui.Library: java.lang.String getInfo()>();
+        virtualinvoke $stack5.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>($stack19);
+        virtualinvoke $stack5.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>(").");
+        contributor#1 = contributor#1 + 1;
+    
+        goto label5;
+    
+      label6:
+        goto label8;
+    
+      label7:
+        virtualinvoke $stack5.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>("None");
+    
+      label8:
+        virtualinvoke $stack5.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>("\n");
+        $stack13 = virtualinvoke this.<org.jfree.chart.ui.ProjectInfo: java.lang.String getName()>();
+        virtualinvoke $stack5.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>($stack13);
+        virtualinvoke $stack5.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>(" LICENCE TERMS:");
+        virtualinvoke $stack5.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>("\n");
+        $stack14 = virtualinvoke this.<org.jfree.chart.ui.ProjectInfo: java.lang.String getLicenceText()>();
+        virtualinvoke $stack5.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>($stack14);
+        $stack15 = virtualinvoke $stack5.<java.lang.StringBuffer: java.lang.String toString()>();
+    
+        return $stack15;
+    }
+
+    // ---- method: <org.jfree.chart.ui.ProjectInfo: java.util.List getContributors()> ----
+    {
+        java.util.List $stack1;
+        org.jfree.chart.ui.ProjectInfo this;
+    
+    
+        this := @this: org.jfree.chart.ui.ProjectInfo;
+        $stack1 = this.<org.jfree.chart.ui.ProjectInfo: java.util.List contributors>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.ui.ProjectInfo: void setContributors(java.util.List)> ----
+    {
+        java.util.List contributors;
+        org.jfree.chart.ui.ProjectInfo this;
+    
+    
+        this := @this: org.jfree.chart.ui.ProjectInfo;
+        contributors := @parameter0: java.util.List;
+        this.<org.jfree.chart.ui.ProjectInfo: java.util.List contributors> = contributors;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.ui.ProjectInfo: java.lang.String getLicenceText()> ----
+    {
+        java.lang.String $stack1;
+        org.jfree.chart.ui.ProjectInfo this;
+    
+    
+        this := @this: org.jfree.chart.ui.ProjectInfo;
+        $stack1 = this.<org.jfree.chart.ui.ProjectInfo: java.lang.String licenceText>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.ui.ProjectInfo: void <init>()> ----
+    {
+        org.jfree.chart.ui.ProjectInfo this;
+    
+    
+        this := @this: org.jfree.chart.ui.ProjectInfo;
+        specialinvoke this.<org.jfree.chart.ui.BasicProjectInfo: void <init>()>();
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.ui.ProjectInfo: void <init>(java.lang.String,java.lang.String,java.lang.String,java.awt.Image,java.lang.String,java.lang.String,java.lang.String)> ----
+    {
+        java.awt.Image logo;
+        java.lang.String copyright, info, licenceName, licenceText, name, version;
+        org.jfree.chart.ui.ProjectInfo this;
+    
+    
+        this := @this: org.jfree.chart.ui.ProjectInfo;
+        name := @parameter0: java.lang.String;
+        version := @parameter1: java.lang.String;
+        info := @parameter2: java.lang.String;
+        logo := @parameter3: java.awt.Image;
+        copyright := @parameter4: java.lang.String;
+        licenceName := @parameter5: java.lang.String;
+        licenceText := @parameter6: java.lang.String;
+        specialinvoke this.<org.jfree.chart.ui.BasicProjectInfo: void <init>(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String)>(name, version, info, copyright, licenceName);
+        this.<org.jfree.chart.ui.ProjectInfo: java.awt.Image logo> = logo;
+        this.<org.jfree.chart.ui.ProjectInfo: java.lang.String licenceText> = licenceText;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.ui.ProjectInfo: void setLicenceText(java.lang.String)> ----
+    {
+        java.lang.String licenceText;
+        org.jfree.chart.ui.ProjectInfo this;
+    
+    
+        this := @this: org.jfree.chart.ui.ProjectInfo;
+        licenceText := @parameter0: java.lang.String;
+        this.<org.jfree.chart.ui.ProjectInfo: java.lang.String licenceText> = licenceText;
+    
+        return;
+    }
+
+}

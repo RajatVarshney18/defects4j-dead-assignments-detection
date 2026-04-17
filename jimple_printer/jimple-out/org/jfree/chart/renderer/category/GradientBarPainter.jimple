@@ -1,0 +1,602 @@
+// ========================================================================
+// CLASS : org.jfree.chart.renderer.category.GradientBarPainter
+// ========================================================================
+
+[PUBLIC, SUPER] class org.jfree.chart.renderer.category.GradientBarPainter extends java.lang.Object implements org.jfree.chart.renderer.category.BarPainter, java.io.Serializable {
+
+    // ---- method: <org.jfree.chart.renderer.category.GradientBarPainter: void paintBarShadow(java.awt.Graphics2D,org.jfree.chart.renderer.category.BarRenderer,int,int,boolean,java.awt.geom.RectangularShape,org.jfree.chart.util.RectangleEdge,boolean)> ----
+    {
+        boolean $stack11, pegShadow, selected;
+        double $stack12, $stack13;
+        int $stack15, column, row;
+        java.awt.Color c#0;
+        java.awt.Graphics2D g2;
+        java.awt.Paint $stack14, itemPaint;
+        java.awt.Shape #l0;
+        java.awt.geom.RectangularShape bar;
+        java.lang.Object c#1;
+        org.jfree.chart.renderer.category.BarRenderer renderer;
+        org.jfree.chart.renderer.category.GradientBarPainter this;
+        org.jfree.chart.util.RectangleEdge base;
+    
+    
+        this := @this: org.jfree.chart.renderer.category.GradientBarPainter;
+        g2 := @parameter0: java.awt.Graphics2D;
+        renderer := @parameter1: org.jfree.chart.renderer.category.BarRenderer;
+        row := @parameter2: int;
+        column := @parameter3: int;
+        selected := @parameter4: boolean;
+        bar := @parameter5: java.awt.geom.RectangularShape;
+        base := @parameter6: org.jfree.chart.util.RectangleEdge;
+        pegShadow := @parameter7: boolean;
+        itemPaint = virtualinvoke renderer.<org.jfree.chart.renderer.category.BarRenderer: java.awt.Paint getItemPaint(int,int,boolean)>(row, column, selected);
+        $stack11 = itemPaint instanceof java.awt.Color;
+    
+        if $stack11 == 0 goto label1;
+        c#0 = (java.awt.Color) itemPaint;
+        $stack15 = virtualinvoke c#0.<java.awt.Color: int getAlpha()>();
+    
+        if $stack15 != 0 goto label1;
+    
+        return;
+    
+      label1:
+        $stack13 = virtualinvoke renderer.<org.jfree.chart.renderer.category.BarRenderer: double getShadowXOffset()>();
+        $stack12 = virtualinvoke renderer.<org.jfree.chart.renderer.category.BarRenderer: double getShadowYOffset()>();
+        c#1 = specialinvoke this.<org.jfree.chart.renderer.category.GradientBarPainter: java.awt.geom.Rectangle2D createShadow(java.awt.geom.RectangularShape,double,double,org.jfree.chart.util.RectangleEdge,boolean)>(bar, $stack13, $stack12, base, pegShadow);
+        $stack14 = virtualinvoke renderer.<org.jfree.chart.renderer.category.BarRenderer: java.awt.Paint getShadowPaint()>();
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>($stack14);
+        #l0 = (java.awt.Shape) c#1;
+        virtualinvoke g2.<java.awt.Graphics2D: void fill(java.awt.Shape)>(#l0);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.category.GradientBarPainter: void <init>()> ----
+    {
+        org.jfree.chart.renderer.category.GradientBarPainter this;
+    
+    
+        this := @this: org.jfree.chart.renderer.category.GradientBarPainter;
+        specialinvoke this.<org.jfree.chart.renderer.category.GradientBarPainter: void <init>(double,double,double)>(0.1, 0.2, 0.8);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.category.GradientBarPainter: java.awt.geom.Rectangle2D[] splitHorizontalBar(java.awt.geom.RectangularShape,double,double,double)> ----
+    {
+        double $stack17, $stack18, $stack19, $stack20, $stack21, $stack22, $stack23, $stack24, $stack25, $stack26, $stack27, $stack28, $stack29, $stack31, $stack32, $stack33, $stack35, $stack36, $stack37, $stack39, $stack40, $stack41, $stack42, a, b, c, y0, y1, y2, y3;
+        java.awt.geom.Rectangle2D$Double $stack30, $stack34, $stack38, $stack43;
+        java.awt.geom.Rectangle2D[] #l0;
+        java.awt.geom.RectangularShape bar;
+        java.lang.Object[] result;
+        org.jfree.chart.renderer.category.GradientBarPainter this;
+    
+    
+        this := @this: org.jfree.chart.renderer.category.GradientBarPainter;
+        bar := @parameter0: java.awt.geom.RectangularShape;
+        a := @parameter1: double;
+        b := @parameter2: double;
+        c := @parameter3: double;
+        result = newarray (java.awt.geom.Rectangle2D)[4];
+        y0 = virtualinvoke bar.<java.awt.geom.RectangularShape: double getMinY()>();
+        $stack17 = virtualinvoke bar.<java.awt.geom.RectangularShape: double getHeight()>();
+        $stack18 = $stack17 * a;
+        $stack19 = y0 + $stack18;
+        y1 = staticinvoke <java.lang.Math: double rint(double)>($stack19);
+        $stack20 = virtualinvoke bar.<java.awt.geom.RectangularShape: double getHeight()>();
+        $stack21 = $stack20 * b;
+        $stack22 = y0 + $stack21;
+        y2 = staticinvoke <java.lang.Math: double rint(double)>($stack22);
+        $stack23 = virtualinvoke bar.<java.awt.geom.RectangularShape: double getHeight()>();
+        $stack24 = $stack23 * c;
+        $stack25 = y0 + $stack24;
+        y3 = staticinvoke <java.lang.Math: double rint(double)>($stack25);
+        $stack30 = new java.awt.geom.Rectangle2D$Double;
+        $stack29 = virtualinvoke bar.<java.awt.geom.RectangularShape: double getMinX()>();
+        $stack28 = virtualinvoke bar.<java.awt.geom.RectangularShape: double getMinY()>();
+        $stack27 = virtualinvoke bar.<java.awt.geom.RectangularShape: double getWidth()>();
+        $stack26 = y1 - y0;
+        specialinvoke $stack30.<java.awt.geom.Rectangle2D$Double: void <init>(double,double,double,double)>($stack29, $stack28, $stack27, $stack26);
+        result[0] = $stack30;
+        $stack34 = new java.awt.geom.Rectangle2D$Double;
+        $stack33 = virtualinvoke bar.<java.awt.geom.RectangularShape: double getMinX()>();
+        $stack32 = virtualinvoke bar.<java.awt.geom.RectangularShape: double getWidth()>();
+        $stack31 = y2 - y1;
+        specialinvoke $stack34.<java.awt.geom.Rectangle2D$Double: void <init>(double,double,double,double)>($stack33, y1, $stack32, $stack31);
+        result[1] = $stack34;
+        $stack38 = new java.awt.geom.Rectangle2D$Double;
+        $stack37 = virtualinvoke bar.<java.awt.geom.RectangularShape: double getMinX()>();
+        $stack36 = virtualinvoke bar.<java.awt.geom.RectangularShape: double getWidth()>();
+        $stack35 = y3 - y2;
+        specialinvoke $stack38.<java.awt.geom.Rectangle2D$Double: void <init>(double,double,double,double)>($stack37, y2, $stack36, $stack35);
+        result[2] = $stack38;
+        $stack43 = new java.awt.geom.Rectangle2D$Double;
+        $stack42 = virtualinvoke bar.<java.awt.geom.RectangularShape: double getMinX()>();
+        $stack41 = virtualinvoke bar.<java.awt.geom.RectangularShape: double getWidth()>();
+        $stack39 = virtualinvoke bar.<java.awt.geom.RectangularShape: double getMaxY()>();
+        $stack40 = $stack39 - y3;
+        specialinvoke $stack43.<java.awt.geom.Rectangle2D$Double: void <init>(double,double,double,double)>($stack42, y3, $stack41, $stack40);
+        result[3] = $stack43;
+        #l0 = (java.awt.geom.Rectangle2D[]) result;
+    
+        return #l0;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.category.GradientBarPainter: java.awt.geom.Rectangle2D createShadow(java.awt.geom.RectangularShape,double,double,org.jfree.chart.util.RectangleEdge,boolean)> ----
+    {
+        boolean pegShadow;
+        double $stack20, $stack21, x0, x1, xOffset, y0, y1, yOffset;
+        java.awt.geom.Rectangle2D #l0;
+        java.awt.geom.Rectangle2D$Double #l1;
+        java.awt.geom.RectangularShape bar;
+        java.lang.Object $stack22;
+        org.jfree.chart.renderer.category.GradientBarPainter this;
+        org.jfree.chart.util.RectangleEdge $stack16, $stack17, $stack18, $stack19, base;
+    
+    
+        this := @this: org.jfree.chart.renderer.category.GradientBarPainter;
+        bar := @parameter0: java.awt.geom.RectangularShape;
+        xOffset := @parameter1: double;
+        yOffset := @parameter2: double;
+        base := @parameter3: org.jfree.chart.util.RectangleEdge;
+        pegShadow := @parameter4: boolean;
+        x0 = virtualinvoke bar.<java.awt.geom.RectangularShape: double getMinX()>();
+        x1 = virtualinvoke bar.<java.awt.geom.RectangularShape: double getMaxX()>();
+        y0 = virtualinvoke bar.<java.awt.geom.RectangularShape: double getMinY()>();
+        y1 = virtualinvoke bar.<java.awt.geom.RectangularShape: double getMaxY()>();
+        $stack16 = <org.jfree.chart.util.RectangleEdge: org.jfree.chart.util.RectangleEdge TOP>;
+    
+        if base != $stack16 goto label2;
+        x0 = x0 + xOffset;
+        x1 = x1 + xOffset;
+    
+        if pegShadow != 0 goto label1;
+        y0 = y0 + yOffset;
+    
+      label1:
+        y1 = y1 + yOffset;
+    
+        goto label7;
+    
+      label2:
+        $stack17 = <org.jfree.chart.util.RectangleEdge: org.jfree.chart.util.RectangleEdge BOTTOM>;
+    
+        if base != $stack17 goto label3;
+        x0 = x0 + xOffset;
+        x1 = x1 + xOffset;
+        y0 = y0 + yOffset;
+    
+        if pegShadow != 0 goto label7;
+        y1 = y1 + yOffset;
+    
+        goto label7;
+    
+      label3:
+        $stack18 = <org.jfree.chart.util.RectangleEdge: org.jfree.chart.util.RectangleEdge LEFT>;
+    
+        if base != $stack18 goto label5;
+    
+        if pegShadow != 0 goto label4;
+        x0 = x0 + xOffset;
+    
+      label4:
+        x1 = x1 + xOffset;
+        y0 = y0 + yOffset;
+        y1 = y1 + yOffset;
+    
+        goto label7;
+    
+      label5:
+        $stack19 = <org.jfree.chart.util.RectangleEdge: org.jfree.chart.util.RectangleEdge RIGHT>;
+    
+        if base != $stack19 goto label7;
+        x0 = x0 + xOffset;
+    
+        if pegShadow != 0 goto label6;
+        x1 = x1 + xOffset;
+    
+      label6:
+        y0 = y0 + yOffset;
+        y1 = y1 + yOffset;
+    
+      label7:
+        $stack22 = new java.awt.geom.Rectangle2D$Double;
+        $stack21 = x1 - x0;
+        $stack20 = y1 - y0;
+        #l1 = (java.awt.geom.Rectangle2D$Double) $stack22;
+        specialinvoke #l1.<java.awt.geom.Rectangle2D$Double: void <init>(double,double,double,double)>(x0, y0, $stack21, $stack20);
+        #l0 = (java.awt.geom.Rectangle2D) $stack22;
+    
+        return #l0;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.category.GradientBarPainter: java.awt.geom.Rectangle2D[] splitVerticalBar(java.awt.geom.RectangularShape,double,double,double)> ----
+    {
+        double $stack17, $stack18, $stack19, $stack20, $stack21, $stack22, $stack23, $stack24, $stack25, $stack26, $stack27, $stack28, $stack29, $stack31, $stack32, $stack33, $stack35, $stack36, $stack37, $stack39, $stack40, $stack41, $stack42, a, b, c, x0, x1, x2, x3;
+        java.awt.geom.Rectangle2D$Double $stack30, $stack34, $stack38, $stack43;
+        java.awt.geom.Rectangle2D[] #l0;
+        java.awt.geom.RectangularShape bar;
+        java.lang.Object[] result;
+        org.jfree.chart.renderer.category.GradientBarPainter this;
+    
+    
+        this := @this: org.jfree.chart.renderer.category.GradientBarPainter;
+        bar := @parameter0: java.awt.geom.RectangularShape;
+        a := @parameter1: double;
+        b := @parameter2: double;
+        c := @parameter3: double;
+        result = newarray (java.awt.geom.Rectangle2D)[4];
+        x0 = virtualinvoke bar.<java.awt.geom.RectangularShape: double getMinX()>();
+        $stack17 = virtualinvoke bar.<java.awt.geom.RectangularShape: double getWidth()>();
+        $stack18 = $stack17 * a;
+        $stack19 = x0 + $stack18;
+        x1 = staticinvoke <java.lang.Math: double rint(double)>($stack19);
+        $stack20 = virtualinvoke bar.<java.awt.geom.RectangularShape: double getWidth()>();
+        $stack21 = $stack20 * b;
+        $stack22 = x0 + $stack21;
+        x2 = staticinvoke <java.lang.Math: double rint(double)>($stack22);
+        $stack23 = virtualinvoke bar.<java.awt.geom.RectangularShape: double getWidth()>();
+        $stack24 = $stack23 * c;
+        $stack25 = x0 + $stack24;
+        x3 = staticinvoke <java.lang.Math: double rint(double)>($stack25);
+        $stack30 = new java.awt.geom.Rectangle2D$Double;
+        $stack29 = virtualinvoke bar.<java.awt.geom.RectangularShape: double getMinX()>();
+        $stack28 = virtualinvoke bar.<java.awt.geom.RectangularShape: double getMinY()>();
+        $stack27 = x1 - x0;
+        $stack26 = virtualinvoke bar.<java.awt.geom.RectangularShape: double getHeight()>();
+        specialinvoke $stack30.<java.awt.geom.Rectangle2D$Double: void <init>(double,double,double,double)>($stack29, $stack28, $stack27, $stack26);
+        result[0] = $stack30;
+        $stack34 = new java.awt.geom.Rectangle2D$Double;
+        $stack33 = virtualinvoke bar.<java.awt.geom.RectangularShape: double getMinY()>();
+        $stack32 = x2 - x1;
+        $stack31 = virtualinvoke bar.<java.awt.geom.RectangularShape: double getHeight()>();
+        specialinvoke $stack34.<java.awt.geom.Rectangle2D$Double: void <init>(double,double,double,double)>(x1, $stack33, $stack32, $stack31);
+        result[1] = $stack34;
+        $stack38 = new java.awt.geom.Rectangle2D$Double;
+        $stack37 = virtualinvoke bar.<java.awt.geom.RectangularShape: double getMinY()>();
+        $stack36 = x3 - x2;
+        $stack35 = virtualinvoke bar.<java.awt.geom.RectangularShape: double getHeight()>();
+        specialinvoke $stack38.<java.awt.geom.Rectangle2D$Double: void <init>(double,double,double,double)>(x2, $stack37, $stack36, $stack35);
+        result[2] = $stack38;
+        $stack43 = new java.awt.geom.Rectangle2D$Double;
+        $stack42 = virtualinvoke bar.<java.awt.geom.RectangularShape: double getMinY()>();
+        $stack39 = virtualinvoke bar.<java.awt.geom.RectangularShape: double getMaxX()>();
+        $stack41 = $stack39 - x3;
+        $stack40 = virtualinvoke bar.<java.awt.geom.RectangularShape: double getHeight()>();
+        specialinvoke $stack43.<java.awt.geom.Rectangle2D$Double: void <init>(double,double,double,double)>(x3, $stack42, $stack41, $stack40);
+        result[3] = $stack43;
+        #l0 = (java.awt.geom.Rectangle2D[]) result;
+    
+        return #l0;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.category.GradientBarPainter: void <init>(double,double,double)> ----
+    {
+        double g1, g2, g3;
+        org.jfree.chart.renderer.category.GradientBarPainter this;
+    
+    
+        this := @this: org.jfree.chart.renderer.category.GradientBarPainter;
+        g1 := @parameter0: double;
+        g2 := @parameter1: double;
+        g3 := @parameter2: double;
+        specialinvoke this.<java.lang.Object: void <init>()>();
+        this.<org.jfree.chart.renderer.category.GradientBarPainter: double g1> = g1;
+        this.<org.jfree.chart.renderer.category.GradientBarPainter: double g2> = g2;
+        this.<org.jfree.chart.renderer.category.GradientBarPainter: double g3> = g3;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.category.GradientBarPainter: void paintBar(java.awt.Graphics2D,org.jfree.chart.renderer.category.BarRenderer,int,int,boolean,java.awt.geom.RectangularShape,org.jfree.chart.util.RectangleEdge)> ----
+    {
+        boolean $stack13, $stack14, $stack55, selected;
+        double $stack18, $stack19, $stack20, $stack22, $stack24, $stack31, $stack34, $stack40, $stack42, $stack48, $stack50, $stack58, $stack59, $stack60, $stack62, $stack64, $stack71, $stack74, $stack80, $stack82, $stack88, $stack90;
+        float $stack26, $stack27, $stack35, $stack36, $stack43, $stack44, $stack51, $stack52, $stack66, $stack67, $stack75, $stack76, $stack83, $stack84, $stack91, $stack92;
+        int $stack16, column, row;
+        java.awt.Color $stack15, $stack25, $stack33, $stack65, $stack73, c0, c1;
+        java.awt.GradientPaint #l10, #l14, #l18, #l19, #l20, #l24, #l25, #l8, gp#0, gp_1#0, gp_1#1, gp_1#2, gp_1#3, gp_1#4, gp_1#5, gp_1#6, gp_1#7;
+        java.awt.Graphics2D g2;
+        java.awt.Paint #l11, #l12, #l13, #l2, #l23, #l4, #l5, #l9, gp_1#8, itemPaint;
+        java.awt.Shape #l1, #l15, #l16, #l17, #l21, #l26, #l3, #l6, #l7;
+        java.awt.Stroke gp#3;
+        java.awt.geom.Rectangle2D $stack21, $stack23, $stack30, $stack32, $stack39, $stack41, $stack47, $stack49, $stack61, $stack63, $stack70, $stack72, $stack79, $stack81, $stack87, $stack89;
+        java.awt.geom.Rectangle2D[] gp#1, gp#2;
+        java.awt.geom.RectangularShape #l0, #l22;
+        java.lang.Object $stack28, $stack29, $stack37, $stack38, $stack45, $stack46, $stack53, $stack54, $stack68, $stack69, $stack77, $stack78, $stack85, $stack86, $stack93, $stack94, bar;
+        org.jfree.chart.renderer.category.BarRenderer renderer;
+        org.jfree.chart.renderer.category.GradientBarPainter this;
+        org.jfree.chart.util.RectangleEdge $stack17, $stack56, $stack57, $stack95, base;
+    
+    
+        this := @this: org.jfree.chart.renderer.category.GradientBarPainter;
+        g2 := @parameter0: java.awt.Graphics2D;
+        renderer := @parameter1: org.jfree.chart.renderer.category.BarRenderer;
+        row := @parameter2: int;
+        column := @parameter3: int;
+        selected := @parameter4: boolean;
+        bar := @parameter5: java.awt.geom.RectangularShape;
+        base := @parameter6: org.jfree.chart.util.RectangleEdge;
+        itemPaint = virtualinvoke renderer.<org.jfree.chart.renderer.category.BarRenderer: java.awt.Paint getItemPaint(int,int,boolean)>(row, column, selected);
+        $stack13 = itemPaint instanceof java.awt.Color;
+    
+        if $stack13 == 0 goto label1;
+        c0 = (java.awt.Color) itemPaint;
+        c1 = virtualinvoke c0.<java.awt.Color: java.awt.Color brighter()>();
+    
+        goto label3;
+    
+      label1:
+        $stack14 = itemPaint instanceof java.awt.GradientPaint;
+    
+        if $stack14 == 0 goto label2;
+        gp#0 = (java.awt.GradientPaint) itemPaint;
+        c0 = virtualinvoke gp#0.<java.awt.GradientPaint: java.awt.Color getColor1()>();
+        c1 = virtualinvoke gp#0.<java.awt.GradientPaint: java.awt.Color getColor2()>();
+    
+        goto label3;
+    
+      label2:
+        c0 = <java.awt.Color: java.awt.Color blue>;
+        $stack15 = <java.awt.Color: java.awt.Color blue>;
+        c1 = virtualinvoke $stack15.<java.awt.Color: java.awt.Color brighter()>();
+    
+      label3:
+        $stack16 = virtualinvoke c0.<java.awt.Color: int getAlpha()>();
+    
+        if $stack16 != 0 goto label4;
+    
+        return;
+    
+      label4:
+        $stack17 = <org.jfree.chart.util.RectangleEdge: org.jfree.chart.util.RectangleEdge TOP>;
+    
+        if base == $stack17 goto label5;
+        $stack56 = <org.jfree.chart.util.RectangleEdge: org.jfree.chart.util.RectangleEdge BOTTOM>;
+    
+        if base != $stack56 goto label6;
+    
+      label5:
+        $stack20 = this.<org.jfree.chart.renderer.category.GradientBarPainter: double g1>;
+        $stack19 = this.<org.jfree.chart.renderer.category.GradientBarPainter: double g2>;
+        $stack18 = this.<org.jfree.chart.renderer.category.GradientBarPainter: double g3>;
+        #l22 = (java.awt.geom.RectangularShape) bar;
+        gp#1 = specialinvoke this.<org.jfree.chart.renderer.category.GradientBarPainter: java.awt.geom.Rectangle2D[] splitVerticalBar(java.awt.geom.RectangularShape,double,double,double)>(#l22, $stack20, $stack19, $stack18);
+        $stack28 = new java.awt.GradientPaint;
+        $stack21 = gp#1[0];
+        $stack22 = virtualinvoke $stack21.<java.awt.geom.Rectangle2D: double getMinX()>();
+        $stack27 = (float) $stack22;
+        $stack23 = gp#1[0];
+        $stack24 = virtualinvoke $stack23.<java.awt.geom.Rectangle2D: double getMaxX()>();
+        $stack26 = (float) $stack24;
+        $stack25 = <java.awt.Color: java.awt.Color white>;
+        #l14 = (java.awt.GradientPaint) $stack28;
+        specialinvoke #l14.<java.awt.GradientPaint: void <init>(float,float,java.awt.Color,float,float,java.awt.Color)>($stack27, 0.0F, c0, $stack26, 0.0F, $stack25);
+        gp_1#0 = (java.awt.GradientPaint) $stack28;
+        #l4 = (java.awt.Paint) $stack28;
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>(#l4);
+        $stack29 = gp#1[0];
+        #l6 = (java.awt.Shape) $stack29;
+        virtualinvoke g2.<java.awt.Graphics2D: void fill(java.awt.Shape)>(#l6);
+        $stack37 = new java.awt.GradientPaint;
+        $stack30 = gp#1[1];
+        $stack31 = virtualinvoke $stack30.<java.awt.geom.Rectangle2D: double getMinX()>();
+        $stack36 = (float) $stack31;
+        $stack33 = <java.awt.Color: java.awt.Color white>;
+        $stack32 = gp#1[1];
+        $stack34 = virtualinvoke $stack32.<java.awt.geom.Rectangle2D: double getMaxX()>();
+        $stack35 = (float) $stack34;
+        #l10 = (java.awt.GradientPaint) $stack37;
+        specialinvoke #l10.<java.awt.GradientPaint: void <init>(float,float,java.awt.Color,float,float,java.awt.Color)>($stack36, 0.0F, $stack33, $stack35, 0.0F, c0);
+        gp_1#1 = (java.awt.GradientPaint) $stack37;
+        #l9 = (java.awt.Paint) $stack37;
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>(#l9);
+        $stack38 = gp#1[1];
+        #l26 = (java.awt.Shape) $stack38;
+        virtualinvoke g2.<java.awt.Graphics2D: void fill(java.awt.Shape)>(#l26);
+        $stack45 = new java.awt.GradientPaint;
+        $stack39 = gp#1[2];
+        $stack40 = virtualinvoke $stack39.<java.awt.geom.Rectangle2D: double getMinX()>();
+        $stack44 = (float) $stack40;
+        $stack41 = gp#1[2];
+        $stack42 = virtualinvoke $stack41.<java.awt.geom.Rectangle2D: double getMaxX()>();
+        $stack43 = (float) $stack42;
+        #l18 = (java.awt.GradientPaint) $stack45;
+        specialinvoke #l18.<java.awt.GradientPaint: void <init>(float,float,java.awt.Color,float,float,java.awt.Color)>($stack44, 0.0F, c0, $stack43, 0.0F, c1);
+        gp_1#2 = (java.awt.GradientPaint) $stack45;
+        #l11 = (java.awt.Paint) $stack45;
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>(#l11);
+        $stack46 = gp#1[2];
+        #l7 = (java.awt.Shape) $stack46;
+        virtualinvoke g2.<java.awt.Graphics2D: void fill(java.awt.Shape)>(#l7);
+        $stack53 = new java.awt.GradientPaint;
+        $stack47 = gp#1[3];
+        $stack48 = virtualinvoke $stack47.<java.awt.geom.Rectangle2D: double getMinX()>();
+        $stack52 = (float) $stack48;
+        $stack49 = gp#1[3];
+        $stack50 = virtualinvoke $stack49.<java.awt.geom.Rectangle2D: double getMaxX()>();
+        $stack51 = (float) $stack50;
+        #l19 = (java.awt.GradientPaint) $stack53;
+        specialinvoke #l19.<java.awt.GradientPaint: void <init>(float,float,java.awt.Color,float,float,java.awt.Color)>($stack52, 0.0F, c1, $stack51, 0.0F, c0);
+        gp_1#3 = (java.awt.GradientPaint) $stack53;
+        #l12 = (java.awt.Paint) $stack53;
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>(#l12);
+        $stack54 = gp#1[3];
+        #l21 = (java.awt.Shape) $stack54;
+        virtualinvoke g2.<java.awt.Graphics2D: void fill(java.awt.Shape)>(#l21);
+    
+        goto label8;
+    
+      label6:
+        $stack57 = <org.jfree.chart.util.RectangleEdge: org.jfree.chart.util.RectangleEdge LEFT>;
+    
+        if base == $stack57 goto label7;
+        $stack95 = <org.jfree.chart.util.RectangleEdge: org.jfree.chart.util.RectangleEdge RIGHT>;
+    
+        if base != $stack95 goto label8;
+    
+      label7:
+        $stack60 = this.<org.jfree.chart.renderer.category.GradientBarPainter: double g1>;
+        $stack59 = this.<org.jfree.chart.renderer.category.GradientBarPainter: double g2>;
+        $stack58 = this.<org.jfree.chart.renderer.category.GradientBarPainter: double g3>;
+        #l0 = (java.awt.geom.RectangularShape) bar;
+        gp#2 = specialinvoke this.<org.jfree.chart.renderer.category.GradientBarPainter: java.awt.geom.Rectangle2D[] splitHorizontalBar(java.awt.geom.RectangularShape,double,double,double)>(#l0, $stack60, $stack59, $stack58);
+        $stack68 = new java.awt.GradientPaint;
+        $stack61 = gp#2[0];
+        $stack62 = virtualinvoke $stack61.<java.awt.geom.Rectangle2D: double getMinY()>();
+        $stack67 = (float) $stack62;
+        $stack63 = gp#2[0];
+        $stack64 = virtualinvoke $stack63.<java.awt.geom.Rectangle2D: double getMaxX()>();
+        $stack66 = (float) $stack64;
+        $stack65 = <java.awt.Color: java.awt.Color white>;
+        #l25 = (java.awt.GradientPaint) $stack68;
+        specialinvoke #l25.<java.awt.GradientPaint: void <init>(float,float,java.awt.Color,float,float,java.awt.Color)>(0.0F, $stack67, c0, 0.0F, $stack66, $stack65);
+        gp_1#4 = (java.awt.GradientPaint) $stack68;
+        #l23 = (java.awt.Paint) $stack68;
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>(#l23);
+        $stack69 = gp#2[0];
+        #l3 = (java.awt.Shape) $stack69;
+        virtualinvoke g2.<java.awt.Graphics2D: void fill(java.awt.Shape)>(#l3);
+        $stack77 = new java.awt.GradientPaint;
+        $stack70 = gp#2[1];
+        $stack71 = virtualinvoke $stack70.<java.awt.geom.Rectangle2D: double getMinY()>();
+        $stack76 = (float) $stack71;
+        $stack73 = <java.awt.Color: java.awt.Color white>;
+        $stack72 = gp#2[1];
+        $stack74 = virtualinvoke $stack72.<java.awt.geom.Rectangle2D: double getMaxY()>();
+        $stack75 = (float) $stack74;
+        #l24 = (java.awt.GradientPaint) $stack77;
+        specialinvoke #l24.<java.awt.GradientPaint: void <init>(float,float,java.awt.Color,float,float,java.awt.Color)>(0.0F, $stack76, $stack73, 0.0F, $stack75, c0);
+        gp_1#5 = (java.awt.GradientPaint) $stack77;
+        #l13 = (java.awt.Paint) $stack77;
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>(#l13);
+        $stack78 = gp#2[1];
+        #l17 = (java.awt.Shape) $stack78;
+        virtualinvoke g2.<java.awt.Graphics2D: void fill(java.awt.Shape)>(#l17);
+        $stack85 = new java.awt.GradientPaint;
+        $stack79 = gp#2[2];
+        $stack80 = virtualinvoke $stack79.<java.awt.geom.Rectangle2D: double getMinY()>();
+        $stack84 = (float) $stack80;
+        $stack81 = gp#2[2];
+        $stack82 = virtualinvoke $stack81.<java.awt.geom.Rectangle2D: double getMaxY()>();
+        $stack83 = (float) $stack82;
+        #l20 = (java.awt.GradientPaint) $stack85;
+        specialinvoke #l20.<java.awt.GradientPaint: void <init>(float,float,java.awt.Color,float,float,java.awt.Color)>(0.0F, $stack84, c0, 0.0F, $stack83, c1);
+        gp_1#6 = (java.awt.GradientPaint) $stack85;
+        #l2 = (java.awt.Paint) $stack85;
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>(#l2);
+        $stack86 = gp#2[2];
+        #l1 = (java.awt.Shape) $stack86;
+        virtualinvoke g2.<java.awt.Graphics2D: void fill(java.awt.Shape)>(#l1);
+        $stack93 = new java.awt.GradientPaint;
+        $stack87 = gp#2[3];
+        $stack88 = virtualinvoke $stack87.<java.awt.geom.Rectangle2D: double getMinY()>();
+        $stack92 = (float) $stack88;
+        $stack89 = gp#2[3];
+        $stack90 = virtualinvoke $stack89.<java.awt.geom.Rectangle2D: double getMaxY()>();
+        $stack91 = (float) $stack90;
+        #l8 = (java.awt.GradientPaint) $stack93;
+        specialinvoke #l8.<java.awt.GradientPaint: void <init>(float,float,java.awt.Color,float,float,java.awt.Color)>(0.0F, $stack92, c1, 0.0F, $stack91, c0);
+        gp_1#7 = (java.awt.GradientPaint) $stack93;
+        #l5 = (java.awt.Paint) $stack93;
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>(#l5);
+        $stack94 = gp#2[3];
+        #l15 = (java.awt.Shape) $stack94;
+        virtualinvoke g2.<java.awt.Graphics2D: void fill(java.awt.Shape)>(#l15);
+    
+      label8:
+        $stack55 = virtualinvoke renderer.<org.jfree.chart.renderer.category.BarRenderer: boolean isDrawBarOutline()>();
+    
+        if $stack55 == 0 goto label9;
+        gp#3 = virtualinvoke renderer.<org.jfree.chart.renderer.category.BarRenderer: java.awt.Stroke getItemOutlineStroke(int,int,boolean)>(row, column, selected);
+        gp_1#8 = virtualinvoke renderer.<org.jfree.chart.renderer.category.BarRenderer: java.awt.Paint getItemOutlinePaint(int,int,boolean)>(row, column, selected);
+    
+        if gp#3 == null goto label9;
+    
+        if gp_1#8 == null goto label9;
+        virtualinvoke g2.<java.awt.Graphics2D: void setStroke(java.awt.Stroke)>(gp#3);
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>(gp_1#8);
+        #l16 = (java.awt.Shape) bar;
+        virtualinvoke g2.<java.awt.Graphics2D: void draw(java.awt.Shape)>(#l16);
+    
+      label9:
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.category.GradientBarPainter: boolean equals(java.lang.Object)> ----
+    {
+        boolean $stack3;
+        byte $stack12, $stack6, $stack9;
+        double $stack10, $stack11, $stack4, $stack5, $stack7, $stack8;
+        java.lang.Object obj;
+        org.jfree.chart.renderer.category.GradientBarPainter that, this;
+    
+    
+        this := @this: org.jfree.chart.renderer.category.GradientBarPainter;
+        obj := @parameter0: java.lang.Object;
+    
+        if obj != this goto label1;
+    
+        return 1;
+    
+      label1:
+        $stack3 = obj instanceof org.jfree.chart.renderer.category.GradientBarPainter;
+    
+        if $stack3 != 0 goto label2;
+    
+        return 0;
+    
+      label2:
+        that = (org.jfree.chart.renderer.category.GradientBarPainter) obj;
+        $stack4 = this.<org.jfree.chart.renderer.category.GradientBarPainter: double g1>;
+        $stack5 = that.<org.jfree.chart.renderer.category.GradientBarPainter: double g1>;
+        $stack6 = $stack4 cmpl $stack5;
+    
+        if $stack6 == 0 goto label3;
+    
+        return 0;
+    
+      label3:
+        $stack7 = this.<org.jfree.chart.renderer.category.GradientBarPainter: double g2>;
+        $stack8 = that.<org.jfree.chart.renderer.category.GradientBarPainter: double g2>;
+        $stack9 = $stack7 cmpl $stack8;
+    
+        if $stack9 == 0 goto label4;
+    
+        return 0;
+    
+      label4:
+        $stack10 = this.<org.jfree.chart.renderer.category.GradientBarPainter: double g3>;
+        $stack11 = that.<org.jfree.chart.renderer.category.GradientBarPainter: double g3>;
+        $stack12 = $stack10 cmpl $stack11;
+    
+        if $stack12 == 0 goto label5;
+    
+        return 0;
+    
+      label5:
+        return 1;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.category.GradientBarPainter: int hashCode()> ----
+    {
+        byte hash#0;
+        double $stack2, $stack3, $stack4;
+        int hash#1, hash#2, hash#3;
+        org.jfree.chart.renderer.category.GradientBarPainter this;
+    
+    
+        this := @this: org.jfree.chart.renderer.category.GradientBarPainter;
+        hash#0 = 37;
+        $stack2 = this.<org.jfree.chart.renderer.category.GradientBarPainter: double g1>;
+        hash#1 = staticinvoke <org.jfree.chart.util.HashUtilities: int hashCode(int,double)>(37, $stack2);
+        $stack3 = this.<org.jfree.chart.renderer.category.GradientBarPainter: double g2>;
+        hash#2 = staticinvoke <org.jfree.chart.util.HashUtilities: int hashCode(int,double)>(hash#1, $stack3);
+        $stack4 = this.<org.jfree.chart.renderer.category.GradientBarPainter: double g3>;
+        hash#3 = staticinvoke <org.jfree.chart.util.HashUtilities: int hashCode(int,double)>(hash#2, $stack4);
+    
+        return hash#3;
+    }
+
+}

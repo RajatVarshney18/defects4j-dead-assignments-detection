@@ -1,0 +1,520 @@
+// ========================================================================
+// CLASS : org.jfree.data.xy.CategoryTableXYDataset
+// ========================================================================
+
+[PUBLIC, SUPER] class org.jfree.data.xy.CategoryTableXYDataset extends org.jfree.data.xy.AbstractIntervalXYDataset implements org.jfree.chart.util.PublicCloneable, org.jfree.data.xy.IntervalXYDataset, org.jfree.data.DomainInfo, org.jfree.data.xy.TableXYDataset {
+
+    // ---- method: <org.jfree.data.xy.CategoryTableXYDataset: java.lang.Object clone()> ----
+    {
+        boolean $stack10;
+        double $stack12, $stack8;
+        java.lang.Object $stack2, $stack4;
+        org.jfree.data.DefaultKeyedValues2D $stack3, $stack5;
+        org.jfree.data.xy.CategoryTableXYDataset clone, this;
+        org.jfree.data.xy.IntervalXYDelegate $stack11, $stack6, $stack7, $stack9;
+    
+    
+        this := @this: org.jfree.data.xy.CategoryTableXYDataset;
+        $stack2 = specialinvoke this.<org.jfree.data.xy.AbstractIntervalXYDataset: java.lang.Object clone()>();
+        clone = (org.jfree.data.xy.CategoryTableXYDataset) $stack2;
+        $stack3 = this.<org.jfree.data.xy.CategoryTableXYDataset: org.jfree.data.DefaultKeyedValues2D values>;
+        $stack4 = virtualinvoke $stack3.<org.jfree.data.DefaultKeyedValues2D: java.lang.Object clone()>();
+        $stack5 = (org.jfree.data.DefaultKeyedValues2D) $stack4;
+        clone.<org.jfree.data.xy.CategoryTableXYDataset: org.jfree.data.DefaultKeyedValues2D values> = $stack5;
+        $stack6 = new org.jfree.data.xy.IntervalXYDelegate;
+        specialinvoke $stack6.<org.jfree.data.xy.IntervalXYDelegate: void <init>(org.jfree.data.xy.XYDataset)>(clone);
+        clone.<org.jfree.data.xy.CategoryTableXYDataset: org.jfree.data.xy.IntervalXYDelegate intervalDelegate> = $stack6;
+        $stack7 = clone.<org.jfree.data.xy.CategoryTableXYDataset: org.jfree.data.xy.IntervalXYDelegate intervalDelegate>;
+        $stack8 = virtualinvoke this.<org.jfree.data.xy.CategoryTableXYDataset: double getIntervalWidth()>();
+        virtualinvoke $stack7.<org.jfree.data.xy.IntervalXYDelegate: void setFixedIntervalWidth(double)>($stack8);
+        $stack9 = clone.<org.jfree.data.xy.CategoryTableXYDataset: org.jfree.data.xy.IntervalXYDelegate intervalDelegate>;
+        $stack10 = virtualinvoke this.<org.jfree.data.xy.CategoryTableXYDataset: boolean isAutoWidth()>();
+        virtualinvoke $stack9.<org.jfree.data.xy.IntervalXYDelegate: void setAutoWidth(boolean)>($stack10);
+        $stack11 = clone.<org.jfree.data.xy.CategoryTableXYDataset: org.jfree.data.xy.IntervalXYDelegate intervalDelegate>;
+        $stack12 = virtualinvoke this.<org.jfree.data.xy.CategoryTableXYDataset: double getIntervalPositionFactor()>();
+        virtualinvoke $stack11.<org.jfree.data.xy.IntervalXYDelegate: void setIntervalPositionFactor(double)>($stack12);
+    
+        return clone;
+    }
+
+    // ---- method: <org.jfree.data.xy.CategoryTableXYDataset: double getIntervalWidth()> ----
+    {
+        double $stack2;
+        org.jfree.data.xy.CategoryTableXYDataset this;
+        org.jfree.data.xy.IntervalXYDelegate $stack1;
+    
+    
+        this := @this: org.jfree.data.xy.CategoryTableXYDataset;
+        $stack1 = this.<org.jfree.data.xy.CategoryTableXYDataset: org.jfree.data.xy.IntervalXYDelegate intervalDelegate>;
+        $stack2 = virtualinvoke $stack1.<org.jfree.data.xy.IntervalXYDelegate: double getIntervalWidth()>();
+    
+        return $stack2;
+    }
+
+    // ---- method: <org.jfree.data.xy.CategoryTableXYDataset: java.lang.Comparable getSeriesKey(int)> ----
+    {
+        int series;
+        java.lang.Comparable $stack3;
+        org.jfree.data.DefaultKeyedValues2D $stack2;
+        org.jfree.data.xy.CategoryTableXYDataset this;
+    
+    
+        this := @this: org.jfree.data.xy.CategoryTableXYDataset;
+        series := @parameter0: int;
+        $stack2 = this.<org.jfree.data.xy.CategoryTableXYDataset: org.jfree.data.DefaultKeyedValues2D values>;
+        $stack3 = virtualinvoke $stack2.<org.jfree.data.DefaultKeyedValues2D: java.lang.Comparable getColumnKey(int)>(series);
+    
+        return $stack3;
+    }
+
+    // ---- method: <org.jfree.data.xy.CategoryTableXYDataset: void add(double,double,java.lang.String)> ----
+    {
+        double x, y;
+        java.lang.Double #l0, #l3;
+        java.lang.Number #l1, #l2;
+        java.lang.Object $stack6, $stack7;
+        java.lang.String seriesName;
+        org.jfree.data.xy.CategoryTableXYDataset this;
+    
+    
+        this := @this: org.jfree.data.xy.CategoryTableXYDataset;
+        x := @parameter0: double;
+        y := @parameter1: double;
+        seriesName := @parameter2: java.lang.String;
+        $stack6 = new java.lang.Double;
+        #l0 = (java.lang.Double) $stack6;
+        specialinvoke #l0.<java.lang.Double: void <init>(double)>(x);
+        $stack7 = new java.lang.Double;
+        #l3 = (java.lang.Double) $stack7;
+        specialinvoke #l3.<java.lang.Double: void <init>(double)>(y);
+        #l1 = (java.lang.Number) $stack6;
+        #l2 = (java.lang.Number) $stack7;
+        virtualinvoke this.<org.jfree.data.xy.CategoryTableXYDataset: void add(java.lang.Number,java.lang.Number,java.lang.String,boolean)>(#l1, #l2, seriesName, 1);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.xy.CategoryTableXYDataset: void add(java.lang.Number,java.lang.Number,java.lang.String,boolean)> ----
+    {
+        boolean notify;
+        java.lang.Comparable #l0, $stack5;
+        java.lang.Number x, y;
+        java.lang.Object seriesName;
+        org.jfree.chart.event.DatasetChangeInfo $stack7;
+        org.jfree.data.DefaultKeyedValues2D $stack6;
+        org.jfree.data.xy.CategoryTableXYDataset this;
+    
+    
+        this := @this: org.jfree.data.xy.CategoryTableXYDataset;
+        x := @parameter0: java.lang.Number;
+        y := @parameter1: java.lang.Number;
+        seriesName := @parameter2: java.lang.String;
+        notify := @parameter3: boolean;
+        $stack6 = this.<org.jfree.data.xy.CategoryTableXYDataset: org.jfree.data.DefaultKeyedValues2D values>;
+        $stack5 = (java.lang.Comparable) x;
+        #l0 = (java.lang.Comparable) seriesName;
+        virtualinvoke $stack6.<org.jfree.data.DefaultKeyedValues2D: void addValue(java.lang.Number,java.lang.Comparable,java.lang.Comparable)>(y, $stack5, #l0);
+    
+        if notify == 0 goto label1;
+        $stack7 = new org.jfree.chart.event.DatasetChangeInfo;
+        specialinvoke $stack7.<org.jfree.chart.event.DatasetChangeInfo: void <init>()>();
+        virtualinvoke this.<org.jfree.data.xy.CategoryTableXYDataset: void fireDatasetChanged(org.jfree.chart.event.DatasetChangeInfo)>($stack7);
+    
+      label1:
+        return;
+    }
+
+    // ---- method: <org.jfree.data.xy.CategoryTableXYDataset: int getItemCount()> ----
+    {
+        int $stack2;
+        org.jfree.data.DefaultKeyedValues2D $stack1;
+        org.jfree.data.xy.CategoryTableXYDataset this;
+    
+    
+        this := @this: org.jfree.data.xy.CategoryTableXYDataset;
+        $stack1 = this.<org.jfree.data.xy.CategoryTableXYDataset: org.jfree.data.DefaultKeyedValues2D values>;
+        $stack2 = virtualinvoke $stack1.<org.jfree.data.DefaultKeyedValues2D: int getRowCount()>();
+    
+        return $stack2;
+    }
+
+    // ---- method: <org.jfree.data.xy.CategoryTableXYDataset: double getDomainLowerBound(boolean)> ----
+    {
+        boolean includeInterval;
+        double $stack3;
+        org.jfree.data.xy.CategoryTableXYDataset this;
+        org.jfree.data.xy.IntervalXYDelegate $stack2;
+    
+    
+        this := @this: org.jfree.data.xy.CategoryTableXYDataset;
+        includeInterval := @parameter0: boolean;
+        $stack2 = this.<org.jfree.data.xy.CategoryTableXYDataset: org.jfree.data.xy.IntervalXYDelegate intervalDelegate>;
+        $stack3 = virtualinvoke $stack2.<org.jfree.data.xy.IntervalXYDelegate: double getDomainLowerBound(boolean)>(includeInterval);
+    
+        return $stack3;
+    }
+
+    // ---- method: <org.jfree.data.xy.CategoryTableXYDataset: void remove(java.lang.Number,java.lang.String,boolean)> ----
+    {
+        boolean notify;
+        java.lang.Comparable #l0, $stack4;
+        java.lang.Number x;
+        java.lang.Object seriesName;
+        org.jfree.chart.event.DatasetChangeInfo $stack6;
+        org.jfree.data.DefaultKeyedValues2D $stack5;
+        org.jfree.data.xy.CategoryTableXYDataset this;
+    
+    
+        this := @this: org.jfree.data.xy.CategoryTableXYDataset;
+        x := @parameter0: java.lang.Number;
+        seriesName := @parameter1: java.lang.String;
+        notify := @parameter2: boolean;
+        $stack5 = this.<org.jfree.data.xy.CategoryTableXYDataset: org.jfree.data.DefaultKeyedValues2D values>;
+        $stack4 = (java.lang.Comparable) x;
+        #l0 = (java.lang.Comparable) seriesName;
+        virtualinvoke $stack5.<org.jfree.data.DefaultKeyedValues2D: void removeValue(java.lang.Comparable,java.lang.Comparable)>($stack4, #l0);
+    
+        if notify == 0 goto label1;
+        $stack6 = new org.jfree.chart.event.DatasetChangeInfo;
+        specialinvoke $stack6.<org.jfree.chart.event.DatasetChangeInfo: void <init>()>();
+        virtualinvoke this.<org.jfree.data.xy.CategoryTableXYDataset: void fireDatasetChanged(org.jfree.chart.event.DatasetChangeInfo)>($stack6);
+    
+      label1:
+        return;
+    }
+
+    // ---- method: <org.jfree.data.xy.CategoryTableXYDataset: java.lang.Number getStartX(int,int)> ----
+    {
+        int item, series;
+        java.lang.Number $stack4;
+        org.jfree.data.xy.CategoryTableXYDataset this;
+        org.jfree.data.xy.IntervalXYDelegate $stack3;
+    
+    
+        this := @this: org.jfree.data.xy.CategoryTableXYDataset;
+        series := @parameter0: int;
+        item := @parameter1: int;
+        $stack3 = this.<org.jfree.data.xy.CategoryTableXYDataset: org.jfree.data.xy.IntervalXYDelegate intervalDelegate>;
+        $stack4 = virtualinvoke $stack3.<org.jfree.data.xy.IntervalXYDelegate: java.lang.Number getStartX(int,int)>(series, item);
+    
+        return $stack4;
+    }
+
+    // ---- method: <org.jfree.data.xy.CategoryTableXYDataset: int getItemCount(int)> ----
+    {
+        int $stack2, series;
+        org.jfree.data.xy.CategoryTableXYDataset this;
+    
+    
+        this := @this: org.jfree.data.xy.CategoryTableXYDataset;
+        series := @parameter0: int;
+        $stack2 = virtualinvoke this.<org.jfree.data.xy.CategoryTableXYDataset: int getItemCount()>();
+    
+        return $stack2;
+    }
+
+    // ---- method: <org.jfree.data.xy.CategoryTableXYDataset: void <init>()> ----
+    {
+        org.jfree.data.DefaultKeyedValues2D $stack1;
+        org.jfree.data.xy.CategoryTableXYDataset this;
+        org.jfree.data.xy.IntervalXYDelegate $stack2, $stack3;
+    
+    
+        this := @this: org.jfree.data.xy.CategoryTableXYDataset;
+        specialinvoke this.<org.jfree.data.xy.AbstractIntervalXYDataset: void <init>()>();
+        $stack1 = new org.jfree.data.DefaultKeyedValues2D;
+        specialinvoke $stack1.<org.jfree.data.DefaultKeyedValues2D: void <init>(boolean)>(1);
+        this.<org.jfree.data.xy.CategoryTableXYDataset: org.jfree.data.DefaultKeyedValues2D values> = $stack1;
+        $stack2 = new org.jfree.data.xy.IntervalXYDelegate;
+        specialinvoke $stack2.<org.jfree.data.xy.IntervalXYDelegate: void <init>(org.jfree.data.xy.XYDataset)>(this);
+        this.<org.jfree.data.xy.CategoryTableXYDataset: org.jfree.data.xy.IntervalXYDelegate intervalDelegate> = $stack2;
+        $stack3 = this.<org.jfree.data.xy.CategoryTableXYDataset: org.jfree.data.xy.IntervalXYDelegate intervalDelegate>;
+        virtualinvoke this.<org.jfree.data.xy.CategoryTableXYDataset: void addChangeListener(org.jfree.data.event.DatasetChangeListener)>($stack3);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.xy.CategoryTableXYDataset: boolean isAutoWidth()> ----
+    {
+        boolean $stack2;
+        org.jfree.data.xy.CategoryTableXYDataset this;
+        org.jfree.data.xy.IntervalXYDelegate $stack1;
+    
+    
+        this := @this: org.jfree.data.xy.CategoryTableXYDataset;
+        $stack1 = this.<org.jfree.data.xy.CategoryTableXYDataset: org.jfree.data.xy.IntervalXYDelegate intervalDelegate>;
+        $stack2 = virtualinvoke $stack1.<org.jfree.data.xy.IntervalXYDelegate: boolean isAutoWidth()>();
+    
+        return $stack2;
+    }
+
+    // ---- method: <org.jfree.data.xy.CategoryTableXYDataset: java.lang.Number getY(int,int)> ----
+    {
+        int item, series;
+        java.lang.Number $stack4;
+        org.jfree.data.DefaultKeyedValues2D $stack3;
+        org.jfree.data.xy.CategoryTableXYDataset this;
+    
+    
+        this := @this: org.jfree.data.xy.CategoryTableXYDataset;
+        series := @parameter0: int;
+        item := @parameter1: int;
+        $stack3 = this.<org.jfree.data.xy.CategoryTableXYDataset: org.jfree.data.DefaultKeyedValues2D values>;
+        $stack4 = virtualinvoke $stack3.<org.jfree.data.DefaultKeyedValues2D: java.lang.Number getValue(int,int)>(item, series);
+    
+        return $stack4;
+    }
+
+    // ---- method: <org.jfree.data.xy.CategoryTableXYDataset: java.lang.Number getStartY(int,int)> ----
+    {
+        int item, series;
+        java.lang.Number $stack3;
+        org.jfree.data.xy.CategoryTableXYDataset this;
+    
+    
+        this := @this: org.jfree.data.xy.CategoryTableXYDataset;
+        series := @parameter0: int;
+        item := @parameter1: int;
+        $stack3 = virtualinvoke this.<org.jfree.data.xy.CategoryTableXYDataset: java.lang.Number getY(int,int)>(series, item);
+    
+        return $stack3;
+    }
+
+    // ---- method: <org.jfree.data.xy.CategoryTableXYDataset: double getIntervalPositionFactor()> ----
+    {
+        double $stack2;
+        org.jfree.data.xy.CategoryTableXYDataset this;
+        org.jfree.data.xy.IntervalXYDelegate $stack1;
+    
+    
+        this := @this: org.jfree.data.xy.CategoryTableXYDataset;
+        $stack1 = this.<org.jfree.data.xy.CategoryTableXYDataset: org.jfree.data.xy.IntervalXYDelegate intervalDelegate>;
+        $stack2 = virtualinvoke $stack1.<org.jfree.data.xy.IntervalXYDelegate: double getIntervalPositionFactor()>();
+    
+        return $stack2;
+    }
+
+    // ---- method: <org.jfree.data.xy.CategoryTableXYDataset: void setIntervalPositionFactor(double)> ----
+    {
+        double d;
+        org.jfree.chart.event.DatasetChangeInfo $stack4;
+        org.jfree.data.xy.CategoryTableXYDataset this;
+        org.jfree.data.xy.IntervalXYDelegate $stack3;
+    
+    
+        this := @this: org.jfree.data.xy.CategoryTableXYDataset;
+        d := @parameter0: double;
+        $stack3 = this.<org.jfree.data.xy.CategoryTableXYDataset: org.jfree.data.xy.IntervalXYDelegate intervalDelegate>;
+        virtualinvoke $stack3.<org.jfree.data.xy.IntervalXYDelegate: void setIntervalPositionFactor(double)>(d);
+        $stack4 = new org.jfree.chart.event.DatasetChangeInfo;
+        specialinvoke $stack4.<org.jfree.chart.event.DatasetChangeInfo: void <init>()>();
+        virtualinvoke this.<org.jfree.data.xy.CategoryTableXYDataset: void fireDatasetChanged(org.jfree.chart.event.DatasetChangeInfo)>($stack4);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.xy.CategoryTableXYDataset: boolean equals(java.lang.Object)> ----
+    {
+        boolean $stack3, $stack6, $stack9;
+        java.lang.Object obj;
+        org.jfree.data.DefaultKeyedValues2D $stack7, $stack8;
+        org.jfree.data.xy.CategoryTableXYDataset that, this;
+        org.jfree.data.xy.IntervalXYDelegate $stack4, $stack5;
+    
+    
+        this := @this: org.jfree.data.xy.CategoryTableXYDataset;
+        obj := @parameter0: java.lang.Object;
+        $stack3 = obj instanceof org.jfree.data.xy.CategoryTableXYDataset;
+    
+        if $stack3 != 0 goto label1;
+    
+        return 0;
+    
+      label1:
+        that = (org.jfree.data.xy.CategoryTableXYDataset) obj;
+        $stack5 = this.<org.jfree.data.xy.CategoryTableXYDataset: org.jfree.data.xy.IntervalXYDelegate intervalDelegate>;
+        $stack4 = that.<org.jfree.data.xy.CategoryTableXYDataset: org.jfree.data.xy.IntervalXYDelegate intervalDelegate>;
+        $stack6 = virtualinvoke $stack5.<org.jfree.data.xy.IntervalXYDelegate: boolean equals(java.lang.Object)>($stack4);
+    
+        if $stack6 != 0 goto label2;
+    
+        return 0;
+    
+      label2:
+        $stack8 = this.<org.jfree.data.xy.CategoryTableXYDataset: org.jfree.data.DefaultKeyedValues2D values>;
+        $stack7 = that.<org.jfree.data.xy.CategoryTableXYDataset: org.jfree.data.DefaultKeyedValues2D values>;
+        $stack9 = virtualinvoke $stack8.<org.jfree.data.DefaultKeyedValues2D: boolean equals(java.lang.Object)>($stack7);
+    
+        if $stack9 != 0 goto label3;
+    
+        return 0;
+    
+      label3:
+        return 1;
+    }
+
+    // ---- method: <org.jfree.data.xy.CategoryTableXYDataset: java.lang.Number getX(int,int)> ----
+    {
+        int item, series;
+        java.lang.Comparable $stack4;
+        java.lang.Number $stack5;
+        org.jfree.data.DefaultKeyedValues2D $stack3;
+        org.jfree.data.xy.CategoryTableXYDataset this;
+    
+    
+        this := @this: org.jfree.data.xy.CategoryTableXYDataset;
+        series := @parameter0: int;
+        item := @parameter1: int;
+        $stack3 = this.<org.jfree.data.xy.CategoryTableXYDataset: org.jfree.data.DefaultKeyedValues2D values>;
+        $stack4 = virtualinvoke $stack3.<org.jfree.data.DefaultKeyedValues2D: java.lang.Comparable getRowKey(int)>(item);
+        $stack5 = (java.lang.Number) $stack4;
+    
+        return $stack5;
+    }
+
+    // ---- method: <org.jfree.data.xy.CategoryTableXYDataset: void setAutoWidth(boolean)> ----
+    {
+        boolean b;
+        org.jfree.chart.event.DatasetChangeInfo $stack3;
+        org.jfree.data.xy.CategoryTableXYDataset this;
+        org.jfree.data.xy.IntervalXYDelegate $stack2;
+    
+    
+        this := @this: org.jfree.data.xy.CategoryTableXYDataset;
+        b := @parameter0: boolean;
+        $stack2 = this.<org.jfree.data.xy.CategoryTableXYDataset: org.jfree.data.xy.IntervalXYDelegate intervalDelegate>;
+        virtualinvoke $stack2.<org.jfree.data.xy.IntervalXYDelegate: void setAutoWidth(boolean)>(b);
+        $stack3 = new org.jfree.chart.event.DatasetChangeInfo;
+        specialinvoke $stack3.<org.jfree.chart.event.DatasetChangeInfo: void <init>()>();
+        virtualinvoke this.<org.jfree.data.xy.CategoryTableXYDataset: void fireDatasetChanged(org.jfree.chart.event.DatasetChangeInfo)>($stack3);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.xy.CategoryTableXYDataset: int getSeriesCount()> ----
+    {
+        int $stack2;
+        org.jfree.data.DefaultKeyedValues2D $stack1;
+        org.jfree.data.xy.CategoryTableXYDataset this;
+    
+    
+        this := @this: org.jfree.data.xy.CategoryTableXYDataset;
+        $stack1 = this.<org.jfree.data.xy.CategoryTableXYDataset: org.jfree.data.DefaultKeyedValues2D values>;
+        $stack2 = virtualinvoke $stack1.<org.jfree.data.DefaultKeyedValues2D: int getColumnCount()>();
+    
+        return $stack2;
+    }
+
+    // ---- method: <org.jfree.data.xy.CategoryTableXYDataset: void remove(double,java.lang.String)> ----
+    {
+        double x;
+        java.lang.Double #l0;
+        java.lang.Number #l1;
+        java.lang.Object $stack4;
+        java.lang.String seriesName;
+        org.jfree.data.xy.CategoryTableXYDataset this;
+    
+    
+        this := @this: org.jfree.data.xy.CategoryTableXYDataset;
+        x := @parameter0: double;
+        seriesName := @parameter1: java.lang.String;
+        $stack4 = new java.lang.Double;
+        #l0 = (java.lang.Double) $stack4;
+        specialinvoke #l0.<java.lang.Double: void <init>(double)>(x);
+        #l1 = (java.lang.Number) $stack4;
+        virtualinvoke this.<org.jfree.data.xy.CategoryTableXYDataset: void remove(java.lang.Number,java.lang.String,boolean)>(#l1, seriesName, 1);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.xy.CategoryTableXYDataset: double getDomainUpperBound(boolean)> ----
+    {
+        boolean includeInterval;
+        double $stack3;
+        org.jfree.data.xy.CategoryTableXYDataset this;
+        org.jfree.data.xy.IntervalXYDelegate $stack2;
+    
+    
+        this := @this: org.jfree.data.xy.CategoryTableXYDataset;
+        includeInterval := @parameter0: boolean;
+        $stack2 = this.<org.jfree.data.xy.CategoryTableXYDataset: org.jfree.data.xy.IntervalXYDelegate intervalDelegate>;
+        $stack3 = virtualinvoke $stack2.<org.jfree.data.xy.IntervalXYDelegate: double getDomainUpperBound(boolean)>(includeInterval);
+    
+        return $stack3;
+    }
+
+    // ---- method: <org.jfree.data.xy.CategoryTableXYDataset: java.lang.Number getEndX(int,int)> ----
+    {
+        int item, series;
+        java.lang.Number $stack4;
+        org.jfree.data.xy.CategoryTableXYDataset this;
+        org.jfree.data.xy.IntervalXYDelegate $stack3;
+    
+    
+        this := @this: org.jfree.data.xy.CategoryTableXYDataset;
+        series := @parameter0: int;
+        item := @parameter1: int;
+        $stack3 = this.<org.jfree.data.xy.CategoryTableXYDataset: org.jfree.data.xy.IntervalXYDelegate intervalDelegate>;
+        $stack4 = virtualinvoke $stack3.<org.jfree.data.xy.IntervalXYDelegate: java.lang.Number getEndX(int,int)>(series, item);
+    
+        return $stack4;
+    }
+
+    // ---- method: <org.jfree.data.xy.CategoryTableXYDataset: org.jfree.data.Range getDomainBounds(boolean)> ----
+    {
+        boolean includeInterval;
+        org.jfree.data.Range $stack2, $stack4;
+        org.jfree.data.xy.CategoryTableXYDataset this;
+        org.jfree.data.xy.IntervalXYDelegate $stack3;
+    
+    
+        this := @this: org.jfree.data.xy.CategoryTableXYDataset;
+        includeInterval := @parameter0: boolean;
+    
+        if includeInterval == 0 goto label1;
+        $stack3 = this.<org.jfree.data.xy.CategoryTableXYDataset: org.jfree.data.xy.IntervalXYDelegate intervalDelegate>;
+        $stack4 = virtualinvoke $stack3.<org.jfree.data.xy.IntervalXYDelegate: org.jfree.data.Range getDomainBounds(boolean)>(includeInterval);
+    
+        return $stack4;
+    
+      label1:
+        $stack2 = staticinvoke <org.jfree.data.general.DatasetUtilities: org.jfree.data.Range iterateDomainBounds(org.jfree.data.xy.XYDataset,boolean)>(this, includeInterval);
+    
+        return $stack2;
+    }
+
+    // ---- method: <org.jfree.data.xy.CategoryTableXYDataset: void setIntervalWidth(double)> ----
+    {
+        double d;
+        org.jfree.chart.event.DatasetChangeInfo $stack4;
+        org.jfree.data.xy.CategoryTableXYDataset this;
+        org.jfree.data.xy.IntervalXYDelegate $stack3;
+    
+    
+        this := @this: org.jfree.data.xy.CategoryTableXYDataset;
+        d := @parameter0: double;
+        $stack3 = this.<org.jfree.data.xy.CategoryTableXYDataset: org.jfree.data.xy.IntervalXYDelegate intervalDelegate>;
+        virtualinvoke $stack3.<org.jfree.data.xy.IntervalXYDelegate: void setFixedIntervalWidth(double)>(d);
+        $stack4 = new org.jfree.chart.event.DatasetChangeInfo;
+        specialinvoke $stack4.<org.jfree.chart.event.DatasetChangeInfo: void <init>()>();
+        virtualinvoke this.<org.jfree.data.xy.CategoryTableXYDataset: void fireDatasetChanged(org.jfree.chart.event.DatasetChangeInfo)>($stack4);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.xy.CategoryTableXYDataset: java.lang.Number getEndY(int,int)> ----
+    {
+        int item, series;
+        java.lang.Number $stack3;
+        org.jfree.data.xy.CategoryTableXYDataset this;
+    
+    
+        this := @this: org.jfree.data.xy.CategoryTableXYDataset;
+        series := @parameter0: int;
+        item := @parameter1: int;
+        $stack3 = virtualinvoke this.<org.jfree.data.xy.CategoryTableXYDataset: java.lang.Number getY(int,int)>(series, item);
+    
+        return $stack3;
+    }
+
+}

@@ -1,0 +1,558 @@
+// ========================================================================
+// CLASS : org.jfree.data.xy.XYIntervalSeriesCollection
+// ========================================================================
+
+[PUBLIC, SUPER] class org.jfree.data.xy.XYIntervalSeriesCollection extends org.jfree.data.xy.AbstractIntervalXYDataset implements org.jfree.chart.util.PublicCloneable, org.jfree.data.xy.IntervalXYDataset, java.io.Serializable {
+
+    // ---- method: <org.jfree.data.xy.XYIntervalSeriesCollection: org.jfree.data.xy.XYIntervalSeries getSeries(int)> ----
+    {
+        int $stack3, series;
+        java.lang.IllegalArgumentException #l1;
+        java.lang.Object $stack2, $stack5;
+        java.lang.Throwable #l0;
+        java.util.List $stack4;
+        org.jfree.data.xy.XYIntervalSeries $stack6;
+        org.jfree.data.xy.XYIntervalSeriesCollection this;
+    
+    
+        this := @this: org.jfree.data.xy.XYIntervalSeriesCollection;
+        series := @parameter0: int;
+    
+        if series < 0 goto label1;
+        $stack3 = virtualinvoke this.<org.jfree.data.xy.XYIntervalSeriesCollection: int getSeriesCount()>();
+    
+        if series < $stack3 goto label2;
+    
+      label1:
+        $stack2 = new java.lang.IllegalArgumentException;
+        #l1 = (java.lang.IllegalArgumentException) $stack2;
+        specialinvoke #l1.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Series index out of bounds");
+        #l0 = (java.lang.Throwable) $stack2;
+    
+        throw #l0;
+    
+      label2:
+        $stack4 = this.<org.jfree.data.xy.XYIntervalSeriesCollection: java.util.List data>;
+        $stack5 = interfaceinvoke $stack4.<java.util.List: java.lang.Object get(int)>(series);
+        $stack6 = (org.jfree.data.xy.XYIntervalSeries) $stack5;
+    
+        return $stack6;
+    }
+
+    // ---- method: <org.jfree.data.xy.XYIntervalSeriesCollection: java.lang.Number getStartX(int,int)> ----
+    {
+        double $stack3;
+        int item, series;
+        java.lang.Double #l0;
+        java.lang.Number #l1;
+        java.lang.Object $stack4;
+        org.jfree.data.xy.XYIntervalSeriesCollection this;
+    
+    
+        this := @this: org.jfree.data.xy.XYIntervalSeriesCollection;
+        series := @parameter0: int;
+        item := @parameter1: int;
+        $stack4 = new java.lang.Double;
+        $stack3 = virtualinvoke this.<org.jfree.data.xy.XYIntervalSeriesCollection: double getStartXValue(int,int)>(series, item);
+        #l0 = (java.lang.Double) $stack4;
+        specialinvoke #l0.<java.lang.Double: void <init>(double)>($stack3);
+        #l1 = (java.lang.Number) $stack4;
+    
+        return #l1;
+    }
+
+    // ---- method: <org.jfree.data.xy.XYIntervalSeriesCollection: double getEndXValue(int,int)> ----
+    {
+        double $stack6;
+        int item, series;
+        java.lang.Object $stack5;
+        java.util.List $stack4;
+        org.jfree.data.xy.XYIntervalSeries s;
+        org.jfree.data.xy.XYIntervalSeriesCollection this;
+    
+    
+        this := @this: org.jfree.data.xy.XYIntervalSeriesCollection;
+        series := @parameter0: int;
+        item := @parameter1: int;
+        $stack4 = this.<org.jfree.data.xy.XYIntervalSeriesCollection: java.util.List data>;
+        $stack5 = interfaceinvoke $stack4.<java.util.List: java.lang.Object get(int)>(series);
+        s = (org.jfree.data.xy.XYIntervalSeries) $stack5;
+        $stack6 = virtualinvoke s.<org.jfree.data.xy.XYIntervalSeries: double getXHighValue(int)>(item);
+    
+        return $stack6;
+    }
+
+    // ---- method: <org.jfree.data.xy.XYIntervalSeriesCollection: int getItemCount(int)> ----
+    {
+        int $stack3, series;
+        org.jfree.data.xy.XYIntervalSeries $stack2;
+        org.jfree.data.xy.XYIntervalSeriesCollection this;
+    
+    
+        this := @this: org.jfree.data.xy.XYIntervalSeriesCollection;
+        series := @parameter0: int;
+        $stack2 = virtualinvoke this.<org.jfree.data.xy.XYIntervalSeriesCollection: org.jfree.data.xy.XYIntervalSeries getSeries(int)>(series);
+        $stack3 = virtualinvoke $stack2.<org.jfree.data.xy.XYIntervalSeries: int getItemCount()>();
+    
+        return $stack3;
+    }
+
+    // ---- method: <org.jfree.data.xy.XYIntervalSeriesCollection: java.lang.Object clone()> ----
+    {
+        int $stack7, i, seriesCount;
+        java.lang.Object $stack10, $stack4, $stack5;
+        java.util.ArrayList #l0;
+        java.util.List $stack6, $stack8;
+        org.jfree.data.xy.XYIntervalSeries $stack9;
+        org.jfree.data.xy.XYIntervalSeriesCollection clone, this;
+    
+    
+        this := @this: org.jfree.data.xy.XYIntervalSeriesCollection;
+        $stack4 = specialinvoke this.<org.jfree.data.xy.AbstractIntervalXYDataset: java.lang.Object clone()>();
+        clone = (org.jfree.data.xy.XYIntervalSeriesCollection) $stack4;
+        seriesCount = virtualinvoke this.<org.jfree.data.xy.XYIntervalSeriesCollection: int getSeriesCount()>();
+        $stack5 = new java.util.ArrayList;
+        #l0 = (java.util.ArrayList) $stack5;
+        specialinvoke #l0.<java.util.ArrayList: void <init>(int)>(seriesCount);
+        clone.<org.jfree.data.xy.XYIntervalSeriesCollection: java.util.List data> = (java.util.List) $stack5;
+        i = 0;
+    
+      label1:
+        $stack6 = this.<org.jfree.data.xy.XYIntervalSeriesCollection: java.util.List data>;
+        $stack7 = interfaceinvoke $stack6.<java.util.List: int size()>();
+    
+        if i >= $stack7 goto label2;
+        $stack8 = clone.<org.jfree.data.xy.XYIntervalSeriesCollection: java.util.List data>;
+        $stack9 = virtualinvoke this.<org.jfree.data.xy.XYIntervalSeriesCollection: org.jfree.data.xy.XYIntervalSeries getSeries(int)>(i);
+        $stack10 = virtualinvoke $stack9.<org.jfree.data.xy.XYIntervalSeries: java.lang.Object clone()>();
+        interfaceinvoke $stack8.<java.util.List: java.lang.Object set(int,java.lang.Object)>(i, $stack10);
+        i = i + 1;
+    
+        goto label1;
+    
+      label2:
+        return clone;
+    }
+
+    // ---- method: <org.jfree.data.xy.XYIntervalSeriesCollection: int getSeriesCount()> ----
+    {
+        int $stack2;
+        java.util.List $stack1;
+        org.jfree.data.xy.XYIntervalSeriesCollection this;
+    
+    
+        this := @this: org.jfree.data.xy.XYIntervalSeriesCollection;
+        $stack1 = this.<org.jfree.data.xy.XYIntervalSeriesCollection: java.util.List data>;
+        $stack2 = interfaceinvoke $stack1.<java.util.List: int size()>();
+    
+        return $stack2;
+    }
+
+    // ---- method: <org.jfree.data.xy.XYIntervalSeriesCollection: java.lang.Number getEndY(int,int)> ----
+    {
+        double $stack3;
+        int item, series;
+        java.lang.Double #l0;
+        java.lang.Number #l1;
+        java.lang.Object $stack4;
+        org.jfree.data.xy.XYIntervalSeriesCollection this;
+    
+    
+        this := @this: org.jfree.data.xy.XYIntervalSeriesCollection;
+        series := @parameter0: int;
+        item := @parameter1: int;
+        $stack4 = new java.lang.Double;
+        $stack3 = virtualinvoke this.<org.jfree.data.xy.XYIntervalSeriesCollection: double getEndYValue(int,int)>(series, item);
+        #l0 = (java.lang.Double) $stack4;
+        specialinvoke #l0.<java.lang.Double: void <init>(double)>($stack3);
+        #l1 = (java.lang.Number) $stack4;
+    
+        return #l1;
+    }
+
+    // ---- method: <org.jfree.data.xy.XYIntervalSeriesCollection: double getStartXValue(int,int)> ----
+    {
+        double $stack6;
+        int item, series;
+        java.lang.Object $stack5;
+        java.util.List $stack4;
+        org.jfree.data.xy.XYIntervalSeries s;
+        org.jfree.data.xy.XYIntervalSeriesCollection this;
+    
+    
+        this := @this: org.jfree.data.xy.XYIntervalSeriesCollection;
+        series := @parameter0: int;
+        item := @parameter1: int;
+        $stack4 = this.<org.jfree.data.xy.XYIntervalSeriesCollection: java.util.List data>;
+        $stack5 = interfaceinvoke $stack4.<java.util.List: java.lang.Object get(int)>(series);
+        s = (org.jfree.data.xy.XYIntervalSeries) $stack5;
+        $stack6 = virtualinvoke s.<org.jfree.data.xy.XYIntervalSeries: double getXLowValue(int)>(item);
+    
+        return $stack6;
+    }
+
+    // ---- method: <org.jfree.data.xy.XYIntervalSeriesCollection: double getYValue(int,int)> ----
+    {
+        double $stack6;
+        int item, series;
+        java.lang.Object $stack5;
+        java.util.List $stack4;
+        org.jfree.data.xy.XYIntervalSeries s;
+        org.jfree.data.xy.XYIntervalSeriesCollection this;
+    
+    
+        this := @this: org.jfree.data.xy.XYIntervalSeriesCollection;
+        series := @parameter0: int;
+        item := @parameter1: int;
+        $stack4 = this.<org.jfree.data.xy.XYIntervalSeriesCollection: java.util.List data>;
+        $stack5 = interfaceinvoke $stack4.<java.util.List: java.lang.Object get(int)>(series);
+        s = (org.jfree.data.xy.XYIntervalSeries) $stack5;
+        $stack6 = virtualinvoke s.<org.jfree.data.xy.XYIntervalSeries: double getYValue(int)>(item);
+    
+        return $stack6;
+    }
+
+    // ---- method: <org.jfree.data.xy.XYIntervalSeriesCollection: java.lang.Number getEndX(int,int)> ----
+    {
+        double $stack3;
+        int item, series;
+        java.lang.Double #l0;
+        java.lang.Number #l1;
+        java.lang.Object $stack4;
+        org.jfree.data.xy.XYIntervalSeriesCollection this;
+    
+    
+        this := @this: org.jfree.data.xy.XYIntervalSeriesCollection;
+        series := @parameter0: int;
+        item := @parameter1: int;
+        $stack4 = new java.lang.Double;
+        $stack3 = virtualinvoke this.<org.jfree.data.xy.XYIntervalSeriesCollection: double getEndXValue(int,int)>(series, item);
+        #l0 = (java.lang.Double) $stack4;
+        specialinvoke #l0.<java.lang.Double: void <init>(double)>($stack3);
+        #l1 = (java.lang.Number) $stack4;
+    
+        return #l1;
+    }
+
+    // ---- method: <org.jfree.data.xy.XYIntervalSeriesCollection: java.lang.Comparable getSeriesKey(int)> ----
+    {
+        int series;
+        java.lang.Comparable $stack3;
+        org.jfree.data.xy.XYIntervalSeries $stack2;
+        org.jfree.data.xy.XYIntervalSeriesCollection this;
+    
+    
+        this := @this: org.jfree.data.xy.XYIntervalSeriesCollection;
+        series := @parameter0: int;
+        $stack2 = virtualinvoke this.<org.jfree.data.xy.XYIntervalSeriesCollection: org.jfree.data.xy.XYIntervalSeries getSeries(int)>(series);
+        $stack3 = virtualinvoke $stack2.<org.jfree.data.xy.XYIntervalSeries: java.lang.Comparable getKey()>();
+    
+        return $stack3;
+    }
+
+    // ---- method: <org.jfree.data.xy.XYIntervalSeriesCollection: void removeSeries(org.jfree.data.xy.XYIntervalSeries)> ----
+    {
+        boolean $stack3;
+        java.lang.IllegalArgumentException #l0;
+        java.lang.Object $stack6;
+        java.lang.Throwable #l1;
+        java.util.List $stack2, $stack4;
+        org.jfree.chart.event.DatasetChangeInfo $stack5;
+        org.jfree.data.xy.XYIntervalSeries series;
+        org.jfree.data.xy.XYIntervalSeriesCollection this;
+    
+    
+        this := @this: org.jfree.data.xy.XYIntervalSeriesCollection;
+        series := @parameter0: org.jfree.data.xy.XYIntervalSeries;
+    
+        if series != null goto label1;
+        $stack6 = new java.lang.IllegalArgumentException;
+        #l0 = (java.lang.IllegalArgumentException) $stack6;
+        specialinvoke #l0.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'series\' argument.");
+        #l1 = (java.lang.Throwable) $stack6;
+    
+        throw #l1;
+    
+      label1:
+        $stack2 = this.<org.jfree.data.xy.XYIntervalSeriesCollection: java.util.List data>;
+        $stack3 = interfaceinvoke $stack2.<java.util.List: boolean contains(java.lang.Object)>(series);
+    
+        if $stack3 == 0 goto label2;
+        virtualinvoke series.<org.jfree.data.xy.XYIntervalSeries: void removeChangeListener(org.jfree.data.event.SeriesChangeListener)>(this);
+        $stack4 = this.<org.jfree.data.xy.XYIntervalSeriesCollection: java.util.List data>;
+        interfaceinvoke $stack4.<java.util.List: boolean remove(java.lang.Object)>(series);
+        $stack5 = new org.jfree.chart.event.DatasetChangeInfo;
+        specialinvoke $stack5.<org.jfree.chart.event.DatasetChangeInfo: void <init>()>();
+        virtualinvoke this.<org.jfree.data.xy.XYIntervalSeriesCollection: void fireDatasetChanged(org.jfree.chart.event.DatasetChangeInfo)>($stack5);
+    
+      label2:
+        return;
+    }
+
+    // ---- method: <org.jfree.data.xy.XYIntervalSeriesCollection: void removeAllSeries()> ----
+    {
+        int $stack4, i;
+        java.lang.Object $stack8;
+        java.util.List $stack3, $stack5, $stack7;
+        org.jfree.chart.event.DatasetChangeInfo $stack6;
+        org.jfree.data.xy.XYIntervalSeries series;
+        org.jfree.data.xy.XYIntervalSeriesCollection this;
+    
+    
+        this := @this: org.jfree.data.xy.XYIntervalSeriesCollection;
+        i = 0;
+    
+      label1:
+        $stack3 = this.<org.jfree.data.xy.XYIntervalSeriesCollection: java.util.List data>;
+        $stack4 = interfaceinvoke $stack3.<java.util.List: int size()>();
+    
+        if i >= $stack4 goto label2;
+        $stack7 = this.<org.jfree.data.xy.XYIntervalSeriesCollection: java.util.List data>;
+        $stack8 = interfaceinvoke $stack7.<java.util.List: java.lang.Object get(int)>(i);
+        series = (org.jfree.data.xy.XYIntervalSeries) $stack8;
+        virtualinvoke series.<org.jfree.data.xy.XYIntervalSeries: void removeChangeListener(org.jfree.data.event.SeriesChangeListener)>(this);
+        i = i + 1;
+    
+        goto label1;
+    
+      label2:
+        $stack5 = this.<org.jfree.data.xy.XYIntervalSeriesCollection: java.util.List data>;
+        interfaceinvoke $stack5.<java.util.List: void clear()>();
+        $stack6 = new org.jfree.chart.event.DatasetChangeInfo;
+        specialinvoke $stack6.<org.jfree.chart.event.DatasetChangeInfo: void <init>()>();
+        virtualinvoke this.<org.jfree.data.xy.XYIntervalSeriesCollection: void fireDatasetChanged(org.jfree.chart.event.DatasetChangeInfo)>($stack6);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.xy.XYIntervalSeriesCollection: void removeSeries(int)> ----
+    {
+        int $stack4, series;
+        java.lang.IllegalArgumentException #l1;
+        java.lang.Object $stack3, $stack6;
+        java.lang.Throwable #l0;
+        java.util.List $stack5, $stack7;
+        org.jfree.chart.event.DatasetChangeInfo $stack8;
+        org.jfree.data.xy.XYIntervalSeries ts;
+        org.jfree.data.xy.XYIntervalSeriesCollection this;
+    
+    
+        this := @this: org.jfree.data.xy.XYIntervalSeriesCollection;
+        series := @parameter0: int;
+    
+        if series < 0 goto label1;
+        $stack4 = virtualinvoke this.<org.jfree.data.xy.XYIntervalSeriesCollection: int getSeriesCount()>();
+    
+        if series < $stack4 goto label2;
+    
+      label1:
+        $stack3 = new java.lang.IllegalArgumentException;
+        #l1 = (java.lang.IllegalArgumentException) $stack3;
+        specialinvoke #l1.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Series index out of bounds.");
+        #l0 = (java.lang.Throwable) $stack3;
+    
+        throw #l0;
+    
+      label2:
+        $stack5 = this.<org.jfree.data.xy.XYIntervalSeriesCollection: java.util.List data>;
+        $stack6 = interfaceinvoke $stack5.<java.util.List: java.lang.Object get(int)>(series);
+        ts = (org.jfree.data.xy.XYIntervalSeries) $stack6;
+        virtualinvoke ts.<org.jfree.data.xy.XYIntervalSeries: void removeChangeListener(org.jfree.data.event.SeriesChangeListener)>(this);
+        $stack7 = this.<org.jfree.data.xy.XYIntervalSeriesCollection: java.util.List data>;
+        interfaceinvoke $stack7.<java.util.List: java.lang.Object remove(int)>(series);
+        $stack8 = new org.jfree.chart.event.DatasetChangeInfo;
+        specialinvoke $stack8.<org.jfree.chart.event.DatasetChangeInfo: void <init>()>();
+        virtualinvoke this.<org.jfree.data.xy.XYIntervalSeriesCollection: void fireDatasetChanged(org.jfree.chart.event.DatasetChangeInfo)>($stack8);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.xy.XYIntervalSeriesCollection: void addSeries(org.jfree.data.xy.XYIntervalSeries)> ----
+    {
+        java.lang.IllegalArgumentException #l1;
+        java.lang.Object $stack4;
+        java.lang.Throwable #l0;
+        java.util.List $stack2;
+        org.jfree.chart.event.DatasetChangeInfo $stack3;
+        org.jfree.data.xy.XYIntervalSeries series;
+        org.jfree.data.xy.XYIntervalSeriesCollection this;
+    
+    
+        this := @this: org.jfree.data.xy.XYIntervalSeriesCollection;
+        series := @parameter0: org.jfree.data.xy.XYIntervalSeries;
+    
+        if series != null goto label1;
+        $stack4 = new java.lang.IllegalArgumentException;
+        #l1 = (java.lang.IllegalArgumentException) $stack4;
+        specialinvoke #l1.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'series\' argument.");
+        #l0 = (java.lang.Throwable) $stack4;
+    
+        throw #l0;
+    
+      label1:
+        $stack2 = this.<org.jfree.data.xy.XYIntervalSeriesCollection: java.util.List data>;
+        interfaceinvoke $stack2.<java.util.List: boolean add(java.lang.Object)>(series);
+        virtualinvoke series.<org.jfree.data.xy.XYIntervalSeries: void addChangeListener(org.jfree.data.event.SeriesChangeListener)>(this);
+        $stack3 = new org.jfree.chart.event.DatasetChangeInfo;
+        specialinvoke $stack3.<org.jfree.chart.event.DatasetChangeInfo: void <init>()>();
+        virtualinvoke this.<org.jfree.data.xy.XYIntervalSeriesCollection: void fireDatasetChanged(org.jfree.chart.event.DatasetChangeInfo)>($stack3);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.xy.XYIntervalSeriesCollection: java.lang.Number getX(int,int)> ----
+    {
+        int item, series;
+        java.lang.Number $stack6;
+        java.lang.Object $stack5;
+        java.util.List $stack4;
+        org.jfree.data.xy.XYIntervalSeries s;
+        org.jfree.data.xy.XYIntervalSeriesCollection this;
+    
+    
+        this := @this: org.jfree.data.xy.XYIntervalSeriesCollection;
+        series := @parameter0: int;
+        item := @parameter1: int;
+        $stack4 = this.<org.jfree.data.xy.XYIntervalSeriesCollection: java.util.List data>;
+        $stack5 = interfaceinvoke $stack4.<java.util.List: java.lang.Object get(int)>(series);
+        s = (org.jfree.data.xy.XYIntervalSeries) $stack5;
+        $stack6 = virtualinvoke s.<org.jfree.data.xy.XYIntervalSeries: java.lang.Number getX(int)>(item);
+    
+        return $stack6;
+    }
+
+    // ---- method: <org.jfree.data.xy.XYIntervalSeriesCollection: java.lang.Number getY(int,int)> ----
+    {
+        double $stack3;
+        int item, series;
+        java.lang.Double #l0;
+        java.lang.Number #l1;
+        java.lang.Object $stack4;
+        org.jfree.data.xy.XYIntervalSeriesCollection this;
+    
+    
+        this := @this: org.jfree.data.xy.XYIntervalSeriesCollection;
+        series := @parameter0: int;
+        item := @parameter1: int;
+        $stack4 = new java.lang.Double;
+        $stack3 = virtualinvoke this.<org.jfree.data.xy.XYIntervalSeriesCollection: double getYValue(int,int)>(series, item);
+        #l0 = (java.lang.Double) $stack4;
+        specialinvoke #l0.<java.lang.Double: void <init>(double)>($stack3);
+        #l1 = (java.lang.Number) $stack4;
+    
+        return #l1;
+    }
+
+    // ---- method: <org.jfree.data.xy.XYIntervalSeriesCollection: java.lang.Number getStartY(int,int)> ----
+    {
+        double $stack3;
+        int item, series;
+        java.lang.Double #l0;
+        java.lang.Number #l1;
+        java.lang.Object $stack4;
+        org.jfree.data.xy.XYIntervalSeriesCollection this;
+    
+    
+        this := @this: org.jfree.data.xy.XYIntervalSeriesCollection;
+        series := @parameter0: int;
+        item := @parameter1: int;
+        $stack4 = new java.lang.Double;
+        $stack3 = virtualinvoke this.<org.jfree.data.xy.XYIntervalSeriesCollection: double getStartYValue(int,int)>(series, item);
+        #l0 = (java.lang.Double) $stack4;
+        specialinvoke #l0.<java.lang.Double: void <init>(double)>($stack3);
+        #l1 = (java.lang.Number) $stack4;
+    
+        return #l1;
+    }
+
+    // ---- method: <org.jfree.data.xy.XYIntervalSeriesCollection: double getEndYValue(int,int)> ----
+    {
+        double $stack6;
+        int item, series;
+        java.lang.Object $stack5;
+        java.util.List $stack4;
+        org.jfree.data.xy.XYIntervalSeries s;
+        org.jfree.data.xy.XYIntervalSeriesCollection this;
+    
+    
+        this := @this: org.jfree.data.xy.XYIntervalSeriesCollection;
+        series := @parameter0: int;
+        item := @parameter1: int;
+        $stack4 = this.<org.jfree.data.xy.XYIntervalSeriesCollection: java.util.List data>;
+        $stack5 = interfaceinvoke $stack4.<java.util.List: java.lang.Object get(int)>(series);
+        s = (org.jfree.data.xy.XYIntervalSeries) $stack5;
+        $stack6 = virtualinvoke s.<org.jfree.data.xy.XYIntervalSeries: double getYHighValue(int)>(item);
+    
+        return $stack6;
+    }
+
+    // ---- method: <org.jfree.data.xy.XYIntervalSeriesCollection: double getStartYValue(int,int)> ----
+    {
+        double $stack6;
+        int item, series;
+        java.lang.Object $stack5;
+        java.util.List $stack4;
+        org.jfree.data.xy.XYIntervalSeries s;
+        org.jfree.data.xy.XYIntervalSeriesCollection this;
+    
+    
+        this := @this: org.jfree.data.xy.XYIntervalSeriesCollection;
+        series := @parameter0: int;
+        item := @parameter1: int;
+        $stack4 = this.<org.jfree.data.xy.XYIntervalSeriesCollection: java.util.List data>;
+        $stack5 = interfaceinvoke $stack4.<java.util.List: java.lang.Object get(int)>(series);
+        s = (org.jfree.data.xy.XYIntervalSeries) $stack5;
+        $stack6 = virtualinvoke s.<org.jfree.data.xy.XYIntervalSeries: double getYLowValue(int)>(item);
+    
+        return $stack6;
+    }
+
+    // ---- method: <org.jfree.data.xy.XYIntervalSeriesCollection: boolean equals(java.lang.Object)> ----
+    {
+        boolean $stack3, $stack6;
+        java.lang.Object obj;
+        java.util.List $stack4, $stack5;
+        org.jfree.data.xy.XYIntervalSeriesCollection that, this;
+    
+    
+        this := @this: org.jfree.data.xy.XYIntervalSeriesCollection;
+        obj := @parameter0: java.lang.Object;
+    
+        if obj != this goto label1;
+    
+        return 1;
+    
+      label1:
+        $stack3 = obj instanceof org.jfree.data.xy.XYIntervalSeriesCollection;
+    
+        if $stack3 != 0 goto label2;
+    
+        return 0;
+    
+      label2:
+        that = (org.jfree.data.xy.XYIntervalSeriesCollection) obj;
+        $stack5 = this.<org.jfree.data.xy.XYIntervalSeriesCollection: java.util.List data>;
+        $stack4 = that.<org.jfree.data.xy.XYIntervalSeriesCollection: java.util.List data>;
+        $stack6 = staticinvoke <org.jfree.chart.util.ObjectUtilities: boolean equal(java.lang.Object,java.lang.Object)>($stack5, $stack4);
+    
+        return $stack6;
+    }
+
+    // ---- method: <org.jfree.data.xy.XYIntervalSeriesCollection: void <init>()> ----
+    {
+        java.lang.Object $stack1;
+        java.util.ArrayList #l0;
+        org.jfree.data.xy.XYIntervalSeriesCollection this;
+    
+    
+        this := @this: org.jfree.data.xy.XYIntervalSeriesCollection;
+        specialinvoke this.<org.jfree.data.xy.AbstractIntervalXYDataset: void <init>()>();
+        $stack1 = new java.util.ArrayList;
+        #l0 = (java.util.ArrayList) $stack1;
+        specialinvoke #l0.<java.util.ArrayList: void <init>()>();
+        this.<org.jfree.data.xy.XYIntervalSeriesCollection: java.util.List data> = (java.util.List) $stack1;
+    
+        return;
+    }
+
+}

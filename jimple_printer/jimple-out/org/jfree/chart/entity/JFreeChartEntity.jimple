@@ -1,0 +1,229 @@
+// ========================================================================
+// CLASS : org.jfree.chart.entity.JFreeChartEntity
+// ========================================================================
+
+[PUBLIC, SUPER] class org.jfree.chart.entity.JFreeChartEntity extends org.jfree.chart.entity.ChartEntity {
+
+    // ---- method: <org.jfree.chart.entity.JFreeChartEntity: void <init>(java.awt.Shape,org.jfree.chart.JFreeChart,java.lang.String)> ----
+    {
+        java.awt.Shape area;
+        java.lang.String toolTipText;
+        org.jfree.chart.JFreeChart chart;
+        org.jfree.chart.entity.JFreeChartEntity this;
+    
+    
+        this := @this: org.jfree.chart.entity.JFreeChartEntity;
+        area := @parameter0: java.awt.Shape;
+        chart := @parameter1: org.jfree.chart.JFreeChart;
+        toolTipText := @parameter2: java.lang.String;
+        specialinvoke this.<org.jfree.chart.entity.JFreeChartEntity: void <init>(java.awt.Shape,org.jfree.chart.JFreeChart,java.lang.String,java.lang.String)>(area, chart, toolTipText, null);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.entity.JFreeChartEntity: boolean equals(java.lang.Object)> ----
+    {
+        boolean $stack12, $stack15, $stack3, $stack6, $stack9;
+        java.awt.Shape $stack4, $stack5;
+        java.lang.Object obj;
+        java.lang.String $stack10, $stack11, $stack7, $stack8;
+        org.jfree.chart.JFreeChart $stack13, $stack14;
+        org.jfree.chart.entity.JFreeChartEntity that, this;
+    
+    
+        this := @this: org.jfree.chart.entity.JFreeChartEntity;
+        obj := @parameter0: java.lang.Object;
+    
+        if obj != this goto label1;
+    
+        return 1;
+    
+      label1:
+        $stack3 = obj instanceof org.jfree.chart.entity.JFreeChartEntity;
+    
+        if $stack3 != 0 goto label2;
+    
+        return 0;
+    
+      label2:
+        that = (org.jfree.chart.entity.JFreeChartEntity) obj;
+        $stack5 = virtualinvoke this.<org.jfree.chart.entity.JFreeChartEntity: java.awt.Shape getArea()>();
+        $stack4 = virtualinvoke that.<org.jfree.chart.entity.JFreeChartEntity: java.awt.Shape getArea()>();
+        $stack6 = virtualinvoke $stack5.<java.lang.Object: boolean equals(java.lang.Object)>($stack4);
+    
+        if $stack6 != 0 goto label3;
+    
+        return 0;
+    
+      label3:
+        $stack8 = virtualinvoke this.<org.jfree.chart.entity.JFreeChartEntity: java.lang.String getToolTipText()>();
+        $stack7 = virtualinvoke that.<org.jfree.chart.entity.JFreeChartEntity: java.lang.String getToolTipText()>();
+        $stack9 = staticinvoke <org.jfree.chart.util.ObjectUtilities: boolean equal(java.lang.Object,java.lang.Object)>($stack8, $stack7);
+    
+        if $stack9 != 0 goto label4;
+    
+        return 0;
+    
+      label4:
+        $stack11 = virtualinvoke this.<org.jfree.chart.entity.JFreeChartEntity: java.lang.String getURLText()>();
+        $stack10 = virtualinvoke that.<org.jfree.chart.entity.JFreeChartEntity: java.lang.String getURLText()>();
+        $stack12 = staticinvoke <org.jfree.chart.util.ObjectUtilities: boolean equal(java.lang.Object,java.lang.Object)>($stack11, $stack10);
+    
+        if $stack12 != 0 goto label5;
+    
+        return 0;
+    
+      label5:
+        $stack14 = this.<org.jfree.chart.entity.JFreeChartEntity: org.jfree.chart.JFreeChart chart>;
+        $stack13 = that.<org.jfree.chart.entity.JFreeChartEntity: org.jfree.chart.JFreeChart chart>;
+        $stack15 = virtualinvoke $stack14.<org.jfree.chart.JFreeChart: boolean equals(java.lang.Object)>($stack13);
+    
+        if $stack15 != 0 goto label6;
+    
+        return 0;
+    
+      label6:
+        return 1;
+    }
+
+    // ---- method: <org.jfree.chart.entity.JFreeChartEntity: void readObject(java.io.ObjectInputStream)> ----
+    {
+        java.awt.Shape $stack2;
+        java.io.ObjectInputStream stream;
+        org.jfree.chart.entity.JFreeChartEntity this;
+    
+    
+        this := @this: org.jfree.chart.entity.JFreeChartEntity;
+        stream := @parameter0: java.io.ObjectInputStream;
+        virtualinvoke stream.<java.io.ObjectInputStream: void defaultReadObject()>();
+        $stack2 = staticinvoke <org.jfree.chart.util.SerialUtilities: java.awt.Shape readShape(java.io.ObjectInputStream)>(stream);
+        virtualinvoke this.<org.jfree.chart.entity.JFreeChartEntity: void setArea(java.awt.Shape)>($stack2);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.entity.JFreeChartEntity: java.lang.String toString()> ----
+    {
+        java.lang.String $stack3, $stack4;
+        java.lang.StringBuffer $stack2, buf;
+        org.jfree.chart.entity.JFreeChartEntity this;
+    
+    
+        this := @this: org.jfree.chart.entity.JFreeChartEntity;
+        $stack2 = new java.lang.StringBuffer;
+        specialinvoke $stack2.<java.lang.StringBuffer: void <init>(java.lang.String)>("JFreeChartEntity: ");
+        buf = $stack2;
+        virtualinvoke $stack2.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>("tooltip = ");
+        $stack3 = virtualinvoke this.<org.jfree.chart.entity.JFreeChartEntity: java.lang.String getToolTipText()>();
+        virtualinvoke $stack2.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>($stack3);
+        $stack4 = virtualinvoke $stack2.<java.lang.StringBuffer: java.lang.String toString()>();
+    
+        return $stack4;
+    }
+
+    // ---- method: <org.jfree.chart.entity.JFreeChartEntity: java.lang.Object clone()> ----
+    {
+        java.lang.Object $stack1;
+        org.jfree.chart.entity.JFreeChartEntity this;
+    
+    
+        this := @this: org.jfree.chart.entity.JFreeChartEntity;
+        $stack1 = specialinvoke this.<org.jfree.chart.entity.ChartEntity: java.lang.Object clone()>();
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.entity.JFreeChartEntity: int hashCode()> ----
+    {
+        byte result#0;
+        int result#1, result#2;
+        java.lang.String $stack2, $stack3;
+        org.jfree.chart.entity.JFreeChartEntity this;
+    
+    
+        this := @this: org.jfree.chart.entity.JFreeChartEntity;
+        result#0 = 39;
+        $stack2 = virtualinvoke this.<org.jfree.chart.entity.JFreeChartEntity: java.lang.String getToolTipText()>();
+        result#1 = staticinvoke <org.jfree.chart.util.HashUtilities: int hashCode(int,java.lang.String)>(39, $stack2);
+        $stack3 = virtualinvoke this.<org.jfree.chart.entity.JFreeChartEntity: java.lang.String getURLText()>();
+        result#2 = staticinvoke <org.jfree.chart.util.HashUtilities: int hashCode(int,java.lang.String)>(result#1, $stack3);
+    
+        return result#2;
+    }
+
+    // ---- method: <org.jfree.chart.entity.JFreeChartEntity: org.jfree.chart.JFreeChart getChart()> ----
+    {
+        org.jfree.chart.JFreeChart $stack1;
+        org.jfree.chart.entity.JFreeChartEntity this;
+    
+    
+        this := @this: org.jfree.chart.entity.JFreeChartEntity;
+        $stack1 = this.<org.jfree.chart.entity.JFreeChartEntity: org.jfree.chart.JFreeChart chart>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.entity.JFreeChartEntity: void writeObject(java.io.ObjectOutputStream)> ----
+    {
+        java.awt.Shape $stack2;
+        java.io.ObjectOutputStream stream;
+        org.jfree.chart.entity.JFreeChartEntity this;
+    
+    
+        this := @this: org.jfree.chart.entity.JFreeChartEntity;
+        stream := @parameter0: java.io.ObjectOutputStream;
+        virtualinvoke stream.<java.io.ObjectOutputStream: void defaultWriteObject()>();
+        $stack2 = virtualinvoke this.<org.jfree.chart.entity.JFreeChartEntity: java.awt.Shape getArea()>();
+        staticinvoke <org.jfree.chart.util.SerialUtilities: void writeShape(java.awt.Shape,java.io.ObjectOutputStream)>($stack2, stream);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.entity.JFreeChartEntity: void <init>(java.awt.Shape,org.jfree.chart.JFreeChart,java.lang.String,java.lang.String)> ----
+    {
+        java.awt.Shape area;
+        java.lang.IllegalArgumentException #l0;
+        java.lang.Object $stack5;
+        java.lang.String toolTipText, urlText;
+        java.lang.Throwable #l1;
+        org.jfree.chart.JFreeChart chart;
+        org.jfree.chart.entity.JFreeChartEntity this;
+    
+    
+        this := @this: org.jfree.chart.entity.JFreeChartEntity;
+        area := @parameter0: java.awt.Shape;
+        chart := @parameter1: org.jfree.chart.JFreeChart;
+        toolTipText := @parameter2: java.lang.String;
+        urlText := @parameter3: java.lang.String;
+        specialinvoke this.<org.jfree.chart.entity.ChartEntity: void <init>(java.awt.Shape,java.lang.String,java.lang.String)>(area, toolTipText, urlText);
+    
+        if chart != null goto label1;
+        $stack5 = new java.lang.IllegalArgumentException;
+        #l0 = (java.lang.IllegalArgumentException) $stack5;
+        specialinvoke #l0.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'chart\' argument.");
+        #l1 = (java.lang.Throwable) $stack5;
+    
+        throw #l1;
+    
+      label1:
+        this.<org.jfree.chart.entity.JFreeChartEntity: org.jfree.chart.JFreeChart chart> = chart;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.entity.JFreeChartEntity: void <init>(java.awt.Shape,org.jfree.chart.JFreeChart)> ----
+    {
+        java.awt.Shape area;
+        org.jfree.chart.JFreeChart chart;
+        org.jfree.chart.entity.JFreeChartEntity this;
+    
+    
+        this := @this: org.jfree.chart.entity.JFreeChartEntity;
+        area := @parameter0: java.awt.Shape;
+        chart := @parameter1: org.jfree.chart.JFreeChart;
+        specialinvoke this.<org.jfree.chart.entity.JFreeChartEntity: void <init>(java.awt.Shape,org.jfree.chart.JFreeChart,java.lang.String)>(area, chart, null);
+    
+        return;
+    }
+
+}

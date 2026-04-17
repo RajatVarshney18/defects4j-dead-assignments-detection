@@ -1,0 +1,495 @@
+// ========================================================================
+// CLASS : org.jfree.data.KeyToGroupMap
+// ========================================================================
+
+[PUBLIC, SUPER] class org.jfree.data.KeyToGroupMap extends java.lang.Object implements org.jfree.chart.util.PublicCloneable, java.lang.Cloneable, java.io.Serializable {
+
+    // ---- method: <org.jfree.data.KeyToGroupMap: java.lang.Object clone()> ----
+    {
+        java.lang.Comparable $stack3, $stack5;
+        java.lang.Object $stack10, $stack2, $stack4, $stack6;
+        java.util.Collection #l0, $stack7;
+        java.util.List $stack8;
+        java.util.Map $stack11, $stack9;
+        org.jfree.data.KeyToGroupMap result, this;
+    
+    
+        this := @this: org.jfree.data.KeyToGroupMap;
+        $stack2 = specialinvoke this.<java.lang.Object: java.lang.Object clone()>();
+        result = (org.jfree.data.KeyToGroupMap) $stack2;
+        $stack3 = this.<org.jfree.data.KeyToGroupMap: java.lang.Comparable defaultGroup>;
+        $stack4 = staticinvoke <org.jfree.data.KeyToGroupMap: java.lang.Object clone(java.lang.Object)>($stack3);
+        $stack5 = (java.lang.Comparable) $stack4;
+        result.<org.jfree.data.KeyToGroupMap: java.lang.Comparable defaultGroup> = $stack5;
+        $stack6 = this.<org.jfree.data.KeyToGroupMap: java.util.List groups>;
+        #l0 = (java.util.Collection) $stack6;
+        $stack7 = staticinvoke <org.jfree.data.KeyToGroupMap: java.util.Collection clone(java.util.Collection)>(#l0);
+        $stack8 = (java.util.List) $stack7;
+        result.<org.jfree.data.KeyToGroupMap: java.util.List groups> = $stack8;
+        $stack9 = this.<org.jfree.data.KeyToGroupMap: java.util.Map keyToGroupMap>;
+        $stack10 = staticinvoke <org.jfree.data.KeyToGroupMap: java.lang.Object clone(java.lang.Object)>($stack9);
+        $stack11 = (java.util.Map) $stack10;
+        result.<org.jfree.data.KeyToGroupMap: java.util.Map keyToGroupMap> = $stack11;
+    
+        return result;
+    }
+
+    // ---- method: <org.jfree.data.KeyToGroupMap: boolean equals(java.lang.Object)> ----
+    {
+        boolean $stack3, $stack6, $stack9;
+        java.lang.Comparable $stack4, $stack5;
+        java.lang.Object obj;
+        java.util.Map $stack7, $stack8;
+        org.jfree.data.KeyToGroupMap that, this;
+    
+    
+        this := @this: org.jfree.data.KeyToGroupMap;
+        obj := @parameter0: java.lang.Object;
+    
+        if obj != this goto label1;
+    
+        return 1;
+    
+      label1:
+        $stack3 = obj instanceof org.jfree.data.KeyToGroupMap;
+    
+        if $stack3 != 0 goto label2;
+    
+        return 0;
+    
+      label2:
+        that = (org.jfree.data.KeyToGroupMap) obj;
+        $stack5 = this.<org.jfree.data.KeyToGroupMap: java.lang.Comparable defaultGroup>;
+        $stack4 = that.<org.jfree.data.KeyToGroupMap: java.lang.Comparable defaultGroup>;
+        $stack6 = staticinvoke <org.jfree.chart.util.ObjectUtilities: boolean equal(java.lang.Object,java.lang.Object)>($stack5, $stack4);
+    
+        if $stack6 != 0 goto label3;
+    
+        return 0;
+    
+      label3:
+        $stack8 = this.<org.jfree.data.KeyToGroupMap: java.util.Map keyToGroupMap>;
+        $stack7 = that.<org.jfree.data.KeyToGroupMap: java.util.Map keyToGroupMap>;
+        $stack9 = interfaceinvoke $stack8.<java.util.Map: boolean equals(java.lang.Object)>($stack7);
+    
+        if $stack9 != 0 goto label4;
+    
+        return 0;
+    
+      label4:
+        return 1;
+    }
+
+    // ---- method: <org.jfree.data.KeyToGroupMap: java.lang.Comparable getGroup(java.lang.Comparable)> ----
+    {
+        java.lang.Comparable group, key, result;
+        java.lang.IllegalArgumentException #l1;
+        java.lang.Object $stack5, $stack6;
+        java.lang.Throwable #l0;
+        java.util.Map $stack4;
+        org.jfree.data.KeyToGroupMap this;
+    
+    
+        this := @this: org.jfree.data.KeyToGroupMap;
+        key := @parameter0: java.lang.Comparable;
+    
+        if key != null goto label1;
+        $stack6 = new java.lang.IllegalArgumentException;
+        #l1 = (java.lang.IllegalArgumentException) $stack6;
+        specialinvoke #l1.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'key\' argument.");
+        #l0 = (java.lang.Throwable) $stack6;
+    
+        throw #l0;
+    
+      label1:
+        result = this.<org.jfree.data.KeyToGroupMap: java.lang.Comparable defaultGroup>;
+        $stack4 = this.<org.jfree.data.KeyToGroupMap: java.util.Map keyToGroupMap>;
+        $stack5 = interfaceinvoke $stack4.<java.util.Map: java.lang.Object get(java.lang.Object)>(key);
+        group = (java.lang.Comparable) $stack5;
+    
+        if group == null goto label2;
+        result = group;
+    
+      label2:
+        return result;
+    }
+
+    // ---- method: <org.jfree.data.KeyToGroupMap: void <init>(java.lang.Comparable)> ----
+    {
+        java.lang.Comparable defaultGroup;
+        java.lang.IllegalArgumentException #l2;
+        java.lang.Object $stack2, $stack3, $stack4;
+        java.lang.Throwable #l0;
+        java.util.ArrayList #l1;
+        java.util.HashMap #l3;
+        org.jfree.data.KeyToGroupMap this;
+    
+    
+        this := @this: org.jfree.data.KeyToGroupMap;
+        defaultGroup := @parameter0: java.lang.Comparable;
+        specialinvoke this.<java.lang.Object: void <init>()>();
+    
+        if defaultGroup != null goto label1;
+        $stack4 = new java.lang.IllegalArgumentException;
+        #l2 = (java.lang.IllegalArgumentException) $stack4;
+        specialinvoke #l2.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'defaultGroup\' argument.");
+        #l0 = (java.lang.Throwable) $stack4;
+    
+        throw #l0;
+    
+      label1:
+        this.<org.jfree.data.KeyToGroupMap: java.lang.Comparable defaultGroup> = defaultGroup;
+        $stack2 = new java.util.ArrayList;
+        #l1 = (java.util.ArrayList) $stack2;
+        specialinvoke #l1.<java.util.ArrayList: void <init>()>();
+        this.<org.jfree.data.KeyToGroupMap: java.util.List groups> = (java.util.List) $stack2;
+        $stack3 = new java.util.HashMap;
+        #l3 = (java.util.HashMap) $stack3;
+        specialinvoke #l3.<java.util.HashMap: void <init>()>();
+        this.<org.jfree.data.KeyToGroupMap: java.util.Map keyToGroupMap> = (java.util.Map) $stack3;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.KeyToGroupMap: java.util.List getGroups()> ----
+    {
+        boolean $stack7, $stack9;
+        java.lang.Comparable $stack5, group;
+        java.lang.Object $stack4, $stack8;
+        java.util.ArrayList #l2, result;
+        java.util.Iterator iterator;
+        java.util.List #l0, #l1, #l3, #l4, $stack6;
+        org.jfree.data.KeyToGroupMap this;
+    
+    
+        this := @this: org.jfree.data.KeyToGroupMap;
+        $stack4 = new java.util.ArrayList;
+        #l2 = (java.util.ArrayList) $stack4;
+        specialinvoke #l2.<java.util.ArrayList: void <init>()>();
+        result = (java.util.ArrayList) $stack4;
+        $stack5 = this.<org.jfree.data.KeyToGroupMap: java.lang.Comparable defaultGroup>;
+        #l0 = (java.util.List) $stack4;
+        interfaceinvoke #l0.<java.util.List: boolean add(java.lang.Object)>($stack5);
+        $stack6 = this.<org.jfree.data.KeyToGroupMap: java.util.List groups>;
+        iterator = interfaceinvoke $stack6.<java.util.List: java.util.Iterator iterator()>();
+    
+      label1:
+        $stack7 = interfaceinvoke iterator.<java.util.Iterator: boolean hasNext()>();
+    
+        if $stack7 == 0 goto label3;
+        $stack8 = interfaceinvoke iterator.<java.util.Iterator: java.lang.Object next()>();
+        group = (java.lang.Comparable) $stack8;
+        #l3 = (java.util.List) $stack4;
+        $stack9 = interfaceinvoke #l3.<java.util.List: boolean contains(java.lang.Object)>(group);
+    
+        if $stack9 != 0 goto label2;
+        #l4 = (java.util.List) $stack4;
+        interfaceinvoke #l4.<java.util.List: boolean add(java.lang.Object)>(group);
+    
+      label2:
+        goto label1;
+    
+      label3:
+        #l1 = (java.util.List) $stack4;
+    
+        return #l1;
+    }
+
+    // ---- method: <org.jfree.data.KeyToGroupMap: void <init>()> ----
+    {
+        java.lang.Comparable #l0;
+        org.jfree.data.KeyToGroupMap this;
+    
+    
+        this := @this: org.jfree.data.KeyToGroupMap;
+        #l0 = (java.lang.Comparable) "Default Group";
+        specialinvoke this.<org.jfree.data.KeyToGroupMap: void <init>(java.lang.Comparable)>(#l0);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.KeyToGroupMap: void mapKeyToGroup(java.lang.Comparable,java.lang.Comparable)> ----
+    {
+        boolean $stack11, $stack14, $stack6, $stack8;
+        int count;
+        java.lang.Comparable $stack10, $stack5, currentGroup, group, key;
+        java.lang.IllegalArgumentException #l1;
+        java.lang.Object $stack16;
+        java.lang.Throwable #l0;
+        java.util.List $stack12, $stack15, $stack7;
+        java.util.Map $stack13, $stack9;
+        org.jfree.data.KeyToGroupMap this;
+    
+    
+        this := @this: org.jfree.data.KeyToGroupMap;
+        key := @parameter0: java.lang.Comparable;
+        group := @parameter1: java.lang.Comparable;
+    
+        if key != null goto label1;
+        $stack16 = new java.lang.IllegalArgumentException;
+        #l1 = (java.lang.IllegalArgumentException) $stack16;
+        specialinvoke #l1.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'key\' argument.");
+        #l0 = (java.lang.Throwable) $stack16;
+    
+        throw #l0;
+    
+      label1:
+        currentGroup = virtualinvoke this.<org.jfree.data.KeyToGroupMap: java.lang.Comparable getGroup(java.lang.Comparable)>(key);
+        $stack5 = this.<org.jfree.data.KeyToGroupMap: java.lang.Comparable defaultGroup>;
+        $stack6 = virtualinvoke currentGroup.<java.lang.Object: boolean equals(java.lang.Object)>($stack5);
+    
+        if $stack6 != 0 goto label2;
+        $stack14 = virtualinvoke currentGroup.<java.lang.Object: boolean equals(java.lang.Object)>(group);
+    
+        if $stack14 != 0 goto label2;
+        count = virtualinvoke this.<org.jfree.data.KeyToGroupMap: int getKeyCount(java.lang.Comparable)>(currentGroup);
+    
+        if count != 1 goto label2;
+        $stack15 = this.<org.jfree.data.KeyToGroupMap: java.util.List groups>;
+        interfaceinvoke $stack15.<java.util.List: boolean remove(java.lang.Object)>(currentGroup);
+    
+      label2:
+        if group != null goto label3;
+        $stack13 = this.<org.jfree.data.KeyToGroupMap: java.util.Map keyToGroupMap>;
+        interfaceinvoke $stack13.<java.util.Map: java.lang.Object remove(java.lang.Object)>(key);
+    
+        goto label5;
+    
+      label3:
+        $stack7 = this.<org.jfree.data.KeyToGroupMap: java.util.List groups>;
+        $stack8 = interfaceinvoke $stack7.<java.util.List: boolean contains(java.lang.Object)>(group);
+    
+        if $stack8 != 0 goto label4;
+        $stack10 = this.<org.jfree.data.KeyToGroupMap: java.lang.Comparable defaultGroup>;
+        $stack11 = virtualinvoke $stack10.<java.lang.Object: boolean equals(java.lang.Object)>(group);
+    
+        if $stack11 != 0 goto label4;
+        $stack12 = this.<org.jfree.data.KeyToGroupMap: java.util.List groups>;
+        interfaceinvoke $stack12.<java.util.List: boolean add(java.lang.Object)>(group);
+    
+      label4:
+        $stack9 = this.<org.jfree.data.KeyToGroupMap: java.util.Map keyToGroupMap>;
+        interfaceinvoke $stack9.<java.util.Map: java.lang.Object put(java.lang.Object,java.lang.Object)>(key, group);
+    
+      label5:
+        return;
+    }
+
+    // ---- method: <org.jfree.data.KeyToGroupMap: int getGroupCount()> ----
+    {
+        int $stack2, $stack3;
+        java.util.List $stack1;
+        org.jfree.data.KeyToGroupMap this;
+    
+    
+        this := @this: org.jfree.data.KeyToGroupMap;
+        $stack1 = this.<org.jfree.data.KeyToGroupMap: java.util.List groups>;
+        $stack2 = interfaceinvoke $stack1.<java.util.List: int size()>();
+        $stack3 = $stack2 + 1;
+    
+        return $stack3;
+    }
+
+    // ---- method: <org.jfree.data.KeyToGroupMap: int getGroupIndex(java.lang.Comparable)> ----
+    {
+        boolean $stack5;
+        int result;
+        java.lang.Comparable $stack4, group;
+        java.util.List $stack3;
+        org.jfree.data.KeyToGroupMap this;
+    
+    
+        this := @this: org.jfree.data.KeyToGroupMap;
+        group := @parameter0: java.lang.Comparable;
+        $stack3 = this.<org.jfree.data.KeyToGroupMap: java.util.List groups>;
+        result = interfaceinvoke $stack3.<java.util.List: int indexOf(java.lang.Object)>(group);
+    
+        if result >= 0 goto label1;
+        $stack4 = this.<org.jfree.data.KeyToGroupMap: java.lang.Comparable defaultGroup>;
+        $stack5 = virtualinvoke $stack4.<java.lang.Object: boolean equals(java.lang.Object)>(group);
+    
+        if $stack5 == 0 goto label2;
+        result = 0;
+    
+        goto label2;
+    
+      label1:
+        result = result + 1;
+    
+      label2:
+        return result;
+    }
+
+    // ---- method: <org.jfree.data.KeyToGroupMap: java.util.Collection clone(java.util.Collection)> ----
+    {
+        boolean $stack6;
+        java.lang.Class $stack4;
+        java.lang.CloneNotSupportedException #l0;
+        java.lang.Object $stack10, $stack5, $stack7, $stack8, result;
+        java.lang.Throwable #l2, $stack9, clone#1;
+        java.util.Collection #l1, list;
+        java.util.Iterator iterator;
+        java.util.List clone#0;
+    
+    
+        list := @parameter0: java.util.Collection;
+        result = null;
+    
+        if list == null goto label6;
+    
+      label1:
+        $stack4 = virtualinvoke list.<java.lang.Object: java.lang.Class getClass()>();
+        $stack5 = virtualinvoke $stack4.<java.lang.Class: java.lang.Object newInstance()>();
+        clone#0 = (java.util.List) $stack5;
+        iterator = interfaceinvoke list.<java.util.Collection: java.util.Iterator iterator()>();
+    
+      label2:
+        $stack6 = interfaceinvoke iterator.<java.util.Iterator: boolean hasNext()>();
+    
+        if $stack6 == 0 goto label4;
+        $stack7 = interfaceinvoke iterator.<java.util.Iterator: java.lang.Object next()>();
+        $stack8 = staticinvoke <org.jfree.data.KeyToGroupMap: java.lang.Object clone(java.lang.Object)>($stack7);
+        interfaceinvoke clone#0.<java.util.List: boolean add(java.lang.Object)>($stack8);
+    
+        goto label2;
+    
+      label3:
+        $stack9 := @caughtexception;
+        clone#1 = $stack9;
+        $stack10 = new java.lang.CloneNotSupportedException;
+        #l0 = (java.lang.CloneNotSupportedException) $stack10;
+        specialinvoke #l0.<java.lang.CloneNotSupportedException: void <init>(java.lang.String)>("Exception.");
+        #l2 = (java.lang.Throwable) $stack10;
+    
+        throw #l2;
+    
+      label4:
+        result = clone#0;
+    
+      label5:
+        goto label6;
+    
+      label6:
+        #l1 = (java.util.Collection) result;
+    
+        return #l1;
+    
+     catch java.lang.Exception from label1 to label3 with label3;
+     catch java.lang.Exception from label4 to label5 with label3;
+    }
+
+    // ---- method: <org.jfree.data.KeyToGroupMap: int getKeyCount(java.lang.Comparable)> ----
+    {
+        boolean $stack7, $stack9;
+        int result;
+        java.lang.Comparable g, group;
+        java.lang.IllegalArgumentException #l0;
+        java.lang.Object $stack10, $stack8;
+        java.lang.Throwable #l1;
+        java.util.Collection $stack6;
+        java.util.Iterator iterator;
+        java.util.Map $stack5;
+        org.jfree.data.KeyToGroupMap this;
+    
+    
+        this := @this: org.jfree.data.KeyToGroupMap;
+        group := @parameter0: java.lang.Comparable;
+    
+        if group != null goto label1;
+        $stack10 = new java.lang.IllegalArgumentException;
+        #l0 = (java.lang.IllegalArgumentException) $stack10;
+        specialinvoke #l0.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'group\' argument.");
+        #l1 = (java.lang.Throwable) $stack10;
+    
+        throw #l1;
+    
+      label1:
+        result = 0;
+        $stack5 = this.<org.jfree.data.KeyToGroupMap: java.util.Map keyToGroupMap>;
+        $stack6 = interfaceinvoke $stack5.<java.util.Map: java.util.Collection values()>();
+        iterator = interfaceinvoke $stack6.<java.util.Collection: java.util.Iterator iterator()>();
+    
+      label2:
+        $stack7 = interfaceinvoke iterator.<java.util.Iterator: boolean hasNext()>();
+    
+        if $stack7 == 0 goto label4;
+        $stack8 = interfaceinvoke iterator.<java.util.Iterator: java.lang.Object next()>();
+        g = (java.lang.Comparable) $stack8;
+        $stack9 = virtualinvoke group.<java.lang.Object: boolean equals(java.lang.Object)>(g);
+    
+        if $stack9 == 0 goto label3;
+        result = result + 1;
+    
+      label3:
+        goto label2;
+    
+      label4:
+        return result;
+    }
+
+    // ---- method: <org.jfree.data.KeyToGroupMap: java.lang.Object clone(java.lang.Object)> ----
+    {
+        boolean $stack7;
+        int $stack6;
+        java.lang.Class c;
+        java.lang.Class[] $stack5;
+        java.lang.Exception #l0;
+        java.lang.Object $stack10, object, result;
+        java.lang.Object[] $stack8;
+        java.lang.Throwable $stack9, e, m#1;
+        java.lang.reflect.Method m#0;
+    
+    
+        object := @parameter0: java.lang.Object;
+    
+        if object != null goto label01;
+    
+        return null;
+    
+      label01:
+        c = virtualinvoke object.<java.lang.Object: java.lang.Class getClass()>();
+        result = null;
+    
+      label02:
+        $stack5 = (java.lang.Class[]) null;
+        m#0 = virtualinvoke c.<java.lang.Class: java.lang.reflect.Method getMethod(java.lang.String,java.lang.Class[])>("clone", $stack5);
+        $stack6 = virtualinvoke m#0.<java.lang.reflect.Method: int getModifiers()>();
+        $stack7 = staticinvoke <java.lang.reflect.Modifier: boolean isPublic(int)>($stack6);
+    
+        if $stack7 == 0 goto label10;
+    
+      label03:
+        $stack8 = (java.lang.Object[]) null;
+        result = virtualinvoke m#0.<java.lang.reflect.Method: java.lang.Object invoke(java.lang.Object,java.lang.Object[])>(object, $stack8);
+    
+      label04:
+        goto label10;
+    
+      label05:
+        $stack9 := @caughtexception;
+        m#1 = $stack9;
+        result = object;
+    
+      label06:
+        return result;
+    
+      label07:
+        $stack10 := @caughtexception;
+        e = (java.lang.Throwable) $stack10;
+    
+      label08:
+        #l0 = (java.lang.Exception) $stack10;
+    
+      label09:
+        virtualinvoke #l0.<java.lang.Exception: void printStackTrace()>();
+    
+      label10:
+        goto label06;
+    
+     catch java.lang.NoSuchMethodException from label02 to label05 with label05;
+     catch java.lang.Exception from label03 to label04 with label07;
+     catch java.lang.NoSuchMethodException from label07 to label08 with label05;
+     catch java.lang.NoSuchMethodException from label09 to label10 with label05;
+    }
+
+}

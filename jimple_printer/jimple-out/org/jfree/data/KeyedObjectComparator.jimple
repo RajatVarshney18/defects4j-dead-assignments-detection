@@ -1,0 +1,195 @@
+// ========================================================================
+// CLASS : org.jfree.data.KeyedObjectComparator
+// ========================================================================
+
+[PUBLIC, SUPER] class org.jfree.data.KeyedObjectComparator extends java.lang.Object implements java.util.Comparator {
+
+    // ---- method: <org.jfree.data.KeyedObjectComparator: void <init>(org.jfree.data.KeyedObjectComparatorType,org.jfree.chart.util.SortOrder)> ----
+    {
+        java.lang.IllegalArgumentException #l0;
+        java.lang.Object $stack3;
+        java.lang.Throwable #l1;
+        org.jfree.chart.util.SortOrder order;
+        org.jfree.data.KeyedObjectComparator this;
+        org.jfree.data.KeyedObjectComparatorType type;
+    
+    
+        this := @this: org.jfree.data.KeyedObjectComparator;
+        type := @parameter0: org.jfree.data.KeyedObjectComparatorType;
+        order := @parameter1: org.jfree.chart.util.SortOrder;
+        specialinvoke this.<java.lang.Object: void <init>()>();
+    
+        if order != null goto label1;
+        $stack3 = new java.lang.IllegalArgumentException;
+        #l0 = (java.lang.IllegalArgumentException) $stack3;
+        specialinvoke #l0.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'order\' argument.");
+        #l1 = (java.lang.Throwable) $stack3;
+    
+        throw #l1;
+    
+      label1:
+        this.<org.jfree.data.KeyedObjectComparator: org.jfree.data.KeyedObjectComparatorType type> = type;
+        this.<org.jfree.data.KeyedObjectComparator: org.jfree.chart.util.SortOrder order> = order;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.KeyedObjectComparator: int compare(java.lang.Object,java.lang.Object)> ----
+    {
+        boolean $stack14, $stack15, $stack18, $stack21, $stack27, $stack30;
+        int $stack23, $stack24, $stack34, $stack37;
+        java.lang.Comparable #l2, #l4, $stack32, $stack33, $stack35, $stack36;
+        java.lang.IllegalArgumentException #l3, #l5, #l7;
+        java.lang.Object $stack13, $stack22, $stack31, c1, c2, n1, n2, o1, o2;
+        java.lang.Throwable #l0, #l1, #l6;
+        org.jfree.chart.util.SortOrder $stack16, $stack17, $stack19, $stack20, $stack25, $stack26, $stack28, $stack29;
+        org.jfree.data.KeyedObject ko1, ko2;
+        org.jfree.data.KeyedObjectComparator this;
+        org.jfree.data.KeyedObjectComparatorType $stack10, $stack11, $stack12, $stack9;
+    
+    
+        this := @this: org.jfree.data.KeyedObjectComparator;
+        o1 := @parameter0: java.lang.Object;
+        o2 := @parameter1: java.lang.Object;
+    
+        if o2 != null goto label01;
+    
+        return -1;
+    
+      label01:
+        if o1 != null goto label02;
+    
+        return 1;
+    
+      label02:
+        ko1 = (org.jfree.data.KeyedObject) o1;
+        ko2 = (org.jfree.data.KeyedObject) o2;
+        $stack10 = this.<org.jfree.data.KeyedObjectComparator: org.jfree.data.KeyedObjectComparatorType type>;
+        $stack9 = <org.jfree.data.KeyedObjectComparatorType: org.jfree.data.KeyedObjectComparatorType BY_KEY>;
+    
+        if $stack10 != $stack9 goto label04;
+        $stack26 = this.<org.jfree.data.KeyedObjectComparator: org.jfree.chart.util.SortOrder order>;
+        $stack25 = <org.jfree.chart.util.SortOrder: org.jfree.chart.util.SortOrder ASCENDING>;
+        $stack27 = virtualinvoke $stack26.<org.jfree.chart.util.SortOrder: boolean equals(java.lang.Object)>($stack25);
+    
+        if $stack27 == 0 goto label03;
+        $stack36 = virtualinvoke ko1.<org.jfree.data.KeyedObject: java.lang.Comparable getKey()>();
+        $stack35 = virtualinvoke ko2.<org.jfree.data.KeyedObject: java.lang.Comparable getKey()>();
+        $stack37 = interfaceinvoke $stack36.<java.lang.Comparable: int compareTo(java.lang.Object)>($stack35);
+    
+        return $stack37;
+    
+      label03:
+        $stack29 = this.<org.jfree.data.KeyedObjectComparator: org.jfree.chart.util.SortOrder order>;
+        $stack28 = <org.jfree.chart.util.SortOrder: org.jfree.chart.util.SortOrder DESCENDING>;
+        $stack30 = virtualinvoke $stack29.<org.jfree.chart.util.SortOrder: boolean equals(java.lang.Object)>($stack28);
+    
+        if $stack30 == 0 goto label10;
+        $stack33 = virtualinvoke ko2.<org.jfree.data.KeyedObject: java.lang.Comparable getKey()>();
+        $stack32 = virtualinvoke ko1.<org.jfree.data.KeyedObject: java.lang.Comparable getKey()>();
+        $stack34 = interfaceinvoke $stack33.<java.lang.Comparable: int compareTo(java.lang.Object)>($stack32);
+    
+        return $stack34;
+    
+      label04:
+        $stack12 = this.<org.jfree.data.KeyedObjectComparator: org.jfree.data.KeyedObjectComparatorType type>;
+        $stack11 = <org.jfree.data.KeyedObjectComparatorType: org.jfree.data.KeyedObjectComparatorType BY_VALUE>;
+    
+        if $stack12 != $stack11 goto label11;
+        n1 = virtualinvoke ko1.<org.jfree.data.KeyedObject: java.lang.Object getObject()>();
+        n2 = virtualinvoke ko2.<org.jfree.data.KeyedObject: java.lang.Object getObject()>();
+        c1 = "FALLBACK";
+        $stack14 = n1 instanceof java.lang.Comparable;
+    
+        if $stack14 == 0 goto label05;
+        c1 = (java.lang.Comparable) n1;
+    
+      label05:
+        c2 = "FALLBACK";
+        $stack15 = n2 instanceof java.lang.Comparable;
+    
+        if $stack15 == 0 goto label06;
+        c2 = (java.lang.Comparable) n2;
+    
+      label06:
+        if n2 != null goto label07;
+    
+        return -1;
+    
+      label07:
+        if n1 != null goto label08;
+    
+        return 1;
+    
+      label08:
+        $stack17 = this.<org.jfree.data.KeyedObjectComparator: org.jfree.chart.util.SortOrder order>;
+        $stack16 = <org.jfree.chart.util.SortOrder: org.jfree.chart.util.SortOrder ASCENDING>;
+        $stack18 = virtualinvoke $stack17.<org.jfree.chart.util.SortOrder: boolean equals(java.lang.Object)>($stack16);
+    
+        if $stack18 == 0 goto label09;
+        #l4 = (java.lang.Comparable) c1;
+        $stack24 = interfaceinvoke #l4.<java.lang.Comparable: int compareTo(java.lang.Object)>(c2);
+    
+        return $stack24;
+    
+      label09:
+        $stack20 = this.<org.jfree.data.KeyedObjectComparator: org.jfree.chart.util.SortOrder order>;
+        $stack19 = <org.jfree.chart.util.SortOrder: org.jfree.chart.util.SortOrder DESCENDING>;
+        $stack21 = virtualinvoke $stack20.<org.jfree.chart.util.SortOrder: boolean equals(java.lang.Object)>($stack19);
+    
+        if $stack21 == 0 goto label12;
+        #l2 = (java.lang.Comparable) c2;
+        $stack23 = interfaceinvoke #l2.<java.lang.Comparable: int compareTo(java.lang.Object)>(c1);
+    
+        return $stack23;
+    
+      label10:
+        $stack31 = new java.lang.IllegalArgumentException;
+        #l3 = (java.lang.IllegalArgumentException) $stack31;
+        specialinvoke #l3.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Unrecognised sort order.");
+        #l1 = (java.lang.Throwable) $stack31;
+    
+        throw #l1;
+    
+      label11:
+        $stack13 = new java.lang.IllegalArgumentException;
+        #l7 = (java.lang.IllegalArgumentException) $stack13;
+        specialinvoke #l7.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Unrecognised type.");
+        #l0 = (java.lang.Throwable) $stack13;
+    
+        throw #l0;
+    
+      label12:
+        $stack22 = new java.lang.IllegalArgumentException;
+        #l5 = (java.lang.IllegalArgumentException) $stack22;
+        specialinvoke #l5.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Unrecognised sort order.");
+        #l6 = (java.lang.Throwable) $stack22;
+    
+        throw #l6;
+    }
+
+    // ---- method: <org.jfree.data.KeyedObjectComparator: org.jfree.data.KeyedObjectComparatorType getType()> ----
+    {
+        org.jfree.data.KeyedObjectComparator this;
+        org.jfree.data.KeyedObjectComparatorType $stack1;
+    
+    
+        this := @this: org.jfree.data.KeyedObjectComparator;
+        $stack1 = this.<org.jfree.data.KeyedObjectComparator: org.jfree.data.KeyedObjectComparatorType type>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.data.KeyedObjectComparator: org.jfree.chart.util.SortOrder getOrder()> ----
+    {
+        org.jfree.chart.util.SortOrder $stack1;
+        org.jfree.data.KeyedObjectComparator this;
+    
+    
+        this := @this: org.jfree.data.KeyedObjectComparator;
+        $stack1 = this.<org.jfree.data.KeyedObjectComparator: org.jfree.chart.util.SortOrder order>;
+    
+        return $stack1;
+    }
+
+}

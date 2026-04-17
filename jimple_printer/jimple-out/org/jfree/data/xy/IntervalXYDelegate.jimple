@@ -1,0 +1,548 @@
+// ========================================================================
+// CLASS : org.jfree.data.xy.IntervalXYDelegate
+// ========================================================================
+
+[PUBLIC, SUPER] class org.jfree.data.xy.IntervalXYDelegate extends java.lang.Object implements org.jfree.chart.util.PublicCloneable, org.jfree.data.DomainInfo, java.io.Serializable, java.lang.Cloneable, org.jfree.data.event.DatasetChangeListener {
+
+    // ---- method: <org.jfree.data.xy.IntervalXYDelegate: void setIntervalPositionFactor(double)> ----
+    {
+        byte $stack3, $stack5;
+        double d;
+        java.lang.IllegalArgumentException #l0;
+        java.lang.Object $stack4;
+        java.lang.Throwable #l1;
+        org.jfree.data.xy.IntervalXYDelegate this;
+    
+    
+        this := @this: org.jfree.data.xy.IntervalXYDelegate;
+        d := @parameter0: double;
+        $stack3 = d cmpg 0.0;
+    
+        if $stack3 < 0 goto label1;
+        $stack5 = 1.0 cmpg d;
+    
+        if $stack5 >= 0 goto label2;
+    
+      label1:
+        $stack4 = new java.lang.IllegalArgumentException;
+        #l0 = (java.lang.IllegalArgumentException) $stack4;
+        specialinvoke #l0.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Argument \'d\' outside valid range.");
+        #l1 = (java.lang.Throwable) $stack4;
+    
+        throw #l1;
+    
+      label2:
+        this.<org.jfree.data.xy.IntervalXYDelegate: double intervalPositionFactor> = d;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.xy.IntervalXYDelegate: boolean equals(java.lang.Object)> ----
+    {
+        boolean $stack3, $stack4, $stack5;
+        byte $stack11, $stack8;
+        double $stack10, $stack6, $stack7, $stack9;
+        java.lang.Object obj;
+        org.jfree.data.xy.IntervalXYDelegate that, this;
+    
+    
+        this := @this: org.jfree.data.xy.IntervalXYDelegate;
+        obj := @parameter0: java.lang.Object;
+    
+        if obj != this goto label1;
+    
+        return 1;
+    
+      label1:
+        $stack3 = obj instanceof org.jfree.data.xy.IntervalXYDelegate;
+    
+        if $stack3 != 0 goto label2;
+    
+        return 0;
+    
+      label2:
+        that = (org.jfree.data.xy.IntervalXYDelegate) obj;
+        $stack5 = this.<org.jfree.data.xy.IntervalXYDelegate: boolean autoWidth>;
+        $stack4 = that.<org.jfree.data.xy.IntervalXYDelegate: boolean autoWidth>;
+    
+        if $stack5 == $stack4 goto label3;
+    
+        return 0;
+    
+      label3:
+        $stack6 = this.<org.jfree.data.xy.IntervalXYDelegate: double intervalPositionFactor>;
+        $stack7 = that.<org.jfree.data.xy.IntervalXYDelegate: double intervalPositionFactor>;
+        $stack8 = $stack6 cmpl $stack7;
+    
+        if $stack8 == 0 goto label4;
+    
+        return 0;
+    
+      label4:
+        $stack9 = this.<org.jfree.data.xy.IntervalXYDelegate: double fixedIntervalWidth>;
+        $stack10 = that.<org.jfree.data.xy.IntervalXYDelegate: double fixedIntervalWidth>;
+        $stack11 = $stack9 cmpl $stack10;
+    
+        if $stack11 == 0 goto label5;
+    
+        return 0;
+    
+      label5:
+        return 1;
+    }
+
+    // ---- method: <org.jfree.data.xy.IntervalXYDelegate: void setFixedIntervalWidth(double)> ----
+    {
+        byte $stack3;
+        double w;
+        java.lang.IllegalArgumentException #l0;
+        java.lang.Object $stack4;
+        java.lang.Throwable #l1;
+        org.jfree.data.xy.IntervalXYDelegate this;
+    
+    
+        this := @this: org.jfree.data.xy.IntervalXYDelegate;
+        w := @parameter0: double;
+        $stack3 = w cmpg 0.0;
+    
+        if $stack3 >= 0 goto label1;
+        $stack4 = new java.lang.IllegalArgumentException;
+        #l0 = (java.lang.IllegalArgumentException) $stack4;
+        specialinvoke #l0.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Negative \'w\' argument.");
+        #l1 = (java.lang.Throwable) $stack4;
+    
+        throw #l1;
+    
+      label1:
+        this.<org.jfree.data.xy.IntervalXYDelegate: double fixedIntervalWidth> = w;
+        this.<org.jfree.data.xy.IntervalXYDelegate: boolean autoWidth> = 0;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.xy.IntervalXYDelegate: double getIntervalPositionFactor()> ----
+    {
+        double $stack1;
+        org.jfree.data.xy.IntervalXYDelegate this;
+    
+    
+        this := @this: org.jfree.data.xy.IntervalXYDelegate;
+        $stack1 = this.<org.jfree.data.xy.IntervalXYDelegate: double intervalPositionFactor>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.data.xy.IntervalXYDelegate: java.lang.Object clone()> ----
+    {
+        java.lang.Object $stack1;
+        org.jfree.data.xy.IntervalXYDelegate this;
+    
+    
+        this := @this: org.jfree.data.xy.IntervalXYDelegate;
+        $stack1 = specialinvoke this.<java.lang.Object: java.lang.Object clone()>();
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.data.xy.IntervalXYDelegate: double getIntervalWidth()> ----
+    {
+        boolean $stack1, $stack4;
+        double $stack2, $stack3, $stack5;
+        org.jfree.data.xy.IntervalXYDelegate this;
+    
+    
+        this := @this: org.jfree.data.xy.IntervalXYDelegate;
+        $stack1 = virtualinvoke this.<org.jfree.data.xy.IntervalXYDelegate: boolean isAutoWidth()>();
+    
+        if $stack1 == 0 goto label1;
+        $stack3 = this.<org.jfree.data.xy.IntervalXYDelegate: double autoIntervalWidth>;
+        $stack4 = staticinvoke <java.lang.Double: boolean isInfinite(double)>($stack3);
+    
+        if $stack4 != 0 goto label1;
+        $stack5 = this.<org.jfree.data.xy.IntervalXYDelegate: double autoIntervalWidth>;
+    
+        return $stack5;
+    
+      label1:
+        $stack2 = this.<org.jfree.data.xy.IntervalXYDelegate: double fixedIntervalWidth>;
+    
+        return $stack2;
+    }
+
+    // ---- method: <org.jfree.data.xy.IntervalXYDelegate: double calculateIntervalForSeries(int)> ----
+    {
+        double $stack13, prev, result, x;
+        int item, itemCount, series;
+        org.jfree.data.xy.IntervalXYDelegate this;
+        org.jfree.data.xy.XYDataset $stack10, $stack11, $stack12;
+    
+    
+        this := @this: org.jfree.data.xy.IntervalXYDelegate;
+        series := @parameter0: int;
+        result = #Infinity;
+        $stack10 = this.<org.jfree.data.xy.IntervalXYDelegate: org.jfree.data.xy.XYDataset dataset>;
+        itemCount = interfaceinvoke $stack10.<org.jfree.data.xy.XYDataset: int getItemCount(int)>(series);
+    
+        if itemCount <= 1 goto label2;
+        $stack11 = this.<org.jfree.data.xy.IntervalXYDelegate: org.jfree.data.xy.XYDataset dataset>;
+        prev = interfaceinvoke $stack11.<org.jfree.data.xy.XYDataset: double getXValue(int,int)>(series, 0);
+        item = 1;
+    
+      label1:
+        if item >= itemCount goto label2;
+        $stack12 = this.<org.jfree.data.xy.IntervalXYDelegate: org.jfree.data.xy.XYDataset dataset>;
+        x = interfaceinvoke $stack12.<org.jfree.data.xy.XYDataset: double getXValue(int,int)>(series, item);
+        $stack13 = x - prev;
+        result = staticinvoke <java.lang.Math: double min(double,double)>(result, $stack13);
+        prev = x;
+        item = item + 1;
+    
+        goto label1;
+    
+      label2:
+        return result;
+    }
+
+    // ---- method: <org.jfree.data.xy.IntervalXYDelegate: java.lang.Number getStartX(int,int)> ----
+    {
+        double $stack10, $stack6, $stack7, $stack8, $stack9;
+        int item, series;
+        java.lang.Double $stack11;
+        java.lang.Number #l0, x;
+        java.lang.Object startX;
+        org.jfree.data.xy.IntervalXYDelegate this;
+        org.jfree.data.xy.XYDataset $stack5;
+    
+    
+        this := @this: org.jfree.data.xy.IntervalXYDelegate;
+        series := @parameter0: int;
+        item := @parameter1: int;
+        startX = null;
+        $stack5 = this.<org.jfree.data.xy.IntervalXYDelegate: org.jfree.data.xy.XYDataset dataset>;
+        x = interfaceinvoke $stack5.<org.jfree.data.xy.XYDataset: java.lang.Number getX(int,int)>(series, item);
+    
+        if x == null goto label1;
+        $stack11 = new java.lang.Double;
+        $stack8 = virtualinvoke x.<java.lang.Number: double doubleValue()>();
+        $stack6 = virtualinvoke this.<org.jfree.data.xy.IntervalXYDelegate: double getIntervalPositionFactor()>();
+        $stack7 = virtualinvoke this.<org.jfree.data.xy.IntervalXYDelegate: double getIntervalWidth()>();
+        $stack9 = $stack6 * $stack7;
+        $stack10 = $stack8 - $stack9;
+        specialinvoke $stack11.<java.lang.Double: void <init>(double)>($stack10);
+        startX = $stack11;
+    
+      label1:
+        #l0 = (java.lang.Number) startX;
+    
+        return #l0;
+    }
+
+    // ---- method: <org.jfree.data.xy.IntervalXYDelegate: double getFixedIntervalWidth()> ----
+    {
+        double $stack1;
+        org.jfree.data.xy.IntervalXYDelegate this;
+    
+    
+        this := @this: org.jfree.data.xy.IntervalXYDelegate;
+        $stack1 = this.<org.jfree.data.xy.IntervalXYDelegate: double fixedIntervalWidth>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.data.xy.IntervalXYDelegate: double getEndXValue(int,int)> ----
+    {
+        double $stack4, $stack5, $stack6, $stack7, $stack8, $stack9;
+        int item, series;
+        org.jfree.data.xy.IntervalXYDelegate this;
+        org.jfree.data.xy.XYDataset $stack3;
+    
+    
+        this := @this: org.jfree.data.xy.IntervalXYDelegate;
+        series := @parameter0: int;
+        item := @parameter1: int;
+        $stack3 = this.<org.jfree.data.xy.IntervalXYDelegate: org.jfree.data.xy.XYDataset dataset>;
+        $stack7 = interfaceinvoke $stack3.<org.jfree.data.xy.XYDataset: double getXValue(int,int)>(series, item);
+        $stack4 = virtualinvoke this.<org.jfree.data.xy.IntervalXYDelegate: double getIntervalPositionFactor()>();
+        $stack5 = 1.0 - $stack4;
+        $stack6 = virtualinvoke this.<org.jfree.data.xy.IntervalXYDelegate: double getIntervalWidth()>();
+        $stack8 = $stack5 * $stack6;
+        $stack9 = $stack7 + $stack8;
+    
+        return $stack9;
+    }
+
+    // ---- method: <org.jfree.data.xy.IntervalXYDelegate: double recalculateInterval()> ----
+    {
+        double $stack6, result;
+        int series, seriesCount;
+        org.jfree.data.xy.IntervalXYDelegate this;
+        org.jfree.data.xy.XYDataset $stack5;
+    
+    
+        this := @this: org.jfree.data.xy.IntervalXYDelegate;
+        result = #Infinity;
+        $stack5 = this.<org.jfree.data.xy.IntervalXYDelegate: org.jfree.data.xy.XYDataset dataset>;
+        seriesCount = interfaceinvoke $stack5.<org.jfree.data.xy.XYDataset: int getSeriesCount()>();
+        series = 0;
+    
+      label1:
+        if series >= seriesCount goto label2;
+        $stack6 = specialinvoke this.<org.jfree.data.xy.IntervalXYDelegate: double calculateIntervalForSeries(int)>(series);
+        result = staticinvoke <java.lang.Math: double min(double,double)>(result, $stack6);
+        series = series + 1;
+    
+        goto label1;
+    
+      label2:
+        return result;
+    }
+
+    // ---- method: <org.jfree.data.xy.IntervalXYDelegate: void <init>(org.jfree.data.xy.XYDataset)> ----
+    {
+        org.jfree.data.xy.IntervalXYDelegate this;
+        org.jfree.data.xy.XYDataset dataset;
+    
+    
+        this := @this: org.jfree.data.xy.IntervalXYDelegate;
+        dataset := @parameter0: org.jfree.data.xy.XYDataset;
+        specialinvoke this.<org.jfree.data.xy.IntervalXYDelegate: void <init>(org.jfree.data.xy.XYDataset,boolean)>(dataset, 1);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.xy.IntervalXYDelegate: double getStartXValue(int,int)> ----
+    {
+        double $stack4, $stack5, $stack6, $stack7, $stack8;
+        int item, series;
+        org.jfree.data.xy.IntervalXYDelegate this;
+        org.jfree.data.xy.XYDataset $stack3;
+    
+    
+        this := @this: org.jfree.data.xy.IntervalXYDelegate;
+        series := @parameter0: int;
+        item := @parameter1: int;
+        $stack3 = this.<org.jfree.data.xy.IntervalXYDelegate: org.jfree.data.xy.XYDataset dataset>;
+        $stack6 = interfaceinvoke $stack3.<org.jfree.data.xy.XYDataset: double getXValue(int,int)>(series, item);
+        $stack4 = virtualinvoke this.<org.jfree.data.xy.IntervalXYDelegate: double getIntervalPositionFactor()>();
+        $stack5 = virtualinvoke this.<org.jfree.data.xy.IntervalXYDelegate: double getIntervalWidth()>();
+        $stack7 = $stack4 * $stack5;
+        $stack8 = $stack6 - $stack7;
+    
+        return $stack8;
+    }
+
+    // ---- method: <org.jfree.data.xy.IntervalXYDelegate: boolean isAutoWidth()> ----
+    {
+        boolean $stack1;
+        org.jfree.data.xy.IntervalXYDelegate this;
+    
+    
+        this := @this: org.jfree.data.xy.IntervalXYDelegate;
+        $stack1 = this.<org.jfree.data.xy.IntervalXYDelegate: boolean autoWidth>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.data.xy.IntervalXYDelegate: java.lang.Number getEndX(int,int)> ----
+    {
+        double $stack10, $stack11, $stack6, $stack7, $stack8, $stack9;
+        int item, series;
+        java.lang.Double $stack12;
+        java.lang.Number #l0, x;
+        java.lang.Object endX;
+        org.jfree.data.xy.IntervalXYDelegate this;
+        org.jfree.data.xy.XYDataset $stack5;
+    
+    
+        this := @this: org.jfree.data.xy.IntervalXYDelegate;
+        series := @parameter0: int;
+        item := @parameter1: int;
+        endX = null;
+        $stack5 = this.<org.jfree.data.xy.IntervalXYDelegate: org.jfree.data.xy.XYDataset dataset>;
+        x = interfaceinvoke $stack5.<org.jfree.data.xy.XYDataset: java.lang.Number getX(int,int)>(series, item);
+    
+        if x == null goto label1;
+        $stack12 = new java.lang.Double;
+        $stack9 = virtualinvoke x.<java.lang.Number: double doubleValue()>();
+        $stack6 = virtualinvoke this.<org.jfree.data.xy.IntervalXYDelegate: double getIntervalPositionFactor()>();
+        $stack7 = 1.0 - $stack6;
+        $stack8 = virtualinvoke this.<org.jfree.data.xy.IntervalXYDelegate: double getIntervalWidth()>();
+        $stack10 = $stack7 * $stack8;
+        $stack11 = $stack9 + $stack10;
+        specialinvoke $stack12.<java.lang.Double: void <init>(double)>($stack11);
+        endX = $stack12;
+    
+      label1:
+        #l0 = (java.lang.Number) endX;
+    
+        return #l0;
+    }
+
+    // ---- method: <org.jfree.data.xy.IntervalXYDelegate: double getDomainUpperBound(boolean)> ----
+    {
+        boolean includeInterval;
+        double result;
+        org.jfree.data.Range r;
+        org.jfree.data.xy.IntervalXYDelegate this;
+    
+    
+        this := @this: org.jfree.data.xy.IntervalXYDelegate;
+        includeInterval := @parameter0: boolean;
+        result = #NaN;
+        r = virtualinvoke this.<org.jfree.data.xy.IntervalXYDelegate: org.jfree.data.Range getDomainBounds(boolean)>(includeInterval);
+    
+        if r == null goto label1;
+        result = virtualinvoke r.<org.jfree.data.Range: double getUpperBound()>();
+    
+      label1:
+        return result;
+    }
+
+    // ---- method: <org.jfree.data.xy.IntervalXYDelegate: org.jfree.data.Range getDomainBounds(boolean)> ----
+    {
+        boolean includeInterval;
+        double $stack10, $stack11, $stack12, $stack13, $stack14, $stack8, $stack9, lowerAdj, upperAdj;
+        org.jfree.data.Range $stack15, range;
+        org.jfree.data.xy.IntervalXYDelegate this;
+        org.jfree.data.xy.XYDataset $stack7;
+    
+    
+        this := @this: org.jfree.data.xy.IntervalXYDelegate;
+        includeInterval := @parameter0: boolean;
+        $stack7 = this.<org.jfree.data.xy.IntervalXYDelegate: org.jfree.data.xy.XYDataset dataset>;
+        range = staticinvoke <org.jfree.data.general.DatasetUtilities: org.jfree.data.Range findDomainBounds(org.jfree.data.xy.XYDataset,boolean)>($stack7, 0);
+    
+        if includeInterval == 0 goto label1;
+    
+        if range == null goto label1;
+        $stack8 = virtualinvoke this.<org.jfree.data.xy.IntervalXYDelegate: double getIntervalWidth()>();
+        $stack9 = virtualinvoke this.<org.jfree.data.xy.IntervalXYDelegate: double getIntervalPositionFactor()>();
+        lowerAdj = $stack8 * $stack9;
+        $stack10 = virtualinvoke this.<org.jfree.data.xy.IntervalXYDelegate: double getIntervalWidth()>();
+        upperAdj = $stack10 - lowerAdj;
+        $stack15 = new org.jfree.data.Range;
+        $stack11 = virtualinvoke range.<org.jfree.data.Range: double getLowerBound()>();
+        $stack14 = $stack11 - lowerAdj;
+        $stack12 = virtualinvoke range.<org.jfree.data.Range: double getUpperBound()>();
+        $stack13 = $stack12 + upperAdj;
+        specialinvoke $stack15.<org.jfree.data.Range: void <init>(double,double)>($stack14, $stack13);
+        range = $stack15;
+    
+      label1:
+        return range;
+    }
+
+    // ---- method: <org.jfree.data.xy.IntervalXYDelegate: int hashCode()> ----
+    {
+        boolean $stack2;
+        byte hash#0;
+        double $stack3, $stack4;
+        int hash#1, hash#2, hash#3;
+        org.jfree.data.xy.IntervalXYDelegate this;
+    
+    
+        this := @this: org.jfree.data.xy.IntervalXYDelegate;
+        hash#0 = 5;
+        $stack2 = this.<org.jfree.data.xy.IntervalXYDelegate: boolean autoWidth>;
+        hash#1 = staticinvoke <org.jfree.chart.util.HashUtilities: int hashCode(int,boolean)>(5, $stack2);
+        $stack3 = this.<org.jfree.data.xy.IntervalXYDelegate: double intervalPositionFactor>;
+        hash#2 = staticinvoke <org.jfree.chart.util.HashUtilities: int hashCode(int,double)>(hash#1, $stack3);
+        $stack4 = this.<org.jfree.data.xy.IntervalXYDelegate: double fixedIntervalWidth>;
+        hash#3 = staticinvoke <org.jfree.chart.util.HashUtilities: int hashCode(int,double)>(hash#2, $stack4);
+    
+        return hash#3;
+    }
+
+    // ---- method: <org.jfree.data.xy.IntervalXYDelegate: void <init>(org.jfree.data.xy.XYDataset,boolean)> ----
+    {
+        boolean autoWidth;
+        java.lang.IllegalArgumentException #l1;
+        java.lang.Object $stack3;
+        java.lang.Throwable #l0;
+        org.jfree.data.xy.IntervalXYDelegate this;
+        org.jfree.data.xy.XYDataset dataset;
+    
+    
+        this := @this: org.jfree.data.xy.IntervalXYDelegate;
+        dataset := @parameter0: org.jfree.data.xy.XYDataset;
+        autoWidth := @parameter1: boolean;
+        specialinvoke this.<java.lang.Object: void <init>()>();
+    
+        if dataset != null goto label1;
+        $stack3 = new java.lang.IllegalArgumentException;
+        #l1 = (java.lang.IllegalArgumentException) $stack3;
+        specialinvoke #l1.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'dataset\' argument.");
+        #l0 = (java.lang.Throwable) $stack3;
+    
+        throw #l0;
+    
+      label1:
+        this.<org.jfree.data.xy.IntervalXYDelegate: org.jfree.data.xy.XYDataset dataset> = dataset;
+        this.<org.jfree.data.xy.IntervalXYDelegate: boolean autoWidth> = autoWidth;
+        this.<org.jfree.data.xy.IntervalXYDelegate: double intervalPositionFactor> = 0.5;
+        this.<org.jfree.data.xy.IntervalXYDelegate: double autoIntervalWidth> = #Infinity;
+        this.<org.jfree.data.xy.IntervalXYDelegate: double fixedIntervalWidth> = 1.0;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.xy.IntervalXYDelegate: void setAutoWidth(boolean)> ----
+    {
+        boolean b;
+        double $stack2;
+        org.jfree.data.xy.IntervalXYDelegate this;
+    
+    
+        this := @this: org.jfree.data.xy.IntervalXYDelegate;
+        b := @parameter0: boolean;
+        this.<org.jfree.data.xy.IntervalXYDelegate: boolean autoWidth> = b;
+    
+        if b == 0 goto label1;
+        $stack2 = specialinvoke this.<org.jfree.data.xy.IntervalXYDelegate: double recalculateInterval()>();
+        this.<org.jfree.data.xy.IntervalXYDelegate: double autoIntervalWidth> = $stack2;
+    
+      label1:
+        return;
+    }
+
+    // ---- method: <org.jfree.data.xy.IntervalXYDelegate: void datasetChanged(org.jfree.data.event.DatasetChangeEvent)> ----
+    {
+        boolean $stack2;
+        double $stack3;
+        org.jfree.data.event.DatasetChangeEvent e;
+        org.jfree.data.xy.IntervalXYDelegate this;
+    
+    
+        this := @this: org.jfree.data.xy.IntervalXYDelegate;
+        e := @parameter0: org.jfree.data.event.DatasetChangeEvent;
+        $stack2 = this.<org.jfree.data.xy.IntervalXYDelegate: boolean autoWidth>;
+    
+        if $stack2 == 0 goto label1;
+        $stack3 = specialinvoke this.<org.jfree.data.xy.IntervalXYDelegate: double recalculateInterval()>();
+        this.<org.jfree.data.xy.IntervalXYDelegate: double autoIntervalWidth> = $stack3;
+    
+      label1:
+        return;
+    }
+
+    // ---- method: <org.jfree.data.xy.IntervalXYDelegate: double getDomainLowerBound(boolean)> ----
+    {
+        boolean includeInterval;
+        double result;
+        org.jfree.data.Range r;
+        org.jfree.data.xy.IntervalXYDelegate this;
+    
+    
+        this := @this: org.jfree.data.xy.IntervalXYDelegate;
+        includeInterval := @parameter0: boolean;
+        result = #NaN;
+        r = virtualinvoke this.<org.jfree.data.xy.IntervalXYDelegate: org.jfree.data.Range getDomainBounds(boolean)>(includeInterval);
+    
+        if r == null goto label1;
+        result = virtualinvoke r.<org.jfree.data.Range: double getLowerBound()>();
+    
+      label1:
+        return result;
+    }
+
+}

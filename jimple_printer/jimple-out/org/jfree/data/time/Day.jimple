@@ -1,0 +1,520 @@
+// ========================================================================
+// CLASS : org.jfree.data.time.Day
+// ========================================================================
+
+[PUBLIC, SUPER] class org.jfree.data.time.Day extends org.jfree.data.time.RegularTimePeriod implements java.io.Serializable {
+
+    // ---- method: <org.jfree.data.time.Day: void <init>(int,int,int)> ----
+    {
+        int day, month, year;
+        java.util.Calendar $stack5;
+        org.jfree.data.time.Day this;
+        org.jfree.data.time.SerialDate $stack4;
+    
+    
+        this := @this: org.jfree.data.time.Day;
+        day := @parameter0: int;
+        month := @parameter1: int;
+        year := @parameter2: int;
+        specialinvoke this.<org.jfree.data.time.RegularTimePeriod: void <init>()>();
+        $stack4 = staticinvoke <org.jfree.data.time.SerialDate: org.jfree.data.time.SerialDate createInstance(int,int,int)>(day, month, year);
+        this.<org.jfree.data.time.Day: org.jfree.data.time.SerialDate serialDate> = $stack4;
+        $stack5 = staticinvoke <java.util.Calendar: java.util.Calendar getInstance()>();
+        virtualinvoke this.<org.jfree.data.time.Day: void peg(java.util.Calendar)>($stack5);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.time.Day: org.jfree.data.time.Day parseDay(java.lang.String)> ----
+    {
+        java.lang.String s;
+        java.lang.Throwable $stack6, $stack7, e1, e2;
+        java.text.DateFormat $stack3, $stack8;
+        java.util.Date $stack4, $stack9;
+        org.jfree.data.time.Day $stack10, $stack5;
+    
+    
+        s := @parameter0: java.lang.String;
+    
+      label1:
+        $stack5 = new org.jfree.data.time.Day;
+        $stack3 = <org.jfree.data.time.Day: java.text.DateFormat DATE_FORMAT>;
+        $stack4 = virtualinvoke $stack3.<java.text.DateFormat: java.util.Date parse(java.lang.String)>(s);
+        specialinvoke $stack5.<org.jfree.data.time.Day: void <init>(java.util.Date)>($stack4);
+    
+      label2:
+        return $stack5;
+    
+      label3:
+        $stack7 := @caughtexception;
+        e1 = $stack7;
+    
+      label4:
+        $stack10 = new org.jfree.data.time.Day;
+        $stack8 = <org.jfree.data.time.Day: java.text.DateFormat DATE_FORMAT_SHORT>;
+        $stack9 = virtualinvoke $stack8.<java.text.DateFormat: java.util.Date parse(java.lang.String)>(s);
+        specialinvoke $stack10.<org.jfree.data.time.Day: void <init>(java.util.Date)>($stack9);
+    
+      label5:
+        return $stack10;
+    
+      label6:
+        $stack6 := @caughtexception;
+        e2 = $stack6;
+    
+        return null;
+    
+     catch java.text.ParseException from label1 to label2 with label3;
+     catch java.text.ParseException from label4 to label5 with label6;
+    }
+
+    // ---- method: <org.jfree.data.time.Day: org.jfree.data.time.SerialDate getSerialDate()> ----
+    {
+        org.jfree.data.time.Day this;
+        org.jfree.data.time.SerialDate $stack1;
+    
+    
+        this := @this: org.jfree.data.time.Day;
+        $stack1 = this.<org.jfree.data.time.Day: org.jfree.data.time.SerialDate serialDate>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.data.time.Day: int getMonth()> ----
+    {
+        int $stack2;
+        org.jfree.data.time.Day this;
+        org.jfree.data.time.SerialDate $stack1;
+    
+    
+        this := @this: org.jfree.data.time.Day;
+        $stack1 = this.<org.jfree.data.time.Day: org.jfree.data.time.SerialDate serialDate>;
+        $stack2 = virtualinvoke $stack1.<org.jfree.data.time.SerialDate: int getMonth()>();
+    
+        return $stack2;
+    }
+
+    // ---- method: <org.jfree.data.time.Day: int getDayOfMonth()> ----
+    {
+        int $stack2;
+        org.jfree.data.time.Day this;
+        org.jfree.data.time.SerialDate $stack1;
+    
+    
+        this := @this: org.jfree.data.time.Day;
+        $stack1 = this.<org.jfree.data.time.Day: org.jfree.data.time.SerialDate serialDate>;
+        $stack2 = virtualinvoke $stack1.<org.jfree.data.time.SerialDate: int getDayOfMonth()>();
+    
+        return $stack2;
+    }
+
+    // ---- method: <org.jfree.data.time.Day: long getLastMillisecond()> ----
+    {
+        long $stack1;
+        org.jfree.data.time.Day this;
+    
+    
+        this := @this: org.jfree.data.time.Day;
+        $stack1 = this.<org.jfree.data.time.Day: long lastMillisecond>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.data.time.Day: void <init>(java.util.Date,java.util.TimeZone)> ----
+    {
+        int $stack7, d, m, y;
+        java.lang.IllegalArgumentException #l1, #l3;
+        java.lang.Object $stack10, $stack9;
+        java.lang.Throwable #l0, #l2;
+        java.util.Calendar calendar;
+        java.util.Date time;
+        java.util.TimeZone zone;
+        org.jfree.data.time.Day this;
+        org.jfree.data.time.SerialDate $stack8;
+    
+    
+        this := @this: org.jfree.data.time.Day;
+        time := @parameter0: java.util.Date;
+        zone := @parameter1: java.util.TimeZone;
+        specialinvoke this.<org.jfree.data.time.RegularTimePeriod: void <init>()>();
+    
+        if time != null goto label1;
+        $stack10 = new java.lang.IllegalArgumentException;
+        #l1 = (java.lang.IllegalArgumentException) $stack10;
+        specialinvoke #l1.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'time\' argument.");
+        #l0 = (java.lang.Throwable) $stack10;
+    
+        throw #l0;
+    
+      label1:
+        if zone != null goto label2;
+        $stack9 = new java.lang.IllegalArgumentException;
+        #l3 = (java.lang.IllegalArgumentException) $stack9;
+        specialinvoke #l3.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'zone\' argument.");
+        #l2 = (java.lang.Throwable) $stack9;
+    
+        throw #l2;
+    
+      label2:
+        calendar = staticinvoke <java.util.Calendar: java.util.Calendar getInstance(java.util.TimeZone)>(zone);
+        virtualinvoke calendar.<java.util.Calendar: void setTime(java.util.Date)>(time);
+        d = virtualinvoke calendar.<java.util.Calendar: int get(int)>(5);
+        $stack7 = virtualinvoke calendar.<java.util.Calendar: int get(int)>(2);
+        m = $stack7 + 1;
+        y = virtualinvoke calendar.<java.util.Calendar: int get(int)>(1);
+        $stack8 = staticinvoke <org.jfree.data.time.SerialDate: org.jfree.data.time.SerialDate createInstance(int,int,int)>(d, m, y);
+        this.<org.jfree.data.time.Day: org.jfree.data.time.SerialDate serialDate> = $stack8;
+        virtualinvoke this.<org.jfree.data.time.Day: void peg(java.util.Calendar)>(calendar);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.time.Day: int compareTo(java.lang.Object)> ----
+    {
+        boolean $stack4, $stack5;
+        int $stack8, result;
+        java.lang.Object o1;
+        org.jfree.data.time.Day d, this;
+        org.jfree.data.time.SerialDate $stack6, $stack7;
+    
+    
+        this := @this: org.jfree.data.time.Day;
+        o1 := @parameter0: java.lang.Object;
+        $stack4 = o1 instanceof org.jfree.data.time.Day;
+    
+        if $stack4 == 0 goto label1;
+        d = (org.jfree.data.time.Day) o1;
+        $stack7 = virtualinvoke d.<org.jfree.data.time.Day: org.jfree.data.time.SerialDate getSerialDate()>();
+        $stack6 = this.<org.jfree.data.time.Day: org.jfree.data.time.SerialDate serialDate>;
+        $stack8 = virtualinvoke $stack7.<org.jfree.data.time.SerialDate: int compare(org.jfree.data.time.SerialDate)>($stack6);
+        result = neg $stack8;
+    
+        goto label3;
+    
+      label1:
+        $stack5 = o1 instanceof org.jfree.data.time.RegularTimePeriod;
+    
+        if $stack5 == 0 goto label2;
+        result = 0;
+    
+        goto label3;
+    
+      label2:
+        result = 1;
+    
+      label3:
+        return result;
+    }
+
+    // ---- method: <org.jfree.data.time.Day: void <init>()> ----
+    {
+        java.util.Date $stack1;
+        org.jfree.data.time.Day this;
+    
+    
+        this := @this: org.jfree.data.time.Day;
+        $stack1 = new java.util.Date;
+        specialinvoke $stack1.<java.util.Date: void <init>()>();
+        specialinvoke this.<org.jfree.data.time.Day: void <init>(java.util.Date)>($stack1);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.time.Day: int getYear()> ----
+    {
+        int $stack2;
+        org.jfree.data.time.Day this;
+        org.jfree.data.time.SerialDate $stack1;
+    
+    
+        this := @this: org.jfree.data.time.Day;
+        $stack1 = this.<org.jfree.data.time.Day: org.jfree.data.time.SerialDate serialDate>;
+        $stack2 = virtualinvoke $stack1.<org.jfree.data.time.SerialDate: int getYYYY()>();
+    
+        return $stack2;
+    }
+
+    // ---- method: <org.jfree.data.time.Day: org.jfree.data.time.RegularTimePeriod next()> ----
+    {
+        int $stack5, serial;
+        java.lang.Object result;
+        org.jfree.data.time.Day $stack6, this;
+        org.jfree.data.time.SerialDate $stack4, tomorrow;
+    
+    
+        this := @this: org.jfree.data.time.Day;
+        $stack4 = this.<org.jfree.data.time.Day: org.jfree.data.time.SerialDate serialDate>;
+        serial = virtualinvoke $stack4.<org.jfree.data.time.SerialDate: int toSerial()>();
+    
+        if serial >= 2958465 goto label1;
+        $stack5 = serial + 1;
+        tomorrow = staticinvoke <org.jfree.data.time.SerialDate: org.jfree.data.time.SerialDate createInstance(int)>($stack5);
+        $stack6 = new org.jfree.data.time.Day;
+        specialinvoke $stack6.<org.jfree.data.time.Day: void <init>(org.jfree.data.time.SerialDate)>(tomorrow);
+    
+        return $stack6;
+    
+      label1:
+        result = null;
+    
+        return null;
+    }
+
+    // ---- method: <org.jfree.data.time.Day: void peg(java.util.Calendar)> ----
+    {
+        java.util.Calendar calendar;
+        long $stack2, $stack3;
+        org.jfree.data.time.Day this;
+    
+    
+        this := @this: org.jfree.data.time.Day;
+        calendar := @parameter0: java.util.Calendar;
+        $stack2 = virtualinvoke this.<org.jfree.data.time.Day: long getFirstMillisecond(java.util.Calendar)>(calendar);
+        this.<org.jfree.data.time.Day: long firstMillisecond> = $stack2;
+        $stack3 = virtualinvoke this.<org.jfree.data.time.Day: long getLastMillisecond(java.util.Calendar)>(calendar);
+        this.<org.jfree.data.time.Day: long lastMillisecond> = $stack3;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.time.Day: java.lang.String toString()> ----
+    {
+        java.lang.String $stack2;
+        org.jfree.data.time.Day this;
+        org.jfree.data.time.SerialDate $stack1;
+    
+    
+        this := @this: org.jfree.data.time.Day;
+        $stack1 = this.<org.jfree.data.time.Day: org.jfree.data.time.SerialDate serialDate>;
+        $stack2 = virtualinvoke $stack1.<org.jfree.data.time.SerialDate: java.lang.String toString()>();
+    
+        return $stack2;
+    }
+
+    // ---- method: <org.jfree.data.time.Day: long getSerialIndex()> ----
+    {
+        int $stack2;
+        long $stack3;
+        org.jfree.data.time.Day this;
+        org.jfree.data.time.SerialDate $stack1;
+    
+    
+        this := @this: org.jfree.data.time.Day;
+        $stack1 = this.<org.jfree.data.time.Day: org.jfree.data.time.SerialDate serialDate>;
+        $stack2 = virtualinvoke $stack1.<org.jfree.data.time.SerialDate: int toSerial()>();
+        $stack3 = (long) $stack2;
+    
+        return $stack3;
+    }
+
+    // ---- method: <org.jfree.data.time.Day: void <init>(java.util.Date)> ----
+    {
+        java.util.Date time;
+        java.util.TimeZone $stack2;
+        org.jfree.data.time.Day this;
+    
+    
+        this := @this: org.jfree.data.time.Day;
+        time := @parameter0: java.util.Date;
+        $stack2 = staticinvoke <java.util.TimeZone: java.util.TimeZone getDefault()>();
+        specialinvoke this.<org.jfree.data.time.Day: void <init>(java.util.Date,java.util.TimeZone)>(time, $stack2);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.time.Day: void <clinit>()> ----
+    {
+        java.lang.Object $stack0;
+        java.text.DateFormat $stack1, $stack2, $stack3;
+        java.text.SimpleDateFormat #l0;
+    
+    
+        $stack0 = new java.text.SimpleDateFormat;
+        #l0 = (java.text.SimpleDateFormat) $stack0;
+        specialinvoke #l0.<java.text.SimpleDateFormat: void <init>(java.lang.String)>("yyyy-MM-dd");
+        <org.jfree.data.time.Day: java.text.DateFormat DATE_FORMAT> = (java.text.DateFormat) $stack0;
+        $stack1 = staticinvoke <java.text.DateFormat: java.text.DateFormat getDateInstance(int)>(3);
+        <org.jfree.data.time.Day: java.text.DateFormat DATE_FORMAT_SHORT> = $stack1;
+        $stack2 = staticinvoke <java.text.DateFormat: java.text.DateFormat getDateInstance(int)>(2);
+        <org.jfree.data.time.Day: java.text.DateFormat DATE_FORMAT_MEDIUM> = $stack2;
+        $stack3 = staticinvoke <java.text.DateFormat: java.text.DateFormat getDateInstance(int)>(1);
+        <org.jfree.data.time.Day: java.text.DateFormat DATE_FORMAT_LONG> = $stack3;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.time.Day: long getFirstMillisecond()> ----
+    {
+        long $stack1;
+        org.jfree.data.time.Day this;
+    
+    
+        this := @this: org.jfree.data.time.Day;
+        $stack1 = this.<org.jfree.data.time.Day: long firstMillisecond>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.data.time.Day: long getLastMillisecond(java.util.Calendar)> ----
+    {
+        int $stack8, day, month, year;
+        java.util.Calendar calendar;
+        java.util.Date $stack9;
+        long $stack10;
+        org.jfree.data.time.Day this;
+        org.jfree.data.time.SerialDate $stack5, $stack6, $stack7;
+    
+    
+        this := @this: org.jfree.data.time.Day;
+        calendar := @parameter0: java.util.Calendar;
+        $stack5 = this.<org.jfree.data.time.Day: org.jfree.data.time.SerialDate serialDate>;
+        year = virtualinvoke $stack5.<org.jfree.data.time.SerialDate: int getYYYY()>();
+        $stack6 = this.<org.jfree.data.time.Day: org.jfree.data.time.SerialDate serialDate>;
+        month = virtualinvoke $stack6.<org.jfree.data.time.SerialDate: int getMonth()>();
+        $stack7 = this.<org.jfree.data.time.Day: org.jfree.data.time.SerialDate serialDate>;
+        day = virtualinvoke $stack7.<org.jfree.data.time.SerialDate: int getDayOfMonth()>();
+        virtualinvoke calendar.<java.util.Calendar: void clear()>();
+        $stack8 = month - 1;
+        virtualinvoke calendar.<java.util.Calendar: void set(int,int,int,int,int,int)>(year, $stack8, day, 23, 59, 59);
+        virtualinvoke calendar.<java.util.Calendar: void set(int,int)>(14, 999);
+        $stack9 = virtualinvoke calendar.<java.util.Calendar: java.util.Date getTime()>();
+        $stack10 = virtualinvoke $stack9.<java.util.Date: long getTime()>();
+    
+        return $stack10;
+    }
+
+    // ---- method: <org.jfree.data.time.Day: int hashCode()> ----
+    {
+        int $stack2;
+        org.jfree.data.time.Day this;
+        org.jfree.data.time.SerialDate $stack1;
+    
+    
+        this := @this: org.jfree.data.time.Day;
+        $stack1 = this.<org.jfree.data.time.Day: org.jfree.data.time.SerialDate serialDate>;
+        $stack2 = virtualinvoke $stack1.<java.lang.Object: int hashCode()>();
+    
+        return $stack2;
+    }
+
+    // ---- method: <org.jfree.data.time.Day: long getFirstMillisecond(java.util.Calendar)> ----
+    {
+        int $stack8, day, month, year;
+        java.util.Calendar calendar;
+        java.util.Date $stack9;
+        long $stack10;
+        org.jfree.data.time.Day this;
+        org.jfree.data.time.SerialDate $stack5, $stack6, $stack7;
+    
+    
+        this := @this: org.jfree.data.time.Day;
+        calendar := @parameter0: java.util.Calendar;
+        $stack5 = this.<org.jfree.data.time.Day: org.jfree.data.time.SerialDate serialDate>;
+        year = virtualinvoke $stack5.<org.jfree.data.time.SerialDate: int getYYYY()>();
+        $stack6 = this.<org.jfree.data.time.Day: org.jfree.data.time.SerialDate serialDate>;
+        month = virtualinvoke $stack6.<org.jfree.data.time.SerialDate: int getMonth()>();
+        $stack7 = this.<org.jfree.data.time.Day: org.jfree.data.time.SerialDate serialDate>;
+        day = virtualinvoke $stack7.<org.jfree.data.time.SerialDate: int getDayOfMonth()>();
+        virtualinvoke calendar.<java.util.Calendar: void clear()>();
+        $stack8 = month - 1;
+        virtualinvoke calendar.<java.util.Calendar: void set(int,int,int,int,int,int)>(year, $stack8, day, 0, 0, 0);
+        virtualinvoke calendar.<java.util.Calendar: void set(int,int)>(14, 0);
+        $stack9 = virtualinvoke calendar.<java.util.Calendar: java.util.Date getTime()>();
+        $stack10 = virtualinvoke $stack9.<java.util.Date: long getTime()>();
+    
+        return $stack10;
+    }
+
+    // ---- method: <org.jfree.data.time.Day: void <init>(org.jfree.data.time.SerialDate)> ----
+    {
+        java.lang.IllegalArgumentException #l0;
+        java.lang.Object $stack3;
+        java.lang.Throwable #l1;
+        java.util.Calendar $stack2;
+        org.jfree.data.time.Day this;
+        org.jfree.data.time.SerialDate serialDate;
+    
+    
+        this := @this: org.jfree.data.time.Day;
+        serialDate := @parameter0: org.jfree.data.time.SerialDate;
+        specialinvoke this.<org.jfree.data.time.RegularTimePeriod: void <init>()>();
+    
+        if serialDate != null goto label1;
+        $stack3 = new java.lang.IllegalArgumentException;
+        #l0 = (java.lang.IllegalArgumentException) $stack3;
+        specialinvoke #l0.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'serialDate\' argument.");
+        #l1 = (java.lang.Throwable) $stack3;
+    
+        throw #l1;
+    
+      label1:
+        this.<org.jfree.data.time.Day: org.jfree.data.time.SerialDate serialDate> = serialDate;
+        $stack2 = staticinvoke <java.util.Calendar: java.util.Calendar getInstance()>();
+        virtualinvoke this.<org.jfree.data.time.Day: void peg(java.util.Calendar)>($stack2);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.time.Day: boolean equals(java.lang.Object)> ----
+    {
+        boolean $stack3, $stack6;
+        java.lang.Object obj;
+        org.jfree.data.time.Day that, this;
+        org.jfree.data.time.SerialDate $stack4, $stack5;
+    
+    
+        this := @this: org.jfree.data.time.Day;
+        obj := @parameter0: java.lang.Object;
+    
+        if obj != this goto label1;
+    
+        return 1;
+    
+      label1:
+        $stack3 = obj instanceof org.jfree.data.time.Day;
+    
+        if $stack3 != 0 goto label2;
+    
+        return 0;
+    
+      label2:
+        that = (org.jfree.data.time.Day) obj;
+        $stack4 = this.<org.jfree.data.time.Day: org.jfree.data.time.SerialDate serialDate>;
+        $stack5 = virtualinvoke that.<org.jfree.data.time.Day: org.jfree.data.time.SerialDate getSerialDate()>();
+        $stack6 = virtualinvoke $stack4.<java.lang.Object: boolean equals(java.lang.Object)>($stack5);
+    
+        if $stack6 != 0 goto label3;
+    
+        return 0;
+    
+      label3:
+        return 1;
+    }
+
+    // ---- method: <org.jfree.data.time.Day: org.jfree.data.time.RegularTimePeriod previous()> ----
+    {
+        int $stack5, serial;
+        java.lang.Object result;
+        org.jfree.data.time.Day $stack6, this;
+        org.jfree.data.time.SerialDate $stack4, yesterday;
+    
+    
+        this := @this: org.jfree.data.time.Day;
+        $stack4 = this.<org.jfree.data.time.Day: org.jfree.data.time.SerialDate serialDate>;
+        serial = virtualinvoke $stack4.<org.jfree.data.time.SerialDate: int toSerial()>();
+    
+        if serial <= 2 goto label1;
+        $stack5 = serial - 1;
+        yesterday = staticinvoke <org.jfree.data.time.SerialDate: org.jfree.data.time.SerialDate createInstance(int)>($stack5);
+        $stack6 = new org.jfree.data.time.Day;
+        specialinvoke $stack6.<org.jfree.data.time.Day: void <init>(org.jfree.data.time.SerialDate)>(yesterday);
+    
+        return $stack6;
+    
+      label1:
+        result = null;
+    
+        return null;
+    }
+
+}

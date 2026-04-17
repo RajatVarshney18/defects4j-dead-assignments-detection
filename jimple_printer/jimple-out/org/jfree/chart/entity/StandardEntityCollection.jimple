@@ -1,0 +1,253 @@
+// ========================================================================
+// CLASS : org.jfree.chart.entity.StandardEntityCollection
+// ========================================================================
+
+[PUBLIC, SUPER] class org.jfree.chart.entity.StandardEntityCollection extends java.lang.Object implements org.jfree.chart.util.PublicCloneable, org.jfree.chart.entity.EntityCollection, java.lang.Cloneable, java.io.Serializable {
+
+    // ---- method: <org.jfree.chart.entity.StandardEntityCollection: void addAll(org.jfree.chart.entity.EntityCollection)> ----
+    {
+        java.util.Collection $stack3;
+        java.util.List $stack2;
+        org.jfree.chart.entity.EntityCollection collection;
+        org.jfree.chart.entity.StandardEntityCollection this;
+    
+    
+        this := @this: org.jfree.chart.entity.StandardEntityCollection;
+        collection := @parameter0: org.jfree.chart.entity.EntityCollection;
+        $stack2 = this.<org.jfree.chart.entity.StandardEntityCollection: java.util.List entities>;
+        $stack3 = interfaceinvoke collection.<org.jfree.chart.entity.EntityCollection: java.util.Collection getEntities()>();
+        interfaceinvoke $stack2.<java.util.List: boolean addAll(java.util.Collection)>($stack3);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.entity.StandardEntityCollection: void add(org.jfree.chart.entity.ChartEntity)> ----
+    {
+        java.lang.IllegalArgumentException #l1;
+        java.lang.Object $stack3;
+        java.lang.Throwable #l0;
+        java.util.List $stack2;
+        org.jfree.chart.entity.ChartEntity entity;
+        org.jfree.chart.entity.StandardEntityCollection this;
+    
+    
+        this := @this: org.jfree.chart.entity.StandardEntityCollection;
+        entity := @parameter0: org.jfree.chart.entity.ChartEntity;
+    
+        if entity != null goto label1;
+        $stack3 = new java.lang.IllegalArgumentException;
+        #l1 = (java.lang.IllegalArgumentException) $stack3;
+        specialinvoke #l1.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'entity\' argument.");
+        #l0 = (java.lang.Throwable) $stack3;
+    
+        throw #l0;
+    
+      label1:
+        $stack2 = this.<org.jfree.chart.entity.StandardEntityCollection: java.util.List entities>;
+        interfaceinvoke $stack2.<java.util.List: boolean add(java.lang.Object)>(entity);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.entity.StandardEntityCollection: org.jfree.chart.entity.ChartEntity getEntity(double,double)> ----
+    {
+        boolean $stack12;
+        double x, y;
+        int entityCount, i;
+        java.awt.Shape $stack11;
+        java.lang.Object $stack10;
+        java.util.List $stack8, $stack9;
+        org.jfree.chart.entity.ChartEntity entity;
+        org.jfree.chart.entity.StandardEntityCollection this;
+    
+    
+        this := @this: org.jfree.chart.entity.StandardEntityCollection;
+        x := @parameter0: double;
+        y := @parameter1: double;
+        $stack8 = this.<org.jfree.chart.entity.StandardEntityCollection: java.util.List entities>;
+        entityCount = interfaceinvoke $stack8.<java.util.List: int size()>();
+        i = entityCount - 1;
+    
+      label1:
+        if i < 0 goto label3;
+        $stack9 = this.<org.jfree.chart.entity.StandardEntityCollection: java.util.List entities>;
+        $stack10 = interfaceinvoke $stack9.<java.util.List: java.lang.Object get(int)>(i);
+        entity = (org.jfree.chart.entity.ChartEntity) $stack10;
+        $stack11 = virtualinvoke entity.<org.jfree.chart.entity.ChartEntity: java.awt.Shape getArea()>();
+        $stack12 = interfaceinvoke $stack11.<java.awt.Shape: boolean contains(double,double)>(x, y);
+    
+        if $stack12 == 0 goto label2;
+    
+        return entity;
+    
+      label2:
+        i = i + -1;
+    
+        goto label1;
+    
+      label3:
+        return null;
+    }
+
+    // ---- method: <org.jfree.chart.entity.StandardEntityCollection: java.lang.Object clone()> ----
+    {
+        int $stack6, $stack9, i;
+        java.lang.Object $stack11, $stack13, $stack4, $stack7;
+        java.util.ArrayList #l0;
+        java.util.List $stack10, $stack12, $stack5, $stack8;
+        org.jfree.chart.entity.ChartEntity entity;
+        org.jfree.chart.entity.StandardEntityCollection clone, this;
+    
+    
+        this := @this: org.jfree.chart.entity.StandardEntityCollection;
+        $stack4 = specialinvoke this.<java.lang.Object: java.lang.Object clone()>();
+        clone = (org.jfree.chart.entity.StandardEntityCollection) $stack4;
+        $stack7 = new java.util.ArrayList;
+        $stack5 = this.<org.jfree.chart.entity.StandardEntityCollection: java.util.List entities>;
+        $stack6 = interfaceinvoke $stack5.<java.util.List: int size()>();
+        #l0 = (java.util.ArrayList) $stack7;
+        specialinvoke #l0.<java.util.ArrayList: void <init>(int)>($stack6);
+        clone.<org.jfree.chart.entity.StandardEntityCollection: java.util.List entities> = (java.util.List) $stack7;
+        i = 0;
+    
+      label1:
+        $stack8 = this.<org.jfree.chart.entity.StandardEntityCollection: java.util.List entities>;
+        $stack9 = interfaceinvoke $stack8.<java.util.List: int size()>();
+    
+        if i >= $stack9 goto label2;
+        $stack10 = this.<org.jfree.chart.entity.StandardEntityCollection: java.util.List entities>;
+        $stack11 = interfaceinvoke $stack10.<java.util.List: java.lang.Object get(int)>(i);
+        entity = (org.jfree.chart.entity.ChartEntity) $stack11;
+        $stack12 = clone.<org.jfree.chart.entity.StandardEntityCollection: java.util.List entities>;
+        $stack13 = virtualinvoke entity.<org.jfree.chart.entity.ChartEntity: java.lang.Object clone()>();
+        interfaceinvoke $stack12.<java.util.List: boolean add(java.lang.Object)>($stack13);
+        i = i + 1;
+    
+        goto label1;
+    
+      label2:
+        return clone;
+    }
+
+    // ---- method: <org.jfree.chart.entity.StandardEntityCollection: int getEntityCount()> ----
+    {
+        int $stack2;
+        java.util.List $stack1;
+        org.jfree.chart.entity.StandardEntityCollection this;
+    
+    
+        this := @this: org.jfree.chart.entity.StandardEntityCollection;
+        $stack1 = this.<org.jfree.chart.entity.StandardEntityCollection: java.util.List entities>;
+        $stack2 = interfaceinvoke $stack1.<java.util.List: int size()>();
+    
+        return $stack2;
+    }
+
+    // ---- method: <org.jfree.chart.entity.StandardEntityCollection: void clear()> ----
+    {
+        java.util.List $stack1;
+        org.jfree.chart.entity.StandardEntityCollection this;
+    
+    
+        this := @this: org.jfree.chart.entity.StandardEntityCollection;
+        $stack1 = this.<org.jfree.chart.entity.StandardEntityCollection: java.util.List entities>;
+        interfaceinvoke $stack1.<java.util.List: void clear()>();
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.entity.StandardEntityCollection: java.util.Iterator iterator()> ----
+    {
+        java.util.Iterator $stack2;
+        java.util.List $stack1;
+        org.jfree.chart.entity.StandardEntityCollection this;
+    
+    
+        this := @this: org.jfree.chart.entity.StandardEntityCollection;
+        $stack1 = this.<org.jfree.chart.entity.StandardEntityCollection: java.util.List entities>;
+        $stack2 = interfaceinvoke $stack1.<java.util.List: java.util.Iterator iterator()>();
+    
+        return $stack2;
+    }
+
+    // ---- method: <org.jfree.chart.entity.StandardEntityCollection: void <init>()> ----
+    {
+        java.lang.Object $stack1;
+        java.util.ArrayList #l0;
+        org.jfree.chart.entity.StandardEntityCollection this;
+    
+    
+        this := @this: org.jfree.chart.entity.StandardEntityCollection;
+        specialinvoke this.<java.lang.Object: void <init>()>();
+        $stack1 = new java.util.ArrayList;
+        #l0 = (java.util.ArrayList) $stack1;
+        specialinvoke #l0.<java.util.ArrayList: void <init>()>();
+        this.<org.jfree.chart.entity.StandardEntityCollection: java.util.List entities> = (java.util.List) $stack1;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.entity.StandardEntityCollection: org.jfree.chart.entity.ChartEntity getEntity(int)> ----
+    {
+        int index;
+        java.lang.Object $stack3;
+        java.util.List $stack2;
+        org.jfree.chart.entity.ChartEntity $stack4;
+        org.jfree.chart.entity.StandardEntityCollection this;
+    
+    
+        this := @this: org.jfree.chart.entity.StandardEntityCollection;
+        index := @parameter0: int;
+        $stack2 = this.<org.jfree.chart.entity.StandardEntityCollection: java.util.List entities>;
+        $stack3 = interfaceinvoke $stack2.<java.util.List: java.lang.Object get(int)>(index);
+        $stack4 = (org.jfree.chart.entity.ChartEntity) $stack3;
+    
+        return $stack4;
+    }
+
+    // ---- method: <org.jfree.chart.entity.StandardEntityCollection: java.util.Collection getEntities()> ----
+    {
+        java.lang.Object $stack1;
+        java.util.Collection #l0, $stack2;
+        org.jfree.chart.entity.StandardEntityCollection this;
+    
+    
+        this := @this: org.jfree.chart.entity.StandardEntityCollection;
+        $stack1 = this.<org.jfree.chart.entity.StandardEntityCollection: java.util.List entities>;
+        #l0 = (java.util.Collection) $stack1;
+        $stack2 = staticinvoke <java.util.Collections: java.util.Collection unmodifiableCollection(java.util.Collection)>(#l0);
+    
+        return $stack2;
+    }
+
+    // ---- method: <org.jfree.chart.entity.StandardEntityCollection: boolean equals(java.lang.Object)> ----
+    {
+        boolean $stack3, $stack6;
+        java.lang.Object obj;
+        java.util.List $stack4, $stack5;
+        org.jfree.chart.entity.StandardEntityCollection that, this;
+    
+    
+        this := @this: org.jfree.chart.entity.StandardEntityCollection;
+        obj := @parameter0: java.lang.Object;
+    
+        if obj != this goto label1;
+    
+        return 1;
+    
+      label1:
+        $stack3 = obj instanceof org.jfree.chart.entity.StandardEntityCollection;
+    
+        if $stack3 == 0 goto label2;
+        that = (org.jfree.chart.entity.StandardEntityCollection) obj;
+        $stack5 = this.<org.jfree.chart.entity.StandardEntityCollection: java.util.List entities>;
+        $stack4 = that.<org.jfree.chart.entity.StandardEntityCollection: java.util.List entities>;
+        $stack6 = staticinvoke <org.jfree.chart.util.ObjectUtilities: boolean equal(java.lang.Object,java.lang.Object)>($stack5, $stack4);
+    
+        return $stack6;
+    
+      label2:
+        return 0;
+    }
+
+}

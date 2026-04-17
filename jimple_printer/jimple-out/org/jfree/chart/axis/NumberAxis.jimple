@@ -1,0 +1,2205 @@
+// ========================================================================
+// CLASS : org.jfree.chart.axis.NumberAxis
+// ========================================================================
+
+[PUBLIC, SUPER] class org.jfree.chart.axis.NumberAxis extends org.jfree.chart.axis.ValueAxis implements java.lang.Cloneable, java.io.Serializable {
+
+    // ---- method: <org.jfree.chart.axis.NumberAxis: void setMarkerBand(org.jfree.chart.axis.MarkerAxisBand)> ----
+    {
+        org.jfree.chart.axis.MarkerAxisBand band;
+        org.jfree.chart.axis.NumberAxis this;
+        org.jfree.chart.event.AxisChangeEvent $stack2;
+    
+    
+        this := @this: org.jfree.chart.axis.NumberAxis;
+        band := @parameter0: org.jfree.chart.axis.MarkerAxisBand;
+        this.<org.jfree.chart.axis.NumberAxis: org.jfree.chart.axis.MarkerAxisBand markerBand> = band;
+        $stack2 = new org.jfree.chart.event.AxisChangeEvent;
+        specialinvoke $stack2.<org.jfree.chart.event.AxisChangeEvent: void <init>(org.jfree.chart.axis.Axis)>(this);
+        virtualinvoke this.<org.jfree.chart.axis.NumberAxis: void notifyListeners(org.jfree.chart.event.AxisChangeEvent)>($stack2);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.axis.NumberAxis: int calculateVisibleTickCount()> ----
+    {
+        double $stack10, $stack11, $stack12, $stack5, $stack6, $stack7, $stack8, $stack9, unit;
+        int $stack13;
+        org.jfree.chart.axis.NumberAxis this;
+        org.jfree.chart.axis.NumberTickUnit $stack4;
+        org.jfree.data.Range range;
+    
+    
+        this := @this: org.jfree.chart.axis.NumberAxis;
+        $stack4 = virtualinvoke this.<org.jfree.chart.axis.NumberAxis: org.jfree.chart.axis.NumberTickUnit getTickUnit()>();
+        unit = virtualinvoke $stack4.<org.jfree.chart.axis.NumberTickUnit: double getSize()>();
+        range = virtualinvoke this.<org.jfree.chart.axis.NumberAxis: org.jfree.data.Range getRange()>();
+        $stack5 = virtualinvoke range.<org.jfree.data.Range: double getUpperBound()>();
+        $stack6 = $stack5 / unit;
+        $stack9 = staticinvoke <java.lang.Math: double floor(double)>($stack6);
+        $stack7 = virtualinvoke range.<org.jfree.data.Range: double getLowerBound()>();
+        $stack8 = $stack7 / unit;
+        $stack10 = staticinvoke <java.lang.Math: double ceil(double)>($stack8);
+        $stack11 = $stack9 - $stack10;
+        $stack12 = $stack11 + 1.0;
+        $stack13 = (int) $stack12;
+    
+        return $stack13;
+    }
+
+    // ---- method: <org.jfree.chart.axis.NumberAxis: void selectAutoTickUnit(java.awt.Graphics2D,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)> ----
+    {
+        boolean $stack4, $stack5;
+        java.awt.Graphics2D g2;
+        java.awt.geom.Rectangle2D dataArea;
+        org.jfree.chart.axis.NumberAxis this;
+        org.jfree.chart.util.RectangleEdge edge;
+    
+    
+        this := @this: org.jfree.chart.axis.NumberAxis;
+        g2 := @parameter0: java.awt.Graphics2D;
+        dataArea := @parameter1: java.awt.geom.Rectangle2D;
+        edge := @parameter2: org.jfree.chart.util.RectangleEdge;
+        $stack4 = staticinvoke <org.jfree.chart.util.RectangleEdge: boolean isTopOrBottom(org.jfree.chart.util.RectangleEdge)>(edge);
+    
+        if $stack4 == 0 goto label1;
+        virtualinvoke this.<org.jfree.chart.axis.NumberAxis: void selectHorizontalAutoTickUnit(java.awt.Graphics2D,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)>(g2, dataArea, edge);
+    
+        goto label2;
+    
+      label1:
+        $stack5 = staticinvoke <org.jfree.chart.util.RectangleEdge: boolean isLeftOrRight(org.jfree.chart.util.RectangleEdge)>(edge);
+    
+        if $stack5 == 0 goto label2;
+        virtualinvoke this.<org.jfree.chart.axis.NumberAxis: void selectVerticalAutoTickUnit(java.awt.Graphics2D,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)>(g2, dataArea, edge);
+    
+      label2:
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.axis.NumberAxis: void setRangeType(org.jfree.data.RangeType)> ----
+    {
+        java.lang.IllegalArgumentException #l0;
+        java.lang.Object $stack3;
+        java.lang.Throwable #l1;
+        org.jfree.chart.axis.NumberAxis this;
+        org.jfree.chart.event.AxisChangeEvent $stack2;
+        org.jfree.data.RangeType rangeType;
+    
+    
+        this := @this: org.jfree.chart.axis.NumberAxis;
+        rangeType := @parameter0: org.jfree.data.RangeType;
+    
+        if rangeType != null goto label1;
+        $stack3 = new java.lang.IllegalArgumentException;
+        #l0 = (java.lang.IllegalArgumentException) $stack3;
+        specialinvoke #l0.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'rangeType\' argument.");
+        #l1 = (java.lang.Throwable) $stack3;
+    
+        throw #l1;
+    
+      label1:
+        this.<org.jfree.chart.axis.NumberAxis: org.jfree.data.RangeType rangeType> = rangeType;
+        $stack2 = new org.jfree.chart.event.AxisChangeEvent;
+        specialinvoke $stack2.<org.jfree.chart.event.AxisChangeEvent: void <init>(org.jfree.chart.axis.Axis)>(this);
+        virtualinvoke this.<org.jfree.chart.axis.NumberAxis: void notifyListeners(org.jfree.chart.event.AxisChangeEvent)>($stack2);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.axis.NumberAxis: boolean getAutoRangeStickyZero()> ----
+    {
+        boolean $stack1;
+        org.jfree.chart.axis.NumberAxis this;
+    
+    
+        this := @this: org.jfree.chart.axis.NumberAxis;
+        $stack1 = this.<org.jfree.chart.axis.NumberAxis: boolean autoRangeStickyZero>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.axis.NumberAxis: org.jfree.data.RangeType getRangeType()> ----
+    {
+        org.jfree.chart.axis.NumberAxis this;
+        org.jfree.data.RangeType $stack1;
+    
+    
+        this := @this: org.jfree.chart.axis.NumberAxis;
+        $stack1 = this.<org.jfree.chart.axis.NumberAxis: org.jfree.data.RangeType rangeType>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.axis.NumberAxis: void autoAdjustRange()> ----
+    {
+        boolean $stack18, $stack23, $stack26;
+        byte $stack24, $stack25, $stack32, $stack35, $stack45, $stack50, $stack51;
+        double $stack27, $stack28, $stack29, $stack30, $stack33, $stack34, $stack36, $stack37, $stack38, $stack39, $stack40, $stack41, $stack42, $stack43, $stack44, $stack52, adjust, expand, fixedAutoRange, lower#0, lower#1, minRange, range, upper;
+        org.jfree.chart.axis.NumberAxis this;
+        org.jfree.chart.plot.Plot plot;
+        org.jfree.chart.plot.ValueAxisPlot vap;
+        org.jfree.data.Range $stack31, r;
+        org.jfree.data.RangeType $stack19, $stack20, $stack21, $stack22, $stack46, $stack47, $stack48, $stack49;
+    
+    
+        this := @this: org.jfree.chart.axis.NumberAxis;
+        plot = virtualinvoke this.<org.jfree.chart.axis.NumberAxis: org.jfree.chart.plot.Plot getPlot()>();
+    
+        if plot != null goto label01;
+    
+        return;
+    
+      label01:
+        $stack18 = plot instanceof org.jfree.chart.plot.ValueAxisPlot;
+    
+        if $stack18 == 0 goto label15;
+        vap = (org.jfree.chart.plot.ValueAxisPlot) plot;
+        r = interfaceinvoke vap.<org.jfree.chart.plot.ValueAxisPlot: org.jfree.data.Range getDataRange(org.jfree.chart.axis.ValueAxis)>(this);
+    
+        if r != null goto label02;
+        r = virtualinvoke this.<org.jfree.chart.axis.NumberAxis: org.jfree.data.Range getDefaultAutoRange()>();
+    
+      label02:
+        upper = virtualinvoke r.<org.jfree.data.Range: double getUpperBound()>();
+        lower#0 = virtualinvoke r.<org.jfree.data.Range: double getLowerBound()>();
+        $stack20 = this.<org.jfree.chart.axis.NumberAxis: org.jfree.data.RangeType rangeType>;
+        $stack19 = <org.jfree.data.RangeType: org.jfree.data.RangeType POSITIVE>;
+    
+        if $stack20 != $stack19 goto label03;
+        lower#0 = staticinvoke <java.lang.Math: double max(double,double)>(0.0, lower#0);
+        upper = staticinvoke <java.lang.Math: double max(double,double)>(0.0, upper);
+    
+        goto label04;
+    
+      label03:
+        $stack22 = this.<org.jfree.chart.axis.NumberAxis: org.jfree.data.RangeType rangeType>;
+        $stack21 = <org.jfree.data.RangeType: org.jfree.data.RangeType NEGATIVE>;
+    
+        if $stack22 != $stack21 goto label04;
+        lower#0 = staticinvoke <java.lang.Math: double min(double,double)>(0.0, lower#0);
+        upper = staticinvoke <java.lang.Math: double min(double,double)>(0.0, upper);
+    
+      label04:
+        $stack23 = virtualinvoke this.<org.jfree.chart.axis.NumberAxis: boolean getAutoRangeIncludesZero()>();
+    
+        if $stack23 == 0 goto label05;
+        lower#0 = staticinvoke <java.lang.Math: double min(double,double)>(lower#0, 0.0);
+        upper = staticinvoke <java.lang.Math: double max(double,double)>(upper, 0.0);
+    
+      label05:
+        range = upper - lower#0;
+        fixedAutoRange = virtualinvoke this.<org.jfree.chart.axis.NumberAxis: double getFixedAutoRange()>();
+        $stack24 = fixedAutoRange cmpl 0.0;
+    
+        if $stack24 <= 0 goto label06;
+        lower#1 = upper - fixedAutoRange;
+    
+        goto label14;
+    
+      label06:
+        minRange = virtualinvoke this.<org.jfree.chart.axis.NumberAxis: double getAutoRangeMinimumSize()>();
+        $stack25 = range cmpg minRange;
+    
+        if $stack25 >= 0 goto label09;
+        $stack44 = minRange - range;
+        expand = $stack44 / 2.0;
+        upper = upper + expand;
+        lower#0 = lower#0 - expand;
+        $stack45 = lower#0 cmpl upper;
+    
+        if $stack45 != 0 goto label07;
+        $stack52 = staticinvoke <java.lang.Math: double abs(double)>(lower#0);
+        adjust = $stack52 / 10.0;
+        lower#0 = lower#0 - adjust;
+        upper = upper + adjust;
+    
+      label07:
+        $stack47 = this.<org.jfree.chart.axis.NumberAxis: org.jfree.data.RangeType rangeType>;
+        $stack46 = <org.jfree.data.RangeType: org.jfree.data.RangeType POSITIVE>;
+    
+        if $stack47 != $stack46 goto label08;
+        $stack51 = lower#0 cmpg 0.0;
+    
+        if $stack51 >= 0 goto label09;
+        upper = upper - lower#0;
+        lower#0 = 0.0;
+    
+        goto label09;
+    
+      label08:
+        $stack49 = this.<org.jfree.chart.axis.NumberAxis: org.jfree.data.RangeType rangeType>;
+        $stack48 = <org.jfree.data.RangeType: org.jfree.data.RangeType NEGATIVE>;
+    
+        if $stack49 != $stack48 goto label09;
+        $stack50 = upper cmpl 0.0;
+    
+        if $stack50 <= 0 goto label09;
+        lower#0 = lower#0 - upper;
+        upper = 0.0;
+    
+      label09:
+        $stack26 = virtualinvoke this.<org.jfree.chart.axis.NumberAxis: boolean getAutoRangeStickyZero()>();
+    
+        if $stack26 == 0 goto label13;
+        $stack32 = upper cmpg 0.0;
+    
+        if $stack32 > 0 goto label10;
+        $stack41 = virtualinvoke this.<org.jfree.chart.axis.NumberAxis: double getUpperMargin()>();
+        $stack42 = $stack41 * range;
+        $stack43 = upper + $stack42;
+        upper = staticinvoke <java.lang.Math: double min(double,double)>(0.0, $stack43);
+    
+        goto label11;
+    
+      label10:
+        $stack33 = virtualinvoke this.<org.jfree.chart.axis.NumberAxis: double getUpperMargin()>();
+        $stack34 = $stack33 * range;
+        upper = upper + $stack34;
+    
+      label11:
+        $stack35 = lower#0 cmpl 0.0;
+    
+        if $stack35 < 0 goto label12;
+        $stack38 = virtualinvoke this.<org.jfree.chart.axis.NumberAxis: double getLowerMargin()>();
+        $stack39 = $stack38 * range;
+        $stack40 = lower#0 - $stack39;
+        lower#1 = staticinvoke <java.lang.Math: double max(double,double)>(0.0, $stack40);
+    
+        goto label14;
+    
+      label12:
+        $stack36 = virtualinvoke this.<org.jfree.chart.axis.NumberAxis: double getLowerMargin()>();
+        $stack37 = $stack36 * range;
+        lower#1 = lower#0 - $stack37;
+    
+        goto label14;
+    
+      label13:
+        $stack27 = virtualinvoke this.<org.jfree.chart.axis.NumberAxis: double getUpperMargin()>();
+        $stack28 = $stack27 * range;
+        upper = upper + $stack28;
+        $stack29 = virtualinvoke this.<org.jfree.chart.axis.NumberAxis: double getLowerMargin()>();
+        $stack30 = $stack29 * range;
+        lower#1 = lower#0 - $stack30;
+    
+      label14:
+        $stack31 = new org.jfree.data.Range;
+        specialinvoke $stack31.<org.jfree.data.Range: void <init>(double,double)>(lower#1, upper);
+        virtualinvoke this.<org.jfree.chart.axis.NumberAxis: void setRange(org.jfree.data.Range,boolean,boolean)>($stack31, 0, 0);
+    
+      label15:
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.axis.NumberAxis: void <init>()> ----
+    {
+        org.jfree.chart.axis.NumberAxis this;
+    
+    
+        this := @this: org.jfree.chart.axis.NumberAxis;
+        specialinvoke this.<org.jfree.chart.axis.NumberAxis: void <init>(java.lang.String)>(null);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.axis.NumberAxis: boolean getAutoRangeIncludesZero()> ----
+    {
+        boolean $stack1;
+        org.jfree.chart.axis.NumberAxis this;
+    
+    
+        this := @this: org.jfree.chart.axis.NumberAxis;
+        $stack1 = this.<org.jfree.chart.axis.NumberAxis: boolean autoRangeIncludesZero>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.axis.NumberAxis: double estimateMaximumTickLabelWidth(java.awt.Graphics2D,org.jfree.chart.axis.TickUnit)> ----
+    {
+        boolean $stack21;
+        double $stack19, $stack20, $stack25, $stack28, lower, result#0, result#1, upper, w1, w2;
+        float $stack27;
+        int $stack23, $stack24;
+        java.awt.Font $stack22, $stack26;
+        java.awt.FontMetrics frc#1;
+        java.awt.Graphics2D g2;
+        java.awt.font.FontRenderContext frc#0;
+        java.awt.font.LineMetrics lm#0;
+        java.lang.String lowerStr#0, lowerStr#1, upperStr#0, upperStr#1;
+        java.text.NumberFormat formatter;
+        org.jfree.chart.axis.NumberAxis this;
+        org.jfree.chart.axis.TickUnit unit;
+        org.jfree.chart.util.RectangleInsets tickLabelInsets;
+        org.jfree.data.Range lm#1;
+    
+    
+        this := @this: org.jfree.chart.axis.NumberAxis;
+        g2 := @parameter0: java.awt.Graphics2D;
+        unit := @parameter1: org.jfree.chart.axis.TickUnit;
+        tickLabelInsets = virtualinvoke this.<org.jfree.chart.axis.NumberAxis: org.jfree.chart.util.RectangleInsets getTickLabelInsets()>();
+        $stack19 = virtualinvoke tickLabelInsets.<org.jfree.chart.util.RectangleInsets: double getLeft()>();
+        $stack20 = virtualinvoke tickLabelInsets.<org.jfree.chart.util.RectangleInsets: double getRight()>();
+        result#0 = $stack19 + $stack20;
+        $stack21 = virtualinvoke this.<org.jfree.chart.axis.NumberAxis: boolean isVerticalTickLabels()>();
+    
+        if $stack21 == 0 goto label1;
+        frc#0 = virtualinvoke g2.<java.awt.Graphics2D: java.awt.font.FontRenderContext getFontRenderContext()>();
+        $stack26 = virtualinvoke this.<org.jfree.chart.axis.NumberAxis: java.awt.Font getTickLabelFont()>();
+        lm#0 = virtualinvoke $stack26.<java.awt.Font: java.awt.font.LineMetrics getLineMetrics(java.lang.String,java.awt.font.FontRenderContext)>("0", frc#0);
+        $stack27 = virtualinvoke lm#0.<java.awt.font.LineMetrics: float getHeight()>();
+        $stack28 = (double) $stack27;
+        result#1 = result#0 + $stack28;
+    
+        goto label4;
+    
+      label1:
+        $stack22 = virtualinvoke this.<org.jfree.chart.axis.NumberAxis: java.awt.Font getTickLabelFont()>();
+        frc#1 = virtualinvoke g2.<java.awt.Graphics2D: java.awt.FontMetrics getFontMetrics(java.awt.Font)>($stack22);
+        lm#1 = virtualinvoke this.<org.jfree.chart.axis.NumberAxis: org.jfree.data.Range getRange()>();
+        lower = virtualinvoke lm#1.<org.jfree.data.Range: double getLowerBound()>();
+        upper = virtualinvoke lm#1.<org.jfree.data.Range: double getUpperBound()>();
+        lowerStr#0 = "";
+        upperStr#0 = "";
+        formatter = virtualinvoke this.<org.jfree.chart.axis.NumberAxis: java.text.NumberFormat getNumberFormatOverride()>();
+    
+        if formatter == null goto label2;
+        lowerStr#1 = virtualinvoke formatter.<java.text.NumberFormat: java.lang.String format(double)>(lower);
+        upperStr#1 = virtualinvoke formatter.<java.text.NumberFormat: java.lang.String format(double)>(upper);
+    
+        goto label3;
+    
+      label2:
+        lowerStr#1 = virtualinvoke unit.<org.jfree.chart.axis.TickUnit: java.lang.String valueToString(double)>(lower);
+        upperStr#1 = virtualinvoke unit.<org.jfree.chart.axis.TickUnit: java.lang.String valueToString(double)>(upper);
+    
+      label3:
+        $stack23 = virtualinvoke frc#1.<java.awt.FontMetrics: int stringWidth(java.lang.String)>(lowerStr#1);
+        w1 = (double) $stack23;
+        $stack24 = virtualinvoke frc#1.<java.awt.FontMetrics: int stringWidth(java.lang.String)>(upperStr#1);
+        w2 = (double) $stack24;
+        $stack25 = staticinvoke <java.lang.Math: double max(double,double)>(w1, w2);
+        result#1 = result#0 + $stack25;
+    
+      label4:
+        return result#1;
+    }
+
+    // ---- method: <org.jfree.chart.axis.NumberAxis: java.util.List refreshTicksVertical(java.awt.Graphics2D,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)> ----
+    {
+        boolean $stack29, $stack33, $stack46, $stack57;
+        double $stack30, $stack31, $stack38, $stack39, $stack40, $stack41, $stack42, $stack43, $stack44, $stack52, $stack53, $stack54, $stack55, angle, lowestTickValue, minorTickValue#0, minorTickValue#1, minorTickValue_1, nextTickValue, size;
+        int $stack37, count, minorTick#0, minorTick#1, minorTickSpaces, minorTick_1;
+        java.awt.Font tickLabelFont;
+        java.awt.Graphics2D g2;
+        java.awt.geom.Rectangle2D dataArea;
+        java.lang.Double #l2;
+        java.lang.Number #l3;
+        java.lang.Object $stack28, $stack35, anchor#0, rotationAnchor#0;
+        java.lang.String tickLabel;
+        java.text.NumberFormat formatter;
+        java.util.ArrayList #l5, result;
+        java.util.List #l0, #l1, #l4, #l6, #l7;
+        org.jfree.chart.axis.NumberAxis this;
+        org.jfree.chart.axis.NumberTick $stack36, $stack50, $stack61, tick;
+        org.jfree.chart.axis.NumberTickUnit $stack32, tu;
+        org.jfree.chart.axis.TickType $stack49, $stack60;
+        org.jfree.chart.text.TextAnchor $stack47, $stack48, $stack58, $stack59, anchor#1, rotationAnchor#1;
+        org.jfree.chart.util.RectangleEdge $stack34, $stack51, edge;
+        org.jfree.data.Range $stack45, $stack56;
+    
+    
+        this := @this: org.jfree.chart.axis.NumberAxis;
+        g2 := @parameter0: java.awt.Graphics2D;
+        dataArea := @parameter1: java.awt.geom.Rectangle2D;
+        edge := @parameter2: org.jfree.chart.util.RectangleEdge;
+        $stack28 = new java.util.ArrayList;
+        #l5 = (java.util.ArrayList) $stack28;
+        specialinvoke #l5.<java.util.ArrayList: void <init>()>();
+        result = (java.util.ArrayList) $stack28;
+        #l1 = (java.util.List) $stack28;
+        interfaceinvoke #l1.<java.util.List: void clear()>();
+        tickLabelFont = virtualinvoke this.<org.jfree.chart.axis.NumberAxis: java.awt.Font getTickLabelFont()>();
+        virtualinvoke g2.<java.awt.Graphics2D: void setFont(java.awt.Font)>(tickLabelFont);
+        $stack29 = virtualinvoke this.<org.jfree.chart.axis.NumberAxis: boolean isAutoTickUnitSelection()>();
+    
+        if $stack29 == 0 goto label01;
+        virtualinvoke this.<org.jfree.chart.axis.NumberAxis: void selectAutoTickUnit(java.awt.Graphics2D,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)>(g2, dataArea, edge);
+    
+      label01:
+        tu = virtualinvoke this.<org.jfree.chart.axis.NumberAxis: org.jfree.chart.axis.NumberTickUnit getTickUnit()>();
+        size = virtualinvoke tu.<org.jfree.chart.axis.TickUnit: double getSize()>();
+        count = virtualinvoke this.<org.jfree.chart.axis.NumberAxis: int calculateVisibleTickCount()>();
+        lowestTickValue = virtualinvoke this.<org.jfree.chart.axis.NumberAxis: double calculateLowestVisibleTickValue()>();
+    
+        if count > 500 goto label16;
+        minorTickSpaces = virtualinvoke this.<org.jfree.chart.axis.NumberAxis: int getMinorTickCount()>();
+    
+        if minorTickSpaces > 0 goto label02;
+        minorTickSpaces = virtualinvoke tu.<org.jfree.chart.axis.TickUnit: int getMinorTickCount()>();
+    
+      label02:
+        minorTick#0 = 1;
+    
+      label03:
+        if minorTick#0 >= minorTickSpaces goto label05;
+        $stack52 = (double) minorTick#0;
+        $stack53 = size * $stack52;
+        $stack54 = (double) minorTickSpaces;
+        $stack55 = $stack53 / $stack54;
+        minorTickValue#0 = lowestTickValue - $stack55;
+        $stack56 = virtualinvoke this.<org.jfree.chart.axis.NumberAxis: org.jfree.data.Range getRange()>();
+        $stack57 = virtualinvoke $stack56.<org.jfree.data.Range: boolean contains(double)>(minorTickValue#0);
+    
+        if $stack57 == 0 goto label04;
+        $stack61 = new org.jfree.chart.axis.NumberTick;
+        $stack60 = <org.jfree.chart.axis.TickType: org.jfree.chart.axis.TickType MINOR>;
+        $stack59 = <org.jfree.chart.text.TextAnchor: org.jfree.chart.text.TextAnchor TOP_CENTER>;
+        $stack58 = <org.jfree.chart.text.TextAnchor: org.jfree.chart.text.TextAnchor CENTER>;
+        specialinvoke $stack61.<org.jfree.chart.axis.NumberTick: void <init>(org.jfree.chart.axis.TickType,double,java.lang.String,org.jfree.chart.text.TextAnchor,org.jfree.chart.text.TextAnchor,double)>($stack60, minorTickValue#0, "", $stack59, $stack58, 0.0);
+        #l0 = (java.util.List) $stack28;
+        interfaceinvoke #l0.<java.util.List: boolean add(java.lang.Object)>($stack61);
+    
+      label04:
+        minorTick#0 = minorTick#0 + 1;
+    
+        goto label03;
+    
+      label05:
+        minorTick#1 = 0;
+    
+      label06:
+        if minorTick#1 >= count goto label16;
+        $stack30 = (double) minorTick#1;
+        $stack31 = $stack30 * size;
+        minorTickValue#1 = lowestTickValue + $stack31;
+        formatter = virtualinvoke this.<org.jfree.chart.axis.NumberAxis: java.text.NumberFormat getNumberFormatOverride()>();
+    
+        if formatter == null goto label07;
+        tickLabel = virtualinvoke formatter.<java.text.NumberFormat: java.lang.String format(double)>(minorTickValue#1);
+    
+        goto label08;
+    
+      label07:
+        $stack32 = virtualinvoke this.<org.jfree.chart.axis.NumberAxis: org.jfree.chart.axis.NumberTickUnit getTickUnit()>();
+        tickLabel = virtualinvoke $stack32.<org.jfree.chart.axis.NumberTickUnit: java.lang.String valueToString(double)>(minorTickValue#1);
+    
+      label08:
+        anchor#0 = null;
+        rotationAnchor#0 = null;
+        angle = 0.0;
+        $stack33 = virtualinvoke this.<org.jfree.chart.axis.NumberAxis: boolean isVerticalTickLabels()>();
+    
+        if $stack33 == 0 goto label10;
+        $stack51 = <org.jfree.chart.util.RectangleEdge: org.jfree.chart.util.RectangleEdge LEFT>;
+    
+        if edge != $stack51 goto label09;
+        anchor#1 = <org.jfree.chart.text.TextAnchor: org.jfree.chart.text.TextAnchor BOTTOM_CENTER>;
+        rotationAnchor#1 = <org.jfree.chart.text.TextAnchor: org.jfree.chart.text.TextAnchor BOTTOM_CENTER>;
+        angle = -1.5707963267948966;
+    
+        goto label12;
+    
+      label09:
+        anchor#1 = <org.jfree.chart.text.TextAnchor: org.jfree.chart.text.TextAnchor BOTTOM_CENTER>;
+        rotationAnchor#1 = <org.jfree.chart.text.TextAnchor: org.jfree.chart.text.TextAnchor BOTTOM_CENTER>;
+        angle = 1.5707963267948966;
+    
+        goto label12;
+    
+      label10:
+        $stack34 = <org.jfree.chart.util.RectangleEdge: org.jfree.chart.util.RectangleEdge LEFT>;
+    
+        if edge != $stack34 goto label11;
+        anchor#1 = <org.jfree.chart.text.TextAnchor: org.jfree.chart.text.TextAnchor CENTER_RIGHT>;
+        rotationAnchor#1 = <org.jfree.chart.text.TextAnchor: org.jfree.chart.text.TextAnchor CENTER_RIGHT>;
+    
+        goto label12;
+    
+      label11:
+        anchor#1 = <org.jfree.chart.text.TextAnchor: org.jfree.chart.text.TextAnchor CENTER_LEFT>;
+        rotationAnchor#1 = <org.jfree.chart.text.TextAnchor: org.jfree.chart.text.TextAnchor CENTER_LEFT>;
+    
+      label12:
+        $stack36 = new org.jfree.chart.axis.NumberTick;
+        $stack35 = new java.lang.Double;
+        #l2 = (java.lang.Double) $stack35;
+        specialinvoke #l2.<java.lang.Double: void <init>(double)>(minorTickValue#1);
+        #l3 = (java.lang.Number) $stack35;
+        specialinvoke $stack36.<org.jfree.chart.axis.NumberTick: void <init>(java.lang.Number,java.lang.String,org.jfree.chart.text.TextAnchor,org.jfree.chart.text.TextAnchor,double)>(#l3, tickLabel, anchor#1, rotationAnchor#1, angle);
+        tick = $stack36;
+        #l4 = (java.util.List) $stack28;
+        interfaceinvoke #l4.<java.util.List: boolean add(java.lang.Object)>($stack36);
+        $stack37 = minorTick#1 + 1;
+        $stack38 = (double) $stack37;
+        $stack39 = $stack38 * size;
+        nextTickValue = lowestTickValue + $stack39;
+        minorTick_1 = 1;
+    
+      label13:
+        if minorTick_1 >= minorTickSpaces goto label15;
+        $stack40 = nextTickValue - minorTickValue#1;
+        $stack41 = (double) minorTick_1;
+        $stack42 = $stack40 * $stack41;
+        $stack43 = (double) minorTickSpaces;
+        $stack44 = $stack42 / $stack43;
+        minorTickValue_1 = minorTickValue#1 + $stack44;
+        $stack45 = virtualinvoke this.<org.jfree.chart.axis.NumberAxis: org.jfree.data.Range getRange()>();
+        $stack46 = virtualinvoke $stack45.<org.jfree.data.Range: boolean contains(double)>(minorTickValue_1);
+    
+        if $stack46 == 0 goto label14;
+        $stack50 = new org.jfree.chart.axis.NumberTick;
+        $stack49 = <org.jfree.chart.axis.TickType: org.jfree.chart.axis.TickType MINOR>;
+        $stack48 = <org.jfree.chart.text.TextAnchor: org.jfree.chart.text.TextAnchor TOP_CENTER>;
+        $stack47 = <org.jfree.chart.text.TextAnchor: org.jfree.chart.text.TextAnchor CENTER>;
+        specialinvoke $stack50.<org.jfree.chart.axis.NumberTick: void <init>(org.jfree.chart.axis.TickType,double,java.lang.String,org.jfree.chart.text.TextAnchor,org.jfree.chart.text.TextAnchor,double)>($stack49, minorTickValue_1, "", $stack48, $stack47, 0.0);
+        #l6 = (java.util.List) $stack28;
+        interfaceinvoke #l6.<java.util.List: boolean add(java.lang.Object)>($stack50);
+    
+      label14:
+        minorTick_1 = minorTick_1 + 1;
+    
+        goto label13;
+    
+      label15:
+        minorTick#1 = minorTick#1 + 1;
+    
+        goto label06;
+    
+      label16:
+        #l7 = (java.util.List) $stack28;
+    
+        return #l7;
+    }
+
+    // ---- method: <org.jfree.chart.axis.NumberAxis: org.jfree.chart.axis.TickUnitSource createStandardTickUnits()> ----
+    {
+        java.lang.Object $stack15, $stack16, $stack17, $stack18, $stack19, $stack20, $stack21, $stack22, $stack23, $stack24, $stack25, $stack26, $stack27;
+        java.text.DecimalFormat #l1, #l14, #l19, #l20, #l39, #l41, #l47, #l49, #l5, #l58, #l62, #l73, #l74, df0, df00, df000, df1, df10, df2, df3, df4, df5, df6, df7, df8, df9;
+        java.text.NumberFormat #l0, #l10, #l11, #l12, #l13, #l15, #l16, #l17, #l18, #l2, #l21, #l22, #l23, #l24, #l25, #l26, #l27, #l28, #l29, #l3, #l30, #l31, #l32, #l33, #l34, #l35, #l36, #l37, #l38, #l4, #l40, #l42, #l43, #l44, #l45, #l46, #l48, #l50, #l51, #l52, #l53, #l54, #l55, #l56, #l57, #l59, #l6, #l60, #l61, #l63, #l64, #l65, #l66, #l67, #l68, #l69, #l7, #l70, #l71, #l72, #l75, #l8, #l9;
+        org.jfree.chart.axis.NumberTickUnit $stack28, $stack29, $stack30, $stack31, $stack32, $stack33, $stack34, $stack35, $stack36, $stack37, $stack38, $stack39, $stack40, $stack41, $stack42, $stack43, $stack44, $stack45, $stack46, $stack47, $stack48, $stack49, $stack50, $stack51, $stack52, $stack53, $stack54, $stack55, $stack56, $stack57, $stack58, $stack59, $stack60, $stack61, $stack62, $stack63, $stack64, $stack65, $stack66, $stack67, $stack68, $stack69, $stack70, $stack71, $stack72, $stack73, $stack74, $stack75, $stack76, $stack77, $stack78, $stack79, $stack80, $stack81, $stack82, $stack83, $stack84, $stack85, $stack86, $stack87, $stack88, $stack89, $stack90;
+        org.jfree.chart.axis.TickUnits $stack14, units;
+    
+    
+        $stack14 = new org.jfree.chart.axis.TickUnits;
+        specialinvoke $stack14.<org.jfree.chart.axis.TickUnits: void <init>()>();
+        units = $stack14;
+        $stack15 = new java.text.DecimalFormat;
+        #l58 = (java.text.DecimalFormat) $stack15;
+        specialinvoke #l58.<java.text.DecimalFormat: void <init>(java.lang.String)>("0.0000000000");
+        df000 = (java.text.DecimalFormat) $stack15;
+        $stack16 = new java.text.DecimalFormat;
+        #l41 = (java.text.DecimalFormat) $stack16;
+        specialinvoke #l41.<java.text.DecimalFormat: void <init>(java.lang.String)>("0.000000000");
+        df00 = (java.text.DecimalFormat) $stack16;
+        $stack17 = new java.text.DecimalFormat;
+        #l49 = (java.text.DecimalFormat) $stack17;
+        specialinvoke #l49.<java.text.DecimalFormat: void <init>(java.lang.String)>("0.00000000");
+        df0 = (java.text.DecimalFormat) $stack17;
+        $stack18 = new java.text.DecimalFormat;
+        #l47 = (java.text.DecimalFormat) $stack18;
+        specialinvoke #l47.<java.text.DecimalFormat: void <init>(java.lang.String)>("0.0000000");
+        df1 = (java.text.DecimalFormat) $stack18;
+        $stack19 = new java.text.DecimalFormat;
+        #l74 = (java.text.DecimalFormat) $stack19;
+        specialinvoke #l74.<java.text.DecimalFormat: void <init>(java.lang.String)>("0.000000");
+        df2 = (java.text.DecimalFormat) $stack19;
+        $stack20 = new java.text.DecimalFormat;
+        #l73 = (java.text.DecimalFormat) $stack20;
+        specialinvoke #l73.<java.text.DecimalFormat: void <init>(java.lang.String)>("0.00000");
+        df3 = (java.text.DecimalFormat) $stack20;
+        $stack21 = new java.text.DecimalFormat;
+        #l62 = (java.text.DecimalFormat) $stack21;
+        specialinvoke #l62.<java.text.DecimalFormat: void <init>(java.lang.String)>("0.0000");
+        df4 = (java.text.DecimalFormat) $stack21;
+        $stack22 = new java.text.DecimalFormat;
+        #l14 = (java.text.DecimalFormat) $stack22;
+        specialinvoke #l14.<java.text.DecimalFormat: void <init>(java.lang.String)>("0.000");
+        df5 = (java.text.DecimalFormat) $stack22;
+        $stack23 = new java.text.DecimalFormat;
+        #l39 = (java.text.DecimalFormat) $stack23;
+        specialinvoke #l39.<java.text.DecimalFormat: void <init>(java.lang.String)>("0.00");
+        df6 = (java.text.DecimalFormat) $stack23;
+        $stack24 = new java.text.DecimalFormat;
+        #l19 = (java.text.DecimalFormat) $stack24;
+        specialinvoke #l19.<java.text.DecimalFormat: void <init>(java.lang.String)>("0.0");
+        df7 = (java.text.DecimalFormat) $stack24;
+        $stack25 = new java.text.DecimalFormat;
+        #l20 = (java.text.DecimalFormat) $stack25;
+        specialinvoke #l20.<java.text.DecimalFormat: void <init>(java.lang.String)>("#,##0");
+        df8 = (java.text.DecimalFormat) $stack25;
+        $stack26 = new java.text.DecimalFormat;
+        #l1 = (java.text.DecimalFormat) $stack26;
+        specialinvoke #l1.<java.text.DecimalFormat: void <init>(java.lang.String)>("#,###,##0");
+        df9 = (java.text.DecimalFormat) $stack26;
+        $stack27 = new java.text.DecimalFormat;
+        #l5 = (java.text.DecimalFormat) $stack27;
+        specialinvoke #l5.<java.text.DecimalFormat: void <init>(java.lang.String)>("#,###,###,##0");
+        df10 = (java.text.DecimalFormat) $stack27;
+        $stack28 = new org.jfree.chart.axis.NumberTickUnit;
+        #l32 = (java.text.NumberFormat) $stack16;
+        specialinvoke $stack28.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(1.0E-9, #l32, 2);
+        virtualinvoke $stack14.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack28);
+        $stack29 = new org.jfree.chart.axis.NumberTickUnit;
+        #l55 = (java.text.NumberFormat) $stack17;
+        specialinvoke $stack29.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(1.0E-8, #l55, 2);
+        virtualinvoke $stack14.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack29);
+        $stack30 = new org.jfree.chart.axis.NumberTickUnit;
+        #l38 = (java.text.NumberFormat) $stack18;
+        specialinvoke $stack30.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(1.0E-7, #l38, 2);
+        virtualinvoke $stack14.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack30);
+        $stack31 = new org.jfree.chart.axis.NumberTickUnit;
+        #l29 = (java.text.NumberFormat) $stack19;
+        specialinvoke $stack31.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(1.0E-6, #l29, 2);
+        virtualinvoke $stack14.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack31);
+        $stack32 = new org.jfree.chart.axis.NumberTickUnit;
+        #l21 = (java.text.NumberFormat) $stack20;
+        specialinvoke $stack32.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(1.0E-5, #l21, 2);
+        virtualinvoke $stack14.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack32);
+        $stack33 = new org.jfree.chart.axis.NumberTickUnit;
+        #l18 = (java.text.NumberFormat) $stack21;
+        specialinvoke $stack33.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(1.0E-4, #l18, 2);
+        virtualinvoke $stack14.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack33);
+        $stack34 = new org.jfree.chart.axis.NumberTickUnit;
+        #l16 = (java.text.NumberFormat) $stack22;
+        specialinvoke $stack34.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(0.001, #l16, 2);
+        virtualinvoke $stack14.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack34);
+        $stack35 = new org.jfree.chart.axis.NumberTickUnit;
+        #l54 = (java.text.NumberFormat) $stack23;
+        specialinvoke $stack35.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(0.01, #l54, 2);
+        virtualinvoke $stack14.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack35);
+        $stack36 = new org.jfree.chart.axis.NumberTickUnit;
+        #l59 = (java.text.NumberFormat) $stack24;
+        specialinvoke $stack36.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(0.1, #l59, 2);
+        virtualinvoke $stack14.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack36);
+        $stack37 = new org.jfree.chart.axis.NumberTickUnit;
+        #l2 = (java.text.NumberFormat) $stack25;
+        specialinvoke $stack37.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(1.0, #l2, 2);
+        virtualinvoke $stack14.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack37);
+        $stack38 = new org.jfree.chart.axis.NumberTickUnit;
+        #l42 = (java.text.NumberFormat) $stack25;
+        specialinvoke $stack38.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(10.0, #l42, 2);
+        virtualinvoke $stack14.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack38);
+        $stack39 = new org.jfree.chart.axis.NumberTickUnit;
+        #l69 = (java.text.NumberFormat) $stack25;
+        specialinvoke $stack39.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(100.0, #l69, 2);
+        virtualinvoke $stack14.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack39);
+        $stack40 = new org.jfree.chart.axis.NumberTickUnit;
+        #l37 = (java.text.NumberFormat) $stack25;
+        specialinvoke $stack40.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(1000.0, #l37, 2);
+        virtualinvoke $stack14.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack40);
+        $stack41 = new org.jfree.chart.axis.NumberTickUnit;
+        #l51 = (java.text.NumberFormat) $stack25;
+        specialinvoke $stack41.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(10000.0, #l51, 2);
+        virtualinvoke $stack14.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack41);
+        $stack42 = new org.jfree.chart.axis.NumberTickUnit;
+        #l68 = (java.text.NumberFormat) $stack25;
+        specialinvoke $stack42.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(100000.0, #l68, 2);
+        virtualinvoke $stack14.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack42);
+        $stack43 = new org.jfree.chart.axis.NumberTickUnit;
+        #l61 = (java.text.NumberFormat) $stack26;
+        specialinvoke $stack43.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(1000000.0, #l61, 2);
+        virtualinvoke $stack14.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack43);
+        $stack44 = new org.jfree.chart.axis.NumberTickUnit;
+        #l8 = (java.text.NumberFormat) $stack26;
+        specialinvoke $stack44.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(1.0E7, #l8, 2);
+        virtualinvoke $stack14.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack44);
+        $stack45 = new org.jfree.chart.axis.NumberTickUnit;
+        #l0 = (java.text.NumberFormat) $stack26;
+        specialinvoke $stack45.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(1.0E8, #l0, 2);
+        virtualinvoke $stack14.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack45);
+        $stack46 = new org.jfree.chart.axis.NumberTickUnit;
+        #l48 = (java.text.NumberFormat) $stack27;
+        specialinvoke $stack46.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(1.0E9, #l48, 2);
+        virtualinvoke $stack14.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack46);
+        $stack47 = new org.jfree.chart.axis.NumberTickUnit;
+        #l35 = (java.text.NumberFormat) $stack27;
+        specialinvoke $stack47.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(1.0E10, #l35, 2);
+        virtualinvoke $stack14.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack47);
+        $stack48 = new org.jfree.chart.axis.NumberTickUnit;
+        #l9 = (java.text.NumberFormat) $stack27;
+        specialinvoke $stack48.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(1.0E11, #l9, 2);
+        virtualinvoke $stack14.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack48);
+        $stack49 = new org.jfree.chart.axis.NumberTickUnit;
+        #l13 = (java.text.NumberFormat) $stack15;
+        specialinvoke $stack49.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(2.5E-9, #l13, 5);
+        virtualinvoke $stack14.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack49);
+        $stack50 = new org.jfree.chart.axis.NumberTickUnit;
+        #l31 = (java.text.NumberFormat) $stack16;
+        specialinvoke $stack50.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(2.5E-8, #l31, 5);
+        virtualinvoke $stack14.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack50);
+        $stack51 = new org.jfree.chart.axis.NumberTickUnit;
+        #l43 = (java.text.NumberFormat) $stack17;
+        specialinvoke $stack51.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(2.5E-7, #l43, 5);
+        virtualinvoke $stack14.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack51);
+        $stack52 = new org.jfree.chart.axis.NumberTickUnit;
+        #l56 = (java.text.NumberFormat) $stack18;
+        specialinvoke $stack52.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(2.5E-6, #l56, 5);
+        virtualinvoke $stack14.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack52);
+        $stack53 = new org.jfree.chart.axis.NumberTickUnit;
+        #l11 = (java.text.NumberFormat) $stack19;
+        specialinvoke $stack53.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(2.5E-5, #l11, 5);
+        virtualinvoke $stack14.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack53);
+        $stack54 = new org.jfree.chart.axis.NumberTickUnit;
+        #l36 = (java.text.NumberFormat) $stack20;
+        specialinvoke $stack54.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(2.5E-4, #l36, 5);
+        virtualinvoke $stack14.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack54);
+        $stack55 = new org.jfree.chart.axis.NumberTickUnit;
+        #l33 = (java.text.NumberFormat) $stack21;
+        specialinvoke $stack55.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(0.0025, #l33, 5);
+        virtualinvoke $stack14.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack55);
+        $stack56 = new org.jfree.chart.axis.NumberTickUnit;
+        #l22 = (java.text.NumberFormat) $stack22;
+        specialinvoke $stack56.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(0.025, #l22, 5);
+        virtualinvoke $stack14.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack56);
+        $stack57 = new org.jfree.chart.axis.NumberTickUnit;
+        #l7 = (java.text.NumberFormat) $stack23;
+        specialinvoke $stack57.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(0.25, #l7, 5);
+        virtualinvoke $stack14.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack57);
+        $stack58 = new org.jfree.chart.axis.NumberTickUnit;
+        #l57 = (java.text.NumberFormat) $stack24;
+        specialinvoke $stack58.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(2.5, #l57, 5);
+        virtualinvoke $stack14.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack58);
+        $stack59 = new org.jfree.chart.axis.NumberTickUnit;
+        #l70 = (java.text.NumberFormat) $stack25;
+        specialinvoke $stack59.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(25.0, #l70, 5);
+        virtualinvoke $stack14.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack59);
+        $stack60 = new org.jfree.chart.axis.NumberTickUnit;
+        #l27 = (java.text.NumberFormat) $stack25;
+        specialinvoke $stack60.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(250.0, #l27, 5);
+        virtualinvoke $stack14.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack60);
+        $stack61 = new org.jfree.chart.axis.NumberTickUnit;
+        #l53 = (java.text.NumberFormat) $stack25;
+        specialinvoke $stack61.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(2500.0, #l53, 5);
+        virtualinvoke $stack14.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack61);
+        $stack62 = new org.jfree.chart.axis.NumberTickUnit;
+        #l34 = (java.text.NumberFormat) $stack25;
+        specialinvoke $stack62.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(25000.0, #l34, 5);
+        virtualinvoke $stack14.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack62);
+        $stack63 = new org.jfree.chart.axis.NumberTickUnit;
+        #l64 = (java.text.NumberFormat) $stack25;
+        specialinvoke $stack63.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(250000.0, #l64, 5);
+        virtualinvoke $stack14.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack63);
+        $stack64 = new org.jfree.chart.axis.NumberTickUnit;
+        #l15 = (java.text.NumberFormat) $stack26;
+        specialinvoke $stack64.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(2500000.0, #l15, 5);
+        virtualinvoke $stack14.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack64);
+        $stack65 = new org.jfree.chart.axis.NumberTickUnit;
+        #l25 = (java.text.NumberFormat) $stack26;
+        specialinvoke $stack65.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(2.5E7, #l25, 5);
+        virtualinvoke $stack14.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack65);
+        $stack66 = new org.jfree.chart.axis.NumberTickUnit;
+        #l24 = (java.text.NumberFormat) $stack26;
+        specialinvoke $stack66.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(2.5E8, #l24, 5);
+        virtualinvoke $stack14.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack66);
+        $stack67 = new org.jfree.chart.axis.NumberTickUnit;
+        #l66 = (java.text.NumberFormat) $stack27;
+        specialinvoke $stack67.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(2.5E9, #l66, 5);
+        virtualinvoke $stack14.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack67);
+        $stack68 = new org.jfree.chart.axis.NumberTickUnit;
+        #l52 = (java.text.NumberFormat) $stack27;
+        specialinvoke $stack68.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(2.5E10, #l52, 5);
+        virtualinvoke $stack14.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack68);
+        $stack69 = new org.jfree.chart.axis.NumberTickUnit;
+        #l50 = (java.text.NumberFormat) $stack27;
+        specialinvoke $stack69.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(2.5E11, #l50, 5);
+        virtualinvoke $stack14.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack69);
+        $stack70 = new org.jfree.chart.axis.NumberTickUnit;
+        #l67 = (java.text.NumberFormat) $stack16;
+        specialinvoke $stack70.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(5.0E-9, #l67, 5);
+        virtualinvoke $stack14.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack70);
+        $stack71 = new org.jfree.chart.axis.NumberTickUnit;
+        #l26 = (java.text.NumberFormat) $stack17;
+        specialinvoke $stack71.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(5.0E-8, #l26, 5);
+        virtualinvoke $stack14.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack71);
+        $stack72 = new org.jfree.chart.axis.NumberTickUnit;
+        #l3 = (java.text.NumberFormat) $stack18;
+        specialinvoke $stack72.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(5.0E-7, #l3, 5);
+        virtualinvoke $stack14.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack72);
+        $stack73 = new org.jfree.chart.axis.NumberTickUnit;
+        #l28 = (java.text.NumberFormat) $stack19;
+        specialinvoke $stack73.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(5.0E-6, #l28, 5);
+        virtualinvoke $stack14.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack73);
+        $stack74 = new org.jfree.chart.axis.NumberTickUnit;
+        #l40 = (java.text.NumberFormat) $stack20;
+        specialinvoke $stack74.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(5.0E-5, #l40, 5);
+        virtualinvoke $stack14.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack74);
+        $stack75 = new org.jfree.chart.axis.NumberTickUnit;
+        #l17 = (java.text.NumberFormat) $stack21;
+        specialinvoke $stack75.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(5.0E-4, #l17, 5);
+        virtualinvoke $stack14.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack75);
+        $stack76 = new org.jfree.chart.axis.NumberTickUnit;
+        #l44 = (java.text.NumberFormat) $stack22;
+        specialinvoke $stack76.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(0.005, #l44, 5);
+        virtualinvoke $stack14.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack76);
+        $stack77 = new org.jfree.chart.axis.NumberTickUnit;
+        #l10 = (java.text.NumberFormat) $stack23;
+        specialinvoke $stack77.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(0.05, #l10, 5);
+        virtualinvoke $stack14.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack77);
+        $stack78 = new org.jfree.chart.axis.NumberTickUnit;
+        #l30 = (java.text.NumberFormat) $stack24;
+        specialinvoke $stack78.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(0.5, #l30, 5);
+        virtualinvoke $stack14.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack78);
+        $stack79 = new org.jfree.chart.axis.NumberTickUnit;
+        #l46 = (java.text.NumberFormat) $stack25;
+        specialinvoke $stack79.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(5.0, #l46, 5);
+        virtualinvoke $stack14.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack79);
+        $stack80 = new org.jfree.chart.axis.NumberTickUnit;
+        #l60 = (java.text.NumberFormat) $stack25;
+        specialinvoke $stack80.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(50.0, #l60, 5);
+        virtualinvoke $stack14.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack80);
+        $stack81 = new org.jfree.chart.axis.NumberTickUnit;
+        #l12 = (java.text.NumberFormat) $stack25;
+        specialinvoke $stack81.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(500.0, #l12, 5);
+        virtualinvoke $stack14.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack81);
+        $stack82 = new org.jfree.chart.axis.NumberTickUnit;
+        #l63 = (java.text.NumberFormat) $stack25;
+        specialinvoke $stack82.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(5000.0, #l63, 5);
+        virtualinvoke $stack14.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack82);
+        $stack83 = new org.jfree.chart.axis.NumberTickUnit;
+        #l23 = (java.text.NumberFormat) $stack25;
+        specialinvoke $stack83.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(50000.0, #l23, 5);
+        virtualinvoke $stack14.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack83);
+        $stack84 = new org.jfree.chart.axis.NumberTickUnit;
+        #l6 = (java.text.NumberFormat) $stack25;
+        specialinvoke $stack84.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(500000.0, #l6, 5);
+        virtualinvoke $stack14.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack84);
+        $stack85 = new org.jfree.chart.axis.NumberTickUnit;
+        #l71 = (java.text.NumberFormat) $stack26;
+        specialinvoke $stack85.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(5000000.0, #l71, 5);
+        virtualinvoke $stack14.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack85);
+        $stack86 = new org.jfree.chart.axis.NumberTickUnit;
+        #l65 = (java.text.NumberFormat) $stack26;
+        specialinvoke $stack86.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(5.0E7, #l65, 5);
+        virtualinvoke $stack14.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack86);
+        $stack87 = new org.jfree.chart.axis.NumberTickUnit;
+        #l45 = (java.text.NumberFormat) $stack26;
+        specialinvoke $stack87.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(5.0E8, #l45, 5);
+        virtualinvoke $stack14.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack87);
+        $stack88 = new org.jfree.chart.axis.NumberTickUnit;
+        #l4 = (java.text.NumberFormat) $stack27;
+        specialinvoke $stack88.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(5.0E9, #l4, 5);
+        virtualinvoke $stack14.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack88);
+        $stack89 = new org.jfree.chart.axis.NumberTickUnit;
+        #l75 = (java.text.NumberFormat) $stack27;
+        specialinvoke $stack89.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(5.0E10, #l75, 5);
+        virtualinvoke $stack14.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack89);
+        $stack90 = new org.jfree.chart.axis.NumberTickUnit;
+        #l72 = (java.text.NumberFormat) $stack27;
+        specialinvoke $stack90.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(5.0E11, #l72, 5);
+        virtualinvoke $stack14.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack90);
+    
+        return $stack14;
+    }
+
+    // ---- method: <org.jfree.chart.axis.NumberAxis: boolean equals(java.lang.Object)> ----
+    {
+        boolean $stack10, $stack13, $stack16, $stack17, $stack3, $stack4, $stack5, $stack6, $stack7;
+        java.lang.Object obj;
+        java.text.NumberFormat $stack11, $stack12;
+        org.jfree.chart.axis.NumberAxis that, this;
+        org.jfree.chart.axis.NumberTickUnit $stack8, $stack9;
+        org.jfree.data.RangeType $stack14, $stack15;
+    
+    
+        this := @this: org.jfree.chart.axis.NumberAxis;
+        obj := @parameter0: java.lang.Object;
+    
+        if obj != this goto label1;
+    
+        return 1;
+    
+      label1:
+        $stack3 = obj instanceof org.jfree.chart.axis.NumberAxis;
+    
+        if $stack3 != 0 goto label2;
+    
+        return 0;
+    
+      label2:
+        that = (org.jfree.chart.axis.NumberAxis) obj;
+        $stack5 = this.<org.jfree.chart.axis.NumberAxis: boolean autoRangeIncludesZero>;
+        $stack4 = that.<org.jfree.chart.axis.NumberAxis: boolean autoRangeIncludesZero>;
+    
+        if $stack5 == $stack4 goto label3;
+    
+        return 0;
+    
+      label3:
+        $stack7 = this.<org.jfree.chart.axis.NumberAxis: boolean autoRangeStickyZero>;
+        $stack6 = that.<org.jfree.chart.axis.NumberAxis: boolean autoRangeStickyZero>;
+    
+        if $stack7 == $stack6 goto label4;
+    
+        return 0;
+    
+      label4:
+        $stack9 = this.<org.jfree.chart.axis.NumberAxis: org.jfree.chart.axis.NumberTickUnit tickUnit>;
+        $stack8 = that.<org.jfree.chart.axis.NumberAxis: org.jfree.chart.axis.NumberTickUnit tickUnit>;
+        $stack10 = staticinvoke <org.jfree.chart.util.ObjectUtilities: boolean equal(java.lang.Object,java.lang.Object)>($stack9, $stack8);
+    
+        if $stack10 != 0 goto label5;
+    
+        return 0;
+    
+      label5:
+        $stack12 = this.<org.jfree.chart.axis.NumberAxis: java.text.NumberFormat numberFormatOverride>;
+        $stack11 = that.<org.jfree.chart.axis.NumberAxis: java.text.NumberFormat numberFormatOverride>;
+        $stack13 = staticinvoke <org.jfree.chart.util.ObjectUtilities: boolean equal(java.lang.Object,java.lang.Object)>($stack12, $stack11);
+    
+        if $stack13 != 0 goto label6;
+    
+        return 0;
+    
+      label6:
+        $stack15 = this.<org.jfree.chart.axis.NumberAxis: org.jfree.data.RangeType rangeType>;
+        $stack14 = that.<org.jfree.chart.axis.NumberAxis: org.jfree.data.RangeType rangeType>;
+        $stack16 = virtualinvoke $stack15.<org.jfree.data.RangeType: boolean equals(java.lang.Object)>($stack14);
+    
+        if $stack16 != 0 goto label7;
+    
+        return 0;
+    
+      label7:
+        $stack17 = specialinvoke this.<org.jfree.chart.axis.ValueAxis: boolean equals(java.lang.Object)>(obj);
+    
+        return $stack17;
+    }
+
+    // ---- method: <org.jfree.chart.axis.NumberAxis: double estimateMaximumTickLabelHeight(java.awt.Graphics2D)> ----
+    {
+        double $stack11, $stack7, $stack8, result#0, result#1;
+        float $stack10;
+        java.awt.Font tickLabelFont;
+        java.awt.Graphics2D g2;
+        java.awt.font.FontRenderContext frc;
+        java.awt.font.LineMetrics $stack9;
+        org.jfree.chart.axis.NumberAxis this;
+        org.jfree.chart.util.RectangleInsets tickLabelInsets;
+    
+    
+        this := @this: org.jfree.chart.axis.NumberAxis;
+        g2 := @parameter0: java.awt.Graphics2D;
+        tickLabelInsets = virtualinvoke this.<org.jfree.chart.axis.NumberAxis: org.jfree.chart.util.RectangleInsets getTickLabelInsets()>();
+        $stack7 = virtualinvoke tickLabelInsets.<org.jfree.chart.util.RectangleInsets: double getTop()>();
+        $stack8 = virtualinvoke tickLabelInsets.<org.jfree.chart.util.RectangleInsets: double getBottom()>();
+        result#0 = $stack7 + $stack8;
+        tickLabelFont = virtualinvoke this.<org.jfree.chart.axis.NumberAxis: java.awt.Font getTickLabelFont()>();
+        frc = virtualinvoke g2.<java.awt.Graphics2D: java.awt.font.FontRenderContext getFontRenderContext()>();
+        $stack9 = virtualinvoke tickLabelFont.<java.awt.Font: java.awt.font.LineMetrics getLineMetrics(java.lang.String,java.awt.font.FontRenderContext)>("123", frc);
+        $stack10 = virtualinvoke $stack9.<java.awt.font.LineMetrics: float getHeight()>();
+        $stack11 = (double) $stack10;
+        result#1 = result#0 + $stack11;
+    
+        return result#1;
+    }
+
+    // ---- method: <org.jfree.chart.axis.NumberAxis: void selectHorizontalAutoTickUnit(java.awt.Graphics2D,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)> ----
+    {
+        byte $stack22;
+        double $stack17, $stack18, $stack19, $stack21, guess, tickLabelWidth#0, tickLabelWidth#1, unit1Width, unit2Width;
+        java.awt.Graphics2D g2;
+        java.awt.geom.Rectangle2D dataArea;
+        org.jfree.chart.axis.NumberAxis this;
+        org.jfree.chart.axis.NumberTickUnit $stack15, $stack16, unit2;
+        org.jfree.chart.axis.TickUnit $stack20, $stack23, unit1;
+        org.jfree.chart.axis.TickUnitSource tickUnits;
+        org.jfree.chart.util.RectangleEdge edge;
+    
+    
+        this := @this: org.jfree.chart.axis.NumberAxis;
+        g2 := @parameter0: java.awt.Graphics2D;
+        dataArea := @parameter1: java.awt.geom.Rectangle2D;
+        edge := @parameter2: org.jfree.chart.util.RectangleEdge;
+        $stack15 = virtualinvoke this.<org.jfree.chart.axis.NumberAxis: org.jfree.chart.axis.NumberTickUnit getTickUnit()>();
+        tickLabelWidth#0 = virtualinvoke this.<org.jfree.chart.axis.NumberAxis: double estimateMaximumTickLabelWidth(java.awt.Graphics2D,org.jfree.chart.axis.TickUnit)>(g2, $stack15);
+        tickUnits = virtualinvoke this.<org.jfree.chart.axis.NumberAxis: org.jfree.chart.axis.TickUnitSource getStandardTickUnits()>();
+        $stack16 = virtualinvoke this.<org.jfree.chart.axis.NumberAxis: org.jfree.chart.axis.NumberTickUnit getTickUnit()>();
+        unit1 = interfaceinvoke tickUnits.<org.jfree.chart.axis.TickUnitSource: org.jfree.chart.axis.TickUnit getCeilingTickUnit(org.jfree.chart.axis.TickUnit)>($stack16);
+        $stack17 = virtualinvoke unit1.<org.jfree.chart.axis.TickUnit: double getSize()>();
+        unit1Width = virtualinvoke this.<org.jfree.chart.axis.NumberAxis: double lengthToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)>($stack17, dataArea, edge);
+        $stack18 = tickLabelWidth#0 / unit1Width;
+        $stack19 = virtualinvoke unit1.<org.jfree.chart.axis.TickUnit: double getSize()>();
+        guess = $stack18 * $stack19;
+        $stack20 = interfaceinvoke tickUnits.<org.jfree.chart.axis.TickUnitSource: org.jfree.chart.axis.TickUnit getCeilingTickUnit(double)>(guess);
+        unit2 = (org.jfree.chart.axis.NumberTickUnit) $stack20;
+        $stack21 = virtualinvoke unit2.<org.jfree.chart.axis.NumberTickUnit: double getSize()>();
+        unit2Width = virtualinvoke this.<org.jfree.chart.axis.NumberAxis: double lengthToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)>($stack21, dataArea, edge);
+        tickLabelWidth#1 = virtualinvoke this.<org.jfree.chart.axis.NumberAxis: double estimateMaximumTickLabelWidth(java.awt.Graphics2D,org.jfree.chart.axis.TickUnit)>(g2, unit2);
+        $stack22 = tickLabelWidth#1 cmpl unit2Width;
+    
+        if $stack22 <= 0 goto label1;
+        $stack23 = interfaceinvoke tickUnits.<org.jfree.chart.axis.TickUnitSource: org.jfree.chart.axis.TickUnit getLargerTickUnit(org.jfree.chart.axis.TickUnit)>(unit2);
+        unit2 = (org.jfree.chart.axis.NumberTickUnit) $stack23;
+    
+      label1:
+        virtualinvoke this.<org.jfree.chart.axis.NumberAxis: void setTickUnit(org.jfree.chart.axis.NumberTickUnit,boolean,boolean)>(unit2, 0, 0);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.axis.NumberAxis: java.text.NumberFormat getNumberFormatOverride()> ----
+    {
+        java.text.NumberFormat $stack1;
+        org.jfree.chart.axis.NumberAxis this;
+    
+    
+        this := @this: org.jfree.chart.axis.NumberAxis;
+        $stack1 = this.<org.jfree.chart.axis.NumberAxis: java.text.NumberFormat numberFormatOverride>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.axis.NumberAxis: int hashCode()> ----
+    {
+        int $stack3;
+        java.lang.String $stack1, $stack2;
+        org.jfree.chart.axis.NumberAxis this;
+    
+    
+        this := @this: org.jfree.chart.axis.NumberAxis;
+        $stack1 = virtualinvoke this.<org.jfree.chart.axis.NumberAxis: java.lang.String getLabel()>();
+    
+        if $stack1 == null goto label1;
+        $stack2 = virtualinvoke this.<org.jfree.chart.axis.NumberAxis: java.lang.String getLabel()>();
+        $stack3 = virtualinvoke $stack2.<java.lang.String: int hashCode()>();
+    
+        return $stack3;
+    
+      label1:
+        return 0;
+    }
+
+    // ---- method: <org.jfree.chart.axis.NumberAxis: org.jfree.chart.axis.AxisState draw(java.awt.Graphics2D,double,java.awt.geom.Rectangle2D,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge,org.jfree.chart.plot.PlotRenderingInfo)> ----
+    {
+        boolean $stack10;
+        double cursor;
+        java.awt.Graphics2D g2;
+        java.awt.geom.Rectangle2D dataArea, plotArea;
+        java.lang.Object state#0;
+        java.lang.String $stack11;
+        java.util.List ticks;
+        org.jfree.chart.axis.AxisState $stack12, state#1, state#2, state#3;
+        org.jfree.chart.axis.NumberAxis this;
+        org.jfree.chart.plot.PlotRenderingInfo plotState;
+        org.jfree.chart.util.RectangleEdge edge;
+    
+    
+        this := @this: org.jfree.chart.axis.NumberAxis;
+        g2 := @parameter0: java.awt.Graphics2D;
+        cursor := @parameter1: double;
+        plotArea := @parameter2: java.awt.geom.Rectangle2D;
+        dataArea := @parameter3: java.awt.geom.Rectangle2D;
+        edge := @parameter4: org.jfree.chart.util.RectangleEdge;
+        plotState := @parameter5: org.jfree.chart.plot.PlotRenderingInfo;
+        state#0 = null;
+        $stack10 = virtualinvoke this.<org.jfree.chart.axis.NumberAxis: boolean isVisible()>();
+    
+        if $stack10 != 0 goto label1;
+        $stack12 = new org.jfree.chart.axis.AxisState;
+        specialinvoke $stack12.<org.jfree.chart.axis.AxisState: void <init>(double)>(cursor);
+        state#1 = $stack12;
+        ticks = virtualinvoke this.<org.jfree.chart.axis.NumberAxis: java.util.List refreshTicks(java.awt.Graphics2D,org.jfree.chart.axis.AxisState,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)>(g2, $stack12, dataArea, edge);
+        virtualinvoke $stack12.<org.jfree.chart.axis.AxisState: void setTicks(java.util.List)>(ticks);
+    
+        return $stack12;
+    
+      label1:
+        state#2 = virtualinvoke this.<org.jfree.chart.axis.NumberAxis: org.jfree.chart.axis.AxisState drawTickMarksAndLabels(java.awt.Graphics2D,double,java.awt.geom.Rectangle2D,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge,org.jfree.chart.plot.PlotRenderingInfo)>(g2, cursor, plotArea, dataArea, edge, plotState);
+        $stack11 = virtualinvoke this.<org.jfree.chart.axis.NumberAxis: java.lang.String getLabel()>();
+        state#3 = virtualinvoke this.<org.jfree.chart.axis.NumberAxis: org.jfree.chart.axis.AxisState drawLabel(java.lang.String,java.awt.Graphics2D,java.awt.geom.Rectangle2D,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge,org.jfree.chart.axis.AxisState,org.jfree.chart.plot.PlotRenderingInfo)>($stack11, g2, plotArea, dataArea, edge, state#2, plotState);
+        virtualinvoke this.<org.jfree.chart.axis.NumberAxis: void createAndAddEntity(double,org.jfree.chart.axis.AxisState,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge,org.jfree.chart.plot.PlotRenderingInfo)>(cursor, state#3, dataArea, edge, plotState);
+    
+        return state#3;
+    }
+
+    // ---- method: <org.jfree.chart.axis.NumberAxis: java.util.List refreshTicks(java.awt.Graphics2D,org.jfree.chart.axis.AxisState,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)> ----
+    {
+        boolean $stack7, $stack8;
+        java.awt.Graphics2D g2;
+        java.awt.geom.Rectangle2D dataArea;
+        java.lang.Object result;
+        java.util.ArrayList $stack6;
+        java.util.List #l0;
+        org.jfree.chart.axis.AxisState state;
+        org.jfree.chart.axis.NumberAxis this;
+        org.jfree.chart.util.RectangleEdge edge;
+    
+    
+        this := @this: org.jfree.chart.axis.NumberAxis;
+        g2 := @parameter0: java.awt.Graphics2D;
+        state := @parameter1: org.jfree.chart.axis.AxisState;
+        dataArea := @parameter2: java.awt.geom.Rectangle2D;
+        edge := @parameter3: org.jfree.chart.util.RectangleEdge;
+        $stack6 = new java.util.ArrayList;
+        specialinvoke $stack6.<java.util.ArrayList: void <init>()>();
+        result = $stack6;
+        $stack7 = staticinvoke <org.jfree.chart.util.RectangleEdge: boolean isTopOrBottom(org.jfree.chart.util.RectangleEdge)>(edge);
+    
+        if $stack7 == 0 goto label1;
+        result = virtualinvoke this.<org.jfree.chart.axis.NumberAxis: java.util.List refreshTicksHorizontal(java.awt.Graphics2D,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)>(g2, dataArea, edge);
+    
+        goto label2;
+    
+      label1:
+        $stack8 = staticinvoke <org.jfree.chart.util.RectangleEdge: boolean isLeftOrRight(org.jfree.chart.util.RectangleEdge)>(edge);
+    
+        if $stack8 == 0 goto label2;
+        result = virtualinvoke this.<org.jfree.chart.axis.NumberAxis: java.util.List refreshTicksVertical(java.awt.Graphics2D,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)>(g2, dataArea, edge);
+    
+      label2:
+        #l0 = (java.util.List) result;
+    
+        return #l0;
+    }
+
+    // ---- method: <org.jfree.chart.axis.NumberAxis: java.lang.Object clone()> ----
+    {
+        java.lang.Object $stack2, $stack5;
+        java.text.NumberFormat $stack3, $stack4, $stack6;
+        org.jfree.chart.axis.NumberAxis clone, this;
+    
+    
+        this := @this: org.jfree.chart.axis.NumberAxis;
+        $stack2 = specialinvoke this.<org.jfree.chart.axis.ValueAxis: java.lang.Object clone()>();
+        clone = (org.jfree.chart.axis.NumberAxis) $stack2;
+        $stack3 = this.<org.jfree.chart.axis.NumberAxis: java.text.NumberFormat numberFormatOverride>;
+    
+        if $stack3 == null goto label1;
+        $stack4 = this.<org.jfree.chart.axis.NumberAxis: java.text.NumberFormat numberFormatOverride>;
+        $stack5 = virtualinvoke $stack4.<java.text.NumberFormat: java.lang.Object clone()>();
+        $stack6 = (java.text.NumberFormat) $stack5;
+        clone.<org.jfree.chart.axis.NumberAxis: java.text.NumberFormat numberFormatOverride> = $stack6;
+    
+      label1:
+        return clone;
+    }
+
+    // ---- method: <org.jfree.chart.axis.NumberAxis: void setAutoRangeIncludesZero(boolean)> ----
+    {
+        boolean $stack2, $stack3, flag;
+        org.jfree.chart.axis.NumberAxis this;
+        org.jfree.chart.event.AxisChangeEvent $stack4;
+    
+    
+        this := @this: org.jfree.chart.axis.NumberAxis;
+        flag := @parameter0: boolean;
+        $stack2 = this.<org.jfree.chart.axis.NumberAxis: boolean autoRangeIncludesZero>;
+    
+        if $stack2 == flag goto label2;
+        this.<org.jfree.chart.axis.NumberAxis: boolean autoRangeIncludesZero> = flag;
+        $stack3 = virtualinvoke this.<org.jfree.chart.axis.NumberAxis: boolean isAutoRange()>();
+    
+        if $stack3 == 0 goto label1;
+        virtualinvoke this.<org.jfree.chart.axis.NumberAxis: void autoAdjustRange()>();
+    
+      label1:
+        $stack4 = new org.jfree.chart.event.AxisChangeEvent;
+        specialinvoke $stack4.<org.jfree.chart.event.AxisChangeEvent: void <init>(org.jfree.chart.axis.Axis)>(this);
+        virtualinvoke this.<org.jfree.chart.axis.NumberAxis: void notifyListeners(org.jfree.chart.event.AxisChangeEvent)>($stack4);
+    
+      label2:
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.axis.NumberAxis: void setAutoRangeStickyZero(boolean)> ----
+    {
+        boolean $stack2, $stack3, flag;
+        org.jfree.chart.axis.NumberAxis this;
+        org.jfree.chart.event.AxisChangeEvent $stack4;
+    
+    
+        this := @this: org.jfree.chart.axis.NumberAxis;
+        flag := @parameter0: boolean;
+        $stack2 = this.<org.jfree.chart.axis.NumberAxis: boolean autoRangeStickyZero>;
+    
+        if $stack2 == flag goto label2;
+        this.<org.jfree.chart.axis.NumberAxis: boolean autoRangeStickyZero> = flag;
+        $stack3 = virtualinvoke this.<org.jfree.chart.axis.NumberAxis: boolean isAutoRange()>();
+    
+        if $stack3 == 0 goto label1;
+        virtualinvoke this.<org.jfree.chart.axis.NumberAxis: void autoAdjustRange()>();
+    
+      label1:
+        $stack4 = new org.jfree.chart.event.AxisChangeEvent;
+        specialinvoke $stack4.<org.jfree.chart.event.AxisChangeEvent: void <init>(org.jfree.chart.axis.Axis)>(this);
+        virtualinvoke this.<org.jfree.chart.axis.NumberAxis: void notifyListeners(org.jfree.chart.event.AxisChangeEvent)>($stack4);
+    
+      label2:
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.axis.NumberAxis: org.jfree.chart.axis.TickUnitSource createIntegerTickUnits(java.util.Locale)> ----
+    {
+        java.text.NumberFormat numberFormat;
+        java.util.Locale locale;
+        org.jfree.chart.axis.NumberTickUnit $stack10, $stack11, $stack12, $stack13, $stack14, $stack15, $stack16, $stack17, $stack18, $stack19, $stack20, $stack21, $stack22, $stack23, $stack24, $stack25, $stack26, $stack27, $stack28, $stack29, $stack30, $stack31, $stack32, $stack33, $stack34, $stack4, $stack5, $stack6, $stack7, $stack8, $stack9;
+        org.jfree.chart.axis.TickUnits $stack3, units;
+    
+    
+        locale := @parameter0: java.util.Locale;
+        $stack3 = new org.jfree.chart.axis.TickUnits;
+        specialinvoke $stack3.<org.jfree.chart.axis.TickUnits: void <init>()>();
+        units = $stack3;
+        numberFormat = staticinvoke <java.text.NumberFormat: java.text.NumberFormat getNumberInstance(java.util.Locale)>(locale);
+        $stack4 = new org.jfree.chart.axis.NumberTickUnit;
+        specialinvoke $stack4.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(1.0, numberFormat, 2);
+        virtualinvoke $stack3.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack4);
+        $stack5 = new org.jfree.chart.axis.NumberTickUnit;
+        specialinvoke $stack5.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(2.0, numberFormat, 2);
+        virtualinvoke $stack3.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack5);
+        $stack6 = new org.jfree.chart.axis.NumberTickUnit;
+        specialinvoke $stack6.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(5.0, numberFormat, 5);
+        virtualinvoke $stack3.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack6);
+        $stack7 = new org.jfree.chart.axis.NumberTickUnit;
+        specialinvoke $stack7.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(10.0, numberFormat, 2);
+        virtualinvoke $stack3.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack7);
+        $stack8 = new org.jfree.chart.axis.NumberTickUnit;
+        specialinvoke $stack8.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(20.0, numberFormat, 2);
+        virtualinvoke $stack3.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack8);
+        $stack9 = new org.jfree.chart.axis.NumberTickUnit;
+        specialinvoke $stack9.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(50.0, numberFormat, 5);
+        virtualinvoke $stack3.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack9);
+        $stack10 = new org.jfree.chart.axis.NumberTickUnit;
+        specialinvoke $stack10.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(100.0, numberFormat, 2);
+        virtualinvoke $stack3.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack10);
+        $stack11 = new org.jfree.chart.axis.NumberTickUnit;
+        specialinvoke $stack11.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(200.0, numberFormat, 2);
+        virtualinvoke $stack3.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack11);
+        $stack12 = new org.jfree.chart.axis.NumberTickUnit;
+        specialinvoke $stack12.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(500.0, numberFormat, 5);
+        virtualinvoke $stack3.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack12);
+        $stack13 = new org.jfree.chart.axis.NumberTickUnit;
+        specialinvoke $stack13.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(1000.0, numberFormat, 2);
+        virtualinvoke $stack3.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack13);
+        $stack14 = new org.jfree.chart.axis.NumberTickUnit;
+        specialinvoke $stack14.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(2000.0, numberFormat, 2);
+        virtualinvoke $stack3.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack14);
+        $stack15 = new org.jfree.chart.axis.NumberTickUnit;
+        specialinvoke $stack15.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(5000.0, numberFormat, 5);
+        virtualinvoke $stack3.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack15);
+        $stack16 = new org.jfree.chart.axis.NumberTickUnit;
+        specialinvoke $stack16.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(10000.0, numberFormat, 2);
+        virtualinvoke $stack3.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack16);
+        $stack17 = new org.jfree.chart.axis.NumberTickUnit;
+        specialinvoke $stack17.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(20000.0, numberFormat, 2);
+        virtualinvoke $stack3.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack17);
+        $stack18 = new org.jfree.chart.axis.NumberTickUnit;
+        specialinvoke $stack18.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(50000.0, numberFormat, 5);
+        virtualinvoke $stack3.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack18);
+        $stack19 = new org.jfree.chart.axis.NumberTickUnit;
+        specialinvoke $stack19.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(100000.0, numberFormat, 2);
+        virtualinvoke $stack3.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack19);
+        $stack20 = new org.jfree.chart.axis.NumberTickUnit;
+        specialinvoke $stack20.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(200000.0, numberFormat, 2);
+        virtualinvoke $stack3.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack20);
+        $stack21 = new org.jfree.chart.axis.NumberTickUnit;
+        specialinvoke $stack21.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(500000.0, numberFormat, 5);
+        virtualinvoke $stack3.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack21);
+        $stack22 = new org.jfree.chart.axis.NumberTickUnit;
+        specialinvoke $stack22.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(1000000.0, numberFormat, 2);
+        virtualinvoke $stack3.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack22);
+        $stack23 = new org.jfree.chart.axis.NumberTickUnit;
+        specialinvoke $stack23.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(2000000.0, numberFormat, 2);
+        virtualinvoke $stack3.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack23);
+        $stack24 = new org.jfree.chart.axis.NumberTickUnit;
+        specialinvoke $stack24.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(5000000.0, numberFormat, 5);
+        virtualinvoke $stack3.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack24);
+        $stack25 = new org.jfree.chart.axis.NumberTickUnit;
+        specialinvoke $stack25.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(1.0E7, numberFormat, 2);
+        virtualinvoke $stack3.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack25);
+        $stack26 = new org.jfree.chart.axis.NumberTickUnit;
+        specialinvoke $stack26.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(2.0E7, numberFormat, 2);
+        virtualinvoke $stack3.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack26);
+        $stack27 = new org.jfree.chart.axis.NumberTickUnit;
+        specialinvoke $stack27.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(5.0E7, numberFormat, 5);
+        virtualinvoke $stack3.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack27);
+        $stack28 = new org.jfree.chart.axis.NumberTickUnit;
+        specialinvoke $stack28.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(1.0E8, numberFormat, 2);
+        virtualinvoke $stack3.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack28);
+        $stack29 = new org.jfree.chart.axis.NumberTickUnit;
+        specialinvoke $stack29.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(2.0E8, numberFormat, 2);
+        virtualinvoke $stack3.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack29);
+        $stack30 = new org.jfree.chart.axis.NumberTickUnit;
+        specialinvoke $stack30.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(5.0E8, numberFormat, 5);
+        virtualinvoke $stack3.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack30);
+        $stack31 = new org.jfree.chart.axis.NumberTickUnit;
+        specialinvoke $stack31.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(1.0E9, numberFormat, 2);
+        virtualinvoke $stack3.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack31);
+        $stack32 = new org.jfree.chart.axis.NumberTickUnit;
+        specialinvoke $stack32.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(2.0E9, numberFormat, 2);
+        virtualinvoke $stack3.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack32);
+        $stack33 = new org.jfree.chart.axis.NumberTickUnit;
+        specialinvoke $stack33.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(5.0E9, numberFormat, 5);
+        virtualinvoke $stack3.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack33);
+        $stack34 = new org.jfree.chart.axis.NumberTickUnit;
+        specialinvoke $stack34.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(1.0E10, numberFormat, 2);
+        virtualinvoke $stack3.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack34);
+    
+        return $stack3;
+    }
+
+    // ---- method: <org.jfree.chart.axis.NumberAxis: org.jfree.chart.axis.TickUnitSource createStandardTickUnits(java.util.Locale)> ----
+    {
+        java.text.NumberFormat numberFormat;
+        java.util.Locale locale;
+        org.jfree.chart.axis.NumberTickUnit $stack10, $stack11, $stack12, $stack13, $stack14, $stack15, $stack16, $stack17, $stack18, $stack19, $stack20, $stack21, $stack22, $stack23, $stack24, $stack25, $stack26, $stack27, $stack28, $stack29, $stack30, $stack31, $stack32, $stack33, $stack34, $stack35, $stack36, $stack37, $stack38, $stack39, $stack4, $stack40, $stack41, $stack42, $stack43, $stack44, $stack45, $stack46, $stack47, $stack48, $stack49, $stack5, $stack50, $stack51, $stack52, $stack53, $stack54, $stack55, $stack56, $stack57, $stack6, $stack7, $stack8, $stack9;
+        org.jfree.chart.axis.TickUnits $stack3, units;
+    
+    
+        locale := @parameter0: java.util.Locale;
+        $stack3 = new org.jfree.chart.axis.TickUnits;
+        specialinvoke $stack3.<org.jfree.chart.axis.TickUnits: void <init>()>();
+        units = $stack3;
+        numberFormat = staticinvoke <java.text.NumberFormat: java.text.NumberFormat getNumberInstance(java.util.Locale)>(locale);
+        $stack4 = new org.jfree.chart.axis.NumberTickUnit;
+        specialinvoke $stack4.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(1.0E-7, numberFormat, 2);
+        virtualinvoke $stack3.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack4);
+        $stack5 = new org.jfree.chart.axis.NumberTickUnit;
+        specialinvoke $stack5.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(1.0E-6, numberFormat, 2);
+        virtualinvoke $stack3.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack5);
+        $stack6 = new org.jfree.chart.axis.NumberTickUnit;
+        specialinvoke $stack6.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(1.0E-5, numberFormat, 2);
+        virtualinvoke $stack3.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack6);
+        $stack7 = new org.jfree.chart.axis.NumberTickUnit;
+        specialinvoke $stack7.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(1.0E-4, numberFormat, 2);
+        virtualinvoke $stack3.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack7);
+        $stack8 = new org.jfree.chart.axis.NumberTickUnit;
+        specialinvoke $stack8.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(0.001, numberFormat, 2);
+        virtualinvoke $stack3.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack8);
+        $stack9 = new org.jfree.chart.axis.NumberTickUnit;
+        specialinvoke $stack9.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(0.01, numberFormat, 2);
+        virtualinvoke $stack3.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack9);
+        $stack10 = new org.jfree.chart.axis.NumberTickUnit;
+        specialinvoke $stack10.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(0.1, numberFormat, 2);
+        virtualinvoke $stack3.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack10);
+        $stack11 = new org.jfree.chart.axis.NumberTickUnit;
+        specialinvoke $stack11.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(1.0, numberFormat, 2);
+        virtualinvoke $stack3.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack11);
+        $stack12 = new org.jfree.chart.axis.NumberTickUnit;
+        specialinvoke $stack12.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(10.0, numberFormat, 2);
+        virtualinvoke $stack3.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack12);
+        $stack13 = new org.jfree.chart.axis.NumberTickUnit;
+        specialinvoke $stack13.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(100.0, numberFormat, 2);
+        virtualinvoke $stack3.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack13);
+        $stack14 = new org.jfree.chart.axis.NumberTickUnit;
+        specialinvoke $stack14.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(1000.0, numberFormat, 2);
+        virtualinvoke $stack3.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack14);
+        $stack15 = new org.jfree.chart.axis.NumberTickUnit;
+        specialinvoke $stack15.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(10000.0, numberFormat, 2);
+        virtualinvoke $stack3.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack15);
+        $stack16 = new org.jfree.chart.axis.NumberTickUnit;
+        specialinvoke $stack16.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(100000.0, numberFormat, 2);
+        virtualinvoke $stack3.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack16);
+        $stack17 = new org.jfree.chart.axis.NumberTickUnit;
+        specialinvoke $stack17.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(1000000.0, numberFormat, 2);
+        virtualinvoke $stack3.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack17);
+        $stack18 = new org.jfree.chart.axis.NumberTickUnit;
+        specialinvoke $stack18.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(1.0E7, numberFormat, 2);
+        virtualinvoke $stack3.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack18);
+        $stack19 = new org.jfree.chart.axis.NumberTickUnit;
+        specialinvoke $stack19.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(1.0E8, numberFormat, 2);
+        virtualinvoke $stack3.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack19);
+        $stack20 = new org.jfree.chart.axis.NumberTickUnit;
+        specialinvoke $stack20.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(1.0E9, numberFormat, 2);
+        virtualinvoke $stack3.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack20);
+        $stack21 = new org.jfree.chart.axis.NumberTickUnit;
+        specialinvoke $stack21.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(1.0E10, numberFormat, 2);
+        virtualinvoke $stack3.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack21);
+        $stack22 = new org.jfree.chart.axis.NumberTickUnit;
+        specialinvoke $stack22.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(2.5E-7, numberFormat, 5);
+        virtualinvoke $stack3.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack22);
+        $stack23 = new org.jfree.chart.axis.NumberTickUnit;
+        specialinvoke $stack23.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(2.5E-6, numberFormat, 5);
+        virtualinvoke $stack3.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack23);
+        $stack24 = new org.jfree.chart.axis.NumberTickUnit;
+        specialinvoke $stack24.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(2.5E-5, numberFormat, 5);
+        virtualinvoke $stack3.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack24);
+        $stack25 = new org.jfree.chart.axis.NumberTickUnit;
+        specialinvoke $stack25.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(2.5E-4, numberFormat, 5);
+        virtualinvoke $stack3.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack25);
+        $stack26 = new org.jfree.chart.axis.NumberTickUnit;
+        specialinvoke $stack26.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(0.0025, numberFormat, 5);
+        virtualinvoke $stack3.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack26);
+        $stack27 = new org.jfree.chart.axis.NumberTickUnit;
+        specialinvoke $stack27.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(0.025, numberFormat, 5);
+        virtualinvoke $stack3.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack27);
+        $stack28 = new org.jfree.chart.axis.NumberTickUnit;
+        specialinvoke $stack28.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(0.25, numberFormat, 5);
+        virtualinvoke $stack3.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack28);
+        $stack29 = new org.jfree.chart.axis.NumberTickUnit;
+        specialinvoke $stack29.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(2.5, numberFormat, 5);
+        virtualinvoke $stack3.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack29);
+        $stack30 = new org.jfree.chart.axis.NumberTickUnit;
+        specialinvoke $stack30.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(25.0, numberFormat, 5);
+        virtualinvoke $stack3.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack30);
+        $stack31 = new org.jfree.chart.axis.NumberTickUnit;
+        specialinvoke $stack31.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(250.0, numberFormat, 5);
+        virtualinvoke $stack3.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack31);
+        $stack32 = new org.jfree.chart.axis.NumberTickUnit;
+        specialinvoke $stack32.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(2500.0, numberFormat, 5);
+        virtualinvoke $stack3.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack32);
+        $stack33 = new org.jfree.chart.axis.NumberTickUnit;
+        specialinvoke $stack33.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(25000.0, numberFormat, 5);
+        virtualinvoke $stack3.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack33);
+        $stack34 = new org.jfree.chart.axis.NumberTickUnit;
+        specialinvoke $stack34.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(250000.0, numberFormat, 5);
+        virtualinvoke $stack3.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack34);
+        $stack35 = new org.jfree.chart.axis.NumberTickUnit;
+        specialinvoke $stack35.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(2500000.0, numberFormat, 5);
+        virtualinvoke $stack3.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack35);
+        $stack36 = new org.jfree.chart.axis.NumberTickUnit;
+        specialinvoke $stack36.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(2.5E7, numberFormat, 5);
+        virtualinvoke $stack3.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack36);
+        $stack37 = new org.jfree.chart.axis.NumberTickUnit;
+        specialinvoke $stack37.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(2.5E8, numberFormat, 5);
+        virtualinvoke $stack3.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack37);
+        $stack38 = new org.jfree.chart.axis.NumberTickUnit;
+        specialinvoke $stack38.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(2.5E9, numberFormat, 5);
+        virtualinvoke $stack3.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack38);
+        $stack39 = new org.jfree.chart.axis.NumberTickUnit;
+        specialinvoke $stack39.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(2.5E10, numberFormat, 5);
+        virtualinvoke $stack3.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack39);
+        $stack40 = new org.jfree.chart.axis.NumberTickUnit;
+        specialinvoke $stack40.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(5.0E-7, numberFormat, 5);
+        virtualinvoke $stack3.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack40);
+        $stack41 = new org.jfree.chart.axis.NumberTickUnit;
+        specialinvoke $stack41.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(5.0E-6, numberFormat, 5);
+        virtualinvoke $stack3.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack41);
+        $stack42 = new org.jfree.chart.axis.NumberTickUnit;
+        specialinvoke $stack42.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(5.0E-5, numberFormat, 5);
+        virtualinvoke $stack3.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack42);
+        $stack43 = new org.jfree.chart.axis.NumberTickUnit;
+        specialinvoke $stack43.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(5.0E-4, numberFormat, 5);
+        virtualinvoke $stack3.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack43);
+        $stack44 = new org.jfree.chart.axis.NumberTickUnit;
+        specialinvoke $stack44.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(0.005, numberFormat, 5);
+        virtualinvoke $stack3.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack44);
+        $stack45 = new org.jfree.chart.axis.NumberTickUnit;
+        specialinvoke $stack45.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(0.05, numberFormat, 5);
+        virtualinvoke $stack3.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack45);
+        $stack46 = new org.jfree.chart.axis.NumberTickUnit;
+        specialinvoke $stack46.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(0.5, numberFormat, 5);
+        virtualinvoke $stack3.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack46);
+        $stack47 = new org.jfree.chart.axis.NumberTickUnit;
+        specialinvoke $stack47.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(5.0, numberFormat, 5);
+        virtualinvoke $stack3.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack47);
+        $stack48 = new org.jfree.chart.axis.NumberTickUnit;
+        specialinvoke $stack48.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(50.0, numberFormat, 5);
+        virtualinvoke $stack3.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack48);
+        $stack49 = new org.jfree.chart.axis.NumberTickUnit;
+        specialinvoke $stack49.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(500.0, numberFormat, 5);
+        virtualinvoke $stack3.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack49);
+        $stack50 = new org.jfree.chart.axis.NumberTickUnit;
+        specialinvoke $stack50.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(5000.0, numberFormat, 5);
+        virtualinvoke $stack3.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack50);
+        $stack51 = new org.jfree.chart.axis.NumberTickUnit;
+        specialinvoke $stack51.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(50000.0, numberFormat, 5);
+        virtualinvoke $stack3.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack51);
+        $stack52 = new org.jfree.chart.axis.NumberTickUnit;
+        specialinvoke $stack52.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(500000.0, numberFormat, 5);
+        virtualinvoke $stack3.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack52);
+        $stack53 = new org.jfree.chart.axis.NumberTickUnit;
+        specialinvoke $stack53.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(5000000.0, numberFormat, 5);
+        virtualinvoke $stack3.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack53);
+        $stack54 = new org.jfree.chart.axis.NumberTickUnit;
+        specialinvoke $stack54.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(5.0E7, numberFormat, 5);
+        virtualinvoke $stack3.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack54);
+        $stack55 = new org.jfree.chart.axis.NumberTickUnit;
+        specialinvoke $stack55.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(5.0E8, numberFormat, 5);
+        virtualinvoke $stack3.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack55);
+        $stack56 = new org.jfree.chart.axis.NumberTickUnit;
+        specialinvoke $stack56.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(5.0E9, numberFormat, 5);
+        virtualinvoke $stack3.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack56);
+        $stack57 = new org.jfree.chart.axis.NumberTickUnit;
+        specialinvoke $stack57.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(5.0E10, numberFormat, 5);
+        virtualinvoke $stack3.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack57);
+    
+        return $stack3;
+    }
+
+    // ---- method: <org.jfree.chart.axis.NumberAxis: double java2DToValue(double,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)> ----
+    {
+        boolean $stack14, $stack15, $stack16;
+        double $stack17, $stack18, $stack19, $stack20, $stack21, $stack22, $stack23, $stack24, $stack25, $stack26, $stack27, $stack28, axisMax, axisMin, java2DValue, max, min;
+        java.awt.geom.Rectangle2D area;
+        org.jfree.chart.axis.NumberAxis this;
+        org.jfree.chart.util.RectangleEdge edge;
+        org.jfree.data.Range range;
+    
+    
+        this := @this: org.jfree.chart.axis.NumberAxis;
+        java2DValue := @parameter0: double;
+        area := @parameter1: java.awt.geom.Rectangle2D;
+        edge := @parameter2: org.jfree.chart.util.RectangleEdge;
+        range = virtualinvoke this.<org.jfree.chart.axis.NumberAxis: org.jfree.data.Range getRange()>();
+        axisMin = virtualinvoke range.<org.jfree.data.Range: double getLowerBound()>();
+        axisMax = virtualinvoke range.<org.jfree.data.Range: double getUpperBound()>();
+        min = 0.0;
+        max = 0.0;
+        $stack14 = staticinvoke <org.jfree.chart.util.RectangleEdge: boolean isTopOrBottom(org.jfree.chart.util.RectangleEdge)>(edge);
+    
+        if $stack14 == 0 goto label1;
+        min = virtualinvoke area.<java.awt.geom.Rectangle2D: double getX()>();
+        max = virtualinvoke area.<java.awt.geom.Rectangle2D: double getMaxX()>();
+    
+        goto label2;
+    
+      label1:
+        $stack15 = staticinvoke <org.jfree.chart.util.RectangleEdge: boolean isLeftOrRight(org.jfree.chart.util.RectangleEdge)>(edge);
+    
+        if $stack15 == 0 goto label2;
+        min = virtualinvoke area.<java.awt.geom.Rectangle2D: double getMaxY()>();
+        max = virtualinvoke area.<java.awt.geom.Rectangle2D: double getY()>();
+    
+      label2:
+        $stack16 = virtualinvoke this.<org.jfree.chart.axis.NumberAxis: boolean isInverted()>();
+    
+        if $stack16 == 0 goto label3;
+        $stack23 = java2DValue - min;
+        $stack24 = max - min;
+        $stack25 = $stack23 / $stack24;
+        $stack26 = axisMax - axisMin;
+        $stack27 = $stack25 * $stack26;
+        $stack28 = axisMax - $stack27;
+    
+        return $stack28;
+    
+      label3:
+        $stack17 = java2DValue - min;
+        $stack18 = max - min;
+        $stack19 = $stack17 / $stack18;
+        $stack20 = axisMax - axisMin;
+        $stack21 = $stack19 * $stack20;
+        $stack22 = axisMin + $stack21;
+    
+        return $stack22;
+    }
+
+    // ---- method: <org.jfree.chart.axis.NumberAxis: void selectVerticalAutoTickUnit(java.awt.Graphics2D,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)> ----
+    {
+        byte $stack21;
+        double $stack16, $stack17, $stack18, $stack20, guess, tickLabelHeight#0, tickLabelHeight#1, unit2Height, unitHeight;
+        java.awt.Graphics2D g2;
+        java.awt.geom.Rectangle2D dataArea;
+        org.jfree.chart.axis.NumberAxis this;
+        org.jfree.chart.axis.NumberTickUnit $stack15, unit2;
+        org.jfree.chart.axis.TickUnit $stack19, $stack22, unit1;
+        org.jfree.chart.axis.TickUnitSource tickUnits;
+        org.jfree.chart.util.RectangleEdge edge;
+    
+    
+        this := @this: org.jfree.chart.axis.NumberAxis;
+        g2 := @parameter0: java.awt.Graphics2D;
+        dataArea := @parameter1: java.awt.geom.Rectangle2D;
+        edge := @parameter2: org.jfree.chart.util.RectangleEdge;
+        tickLabelHeight#0 = virtualinvoke this.<org.jfree.chart.axis.NumberAxis: double estimateMaximumTickLabelHeight(java.awt.Graphics2D)>(g2);
+        tickUnits = virtualinvoke this.<org.jfree.chart.axis.NumberAxis: org.jfree.chart.axis.TickUnitSource getStandardTickUnits()>();
+        $stack15 = virtualinvoke this.<org.jfree.chart.axis.NumberAxis: org.jfree.chart.axis.NumberTickUnit getTickUnit()>();
+        unit1 = interfaceinvoke tickUnits.<org.jfree.chart.axis.TickUnitSource: org.jfree.chart.axis.TickUnit getCeilingTickUnit(org.jfree.chart.axis.TickUnit)>($stack15);
+        $stack16 = virtualinvoke unit1.<org.jfree.chart.axis.TickUnit: double getSize()>();
+        unitHeight = virtualinvoke this.<org.jfree.chart.axis.NumberAxis: double lengthToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)>($stack16, dataArea, edge);
+        $stack17 = tickLabelHeight#0 / unitHeight;
+        $stack18 = virtualinvoke unit1.<org.jfree.chart.axis.TickUnit: double getSize()>();
+        guess = $stack17 * $stack18;
+        $stack19 = interfaceinvoke tickUnits.<org.jfree.chart.axis.TickUnitSource: org.jfree.chart.axis.TickUnit getCeilingTickUnit(double)>(guess);
+        unit2 = (org.jfree.chart.axis.NumberTickUnit) $stack19;
+        $stack20 = virtualinvoke unit2.<org.jfree.chart.axis.NumberTickUnit: double getSize()>();
+        unit2Height = virtualinvoke this.<org.jfree.chart.axis.NumberAxis: double lengthToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)>($stack20, dataArea, edge);
+        tickLabelHeight#1 = virtualinvoke this.<org.jfree.chart.axis.NumberAxis: double estimateMaximumTickLabelHeight(java.awt.Graphics2D)>(g2);
+        $stack21 = tickLabelHeight#1 cmpl unit2Height;
+    
+        if $stack21 <= 0 goto label1;
+        $stack22 = interfaceinvoke tickUnits.<org.jfree.chart.axis.TickUnitSource: org.jfree.chart.axis.TickUnit getLargerTickUnit(org.jfree.chart.axis.TickUnit)>(unit2);
+        unit2 = (org.jfree.chart.axis.NumberTickUnit) $stack22;
+    
+      label1:
+        virtualinvoke this.<org.jfree.chart.axis.NumberAxis: void setTickUnit(org.jfree.chart.axis.NumberTickUnit,boolean,boolean)>(unit2, 0, 0);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.axis.NumberAxis: double calculateLowestVisibleTickValue()> ----
+    {
+        double $stack7, $stack8, $stack9, index, unit;
+        org.jfree.chart.axis.NumberAxis this;
+        org.jfree.chart.axis.NumberTickUnit $stack5;
+        org.jfree.data.Range $stack6;
+    
+    
+        this := @this: org.jfree.chart.axis.NumberAxis;
+        $stack5 = virtualinvoke this.<org.jfree.chart.axis.NumberAxis: org.jfree.chart.axis.NumberTickUnit getTickUnit()>();
+        unit = virtualinvoke $stack5.<org.jfree.chart.axis.NumberTickUnit: double getSize()>();
+        $stack6 = virtualinvoke this.<org.jfree.chart.axis.NumberAxis: org.jfree.data.Range getRange()>();
+        $stack7 = virtualinvoke $stack6.<org.jfree.data.Range: double getLowerBound()>();
+        $stack8 = $stack7 / unit;
+        index = staticinvoke <java.lang.Math: double ceil(double)>($stack8);
+        $stack9 = index * unit;
+    
+        return $stack9;
+    }
+
+    // ---- method: <org.jfree.chart.axis.NumberAxis: java.util.List refreshTicksHorizontal(java.awt.Graphics2D,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)> ----
+    {
+        boolean $stack29, $stack33, $stack46, $stack57;
+        double $stack30, $stack31, $stack38, $stack39, $stack40, $stack41, $stack42, $stack43, $stack44, $stack52, $stack53, $stack54, $stack55, angle, lowestTickValue, minorTickValue#0, minorTickValue#1, minorTickValue_1, nextTickValue, size;
+        int $stack37, count, minorTick#0, minorTick#1, minorTickSpaces, minorTick_1;
+        java.awt.Font tickLabelFont;
+        java.awt.Graphics2D g2;
+        java.awt.geom.Rectangle2D dataArea;
+        java.lang.Double #l2;
+        java.lang.Number #l1;
+        java.lang.Object $stack28, $stack35, anchor#0, rotationAnchor#0;
+        java.lang.String tickLabel;
+        java.text.NumberFormat formatter;
+        java.util.ArrayList #l3, result;
+        java.util.List #l0, #l4, #l5, #l6;
+        org.jfree.chart.axis.NumberAxis this;
+        org.jfree.chart.axis.NumberTick $stack36, $stack50, $stack61, tick;
+        org.jfree.chart.axis.NumberTickUnit $stack32, tu;
+        org.jfree.chart.axis.TickType $stack49, $stack60;
+        org.jfree.chart.text.TextAnchor $stack47, $stack48, $stack58, $stack59, anchor#1, rotationAnchor#1;
+        org.jfree.chart.util.RectangleEdge $stack34, $stack51, edge;
+        org.jfree.data.Range $stack45, $stack56;
+    
+    
+        this := @this: org.jfree.chart.axis.NumberAxis;
+        g2 := @parameter0: java.awt.Graphics2D;
+        dataArea := @parameter1: java.awt.geom.Rectangle2D;
+        edge := @parameter2: org.jfree.chart.util.RectangleEdge;
+        $stack28 = new java.util.ArrayList;
+        #l3 = (java.util.ArrayList) $stack28;
+        specialinvoke #l3.<java.util.ArrayList: void <init>()>();
+        result = (java.util.ArrayList) $stack28;
+        tickLabelFont = virtualinvoke this.<org.jfree.chart.axis.NumberAxis: java.awt.Font getTickLabelFont()>();
+        virtualinvoke g2.<java.awt.Graphics2D: void setFont(java.awt.Font)>(tickLabelFont);
+        $stack29 = virtualinvoke this.<org.jfree.chart.axis.NumberAxis: boolean isAutoTickUnitSelection()>();
+    
+        if $stack29 == 0 goto label01;
+        virtualinvoke this.<org.jfree.chart.axis.NumberAxis: void selectAutoTickUnit(java.awt.Graphics2D,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)>(g2, dataArea, edge);
+    
+      label01:
+        tu = virtualinvoke this.<org.jfree.chart.axis.NumberAxis: org.jfree.chart.axis.NumberTickUnit getTickUnit()>();
+        size = virtualinvoke tu.<org.jfree.chart.axis.TickUnit: double getSize()>();
+        count = virtualinvoke this.<org.jfree.chart.axis.NumberAxis: int calculateVisibleTickCount()>();
+        lowestTickValue = virtualinvoke this.<org.jfree.chart.axis.NumberAxis: double calculateLowestVisibleTickValue()>();
+    
+        if count > 500 goto label16;
+        minorTickSpaces = virtualinvoke this.<org.jfree.chart.axis.NumberAxis: int getMinorTickCount()>();
+    
+        if minorTickSpaces > 0 goto label02;
+        minorTickSpaces = virtualinvoke tu.<org.jfree.chart.axis.TickUnit: int getMinorTickCount()>();
+    
+      label02:
+        minorTick#0 = 1;
+    
+      label03:
+        if minorTick#0 >= minorTickSpaces goto label05;
+        $stack52 = (double) minorTick#0;
+        $stack53 = size * $stack52;
+        $stack54 = (double) minorTickSpaces;
+        $stack55 = $stack53 / $stack54;
+        minorTickValue#0 = lowestTickValue - $stack55;
+        $stack56 = virtualinvoke this.<org.jfree.chart.axis.NumberAxis: org.jfree.data.Range getRange()>();
+        $stack57 = virtualinvoke $stack56.<org.jfree.data.Range: boolean contains(double)>(minorTickValue#0);
+    
+        if $stack57 == 0 goto label04;
+        $stack61 = new org.jfree.chart.axis.NumberTick;
+        $stack60 = <org.jfree.chart.axis.TickType: org.jfree.chart.axis.TickType MINOR>;
+        $stack59 = <org.jfree.chart.text.TextAnchor: org.jfree.chart.text.TextAnchor TOP_CENTER>;
+        $stack58 = <org.jfree.chart.text.TextAnchor: org.jfree.chart.text.TextAnchor CENTER>;
+        specialinvoke $stack61.<org.jfree.chart.axis.NumberTick: void <init>(org.jfree.chart.axis.TickType,double,java.lang.String,org.jfree.chart.text.TextAnchor,org.jfree.chart.text.TextAnchor,double)>($stack60, minorTickValue#0, "", $stack59, $stack58, 0.0);
+        #l4 = (java.util.List) $stack28;
+        interfaceinvoke #l4.<java.util.List: boolean add(java.lang.Object)>($stack61);
+    
+      label04:
+        minorTick#0 = minorTick#0 + 1;
+    
+        goto label03;
+    
+      label05:
+        minorTick#1 = 0;
+    
+      label06:
+        if minorTick#1 >= count goto label16;
+        $stack30 = (double) minorTick#1;
+        $stack31 = $stack30 * size;
+        minorTickValue#1 = lowestTickValue + $stack31;
+        formatter = virtualinvoke this.<org.jfree.chart.axis.NumberAxis: java.text.NumberFormat getNumberFormatOverride()>();
+    
+        if formatter == null goto label07;
+        tickLabel = virtualinvoke formatter.<java.text.NumberFormat: java.lang.String format(double)>(minorTickValue#1);
+    
+        goto label08;
+    
+      label07:
+        $stack32 = virtualinvoke this.<org.jfree.chart.axis.NumberAxis: org.jfree.chart.axis.NumberTickUnit getTickUnit()>();
+        tickLabel = virtualinvoke $stack32.<org.jfree.chart.axis.NumberTickUnit: java.lang.String valueToString(double)>(minorTickValue#1);
+    
+      label08:
+        anchor#0 = null;
+        rotationAnchor#0 = null;
+        angle = 0.0;
+        $stack33 = virtualinvoke this.<org.jfree.chart.axis.NumberAxis: boolean isVerticalTickLabels()>();
+    
+        if $stack33 == 0 goto label10;
+        anchor#1 = <org.jfree.chart.text.TextAnchor: org.jfree.chart.text.TextAnchor CENTER_RIGHT>;
+        rotationAnchor#1 = <org.jfree.chart.text.TextAnchor: org.jfree.chart.text.TextAnchor CENTER_RIGHT>;
+        $stack51 = <org.jfree.chart.util.RectangleEdge: org.jfree.chart.util.RectangleEdge TOP>;
+    
+        if edge != $stack51 goto label09;
+        angle = 1.5707963267948966;
+    
+        goto label12;
+    
+      label09:
+        angle = -1.5707963267948966;
+    
+        goto label12;
+    
+      label10:
+        $stack34 = <org.jfree.chart.util.RectangleEdge: org.jfree.chart.util.RectangleEdge TOP>;
+    
+        if edge != $stack34 goto label11;
+        anchor#1 = <org.jfree.chart.text.TextAnchor: org.jfree.chart.text.TextAnchor BOTTOM_CENTER>;
+        rotationAnchor#1 = <org.jfree.chart.text.TextAnchor: org.jfree.chart.text.TextAnchor BOTTOM_CENTER>;
+    
+        goto label12;
+    
+      label11:
+        anchor#1 = <org.jfree.chart.text.TextAnchor: org.jfree.chart.text.TextAnchor TOP_CENTER>;
+        rotationAnchor#1 = <org.jfree.chart.text.TextAnchor: org.jfree.chart.text.TextAnchor TOP_CENTER>;
+    
+      label12:
+        $stack36 = new org.jfree.chart.axis.NumberTick;
+        $stack35 = new java.lang.Double;
+        #l2 = (java.lang.Double) $stack35;
+        specialinvoke #l2.<java.lang.Double: void <init>(double)>(minorTickValue#1);
+        #l1 = (java.lang.Number) $stack35;
+        specialinvoke $stack36.<org.jfree.chart.axis.NumberTick: void <init>(java.lang.Number,java.lang.String,org.jfree.chart.text.TextAnchor,org.jfree.chart.text.TextAnchor,double)>(#l1, tickLabel, anchor#1, rotationAnchor#1, angle);
+        tick = $stack36;
+        #l0 = (java.util.List) $stack28;
+        interfaceinvoke #l0.<java.util.List: boolean add(java.lang.Object)>($stack36);
+        $stack37 = minorTick#1 + 1;
+        $stack38 = (double) $stack37;
+        $stack39 = $stack38 * size;
+        nextTickValue = lowestTickValue + $stack39;
+        minorTick_1 = 1;
+    
+      label13:
+        if minorTick_1 >= minorTickSpaces goto label15;
+        $stack40 = nextTickValue - minorTickValue#1;
+        $stack41 = (double) minorTick_1;
+        $stack42 = $stack40 * $stack41;
+        $stack43 = (double) minorTickSpaces;
+        $stack44 = $stack42 / $stack43;
+        minorTickValue_1 = minorTickValue#1 + $stack44;
+        $stack45 = virtualinvoke this.<org.jfree.chart.axis.NumberAxis: org.jfree.data.Range getRange()>();
+        $stack46 = virtualinvoke $stack45.<org.jfree.data.Range: boolean contains(double)>(minorTickValue_1);
+    
+        if $stack46 == 0 goto label14;
+        $stack50 = new org.jfree.chart.axis.NumberTick;
+        $stack49 = <org.jfree.chart.axis.TickType: org.jfree.chart.axis.TickType MINOR>;
+        $stack48 = <org.jfree.chart.text.TextAnchor: org.jfree.chart.text.TextAnchor TOP_CENTER>;
+        $stack47 = <org.jfree.chart.text.TextAnchor: org.jfree.chart.text.TextAnchor CENTER>;
+        specialinvoke $stack50.<org.jfree.chart.axis.NumberTick: void <init>(org.jfree.chart.axis.TickType,double,java.lang.String,org.jfree.chart.text.TextAnchor,org.jfree.chart.text.TextAnchor,double)>($stack49, minorTickValue_1, "", $stack48, $stack47, 0.0);
+        #l5 = (java.util.List) $stack28;
+        interfaceinvoke #l5.<java.util.List: boolean add(java.lang.Object)>($stack50);
+    
+      label14:
+        minorTick_1 = minorTick_1 + 1;
+    
+        goto label13;
+    
+      label15:
+        minorTick#1 = minorTick#1 + 1;
+    
+        goto label06;
+    
+      label16:
+        #l6 = (java.util.List) $stack28;
+    
+        return #l6;
+    }
+
+    // ---- method: <org.jfree.chart.axis.NumberAxis: org.jfree.chart.axis.NumberTickUnit getTickUnit()> ----
+    {
+        org.jfree.chart.axis.NumberAxis this;
+        org.jfree.chart.axis.NumberTickUnit $stack1;
+    
+    
+        this := @this: org.jfree.chart.axis.NumberAxis;
+        $stack1 = this.<org.jfree.chart.axis.NumberAxis: org.jfree.chart.axis.NumberTickUnit tickUnit>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.axis.NumberAxis: void <clinit>()> ----
+    {
+        java.lang.Object $stack0;
+        java.text.DecimalFormat #l1;
+        java.text.NumberFormat #l0;
+        org.jfree.chart.axis.NumberTickUnit $stack1;
+    
+    
+        $stack1 = new org.jfree.chart.axis.NumberTickUnit;
+        $stack0 = new java.text.DecimalFormat;
+        #l1 = (java.text.DecimalFormat) $stack0;
+        specialinvoke #l1.<java.text.DecimalFormat: void <init>(java.lang.String)>("0");
+        #l0 = (java.text.NumberFormat) $stack0;
+        specialinvoke $stack1.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat)>(1.0, #l0);
+        <org.jfree.chart.axis.NumberAxis: org.jfree.chart.axis.NumberTickUnit DEFAULT_TICK_UNIT> = $stack1;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.axis.NumberAxis: double calculateHighestVisibleTickValue()> ----
+    {
+        double $stack7, $stack8, $stack9, index, unit;
+        org.jfree.chart.axis.NumberAxis this;
+        org.jfree.chart.axis.NumberTickUnit $stack5;
+        org.jfree.data.Range $stack6;
+    
+    
+        this := @this: org.jfree.chart.axis.NumberAxis;
+        $stack5 = virtualinvoke this.<org.jfree.chart.axis.NumberAxis: org.jfree.chart.axis.NumberTickUnit getTickUnit()>();
+        unit = virtualinvoke $stack5.<org.jfree.chart.axis.NumberTickUnit: double getSize()>();
+        $stack6 = virtualinvoke this.<org.jfree.chart.axis.NumberAxis: org.jfree.data.Range getRange()>();
+        $stack7 = virtualinvoke $stack6.<org.jfree.data.Range: double getUpperBound()>();
+        $stack8 = $stack7 / unit;
+        index = staticinvoke <java.lang.Math: double floor(double)>($stack8);
+        $stack9 = index * unit;
+    
+        return $stack9;
+    }
+
+    // ---- method: <org.jfree.chart.axis.NumberAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)> ----
+    {
+        boolean $stack14, $stack15, $stack16;
+        double $stack17, $stack18, $stack19, $stack20, $stack21, $stack22, $stack23, $stack24, $stack25, $stack26, $stack27, $stack28, axisMax, axisMin, max, min, value;
+        java.awt.geom.Rectangle2D area;
+        org.jfree.chart.axis.NumberAxis this;
+        org.jfree.chart.util.RectangleEdge edge;
+        org.jfree.data.Range range;
+    
+    
+        this := @this: org.jfree.chart.axis.NumberAxis;
+        value := @parameter0: double;
+        area := @parameter1: java.awt.geom.Rectangle2D;
+        edge := @parameter2: org.jfree.chart.util.RectangleEdge;
+        range = virtualinvoke this.<org.jfree.chart.axis.NumberAxis: org.jfree.data.Range getRange()>();
+        axisMin = virtualinvoke range.<org.jfree.data.Range: double getLowerBound()>();
+        axisMax = virtualinvoke range.<org.jfree.data.Range: double getUpperBound()>();
+        min = 0.0;
+        max = 0.0;
+        $stack14 = staticinvoke <org.jfree.chart.util.RectangleEdge: boolean isTopOrBottom(org.jfree.chart.util.RectangleEdge)>(edge);
+    
+        if $stack14 == 0 goto label1;
+        min = virtualinvoke area.<java.awt.geom.Rectangle2D: double getX()>();
+        max = virtualinvoke area.<java.awt.geom.Rectangle2D: double getMaxX()>();
+    
+        goto label2;
+    
+      label1:
+        $stack15 = staticinvoke <org.jfree.chart.util.RectangleEdge: boolean isLeftOrRight(org.jfree.chart.util.RectangleEdge)>(edge);
+    
+        if $stack15 == 0 goto label2;
+        max = virtualinvoke area.<java.awt.geom.Rectangle2D: double getMinY()>();
+        min = virtualinvoke area.<java.awt.geom.Rectangle2D: double getMaxY()>();
+    
+      label2:
+        $stack16 = virtualinvoke this.<org.jfree.chart.axis.NumberAxis: boolean isInverted()>();
+    
+        if $stack16 == 0 goto label3;
+        $stack23 = value - axisMin;
+        $stack24 = axisMax - axisMin;
+        $stack25 = $stack23 / $stack24;
+        $stack26 = max - min;
+        $stack27 = $stack25 * $stack26;
+        $stack28 = max - $stack27;
+    
+        return $stack28;
+    
+      label3:
+        $stack17 = value - axisMin;
+        $stack18 = axisMax - axisMin;
+        $stack19 = $stack17 / $stack18;
+        $stack20 = max - min;
+        $stack21 = $stack19 * $stack20;
+        $stack22 = min + $stack21;
+    
+        return $stack22;
+    }
+
+    // ---- method: <org.jfree.chart.axis.NumberAxis: org.jfree.chart.axis.TickUnitSource createIntegerTickUnits()> ----
+    {
+        java.lang.Object $stack4, $stack5;
+        java.text.DecimalFormat #l24, #l29, df0, df1;
+        java.text.NumberFormat #l0, #l1, #l10, #l11, #l12, #l13, #l14, #l15, #l16, #l17, #l18, #l19, #l2, #l20, #l21, #l22, #l23, #l25, #l26, #l27, #l28, #l3, #l30, #l31, #l32, #l4, #l5, #l6, #l7, #l8, #l9;
+        org.jfree.chart.axis.NumberTickUnit $stack10, $stack11, $stack12, $stack13, $stack14, $stack15, $stack16, $stack17, $stack18, $stack19, $stack20, $stack21, $stack22, $stack23, $stack24, $stack25, $stack26, $stack27, $stack28, $stack29, $stack30, $stack31, $stack32, $stack33, $stack34, $stack35, $stack36, $stack6, $stack7, $stack8, $stack9;
+        org.jfree.chart.axis.TickUnits $stack3, units;
+    
+    
+        $stack3 = new org.jfree.chart.axis.TickUnits;
+        specialinvoke $stack3.<org.jfree.chart.axis.TickUnits: void <init>()>();
+        units = $stack3;
+        $stack4 = new java.text.DecimalFormat;
+        #l29 = (java.text.DecimalFormat) $stack4;
+        specialinvoke #l29.<java.text.DecimalFormat: void <init>(java.lang.String)>("0");
+        df0 = (java.text.DecimalFormat) $stack4;
+        $stack5 = new java.text.DecimalFormat;
+        #l24 = (java.text.DecimalFormat) $stack5;
+        specialinvoke #l24.<java.text.DecimalFormat: void <init>(java.lang.String)>("#,##0");
+        df1 = (java.text.DecimalFormat) $stack5;
+        $stack6 = new org.jfree.chart.axis.NumberTickUnit;
+        #l27 = (java.text.NumberFormat) $stack4;
+        specialinvoke $stack6.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(1.0, #l27, 2);
+        virtualinvoke $stack3.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack6);
+        $stack7 = new org.jfree.chart.axis.NumberTickUnit;
+        #l30 = (java.text.NumberFormat) $stack4;
+        specialinvoke $stack7.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(2.0, #l30, 2);
+        virtualinvoke $stack3.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack7);
+        $stack8 = new org.jfree.chart.axis.NumberTickUnit;
+        #l17 = (java.text.NumberFormat) $stack4;
+        specialinvoke $stack8.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(5.0, #l17, 5);
+        virtualinvoke $stack3.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack8);
+        $stack9 = new org.jfree.chart.axis.NumberTickUnit;
+        #l21 = (java.text.NumberFormat) $stack4;
+        specialinvoke $stack9.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(10.0, #l21, 2);
+        virtualinvoke $stack3.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack9);
+        $stack10 = new org.jfree.chart.axis.NumberTickUnit;
+        #l13 = (java.text.NumberFormat) $stack4;
+        specialinvoke $stack10.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(20.0, #l13, 2);
+        virtualinvoke $stack3.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack10);
+        $stack11 = new org.jfree.chart.axis.NumberTickUnit;
+        #l28 = (java.text.NumberFormat) $stack4;
+        specialinvoke $stack11.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(50.0, #l28, 5);
+        virtualinvoke $stack3.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack11);
+        $stack12 = new org.jfree.chart.axis.NumberTickUnit;
+        #l2 = (java.text.NumberFormat) $stack4;
+        specialinvoke $stack12.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(100.0, #l2, 2);
+        virtualinvoke $stack3.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack12);
+        $stack13 = new org.jfree.chart.axis.NumberTickUnit;
+        #l8 = (java.text.NumberFormat) $stack4;
+        specialinvoke $stack13.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(200.0, #l8, 2);
+        virtualinvoke $stack3.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack13);
+        $stack14 = new org.jfree.chart.axis.NumberTickUnit;
+        #l14 = (java.text.NumberFormat) $stack4;
+        specialinvoke $stack14.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(500.0, #l14, 5);
+        virtualinvoke $stack3.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack14);
+        $stack15 = new org.jfree.chart.axis.NumberTickUnit;
+        #l19 = (java.text.NumberFormat) $stack5;
+        specialinvoke $stack15.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(1000.0, #l19, 2);
+        virtualinvoke $stack3.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack15);
+        $stack16 = new org.jfree.chart.axis.NumberTickUnit;
+        #l6 = (java.text.NumberFormat) $stack5;
+        specialinvoke $stack16.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(2000.0, #l6, 2);
+        virtualinvoke $stack3.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack16);
+        $stack17 = new org.jfree.chart.axis.NumberTickUnit;
+        #l25 = (java.text.NumberFormat) $stack5;
+        specialinvoke $stack17.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(5000.0, #l25, 5);
+        virtualinvoke $stack3.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack17);
+        $stack18 = new org.jfree.chart.axis.NumberTickUnit;
+        #l18 = (java.text.NumberFormat) $stack5;
+        specialinvoke $stack18.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(10000.0, #l18, 2);
+        virtualinvoke $stack3.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack18);
+        $stack19 = new org.jfree.chart.axis.NumberTickUnit;
+        #l11 = (java.text.NumberFormat) $stack5;
+        specialinvoke $stack19.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(20000.0, #l11, 2);
+        virtualinvoke $stack3.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack19);
+        $stack20 = new org.jfree.chart.axis.NumberTickUnit;
+        #l32 = (java.text.NumberFormat) $stack5;
+        specialinvoke $stack20.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(50000.0, #l32, 5);
+        virtualinvoke $stack3.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack20);
+        $stack21 = new org.jfree.chart.axis.NumberTickUnit;
+        #l15 = (java.text.NumberFormat) $stack5;
+        specialinvoke $stack21.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(100000.0, #l15, 2);
+        virtualinvoke $stack3.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack21);
+        $stack22 = new org.jfree.chart.axis.NumberTickUnit;
+        #l4 = (java.text.NumberFormat) $stack5;
+        specialinvoke $stack22.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(200000.0, #l4, 2);
+        virtualinvoke $stack3.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack22);
+        $stack23 = new org.jfree.chart.axis.NumberTickUnit;
+        #l12 = (java.text.NumberFormat) $stack5;
+        specialinvoke $stack23.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(500000.0, #l12, 5);
+        virtualinvoke $stack3.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack23);
+        $stack24 = new org.jfree.chart.axis.NumberTickUnit;
+        #l20 = (java.text.NumberFormat) $stack5;
+        specialinvoke $stack24.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(1000000.0, #l20, 2);
+        virtualinvoke $stack3.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack24);
+        $stack25 = new org.jfree.chart.axis.NumberTickUnit;
+        #l10 = (java.text.NumberFormat) $stack5;
+        specialinvoke $stack25.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(2000000.0, #l10, 2);
+        virtualinvoke $stack3.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack25);
+        $stack26 = new org.jfree.chart.axis.NumberTickUnit;
+        #l23 = (java.text.NumberFormat) $stack5;
+        specialinvoke $stack26.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(5000000.0, #l23, 5);
+        virtualinvoke $stack3.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack26);
+        $stack27 = new org.jfree.chart.axis.NumberTickUnit;
+        #l7 = (java.text.NumberFormat) $stack5;
+        specialinvoke $stack27.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(1.0E7, #l7, 2);
+        virtualinvoke $stack3.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack27);
+        $stack28 = new org.jfree.chart.axis.NumberTickUnit;
+        #l31 = (java.text.NumberFormat) $stack5;
+        specialinvoke $stack28.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(2.0E7, #l31, 2);
+        virtualinvoke $stack3.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack28);
+        $stack29 = new org.jfree.chart.axis.NumberTickUnit;
+        #l0 = (java.text.NumberFormat) $stack5;
+        specialinvoke $stack29.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(5.0E7, #l0, 5);
+        virtualinvoke $stack3.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack29);
+        $stack30 = new org.jfree.chart.axis.NumberTickUnit;
+        #l22 = (java.text.NumberFormat) $stack5;
+        specialinvoke $stack30.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(1.0E8, #l22, 2);
+        virtualinvoke $stack3.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack30);
+        $stack31 = new org.jfree.chart.axis.NumberTickUnit;
+        #l9 = (java.text.NumberFormat) $stack5;
+        specialinvoke $stack31.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(2.0E8, #l9, 2);
+        virtualinvoke $stack3.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack31);
+        $stack32 = new org.jfree.chart.axis.NumberTickUnit;
+        #l16 = (java.text.NumberFormat) $stack5;
+        specialinvoke $stack32.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(5.0E8, #l16, 5);
+        virtualinvoke $stack3.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack32);
+        $stack33 = new org.jfree.chart.axis.NumberTickUnit;
+        #l5 = (java.text.NumberFormat) $stack5;
+        specialinvoke $stack33.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(1.0E9, #l5, 2);
+        virtualinvoke $stack3.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack33);
+        $stack34 = new org.jfree.chart.axis.NumberTickUnit;
+        #l1 = (java.text.NumberFormat) $stack5;
+        specialinvoke $stack34.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(2.0E9, #l1, 2);
+        virtualinvoke $stack3.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack34);
+        $stack35 = new org.jfree.chart.axis.NumberTickUnit;
+        #l26 = (java.text.NumberFormat) $stack5;
+        specialinvoke $stack35.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(5.0E9, #l26, 5);
+        virtualinvoke $stack3.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack35);
+        $stack36 = new org.jfree.chart.axis.NumberTickUnit;
+        #l3 = (java.text.NumberFormat) $stack5;
+        specialinvoke $stack36.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)>(1.0E10, #l3, 2);
+        virtualinvoke $stack3.<org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)>($stack36);
+    
+        return $stack3;
+    }
+
+    // ---- method: <org.jfree.chart.axis.NumberAxis: void setTickUnit(org.jfree.chart.axis.NumberTickUnit)> ----
+    {
+        org.jfree.chart.axis.NumberAxis this;
+        org.jfree.chart.axis.NumberTickUnit unit;
+    
+    
+        this := @this: org.jfree.chart.axis.NumberAxis;
+        unit := @parameter0: org.jfree.chart.axis.NumberTickUnit;
+        virtualinvoke this.<org.jfree.chart.axis.NumberAxis: void setTickUnit(org.jfree.chart.axis.NumberTickUnit,boolean,boolean)>(unit, 1, 1);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.axis.NumberAxis: org.jfree.chart.axis.MarkerAxisBand getMarkerBand()> ----
+    {
+        org.jfree.chart.axis.MarkerAxisBand $stack1;
+        org.jfree.chart.axis.NumberAxis this;
+    
+    
+        this := @this: org.jfree.chart.axis.NumberAxis;
+        $stack1 = this.<org.jfree.chart.axis.NumberAxis: org.jfree.chart.axis.MarkerAxisBand markerBand>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.axis.NumberAxis: void setTickUnit(org.jfree.chart.axis.NumberTickUnit,boolean,boolean)> ----
+    {
+        boolean notify, turnOffAutoSelect;
+        java.lang.IllegalArgumentException #l0;
+        java.lang.Object $stack5;
+        java.lang.Throwable #l1;
+        org.jfree.chart.axis.NumberAxis this;
+        org.jfree.chart.axis.NumberTickUnit unit;
+        org.jfree.chart.event.AxisChangeEvent $stack4;
+    
+    
+        this := @this: org.jfree.chart.axis.NumberAxis;
+        unit := @parameter0: org.jfree.chart.axis.NumberTickUnit;
+        notify := @parameter1: boolean;
+        turnOffAutoSelect := @parameter2: boolean;
+    
+        if unit != null goto label1;
+        $stack5 = new java.lang.IllegalArgumentException;
+        #l0 = (java.lang.IllegalArgumentException) $stack5;
+        specialinvoke #l0.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'unit\' argument.");
+        #l1 = (java.lang.Throwable) $stack5;
+    
+        throw #l1;
+    
+      label1:
+        this.<org.jfree.chart.axis.NumberAxis: org.jfree.chart.axis.NumberTickUnit tickUnit> = unit;
+    
+        if turnOffAutoSelect == 0 goto label2;
+        virtualinvoke this.<org.jfree.chart.axis.NumberAxis: void setAutoTickUnitSelection(boolean,boolean)>(0, 0);
+    
+      label2:
+        if notify == 0 goto label3;
+        $stack4 = new org.jfree.chart.event.AxisChangeEvent;
+        specialinvoke $stack4.<org.jfree.chart.event.AxisChangeEvent: void <init>(org.jfree.chart.axis.Axis)>(this);
+        virtualinvoke this.<org.jfree.chart.axis.NumberAxis: void notifyListeners(org.jfree.chart.event.AxisChangeEvent)>($stack4);
+    
+      label3:
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.axis.NumberAxis: void setNumberFormatOverride(java.text.NumberFormat)> ----
+    {
+        java.text.NumberFormat formatter;
+        org.jfree.chart.axis.NumberAxis this;
+        org.jfree.chart.event.AxisChangeEvent $stack2;
+    
+    
+        this := @this: org.jfree.chart.axis.NumberAxis;
+        formatter := @parameter0: java.text.NumberFormat;
+        this.<org.jfree.chart.axis.NumberAxis: java.text.NumberFormat numberFormatOverride> = formatter;
+        $stack2 = new org.jfree.chart.event.AxisChangeEvent;
+        specialinvoke $stack2.<org.jfree.chart.event.AxisChangeEvent: void <init>(org.jfree.chart.axis.Axis)>(this);
+        virtualinvoke this.<org.jfree.chart.axis.NumberAxis: void notifyListeners(org.jfree.chart.event.AxisChangeEvent)>($stack2);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.axis.NumberAxis: void <init>(java.lang.String)> ----
+    {
+        java.lang.String label;
+        org.jfree.chart.axis.NumberAxis this;
+        org.jfree.chart.axis.NumberTickUnit $stack4;
+        org.jfree.chart.axis.TickUnitSource $stack2;
+        org.jfree.data.RangeType $stack3;
+    
+    
+        this := @this: org.jfree.chart.axis.NumberAxis;
+        label := @parameter0: java.lang.String;
+        $stack2 = staticinvoke <org.jfree.chart.axis.NumberAxis: org.jfree.chart.axis.TickUnitSource createStandardTickUnits()>();
+        specialinvoke this.<org.jfree.chart.axis.ValueAxis: void <init>(java.lang.String,org.jfree.chart.axis.TickUnitSource)>(label, $stack2);
+        $stack3 = <org.jfree.data.RangeType: org.jfree.data.RangeType FULL>;
+        this.<org.jfree.chart.axis.NumberAxis: org.jfree.data.RangeType rangeType> = $stack3;
+        this.<org.jfree.chart.axis.NumberAxis: boolean autoRangeIncludesZero> = 1;
+        this.<org.jfree.chart.axis.NumberAxis: boolean autoRangeStickyZero> = 1;
+        $stack4 = <org.jfree.chart.axis.NumberAxis: org.jfree.chart.axis.NumberTickUnit DEFAULT_TICK_UNIT>;
+        this.<org.jfree.chart.axis.NumberAxis: org.jfree.chart.axis.NumberTickUnit tickUnit> = $stack4;
+        this.<org.jfree.chart.axis.NumberAxis: java.text.NumberFormat numberFormatOverride> = null;
+        this.<org.jfree.chart.axis.NumberAxis: org.jfree.chart.axis.MarkerAxisBand markerBand> = null;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.axis.NumberAxis: void configure()> ----
+    {
+        boolean $stack1;
+        org.jfree.chart.axis.NumberAxis this;
+    
+    
+        this := @this: org.jfree.chart.axis.NumberAxis;
+        $stack1 = virtualinvoke this.<org.jfree.chart.axis.NumberAxis: boolean isAutoRange()>();
+    
+        if $stack1 == 0 goto label1;
+        virtualinvoke this.<org.jfree.chart.axis.NumberAxis: void autoAdjustRange()>();
+    
+      label1:
+        return;
+    }
+
+}

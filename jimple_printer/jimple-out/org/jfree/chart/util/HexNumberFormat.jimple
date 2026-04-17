@@ -1,0 +1,138 @@
+// ========================================================================
+// CLASS : org.jfree.chart.util.HexNumberFormat
+// ========================================================================
+
+[PUBLIC, SUPER] class org.jfree.chart.util.HexNumberFormat extends java.text.NumberFormat {
+
+    // ---- method: <org.jfree.chart.util.HexNumberFormat: void setNumberOfDigits(int)> ----
+    {
+        int digits;
+        org.jfree.chart.util.HexNumberFormat this;
+    
+    
+        this := @this: org.jfree.chart.util.HexNumberFormat;
+        digits := @parameter0: int;
+        this.<org.jfree.chart.util.HexNumberFormat: int m_numDigits> = digits;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.util.HexNumberFormat: void <init>()> ----
+    {
+        org.jfree.chart.util.HexNumberFormat this;
+    
+    
+        this := @this: org.jfree.chart.util.HexNumberFormat;
+        specialinvoke this.<org.jfree.chart.util.HexNumberFormat: void <init>(int)>(8);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.util.HexNumberFormat: java.lang.StringBuffer format(long,java.lang.StringBuffer,java.text.FieldPosition)> ----
+    {
+        int $stack10, $stack11, i, l_pad#0, l_pad#1;
+        java.lang.String $stack9, l_hex;
+        java.lang.StringBuffer $stack12, l_extended, toAppendTo;
+        java.text.FieldPosition pos;
+        long number;
+        org.jfree.chart.util.HexNumberFormat this;
+    
+    
+        this := @this: org.jfree.chart.util.HexNumberFormat;
+        number := @parameter0: long;
+        toAppendTo := @parameter1: java.lang.StringBuffer;
+        pos := @parameter2: java.text.FieldPosition;
+        $stack9 = staticinvoke <java.lang.Long: java.lang.String toHexString(long)>(number);
+        l_hex = virtualinvoke $stack9.<java.lang.String: java.lang.String toUpperCase()>();
+        $stack10 = this.<org.jfree.chart.util.HexNumberFormat: int m_numDigits>;
+        $stack11 = virtualinvoke l_hex.<java.lang.String: int length()>();
+        l_pad#0 = $stack10 - $stack11;
+    
+        if 0 >= l_pad#0 goto label1;
+        l_pad#1 = l_pad#0;
+    
+        goto label2;
+    
+      label1:
+        l_pad#1 = 0;
+    
+      label2:
+        $stack12 = new java.lang.StringBuffer;
+        specialinvoke $stack12.<java.lang.StringBuffer: void <init>(java.lang.String)>("0x");
+        l_extended = $stack12;
+        i = 0;
+    
+      label3:
+        if i >= l_pad#1 goto label4;
+        virtualinvoke $stack12.<java.lang.StringBuffer: java.lang.StringBuffer append(int)>(0);
+        i = i + 1;
+    
+        goto label3;
+    
+      label4:
+        virtualinvoke $stack12.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>(l_hex);
+    
+        return $stack12;
+    }
+
+    // ---- method: <org.jfree.chart.util.HexNumberFormat: int getNumberOfDigits()> ----
+    {
+        int $stack1;
+        org.jfree.chart.util.HexNumberFormat this;
+    
+    
+        this := @this: org.jfree.chart.util.HexNumberFormat;
+        $stack1 = this.<org.jfree.chart.util.HexNumberFormat: int m_numDigits>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.util.HexNumberFormat: java.lang.StringBuffer format(double,java.lang.StringBuffer,java.text.FieldPosition)> ----
+    {
+        double number;
+        java.lang.StringBuffer $stack6, toAppendTo;
+        java.text.FieldPosition pos;
+        long $stack5;
+        org.jfree.chart.util.HexNumberFormat this;
+    
+    
+        this := @this: org.jfree.chart.util.HexNumberFormat;
+        number := @parameter0: double;
+        toAppendTo := @parameter1: java.lang.StringBuffer;
+        pos := @parameter2: java.text.FieldPosition;
+        $stack5 = (long) number;
+        $stack6 = virtualinvoke this.<org.jfree.chart.util.HexNumberFormat: java.lang.StringBuffer format(long,java.lang.StringBuffer,java.text.FieldPosition)>($stack5, toAppendTo, pos);
+    
+        return $stack6;
+    }
+
+    // ---- method: <org.jfree.chart.util.HexNumberFormat: void <init>(int)> ----
+    {
+        int digits;
+        org.jfree.chart.util.HexNumberFormat this;
+    
+    
+        this := @this: org.jfree.chart.util.HexNumberFormat;
+        digits := @parameter0: int;
+        specialinvoke this.<java.text.NumberFormat: void <init>()>();
+        this.<org.jfree.chart.util.HexNumberFormat: int m_numDigits> = 8;
+        this.<org.jfree.chart.util.HexNumberFormat: int m_numDigits> = digits;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.util.HexNumberFormat: java.lang.Number parse(java.lang.String,java.text.ParsePosition)> ----
+    {
+        java.lang.String source;
+        java.text.ParsePosition parsePosition;
+        org.jfree.chart.util.HexNumberFormat this;
+    
+    
+        this := @this: org.jfree.chart.util.HexNumberFormat;
+        source := @parameter0: java.lang.String;
+        parsePosition := @parameter1: java.text.ParsePosition;
+    
+        return null;
+    }
+
+}

@@ -1,0 +1,681 @@
+// ========================================================================
+// CLASS : org.jfree.chart.renderer.category.MinMaxCategoryRenderer
+// ========================================================================
+
+[PUBLIC, SUPER] class org.jfree.chart.renderer.category.MinMaxCategoryRenderer extends org.jfree.chart.renderer.category.AbstractCategoryItemRenderer {
+
+    // ---- method: <org.jfree.chart.renderer.category.MinMaxCategoryRenderer: java.awt.Stroke getGroupStroke()> ----
+    {
+        java.awt.Stroke $stack1;
+        org.jfree.chart.renderer.category.MinMaxCategoryRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.category.MinMaxCategoryRenderer;
+        $stack1 = this.<org.jfree.chart.renderer.category.MinMaxCategoryRenderer: java.awt.Stroke groupStroke>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.category.MinMaxCategoryRenderer: void setObjectIcon(javax.swing.Icon)> ----
+    {
+        java.lang.IllegalArgumentException #l0;
+        java.lang.Object $stack2;
+        java.lang.Throwable #l1;
+        javax.swing.Icon icon;
+        org.jfree.chart.renderer.category.MinMaxCategoryRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.category.MinMaxCategoryRenderer;
+        icon := @parameter0: javax.swing.Icon;
+    
+        if icon != null goto label1;
+        $stack2 = new java.lang.IllegalArgumentException;
+        #l0 = (java.lang.IllegalArgumentException) $stack2;
+        specialinvoke #l0.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'icon\' argument.");
+        #l1 = (java.lang.Throwable) $stack2;
+    
+        throw #l1;
+    
+      label1:
+        this.<org.jfree.chart.renderer.category.MinMaxCategoryRenderer: javax.swing.Icon objectIcon> = icon;
+        virtualinvoke this.<org.jfree.chart.renderer.category.MinMaxCategoryRenderer: void fireChangeEvent()>();
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.category.MinMaxCategoryRenderer: void drawItem(java.awt.Graphics2D,org.jfree.chart.renderer.category.CategoryItemRendererState,java.awt.geom.Rectangle2D,org.jfree.chart.plot.CategoryPlot,org.jfree.chart.axis.CategoryAxis,org.jfree.chart.axis.ValueAxis,org.jfree.data.category.CategoryDataset,int,int,boolean,int)> ----
+    {
+        boolean $stack43, selected;
+        byte $stack56, $stack59;
+        double $stack30, $stack33, $stack34, $stack41, $stack42, $stack54, $stack55, $stack57, $stack58, $stack64, $stack66, $stack83, $stack84, maxY, minY#0, previous, x0, x1, y0, y1;
+        int $stack28, $stack37, $stack38, $stack40, $stack44, $stack46, $stack47, $stack60, $stack61, $stack70, $stack71, $stack73, $stack74, $stack77, $stack78, $stack80, $stack81, $stack85, $stack86, column, pass, row;
+        java.awt.Graphics #l11, #l15, #l18, #l19, #l4, #l8;
+        java.awt.Graphics2D #l0, #l12, #l13, #l16, #l2, #l20, #l3, #l5, #l7;
+        java.awt.Paint $stack31, $stack49, $stack62;
+        java.awt.Shape #l1, #l10, #l14, #l21;
+        java.awt.Stroke $stack32, $stack50, $stack63;
+        java.awt.geom.Line2D$Double #l6, #l9, $stack52, $stack53;
+        java.awt.geom.Rectangle2D dataArea;
+        java.awt.geom.Rectangle2D$Double #l17, shape#1;
+        java.lang.Number minY#1, value;
+        java.lang.Object $stack35, $stack69, $stack76, g2, line, shape#0;
+        javax.swing.Icon $stack39, $stack72, $stack75, $stack79, $stack82, $stack87;
+        org.jfree.chart.axis.CategoryAxis domainAxis;
+        org.jfree.chart.axis.ValueAxis rangeAxis;
+        org.jfree.chart.entity.EntityCollection minY#2;
+        org.jfree.chart.plot.CategoryPlot plot;
+        org.jfree.chart.plot.PlotOrientation $stack36, $stack51, $stack68, orient;
+        org.jfree.chart.renderer.category.CategoryItemRendererState state;
+        org.jfree.chart.renderer.category.MinMaxCategoryRenderer this;
+        org.jfree.chart.util.RectangleEdge $stack27, $stack29, $stack45, $stack48, $stack65, $stack67;
+        org.jfree.data.category.CategoryDataset dataset;
+    
+    
+        this := @this: org.jfree.chart.renderer.category.MinMaxCategoryRenderer;
+        g2 := @parameter0: java.awt.Graphics2D;
+        state := @parameter1: org.jfree.chart.renderer.category.CategoryItemRendererState;
+        dataArea := @parameter2: java.awt.geom.Rectangle2D;
+        plot := @parameter3: org.jfree.chart.plot.CategoryPlot;
+        domainAxis := @parameter4: org.jfree.chart.axis.CategoryAxis;
+        rangeAxis := @parameter5: org.jfree.chart.axis.ValueAxis;
+        dataset := @parameter6: org.jfree.data.category.CategoryDataset;
+        row := @parameter7: int;
+        column := @parameter8: int;
+        selected := @parameter9: boolean;
+        pass := @parameter10: int;
+        value = interfaceinvoke dataset.<org.jfree.data.category.CategoryDataset: java.lang.Number getValue(int,int)>(row, column);
+    
+        if value == null goto label12;
+        $stack28 = virtualinvoke this.<org.jfree.chart.renderer.category.MinMaxCategoryRenderer: int getColumnCount()>();
+        $stack27 = virtualinvoke plot.<org.jfree.chart.plot.CategoryPlot: org.jfree.chart.util.RectangleEdge getDomainAxisEdge()>();
+        x1 = virtualinvoke domainAxis.<org.jfree.chart.axis.CategoryAxis: double getCategoryMiddle(int,int,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)>(column, $stack28, dataArea, $stack27);
+        $stack30 = virtualinvoke value.<java.lang.Number: double doubleValue()>();
+        $stack29 = virtualinvoke plot.<org.jfree.chart.plot.CategoryPlot: org.jfree.chart.util.RectangleEdge getRangeAxisEdge()>();
+        y1 = virtualinvoke rangeAxis.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)>($stack30, dataArea, $stack29);
+        $stack31 = virtualinvoke this.<org.jfree.chart.renderer.category.MinMaxCategoryRenderer: java.awt.Paint getItemPaint(int,int,boolean)>(row, column, selected);
+        #l7 = (java.awt.Graphics2D) g2;
+        virtualinvoke #l7.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>($stack31);
+        $stack32 = virtualinvoke this.<org.jfree.chart.renderer.category.MinMaxCategoryRenderer: java.awt.Stroke getItemStroke(int,int,boolean)>(row, column, selected);
+        #l2 = (java.awt.Graphics2D) g2;
+        virtualinvoke #l2.<java.awt.Graphics2D: void setStroke(java.awt.Stroke)>($stack32);
+        shape#0 = null;
+        $stack35 = new java.awt.geom.Rectangle2D$Double;
+        $stack34 = x1 - 4.0;
+        $stack33 = y1 - 4.0;
+        #l17 = (java.awt.geom.Rectangle2D$Double) $stack35;
+        specialinvoke #l17.<java.awt.geom.Rectangle2D$Double: void <init>(double,double,double,double)>($stack34, $stack33, 8.0, 8.0);
+        shape#1 = (java.awt.geom.Rectangle2D$Double) $stack35;
+        orient = virtualinvoke plot.<org.jfree.chart.plot.CategoryPlot: org.jfree.chart.plot.PlotOrientation getOrientation()>();
+        $stack36 = <org.jfree.chart.plot.PlotOrientation: org.jfree.chart.plot.PlotOrientation VERTICAL>;
+    
+        if orient != $stack36 goto label01;
+        $stack87 = this.<org.jfree.chart.renderer.category.MinMaxCategoryRenderer: javax.swing.Icon objectIcon>;
+        $stack86 = (int) x1;
+        $stack85 = (int) y1;
+        #l15 = (java.awt.Graphics) g2;
+        interfaceinvoke $stack87.<javax.swing.Icon: void paintIcon(java.awt.Component,java.awt.Graphics,int,int)>(null, #l15, $stack86, $stack85);
+    
+        goto label02;
+    
+      label01:
+        $stack39 = this.<org.jfree.chart.renderer.category.MinMaxCategoryRenderer: javax.swing.Icon objectIcon>;
+        $stack38 = (int) y1;
+        $stack37 = (int) x1;
+        #l8 = (java.awt.Graphics) g2;
+        interfaceinvoke $stack39.<javax.swing.Icon: void paintIcon(java.awt.Component,java.awt.Graphics,int,int)>(null, #l8, $stack38, $stack37);
+    
+      label02:
+        $stack40 = this.<org.jfree.chart.renderer.category.MinMaxCategoryRenderer: int lastCategory>;
+    
+        if $stack40 != column goto label07;
+        $stack54 = this.<org.jfree.chart.renderer.category.MinMaxCategoryRenderer: double min>;
+        $stack55 = virtualinvoke value.<java.lang.Number: double doubleValue()>();
+        $stack56 = $stack54 cmpl $stack55;
+    
+        if $stack56 <= 0 goto label03;
+        $stack84 = virtualinvoke value.<java.lang.Number: double doubleValue()>();
+        this.<org.jfree.chart.renderer.category.MinMaxCategoryRenderer: double min> = $stack84;
+    
+      label03:
+        $stack57 = this.<org.jfree.chart.renderer.category.MinMaxCategoryRenderer: double max>;
+        $stack58 = virtualinvoke value.<java.lang.Number: double doubleValue()>();
+        $stack59 = $stack57 cmpg $stack58;
+    
+        if $stack59 >= 0 goto label04;
+        $stack83 = virtualinvoke value.<java.lang.Number: double doubleValue()>();
+        this.<org.jfree.chart.renderer.category.MinMaxCategoryRenderer: double max> = $stack83;
+    
+      label04:
+        $stack60 = interfaceinvoke dataset.<org.jfree.data.category.CategoryDataset: int getRowCount()>();
+        $stack61 = $stack60 - 1;
+    
+        if $stack61 != row goto label08;
+        $stack62 = this.<org.jfree.chart.renderer.category.MinMaxCategoryRenderer: java.awt.Paint groupPaint>;
+        #l5 = (java.awt.Graphics2D) g2;
+        virtualinvoke #l5.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>($stack62);
+        $stack63 = this.<org.jfree.chart.renderer.category.MinMaxCategoryRenderer: java.awt.Stroke groupStroke>;
+        #l3 = (java.awt.Graphics2D) g2;
+        virtualinvoke #l3.<java.awt.Graphics2D: void setStroke(java.awt.Stroke)>($stack63);
+        $stack64 = this.<org.jfree.chart.renderer.category.MinMaxCategoryRenderer: double min>;
+        $stack65 = virtualinvoke plot.<org.jfree.chart.plot.CategoryPlot: org.jfree.chart.util.RectangleEdge getRangeAxisEdge()>();
+        minY#0 = virtualinvoke rangeAxis.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)>($stack64, dataArea, $stack65);
+        $stack66 = this.<org.jfree.chart.renderer.category.MinMaxCategoryRenderer: double max>;
+        $stack67 = virtualinvoke plot.<org.jfree.chart.plot.CategoryPlot: org.jfree.chart.util.RectangleEdge getRangeAxisEdge()>();
+        maxY = virtualinvoke rangeAxis.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)>($stack66, dataArea, $stack67);
+        $stack68 = <org.jfree.chart.plot.PlotOrientation: org.jfree.chart.plot.PlotOrientation VERTICAL>;
+    
+        if orient != $stack68 goto label05;
+        $stack76 = new java.awt.geom.Line2D$Double;
+        #l9 = (java.awt.geom.Line2D$Double) $stack76;
+        specialinvoke #l9.<java.awt.geom.Line2D$Double: void <init>(double,double,double,double)>(x1, minY#0, x1, maxY);
+        #l20 = (java.awt.Graphics2D) g2;
+        #l21 = (java.awt.Shape) $stack76;
+        virtualinvoke #l20.<java.awt.Graphics2D: void draw(java.awt.Shape)>(#l21);
+        $stack79 = this.<org.jfree.chart.renderer.category.MinMaxCategoryRenderer: javax.swing.Icon minIcon>;
+        $stack78 = (int) x1;
+        $stack77 = (int) minY#0;
+        #l19 = (java.awt.Graphics) g2;
+        interfaceinvoke $stack79.<javax.swing.Icon: void paintIcon(java.awt.Component,java.awt.Graphics,int,int)>(null, #l19, $stack78, $stack77);
+        $stack82 = this.<org.jfree.chart.renderer.category.MinMaxCategoryRenderer: javax.swing.Icon maxIcon>;
+        $stack81 = (int) x1;
+        $stack80 = (int) maxY;
+        #l11 = (java.awt.Graphics) g2;
+        interfaceinvoke $stack82.<javax.swing.Icon: void paintIcon(java.awt.Component,java.awt.Graphics,int,int)>(null, #l11, $stack81, $stack80);
+    
+        goto label06;
+    
+      label05:
+        $stack69 = new java.awt.geom.Line2D$Double;
+        #l6 = (java.awt.geom.Line2D$Double) $stack69;
+        specialinvoke #l6.<java.awt.geom.Line2D$Double: void <init>(double,double,double,double)>(minY#0, x1, maxY, x1);
+        #l13 = (java.awt.Graphics2D) g2;
+        #l14 = (java.awt.Shape) $stack69;
+        virtualinvoke #l13.<java.awt.Graphics2D: void draw(java.awt.Shape)>(#l14);
+        $stack72 = this.<org.jfree.chart.renderer.category.MinMaxCategoryRenderer: javax.swing.Icon minIcon>;
+        $stack71 = (int) minY#0;
+        $stack70 = (int) x1;
+        #l18 = (java.awt.Graphics) g2;
+        interfaceinvoke $stack72.<javax.swing.Icon: void paintIcon(java.awt.Component,java.awt.Graphics,int,int)>(null, #l18, $stack71, $stack70);
+        $stack75 = this.<org.jfree.chart.renderer.category.MinMaxCategoryRenderer: javax.swing.Icon maxIcon>;
+        $stack74 = (int) maxY;
+        $stack73 = (int) x1;
+        #l4 = (java.awt.Graphics) g2;
+        interfaceinvoke $stack75.<javax.swing.Icon: void paintIcon(java.awt.Component,java.awt.Graphics,int,int)>(null, #l4, $stack74, $stack73);
+    
+      label06:
+        goto label08;
+    
+      label07:
+        this.<org.jfree.chart.renderer.category.MinMaxCategoryRenderer: int lastCategory> = column;
+        $stack41 = virtualinvoke value.<java.lang.Number: double doubleValue()>();
+        this.<org.jfree.chart.renderer.category.MinMaxCategoryRenderer: double min> = $stack41;
+        $stack42 = virtualinvoke value.<java.lang.Number: double doubleValue()>();
+        this.<org.jfree.chart.renderer.category.MinMaxCategoryRenderer: double max> = $stack42;
+    
+      label08:
+        $stack43 = this.<org.jfree.chart.renderer.category.MinMaxCategoryRenderer: boolean plotLines>;
+    
+        if $stack43 == 0 goto label11;
+    
+        if column == 0 goto label11;
+        $stack44 = column - 1;
+        minY#1 = interfaceinvoke dataset.<org.jfree.data.category.CategoryDataset: java.lang.Number getValue(int,int)>(row, $stack44);
+    
+        if minY#1 == null goto label11;
+        previous = virtualinvoke minY#1.<java.lang.Number: double doubleValue()>();
+        $stack47 = column - 1;
+        $stack46 = virtualinvoke this.<org.jfree.chart.renderer.category.MinMaxCategoryRenderer: int getColumnCount()>();
+        $stack45 = virtualinvoke plot.<org.jfree.chart.plot.CategoryPlot: org.jfree.chart.util.RectangleEdge getDomainAxisEdge()>();
+        x0 = virtualinvoke domainAxis.<org.jfree.chart.axis.CategoryAxis: double getCategoryMiddle(int,int,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)>($stack47, $stack46, dataArea, $stack45);
+        $stack48 = virtualinvoke plot.<org.jfree.chart.plot.CategoryPlot: org.jfree.chart.util.RectangleEdge getRangeAxisEdge()>();
+        y0 = virtualinvoke rangeAxis.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)>(previous, dataArea, $stack48);
+        $stack49 = virtualinvoke this.<org.jfree.chart.renderer.category.MinMaxCategoryRenderer: java.awt.Paint getItemPaint(int,int,boolean)>(row, column, selected);
+        #l16 = (java.awt.Graphics2D) g2;
+        virtualinvoke #l16.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>($stack49);
+        $stack50 = virtualinvoke this.<org.jfree.chart.renderer.category.MinMaxCategoryRenderer: java.awt.Stroke getItemStroke(int,int,boolean)>(row, column, selected);
+        #l12 = (java.awt.Graphics2D) g2;
+        virtualinvoke #l12.<java.awt.Graphics2D: void setStroke(java.awt.Stroke)>($stack50);
+        $stack51 = <org.jfree.chart.plot.PlotOrientation: org.jfree.chart.plot.PlotOrientation VERTICAL>;
+    
+        if orient != $stack51 goto label09;
+        $stack53 = new java.awt.geom.Line2D$Double;
+        specialinvoke $stack53.<java.awt.geom.Line2D$Double: void <init>(double,double,double,double)>(x0, y0, x1, y1);
+        line = $stack53;
+    
+        goto label10;
+    
+      label09:
+        $stack52 = new java.awt.geom.Line2D$Double;
+        specialinvoke $stack52.<java.awt.geom.Line2D$Double: void <init>(double,double,double,double)>(y0, x0, y1, x1);
+        line = $stack52;
+    
+      label10:
+        #l1 = (java.awt.Shape) line;
+        #l0 = (java.awt.Graphics2D) g2;
+        virtualinvoke #l0.<java.awt.Graphics2D: void draw(java.awt.Shape)>(#l1);
+    
+      label11:
+        minY#2 = virtualinvoke state.<org.jfree.chart.renderer.category.CategoryItemRendererState: org.jfree.chart.entity.EntityCollection getEntityCollection()>();
+    
+        if minY#2 == null goto label12;
+    
+        if $stack35 == null goto label12;
+        #l10 = (java.awt.Shape) $stack35;
+        virtualinvoke this.<org.jfree.chart.renderer.category.MinMaxCategoryRenderer: void addEntity(org.jfree.chart.entity.EntityCollection,java.awt.Shape,org.jfree.data.category.CategoryDataset,int,int,boolean)>(minY#2, #l10, dataset, row, column, selected);
+    
+      label12:
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.category.MinMaxCategoryRenderer: javax.swing.Icon getIcon(java.awt.Shape,java.awt.Paint,java.awt.Paint)> ----
+    {
+        int height, width;
+        java.awt.Paint fillPaint, outlinePaint;
+        java.awt.Rectangle $stack7, $stack8;
+        java.awt.Shape shape;
+        java.awt.geom.GeneralPath $stack9, path;
+        org.jfree.chart.renderer.category.MinMaxCategoryRenderer this;
+        org.jfree.chart.renderer.category.MinMaxCategoryRenderer$1 $stack10;
+    
+    
+        this := @this: org.jfree.chart.renderer.category.MinMaxCategoryRenderer;
+        shape := @parameter0: java.awt.Shape;
+        fillPaint := @parameter1: java.awt.Paint;
+        outlinePaint := @parameter2: java.awt.Paint;
+        $stack7 = interfaceinvoke shape.<java.awt.Shape: java.awt.Rectangle getBounds()>();
+        width = $stack7.<java.awt.Rectangle: int width>;
+        $stack8 = interfaceinvoke shape.<java.awt.Shape: java.awt.Rectangle getBounds()>();
+        height = $stack8.<java.awt.Rectangle: int height>;
+        $stack9 = new java.awt.geom.GeneralPath;
+        specialinvoke $stack9.<java.awt.geom.GeneralPath: void <init>(java.awt.Shape)>(shape);
+        path = $stack9;
+        $stack10 = new org.jfree.chart.renderer.category.MinMaxCategoryRenderer$1;
+        specialinvoke $stack10.<org.jfree.chart.renderer.category.MinMaxCategoryRenderer$1: void <init>(org.jfree.chart.renderer.category.MinMaxCategoryRenderer,java.awt.geom.GeneralPath,java.awt.Paint,java.awt.Paint,int,int)>(this, $stack9, fillPaint, outlinePaint, width, height);
+    
+        return $stack10;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.category.MinMaxCategoryRenderer: void readObject(java.io.ObjectInputStream)> ----
+    {
+        java.awt.Paint #l3, #l7, $stack3;
+        java.awt.Shape #l2, #l4, #l6;
+        java.awt.Stroke $stack2;
+        java.awt.geom.Arc2D$Double #l0, #l1;
+        java.awt.geom.Line2D$Double #l5;
+        java.io.ObjectInputStream stream;
+        java.lang.Object $stack10, $stack4, $stack5, $stack7, $stack8;
+        javax.swing.Icon $stack11, $stack6, $stack9;
+        org.jfree.chart.renderer.category.MinMaxCategoryRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.category.MinMaxCategoryRenderer;
+        stream := @parameter0: java.io.ObjectInputStream;
+        virtualinvoke stream.<java.io.ObjectInputStream: void defaultReadObject()>();
+        $stack2 = staticinvoke <org.jfree.chart.util.SerialUtilities: java.awt.Stroke readStroke(java.io.ObjectInputStream)>(stream);
+        this.<org.jfree.chart.renderer.category.MinMaxCategoryRenderer: java.awt.Stroke groupStroke> = $stack2;
+        $stack3 = staticinvoke <org.jfree.chart.util.SerialUtilities: java.awt.Paint readPaint(java.io.ObjectInputStream)>(stream);
+        this.<org.jfree.chart.renderer.category.MinMaxCategoryRenderer: java.awt.Paint groupPaint> = $stack3;
+        $stack4 = new java.awt.geom.Arc2D$Double;
+        #l1 = (java.awt.geom.Arc2D$Double) $stack4;
+        specialinvoke #l1.<java.awt.geom.Arc2D$Double: void <init>(double,double,double,double,double,double,int)>(-4.0, -4.0, 8.0, 8.0, 0.0, 360.0, 0);
+        $stack5 = <java.awt.Color: java.awt.Color black>;
+        #l6 = (java.awt.Shape) $stack4;
+        #l7 = (java.awt.Paint) $stack5;
+        $stack6 = specialinvoke this.<org.jfree.chart.renderer.category.MinMaxCategoryRenderer: javax.swing.Icon getIcon(java.awt.Shape,java.awt.Paint,java.awt.Paint)>(#l6, null, #l7);
+        this.<org.jfree.chart.renderer.category.MinMaxCategoryRenderer: javax.swing.Icon minIcon> = $stack6;
+        $stack7 = new java.awt.geom.Arc2D$Double;
+        #l0 = (java.awt.geom.Arc2D$Double) $stack7;
+        specialinvoke #l0.<java.awt.geom.Arc2D$Double: void <init>(double,double,double,double,double,double,int)>(-4.0, -4.0, 8.0, 8.0, 0.0, 360.0, 0);
+        $stack8 = <java.awt.Color: java.awt.Color black>;
+        #l2 = (java.awt.Shape) $stack7;
+        #l3 = (java.awt.Paint) $stack8;
+        $stack9 = specialinvoke this.<org.jfree.chart.renderer.category.MinMaxCategoryRenderer: javax.swing.Icon getIcon(java.awt.Shape,java.awt.Paint,java.awt.Paint)>(#l2, null, #l3);
+        this.<org.jfree.chart.renderer.category.MinMaxCategoryRenderer: javax.swing.Icon maxIcon> = $stack9;
+        $stack10 = new java.awt.geom.Line2D$Double;
+        #l5 = (java.awt.geom.Line2D$Double) $stack10;
+        specialinvoke #l5.<java.awt.geom.Line2D$Double: void <init>(double,double,double,double)>(-4.0, 0.0, 4.0, 0.0);
+        #l4 = (java.awt.Shape) $stack10;
+        $stack11 = specialinvoke this.<org.jfree.chart.renderer.category.MinMaxCategoryRenderer: javax.swing.Icon getIcon(java.awt.Shape,boolean,boolean)>(#l4, 0, 1);
+        this.<org.jfree.chart.renderer.category.MinMaxCategoryRenderer: javax.swing.Icon objectIcon> = $stack11;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.category.MinMaxCategoryRenderer: void <init>()> ----
+    {
+        java.awt.BasicStroke #l0;
+        java.awt.Paint #l4, #l6;
+        java.awt.Shape #l3, #l5, #l7;
+        java.awt.geom.Arc2D$Double #l1, #l8;
+        java.awt.geom.Line2D$Double #l2;
+        java.lang.Object $stack1, $stack2, $stack3, $stack4, $stack6, $stack7, $stack9;
+        javax.swing.Icon $stack10, $stack5, $stack8;
+        org.jfree.chart.renderer.category.MinMaxCategoryRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.category.MinMaxCategoryRenderer;
+        specialinvoke this.<org.jfree.chart.renderer.category.AbstractCategoryItemRenderer: void <init>()>();
+        this.<org.jfree.chart.renderer.category.MinMaxCategoryRenderer: boolean plotLines> = 0;
+        $stack1 = <java.awt.Color: java.awt.Color black>;
+        this.<org.jfree.chart.renderer.category.MinMaxCategoryRenderer: java.awt.Paint groupPaint> = (java.awt.Paint) $stack1;
+        $stack2 = new java.awt.BasicStroke;
+        #l0 = (java.awt.BasicStroke) $stack2;
+        specialinvoke #l0.<java.awt.BasicStroke: void <init>(float)>(1.0F);
+        this.<org.jfree.chart.renderer.category.MinMaxCategoryRenderer: java.awt.Stroke groupStroke> = (java.awt.Stroke) $stack2;
+        $stack3 = new java.awt.geom.Arc2D$Double;
+        #l1 = (java.awt.geom.Arc2D$Double) $stack3;
+        specialinvoke #l1.<java.awt.geom.Arc2D$Double: void <init>(double,double,double,double,double,double,int)>(-4.0, -4.0, 8.0, 8.0, 0.0, 360.0, 0);
+        $stack4 = <java.awt.Color: java.awt.Color black>;
+        #l5 = (java.awt.Shape) $stack3;
+        #l6 = (java.awt.Paint) $stack4;
+        $stack5 = specialinvoke this.<org.jfree.chart.renderer.category.MinMaxCategoryRenderer: javax.swing.Icon getIcon(java.awt.Shape,java.awt.Paint,java.awt.Paint)>(#l5, null, #l6);
+        this.<org.jfree.chart.renderer.category.MinMaxCategoryRenderer: javax.swing.Icon minIcon> = $stack5;
+        $stack6 = new java.awt.geom.Arc2D$Double;
+        #l8 = (java.awt.geom.Arc2D$Double) $stack6;
+        specialinvoke #l8.<java.awt.geom.Arc2D$Double: void <init>(double,double,double,double,double,double,int)>(-4.0, -4.0, 8.0, 8.0, 0.0, 360.0, 0);
+        $stack7 = <java.awt.Color: java.awt.Color black>;
+        #l3 = (java.awt.Shape) $stack6;
+        #l4 = (java.awt.Paint) $stack7;
+        $stack8 = specialinvoke this.<org.jfree.chart.renderer.category.MinMaxCategoryRenderer: javax.swing.Icon getIcon(java.awt.Shape,java.awt.Paint,java.awt.Paint)>(#l3, null, #l4);
+        this.<org.jfree.chart.renderer.category.MinMaxCategoryRenderer: javax.swing.Icon maxIcon> = $stack8;
+        $stack9 = new java.awt.geom.Line2D$Double;
+        #l2 = (java.awt.geom.Line2D$Double) $stack9;
+        specialinvoke #l2.<java.awt.geom.Line2D$Double: void <init>(double,double,double,double)>(-4.0, 0.0, 4.0, 0.0);
+        #l7 = (java.awt.Shape) $stack9;
+        $stack10 = specialinvoke this.<org.jfree.chart.renderer.category.MinMaxCategoryRenderer: javax.swing.Icon getIcon(java.awt.Shape,boolean,boolean)>(#l7, 0, 1);
+        this.<org.jfree.chart.renderer.category.MinMaxCategoryRenderer: javax.swing.Icon objectIcon> = $stack10;
+        this.<org.jfree.chart.renderer.category.MinMaxCategoryRenderer: int lastCategory> = -1;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.category.MinMaxCategoryRenderer: boolean equals(java.lang.Object)> ----
+    {
+        boolean $stack11, $stack12, $stack3, $stack4, $stack5, $stack8;
+        java.awt.Paint $stack6, $stack7;
+        java.awt.Stroke $stack10, $stack9;
+        java.lang.Object obj;
+        org.jfree.chart.renderer.category.MinMaxCategoryRenderer that, this;
+    
+    
+        this := @this: org.jfree.chart.renderer.category.MinMaxCategoryRenderer;
+        obj := @parameter0: java.lang.Object;
+    
+        if obj != this goto label1;
+    
+        return 1;
+    
+      label1:
+        $stack3 = obj instanceof org.jfree.chart.renderer.category.MinMaxCategoryRenderer;
+    
+        if $stack3 != 0 goto label2;
+    
+        return 0;
+    
+      label2:
+        that = (org.jfree.chart.renderer.category.MinMaxCategoryRenderer) obj;
+        $stack5 = this.<org.jfree.chart.renderer.category.MinMaxCategoryRenderer: boolean plotLines>;
+        $stack4 = that.<org.jfree.chart.renderer.category.MinMaxCategoryRenderer: boolean plotLines>;
+    
+        if $stack5 == $stack4 goto label3;
+    
+        return 0;
+    
+      label3:
+        $stack7 = this.<org.jfree.chart.renderer.category.MinMaxCategoryRenderer: java.awt.Paint groupPaint>;
+        $stack6 = that.<org.jfree.chart.renderer.category.MinMaxCategoryRenderer: java.awt.Paint groupPaint>;
+        $stack8 = staticinvoke <org.jfree.chart.util.PaintUtilities: boolean equal(java.awt.Paint,java.awt.Paint)>($stack7, $stack6);
+    
+        if $stack8 != 0 goto label4;
+    
+        return 0;
+    
+      label4:
+        $stack10 = this.<org.jfree.chart.renderer.category.MinMaxCategoryRenderer: java.awt.Stroke groupStroke>;
+        $stack9 = that.<org.jfree.chart.renderer.category.MinMaxCategoryRenderer: java.awt.Stroke groupStroke>;
+        $stack11 = virtualinvoke $stack10.<java.lang.Object: boolean equals(java.lang.Object)>($stack9);
+    
+        if $stack11 != 0 goto label5;
+    
+        return 0;
+    
+      label5:
+        $stack12 = specialinvoke this.<org.jfree.chart.renderer.category.AbstractCategoryItemRenderer: boolean equals(java.lang.Object)>(obj);
+    
+        return $stack12;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.category.MinMaxCategoryRenderer: javax.swing.Icon getObjectIcon()> ----
+    {
+        javax.swing.Icon $stack1;
+        org.jfree.chart.renderer.category.MinMaxCategoryRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.category.MinMaxCategoryRenderer;
+        $stack1 = this.<org.jfree.chart.renderer.category.MinMaxCategoryRenderer: javax.swing.Icon objectIcon>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.category.MinMaxCategoryRenderer: java.awt.Paint getGroupPaint()> ----
+    {
+        java.awt.Paint $stack1;
+        org.jfree.chart.renderer.category.MinMaxCategoryRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.category.MinMaxCategoryRenderer;
+        $stack1 = this.<org.jfree.chart.renderer.category.MinMaxCategoryRenderer: java.awt.Paint groupPaint>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.category.MinMaxCategoryRenderer: javax.swing.Icon getMaxIcon()> ----
+    {
+        javax.swing.Icon $stack1;
+        org.jfree.chart.renderer.category.MinMaxCategoryRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.category.MinMaxCategoryRenderer;
+        $stack1 = this.<org.jfree.chart.renderer.category.MinMaxCategoryRenderer: javax.swing.Icon maxIcon>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.category.MinMaxCategoryRenderer: void setDrawLines(boolean)> ----
+    {
+        boolean $stack2, draw;
+        org.jfree.chart.renderer.category.MinMaxCategoryRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.category.MinMaxCategoryRenderer;
+        draw := @parameter0: boolean;
+        $stack2 = this.<org.jfree.chart.renderer.category.MinMaxCategoryRenderer: boolean plotLines>;
+    
+        if $stack2 == draw goto label1;
+        this.<org.jfree.chart.renderer.category.MinMaxCategoryRenderer: boolean plotLines> = draw;
+        virtualinvoke this.<org.jfree.chart.renderer.category.MinMaxCategoryRenderer: void fireChangeEvent()>();
+    
+      label1:
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.category.MinMaxCategoryRenderer: void setMaxIcon(javax.swing.Icon)> ----
+    {
+        java.lang.IllegalArgumentException #l1;
+        java.lang.Object $stack2;
+        java.lang.Throwable #l0;
+        javax.swing.Icon icon;
+        org.jfree.chart.renderer.category.MinMaxCategoryRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.category.MinMaxCategoryRenderer;
+        icon := @parameter0: javax.swing.Icon;
+    
+        if icon != null goto label1;
+        $stack2 = new java.lang.IllegalArgumentException;
+        #l1 = (java.lang.IllegalArgumentException) $stack2;
+        specialinvoke #l1.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'icon\' argument.");
+        #l0 = (java.lang.Throwable) $stack2;
+    
+        throw #l0;
+    
+      label1:
+        this.<org.jfree.chart.renderer.category.MinMaxCategoryRenderer: javax.swing.Icon maxIcon> = icon;
+        virtualinvoke this.<org.jfree.chart.renderer.category.MinMaxCategoryRenderer: void fireChangeEvent()>();
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.category.MinMaxCategoryRenderer: void setMinIcon(javax.swing.Icon)> ----
+    {
+        java.lang.IllegalArgumentException #l1;
+        java.lang.Object $stack2;
+        java.lang.Throwable #l0;
+        javax.swing.Icon icon;
+        org.jfree.chart.renderer.category.MinMaxCategoryRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.category.MinMaxCategoryRenderer;
+        icon := @parameter0: javax.swing.Icon;
+    
+        if icon != null goto label1;
+        $stack2 = new java.lang.IllegalArgumentException;
+        #l1 = (java.lang.IllegalArgumentException) $stack2;
+        specialinvoke #l1.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'icon\' argument.");
+        #l0 = (java.lang.Throwable) $stack2;
+    
+        throw #l0;
+    
+      label1:
+        this.<org.jfree.chart.renderer.category.MinMaxCategoryRenderer: javax.swing.Icon minIcon> = icon;
+        virtualinvoke this.<org.jfree.chart.renderer.category.MinMaxCategoryRenderer: void fireChangeEvent()>();
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.category.MinMaxCategoryRenderer: void writeObject(java.io.ObjectOutputStream)> ----
+    {
+        java.awt.Paint $stack3;
+        java.awt.Stroke $stack2;
+        java.io.ObjectOutputStream stream;
+        org.jfree.chart.renderer.category.MinMaxCategoryRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.category.MinMaxCategoryRenderer;
+        stream := @parameter0: java.io.ObjectOutputStream;
+        virtualinvoke stream.<java.io.ObjectOutputStream: void defaultWriteObject()>();
+        $stack2 = this.<org.jfree.chart.renderer.category.MinMaxCategoryRenderer: java.awt.Stroke groupStroke>;
+        staticinvoke <org.jfree.chart.util.SerialUtilities: void writeStroke(java.awt.Stroke,java.io.ObjectOutputStream)>($stack2, stream);
+        $stack3 = this.<org.jfree.chart.renderer.category.MinMaxCategoryRenderer: java.awt.Paint groupPaint>;
+        staticinvoke <org.jfree.chart.util.SerialUtilities: void writePaint(java.awt.Paint,java.io.ObjectOutputStream)>($stack3, stream);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.category.MinMaxCategoryRenderer: boolean isDrawLines()> ----
+    {
+        boolean $stack1;
+        org.jfree.chart.renderer.category.MinMaxCategoryRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.category.MinMaxCategoryRenderer;
+        $stack1 = this.<org.jfree.chart.renderer.category.MinMaxCategoryRenderer: boolean plotLines>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.category.MinMaxCategoryRenderer: javax.swing.Icon getIcon(java.awt.Shape,boolean,boolean)> ----
+    {
+        boolean fill, outline;
+        int height, width;
+        java.awt.Rectangle $stack7, $stack8;
+        java.awt.Shape shape;
+        java.awt.geom.GeneralPath $stack9, path;
+        org.jfree.chart.renderer.category.MinMaxCategoryRenderer this;
+        org.jfree.chart.renderer.category.MinMaxCategoryRenderer$2 $stack10;
+    
+    
+        this := @this: org.jfree.chart.renderer.category.MinMaxCategoryRenderer;
+        shape := @parameter0: java.awt.Shape;
+        fill := @parameter1: boolean;
+        outline := @parameter2: boolean;
+        $stack7 = interfaceinvoke shape.<java.awt.Shape: java.awt.Rectangle getBounds()>();
+        width = $stack7.<java.awt.Rectangle: int width>;
+        $stack8 = interfaceinvoke shape.<java.awt.Shape: java.awt.Rectangle getBounds()>();
+        height = $stack8.<java.awt.Rectangle: int height>;
+        $stack9 = new java.awt.geom.GeneralPath;
+        specialinvoke $stack9.<java.awt.geom.GeneralPath: void <init>(java.awt.Shape)>(shape);
+        path = $stack9;
+        $stack10 = new org.jfree.chart.renderer.category.MinMaxCategoryRenderer$2;
+        specialinvoke $stack10.<org.jfree.chart.renderer.category.MinMaxCategoryRenderer$2: void <init>(org.jfree.chart.renderer.category.MinMaxCategoryRenderer,java.awt.geom.GeneralPath,boolean,boolean,int,int)>(this, $stack9, fill, outline, width, height);
+    
+        return $stack10;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.category.MinMaxCategoryRenderer: void setGroupPaint(java.awt.Paint)> ----
+    {
+        java.awt.Paint paint;
+        java.lang.IllegalArgumentException #l1;
+        java.lang.Object $stack2;
+        java.lang.Throwable #l0;
+        org.jfree.chart.renderer.category.MinMaxCategoryRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.category.MinMaxCategoryRenderer;
+        paint := @parameter0: java.awt.Paint;
+    
+        if paint != null goto label1;
+        $stack2 = new java.lang.IllegalArgumentException;
+        #l1 = (java.lang.IllegalArgumentException) $stack2;
+        specialinvoke #l1.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'paint\' argument.");
+        #l0 = (java.lang.Throwable) $stack2;
+    
+        throw #l0;
+    
+      label1:
+        this.<org.jfree.chart.renderer.category.MinMaxCategoryRenderer: java.awt.Paint groupPaint> = paint;
+        virtualinvoke this.<org.jfree.chart.renderer.category.MinMaxCategoryRenderer: void fireChangeEvent()>();
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.category.MinMaxCategoryRenderer: void setGroupStroke(java.awt.Stroke)> ----
+    {
+        java.awt.Stroke stroke;
+        java.lang.IllegalArgumentException #l0;
+        java.lang.Object $stack2;
+        java.lang.Throwable #l1;
+        org.jfree.chart.renderer.category.MinMaxCategoryRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.category.MinMaxCategoryRenderer;
+        stroke := @parameter0: java.awt.Stroke;
+    
+        if stroke != null goto label1;
+        $stack2 = new java.lang.IllegalArgumentException;
+        #l0 = (java.lang.IllegalArgumentException) $stack2;
+        specialinvoke #l0.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'stroke\' argument.");
+        #l1 = (java.lang.Throwable) $stack2;
+    
+        throw #l1;
+    
+      label1:
+        this.<org.jfree.chart.renderer.category.MinMaxCategoryRenderer: java.awt.Stroke groupStroke> = stroke;
+        virtualinvoke this.<org.jfree.chart.renderer.category.MinMaxCategoryRenderer: void fireChangeEvent()>();
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.category.MinMaxCategoryRenderer: javax.swing.Icon getMinIcon()> ----
+    {
+        javax.swing.Icon $stack1;
+        org.jfree.chart.renderer.category.MinMaxCategoryRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.category.MinMaxCategoryRenderer;
+        $stack1 = this.<org.jfree.chart.renderer.category.MinMaxCategoryRenderer: javax.swing.Icon minIcon>;
+    
+        return $stack1;
+    }
+
+}

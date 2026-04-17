@@ -1,0 +1,65 @@
+// ========================================================================
+// CLASS : org.jfree.chart.ui.ExtensionFileFilter
+// ========================================================================
+
+[PUBLIC, SUPER] class org.jfree.chart.ui.ExtensionFileFilter extends javax.swing.filechooser.FileFilter {
+
+    // ---- method: <org.jfree.chart.ui.ExtensionFileFilter: boolean accept(java.io.File)> ----
+    {
+        boolean $stack3, $stack6;
+        java.io.File file;
+        java.lang.String $stack4, $stack5, name;
+        org.jfree.chart.ui.ExtensionFileFilter this;
+    
+    
+        this := @this: org.jfree.chart.ui.ExtensionFileFilter;
+        file := @parameter0: java.io.File;
+        $stack3 = virtualinvoke file.<java.io.File: boolean isDirectory()>();
+    
+        if $stack3 == 0 goto label1;
+    
+        return 1;
+    
+      label1:
+        $stack4 = virtualinvoke file.<java.io.File: java.lang.String getName()>();
+        name = virtualinvoke $stack4.<java.lang.String: java.lang.String toLowerCase()>();
+        $stack5 = this.<org.jfree.chart.ui.ExtensionFileFilter: java.lang.String extension>;
+        $stack6 = virtualinvoke name.<java.lang.String: boolean endsWith(java.lang.String)>($stack5);
+    
+        if $stack6 == 0 goto label2;
+    
+        return 1;
+    
+      label2:
+        return 0;
+    }
+
+    // ---- method: <org.jfree.chart.ui.ExtensionFileFilter: java.lang.String getDescription()> ----
+    {
+        java.lang.String $stack1;
+        org.jfree.chart.ui.ExtensionFileFilter this;
+    
+    
+        this := @this: org.jfree.chart.ui.ExtensionFileFilter;
+        $stack1 = this.<org.jfree.chart.ui.ExtensionFileFilter: java.lang.String description>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.ui.ExtensionFileFilter: void <init>(java.lang.String,java.lang.String)> ----
+    {
+        java.lang.String description, extension;
+        org.jfree.chart.ui.ExtensionFileFilter this;
+    
+    
+        this := @this: org.jfree.chart.ui.ExtensionFileFilter;
+        description := @parameter0: java.lang.String;
+        extension := @parameter1: java.lang.String;
+        specialinvoke this.<javax.swing.filechooser.FileFilter: void <init>()>();
+        this.<org.jfree.chart.ui.ExtensionFileFilter: java.lang.String description> = description;
+        this.<org.jfree.chart.ui.ExtensionFileFilter: java.lang.String extension> = extension;
+    
+        return;
+    }
+
+}

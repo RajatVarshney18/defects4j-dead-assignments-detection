@@ -1,0 +1,199 @@
+// ========================================================================
+// CLASS : org.jfree.data.statistics.HistogramBin
+// ========================================================================
+
+[PUBLIC, SUPER] class org.jfree.data.statistics.HistogramBin extends java.lang.Object implements java.lang.Cloneable, java.io.Serializable {
+
+    // ---- method: <org.jfree.data.statistics.HistogramBin: double getEndBoundary()> ----
+    {
+        double $stack1;
+        org.jfree.data.statistics.HistogramBin this;
+    
+    
+        this := @this: org.jfree.data.statistics.HistogramBin;
+        $stack1 = this.<org.jfree.data.statistics.HistogramBin: double endBoundary>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.data.statistics.HistogramBin: int getCount()> ----
+    {
+        int $stack1;
+        org.jfree.data.statistics.HistogramBin this;
+    
+    
+        this := @this: org.jfree.data.statistics.HistogramBin;
+        $stack1 = this.<org.jfree.data.statistics.HistogramBin: int count>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.data.statistics.HistogramBin: void incrementCount()> ----
+    {
+        int $stack1, $stack2;
+        org.jfree.data.statistics.HistogramBin this;
+    
+    
+        this := @this: org.jfree.data.statistics.HistogramBin;
+        $stack1 = this.<org.jfree.data.statistics.HistogramBin: int count>;
+        $stack2 = $stack1 + 1;
+        this.<org.jfree.data.statistics.HistogramBin: int count> = $stack2;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.statistics.HistogramBin: double getBinWidth()> ----
+    {
+        double $stack1, $stack2, $stack3;
+        org.jfree.data.statistics.HistogramBin this;
+    
+    
+        this := @this: org.jfree.data.statistics.HistogramBin;
+        $stack1 = this.<org.jfree.data.statistics.HistogramBin: double endBoundary>;
+        $stack2 = this.<org.jfree.data.statistics.HistogramBin: double startBoundary>;
+        $stack3 = $stack1 - $stack2;
+    
+        return $stack3;
+    }
+
+    // ---- method: <org.jfree.data.statistics.HistogramBin: double getStartBoundary()> ----
+    {
+        double $stack1;
+        org.jfree.data.statistics.HistogramBin this;
+    
+    
+        this := @this: org.jfree.data.statistics.HistogramBin;
+        $stack1 = this.<org.jfree.data.statistics.HistogramBin: double startBoundary>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.data.statistics.HistogramBin: boolean equals(java.lang.Object)> ----
+    {
+        boolean $stack15, $stack6, b0, b1, b2;
+        byte $stack12, $stack9;
+        double $stack10, $stack11, $stack7, $stack8;
+        int $stack13, $stack14;
+        java.lang.Object obj;
+        org.jfree.data.statistics.HistogramBin bin, this;
+    
+    
+        this := @this: org.jfree.data.statistics.HistogramBin;
+        obj := @parameter0: java.lang.Object;
+    
+        if obj != null goto label01;
+    
+        return 0;
+    
+      label01:
+        if obj != this goto label02;
+    
+        return 1;
+    
+      label02:
+        $stack6 = obj instanceof org.jfree.data.statistics.HistogramBin;
+    
+        if $stack6 == 0 goto label11;
+        bin = (org.jfree.data.statistics.HistogramBin) obj;
+        $stack7 = bin.<org.jfree.data.statistics.HistogramBin: double startBoundary>;
+        $stack8 = this.<org.jfree.data.statistics.HistogramBin: double startBoundary>;
+        $stack9 = $stack7 cmpl $stack8;
+    
+        if $stack9 != 0 goto label03;
+        b0 = 1;
+    
+        goto label04;
+    
+      label03:
+        b0 = 0;
+    
+      label04:
+        $stack10 = bin.<org.jfree.data.statistics.HistogramBin: double endBoundary>;
+        $stack11 = this.<org.jfree.data.statistics.HistogramBin: double endBoundary>;
+        $stack12 = $stack10 cmpl $stack11;
+    
+        if $stack12 != 0 goto label05;
+        b1 = 1;
+    
+        goto label06;
+    
+      label05:
+        b1 = 0;
+    
+      label06:
+        $stack14 = bin.<org.jfree.data.statistics.HistogramBin: int count>;
+        $stack13 = this.<org.jfree.data.statistics.HistogramBin: int count>;
+    
+        if $stack14 != $stack13 goto label07;
+        b2 = 1;
+    
+        goto label08;
+    
+      label07:
+        b2 = 0;
+    
+      label08:
+        if b0 == 0 goto label09;
+    
+        if b1 == 0 goto label09;
+    
+        if b2 == 0 goto label09;
+        $stack15 = 1;
+    
+        goto label10;
+    
+      label09:
+        $stack15 = 0;
+    
+      label10:
+        return $stack15;
+    
+      label11:
+        return 0;
+    }
+
+    // ---- method: <org.jfree.data.statistics.HistogramBin: void <init>(double,double)> ----
+    {
+        byte $stack5;
+        double endBoundary, startBoundary;
+        java.lang.IllegalArgumentException #l0;
+        java.lang.Object $stack6;
+        java.lang.Throwable #l1;
+        org.jfree.data.statistics.HistogramBin this;
+    
+    
+        this := @this: org.jfree.data.statistics.HistogramBin;
+        startBoundary := @parameter0: double;
+        endBoundary := @parameter1: double;
+        specialinvoke this.<java.lang.Object: void <init>()>();
+        $stack5 = startBoundary cmpl endBoundary;
+    
+        if $stack5 <= 0 goto label1;
+        $stack6 = new java.lang.IllegalArgumentException;
+        #l0 = (java.lang.IllegalArgumentException) $stack6;
+        specialinvoke #l0.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("HistogramBin():  startBoundary > endBoundary.");
+        #l1 = (java.lang.Throwable) $stack6;
+    
+        throw #l1;
+    
+      label1:
+        this.<org.jfree.data.statistics.HistogramBin: int count> = 0;
+        this.<org.jfree.data.statistics.HistogramBin: double startBoundary> = startBoundary;
+        this.<org.jfree.data.statistics.HistogramBin: double endBoundary> = endBoundary;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.statistics.HistogramBin: java.lang.Object clone()> ----
+    {
+        java.lang.Object $stack1;
+        org.jfree.data.statistics.HistogramBin this;
+    
+    
+        this := @this: org.jfree.data.statistics.HistogramBin;
+        $stack1 = specialinvoke this.<java.lang.Object: java.lang.Object clone()>();
+    
+        return $stack1;
+    }
+
+}

@@ -1,0 +1,658 @@
+// ========================================================================
+// CLASS : org.jfree.data.category.DefaultCategoryDataset
+// ========================================================================
+
+[PUBLIC, SUPER] class org.jfree.data.category.DefaultCategoryDataset extends org.jfree.data.category.AbstractCategoryDataset implements org.jfree.data.category.CategoryDataset, org.jfree.chart.util.PublicCloneable, org.jfree.data.category.CategoryDatasetSelectionState, org.jfree.data.category.SelectableCategoryDataset, java.io.Serializable {
+
+    // ---- method: <org.jfree.data.category.DefaultCategoryDataset: int getRowIndex(java.lang.Comparable)> ----
+    {
+        int $stack3;
+        java.lang.Comparable key;
+        org.jfree.data.KeyedObjects2D $stack2;
+        org.jfree.data.category.DefaultCategoryDataset this;
+    
+    
+        this := @this: org.jfree.data.category.DefaultCategoryDataset;
+        key := @parameter0: java.lang.Comparable;
+        $stack2 = this.<org.jfree.data.category.DefaultCategoryDataset: org.jfree.data.KeyedObjects2D data>;
+        $stack3 = virtualinvoke $stack2.<org.jfree.data.KeyedObjects2D: int getRowIndex(java.lang.Comparable)>(key);
+    
+        return $stack3;
+    }
+
+    // ---- method: <org.jfree.data.category.DefaultCategoryDataset: java.lang.Number getValue(java.lang.Comparable,java.lang.Comparable)> ----
+    {
+        java.lang.Comparable columnKey, rowKey;
+        java.lang.Number $stack6;
+        java.lang.Object $stack5;
+        org.jfree.data.KeyedObjects2D $stack4;
+        org.jfree.data.SelectableValue sv;
+        org.jfree.data.category.DefaultCategoryDataset this;
+    
+    
+        this := @this: org.jfree.data.category.DefaultCategoryDataset;
+        rowKey := @parameter0: java.lang.Comparable;
+        columnKey := @parameter1: java.lang.Comparable;
+        $stack4 = this.<org.jfree.data.category.DefaultCategoryDataset: org.jfree.data.KeyedObjects2D data>;
+        $stack5 = virtualinvoke $stack4.<org.jfree.data.KeyedObjects2D: java.lang.Object getObject(java.lang.Comparable,java.lang.Comparable)>(rowKey, columnKey);
+        sv = (org.jfree.data.SelectableValue) $stack5;
+    
+        if sv == null goto label1;
+        $stack6 = virtualinvoke sv.<org.jfree.data.SelectableValue: java.lang.Number getValue()>();
+    
+        return $stack6;
+    
+      label1:
+        return null;
+    }
+
+    // ---- method: <org.jfree.data.category.DefaultCategoryDataset: int hashCode()> ----
+    {
+        int $stack2;
+        org.jfree.data.KeyedObjects2D $stack1;
+        org.jfree.data.category.DefaultCategoryDataset this;
+    
+    
+        this := @this: org.jfree.data.category.DefaultCategoryDataset;
+        $stack1 = this.<org.jfree.data.category.DefaultCategoryDataset: org.jfree.data.KeyedObjects2D data>;
+        $stack2 = virtualinvoke $stack1.<org.jfree.data.KeyedObjects2D: int hashCode()>();
+    
+        return $stack2;
+    }
+
+    // ---- method: <org.jfree.data.category.DefaultCategoryDataset: java.lang.Comparable getColumnKey(int)> ----
+    {
+        int column;
+        java.lang.Comparable $stack3;
+        org.jfree.data.KeyedObjects2D $stack2;
+        org.jfree.data.category.DefaultCategoryDataset this;
+    
+    
+        this := @this: org.jfree.data.category.DefaultCategoryDataset;
+        column := @parameter0: int;
+        $stack2 = this.<org.jfree.data.category.DefaultCategoryDataset: org.jfree.data.KeyedObjects2D data>;
+        $stack3 = virtualinvoke $stack2.<org.jfree.data.KeyedObjects2D: java.lang.Comparable getColumnKey(int)>(column);
+    
+        return $stack3;
+    }
+
+    // ---- method: <org.jfree.data.category.DefaultCategoryDataset: java.util.List getColumnKeys()> ----
+    {
+        java.util.List $stack2;
+        org.jfree.data.KeyedObjects2D $stack1;
+        org.jfree.data.category.DefaultCategoryDataset this;
+    
+    
+        this := @this: org.jfree.data.category.DefaultCategoryDataset;
+        $stack1 = this.<org.jfree.data.category.DefaultCategoryDataset: org.jfree.data.KeyedObjects2D data>;
+        $stack2 = virtualinvoke $stack1.<org.jfree.data.KeyedObjects2D: java.util.List getColumnKeys()>();
+    
+        return $stack2;
+    }
+
+    // ---- method: <org.jfree.data.category.DefaultCategoryDataset: void incrementValue(double,java.lang.Comparable,java.lang.Comparable)> ----
+    {
+        double $stack8, existing, value;
+        java.lang.Comparable columnKey, rowKey;
+        java.lang.Number n;
+        org.jfree.data.category.DefaultCategoryDataset this;
+    
+    
+        this := @this: org.jfree.data.category.DefaultCategoryDataset;
+        value := @parameter0: double;
+        rowKey := @parameter1: java.lang.Comparable;
+        columnKey := @parameter2: java.lang.Comparable;
+        existing = 0.0;
+        n = virtualinvoke this.<org.jfree.data.category.DefaultCategoryDataset: java.lang.Number getValue(java.lang.Comparable,java.lang.Comparable)>(rowKey, columnKey);
+    
+        if n == null goto label1;
+        existing = virtualinvoke n.<java.lang.Number: double doubleValue()>();
+    
+      label1:
+        $stack8 = existing + value;
+        virtualinvoke this.<org.jfree.data.category.DefaultCategoryDataset: void setValue(double,java.lang.Comparable,java.lang.Comparable)>($stack8, rowKey, columnKey);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.category.DefaultCategoryDataset: void clearSelection()> ----
+    {
+        int c, colCount, r, rowCount;
+        org.jfree.data.category.DefaultCategoryDataset this;
+    
+    
+        this := @this: org.jfree.data.category.DefaultCategoryDataset;
+        rowCount = virtualinvoke this.<org.jfree.data.category.DefaultCategoryDataset: int getRowCount()>();
+        colCount = virtualinvoke this.<org.jfree.data.category.DefaultCategoryDataset: int getColumnCount()>();
+        r = 0;
+    
+      label1:
+        if r >= rowCount goto label4;
+        c = 0;
+    
+      label2:
+        if c >= colCount goto label3;
+        virtualinvoke this.<org.jfree.data.category.DefaultCategoryDataset: void setSelected(int,int,boolean,boolean)>(r, c, 0, 0);
+        c = c + 1;
+    
+        goto label2;
+    
+      label3:
+        r = r + 1;
+    
+        goto label1;
+    
+      label4:
+        virtualinvoke this.<org.jfree.data.category.DefaultCategoryDataset: void fireSelectionEvent()>();
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.category.DefaultCategoryDataset: int getColumnCount()> ----
+    {
+        int $stack2;
+        org.jfree.data.KeyedObjects2D $stack1;
+        org.jfree.data.category.DefaultCategoryDataset this;
+    
+    
+        this := @this: org.jfree.data.category.DefaultCategoryDataset;
+        $stack1 = this.<org.jfree.data.category.DefaultCategoryDataset: org.jfree.data.KeyedObjects2D data>;
+        $stack2 = virtualinvoke $stack1.<org.jfree.data.KeyedObjects2D: int getColumnCount()>();
+    
+        return $stack2;
+    }
+
+    // ---- method: <org.jfree.data.category.DefaultCategoryDataset: void removeRow(int)> ----
+    {
+        int rowIndex;
+        org.jfree.chart.event.DatasetChangeInfo $stack3;
+        org.jfree.data.KeyedObjects2D $stack2;
+        org.jfree.data.category.DefaultCategoryDataset this;
+    
+    
+        this := @this: org.jfree.data.category.DefaultCategoryDataset;
+        rowIndex := @parameter0: int;
+        $stack2 = this.<org.jfree.data.category.DefaultCategoryDataset: org.jfree.data.KeyedObjects2D data>;
+        virtualinvoke $stack2.<org.jfree.data.KeyedObjects2D: void removeRow(int)>(rowIndex);
+        $stack3 = new org.jfree.chart.event.DatasetChangeInfo;
+        specialinvoke $stack3.<org.jfree.chart.event.DatasetChangeInfo: void <init>()>();
+        virtualinvoke this.<org.jfree.data.category.DefaultCategoryDataset: void fireDatasetChanged(org.jfree.chart.event.DatasetChangeInfo)>($stack3);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.category.DefaultCategoryDataset: void setSelected(int,int,boolean)> ----
+    {
+        boolean selected;
+        int column, row;
+        org.jfree.data.category.DefaultCategoryDataset this;
+    
+    
+        this := @this: org.jfree.data.category.DefaultCategoryDataset;
+        row := @parameter0: int;
+        column := @parameter1: int;
+        selected := @parameter2: boolean;
+        virtualinvoke this.<org.jfree.data.category.DefaultCategoryDataset: void setSelected(int,int,boolean,boolean)>(row, column, selected, 1);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.category.DefaultCategoryDataset: java.lang.Object clone()> ----
+    {
+        java.lang.Object $stack2, $stack4;
+        org.jfree.data.KeyedObjects2D $stack3, $stack5;
+        org.jfree.data.category.DefaultCategoryDataset clone, this;
+    
+    
+        this := @this: org.jfree.data.category.DefaultCategoryDataset;
+        $stack2 = specialinvoke this.<org.jfree.data.category.AbstractCategoryDataset: java.lang.Object clone()>();
+        clone = (org.jfree.data.category.DefaultCategoryDataset) $stack2;
+        $stack3 = this.<org.jfree.data.category.DefaultCategoryDataset: org.jfree.data.KeyedObjects2D data>;
+        $stack4 = virtualinvoke $stack3.<org.jfree.data.KeyedObjects2D: java.lang.Object clone()>();
+        $stack5 = (org.jfree.data.KeyedObjects2D) $stack4;
+        clone.<org.jfree.data.category.DefaultCategoryDataset: org.jfree.data.KeyedObjects2D data> = $stack5;
+    
+        return clone;
+    }
+
+    // ---- method: <org.jfree.data.category.DefaultCategoryDataset: void setValue(double,java.lang.Comparable,java.lang.Comparable)> ----
+    {
+        double value;
+        java.lang.Comparable columnKey, rowKey;
+        java.lang.Double #l0;
+        java.lang.Number #l1;
+        java.lang.Object $stack5;
+        org.jfree.data.category.DefaultCategoryDataset this;
+    
+    
+        this := @this: org.jfree.data.category.DefaultCategoryDataset;
+        value := @parameter0: double;
+        rowKey := @parameter1: java.lang.Comparable;
+        columnKey := @parameter2: java.lang.Comparable;
+        $stack5 = new java.lang.Double;
+        #l0 = (java.lang.Double) $stack5;
+        specialinvoke #l0.<java.lang.Double: void <init>(double)>(value);
+        #l1 = (java.lang.Number) $stack5;
+        virtualinvoke this.<org.jfree.data.category.DefaultCategoryDataset: void setValue(java.lang.Number,java.lang.Comparable,java.lang.Comparable)>(#l1, rowKey, columnKey);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.category.DefaultCategoryDataset: void removeColumn(java.lang.Comparable)> ----
+    {
+        java.lang.Comparable columnKey;
+        org.jfree.chart.event.DatasetChangeInfo $stack3;
+        org.jfree.data.KeyedObjects2D $stack2;
+        org.jfree.data.category.DefaultCategoryDataset this;
+    
+    
+        this := @this: org.jfree.data.category.DefaultCategoryDataset;
+        columnKey := @parameter0: java.lang.Comparable;
+        $stack2 = this.<org.jfree.data.category.DefaultCategoryDataset: org.jfree.data.KeyedObjects2D data>;
+        virtualinvoke $stack2.<org.jfree.data.KeyedObjects2D: void removeColumn(java.lang.Comparable)>(columnKey);
+        $stack3 = new org.jfree.chart.event.DatasetChangeInfo;
+        specialinvoke $stack3.<org.jfree.chart.event.DatasetChangeInfo: void <init>()>();
+        virtualinvoke this.<org.jfree.data.category.DefaultCategoryDataset: void fireDatasetChanged(org.jfree.chart.event.DatasetChangeInfo)>($stack3);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.category.DefaultCategoryDataset: void addValue(double,java.lang.Comparable,java.lang.Comparable)> ----
+    {
+        double value;
+        java.lang.Comparable columnKey, rowKey;
+        java.lang.Double #l1;
+        java.lang.Number #l0;
+        java.lang.Object $stack5;
+        org.jfree.data.category.DefaultCategoryDataset this;
+    
+    
+        this := @this: org.jfree.data.category.DefaultCategoryDataset;
+        value := @parameter0: double;
+        rowKey := @parameter1: java.lang.Comparable;
+        columnKey := @parameter2: java.lang.Comparable;
+        $stack5 = new java.lang.Double;
+        #l1 = (java.lang.Double) $stack5;
+        specialinvoke #l1.<java.lang.Double: void <init>(double)>(value);
+        #l0 = (java.lang.Number) $stack5;
+        virtualinvoke this.<org.jfree.data.category.DefaultCategoryDataset: void addValue(java.lang.Number,java.lang.Comparable,java.lang.Comparable)>(#l0, rowKey, columnKey);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.category.DefaultCategoryDataset: void setSelected(int,int,boolean,boolean)> ----
+    {
+        boolean notify, selected;
+        int column, row;
+        java.lang.Object $stack7;
+        org.jfree.data.KeyedObjects2D $stack6;
+        org.jfree.data.SelectableValue sv;
+        org.jfree.data.category.DefaultCategoryDataset this;
+    
+    
+        this := @this: org.jfree.data.category.DefaultCategoryDataset;
+        row := @parameter0: int;
+        column := @parameter1: int;
+        selected := @parameter2: boolean;
+        notify := @parameter3: boolean;
+        $stack6 = this.<org.jfree.data.category.DefaultCategoryDataset: org.jfree.data.KeyedObjects2D data>;
+        $stack7 = virtualinvoke $stack6.<org.jfree.data.KeyedObjects2D: java.lang.Object getObject(int,int)>(row, column);
+        sv = (org.jfree.data.SelectableValue) $stack7;
+        virtualinvoke sv.<org.jfree.data.SelectableValue: void setSelected(boolean)>(selected);
+    
+        if notify == 0 goto label1;
+        virtualinvoke this.<org.jfree.data.category.DefaultCategoryDataset: void fireSelectionEvent()>();
+    
+      label1:
+        return;
+    }
+
+    // ---- method: <org.jfree.data.category.DefaultCategoryDataset: void fireSelectionEvent()> ----
+    {
+        org.jfree.chart.event.DatasetChangeInfo $stack1;
+        org.jfree.data.category.DefaultCategoryDataset this;
+    
+    
+        this := @this: org.jfree.data.category.DefaultCategoryDataset;
+        $stack1 = new org.jfree.chart.event.DatasetChangeInfo;
+        specialinvoke $stack1.<org.jfree.chart.event.DatasetChangeInfo: void <init>()>();
+        virtualinvoke this.<org.jfree.data.category.DefaultCategoryDataset: void fireDatasetChanged(org.jfree.chart.event.DatasetChangeInfo)>($stack1);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.category.DefaultCategoryDataset: boolean isSelected(int,int)> ----
+    {
+        boolean $stack6;
+        int column, row;
+        java.lang.Object $stack5;
+        org.jfree.data.KeyedObjects2D $stack4;
+        org.jfree.data.SelectableValue sv;
+        org.jfree.data.category.DefaultCategoryDataset this;
+    
+    
+        this := @this: org.jfree.data.category.DefaultCategoryDataset;
+        row := @parameter0: int;
+        column := @parameter1: int;
+        $stack4 = this.<org.jfree.data.category.DefaultCategoryDataset: org.jfree.data.KeyedObjects2D data>;
+        $stack5 = virtualinvoke $stack4.<org.jfree.data.KeyedObjects2D: java.lang.Object getObject(int,int)>(row, column);
+        sv = (org.jfree.data.SelectableValue) $stack5;
+        $stack6 = virtualinvoke sv.<org.jfree.data.SelectableValue: boolean isSelected()>();
+    
+        return $stack6;
+    }
+
+    // ---- method: <org.jfree.data.category.DefaultCategoryDataset: void removeColumn(int)> ----
+    {
+        int columnIndex;
+        org.jfree.chart.event.DatasetChangeInfo $stack3;
+        org.jfree.data.KeyedObjects2D $stack2;
+        org.jfree.data.category.DefaultCategoryDataset this;
+    
+    
+        this := @this: org.jfree.data.category.DefaultCategoryDataset;
+        columnIndex := @parameter0: int;
+        $stack2 = this.<org.jfree.data.category.DefaultCategoryDataset: org.jfree.data.KeyedObjects2D data>;
+        virtualinvoke $stack2.<org.jfree.data.KeyedObjects2D: void removeColumn(int)>(columnIndex);
+        $stack3 = new org.jfree.chart.event.DatasetChangeInfo;
+        specialinvoke $stack3.<org.jfree.chart.event.DatasetChangeInfo: void <init>()>();
+        virtualinvoke this.<org.jfree.data.category.DefaultCategoryDataset: void fireDatasetChanged(org.jfree.chart.event.DatasetChangeInfo)>($stack3);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.category.DefaultCategoryDataset: java.lang.Comparable getRowKey(int)> ----
+    {
+        int row;
+        java.lang.Comparable $stack3;
+        org.jfree.data.KeyedObjects2D $stack2;
+        org.jfree.data.category.DefaultCategoryDataset this;
+    
+    
+        this := @this: org.jfree.data.category.DefaultCategoryDataset;
+        row := @parameter0: int;
+        $stack2 = this.<org.jfree.data.category.DefaultCategoryDataset: org.jfree.data.KeyedObjects2D data>;
+        $stack3 = virtualinvoke $stack2.<org.jfree.data.KeyedObjects2D: java.lang.Comparable getRowKey(int)>(row);
+    
+        return $stack3;
+    }
+
+    // ---- method: <org.jfree.data.category.DefaultCategoryDataset: void clear()> ----
+    {
+        org.jfree.chart.event.DatasetChangeInfo $stack2;
+        org.jfree.data.KeyedObjects2D $stack1;
+        org.jfree.data.category.DefaultCategoryDataset this;
+    
+    
+        this := @this: org.jfree.data.category.DefaultCategoryDataset;
+        $stack1 = this.<org.jfree.data.category.DefaultCategoryDataset: org.jfree.data.KeyedObjects2D data>;
+        virtualinvoke $stack1.<org.jfree.data.KeyedObjects2D: void clear()>();
+        $stack2 = new org.jfree.chart.event.DatasetChangeInfo;
+        specialinvoke $stack2.<org.jfree.chart.event.DatasetChangeInfo: void <init>()>();
+        virtualinvoke this.<org.jfree.data.category.DefaultCategoryDataset: void fireDatasetChanged(org.jfree.chart.event.DatasetChangeInfo)>($stack2);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.category.DefaultCategoryDataset: int getColumnIndex(java.lang.Comparable)> ----
+    {
+        int $stack3;
+        java.lang.Comparable key;
+        org.jfree.data.KeyedObjects2D $stack2;
+        org.jfree.data.category.DefaultCategoryDataset this;
+    
+    
+        this := @this: org.jfree.data.category.DefaultCategoryDataset;
+        key := @parameter0: java.lang.Comparable;
+        $stack2 = this.<org.jfree.data.category.DefaultCategoryDataset: org.jfree.data.KeyedObjects2D data>;
+        $stack3 = virtualinvoke $stack2.<org.jfree.data.KeyedObjects2D: int getColumnIndex(java.lang.Comparable)>(key);
+    
+        return $stack3;
+    }
+
+    // ---- method: <org.jfree.data.category.DefaultCategoryDataset: void <init>()> ----
+    {
+        org.jfree.data.KeyedObjects2D $stack1;
+        org.jfree.data.category.DefaultCategoryDataset this;
+    
+    
+        this := @this: org.jfree.data.category.DefaultCategoryDataset;
+        specialinvoke this.<org.jfree.data.category.AbstractCategoryDataset: void <init>()>();
+        $stack1 = new org.jfree.data.KeyedObjects2D;
+        specialinvoke $stack1.<org.jfree.data.KeyedObjects2D: void <init>()>();
+        this.<org.jfree.data.category.DefaultCategoryDataset: org.jfree.data.KeyedObjects2D data> = $stack1;
+        virtualinvoke this.<org.jfree.data.category.DefaultCategoryDataset: void setSelectionState(org.jfree.data.category.CategoryDatasetSelectionState)>(this);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.category.DefaultCategoryDataset: java.lang.Number getValue(int,int)> ----
+    {
+        int column, row;
+        java.lang.Number $stack6;
+        java.lang.Object $stack5;
+        org.jfree.data.KeyedObjects2D $stack4;
+        org.jfree.data.SelectableValue sv;
+        org.jfree.data.category.DefaultCategoryDataset this;
+    
+    
+        this := @this: org.jfree.data.category.DefaultCategoryDataset;
+        row := @parameter0: int;
+        column := @parameter1: int;
+        $stack4 = this.<org.jfree.data.category.DefaultCategoryDataset: org.jfree.data.KeyedObjects2D data>;
+        $stack5 = virtualinvoke $stack4.<org.jfree.data.KeyedObjects2D: java.lang.Object getObject(int,int)>(row, column);
+        sv = (org.jfree.data.SelectableValue) $stack5;
+    
+        if sv != null goto label1;
+    
+        return null;
+    
+      label1:
+        $stack6 = virtualinvoke sv.<org.jfree.data.SelectableValue: java.lang.Number getValue()>();
+    
+        return $stack6;
+    }
+
+    // ---- method: <org.jfree.data.category.DefaultCategoryDataset: void removeRow(java.lang.Comparable)> ----
+    {
+        java.lang.Comparable rowKey;
+        org.jfree.chart.event.DatasetChangeInfo $stack3;
+        org.jfree.data.KeyedObjects2D $stack2;
+        org.jfree.data.category.DefaultCategoryDataset this;
+    
+    
+        this := @this: org.jfree.data.category.DefaultCategoryDataset;
+        rowKey := @parameter0: java.lang.Comparable;
+        $stack2 = this.<org.jfree.data.category.DefaultCategoryDataset: org.jfree.data.KeyedObjects2D data>;
+        virtualinvoke $stack2.<org.jfree.data.KeyedObjects2D: void removeRow(java.lang.Comparable)>(rowKey);
+        $stack3 = new org.jfree.chart.event.DatasetChangeInfo;
+        specialinvoke $stack3.<org.jfree.chart.event.DatasetChangeInfo: void <init>()>();
+        virtualinvoke this.<org.jfree.data.category.DefaultCategoryDataset: void fireDatasetChanged(org.jfree.chart.event.DatasetChangeInfo)>($stack3);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.category.DefaultCategoryDataset: java.util.List getRowKeys()> ----
+    {
+        java.util.List $stack2;
+        org.jfree.data.KeyedObjects2D $stack1;
+        org.jfree.data.category.DefaultCategoryDataset this;
+    
+    
+        this := @this: org.jfree.data.category.DefaultCategoryDataset;
+        $stack1 = this.<org.jfree.data.category.DefaultCategoryDataset: org.jfree.data.KeyedObjects2D data>;
+        $stack2 = virtualinvoke $stack1.<org.jfree.data.KeyedObjects2D: java.util.List getRowKeys()>();
+    
+        return $stack2;
+    }
+
+    // ---- method: <org.jfree.data.category.DefaultCategoryDataset: int getRowCount()> ----
+    {
+        int $stack2;
+        org.jfree.data.KeyedObjects2D $stack1;
+        org.jfree.data.category.DefaultCategoryDataset this;
+    
+    
+        this := @this: org.jfree.data.category.DefaultCategoryDataset;
+        $stack1 = this.<org.jfree.data.category.DefaultCategoryDataset: org.jfree.data.KeyedObjects2D data>;
+        $stack2 = virtualinvoke $stack1.<org.jfree.data.KeyedObjects2D: int getRowCount()>();
+    
+        return $stack2;
+    }
+
+    // ---- method: <org.jfree.data.category.DefaultCategoryDataset: boolean equals(java.lang.Object)> ----
+    {
+        boolean $stack12, $stack15, $stack16, $stack9;
+        int c, colCount, r, rowCount;
+        java.lang.Number v1, v2;
+        java.lang.Object obj;
+        java.util.List $stack10, $stack11, $stack13, $stack14;
+        org.jfree.data.category.CategoryDataset that;
+        org.jfree.data.category.DefaultCategoryDataset this;
+    
+    
+        this := @this: org.jfree.data.category.DefaultCategoryDataset;
+        obj := @parameter0: java.lang.Object;
+    
+        if obj != this goto label01;
+    
+        return 1;
+    
+      label01:
+        $stack9 = obj instanceof org.jfree.data.category.CategoryDataset;
+    
+        if $stack9 != 0 goto label02;
+    
+        return 0;
+    
+      label02:
+        that = (org.jfree.data.category.CategoryDataset) obj;
+        $stack11 = virtualinvoke this.<org.jfree.data.category.DefaultCategoryDataset: java.util.List getRowKeys()>();
+        $stack10 = interfaceinvoke that.<org.jfree.data.category.CategoryDataset: java.util.List getRowKeys()>();
+        $stack12 = interfaceinvoke $stack11.<java.util.List: boolean equals(java.lang.Object)>($stack10);
+    
+        if $stack12 != 0 goto label03;
+    
+        return 0;
+    
+      label03:
+        $stack14 = virtualinvoke this.<org.jfree.data.category.DefaultCategoryDataset: java.util.List getColumnKeys()>();
+        $stack13 = interfaceinvoke that.<org.jfree.data.category.CategoryDataset: java.util.List getColumnKeys()>();
+        $stack15 = interfaceinvoke $stack14.<java.util.List: boolean equals(java.lang.Object)>($stack13);
+    
+        if $stack15 != 0 goto label04;
+    
+        return 0;
+    
+      label04:
+        rowCount = virtualinvoke this.<org.jfree.data.category.DefaultCategoryDataset: int getRowCount()>();
+        colCount = virtualinvoke this.<org.jfree.data.category.DefaultCategoryDataset: int getColumnCount()>();
+        r = 0;
+    
+      label05:
+        if r >= rowCount goto label10;
+        c = 0;
+    
+      label06:
+        if c >= colCount goto label09;
+        v1 = virtualinvoke this.<org.jfree.data.category.DefaultCategoryDataset: java.lang.Number getValue(int,int)>(r, c);
+        v2 = interfaceinvoke that.<org.jfree.data.category.CategoryDataset: java.lang.Number getValue(int,int)>(r, c);
+    
+        if v1 != null goto label08;
+    
+        if v2 == null goto label07;
+    
+        return 0;
+    
+      label07:
+        c = c + 1;
+    
+        goto label06;
+    
+      label08:
+        $stack16 = virtualinvoke v1.<java.lang.Object: boolean equals(java.lang.Object)>(v2);
+    
+        if $stack16 != 0 goto label07;
+    
+        return 0;
+    
+      label09:
+        r = r + 1;
+    
+        goto label05;
+    
+      label10:
+        return 1;
+    }
+
+    // ---- method: <org.jfree.data.category.DefaultCategoryDataset: void addValue(java.lang.Number,java.lang.Comparable,java.lang.Comparable)> ----
+    {
+        java.lang.Comparable columnKey, rowKey;
+        java.lang.Number value;
+        org.jfree.chart.event.DatasetChangeInfo $stack6;
+        org.jfree.data.KeyedObjects2D $stack5;
+        org.jfree.data.SelectableValue $stack4;
+        org.jfree.data.category.DefaultCategoryDataset this;
+    
+    
+        this := @this: org.jfree.data.category.DefaultCategoryDataset;
+        value := @parameter0: java.lang.Number;
+        rowKey := @parameter1: java.lang.Comparable;
+        columnKey := @parameter2: java.lang.Comparable;
+        $stack5 = this.<org.jfree.data.category.DefaultCategoryDataset: org.jfree.data.KeyedObjects2D data>;
+        $stack4 = new org.jfree.data.SelectableValue;
+        specialinvoke $stack4.<org.jfree.data.SelectableValue: void <init>(java.lang.Number)>(value);
+        virtualinvoke $stack5.<org.jfree.data.KeyedObjects2D: void addObject(java.lang.Object,java.lang.Comparable,java.lang.Comparable)>($stack4, rowKey, columnKey);
+        $stack6 = new org.jfree.chart.event.DatasetChangeInfo;
+        specialinvoke $stack6.<org.jfree.chart.event.DatasetChangeInfo: void <init>()>();
+        virtualinvoke this.<org.jfree.data.category.DefaultCategoryDataset: void fireDatasetChanged(org.jfree.chart.event.DatasetChangeInfo)>($stack6);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.category.DefaultCategoryDataset: void removeValue(java.lang.Comparable,java.lang.Comparable)> ----
+    {
+        java.lang.Comparable columnKey, rowKey;
+        org.jfree.chart.event.DatasetChangeInfo $stack4;
+        org.jfree.data.KeyedObjects2D $stack3;
+        org.jfree.data.category.DefaultCategoryDataset this;
+    
+    
+        this := @this: org.jfree.data.category.DefaultCategoryDataset;
+        rowKey := @parameter0: java.lang.Comparable;
+        columnKey := @parameter1: java.lang.Comparable;
+        $stack3 = this.<org.jfree.data.category.DefaultCategoryDataset: org.jfree.data.KeyedObjects2D data>;
+        virtualinvoke $stack3.<org.jfree.data.KeyedObjects2D: void removeObject(java.lang.Comparable,java.lang.Comparable)>(rowKey, columnKey);
+        $stack4 = new org.jfree.chart.event.DatasetChangeInfo;
+        specialinvoke $stack4.<org.jfree.chart.event.DatasetChangeInfo: void <init>()>();
+        virtualinvoke this.<org.jfree.data.category.DefaultCategoryDataset: void fireDatasetChanged(org.jfree.chart.event.DatasetChangeInfo)>($stack4);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.category.DefaultCategoryDataset: void setValue(java.lang.Number,java.lang.Comparable,java.lang.Comparable)> ----
+    {
+        java.lang.Comparable columnKey, rowKey;
+        java.lang.Number value;
+        org.jfree.chart.event.DatasetChangeInfo $stack6;
+        org.jfree.data.KeyedObjects2D $stack5;
+        org.jfree.data.SelectableValue $stack4;
+        org.jfree.data.category.DefaultCategoryDataset this;
+    
+    
+        this := @this: org.jfree.data.category.DefaultCategoryDataset;
+        value := @parameter0: java.lang.Number;
+        rowKey := @parameter1: java.lang.Comparable;
+        columnKey := @parameter2: java.lang.Comparable;
+        $stack5 = this.<org.jfree.data.category.DefaultCategoryDataset: org.jfree.data.KeyedObjects2D data>;
+        $stack4 = new org.jfree.data.SelectableValue;
+        specialinvoke $stack4.<org.jfree.data.SelectableValue: void <init>(java.lang.Number)>(value);
+        virtualinvoke $stack5.<org.jfree.data.KeyedObjects2D: void setObject(java.lang.Object,java.lang.Comparable,java.lang.Comparable)>($stack4, rowKey, columnKey);
+        $stack6 = new org.jfree.chart.event.DatasetChangeInfo;
+        specialinvoke $stack6.<org.jfree.chart.event.DatasetChangeInfo: void <init>()>();
+        virtualinvoke this.<org.jfree.data.category.DefaultCategoryDataset: void fireDatasetChanged(org.jfree.chart.event.DatasetChangeInfo)>($stack6);
+    
+        return;
+    }
+
+}

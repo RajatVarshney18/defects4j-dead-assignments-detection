@@ -1,0 +1,1009 @@
+// ========================================================================
+// CLASS : org.jfree.chart.renderer.category.LineRenderer3D
+// ========================================================================
+
+[PUBLIC, SUPER] class org.jfree.chart.renderer.category.LineRenderer3D extends org.jfree.chart.renderer.category.LineAndShapeRenderer implements org.jfree.chart.Effect3D, java.io.Serializable {
+
+    // ---- method: <org.jfree.chart.renderer.category.LineRenderer3D: boolean equals(java.lang.Object)> ----
+    {
+        boolean $stack12, $stack13, $stack3;
+        byte $stack6, $stack9;
+        double $stack4, $stack5, $stack7, $stack8;
+        java.awt.Paint $stack10, $stack11;
+        java.lang.Object obj;
+        org.jfree.chart.renderer.category.LineRenderer3D that, this;
+    
+    
+        this := @this: org.jfree.chart.renderer.category.LineRenderer3D;
+        obj := @parameter0: java.lang.Object;
+    
+        if obj != this goto label1;
+    
+        return 1;
+    
+      label1:
+        $stack3 = obj instanceof org.jfree.chart.renderer.category.LineRenderer3D;
+    
+        if $stack3 != 0 goto label2;
+    
+        return 0;
+    
+      label2:
+        that = (org.jfree.chart.renderer.category.LineRenderer3D) obj;
+        $stack4 = this.<org.jfree.chart.renderer.category.LineRenderer3D: double xOffset>;
+        $stack5 = that.<org.jfree.chart.renderer.category.LineRenderer3D: double xOffset>;
+        $stack6 = $stack4 cmpl $stack5;
+    
+        if $stack6 == 0 goto label3;
+    
+        return 0;
+    
+      label3:
+        $stack7 = this.<org.jfree.chart.renderer.category.LineRenderer3D: double yOffset>;
+        $stack8 = that.<org.jfree.chart.renderer.category.LineRenderer3D: double yOffset>;
+        $stack9 = $stack7 cmpl $stack8;
+    
+        if $stack9 == 0 goto label4;
+    
+        return 0;
+    
+      label4:
+        $stack11 = this.<org.jfree.chart.renderer.category.LineRenderer3D: java.awt.Paint wallPaint>;
+        $stack10 = that.<org.jfree.chart.renderer.category.LineRenderer3D: java.awt.Paint wallPaint>;
+        $stack12 = staticinvoke <org.jfree.chart.util.PaintUtilities: boolean equal(java.awt.Paint,java.awt.Paint)>($stack11, $stack10);
+    
+        if $stack12 != 0 goto label5;
+    
+        return 0;
+    
+      label5:
+        $stack13 = specialinvoke this.<org.jfree.chart.renderer.category.LineAndShapeRenderer: boolean equals(java.lang.Object)>(obj);
+    
+        return $stack13;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.category.LineRenderer3D: void setYOffset(double)> ----
+    {
+        double yOffset;
+        org.jfree.chart.renderer.category.LineRenderer3D this;
+    
+    
+        this := @this: org.jfree.chart.renderer.category.LineRenderer3D;
+        yOffset := @parameter0: double;
+        this.<org.jfree.chart.renderer.category.LineRenderer3D: double yOffset> = yOffset;
+        virtualinvoke this.<org.jfree.chart.renderer.category.LineRenderer3D: void fireChangeEvent()>();
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.category.LineRenderer3D: void writeObject(java.io.ObjectOutputStream)> ----
+    {
+        java.awt.Paint $stack2;
+        java.io.ObjectOutputStream stream;
+        org.jfree.chart.renderer.category.LineRenderer3D this;
+    
+    
+        this := @this: org.jfree.chart.renderer.category.LineRenderer3D;
+        stream := @parameter0: java.io.ObjectOutputStream;
+        virtualinvoke stream.<java.io.ObjectOutputStream: void defaultWriteObject()>();
+        $stack2 = this.<org.jfree.chart.renderer.category.LineRenderer3D: java.awt.Paint wallPaint>;
+        staticinvoke <org.jfree.chart.util.SerialUtilities: void writePaint(java.awt.Paint,java.io.ObjectOutputStream)>($stack2, stream);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.category.LineRenderer3D: void setXOffset(double)> ----
+    {
+        double xOffset;
+        org.jfree.chart.renderer.category.LineRenderer3D this;
+    
+    
+        this := @this: org.jfree.chart.renderer.category.LineRenderer3D;
+        xOffset := @parameter0: double;
+        this.<org.jfree.chart.renderer.category.LineRenderer3D: double xOffset> = xOffset;
+        virtualinvoke this.<org.jfree.chart.renderer.category.LineRenderer3D: void fireChangeEvent()>();
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.category.LineRenderer3D: void <init>()> ----
+    {
+        java.awt.Paint $stack1;
+        org.jfree.chart.renderer.category.LineRenderer3D this;
+    
+    
+        this := @this: org.jfree.chart.renderer.category.LineRenderer3D;
+        specialinvoke this.<org.jfree.chart.renderer.category.LineAndShapeRenderer: void <init>(boolean,boolean)>(1, 0);
+        this.<org.jfree.chart.renderer.category.LineRenderer3D: double xOffset> = 12.0;
+        this.<org.jfree.chart.renderer.category.LineRenderer3D: double yOffset> = 8.0;
+        $stack1 = <org.jfree.chart.renderer.category.LineRenderer3D: java.awt.Paint DEFAULT_WALL_PAINT>;
+        this.<org.jfree.chart.renderer.category.LineRenderer3D: java.awt.Paint wallPaint> = $stack1;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.category.LineRenderer3D: void <clinit>()> ----
+    {
+        java.awt.Color #l0;
+        java.lang.Object $stack0;
+    
+    
+        $stack0 = new java.awt.Color;
+        #l0 = (java.awt.Color) $stack0;
+        specialinvoke #l0.<java.awt.Color: void <init>(int,int,int)>(221, 221, 221);
+        <org.jfree.chart.renderer.category.LineRenderer3D: java.awt.Paint DEFAULT_WALL_PAINT> = (java.awt.Paint) $stack0;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.category.LineRenderer3D: double getXOffset()> ----
+    {
+        double $stack1;
+        org.jfree.chart.renderer.category.LineRenderer3D this;
+    
+    
+        this := @this: org.jfree.chart.renderer.category.LineRenderer3D;
+        $stack1 = this.<org.jfree.chart.renderer.category.LineRenderer3D: double xOffset>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.category.LineRenderer3D: double getYOffset()> ----
+    {
+        double $stack1;
+        org.jfree.chart.renderer.category.LineRenderer3D this;
+    
+    
+        this := @this: org.jfree.chart.renderer.category.LineRenderer3D;
+        $stack1 = this.<org.jfree.chart.renderer.category.LineRenderer3D: double yOffset>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.category.LineRenderer3D: void setWallPaint(java.awt.Paint)> ----
+    {
+        java.awt.Paint paint;
+        java.lang.IllegalArgumentException #l0;
+        java.lang.Object $stack2;
+        java.lang.Throwable #l1;
+        org.jfree.chart.renderer.category.LineRenderer3D this;
+    
+    
+        this := @this: org.jfree.chart.renderer.category.LineRenderer3D;
+        paint := @parameter0: java.awt.Paint;
+    
+        if paint != null goto label1;
+        $stack2 = new java.lang.IllegalArgumentException;
+        #l0 = (java.lang.IllegalArgumentException) $stack2;
+        specialinvoke #l0.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'paint\' argument.");
+        #l1 = (java.lang.Throwable) $stack2;
+    
+        throw #l1;
+    
+      label1:
+        this.<org.jfree.chart.renderer.category.LineRenderer3D: java.awt.Paint wallPaint> = paint;
+        virtualinvoke this.<org.jfree.chart.renderer.category.LineRenderer3D: void fireChangeEvent()>();
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.category.LineRenderer3D: void drawBackground(java.awt.Graphics2D,org.jfree.chart.plot.CategoryPlot,java.awt.geom.Rectangle2D)> ----
+    {
+        double $stack20, $stack21, $stack22, $stack24, $stack25, $stack26, $stack28, $stack29, $stack30, $stack32, $stack33, $stack34, $stack44, $stack45, $stack46, $stack47, $stack49, $stack50, $stack51, $stack52, $stack53, $stack54, $stack55, $stack56, $stack57, $stack58, $stack59, $stack60, $stack61, $stack62, $stack63, $stack64, $stack65, $stack66;
+        float $stack23, $stack27, $stack31, $stack35, $stack37, x0, x1, x2, x3, y0, y1, y2, y3;
+        java.awt.Composite #l0, originalComposite;
+        java.awt.Graphics2D g2;
+        java.awt.Image backgroundImage;
+        java.awt.Paint #l11, $stack40, $stack42, backgroundPaint;
+        java.awt.Shape #l1, #l14, #l20, #l24, #l31, #l9;
+        java.awt.geom.GeneralPath #l10, #l13, #l15, #l16, #l18, #l19, #l2, #l22, #l23, #l25, #l26, #l28, #l29, #l30, #l32, #l4, #l5, #l6, #l7, #l8, bottomWall, clip, leftWall;
+        java.awt.geom.Line2D #l17, #l21;
+        java.awt.geom.Line2D$Double #l27, corner;
+        java.awt.geom.Rectangle2D #l3, dataArea;
+        java.awt.geom.Rectangle2D$Double #l12, adjusted;
+        java.lang.Object $stack36, $stack38, $stack39, $stack41, $stack43, $stack48, $stack67;
+        org.jfree.chart.plot.CategoryPlot plot;
+        org.jfree.chart.renderer.category.LineRenderer3D this;
+    
+    
+        this := @this: org.jfree.chart.renderer.category.LineRenderer3D;
+        g2 := @parameter0: java.awt.Graphics2D;
+        plot := @parameter1: org.jfree.chart.plot.CategoryPlot;
+        dataArea := @parameter2: java.awt.geom.Rectangle2D;
+        $stack20 = virtualinvoke dataArea.<java.awt.geom.Rectangle2D: double getX()>();
+        x0 = (float) $stack20;
+        $stack21 = this.<org.jfree.chart.renderer.category.LineRenderer3D: double xOffset>;
+        $stack22 = staticinvoke <java.lang.Math: double abs(double)>($stack21);
+        $stack23 = (float) $stack22;
+        x1 = x0 + $stack23;
+        $stack24 = virtualinvoke dataArea.<java.awt.geom.Rectangle2D: double getMaxX()>();
+        x3 = (float) $stack24;
+        $stack25 = this.<org.jfree.chart.renderer.category.LineRenderer3D: double xOffset>;
+        $stack26 = staticinvoke <java.lang.Math: double abs(double)>($stack25);
+        $stack27 = (float) $stack26;
+        x2 = x3 - $stack27;
+        $stack28 = virtualinvoke dataArea.<java.awt.geom.Rectangle2D: double getMaxY()>();
+        y0 = (float) $stack28;
+        $stack29 = this.<org.jfree.chart.renderer.category.LineRenderer3D: double yOffset>;
+        $stack30 = staticinvoke <java.lang.Math: double abs(double)>($stack29);
+        $stack31 = (float) $stack30;
+        y1 = y0 - $stack31;
+        $stack32 = virtualinvoke dataArea.<java.awt.geom.Rectangle2D: double getMinY()>();
+        y3 = (float) $stack32;
+        $stack33 = this.<org.jfree.chart.renderer.category.LineRenderer3D: double yOffset>;
+        $stack34 = staticinvoke <java.lang.Math: double abs(double)>($stack33);
+        $stack35 = (float) $stack34;
+        y2 = y3 + $stack35;
+        $stack36 = new java.awt.geom.GeneralPath;
+        #l8 = (java.awt.geom.GeneralPath) $stack36;
+        specialinvoke #l8.<java.awt.geom.GeneralPath: void <init>()>();
+        clip = (java.awt.geom.GeneralPath) $stack36;
+        #l29 = (java.awt.geom.GeneralPath) $stack36;
+        virtualinvoke #l29.<java.awt.geom.GeneralPath: void moveTo(float,float)>(x0, y0);
+        #l18 = (java.awt.geom.GeneralPath) $stack36;
+        virtualinvoke #l18.<java.awt.geom.GeneralPath: void lineTo(float,float)>(x0, y2);
+        #l7 = (java.awt.geom.GeneralPath) $stack36;
+        virtualinvoke #l7.<java.awt.geom.GeneralPath: void lineTo(float,float)>(x1, y3);
+        #l2 = (java.awt.geom.GeneralPath) $stack36;
+        virtualinvoke #l2.<java.awt.geom.GeneralPath: void lineTo(float,float)>(x3, y3);
+        #l23 = (java.awt.geom.GeneralPath) $stack36;
+        virtualinvoke #l23.<java.awt.geom.GeneralPath: void lineTo(float,float)>(x3, y1);
+        #l19 = (java.awt.geom.GeneralPath) $stack36;
+        virtualinvoke #l19.<java.awt.geom.GeneralPath: void lineTo(float,float)>(x2, y0);
+        #l10 = (java.awt.geom.GeneralPath) $stack36;
+        virtualinvoke #l10.<java.awt.geom.GeneralPath: void closePath()>();
+        originalComposite = virtualinvoke g2.<java.awt.Graphics2D: java.awt.Composite getComposite()>();
+        $stack37 = virtualinvoke plot.<org.jfree.chart.plot.CategoryPlot: float getBackgroundAlpha()>();
+        $stack38 = staticinvoke <java.awt.AlphaComposite: java.awt.AlphaComposite getInstance(int,float)>(3, $stack37);
+        #l0 = (java.awt.Composite) $stack38;
+        virtualinvoke g2.<java.awt.Graphics2D: void setComposite(java.awt.Composite)>(#l0);
+        backgroundPaint = virtualinvoke plot.<org.jfree.chart.plot.CategoryPlot: java.awt.Paint getBackgroundPaint()>();
+    
+        if backgroundPaint == null goto label1;
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>(backgroundPaint);
+        #l24 = (java.awt.Shape) $stack36;
+        virtualinvoke g2.<java.awt.Graphics2D: void fill(java.awt.Shape)>(#l24);
+    
+      label1:
+        $stack39 = new java.awt.geom.GeneralPath;
+        #l28 = (java.awt.geom.GeneralPath) $stack39;
+        specialinvoke #l28.<java.awt.geom.GeneralPath: void <init>()>();
+        leftWall = (java.awt.geom.GeneralPath) $stack39;
+        #l4 = (java.awt.geom.GeneralPath) $stack39;
+        virtualinvoke #l4.<java.awt.geom.GeneralPath: void moveTo(float,float)>(x0, y0);
+        #l13 = (java.awt.geom.GeneralPath) $stack39;
+        virtualinvoke #l13.<java.awt.geom.GeneralPath: void lineTo(float,float)>(x0, y2);
+        #l25 = (java.awt.geom.GeneralPath) $stack39;
+        virtualinvoke #l25.<java.awt.geom.GeneralPath: void lineTo(float,float)>(x1, y3);
+        #l5 = (java.awt.geom.GeneralPath) $stack39;
+        virtualinvoke #l5.<java.awt.geom.GeneralPath: void lineTo(float,float)>(x1, y1);
+        #l22 = (java.awt.geom.GeneralPath) $stack39;
+        virtualinvoke #l22.<java.awt.geom.GeneralPath: void closePath()>();
+        $stack40 = virtualinvoke this.<org.jfree.chart.renderer.category.LineRenderer3D: java.awt.Paint getWallPaint()>();
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>($stack40);
+        #l14 = (java.awt.Shape) $stack39;
+        virtualinvoke g2.<java.awt.Graphics2D: void fill(java.awt.Shape)>(#l14);
+        $stack41 = new java.awt.geom.GeneralPath;
+        #l15 = (java.awt.geom.GeneralPath) $stack41;
+        specialinvoke #l15.<java.awt.geom.GeneralPath: void <init>()>();
+        bottomWall = (java.awt.geom.GeneralPath) $stack41;
+        #l16 = (java.awt.geom.GeneralPath) $stack41;
+        virtualinvoke #l16.<java.awt.geom.GeneralPath: void moveTo(float,float)>(x0, y0);
+        #l26 = (java.awt.geom.GeneralPath) $stack41;
+        virtualinvoke #l26.<java.awt.geom.GeneralPath: void lineTo(float,float)>(x1, y1);
+        #l30 = (java.awt.geom.GeneralPath) $stack41;
+        virtualinvoke #l30.<java.awt.geom.GeneralPath: void lineTo(float,float)>(x3, y1);
+        #l32 = (java.awt.geom.GeneralPath) $stack41;
+        virtualinvoke #l32.<java.awt.geom.GeneralPath: void lineTo(float,float)>(x2, y0);
+        #l6 = (java.awt.geom.GeneralPath) $stack41;
+        virtualinvoke #l6.<java.awt.geom.GeneralPath: void closePath()>();
+        $stack42 = virtualinvoke this.<org.jfree.chart.renderer.category.LineRenderer3D: java.awt.Paint getWallPaint()>();
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>($stack42);
+        #l31 = (java.awt.Shape) $stack41;
+        virtualinvoke g2.<java.awt.Graphics2D: void fill(java.awt.Shape)>(#l31);
+        $stack43 = <java.awt.Color: java.awt.Color lightGray>;
+        #l11 = (java.awt.Paint) $stack43;
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>(#l11);
+        $stack48 = new java.awt.geom.Line2D$Double;
+        $stack47 = (double) x0;
+        $stack46 = (double) y0;
+        $stack45 = (double) x1;
+        $stack44 = (double) y1;
+        #l27 = (java.awt.geom.Line2D$Double) $stack48;
+        specialinvoke #l27.<java.awt.geom.Line2D$Double: void <init>(double,double,double,double)>($stack47, $stack46, $stack45, $stack44);
+        corner = (java.awt.geom.Line2D$Double) $stack48;
+        #l20 = (java.awt.Shape) $stack48;
+        virtualinvoke g2.<java.awt.Graphics2D: void draw(java.awt.Shape)>(#l20);
+        $stack52 = (double) x1;
+        $stack51 = (double) y1;
+        $stack50 = (double) x1;
+        $stack49 = (double) y3;
+        #l17 = (java.awt.geom.Line2D) $stack48;
+        virtualinvoke #l17.<java.awt.geom.Line2D: void setLine(double,double,double,double)>($stack52, $stack51, $stack50, $stack49);
+        #l1 = (java.awt.Shape) $stack48;
+        virtualinvoke g2.<java.awt.Graphics2D: void draw(java.awt.Shape)>(#l1);
+        $stack56 = (double) x1;
+        $stack55 = (double) y1;
+        $stack54 = (double) x3;
+        $stack53 = (double) y1;
+        #l21 = (java.awt.geom.Line2D) $stack48;
+        virtualinvoke #l21.<java.awt.geom.Line2D: void setLine(double,double,double,double)>($stack56, $stack55, $stack54, $stack53);
+        #l9 = (java.awt.Shape) $stack48;
+        virtualinvoke g2.<java.awt.Graphics2D: void draw(java.awt.Shape)>(#l9);
+        backgroundImage = virtualinvoke plot.<org.jfree.chart.plot.CategoryPlot: java.awt.Image getBackgroundImage()>();
+    
+        if backgroundImage == null goto label2;
+        $stack67 = new java.awt.geom.Rectangle2D$Double;
+        $stack57 = virtualinvoke dataArea.<java.awt.geom.Rectangle2D: double getX()>();
+        $stack58 = virtualinvoke this.<org.jfree.chart.renderer.category.LineRenderer3D: double getXOffset()>();
+        $stack66 = $stack57 + $stack58;
+        $stack65 = virtualinvoke dataArea.<java.awt.geom.Rectangle2D: double getY()>();
+        $stack59 = virtualinvoke dataArea.<java.awt.geom.Rectangle2D: double getWidth()>();
+        $stack60 = virtualinvoke this.<org.jfree.chart.renderer.category.LineRenderer3D: double getXOffset()>();
+        $stack64 = $stack59 - $stack60;
+        $stack61 = virtualinvoke dataArea.<java.awt.geom.Rectangle2D: double getHeight()>();
+        $stack62 = virtualinvoke this.<org.jfree.chart.renderer.category.LineRenderer3D: double getYOffset()>();
+        $stack63 = $stack61 - $stack62;
+        #l12 = (java.awt.geom.Rectangle2D$Double) $stack67;
+        specialinvoke #l12.<java.awt.geom.Rectangle2D$Double: void <init>(double,double,double,double)>($stack66, $stack65, $stack64, $stack63);
+        adjusted = (java.awt.geom.Rectangle2D$Double) $stack67;
+        #l3 = (java.awt.geom.Rectangle2D) $stack67;
+        virtualinvoke plot.<org.jfree.chart.plot.CategoryPlot: void drawBackgroundImage(java.awt.Graphics2D,java.awt.geom.Rectangle2D)>(g2, #l3);
+    
+      label2:
+        virtualinvoke g2.<java.awt.Graphics2D: void setComposite(java.awt.Composite)>(originalComposite);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.category.LineRenderer3D: void drawRangeMarker(java.awt.Graphics2D,org.jfree.chart.plot.CategoryPlot,org.jfree.chart.axis.ValueAxis,org.jfree.chart.plot.Marker,java.awt.geom.Rectangle2D)> ----
+    {
+        boolean $stack26, $stack27;
+        double $stack15, $stack16, $stack17, $stack18, $stack19, $stack20, $stack21, $stack22, $stack23, $stack24, $stack33, $stack34, $stack36, $stack38, $stack42, $stack43, $stack44, $stack45, $stack49, $stack52, $stack53, $stack55, $stack56, $stack57, $stack58, $stack62, $stack63, $stack64, $stack65, $stack66, $stack67, $stack70, value;
+        float $stack37, $stack39, $stack40, $stack41, $stack46, $stack47, $stack48, $stack50, $stack59, $stack60, $stack61, $stack68, $stack69, $stack71, x#0, x#1, y#0, y#1;
+        java.awt.Graphics2D g2;
+        java.awt.Paint $stack30, $stack31;
+        java.awt.Shape #l10, #l8;
+        java.awt.geom.GeneralPath $stack35, $stack54;
+        java.awt.geom.Rectangle2D #l0, #l1, #l2, #l3, #l4, #l5, #l6, #l7, dataArea;
+        java.awt.geom.Rectangle2D$Double #l9, adjusted;
+        java.lang.Object $stack25, path;
+        org.jfree.chart.axis.ValueAxis axis;
+        org.jfree.chart.plot.CategoryPlot plot;
+        org.jfree.chart.plot.Marker marker;
+        org.jfree.chart.plot.PlotOrientation $stack28, $stack29, orientation;
+        org.jfree.chart.plot.ValueMarker vm;
+        org.jfree.chart.renderer.category.LineRenderer3D this;
+        org.jfree.chart.util.RectangleEdge $stack32, $stack51;
+        org.jfree.data.Range range;
+    
+    
+        this := @this: org.jfree.chart.renderer.category.LineRenderer3D;
+        g2 := @parameter0: java.awt.Graphics2D;
+        plot := @parameter1: org.jfree.chart.plot.CategoryPlot;
+        axis := @parameter2: org.jfree.chart.axis.ValueAxis;
+        marker := @parameter3: org.jfree.chart.plot.Marker;
+        dataArea := @parameter4: java.awt.geom.Rectangle2D;
+        $stack25 = new java.awt.geom.Rectangle2D$Double;
+        $stack24 = virtualinvoke dataArea.<java.awt.geom.Rectangle2D: double getX()>();
+        $stack15 = virtualinvoke dataArea.<java.awt.geom.Rectangle2D: double getY()>();
+        $stack16 = virtualinvoke this.<org.jfree.chart.renderer.category.LineRenderer3D: double getYOffset()>();
+        $stack23 = $stack15 + $stack16;
+        $stack17 = virtualinvoke dataArea.<java.awt.geom.Rectangle2D: double getWidth()>();
+        $stack18 = virtualinvoke this.<org.jfree.chart.renderer.category.LineRenderer3D: double getXOffset()>();
+        $stack22 = $stack17 - $stack18;
+        $stack19 = virtualinvoke dataArea.<java.awt.geom.Rectangle2D: double getHeight()>();
+        $stack20 = virtualinvoke this.<org.jfree.chart.renderer.category.LineRenderer3D: double getYOffset()>();
+        $stack21 = $stack19 - $stack20;
+        #l9 = (java.awt.geom.Rectangle2D$Double) $stack25;
+        specialinvoke #l9.<java.awt.geom.Rectangle2D$Double: void <init>(double,double,double,double)>($stack24, $stack23, $stack22, $stack21);
+        adjusted = (java.awt.geom.Rectangle2D$Double) $stack25;
+        $stack26 = marker instanceof org.jfree.chart.plot.ValueMarker;
+    
+        if $stack26 == 0 goto label4;
+        vm = (org.jfree.chart.plot.ValueMarker) marker;
+        value = virtualinvoke vm.<org.jfree.chart.plot.ValueMarker: double getValue()>();
+        range = virtualinvoke axis.<org.jfree.chart.axis.ValueAxis: org.jfree.data.Range getRange()>();
+        $stack27 = virtualinvoke range.<org.jfree.data.Range: boolean contains(double)>(value);
+    
+        if $stack27 != 0 goto label1;
+    
+        return;
+    
+      label1:
+        path = null;
+        orientation = virtualinvoke plot.<org.jfree.chart.plot.CategoryPlot: org.jfree.chart.plot.PlotOrientation getOrientation()>();
+        $stack28 = <org.jfree.chart.plot.PlotOrientation: org.jfree.chart.plot.PlotOrientation HORIZONTAL>;
+    
+        if orientation != $stack28 goto label2;
+        $stack51 = virtualinvoke plot.<org.jfree.chart.plot.CategoryPlot: org.jfree.chart.util.RectangleEdge getRangeAxisEdge()>();
+        #l4 = (java.awt.geom.Rectangle2D) $stack25;
+        $stack52 = virtualinvoke axis.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)>(value, #l4, $stack51);
+        x#0 = (float) $stack52;
+        #l7 = (java.awt.geom.Rectangle2D) $stack25;
+        $stack53 = virtualinvoke #l7.<java.awt.geom.Rectangle2D: double getMaxY()>();
+        y#0 = (float) $stack53;
+        $stack54 = new java.awt.geom.GeneralPath;
+        specialinvoke $stack54.<java.awt.geom.GeneralPath: void <init>()>();
+        path = $stack54;
+        virtualinvoke $stack54.<java.awt.geom.GeneralPath: void moveTo(float,float)>(x#0, y#0);
+        $stack55 = (double) x#0;
+        $stack56 = virtualinvoke this.<org.jfree.chart.renderer.category.LineRenderer3D: double getXOffset()>();
+        $stack57 = $stack55 + $stack56;
+        $stack61 = (float) $stack57;
+        $stack58 = virtualinvoke this.<org.jfree.chart.renderer.category.LineRenderer3D: double getYOffset()>();
+        $stack59 = (float) $stack58;
+        $stack60 = y#0 - $stack59;
+        virtualinvoke $stack54.<java.awt.geom.GeneralPath: void lineTo(float,float)>($stack61, $stack60);
+        $stack62 = (double) x#0;
+        $stack63 = virtualinvoke this.<org.jfree.chart.renderer.category.LineRenderer3D: double getXOffset()>();
+        $stack64 = $stack62 + $stack63;
+        $stack69 = (float) $stack64;
+        #l1 = (java.awt.geom.Rectangle2D) $stack25;
+        $stack65 = virtualinvoke #l1.<java.awt.geom.Rectangle2D: double getMinY()>();
+        $stack66 = virtualinvoke this.<org.jfree.chart.renderer.category.LineRenderer3D: double getYOffset()>();
+        $stack67 = $stack65 - $stack66;
+        $stack68 = (float) $stack67;
+        virtualinvoke $stack54.<java.awt.geom.GeneralPath: void lineTo(float,float)>($stack69, $stack68);
+        #l5 = (java.awt.geom.Rectangle2D) $stack25;
+        $stack70 = virtualinvoke #l5.<java.awt.geom.Rectangle2D: double getMinY()>();
+        $stack71 = (float) $stack70;
+        virtualinvoke $stack54.<java.awt.geom.GeneralPath: void lineTo(float,float)>(x#0, $stack71);
+        virtualinvoke $stack54.<java.awt.geom.GeneralPath: void closePath()>();
+    
+        goto label3;
+    
+      label2:
+        $stack29 = <org.jfree.chart.plot.PlotOrientation: org.jfree.chart.plot.PlotOrientation VERTICAL>;
+    
+        if orientation != $stack29 goto label3;
+        $stack32 = virtualinvoke plot.<org.jfree.chart.plot.CategoryPlot: org.jfree.chart.util.RectangleEdge getRangeAxisEdge()>();
+        #l3 = (java.awt.geom.Rectangle2D) $stack25;
+        $stack33 = virtualinvoke axis.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)>(value, #l3, $stack32);
+        x#1 = (float) $stack33;
+        $stack34 = virtualinvoke dataArea.<java.awt.geom.Rectangle2D: double getX()>();
+        y#1 = (float) $stack34;
+        $stack35 = new java.awt.geom.GeneralPath;
+        specialinvoke $stack35.<java.awt.geom.GeneralPath: void <init>()>();
+        path = $stack35;
+        virtualinvoke $stack35.<java.awt.geom.GeneralPath: void moveTo(float,float)>(y#1, x#1);
+        $stack36 = this.<org.jfree.chart.renderer.category.LineRenderer3D: double xOffset>;
+        $stack37 = (float) $stack36;
+        $stack41 = y#1 + $stack37;
+        $stack38 = this.<org.jfree.chart.renderer.category.LineRenderer3D: double yOffset>;
+        $stack39 = (float) $stack38;
+        $stack40 = x#1 - $stack39;
+        virtualinvoke $stack35.<java.awt.geom.GeneralPath: void lineTo(float,float)>($stack41, $stack40);
+        #l2 = (java.awt.geom.Rectangle2D) $stack25;
+        $stack42 = virtualinvoke #l2.<java.awt.geom.Rectangle2D: double getMaxX()>();
+        $stack43 = this.<org.jfree.chart.renderer.category.LineRenderer3D: double xOffset>;
+        $stack44 = $stack42 + $stack43;
+        $stack48 = (float) $stack44;
+        $stack45 = this.<org.jfree.chart.renderer.category.LineRenderer3D: double yOffset>;
+        $stack46 = (float) $stack45;
+        $stack47 = x#1 - $stack46;
+        virtualinvoke $stack35.<java.awt.geom.GeneralPath: void lineTo(float,float)>($stack48, $stack47);
+        #l6 = (java.awt.geom.Rectangle2D) $stack25;
+        $stack49 = virtualinvoke #l6.<java.awt.geom.Rectangle2D: double getMaxX()>();
+        $stack50 = (float) $stack49;
+        virtualinvoke $stack35.<java.awt.geom.GeneralPath: void lineTo(float,float)>($stack50, x#1);
+        virtualinvoke $stack35.<java.awt.geom.GeneralPath: void closePath()>();
+    
+      label3:
+        $stack30 = virtualinvoke marker.<org.jfree.chart.plot.Marker: java.awt.Paint getPaint()>();
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>($stack30);
+        #l8 = (java.awt.Shape) path;
+        virtualinvoke g2.<java.awt.Graphics2D: void fill(java.awt.Shape)>(#l8);
+        $stack31 = virtualinvoke marker.<org.jfree.chart.plot.Marker: java.awt.Paint getOutlinePaint()>();
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>($stack31);
+        #l10 = (java.awt.Shape) path;
+        virtualinvoke g2.<java.awt.Graphics2D: void draw(java.awt.Shape)>(#l10);
+    
+        goto label5;
+    
+      label4:
+        #l0 = (java.awt.geom.Rectangle2D) $stack25;
+        specialinvoke this.<org.jfree.chart.renderer.category.LineAndShapeRenderer: void drawRangeMarker(java.awt.Graphics2D,org.jfree.chart.plot.CategoryPlot,org.jfree.chart.axis.ValueAxis,org.jfree.chart.plot.Marker,java.awt.geom.Rectangle2D)>(g2, plot, axis, marker, #l0);
+    
+      label5:
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.category.LineRenderer3D: void drawItem(java.awt.Graphics2D,org.jfree.chart.renderer.category.CategoryItemRendererState,java.awt.geom.Rectangle2D,org.jfree.chart.plot.CategoryPlot,org.jfree.chart.axis.CategoryAxis,org.jfree.chart.axis.ValueAxis,org.jfree.data.category.CategoryDataset,int,int,boolean,int)> ----
+    {
+        boolean $stack38, $stack55, $stack56, $stack58, selected;
+        byte $stack57;
+        double $stack39, $stack40, $stack41, $stack42, $stack43, $stack44, $stack45, $stack46, $stack47, $stack48, $stack64, $stack65, $stack66, $stack67, previous, value, x0, x1, x2, x3, y0, y1, y2, y3;
+        float $stack74, $stack75, $stack76, $stack77, $stack78, $stack79, $stack80, $stack81, $stack82, $stack83, $stack84, $stack85, $stack86, $stack87, $stack88, $stack89, $stack90, $stack91, $stack92, $stack93;
+        int $stack51, $stack59, $stack61, $stack62, column, pass, row;
+        java.awt.Graphics2D g2;
+        java.awt.Paint $stack71, $stack73;
+        java.awt.Shape #l2, #l5, shape;
+        java.awt.Stroke $stack72;
+        java.awt.geom.GeneralPath #l0, #l1, #l10, #l11, #l12, #l13, #l14, #l16, #l17, #l19, #l4, #l6, #l7, clip;
+        java.awt.geom.Rectangle2D #l18, #l3, #l8, #l9, dataArea;
+        java.awt.geom.Rectangle2D$Double #l15, adjusted;
+        java.lang.Number previousValue#0, v;
+        java.lang.Object $stack49, $stack68;
+        org.jfree.chart.axis.CategoryAxis domainAxis;
+        org.jfree.chart.axis.ValueAxis rangeAxis;
+        org.jfree.chart.entity.EntityCollection previousValue#1;
+        org.jfree.chart.plot.CategoryPlot plot;
+        org.jfree.chart.plot.PlotOrientation $stack53, $stack54, $stack69, $stack70, orientation;
+        org.jfree.chart.renderer.category.CategoryItemRendererState state;
+        org.jfree.chart.renderer.category.LineRenderer3D this;
+        org.jfree.chart.util.RectangleEdge $stack50, $stack52, $stack60, $stack63;
+        org.jfree.data.category.CategoryDataset dataset;
+    
+    
+        this := @this: org.jfree.chart.renderer.category.LineRenderer3D;
+        g2 := @parameter0: java.awt.Graphics2D;
+        state := @parameter1: org.jfree.chart.renderer.category.CategoryItemRendererState;
+        dataArea := @parameter2: java.awt.geom.Rectangle2D;
+        plot := @parameter3: org.jfree.chart.plot.CategoryPlot;
+        domainAxis := @parameter4: org.jfree.chart.axis.CategoryAxis;
+        rangeAxis := @parameter5: org.jfree.chart.axis.ValueAxis;
+        dataset := @parameter6: org.jfree.data.category.CategoryDataset;
+        row := @parameter7: int;
+        column := @parameter8: int;
+        selected := @parameter9: boolean;
+        pass := @parameter10: int;
+        $stack38 = virtualinvoke this.<org.jfree.chart.renderer.category.LineRenderer3D: boolean getItemVisible(int,int)>(row, column);
+    
+        if $stack38 != 0 goto label01;
+    
+        return;
+    
+      label01:
+        v = interfaceinvoke dataset.<org.jfree.data.category.CategoryDataset: java.lang.Number getValue(int,int)>(row, column);
+    
+        if v != null goto label02;
+    
+        return;
+    
+      label02:
+        $stack49 = new java.awt.geom.Rectangle2D$Double;
+        $stack48 = virtualinvoke dataArea.<java.awt.geom.Rectangle2D: double getX()>();
+        $stack39 = virtualinvoke dataArea.<java.awt.geom.Rectangle2D: double getY()>();
+        $stack40 = virtualinvoke this.<org.jfree.chart.renderer.category.LineRenderer3D: double getYOffset()>();
+        $stack47 = $stack39 + $stack40;
+        $stack41 = virtualinvoke dataArea.<java.awt.geom.Rectangle2D: double getWidth()>();
+        $stack42 = virtualinvoke this.<org.jfree.chart.renderer.category.LineRenderer3D: double getXOffset()>();
+        $stack46 = $stack41 - $stack42;
+        $stack43 = virtualinvoke dataArea.<java.awt.geom.Rectangle2D: double getHeight()>();
+        $stack44 = virtualinvoke this.<org.jfree.chart.renderer.category.LineRenderer3D: double getYOffset()>();
+        $stack45 = $stack43 - $stack44;
+        #l15 = (java.awt.geom.Rectangle2D$Double) $stack49;
+        specialinvoke #l15.<java.awt.geom.Rectangle2D$Double: void <init>(double,double,double,double)>($stack48, $stack47, $stack46, $stack45);
+        adjusted = (java.awt.geom.Rectangle2D$Double) $stack49;
+        orientation = virtualinvoke plot.<org.jfree.chart.plot.CategoryPlot: org.jfree.chart.plot.PlotOrientation getOrientation()>();
+        $stack51 = virtualinvoke this.<org.jfree.chart.renderer.category.LineRenderer3D: int getColumnCount()>();
+        $stack50 = virtualinvoke plot.<org.jfree.chart.plot.CategoryPlot: org.jfree.chart.util.RectangleEdge getDomainAxisEdge()>();
+        #l8 = (java.awt.geom.Rectangle2D) $stack49;
+        x1 = virtualinvoke domainAxis.<org.jfree.chart.axis.CategoryAxis: double getCategoryMiddle(int,int,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)>(column, $stack51, #l8, $stack50);
+        value = virtualinvoke v.<java.lang.Number: double doubleValue()>();
+        $stack52 = virtualinvoke plot.<org.jfree.chart.plot.CategoryPlot: org.jfree.chart.util.RectangleEdge getRangeAxisEdge()>();
+        #l9 = (java.awt.geom.Rectangle2D) $stack49;
+        y1 = virtualinvoke rangeAxis.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)>(value, #l9, $stack52);
+        shape = virtualinvoke this.<org.jfree.chart.renderer.category.LineRenderer3D: java.awt.Shape getItemShape(int,int,boolean)>(row, column, selected);
+        $stack53 = <org.jfree.chart.plot.PlotOrientation: org.jfree.chart.plot.PlotOrientation HORIZONTAL>;
+    
+        if orientation != $stack53 goto label03;
+        shape = staticinvoke <org.jfree.chart.util.ShapeUtilities: java.awt.Shape createTranslatedShape(java.awt.Shape,double,double)>(shape, y1, x1);
+    
+        goto label04;
+    
+      label03:
+        $stack54 = <org.jfree.chart.plot.PlotOrientation: org.jfree.chart.plot.PlotOrientation VERTICAL>;
+    
+        if orientation != $stack54 goto label04;
+        shape = staticinvoke <org.jfree.chart.util.ShapeUtilities: java.awt.Shape createTranslatedShape(java.awt.Shape,double,double)>(shape, x1, y1);
+    
+      label04:
+        $stack55 = virtualinvoke this.<org.jfree.chart.renderer.category.LineRenderer3D: boolean getItemLineVisible(int,int)>(row, column);
+    
+        if $stack55 == 0 goto label07;
+    
+        if column == 0 goto label07;
+        $stack59 = column - 1;
+        previousValue#0 = interfaceinvoke dataset.<org.jfree.data.category.CategoryDataset: java.lang.Number getValue(int,int)>(row, $stack59);
+    
+        if previousValue#0 == null goto label07;
+        previous = virtualinvoke previousValue#0.<java.lang.Number: double doubleValue()>();
+        $stack62 = column - 1;
+        $stack61 = virtualinvoke this.<org.jfree.chart.renderer.category.LineRenderer3D: int getColumnCount()>();
+        $stack60 = virtualinvoke plot.<org.jfree.chart.plot.CategoryPlot: org.jfree.chart.util.RectangleEdge getDomainAxisEdge()>();
+        #l3 = (java.awt.geom.Rectangle2D) $stack49;
+        x0 = virtualinvoke domainAxis.<org.jfree.chart.axis.CategoryAxis: double getCategoryMiddle(int,int,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)>($stack62, $stack61, #l3, $stack60);
+        $stack63 = virtualinvoke plot.<org.jfree.chart.plot.CategoryPlot: org.jfree.chart.util.RectangleEdge getRangeAxisEdge()>();
+        #l18 = (java.awt.geom.Rectangle2D) $stack49;
+        y0 = virtualinvoke rangeAxis.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)>(previous, #l18, $stack63);
+        $stack64 = virtualinvoke this.<org.jfree.chart.renderer.category.LineRenderer3D: double getXOffset()>();
+        x2 = x0 + $stack64;
+        $stack65 = virtualinvoke this.<org.jfree.chart.renderer.category.LineRenderer3D: double getYOffset()>();
+        y2 = y0 - $stack65;
+        $stack66 = virtualinvoke this.<org.jfree.chart.renderer.category.LineRenderer3D: double getXOffset()>();
+        x3 = x1 + $stack66;
+        $stack67 = virtualinvoke this.<org.jfree.chart.renderer.category.LineRenderer3D: double getYOffset()>();
+        y3 = y1 - $stack67;
+        $stack68 = new java.awt.geom.GeneralPath;
+        #l12 = (java.awt.geom.GeneralPath) $stack68;
+        specialinvoke #l12.<java.awt.geom.GeneralPath: void <init>()>();
+        clip = (java.awt.geom.GeneralPath) $stack68;
+        $stack69 = <org.jfree.chart.plot.PlotOrientation: org.jfree.chart.plot.PlotOrientation HORIZONTAL>;
+    
+        if orientation != $stack69 goto label05;
+        $stack85 = (float) y0;
+        $stack84 = (float) x0;
+        #l0 = (java.awt.geom.GeneralPath) $stack68;
+        virtualinvoke #l0.<java.awt.geom.GeneralPath: void moveTo(float,float)>($stack85, $stack84);
+        $stack87 = (float) y1;
+        $stack86 = (float) x1;
+        #l11 = (java.awt.geom.GeneralPath) $stack68;
+        virtualinvoke #l11.<java.awt.geom.GeneralPath: void lineTo(float,float)>($stack87, $stack86);
+        $stack89 = (float) y3;
+        $stack88 = (float) x3;
+        #l6 = (java.awt.geom.GeneralPath) $stack68;
+        virtualinvoke #l6.<java.awt.geom.GeneralPath: void lineTo(float,float)>($stack89, $stack88);
+        $stack91 = (float) y2;
+        $stack90 = (float) x2;
+        #l14 = (java.awt.geom.GeneralPath) $stack68;
+        virtualinvoke #l14.<java.awt.geom.GeneralPath: void lineTo(float,float)>($stack91, $stack90);
+        $stack93 = (float) y0;
+        $stack92 = (float) x0;
+        #l13 = (java.awt.geom.GeneralPath) $stack68;
+        virtualinvoke #l13.<java.awt.geom.GeneralPath: void lineTo(float,float)>($stack93, $stack92);
+        #l4 = (java.awt.geom.GeneralPath) $stack68;
+        virtualinvoke #l4.<java.awt.geom.GeneralPath: void closePath()>();
+    
+        goto label06;
+    
+      label05:
+        $stack70 = <org.jfree.chart.plot.PlotOrientation: org.jfree.chart.plot.PlotOrientation VERTICAL>;
+    
+        if orientation != $stack70 goto label06;
+        $stack75 = (float) x0;
+        $stack74 = (float) y0;
+        #l7 = (java.awt.geom.GeneralPath) $stack68;
+        virtualinvoke #l7.<java.awt.geom.GeneralPath: void moveTo(float,float)>($stack75, $stack74);
+        $stack77 = (float) x1;
+        $stack76 = (float) y1;
+        #l1 = (java.awt.geom.GeneralPath) $stack68;
+        virtualinvoke #l1.<java.awt.geom.GeneralPath: void lineTo(float,float)>($stack77, $stack76);
+        $stack79 = (float) x3;
+        $stack78 = (float) y3;
+        #l16 = (java.awt.geom.GeneralPath) $stack68;
+        virtualinvoke #l16.<java.awt.geom.GeneralPath: void lineTo(float,float)>($stack79, $stack78);
+        $stack81 = (float) x2;
+        $stack80 = (float) y2;
+        #l10 = (java.awt.geom.GeneralPath) $stack68;
+        virtualinvoke #l10.<java.awt.geom.GeneralPath: void lineTo(float,float)>($stack81, $stack80);
+        $stack83 = (float) x0;
+        $stack82 = (float) y0;
+        #l19 = (java.awt.geom.GeneralPath) $stack68;
+        virtualinvoke #l19.<java.awt.geom.GeneralPath: void lineTo(float,float)>($stack83, $stack82);
+        #l17 = (java.awt.geom.GeneralPath) $stack68;
+        virtualinvoke #l17.<java.awt.geom.GeneralPath: void closePath()>();
+    
+      label06:
+        $stack71 = virtualinvoke this.<org.jfree.chart.renderer.category.LineRenderer3D: java.awt.Paint getItemPaint(int,int,boolean)>(row, column, selected);
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>($stack71);
+        #l2 = (java.awt.Shape) $stack68;
+        virtualinvoke g2.<java.awt.Graphics2D: void fill(java.awt.Shape)>(#l2);
+        $stack72 = virtualinvoke this.<org.jfree.chart.renderer.category.LineRenderer3D: java.awt.Stroke getItemOutlineStroke(int,int,boolean)>(row, column, selected);
+        virtualinvoke g2.<java.awt.Graphics2D: void setStroke(java.awt.Stroke)>($stack72);
+        $stack73 = virtualinvoke this.<org.jfree.chart.renderer.category.LineRenderer3D: java.awt.Paint getItemOutlinePaint(int,int,boolean)>(row, column, selected);
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>($stack73);
+        #l5 = (java.awt.Shape) $stack68;
+        virtualinvoke g2.<java.awt.Graphics2D: void draw(java.awt.Shape)>(#l5);
+    
+      label07:
+        $stack56 = virtualinvoke this.<org.jfree.chart.renderer.category.LineRenderer3D: boolean isItemLabelVisible(int,int,boolean)>(row, column, selected);
+    
+        if $stack56 == 0 goto label10;
+        $stack57 = value cmpg 0.0;
+    
+        if $stack57 >= 0 goto label08;
+        $stack58 = 1;
+    
+        goto label09;
+    
+      label08:
+        $stack58 = 0;
+    
+      label09:
+        virtualinvoke this.<org.jfree.chart.renderer.category.LineRenderer3D: void drawItemLabel(java.awt.Graphics2D,org.jfree.chart.plot.PlotOrientation,org.jfree.data.category.CategoryDataset,int,int,boolean,double,double,boolean)>(g2, orientation, dataset, row, column, selected, x1, y1, $stack58);
+    
+      label10:
+        previousValue#1 = virtualinvoke state.<org.jfree.chart.renderer.category.CategoryItemRendererState: org.jfree.chart.entity.EntityCollection getEntityCollection()>();
+    
+        if previousValue#1 == null goto label11;
+        virtualinvoke this.<org.jfree.chart.renderer.category.LineRenderer3D: void addEntity(org.jfree.chart.entity.EntityCollection,java.awt.Shape,org.jfree.data.category.CategoryDataset,int,int,boolean)>(previousValue#1, shape, dataset, row, column, selected);
+    
+      label11:
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.category.LineRenderer3D: java.awt.Paint getWallPaint()> ----
+    {
+        java.awt.Paint $stack1;
+        org.jfree.chart.renderer.category.LineRenderer3D this;
+    
+    
+        this := @this: org.jfree.chart.renderer.category.LineRenderer3D;
+        $stack1 = this.<org.jfree.chart.renderer.category.LineRenderer3D: java.awt.Paint wallPaint>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.category.LineRenderer3D: void drawRangeGridline(java.awt.Graphics2D,org.jfree.chart.plot.CategoryPlot,org.jfree.chart.axis.ValueAxis,java.awt.geom.Rectangle2D,double)> ----
+    {
+        boolean $stack22;
+        double $stack23, $stack24, $stack25, $stack26, $stack27, $stack28, $stack29, $stack30, $stack31, $stack32, $stack39, $stack40, $stack44, $stack45, value, x0#0, x0#1, x1#0, x1#1, y0#0, y0#1, y1#0, y1#1, y2#0, y2#1;
+        java.awt.Graphics2D g2;
+        java.awt.Paint $stack36;
+        java.awt.Shape #l0, #l4;
+        java.awt.Stroke $stack37;
+        java.awt.geom.Line2D$Double $stack41, $stack42, $stack46, $stack47;
+        java.awt.geom.Rectangle2D #l1, #l2, dataArea;
+        java.awt.geom.Rectangle2D$Double #l3, adjusted;
+        java.lang.Object $stack33, line1, line2;
+        org.jfree.chart.axis.ValueAxis axis;
+        org.jfree.chart.plot.CategoryPlot plot;
+        org.jfree.chart.plot.PlotOrientation $stack34, $stack35, orientation;
+        org.jfree.chart.renderer.category.LineRenderer3D this;
+        org.jfree.chart.util.RectangleEdge $stack38, $stack43;
+        org.jfree.data.Range range;
+    
+    
+        this := @this: org.jfree.chart.renderer.category.LineRenderer3D;
+        g2 := @parameter0: java.awt.Graphics2D;
+        plot := @parameter1: org.jfree.chart.plot.CategoryPlot;
+        axis := @parameter2: org.jfree.chart.axis.ValueAxis;
+        dataArea := @parameter3: java.awt.geom.Rectangle2D;
+        value := @parameter4: double;
+        range = virtualinvoke axis.<org.jfree.chart.axis.ValueAxis: org.jfree.data.Range getRange()>();
+        $stack22 = virtualinvoke range.<org.jfree.data.Range: boolean contains(double)>(value);
+    
+        if $stack22 != 0 goto label1;
+    
+        return;
+    
+      label1:
+        $stack33 = new java.awt.geom.Rectangle2D$Double;
+        $stack32 = virtualinvoke dataArea.<java.awt.geom.Rectangle2D: double getX()>();
+        $stack23 = virtualinvoke dataArea.<java.awt.geom.Rectangle2D: double getY()>();
+        $stack24 = virtualinvoke this.<org.jfree.chart.renderer.category.LineRenderer3D: double getYOffset()>();
+        $stack31 = $stack23 + $stack24;
+        $stack25 = virtualinvoke dataArea.<java.awt.geom.Rectangle2D: double getWidth()>();
+        $stack26 = virtualinvoke this.<org.jfree.chart.renderer.category.LineRenderer3D: double getXOffset()>();
+        $stack30 = $stack25 - $stack26;
+        $stack27 = virtualinvoke dataArea.<java.awt.geom.Rectangle2D: double getHeight()>();
+        $stack28 = virtualinvoke this.<org.jfree.chart.renderer.category.LineRenderer3D: double getYOffset()>();
+        $stack29 = $stack27 - $stack28;
+        #l3 = (java.awt.geom.Rectangle2D$Double) $stack33;
+        specialinvoke #l3.<java.awt.geom.Rectangle2D$Double: void <init>(double,double,double,double)>($stack32, $stack31, $stack30, $stack29);
+        adjusted = (java.awt.geom.Rectangle2D$Double) $stack33;
+        line1 = null;
+        line2 = null;
+        orientation = virtualinvoke plot.<org.jfree.chart.plot.CategoryPlot: org.jfree.chart.plot.PlotOrientation getOrientation()>();
+        $stack34 = <org.jfree.chart.plot.PlotOrientation: org.jfree.chart.plot.PlotOrientation HORIZONTAL>;
+    
+        if orientation != $stack34 goto label2;
+        $stack43 = virtualinvoke plot.<org.jfree.chart.plot.CategoryPlot: org.jfree.chart.util.RectangleEdge getRangeAxisEdge()>();
+        #l1 = (java.awt.geom.Rectangle2D) $stack33;
+        x0#0 = virtualinvoke axis.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)>(value, #l1, $stack43);
+        $stack44 = virtualinvoke this.<org.jfree.chart.renderer.category.LineRenderer3D: double getXOffset()>();
+        x1#0 = x0#0 + $stack44;
+        y0#0 = virtualinvoke dataArea.<java.awt.geom.Rectangle2D: double getMaxY()>();
+        $stack45 = virtualinvoke this.<org.jfree.chart.renderer.category.LineRenderer3D: double getYOffset()>();
+        y1#0 = y0#0 - $stack45;
+        y2#0 = virtualinvoke dataArea.<java.awt.geom.Rectangle2D: double getMinY()>();
+        $stack46 = new java.awt.geom.Line2D$Double;
+        specialinvoke $stack46.<java.awt.geom.Line2D$Double: void <init>(double,double,double,double)>(x0#0, y0#0, x1#0, y1#0);
+        line1 = $stack46;
+        $stack47 = new java.awt.geom.Line2D$Double;
+        specialinvoke $stack47.<java.awt.geom.Line2D$Double: void <init>(double,double,double,double)>(x1#0, y1#0, x1#0, y2#0);
+        line2 = $stack47;
+    
+        goto label3;
+    
+      label2:
+        $stack35 = <org.jfree.chart.plot.PlotOrientation: org.jfree.chart.plot.PlotOrientation VERTICAL>;
+    
+        if orientation != $stack35 goto label3;
+        $stack38 = virtualinvoke plot.<org.jfree.chart.plot.CategoryPlot: org.jfree.chart.util.RectangleEdge getRangeAxisEdge()>();
+        #l2 = (java.awt.geom.Rectangle2D) $stack33;
+        x0#1 = virtualinvoke axis.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)>(value, #l2, $stack38);
+        $stack39 = virtualinvoke this.<org.jfree.chart.renderer.category.LineRenderer3D: double getYOffset()>();
+        x1#1 = x0#1 - $stack39;
+        y0#1 = virtualinvoke dataArea.<java.awt.geom.Rectangle2D: double getMinX()>();
+        $stack40 = virtualinvoke this.<org.jfree.chart.renderer.category.LineRenderer3D: double getXOffset()>();
+        y1#1 = y0#1 + $stack40;
+        y2#1 = virtualinvoke dataArea.<java.awt.geom.Rectangle2D: double getMaxX()>();
+        $stack41 = new java.awt.geom.Line2D$Double;
+        specialinvoke $stack41.<java.awt.geom.Line2D$Double: void <init>(double,double,double,double)>(y0#1, x0#1, y1#1, x1#1);
+        line1 = $stack41;
+        $stack42 = new java.awt.geom.Line2D$Double;
+        specialinvoke $stack42.<java.awt.geom.Line2D$Double: void <init>(double,double,double,double)>(y1#1, x1#1, y2#1, x1#1);
+        line2 = $stack42;
+    
+      label3:
+        $stack36 = virtualinvoke plot.<org.jfree.chart.plot.CategoryPlot: java.awt.Paint getRangeGridlinePaint()>();
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>($stack36);
+        $stack37 = virtualinvoke plot.<org.jfree.chart.plot.CategoryPlot: java.awt.Stroke getRangeGridlineStroke()>();
+        virtualinvoke g2.<java.awt.Graphics2D: void setStroke(java.awt.Stroke)>($stack37);
+        #l0 = (java.awt.Shape) line1;
+        virtualinvoke g2.<java.awt.Graphics2D: void draw(java.awt.Shape)>(#l0);
+        #l4 = (java.awt.Shape) line2;
+        virtualinvoke g2.<java.awt.Graphics2D: void draw(java.awt.Shape)>(#l4);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.category.LineRenderer3D: void readObject(java.io.ObjectInputStream)> ----
+    {
+        java.awt.Paint $stack2;
+        java.io.ObjectInputStream stream;
+        org.jfree.chart.renderer.category.LineRenderer3D this;
+    
+    
+        this := @this: org.jfree.chart.renderer.category.LineRenderer3D;
+        stream := @parameter0: java.io.ObjectInputStream;
+        virtualinvoke stream.<java.io.ObjectInputStream: void defaultReadObject()>();
+        $stack2 = staticinvoke <org.jfree.chart.util.SerialUtilities: java.awt.Paint readPaint(java.io.ObjectInputStream)>(stream);
+        this.<org.jfree.chart.renderer.category.LineRenderer3D: java.awt.Paint wallPaint> = $stack2;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.category.LineRenderer3D: void drawDomainGridline(java.awt.Graphics2D,org.jfree.chart.plot.CategoryPlot,java.awt.geom.Rectangle2D,double)> ----
+    {
+        double $stack23, $stack24, $stack27, $stack28, value, x0#0, x0#1, x1#0, x1#1, x2#0, x2#1, y0#0, y0#1, y1#0, y1#1;
+        java.awt.Graphics2D g2;
+        java.awt.Paint $stack21;
+        java.awt.Shape #l0, #l1;
+        java.awt.Stroke $stack22;
+        java.awt.geom.Line2D$Double $stack25, $stack26, $stack29, $stack30;
+        java.awt.geom.Rectangle2D dataArea;
+        java.lang.Object line1, line2;
+        org.jfree.chart.plot.CategoryPlot plot;
+        org.jfree.chart.plot.PlotOrientation $stack19, $stack20, orientation;
+        org.jfree.chart.renderer.category.LineRenderer3D this;
+    
+    
+        this := @this: org.jfree.chart.renderer.category.LineRenderer3D;
+        g2 := @parameter0: java.awt.Graphics2D;
+        plot := @parameter1: org.jfree.chart.plot.CategoryPlot;
+        dataArea := @parameter2: java.awt.geom.Rectangle2D;
+        value := @parameter3: double;
+        line1 = null;
+        line2 = null;
+        orientation = virtualinvoke plot.<org.jfree.chart.plot.CategoryPlot: org.jfree.chart.plot.PlotOrientation getOrientation()>();
+        $stack19 = <org.jfree.chart.plot.PlotOrientation: org.jfree.chart.plot.PlotOrientation HORIZONTAL>;
+    
+        if orientation != $stack19 goto label1;
+        y0#0 = value;
+        $stack27 = virtualinvoke this.<org.jfree.chart.renderer.category.LineRenderer3D: double getYOffset()>();
+        y1#0 = value - $stack27;
+        x0#0 = virtualinvoke dataArea.<java.awt.geom.Rectangle2D: double getMinX()>();
+        $stack28 = virtualinvoke this.<org.jfree.chart.renderer.category.LineRenderer3D: double getXOffset()>();
+        x1#0 = x0#0 + $stack28;
+        x2#0 = virtualinvoke dataArea.<java.awt.geom.Rectangle2D: double getMaxX()>();
+        $stack29 = new java.awt.geom.Line2D$Double;
+        specialinvoke $stack29.<java.awt.geom.Line2D$Double: void <init>(double,double,double,double)>(x0#0, value, x1#0, y1#0);
+        line1 = $stack29;
+        $stack30 = new java.awt.geom.Line2D$Double;
+        specialinvoke $stack30.<java.awt.geom.Line2D$Double: void <init>(double,double,double,double)>(x1#0, y1#0, x2#0, y1#0);
+        line2 = $stack30;
+    
+        goto label2;
+    
+      label1:
+        $stack20 = <org.jfree.chart.plot.PlotOrientation: org.jfree.chart.plot.PlotOrientation VERTICAL>;
+    
+        if orientation != $stack20 goto label2;
+        y0#1 = value;
+        $stack23 = virtualinvoke this.<org.jfree.chart.renderer.category.LineRenderer3D: double getXOffset()>();
+        y1#1 = value + $stack23;
+        x0#1 = virtualinvoke dataArea.<java.awt.geom.Rectangle2D: double getMaxY()>();
+        $stack24 = virtualinvoke this.<org.jfree.chart.renderer.category.LineRenderer3D: double getYOffset()>();
+        x1#1 = x0#1 - $stack24;
+        x2#1 = virtualinvoke dataArea.<java.awt.geom.Rectangle2D: double getMinY()>();
+        $stack25 = new java.awt.geom.Line2D$Double;
+        specialinvoke $stack25.<java.awt.geom.Line2D$Double: void <init>(double,double,double,double)>(value, x0#1, y1#1, x1#1);
+        line1 = $stack25;
+        $stack26 = new java.awt.geom.Line2D$Double;
+        specialinvoke $stack26.<java.awt.geom.Line2D$Double: void <init>(double,double,double,double)>(y1#1, x1#1, y1#1, x2#1);
+        line2 = $stack26;
+    
+      label2:
+        $stack21 = virtualinvoke plot.<org.jfree.chart.plot.CategoryPlot: java.awt.Paint getDomainGridlinePaint()>();
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>($stack21);
+        $stack22 = virtualinvoke plot.<org.jfree.chart.plot.CategoryPlot: java.awt.Stroke getDomainGridlineStroke()>();
+        virtualinvoke g2.<java.awt.Graphics2D: void setStroke(java.awt.Stroke)>($stack22);
+        #l0 = (java.awt.Shape) line1;
+        virtualinvoke g2.<java.awt.Graphics2D: void draw(java.awt.Shape)>(#l0);
+        #l1 = (java.awt.Shape) line2;
+        virtualinvoke g2.<java.awt.Graphics2D: void draw(java.awt.Shape)>(#l1);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.category.LineRenderer3D: void drawOutline(java.awt.Graphics2D,org.jfree.chart.plot.CategoryPlot,java.awt.geom.Rectangle2D)> ----
+    {
+        double $stack15, $stack16, $stack17, $stack19, $stack20, $stack21, $stack23, $stack24, $stack25, $stack27, $stack28, $stack29;
+        float $stack18, $stack22, $stack26, $stack30, x0, x1, x2, x3, y0, y1, y2, y3;
+        java.awt.Graphics2D g2;
+        java.awt.Paint outlinePaint;
+        java.awt.Shape #l2;
+        java.awt.Stroke outlineStroke;
+        java.awt.geom.GeneralPath #l0, #l1, #l3, #l4, #l5, #l6, #l7, #l8, clip;
+        java.awt.geom.Rectangle2D dataArea;
+        java.lang.Object $stack31;
+        org.jfree.chart.plot.CategoryPlot plot;
+        org.jfree.chart.renderer.category.LineRenderer3D this;
+    
+    
+        this := @this: org.jfree.chart.renderer.category.LineRenderer3D;
+        g2 := @parameter0: java.awt.Graphics2D;
+        plot := @parameter1: org.jfree.chart.plot.CategoryPlot;
+        dataArea := @parameter2: java.awt.geom.Rectangle2D;
+        $stack15 = virtualinvoke dataArea.<java.awt.geom.Rectangle2D: double getX()>();
+        x0 = (float) $stack15;
+        $stack16 = this.<org.jfree.chart.renderer.category.LineRenderer3D: double xOffset>;
+        $stack17 = staticinvoke <java.lang.Math: double abs(double)>($stack16);
+        $stack18 = (float) $stack17;
+        x1 = x0 + $stack18;
+        $stack19 = virtualinvoke dataArea.<java.awt.geom.Rectangle2D: double getMaxX()>();
+        x3 = (float) $stack19;
+        $stack20 = this.<org.jfree.chart.renderer.category.LineRenderer3D: double xOffset>;
+        $stack21 = staticinvoke <java.lang.Math: double abs(double)>($stack20);
+        $stack22 = (float) $stack21;
+        x2 = x3 - $stack22;
+        $stack23 = virtualinvoke dataArea.<java.awt.geom.Rectangle2D: double getMaxY()>();
+        y0 = (float) $stack23;
+        $stack24 = this.<org.jfree.chart.renderer.category.LineRenderer3D: double yOffset>;
+        $stack25 = staticinvoke <java.lang.Math: double abs(double)>($stack24);
+        $stack26 = (float) $stack25;
+        y1 = y0 - $stack26;
+        $stack27 = virtualinvoke dataArea.<java.awt.geom.Rectangle2D: double getMinY()>();
+        y3 = (float) $stack27;
+        $stack28 = this.<org.jfree.chart.renderer.category.LineRenderer3D: double yOffset>;
+        $stack29 = staticinvoke <java.lang.Math: double abs(double)>($stack28);
+        $stack30 = (float) $stack29;
+        y2 = y3 + $stack30;
+        $stack31 = new java.awt.geom.GeneralPath;
+        #l3 = (java.awt.geom.GeneralPath) $stack31;
+        specialinvoke #l3.<java.awt.geom.GeneralPath: void <init>()>();
+        clip = (java.awt.geom.GeneralPath) $stack31;
+        #l4 = (java.awt.geom.GeneralPath) $stack31;
+        virtualinvoke #l4.<java.awt.geom.GeneralPath: void moveTo(float,float)>(x0, y0);
+        #l6 = (java.awt.geom.GeneralPath) $stack31;
+        virtualinvoke #l6.<java.awt.geom.GeneralPath: void lineTo(float,float)>(x0, y2);
+        #l1 = (java.awt.geom.GeneralPath) $stack31;
+        virtualinvoke #l1.<java.awt.geom.GeneralPath: void lineTo(float,float)>(x1, y3);
+        #l0 = (java.awt.geom.GeneralPath) $stack31;
+        virtualinvoke #l0.<java.awt.geom.GeneralPath: void lineTo(float,float)>(x3, y3);
+        #l7 = (java.awt.geom.GeneralPath) $stack31;
+        virtualinvoke #l7.<java.awt.geom.GeneralPath: void lineTo(float,float)>(x3, y1);
+        #l5 = (java.awt.geom.GeneralPath) $stack31;
+        virtualinvoke #l5.<java.awt.geom.GeneralPath: void lineTo(float,float)>(x2, y0);
+        #l8 = (java.awt.geom.GeneralPath) $stack31;
+        virtualinvoke #l8.<java.awt.geom.GeneralPath: void closePath()>();
+        outlineStroke = virtualinvoke plot.<org.jfree.chart.plot.CategoryPlot: java.awt.Stroke getOutlineStroke()>();
+        outlinePaint = virtualinvoke plot.<org.jfree.chart.plot.CategoryPlot: java.awt.Paint getOutlinePaint()>();
+    
+        if outlineStroke == null goto label1;
+    
+        if outlinePaint == null goto label1;
+        virtualinvoke g2.<java.awt.Graphics2D: void setStroke(java.awt.Stroke)>(outlineStroke);
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>(outlinePaint);
+        #l2 = (java.awt.Shape) $stack31;
+        virtualinvoke g2.<java.awt.Graphics2D: void draw(java.awt.Shape)>(#l2);
+    
+      label1:
+        return;
+    }
+
+}

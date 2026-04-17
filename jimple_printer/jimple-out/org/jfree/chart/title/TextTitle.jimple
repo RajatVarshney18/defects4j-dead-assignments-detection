@@ -1,0 +1,1444 @@
+// ========================================================================
+// CLASS : org.jfree.chart.title.TextTitle
+// ========================================================================
+
+[PUBLIC, SUPER] class org.jfree.chart.title.TextTitle extends org.jfree.chart.title.Title implements org.jfree.chart.util.PublicCloneable, java.io.Serializable, java.lang.Cloneable {
+
+    // ---- method: <org.jfree.chart.title.TextTitle: void setTextAlignment(org.jfree.chart.util.HorizontalAlignment)> ----
+    {
+        java.lang.IllegalArgumentException #l1;
+        java.lang.Object $stack3;
+        java.lang.Throwable #l0;
+        org.jfree.chart.event.TitleChangeEvent $stack2;
+        org.jfree.chart.title.TextTitle this;
+        org.jfree.chart.util.HorizontalAlignment alignment;
+    
+    
+        this := @this: org.jfree.chart.title.TextTitle;
+        alignment := @parameter0: org.jfree.chart.util.HorizontalAlignment;
+    
+        if alignment != null goto label1;
+        $stack3 = new java.lang.IllegalArgumentException;
+        #l1 = (java.lang.IllegalArgumentException) $stack3;
+        specialinvoke #l1.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'alignment\' argument.");
+        #l0 = (java.lang.Throwable) $stack3;
+    
+        throw #l0;
+    
+      label1:
+        this.<org.jfree.chart.title.TextTitle: org.jfree.chart.util.HorizontalAlignment textAlignment> = alignment;
+        $stack2 = new org.jfree.chart.event.TitleChangeEvent;
+        specialinvoke $stack2.<org.jfree.chart.event.TitleChangeEvent: void <init>(org.jfree.chart.title.Title)>(this);
+        virtualinvoke this.<org.jfree.chart.title.TextTitle: void notifyListeners(org.jfree.chart.event.TitleChangeEvent)>($stack2);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.title.TextTitle: org.jfree.chart.util.Size2D arrangeNN(java.awt.Graphics2D)> ----
+    {
+        java.awt.Graphics2D g2;
+        org.jfree.chart.title.TextTitle this;
+        org.jfree.chart.util.Size2D $stack4;
+        org.jfree.data.Range $stack3, max;
+    
+    
+        this := @this: org.jfree.chart.title.TextTitle;
+        g2 := @parameter0: java.awt.Graphics2D;
+        $stack3 = new org.jfree.data.Range;
+        specialinvoke $stack3.<org.jfree.data.Range: void <init>(double,double)>(0.0, 3.4028234663852886E38);
+        max = $stack3;
+        $stack4 = virtualinvoke this.<org.jfree.chart.title.TextTitle: org.jfree.chart.util.Size2D arrangeRR(java.awt.Graphics2D,org.jfree.data.Range,org.jfree.data.Range)>(g2, $stack3, $stack3);
+    
+        return $stack4;
+    }
+
+    // ---- method: <org.jfree.chart.title.TextTitle: org.jfree.chart.util.Size2D arrangeRR(java.awt.Graphics2D,org.jfree.data.Range,org.jfree.data.Range)> ----
+    {
+        boolean $stack19, $stack36;
+        double $stack20, $stack21, $stack25, $stack37, $stack38, $stack40, $stack41, $stack8;
+        float maxWidth#0, maxWidth#1;
+        int $stack14, $stack31;
+        java.awt.Font $stack12, $stack26, $stack29, $stack9;
+        java.awt.Graphics2D g2;
+        java.awt.Paint $stack13, $stack30;
+        java.lang.Object $stack44;
+        java.lang.RuntimeException #l1;
+        java.lang.String $stack11, $stack28;
+        java.lang.Throwable #l0;
+        org.jfree.chart.text.G2TextMeasurer $stack10, $stack27;
+        org.jfree.chart.text.TextBlock $stack15, $stack17, $stack18, $stack32, $stack34, $stack35;
+        org.jfree.chart.title.TextTitle this;
+        org.jfree.chart.util.HorizontalAlignment $stack16, $stack33;
+        org.jfree.chart.util.RectangleEdge $stack23, $stack24, $stack43, $stack7, position;
+        org.jfree.chart.util.Size2D $stack22, $stack39, $stack42, contentSize#0, contentSize#1;
+        org.jfree.data.Range heightRange, widthRange;
+    
+    
+        this := @this: org.jfree.chart.title.TextTitle;
+        g2 := @parameter0: java.awt.Graphics2D;
+        widthRange := @parameter1: org.jfree.data.Range;
+        heightRange := @parameter2: org.jfree.data.Range;
+        position = virtualinvoke this.<org.jfree.chart.title.TextTitle: org.jfree.chart.util.RectangleEdge getPosition()>();
+        $stack7 = <org.jfree.chart.util.RectangleEdge: org.jfree.chart.util.RectangleEdge TOP>;
+    
+        if position == $stack7 goto label1;
+        $stack23 = <org.jfree.chart.util.RectangleEdge: org.jfree.chart.util.RectangleEdge BOTTOM>;
+    
+        if position != $stack23 goto label2;
+    
+      label1:
+        $stack8 = virtualinvoke widthRange.<org.jfree.data.Range: double getUpperBound()>();
+        maxWidth#0 = (float) $stack8;
+        $stack9 = this.<org.jfree.chart.title.TextTitle: java.awt.Font font>;
+        virtualinvoke g2.<java.awt.Graphics2D: void setFont(java.awt.Font)>($stack9);
+        $stack11 = this.<org.jfree.chart.title.TextTitle: java.lang.String text>;
+        $stack12 = this.<org.jfree.chart.title.TextTitle: java.awt.Font font>;
+        $stack13 = this.<org.jfree.chart.title.TextTitle: java.awt.Paint paint>;
+        $stack14 = this.<org.jfree.chart.title.TextTitle: int maximumLinesToDisplay>;
+        $stack10 = new org.jfree.chart.text.G2TextMeasurer;
+        specialinvoke $stack10.<org.jfree.chart.text.G2TextMeasurer: void <init>(java.awt.Graphics2D)>(g2);
+        $stack15 = staticinvoke <org.jfree.chart.text.TextUtilities: org.jfree.chart.text.TextBlock createTextBlock(java.lang.String,java.awt.Font,java.awt.Paint,float,int,org.jfree.chart.text.TextMeasurer)>($stack11, $stack12, $stack13, maxWidth#0, $stack14, $stack10);
+        this.<org.jfree.chart.title.TextTitle: org.jfree.chart.text.TextBlock content> = $stack15;
+        $stack17 = this.<org.jfree.chart.title.TextTitle: org.jfree.chart.text.TextBlock content>;
+        $stack16 = this.<org.jfree.chart.title.TextTitle: org.jfree.chart.util.HorizontalAlignment textAlignment>;
+        virtualinvoke $stack17.<org.jfree.chart.text.TextBlock: void setLineAlignment(org.jfree.chart.util.HorizontalAlignment)>($stack16);
+        $stack18 = this.<org.jfree.chart.title.TextTitle: org.jfree.chart.text.TextBlock content>;
+        contentSize#0 = virtualinvoke $stack18.<org.jfree.chart.text.TextBlock: org.jfree.chart.util.Size2D calculateDimensions(java.awt.Graphics2D)>(g2);
+        $stack19 = this.<org.jfree.chart.title.TextTitle: boolean expandToFitSpace>;
+    
+        if $stack19 == 0 goto label4;
+        $stack22 = new org.jfree.chart.util.Size2D;
+        $stack21 = (double) maxWidth#0;
+        $stack20 = virtualinvoke contentSize#0.<org.jfree.chart.util.Size2D: double getHeight()>();
+        specialinvoke $stack22.<org.jfree.chart.util.Size2D: void <init>(double,double)>($stack21, $stack20);
+    
+        return $stack22;
+    
+      label2:
+        $stack24 = <org.jfree.chart.util.RectangleEdge: org.jfree.chart.util.RectangleEdge LEFT>;
+    
+        if position == $stack24 goto label3;
+        $stack43 = <org.jfree.chart.util.RectangleEdge: org.jfree.chart.util.RectangleEdge RIGHT>;
+    
+        if position != $stack43 goto label5;
+    
+      label3:
+        $stack25 = virtualinvoke heightRange.<org.jfree.data.Range: double getUpperBound()>();
+        maxWidth#1 = (float) $stack25;
+        $stack26 = this.<org.jfree.chart.title.TextTitle: java.awt.Font font>;
+        virtualinvoke g2.<java.awt.Graphics2D: void setFont(java.awt.Font)>($stack26);
+        $stack28 = this.<org.jfree.chart.title.TextTitle: java.lang.String text>;
+        $stack29 = this.<org.jfree.chart.title.TextTitle: java.awt.Font font>;
+        $stack30 = this.<org.jfree.chart.title.TextTitle: java.awt.Paint paint>;
+        $stack31 = this.<org.jfree.chart.title.TextTitle: int maximumLinesToDisplay>;
+        $stack27 = new org.jfree.chart.text.G2TextMeasurer;
+        specialinvoke $stack27.<org.jfree.chart.text.G2TextMeasurer: void <init>(java.awt.Graphics2D)>(g2);
+        $stack32 = staticinvoke <org.jfree.chart.text.TextUtilities: org.jfree.chart.text.TextBlock createTextBlock(java.lang.String,java.awt.Font,java.awt.Paint,float,int,org.jfree.chart.text.TextMeasurer)>($stack28, $stack29, $stack30, maxWidth#1, $stack31, $stack27);
+        this.<org.jfree.chart.title.TextTitle: org.jfree.chart.text.TextBlock content> = $stack32;
+        $stack34 = this.<org.jfree.chart.title.TextTitle: org.jfree.chart.text.TextBlock content>;
+        $stack33 = this.<org.jfree.chart.title.TextTitle: org.jfree.chart.util.HorizontalAlignment textAlignment>;
+        virtualinvoke $stack34.<org.jfree.chart.text.TextBlock: void setLineAlignment(org.jfree.chart.util.HorizontalAlignment)>($stack33);
+        $stack35 = this.<org.jfree.chart.title.TextTitle: org.jfree.chart.text.TextBlock content>;
+        contentSize#1 = virtualinvoke $stack35.<org.jfree.chart.text.TextBlock: org.jfree.chart.util.Size2D calculateDimensions(java.awt.Graphics2D)>(g2);
+        $stack36 = this.<org.jfree.chart.title.TextTitle: boolean expandToFitSpace>;
+    
+        if $stack36 == 0 goto label6;
+        $stack42 = new org.jfree.chart.util.Size2D;
+        $stack41 = virtualinvoke contentSize#1.<org.jfree.chart.util.Size2D: double getHeight()>();
+        $stack40 = (double) maxWidth#1;
+        specialinvoke $stack42.<org.jfree.chart.util.Size2D: void <init>(double,double)>($stack41, $stack40);
+    
+        return $stack42;
+    
+      label4:
+        return contentSize#0;
+    
+      label5:
+        $stack44 = new java.lang.RuntimeException;
+        #l1 = (java.lang.RuntimeException) $stack44;
+        specialinvoke #l1.<java.lang.RuntimeException: void <init>(java.lang.String)>("Unrecognised exception.");
+        #l0 = (java.lang.Throwable) $stack44;
+    
+        throw #l0;
+    
+      label6:
+        $stack39 = new org.jfree.chart.util.Size2D;
+        $stack38 = contentSize#1.<org.jfree.chart.util.Size2D: double height>;
+        $stack37 = contentSize#1.<org.jfree.chart.util.Size2D: double width>;
+        specialinvoke $stack39.<org.jfree.chart.util.Size2D: void <init>(double,double)>($stack38, $stack37);
+    
+        return $stack39;
+    }
+
+    // ---- method: <org.jfree.chart.title.TextTitle: java.awt.Font getFont()> ----
+    {
+        java.awt.Font $stack1;
+        org.jfree.chart.title.TextTitle this;
+    
+    
+        this := @this: org.jfree.chart.title.TextTitle;
+        $stack1 = this.<org.jfree.chart.title.TextTitle: java.awt.Font font>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.title.TextTitle: java.lang.String getToolTipText()> ----
+    {
+        java.lang.String $stack1;
+        org.jfree.chart.title.TextTitle this;
+    
+    
+        this := @this: org.jfree.chart.title.TextTitle;
+        $stack1 = this.<org.jfree.chart.title.TextTitle: java.lang.String toolTipText>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.title.TextTitle: void setExpandToFitSpace(boolean)> ----
+    {
+        boolean expand;
+        org.jfree.chart.event.TitleChangeEvent $stack2;
+        org.jfree.chart.title.TextTitle this;
+    
+    
+        this := @this: org.jfree.chart.title.TextTitle;
+        expand := @parameter0: boolean;
+        this.<org.jfree.chart.title.TextTitle: boolean expandToFitSpace> = expand;
+        $stack2 = new org.jfree.chart.event.TitleChangeEvent;
+        specialinvoke $stack2.<org.jfree.chart.event.TitleChangeEvent: void <init>(org.jfree.chart.title.Title)>(this);
+        virtualinvoke this.<org.jfree.chart.title.TextTitle: void notifyListeners(org.jfree.chart.event.TitleChangeEvent)>($stack2);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.title.TextTitle: int getMaximumLinesToDisplay()> ----
+    {
+        int $stack1;
+        org.jfree.chart.title.TextTitle this;
+    
+    
+        this := @this: org.jfree.chart.title.TextTitle;
+        $stack1 = this.<org.jfree.chart.title.TextTitle: int maximumLinesToDisplay>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.title.TextTitle: void drawHorizontal(java.awt.Graphics2D,java.awt.geom.Rectangle2D)> ----
+    {
+        double $stack18, $stack22, $stack23, $stack24, $stack25;
+        float x, y;
+        java.awt.Font $stack10;
+        java.awt.Graphics2D g2;
+        java.awt.Paint $stack11;
+        java.awt.geom.Rectangle2D area, titleArea;
+        java.lang.Object $stack9;
+        org.jfree.chart.text.TextBlock $stack17;
+        org.jfree.chart.text.TextBlockAnchor anchor;
+        org.jfree.chart.title.TextTitle this;
+        org.jfree.chart.util.HorizontalAlignment $stack12, $stack13, $stack14, $stack19, $stack20, $stack21, horizontalAlignment;
+        org.jfree.chart.util.RectangleEdge $stack15, $stack16, position;
+    
+    
+        this := @this: org.jfree.chart.title.TextTitle;
+        g2 := @parameter0: java.awt.Graphics2D;
+        area := @parameter1: java.awt.geom.Rectangle2D;
+        $stack9 = virtualinvoke area.<java.awt.geom.Rectangle2D: java.lang.Object clone()>();
+        titleArea = (java.awt.geom.Rectangle2D) $stack9;
+        $stack10 = this.<org.jfree.chart.title.TextTitle: java.awt.Font font>;
+        virtualinvoke g2.<java.awt.Graphics2D: void setFont(java.awt.Font)>($stack10);
+        $stack11 = this.<org.jfree.chart.title.TextTitle: java.awt.Paint paint>;
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>($stack11);
+        anchor = null;
+        x = 0.0F;
+        horizontalAlignment = virtualinvoke this.<org.jfree.chart.title.TextTitle: org.jfree.chart.util.HorizontalAlignment getHorizontalAlignment()>();
+        $stack12 = <org.jfree.chart.util.HorizontalAlignment: org.jfree.chart.util.HorizontalAlignment LEFT>;
+    
+        if horizontalAlignment != $stack12 goto label1;
+        $stack25 = virtualinvoke titleArea.<java.awt.geom.Rectangle2D: double getX()>();
+        x = (float) $stack25;
+        anchor = <org.jfree.chart.text.TextBlockAnchor: org.jfree.chart.text.TextBlockAnchor TOP_LEFT>;
+    
+        goto label3;
+    
+      label1:
+        $stack13 = <org.jfree.chart.util.HorizontalAlignment: org.jfree.chart.util.HorizontalAlignment RIGHT>;
+    
+        if horizontalAlignment != $stack13 goto label2;
+        $stack24 = virtualinvoke titleArea.<java.awt.geom.Rectangle2D: double getMaxX()>();
+        x = (float) $stack24;
+        anchor = <org.jfree.chart.text.TextBlockAnchor: org.jfree.chart.text.TextBlockAnchor TOP_RIGHT>;
+    
+        goto label3;
+    
+      label2:
+        $stack14 = <org.jfree.chart.util.HorizontalAlignment: org.jfree.chart.util.HorizontalAlignment CENTER>;
+    
+        if horizontalAlignment != $stack14 goto label3;
+        $stack23 = virtualinvoke titleArea.<java.awt.geom.Rectangle2D: double getCenterX()>();
+        x = (float) $stack23;
+        anchor = <org.jfree.chart.text.TextBlockAnchor: org.jfree.chart.text.TextBlockAnchor TOP_CENTER>;
+    
+      label3:
+        y = 0.0F;
+        position = virtualinvoke this.<org.jfree.chart.title.TextTitle: org.jfree.chart.util.RectangleEdge getPosition()>();
+        $stack15 = <org.jfree.chart.util.RectangleEdge: org.jfree.chart.util.RectangleEdge TOP>;
+    
+        if position != $stack15 goto label4;
+        $stack22 = virtualinvoke titleArea.<java.awt.geom.Rectangle2D: double getY()>();
+        y = (float) $stack22;
+    
+        goto label7;
+    
+      label4:
+        $stack16 = <org.jfree.chart.util.RectangleEdge: org.jfree.chart.util.RectangleEdge BOTTOM>;
+    
+        if position != $stack16 goto label7;
+        $stack18 = virtualinvoke titleArea.<java.awt.geom.Rectangle2D: double getMaxY()>();
+        y = (float) $stack18;
+        $stack19 = <org.jfree.chart.util.HorizontalAlignment: org.jfree.chart.util.HorizontalAlignment LEFT>;
+    
+        if horizontalAlignment != $stack19 goto label5;
+        anchor = <org.jfree.chart.text.TextBlockAnchor: org.jfree.chart.text.TextBlockAnchor BOTTOM_LEFT>;
+    
+        goto label7;
+    
+      label5:
+        $stack20 = <org.jfree.chart.util.HorizontalAlignment: org.jfree.chart.util.HorizontalAlignment CENTER>;
+    
+        if horizontalAlignment != $stack20 goto label6;
+        anchor = <org.jfree.chart.text.TextBlockAnchor: org.jfree.chart.text.TextBlockAnchor BOTTOM_CENTER>;
+    
+        goto label7;
+    
+      label6:
+        $stack21 = <org.jfree.chart.util.HorizontalAlignment: org.jfree.chart.util.HorizontalAlignment RIGHT>;
+    
+        if horizontalAlignment != $stack21 goto label7;
+        anchor = <org.jfree.chart.text.TextBlockAnchor: org.jfree.chart.text.TextBlockAnchor BOTTOM_RIGHT>;
+    
+      label7:
+        $stack17 = this.<org.jfree.chart.title.TextTitle: org.jfree.chart.text.TextBlock content>;
+        virtualinvoke $stack17.<org.jfree.chart.text.TextBlock: void draw(java.awt.Graphics2D,float,float,org.jfree.chart.text.TextBlockAnchor)>(g2, x, y, anchor);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.title.TextTitle: void writeObject(java.io.ObjectOutputStream)> ----
+    {
+        java.awt.Paint $stack2, $stack3;
+        java.io.ObjectOutputStream stream;
+        org.jfree.chart.title.TextTitle this;
+    
+    
+        this := @this: org.jfree.chart.title.TextTitle;
+        stream := @parameter0: java.io.ObjectOutputStream;
+        virtualinvoke stream.<java.io.ObjectOutputStream: void defaultWriteObject()>();
+        $stack2 = this.<org.jfree.chart.title.TextTitle: java.awt.Paint paint>;
+        staticinvoke <org.jfree.chart.util.SerialUtilities: void writePaint(java.awt.Paint,java.io.ObjectOutputStream)>($stack2, stream);
+        $stack3 = this.<org.jfree.chart.title.TextTitle: java.awt.Paint backgroundPaint>;
+        staticinvoke <org.jfree.chart.util.SerialUtilities: void writePaint(java.awt.Paint,java.io.ObjectOutputStream)>($stack3, stream);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.title.TextTitle: java.lang.Object draw(java.awt.Graphics2D,java.awt.geom.Rectangle2D,java.lang.Object)> ----
+    {
+        boolean $stack10, $stack11, $stack20;
+        java.awt.Graphics2D g2;
+        java.awt.Paint $stack12, $stack19;
+        java.awt.Shape #l0, #l1;
+        java.awt.geom.Rectangle2D #l2, #l3, #l4, area#0, area#3;
+        java.lang.Object area#1, area#2, params;
+        java.lang.String $stack21, $stack22, $stack9;
+        org.jfree.chart.block.BlockResult $stack14, result;
+        org.jfree.chart.block.EntityBlockParams p#0;
+        org.jfree.chart.entity.StandardEntityCollection $stack15, sec;
+        org.jfree.chart.entity.TitleEntity $stack23, entity;
+        org.jfree.chart.text.TextBlock $stack8;
+        org.jfree.chart.title.TextTitle this;
+        org.jfree.chart.util.RectangleEdge $stack13, $stack16, $stack17, $stack18, p#1;
+    
+    
+        this := @this: org.jfree.chart.title.TextTitle;
+        g2 := @parameter0: java.awt.Graphics2D;
+        area#0 := @parameter1: java.awt.geom.Rectangle2D;
+        params := @parameter2: java.lang.Object;
+        $stack8 = this.<org.jfree.chart.title.TextTitle: org.jfree.chart.text.TextBlock content>;
+    
+        if $stack8 != null goto label1;
+    
+        return null;
+    
+      label1:
+        area#1 = virtualinvoke this.<org.jfree.chart.title.TextTitle: java.awt.geom.Rectangle2D trimMargin(java.awt.geom.Rectangle2D)>(area#0);
+        #l4 = (java.awt.geom.Rectangle2D) area#1;
+        virtualinvoke this.<org.jfree.chart.title.TextTitle: void drawBorder(java.awt.Graphics2D,java.awt.geom.Rectangle2D)>(g2, #l4);
+        $stack9 = this.<org.jfree.chart.title.TextTitle: java.lang.String text>;
+        $stack10 = virtualinvoke $stack9.<java.lang.String: boolean equals(java.lang.Object)>("");
+    
+        if $stack10 == 0 goto label2;
+    
+        return null;
+    
+      label2:
+        entity = null;
+        $stack11 = params instanceof org.jfree.chart.block.EntityBlockParams;
+    
+        if $stack11 == 0 goto label3;
+        p#0 = (org.jfree.chart.block.EntityBlockParams) params;
+        $stack20 = interfaceinvoke p#0.<org.jfree.chart.block.EntityBlockParams: boolean getGenerateEntities()>();
+    
+        if $stack20 == 0 goto label3;
+        $stack23 = new org.jfree.chart.entity.TitleEntity;
+        $stack22 = this.<org.jfree.chart.title.TextTitle: java.lang.String toolTipText>;
+        $stack21 = this.<org.jfree.chart.title.TextTitle: java.lang.String urlText>;
+        #l1 = (java.awt.Shape) area#1;
+        specialinvoke $stack23.<org.jfree.chart.entity.TitleEntity: void <init>(java.awt.Shape,org.jfree.chart.title.Title,java.lang.String,java.lang.String)>(#l1, this, $stack22, $stack21);
+        entity = $stack23;
+    
+      label3:
+        #l3 = (java.awt.geom.Rectangle2D) area#1;
+        area#2 = virtualinvoke this.<org.jfree.chart.title.TextTitle: java.awt.geom.Rectangle2D trimBorder(java.awt.geom.Rectangle2D)>(#l3);
+        $stack12 = this.<org.jfree.chart.title.TextTitle: java.awt.Paint backgroundPaint>;
+    
+        if $stack12 == null goto label4;
+        $stack19 = this.<org.jfree.chart.title.TextTitle: java.awt.Paint backgroundPaint>;
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>($stack19);
+        #l0 = (java.awt.Shape) area#2;
+        virtualinvoke g2.<java.awt.Graphics2D: void fill(java.awt.Shape)>(#l0);
+    
+      label4:
+        #l2 = (java.awt.geom.Rectangle2D) area#2;
+        area#3 = virtualinvoke this.<org.jfree.chart.title.TextTitle: java.awt.geom.Rectangle2D trimPadding(java.awt.geom.Rectangle2D)>(#l2);
+        p#1 = virtualinvoke this.<org.jfree.chart.title.TextTitle: org.jfree.chart.util.RectangleEdge getPosition()>();
+        $stack13 = <org.jfree.chart.util.RectangleEdge: org.jfree.chart.util.RectangleEdge TOP>;
+    
+        if p#1 == $stack13 goto label5;
+        $stack16 = <org.jfree.chart.util.RectangleEdge: org.jfree.chart.util.RectangleEdge BOTTOM>;
+    
+        if p#1 != $stack16 goto label6;
+    
+      label5:
+        virtualinvoke this.<org.jfree.chart.title.TextTitle: void drawHorizontal(java.awt.Graphics2D,java.awt.geom.Rectangle2D)>(g2, area#3);
+    
+        goto label8;
+    
+      label6:
+        $stack17 = <org.jfree.chart.util.RectangleEdge: org.jfree.chart.util.RectangleEdge LEFT>;
+    
+        if p#1 == $stack17 goto label7;
+        $stack18 = <org.jfree.chart.util.RectangleEdge: org.jfree.chart.util.RectangleEdge RIGHT>;
+    
+        if p#1 != $stack18 goto label8;
+    
+      label7:
+        virtualinvoke this.<org.jfree.chart.title.TextTitle: void drawVertical(java.awt.Graphics2D,java.awt.geom.Rectangle2D)>(g2, area#3);
+    
+      label8:
+        $stack14 = new org.jfree.chart.block.BlockResult;
+        specialinvoke $stack14.<org.jfree.chart.block.BlockResult: void <init>()>();
+        result = $stack14;
+    
+        if entity == null goto label9;
+        $stack15 = new org.jfree.chart.entity.StandardEntityCollection;
+        specialinvoke $stack15.<org.jfree.chart.entity.StandardEntityCollection: void <init>()>();
+        sec = $stack15;
+        virtualinvoke $stack15.<org.jfree.chart.entity.StandardEntityCollection: void add(org.jfree.chart.entity.ChartEntity)>(entity);
+        virtualinvoke $stack14.<org.jfree.chart.block.BlockResult: void setEntityCollection(org.jfree.chart.entity.EntityCollection)>($stack15);
+    
+      label9:
+        return $stack14;
+    }
+
+    // ---- method: <org.jfree.chart.title.TextTitle: java.lang.String getURLText()> ----
+    {
+        java.lang.String $stack1;
+        org.jfree.chart.title.TextTitle this;
+    
+    
+        this := @this: org.jfree.chart.title.TextTitle;
+        $stack1 = this.<org.jfree.chart.title.TextTitle: java.lang.String urlText>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.title.TextTitle: java.awt.Paint getBackgroundPaint()> ----
+    {
+        java.awt.Paint $stack1;
+        org.jfree.chart.title.TextTitle this;
+    
+    
+        this := @this: org.jfree.chart.title.TextTitle;
+        $stack1 = this.<org.jfree.chart.title.TextTitle: java.awt.Paint backgroundPaint>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.title.TextTitle: void drawVertical(java.awt.Graphics2D,java.awt.geom.Rectangle2D)> ----
+    {
+        double $stack18, $stack22, $stack23, $stack24, $stack25;
+        float x, y;
+        java.awt.Font $stack10;
+        java.awt.Graphics2D g2;
+        java.awt.Paint $stack11;
+        java.awt.geom.Rectangle2D area, titleArea;
+        java.lang.Object $stack9;
+        org.jfree.chart.text.TextBlock $stack17;
+        org.jfree.chart.text.TextBlockAnchor anchor;
+        org.jfree.chart.title.TextTitle this;
+        org.jfree.chart.util.RectangleEdge $stack15, $stack16, position;
+        org.jfree.chart.util.VerticalAlignment $stack12, $stack13, $stack14, $stack19, $stack20, $stack21, verticalAlignment;
+    
+    
+        this := @this: org.jfree.chart.title.TextTitle;
+        g2 := @parameter0: java.awt.Graphics2D;
+        area := @parameter1: java.awt.geom.Rectangle2D;
+        $stack9 = virtualinvoke area.<java.awt.geom.Rectangle2D: java.lang.Object clone()>();
+        titleArea = (java.awt.geom.Rectangle2D) $stack9;
+        $stack10 = this.<org.jfree.chart.title.TextTitle: java.awt.Font font>;
+        virtualinvoke g2.<java.awt.Graphics2D: void setFont(java.awt.Font)>($stack10);
+        $stack11 = this.<org.jfree.chart.title.TextTitle: java.awt.Paint paint>;
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>($stack11);
+        anchor = null;
+        y = 0.0F;
+        verticalAlignment = virtualinvoke this.<org.jfree.chart.title.TextTitle: org.jfree.chart.util.VerticalAlignment getVerticalAlignment()>();
+        $stack12 = <org.jfree.chart.util.VerticalAlignment: org.jfree.chart.util.VerticalAlignment TOP>;
+    
+        if verticalAlignment != $stack12 goto label1;
+        $stack25 = virtualinvoke titleArea.<java.awt.geom.Rectangle2D: double getY()>();
+        y = (float) $stack25;
+        anchor = <org.jfree.chart.text.TextBlockAnchor: org.jfree.chart.text.TextBlockAnchor TOP_RIGHT>;
+    
+        goto label3;
+    
+      label1:
+        $stack13 = <org.jfree.chart.util.VerticalAlignment: org.jfree.chart.util.VerticalAlignment BOTTOM>;
+    
+        if verticalAlignment != $stack13 goto label2;
+        $stack24 = virtualinvoke titleArea.<java.awt.geom.Rectangle2D: double getMaxY()>();
+        y = (float) $stack24;
+        anchor = <org.jfree.chart.text.TextBlockAnchor: org.jfree.chart.text.TextBlockAnchor TOP_LEFT>;
+    
+        goto label3;
+    
+      label2:
+        $stack14 = <org.jfree.chart.util.VerticalAlignment: org.jfree.chart.util.VerticalAlignment CENTER>;
+    
+        if verticalAlignment != $stack14 goto label3;
+        $stack23 = virtualinvoke titleArea.<java.awt.geom.Rectangle2D: double getCenterY()>();
+        y = (float) $stack23;
+        anchor = <org.jfree.chart.text.TextBlockAnchor: org.jfree.chart.text.TextBlockAnchor TOP_CENTER>;
+    
+      label3:
+        x = 0.0F;
+        position = virtualinvoke this.<org.jfree.chart.title.TextTitle: org.jfree.chart.util.RectangleEdge getPosition()>();
+        $stack15 = <org.jfree.chart.util.RectangleEdge: org.jfree.chart.util.RectangleEdge LEFT>;
+    
+        if position != $stack15 goto label4;
+        $stack22 = virtualinvoke titleArea.<java.awt.geom.Rectangle2D: double getX()>();
+        x = (float) $stack22;
+    
+        goto label7;
+    
+      label4:
+        $stack16 = <org.jfree.chart.util.RectangleEdge: org.jfree.chart.util.RectangleEdge RIGHT>;
+    
+        if position != $stack16 goto label7;
+        $stack18 = virtualinvoke titleArea.<java.awt.geom.Rectangle2D: double getMaxX()>();
+        x = (float) $stack18;
+        $stack19 = <org.jfree.chart.util.VerticalAlignment: org.jfree.chart.util.VerticalAlignment TOP>;
+    
+        if verticalAlignment != $stack19 goto label5;
+        anchor = <org.jfree.chart.text.TextBlockAnchor: org.jfree.chart.text.TextBlockAnchor BOTTOM_RIGHT>;
+    
+        goto label7;
+    
+      label5:
+        $stack20 = <org.jfree.chart.util.VerticalAlignment: org.jfree.chart.util.VerticalAlignment CENTER>;
+    
+        if verticalAlignment != $stack20 goto label6;
+        anchor = <org.jfree.chart.text.TextBlockAnchor: org.jfree.chart.text.TextBlockAnchor BOTTOM_CENTER>;
+    
+        goto label7;
+    
+      label6:
+        $stack21 = <org.jfree.chart.util.VerticalAlignment: org.jfree.chart.util.VerticalAlignment BOTTOM>;
+    
+        if verticalAlignment != $stack21 goto label7;
+        anchor = <org.jfree.chart.text.TextBlockAnchor: org.jfree.chart.text.TextBlockAnchor BOTTOM_LEFT>;
+    
+      label7:
+        $stack17 = this.<org.jfree.chart.title.TextTitle: org.jfree.chart.text.TextBlock content>;
+        virtualinvoke $stack17.<org.jfree.chart.text.TextBlock: void draw(java.awt.Graphics2D,float,float,org.jfree.chart.text.TextBlockAnchor,float,float,double)>(g2, x, y, anchor, x, y, -1.5707963267948966);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.title.TextTitle: void <init>(java.lang.String)> ----
+    {
+        java.awt.Font $stack7;
+        java.awt.Paint $stack6;
+        java.lang.String text;
+        org.jfree.chart.title.TextTitle this;
+        org.jfree.chart.util.HorizontalAlignment $stack4;
+        org.jfree.chart.util.RectangleEdge $stack5;
+        org.jfree.chart.util.RectangleInsets $stack2;
+        org.jfree.chart.util.VerticalAlignment $stack3;
+    
+    
+        this := @this: org.jfree.chart.title.TextTitle;
+        text := @parameter0: java.lang.String;
+        $stack7 = <org.jfree.chart.title.TextTitle: java.awt.Font DEFAULT_FONT>;
+        $stack6 = <org.jfree.chart.title.TextTitle: java.awt.Paint DEFAULT_TEXT_PAINT>;
+        $stack5 = <org.jfree.chart.title.Title: org.jfree.chart.util.RectangleEdge DEFAULT_POSITION>;
+        $stack4 = <org.jfree.chart.title.Title: org.jfree.chart.util.HorizontalAlignment DEFAULT_HORIZONTAL_ALIGNMENT>;
+        $stack3 = <org.jfree.chart.title.Title: org.jfree.chart.util.VerticalAlignment DEFAULT_VERTICAL_ALIGNMENT>;
+        $stack2 = <org.jfree.chart.title.Title: org.jfree.chart.util.RectangleInsets DEFAULT_PADDING>;
+        specialinvoke this.<org.jfree.chart.title.TextTitle: void <init>(java.lang.String,java.awt.Font,java.awt.Paint,org.jfree.chart.util.RectangleEdge,org.jfree.chart.util.HorizontalAlignment,org.jfree.chart.util.VerticalAlignment,org.jfree.chart.util.RectangleInsets)>(text, $stack7, $stack6, $stack5, $stack4, $stack3, $stack2);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.title.TextTitle: void readObject(java.io.ObjectInputStream)> ----
+    {
+        java.awt.Paint $stack2, $stack3;
+        java.io.ObjectInputStream stream;
+        org.jfree.chart.title.TextTitle this;
+    
+    
+        this := @this: org.jfree.chart.title.TextTitle;
+        stream := @parameter0: java.io.ObjectInputStream;
+        virtualinvoke stream.<java.io.ObjectInputStream: void defaultReadObject()>();
+        $stack2 = staticinvoke <org.jfree.chart.util.SerialUtilities: java.awt.Paint readPaint(java.io.ObjectInputStream)>(stream);
+        this.<org.jfree.chart.title.TextTitle: java.awt.Paint paint> = $stack2;
+        $stack3 = staticinvoke <org.jfree.chart.util.SerialUtilities: java.awt.Paint readPaint(java.io.ObjectInputStream)>(stream);
+        this.<org.jfree.chart.title.TextTitle: java.awt.Paint backgroundPaint> = $stack3;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.title.TextTitle: java.lang.String getText()> ----
+    {
+        java.lang.String $stack1;
+        org.jfree.chart.title.TextTitle this;
+    
+    
+        this := @this: org.jfree.chart.title.TextTitle;
+        $stack1 = this.<org.jfree.chart.title.TextTitle: java.lang.String text>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.title.TextTitle: void draw(java.awt.Graphics2D,java.awt.geom.Rectangle2D)> ----
+    {
+        java.awt.Graphics2D g2;
+        java.awt.geom.Rectangle2D area;
+        org.jfree.chart.title.TextTitle this;
+    
+    
+        this := @this: org.jfree.chart.title.TextTitle;
+        g2 := @parameter0: java.awt.Graphics2D;
+        area := @parameter1: java.awt.geom.Rectangle2D;
+        virtualinvoke this.<org.jfree.chart.title.TextTitle: java.lang.Object draw(java.awt.Graphics2D,java.awt.geom.Rectangle2D,java.lang.Object)>(g2, area, null);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.title.TextTitle: org.jfree.chart.util.HorizontalAlignment getTextAlignment()> ----
+    {
+        org.jfree.chart.title.TextTitle this;
+        org.jfree.chart.util.HorizontalAlignment $stack1;
+    
+    
+        this := @this: org.jfree.chart.title.TextTitle;
+        $stack1 = this.<org.jfree.chart.title.TextTitle: org.jfree.chart.util.HorizontalAlignment textAlignment>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.title.TextTitle: void setPaint(java.awt.Paint)> ----
+    {
+        boolean $stack3;
+        java.awt.Paint $stack2, paint;
+        java.lang.IllegalArgumentException #l0;
+        java.lang.Object $stack5;
+        java.lang.Throwable #l1;
+        org.jfree.chart.event.TitleChangeEvent $stack4;
+        org.jfree.chart.title.TextTitle this;
+    
+    
+        this := @this: org.jfree.chart.title.TextTitle;
+        paint := @parameter0: java.awt.Paint;
+    
+        if paint != null goto label1;
+        $stack5 = new java.lang.IllegalArgumentException;
+        #l0 = (java.lang.IllegalArgumentException) $stack5;
+        specialinvoke #l0.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'paint\' argument.");
+        #l1 = (java.lang.Throwable) $stack5;
+    
+        throw #l1;
+    
+      label1:
+        $stack2 = this.<org.jfree.chart.title.TextTitle: java.awt.Paint paint>;
+        $stack3 = virtualinvoke $stack2.<java.lang.Object: boolean equals(java.lang.Object)>(paint);
+    
+        if $stack3 != 0 goto label2;
+        this.<org.jfree.chart.title.TextTitle: java.awt.Paint paint> = paint;
+        $stack4 = new org.jfree.chart.event.TitleChangeEvent;
+        specialinvoke $stack4.<org.jfree.chart.event.TitleChangeEvent: void <init>(org.jfree.chart.title.Title)>(this);
+        virtualinvoke this.<org.jfree.chart.title.TextTitle: void notifyListeners(org.jfree.chart.event.TitleChangeEvent)>($stack4);
+    
+      label2:
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.title.TextTitle: void <init>(java.lang.String,java.awt.Font,java.awt.Paint,org.jfree.chart.util.RectangleEdge,org.jfree.chart.util.HorizontalAlignment,org.jfree.chart.util.VerticalAlignment,org.jfree.chart.util.RectangleInsets)> ----
+    {
+        java.awt.Font font;
+        java.awt.Paint paint;
+        java.lang.NullPointerException #l0, #l1, #l3;
+        java.lang.Object $stack10, $stack8, $stack9;
+        java.lang.String text;
+        java.lang.Throwable #l2, #l4, #l5;
+        org.jfree.chart.title.TextTitle this;
+        org.jfree.chart.util.HorizontalAlignment horizontalAlignment;
+        org.jfree.chart.util.RectangleEdge position;
+        org.jfree.chart.util.RectangleInsets padding;
+        org.jfree.chart.util.VerticalAlignment verticalAlignment;
+    
+    
+        this := @this: org.jfree.chart.title.TextTitle;
+        text := @parameter0: java.lang.String;
+        font := @parameter1: java.awt.Font;
+        paint := @parameter2: java.awt.Paint;
+        position := @parameter3: org.jfree.chart.util.RectangleEdge;
+        horizontalAlignment := @parameter4: org.jfree.chart.util.HorizontalAlignment;
+        verticalAlignment := @parameter5: org.jfree.chart.util.VerticalAlignment;
+        padding := @parameter6: org.jfree.chart.util.RectangleInsets;
+        specialinvoke this.<org.jfree.chart.title.Title: void <init>(org.jfree.chart.util.RectangleEdge,org.jfree.chart.util.HorizontalAlignment,org.jfree.chart.util.VerticalAlignment,org.jfree.chart.util.RectangleInsets)>(position, horizontalAlignment, verticalAlignment, padding);
+        this.<org.jfree.chart.title.TextTitle: boolean expandToFitSpace> = 0;
+        this.<org.jfree.chart.title.TextTitle: int maximumLinesToDisplay> = 2147483647;
+    
+        if text != null goto label1;
+        $stack10 = new java.lang.NullPointerException;
+        #l3 = (java.lang.NullPointerException) $stack10;
+        specialinvoke #l3.<java.lang.NullPointerException: void <init>(java.lang.String)>("Null \'text\' argument.");
+        #l4 = (java.lang.Throwable) $stack10;
+    
+        throw #l4;
+    
+      label1:
+        if font != null goto label2;
+        $stack9 = new java.lang.NullPointerException;
+        #l0 = (java.lang.NullPointerException) $stack9;
+        specialinvoke #l0.<java.lang.NullPointerException: void <init>(java.lang.String)>("Null \'font\' argument.");
+        #l5 = (java.lang.Throwable) $stack9;
+    
+        throw #l5;
+    
+      label2:
+        if paint != null goto label3;
+        $stack8 = new java.lang.NullPointerException;
+        #l1 = (java.lang.NullPointerException) $stack8;
+        specialinvoke #l1.<java.lang.NullPointerException: void <init>(java.lang.String)>("Null \'paint\' argument.");
+        #l2 = (java.lang.Throwable) $stack8;
+    
+        throw #l2;
+    
+      label3:
+        this.<org.jfree.chart.title.TextTitle: java.lang.String text> = text;
+        this.<org.jfree.chart.title.TextTitle: java.awt.Font font> = font;
+        this.<org.jfree.chart.title.TextTitle: java.awt.Paint paint> = paint;
+        this.<org.jfree.chart.title.TextTitle: org.jfree.chart.util.HorizontalAlignment textAlignment> = horizontalAlignment;
+        this.<org.jfree.chart.title.TextTitle: java.awt.Paint backgroundPaint> = null;
+        this.<org.jfree.chart.title.TextTitle: org.jfree.chart.text.TextBlock content> = null;
+        this.<org.jfree.chart.title.TextTitle: java.lang.String toolTipText> = null;
+        this.<org.jfree.chart.title.TextTitle: java.lang.String urlText> = null;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.title.TextTitle: void <init>()> ----
+    {
+        org.jfree.chart.title.TextTitle this;
+    
+    
+        this := @this: org.jfree.chart.title.TextTitle;
+        specialinvoke this.<org.jfree.chart.title.TextTitle: void <init>(java.lang.String)>("");
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.title.TextTitle: void <clinit>()> ----
+    {
+        java.awt.Font $stack0;
+        java.lang.Object $stack1;
+    
+    
+        $stack0 = new java.awt.Font;
+        specialinvoke $stack0.<java.awt.Font: void <init>(java.lang.String,int,int)>("Tahoma", 1, 12);
+        <org.jfree.chart.title.TextTitle: java.awt.Font DEFAULT_FONT> = $stack0;
+        $stack1 = <java.awt.Color: java.awt.Color black>;
+        <org.jfree.chart.title.TextTitle: java.awt.Paint DEFAULT_TEXT_PAINT> = (java.awt.Paint) $stack1;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.title.TextTitle: void setMaximumLinesToDisplay(int)> ----
+    {
+        int max;
+        org.jfree.chart.event.TitleChangeEvent $stack2;
+        org.jfree.chart.title.TextTitle this;
+    
+    
+        this := @this: org.jfree.chart.title.TextTitle;
+        max := @parameter0: int;
+        this.<org.jfree.chart.title.TextTitle: int maximumLinesToDisplay> = max;
+        $stack2 = new org.jfree.chart.event.TitleChangeEvent;
+        specialinvoke $stack2.<org.jfree.chart.event.TitleChangeEvent: void <init>(org.jfree.chart.title.Title)>(this);
+        virtualinvoke this.<org.jfree.chart.title.TextTitle: void notifyListeners(org.jfree.chart.event.TitleChangeEvent)>($stack2);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.title.TextTitle: void setURLText(java.lang.String)> ----
+    {
+        java.lang.String text;
+        org.jfree.chart.event.TitleChangeEvent $stack2;
+        org.jfree.chart.title.TextTitle this;
+    
+    
+        this := @this: org.jfree.chart.title.TextTitle;
+        text := @parameter0: java.lang.String;
+        this.<org.jfree.chart.title.TextTitle: java.lang.String urlText> = text;
+        $stack2 = new org.jfree.chart.event.TitleChangeEvent;
+        specialinvoke $stack2.<org.jfree.chart.event.TitleChangeEvent: void <init>(org.jfree.chart.title.Title)>(this);
+        virtualinvoke this.<org.jfree.chart.title.TextTitle: void notifyListeners(org.jfree.chart.event.TitleChangeEvent)>($stack2);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.title.TextTitle: java.awt.Paint getPaint()> ----
+    {
+        java.awt.Paint $stack1;
+        org.jfree.chart.title.TextTitle this;
+    
+    
+        this := @this: org.jfree.chart.title.TextTitle;
+        $stack1 = this.<org.jfree.chart.title.TextTitle: java.awt.Paint paint>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.title.TextTitle: int hashCode()> ----
+    {
+        int $stack11, $stack13, $stack15, $stack17, $stack3, $stack5, $stack7, $stack9, result#0, result#1, result#2, result#3, result#4;
+        java.awt.Font $stack14, $stack4;
+        java.awt.Paint $stack10, $stack12, $stack6, $stack8;
+        java.lang.String $stack16, $stack2;
+        org.jfree.chart.title.TextTitle this;
+    
+    
+        this := @this: org.jfree.chart.title.TextTitle;
+        result#0 = specialinvoke this.<org.jfree.chart.title.Title: int hashCode()>();
+        $stack3 = 29 * result#0;
+        $stack2 = this.<org.jfree.chart.title.TextTitle: java.lang.String text>;
+    
+        if $stack2 == null goto label1;
+        $stack16 = this.<org.jfree.chart.title.TextTitle: java.lang.String text>;
+        $stack17 = virtualinvoke $stack16.<java.lang.String: int hashCode()>();
+    
+        goto label2;
+    
+      label1:
+        $stack17 = 0;
+    
+      label2:
+        result#1 = $stack3 + $stack17;
+        $stack5 = 29 * result#1;
+        $stack4 = this.<org.jfree.chart.title.TextTitle: java.awt.Font font>;
+    
+        if $stack4 == null goto label3;
+        $stack14 = this.<org.jfree.chart.title.TextTitle: java.awt.Font font>;
+        $stack15 = virtualinvoke $stack14.<java.awt.Font: int hashCode()>();
+    
+        goto label4;
+    
+      label3:
+        $stack15 = 0;
+    
+      label4:
+        result#2 = $stack5 + $stack15;
+        $stack7 = 29 * result#2;
+        $stack6 = this.<org.jfree.chart.title.TextTitle: java.awt.Paint paint>;
+    
+        if $stack6 == null goto label5;
+        $stack12 = this.<org.jfree.chart.title.TextTitle: java.awt.Paint paint>;
+        $stack13 = virtualinvoke $stack12.<java.lang.Object: int hashCode()>();
+    
+        goto label6;
+    
+      label5:
+        $stack13 = 0;
+    
+      label6:
+        result#3 = $stack7 + $stack13;
+        $stack9 = 29 * result#3;
+        $stack8 = this.<org.jfree.chart.title.TextTitle: java.awt.Paint backgroundPaint>;
+    
+        if $stack8 == null goto label7;
+        $stack10 = this.<org.jfree.chart.title.TextTitle: java.awt.Paint backgroundPaint>;
+        $stack11 = virtualinvoke $stack10.<java.lang.Object: int hashCode()>();
+    
+        goto label8;
+    
+      label7:
+        $stack11 = 0;
+    
+      label8:
+        result#4 = $stack9 + $stack11;
+    
+        return result#4;
+    }
+
+    // ---- method: <org.jfree.chart.title.TextTitle: void setText(java.lang.String)> ----
+    {
+        boolean $stack3;
+        java.lang.IllegalArgumentException #l1;
+        java.lang.Object $stack5;
+        java.lang.String $stack2, text;
+        java.lang.Throwable #l0;
+        org.jfree.chart.event.TitleChangeEvent $stack4;
+        org.jfree.chart.title.TextTitle this;
+    
+    
+        this := @this: org.jfree.chart.title.TextTitle;
+        text := @parameter0: java.lang.String;
+    
+        if text != null goto label1;
+        $stack5 = new java.lang.IllegalArgumentException;
+        #l1 = (java.lang.IllegalArgumentException) $stack5;
+        specialinvoke #l1.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'text\' argument.");
+        #l0 = (java.lang.Throwable) $stack5;
+    
+        throw #l0;
+    
+      label1:
+        $stack2 = this.<org.jfree.chart.title.TextTitle: java.lang.String text>;
+        $stack3 = virtualinvoke $stack2.<java.lang.String: boolean equals(java.lang.Object)>(text);
+    
+        if $stack3 != 0 goto label2;
+        this.<org.jfree.chart.title.TextTitle: java.lang.String text> = text;
+        $stack4 = new org.jfree.chart.event.TitleChangeEvent;
+        specialinvoke $stack4.<org.jfree.chart.event.TitleChangeEvent: void <init>(org.jfree.chart.title.Title)>(this);
+        virtualinvoke this.<org.jfree.chart.title.TextTitle: void notifyListeners(org.jfree.chart.event.TitleChangeEvent)>($stack4);
+    
+      label2:
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.title.TextTitle: void setToolTipText(java.lang.String)> ----
+    {
+        java.lang.String text;
+        org.jfree.chart.event.TitleChangeEvent $stack2;
+        org.jfree.chart.title.TextTitle this;
+    
+    
+        this := @this: org.jfree.chart.title.TextTitle;
+        text := @parameter0: java.lang.String;
+        this.<org.jfree.chart.title.TextTitle: java.lang.String toolTipText> = text;
+        $stack2 = new org.jfree.chart.event.TitleChangeEvent;
+        specialinvoke $stack2.<org.jfree.chart.event.TitleChangeEvent: void <init>(org.jfree.chart.title.Title)>(this);
+        virtualinvoke this.<org.jfree.chart.title.TextTitle: void notifyListeners(org.jfree.chart.event.TitleChangeEvent)>($stack2);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.title.TextTitle: org.jfree.chart.util.Size2D arrange(java.awt.Graphics2D,org.jfree.chart.block.RectangleConstraint)> ----
+    {
+        double $stack10, $stack11, $stack12, $stack13, $stack20;
+        java.awt.Graphics2D g2;
+        java.lang.Object $stack18, $stack19, $stack24, $stack31, $stack32;
+        java.lang.RuntimeException #l0, #l3, #l4, #l5, #l9;
+        java.lang.Throwable #l1, #l2, #l6, #l7, #l8;
+        org.jfree.chart.block.LengthConstraintType $stack15, $stack16, $stack17, $stack21, $stack22, $stack23, $stack28, $stack29, $stack30, $stack7, $stack8, $stack9, h, w;
+        org.jfree.chart.block.RectangleConstraint cc, constraint;
+        org.jfree.chart.title.TextTitle this;
+        org.jfree.chart.util.Size2D $stack14, contentSize;
+        org.jfree.data.Range $stack25, $stack26, $stack27;
+    
+    
+        this := @this: org.jfree.chart.title.TextTitle;
+        g2 := @parameter0: java.awt.Graphics2D;
+        constraint := @parameter1: org.jfree.chart.block.RectangleConstraint;
+        cc = virtualinvoke this.<org.jfree.chart.title.TextTitle: org.jfree.chart.block.RectangleConstraint toContentConstraint(org.jfree.chart.block.RectangleConstraint)>(constraint);
+        w = virtualinvoke cc.<org.jfree.chart.block.RectangleConstraint: org.jfree.chart.block.LengthConstraintType getWidthConstraintType()>();
+        h = virtualinvoke cc.<org.jfree.chart.block.RectangleConstraint: org.jfree.chart.block.LengthConstraintType getHeightConstraintType()>();
+        contentSize = null;
+        $stack7 = <org.jfree.chart.block.LengthConstraintType: org.jfree.chart.block.LengthConstraintType NONE>;
+    
+        if w != $stack7 goto label3;
+        $stack28 = <org.jfree.chart.block.LengthConstraintType: org.jfree.chart.block.LengthConstraintType NONE>;
+    
+        if h != $stack28 goto label1;
+        contentSize = virtualinvoke this.<org.jfree.chart.title.TextTitle: org.jfree.chart.util.Size2D arrangeNN(java.awt.Graphics2D)>(g2);
+    
+        goto label9;
+    
+      label1:
+        $stack29 = <org.jfree.chart.block.LengthConstraintType: org.jfree.chart.block.LengthConstraintType RANGE>;
+    
+        if h != $stack29 goto label2;
+        $stack32 = new java.lang.RuntimeException;
+        #l4 = (java.lang.RuntimeException) $stack32;
+        specialinvoke #l4.<java.lang.RuntimeException: void <init>(java.lang.String)>("Not yet implemented.");
+        #l1 = (java.lang.Throwable) $stack32;
+    
+        throw #l1;
+    
+      label2:
+        $stack30 = <org.jfree.chart.block.LengthConstraintType: org.jfree.chart.block.LengthConstraintType FIXED>;
+    
+        if h != $stack30 goto label9;
+        $stack31 = new java.lang.RuntimeException;
+        #l0 = (java.lang.RuntimeException) $stack31;
+        specialinvoke #l0.<java.lang.RuntimeException: void <init>(java.lang.String)>("Not yet implemented.");
+        #l2 = (java.lang.Throwable) $stack31;
+    
+        throw #l2;
+    
+      label3:
+        $stack8 = <org.jfree.chart.block.LengthConstraintType: org.jfree.chart.block.LengthConstraintType RANGE>;
+    
+        if w != $stack8 goto label6;
+        $stack21 = <org.jfree.chart.block.LengthConstraintType: org.jfree.chart.block.LengthConstraintType NONE>;
+    
+        if h != $stack21 goto label4;
+        $stack27 = virtualinvoke cc.<org.jfree.chart.block.RectangleConstraint: org.jfree.data.Range getWidthRange()>();
+        contentSize = virtualinvoke this.<org.jfree.chart.title.TextTitle: org.jfree.chart.util.Size2D arrangeRN(java.awt.Graphics2D,org.jfree.data.Range)>(g2, $stack27);
+    
+        goto label9;
+    
+      label4:
+        $stack22 = <org.jfree.chart.block.LengthConstraintType: org.jfree.chart.block.LengthConstraintType RANGE>;
+    
+        if h != $stack22 goto label5;
+        $stack26 = virtualinvoke cc.<org.jfree.chart.block.RectangleConstraint: org.jfree.data.Range getWidthRange()>();
+        $stack25 = virtualinvoke cc.<org.jfree.chart.block.RectangleConstraint: org.jfree.data.Range getHeightRange()>();
+        contentSize = virtualinvoke this.<org.jfree.chart.title.TextTitle: org.jfree.chart.util.Size2D arrangeRR(java.awt.Graphics2D,org.jfree.data.Range,org.jfree.data.Range)>(g2, $stack26, $stack25);
+    
+        goto label9;
+    
+      label5:
+        $stack23 = <org.jfree.chart.block.LengthConstraintType: org.jfree.chart.block.LengthConstraintType FIXED>;
+    
+        if h != $stack23 goto label9;
+        $stack24 = new java.lang.RuntimeException;
+        #l9 = (java.lang.RuntimeException) $stack24;
+        specialinvoke #l9.<java.lang.RuntimeException: void <init>(java.lang.String)>("Not yet implemented.");
+        #l7 = (java.lang.Throwable) $stack24;
+    
+        throw #l7;
+    
+      label6:
+        $stack9 = <org.jfree.chart.block.LengthConstraintType: org.jfree.chart.block.LengthConstraintType FIXED>;
+    
+        if w != $stack9 goto label9;
+        $stack15 = <org.jfree.chart.block.LengthConstraintType: org.jfree.chart.block.LengthConstraintType NONE>;
+    
+        if h != $stack15 goto label7;
+        $stack20 = virtualinvoke cc.<org.jfree.chart.block.RectangleConstraint: double getWidth()>();
+        contentSize = virtualinvoke this.<org.jfree.chart.title.TextTitle: org.jfree.chart.util.Size2D arrangeFN(java.awt.Graphics2D,double)>(g2, $stack20);
+    
+        goto label9;
+    
+      label7:
+        $stack16 = <org.jfree.chart.block.LengthConstraintType: org.jfree.chart.block.LengthConstraintType RANGE>;
+    
+        if h != $stack16 goto label8;
+        $stack19 = new java.lang.RuntimeException;
+        #l3 = (java.lang.RuntimeException) $stack19;
+        specialinvoke #l3.<java.lang.RuntimeException: void <init>(java.lang.String)>("Not yet implemented.");
+        #l8 = (java.lang.Throwable) $stack19;
+    
+        throw #l8;
+    
+      label8:
+        $stack17 = <org.jfree.chart.block.LengthConstraintType: org.jfree.chart.block.LengthConstraintType FIXED>;
+    
+        if h != $stack17 goto label9;
+        $stack18 = new java.lang.RuntimeException;
+        #l5 = (java.lang.RuntimeException) $stack18;
+        specialinvoke #l5.<java.lang.RuntimeException: void <init>(java.lang.String)>("Not yet implemented.");
+        #l6 = (java.lang.Throwable) $stack18;
+    
+        throw #l6;
+    
+      label9:
+        $stack14 = new org.jfree.chart.util.Size2D;
+        $stack10 = virtualinvoke contentSize.<org.jfree.chart.util.Size2D: double getWidth()>();
+        $stack13 = virtualinvoke this.<org.jfree.chart.title.TextTitle: double calculateTotalWidth(double)>($stack10);
+        $stack11 = virtualinvoke contentSize.<org.jfree.chart.util.Size2D: double getHeight()>();
+        $stack12 = virtualinvoke this.<org.jfree.chart.title.TextTitle: double calculateTotalHeight(double)>($stack11);
+        specialinvoke $stack14.<org.jfree.chart.util.Size2D: void <init>(double,double)>($stack13, $stack12);
+    
+        return $stack14;
+    }
+
+    // ---- method: <org.jfree.chart.title.TextTitle: java.lang.Object clone()> ----
+    {
+        java.lang.Object $stack1;
+        org.jfree.chart.title.TextTitle this;
+    
+    
+        this := @this: org.jfree.chart.title.TextTitle;
+        $stack1 = specialinvoke this.<org.jfree.chart.title.Title: java.lang.Object clone()>();
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.title.TextTitle: void <init>(java.lang.String,java.awt.Font)> ----
+    {
+        java.awt.Font font;
+        java.awt.Paint $stack7;
+        java.lang.String text;
+        org.jfree.chart.title.TextTitle this;
+        org.jfree.chart.util.HorizontalAlignment $stack5;
+        org.jfree.chart.util.RectangleEdge $stack6;
+        org.jfree.chart.util.RectangleInsets $stack3;
+        org.jfree.chart.util.VerticalAlignment $stack4;
+    
+    
+        this := @this: org.jfree.chart.title.TextTitle;
+        text := @parameter0: java.lang.String;
+        font := @parameter1: java.awt.Font;
+        $stack7 = <org.jfree.chart.title.TextTitle: java.awt.Paint DEFAULT_TEXT_PAINT>;
+        $stack6 = <org.jfree.chart.title.Title: org.jfree.chart.util.RectangleEdge DEFAULT_POSITION>;
+        $stack5 = <org.jfree.chart.title.Title: org.jfree.chart.util.HorizontalAlignment DEFAULT_HORIZONTAL_ALIGNMENT>;
+        $stack4 = <org.jfree.chart.title.Title: org.jfree.chart.util.VerticalAlignment DEFAULT_VERTICAL_ALIGNMENT>;
+        $stack3 = <org.jfree.chart.title.Title: org.jfree.chart.util.RectangleInsets DEFAULT_PADDING>;
+        specialinvoke this.<org.jfree.chart.title.TextTitle: void <init>(java.lang.String,java.awt.Font,java.awt.Paint,org.jfree.chart.util.RectangleEdge,org.jfree.chart.util.HorizontalAlignment,org.jfree.chart.util.VerticalAlignment,org.jfree.chart.util.RectangleInsets)>(text, font, $stack7, $stack6, $stack5, $stack4, $stack3);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.title.TextTitle: boolean getExpandToFitSpace()> ----
+    {
+        boolean $stack1;
+        org.jfree.chart.title.TextTitle this;
+    
+    
+        this := @this: org.jfree.chart.title.TextTitle;
+        $stack1 = this.<org.jfree.chart.title.TextTitle: boolean expandToFitSpace>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.title.TextTitle: boolean equals(java.lang.Object)> ----
+    {
+        boolean $stack12, $stack17, $stack20, $stack21, $stack24, $stack27, $stack28, $stack3, $stack6, $stack9;
+        int $stack18, $stack19;
+        java.awt.Font $stack7, $stack8;
+        java.awt.Paint $stack10, $stack11, $stack15, $stack16;
+        java.lang.Object obj;
+        java.lang.String $stack22, $stack23, $stack25, $stack26, $stack4, $stack5;
+        org.jfree.chart.title.TextTitle that, this;
+        org.jfree.chart.util.HorizontalAlignment $stack13, $stack14;
+    
+    
+        this := @this: org.jfree.chart.title.TextTitle;
+        obj := @parameter0: java.lang.Object;
+    
+        if obj != this goto label01;
+    
+        return 1;
+    
+      label01:
+        $stack3 = obj instanceof org.jfree.chart.title.TextTitle;
+    
+        if $stack3 != 0 goto label02;
+    
+        return 0;
+    
+      label02:
+        that = (org.jfree.chart.title.TextTitle) obj;
+        $stack5 = this.<org.jfree.chart.title.TextTitle: java.lang.String text>;
+        $stack4 = that.<org.jfree.chart.title.TextTitle: java.lang.String text>;
+        $stack6 = staticinvoke <org.jfree.chart.util.ObjectUtilities: boolean equal(java.lang.Object,java.lang.Object)>($stack5, $stack4);
+    
+        if $stack6 != 0 goto label03;
+    
+        return 0;
+    
+      label03:
+        $stack8 = this.<org.jfree.chart.title.TextTitle: java.awt.Font font>;
+        $stack7 = that.<org.jfree.chart.title.TextTitle: java.awt.Font font>;
+        $stack9 = staticinvoke <org.jfree.chart.util.ObjectUtilities: boolean equal(java.lang.Object,java.lang.Object)>($stack8, $stack7);
+    
+        if $stack9 != 0 goto label04;
+    
+        return 0;
+    
+      label04:
+        $stack11 = this.<org.jfree.chart.title.TextTitle: java.awt.Paint paint>;
+        $stack10 = that.<org.jfree.chart.title.TextTitle: java.awt.Paint paint>;
+        $stack12 = staticinvoke <org.jfree.chart.util.PaintUtilities: boolean equal(java.awt.Paint,java.awt.Paint)>($stack11, $stack10);
+    
+        if $stack12 != 0 goto label05;
+    
+        return 0;
+    
+      label05:
+        $stack14 = this.<org.jfree.chart.title.TextTitle: org.jfree.chart.util.HorizontalAlignment textAlignment>;
+        $stack13 = that.<org.jfree.chart.title.TextTitle: org.jfree.chart.util.HorizontalAlignment textAlignment>;
+    
+        if $stack14 == $stack13 goto label06;
+    
+        return 0;
+    
+      label06:
+        $stack16 = this.<org.jfree.chart.title.TextTitle: java.awt.Paint backgroundPaint>;
+        $stack15 = that.<org.jfree.chart.title.TextTitle: java.awt.Paint backgroundPaint>;
+        $stack17 = staticinvoke <org.jfree.chart.util.PaintUtilities: boolean equal(java.awt.Paint,java.awt.Paint)>($stack16, $stack15);
+    
+        if $stack17 != 0 goto label07;
+    
+        return 0;
+    
+      label07:
+        $stack19 = this.<org.jfree.chart.title.TextTitle: int maximumLinesToDisplay>;
+        $stack18 = that.<org.jfree.chart.title.TextTitle: int maximumLinesToDisplay>;
+    
+        if $stack19 == $stack18 goto label08;
+    
+        return 0;
+    
+      label08:
+        $stack21 = this.<org.jfree.chart.title.TextTitle: boolean expandToFitSpace>;
+        $stack20 = that.<org.jfree.chart.title.TextTitle: boolean expandToFitSpace>;
+    
+        if $stack21 == $stack20 goto label09;
+    
+        return 0;
+    
+      label09:
+        $stack23 = this.<org.jfree.chart.title.TextTitle: java.lang.String toolTipText>;
+        $stack22 = that.<org.jfree.chart.title.TextTitle: java.lang.String toolTipText>;
+        $stack24 = staticinvoke <org.jfree.chart.util.ObjectUtilities: boolean equal(java.lang.Object,java.lang.Object)>($stack23, $stack22);
+    
+        if $stack24 != 0 goto label10;
+    
+        return 0;
+    
+      label10:
+        $stack26 = this.<org.jfree.chart.title.TextTitle: java.lang.String urlText>;
+        $stack25 = that.<org.jfree.chart.title.TextTitle: java.lang.String urlText>;
+        $stack27 = staticinvoke <org.jfree.chart.util.ObjectUtilities: boolean equal(java.lang.Object,java.lang.Object)>($stack26, $stack25);
+    
+        if $stack27 != 0 goto label11;
+    
+        return 0;
+    
+      label11:
+        $stack28 = specialinvoke this.<org.jfree.chart.title.Title: boolean equals(java.lang.Object)>(obj);
+    
+        return $stack28;
+    }
+
+    // ---- method: <org.jfree.chart.title.TextTitle: org.jfree.chart.util.Size2D arrangeFN(java.awt.Graphics2D,double)> ----
+    {
+        boolean $stack18, $stack34;
+        double $stack19, $stack20, $stack35, $stack36, $stack38, $stack39, w;
+        float maxWidth#0, maxWidth#1;
+        int $stack13, $stack29;
+        java.awt.Font $stack11, $stack24, $stack27, $stack8;
+        java.awt.Graphics2D g2;
+        java.awt.Paint $stack12, $stack28;
+        java.lang.Object $stack42;
+        java.lang.RuntimeException #l0;
+        java.lang.String $stack10, $stack26;
+        java.lang.Throwable #l1;
+        org.jfree.chart.text.G2TextMeasurer $stack25, $stack9;
+        org.jfree.chart.text.TextBlock $stack14, $stack16, $stack17, $stack30, $stack32, $stack33;
+        org.jfree.chart.title.TextTitle this;
+        org.jfree.chart.util.HorizontalAlignment $stack15, $stack31;
+        org.jfree.chart.util.RectangleEdge $stack22, $stack23, $stack41, $stack7, position;
+        org.jfree.chart.util.Size2D $stack21, $stack37, $stack40, contentSize#0, contentSize#1;
+    
+    
+        this := @this: org.jfree.chart.title.TextTitle;
+        g2 := @parameter0: java.awt.Graphics2D;
+        w := @parameter1: double;
+        position = virtualinvoke this.<org.jfree.chart.title.TextTitle: org.jfree.chart.util.RectangleEdge getPosition()>();
+        $stack7 = <org.jfree.chart.util.RectangleEdge: org.jfree.chart.util.RectangleEdge TOP>;
+    
+        if position == $stack7 goto label1;
+        $stack22 = <org.jfree.chart.util.RectangleEdge: org.jfree.chart.util.RectangleEdge BOTTOM>;
+    
+        if position != $stack22 goto label2;
+    
+      label1:
+        maxWidth#0 = (float) w;
+        $stack8 = this.<org.jfree.chart.title.TextTitle: java.awt.Font font>;
+        virtualinvoke g2.<java.awt.Graphics2D: void setFont(java.awt.Font)>($stack8);
+        $stack10 = this.<org.jfree.chart.title.TextTitle: java.lang.String text>;
+        $stack11 = this.<org.jfree.chart.title.TextTitle: java.awt.Font font>;
+        $stack12 = this.<org.jfree.chart.title.TextTitle: java.awt.Paint paint>;
+        $stack13 = this.<org.jfree.chart.title.TextTitle: int maximumLinesToDisplay>;
+        $stack9 = new org.jfree.chart.text.G2TextMeasurer;
+        specialinvoke $stack9.<org.jfree.chart.text.G2TextMeasurer: void <init>(java.awt.Graphics2D)>(g2);
+        $stack14 = staticinvoke <org.jfree.chart.text.TextUtilities: org.jfree.chart.text.TextBlock createTextBlock(java.lang.String,java.awt.Font,java.awt.Paint,float,int,org.jfree.chart.text.TextMeasurer)>($stack10, $stack11, $stack12, maxWidth#0, $stack13, $stack9);
+        this.<org.jfree.chart.title.TextTitle: org.jfree.chart.text.TextBlock content> = $stack14;
+        $stack16 = this.<org.jfree.chart.title.TextTitle: org.jfree.chart.text.TextBlock content>;
+        $stack15 = this.<org.jfree.chart.title.TextTitle: org.jfree.chart.util.HorizontalAlignment textAlignment>;
+        virtualinvoke $stack16.<org.jfree.chart.text.TextBlock: void setLineAlignment(org.jfree.chart.util.HorizontalAlignment)>($stack15);
+        $stack17 = this.<org.jfree.chart.title.TextTitle: org.jfree.chart.text.TextBlock content>;
+        contentSize#0 = virtualinvoke $stack17.<org.jfree.chart.text.TextBlock: org.jfree.chart.util.Size2D calculateDimensions(java.awt.Graphics2D)>(g2);
+        $stack18 = this.<org.jfree.chart.title.TextTitle: boolean expandToFitSpace>;
+    
+        if $stack18 == 0 goto label4;
+        $stack21 = new org.jfree.chart.util.Size2D;
+        $stack20 = (double) maxWidth#0;
+        $stack19 = virtualinvoke contentSize#0.<org.jfree.chart.util.Size2D: double getHeight()>();
+        specialinvoke $stack21.<org.jfree.chart.util.Size2D: void <init>(double,double)>($stack20, $stack19);
+    
+        return $stack21;
+    
+      label2:
+        $stack23 = <org.jfree.chart.util.RectangleEdge: org.jfree.chart.util.RectangleEdge LEFT>;
+    
+        if position == $stack23 goto label3;
+        $stack41 = <org.jfree.chart.util.RectangleEdge: org.jfree.chart.util.RectangleEdge RIGHT>;
+    
+        if position != $stack41 goto label5;
+    
+      label3:
+        maxWidth#1 = 3.4028235E38F;
+        $stack24 = this.<org.jfree.chart.title.TextTitle: java.awt.Font font>;
+        virtualinvoke g2.<java.awt.Graphics2D: void setFont(java.awt.Font)>($stack24);
+        $stack26 = this.<org.jfree.chart.title.TextTitle: java.lang.String text>;
+        $stack27 = this.<org.jfree.chart.title.TextTitle: java.awt.Font font>;
+        $stack28 = this.<org.jfree.chart.title.TextTitle: java.awt.Paint paint>;
+        $stack29 = this.<org.jfree.chart.title.TextTitle: int maximumLinesToDisplay>;
+        $stack25 = new org.jfree.chart.text.G2TextMeasurer;
+        specialinvoke $stack25.<org.jfree.chart.text.G2TextMeasurer: void <init>(java.awt.Graphics2D)>(g2);
+        $stack30 = staticinvoke <org.jfree.chart.text.TextUtilities: org.jfree.chart.text.TextBlock createTextBlock(java.lang.String,java.awt.Font,java.awt.Paint,float,int,org.jfree.chart.text.TextMeasurer)>($stack26, $stack27, $stack28, 3.4028235E38F, $stack29, $stack25);
+        this.<org.jfree.chart.title.TextTitle: org.jfree.chart.text.TextBlock content> = $stack30;
+        $stack32 = this.<org.jfree.chart.title.TextTitle: org.jfree.chart.text.TextBlock content>;
+        $stack31 = this.<org.jfree.chart.title.TextTitle: org.jfree.chart.util.HorizontalAlignment textAlignment>;
+        virtualinvoke $stack32.<org.jfree.chart.text.TextBlock: void setLineAlignment(org.jfree.chart.util.HorizontalAlignment)>($stack31);
+        $stack33 = this.<org.jfree.chart.title.TextTitle: org.jfree.chart.text.TextBlock content>;
+        contentSize#1 = virtualinvoke $stack33.<org.jfree.chart.text.TextBlock: org.jfree.chart.util.Size2D calculateDimensions(java.awt.Graphics2D)>(g2);
+        $stack34 = this.<org.jfree.chart.title.TextTitle: boolean expandToFitSpace>;
+    
+        if $stack34 == 0 goto label6;
+        $stack40 = new org.jfree.chart.util.Size2D;
+        $stack39 = virtualinvoke contentSize#1.<org.jfree.chart.util.Size2D: double getHeight()>();
+        $stack38 = (double) 3.4028235E38F;
+        specialinvoke $stack40.<org.jfree.chart.util.Size2D: void <init>(double,double)>($stack39, $stack38);
+    
+        return $stack40;
+    
+      label4:
+        return contentSize#0;
+    
+      label5:
+        $stack42 = new java.lang.RuntimeException;
+        #l0 = (java.lang.RuntimeException) $stack42;
+        specialinvoke #l0.<java.lang.RuntimeException: void <init>(java.lang.String)>("Unrecognised exception.");
+        #l1 = (java.lang.Throwable) $stack42;
+    
+        throw #l1;
+    
+      label6:
+        $stack37 = new org.jfree.chart.util.Size2D;
+        $stack36 = contentSize#1.<org.jfree.chart.util.Size2D: double height>;
+        $stack35 = contentSize#1.<org.jfree.chart.util.Size2D: double width>;
+        specialinvoke $stack37.<org.jfree.chart.util.Size2D: void <init>(double,double)>($stack36, $stack35);
+    
+        return $stack37;
+    }
+
+    // ---- method: <org.jfree.chart.title.TextTitle: void setFont(java.awt.Font)> ----
+    {
+        boolean $stack3;
+        java.awt.Font $stack2, font;
+        java.lang.IllegalArgumentException #l1;
+        java.lang.Object $stack5;
+        java.lang.Throwable #l0;
+        org.jfree.chart.event.TitleChangeEvent $stack4;
+        org.jfree.chart.title.TextTitle this;
+    
+    
+        this := @this: org.jfree.chart.title.TextTitle;
+        font := @parameter0: java.awt.Font;
+    
+        if font != null goto label1;
+        $stack5 = new java.lang.IllegalArgumentException;
+        #l1 = (java.lang.IllegalArgumentException) $stack5;
+        specialinvoke #l1.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'font\' argument.");
+        #l0 = (java.lang.Throwable) $stack5;
+    
+        throw #l0;
+    
+      label1:
+        $stack2 = this.<org.jfree.chart.title.TextTitle: java.awt.Font font>;
+        $stack3 = virtualinvoke $stack2.<java.awt.Font: boolean equals(java.lang.Object)>(font);
+    
+        if $stack3 != 0 goto label2;
+        this.<org.jfree.chart.title.TextTitle: java.awt.Font font> = font;
+        $stack4 = new org.jfree.chart.event.TitleChangeEvent;
+        specialinvoke $stack4.<org.jfree.chart.event.TitleChangeEvent: void <init>(org.jfree.chart.title.Title)>(this);
+        virtualinvoke this.<org.jfree.chart.title.TextTitle: void notifyListeners(org.jfree.chart.event.TitleChangeEvent)>($stack4);
+    
+      label2:
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.title.TextTitle: void setBackgroundPaint(java.awt.Paint)> ----
+    {
+        java.awt.Paint paint;
+        org.jfree.chart.event.TitleChangeEvent $stack2;
+        org.jfree.chart.title.TextTitle this;
+    
+    
+        this := @this: org.jfree.chart.title.TextTitle;
+        paint := @parameter0: java.awt.Paint;
+        this.<org.jfree.chart.title.TextTitle: java.awt.Paint backgroundPaint> = paint;
+        $stack2 = new org.jfree.chart.event.TitleChangeEvent;
+        specialinvoke $stack2.<org.jfree.chart.event.TitleChangeEvent: void <init>(org.jfree.chart.title.Title)>(this);
+        virtualinvoke this.<org.jfree.chart.title.TextTitle: void notifyListeners(org.jfree.chart.event.TitleChangeEvent)>($stack2);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.title.TextTitle: org.jfree.chart.util.Size2D arrangeRN(java.awt.Graphics2D,org.jfree.data.Range)> ----
+    {
+        boolean $stack7;
+        double $stack6, $stack8, ww;
+        java.awt.Graphics2D g2;
+        org.jfree.chart.title.TextTitle this;
+        org.jfree.chart.util.Size2D $stack9, s;
+        org.jfree.data.Range widthRange;
+    
+    
+        this := @this: org.jfree.chart.title.TextTitle;
+        g2 := @parameter0: java.awt.Graphics2D;
+        widthRange := @parameter1: org.jfree.data.Range;
+        s = virtualinvoke this.<org.jfree.chart.title.TextTitle: org.jfree.chart.util.Size2D arrangeNN(java.awt.Graphics2D)>(g2);
+        $stack6 = virtualinvoke s.<org.jfree.chart.util.Size2D: double getWidth()>();
+        $stack7 = virtualinvoke widthRange.<org.jfree.data.Range: boolean contains(double)>($stack6);
+    
+        if $stack7 == 0 goto label1;
+    
+        return s;
+    
+      label1:
+        $stack8 = virtualinvoke s.<org.jfree.chart.util.Size2D: double getWidth()>();
+        ww = virtualinvoke widthRange.<org.jfree.data.Range: double constrain(double)>($stack8);
+        $stack9 = virtualinvoke this.<org.jfree.chart.title.TextTitle: org.jfree.chart.util.Size2D arrangeFN(java.awt.Graphics2D,double)>(g2, ww);
+    
+        return $stack9;
+    }
+
+}

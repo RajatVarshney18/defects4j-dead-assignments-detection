@@ -1,0 +1,348 @@
+// ========================================================================
+// CLASS : org.jfree.chart.title.ShortTextTitle
+// ========================================================================
+
+[PUBLIC, SUPER] class org.jfree.chart.title.ShortTextTitle extends org.jfree.chart.title.TextTitle {
+
+    // ---- method: <org.jfree.chart.title.ShortTextTitle: org.jfree.chart.util.Size2D arrangeFN(java.awt.Graphics2D,double)> ----
+    {
+        byte $stack10;
+        double $stack12, $stack9, w;
+        java.awt.Font $stack6, $stack7;
+        java.awt.FontMetrics fm;
+        java.awt.Graphics2D g2;
+        java.awt.geom.Rectangle2D bounds;
+        java.lang.String $stack8;
+        org.jfree.chart.title.ShortTextTitle this;
+        org.jfree.chart.util.Size2D $stack11, $stack13;
+    
+    
+        this := @this: org.jfree.chart.title.ShortTextTitle;
+        g2 := @parameter0: java.awt.Graphics2D;
+        w := @parameter1: double;
+        $stack6 = virtualinvoke this.<org.jfree.chart.title.ShortTextTitle: java.awt.Font getFont()>();
+        virtualinvoke g2.<java.awt.Graphics2D: void setFont(java.awt.Font)>($stack6);
+        $stack7 = virtualinvoke this.<org.jfree.chart.title.ShortTextTitle: java.awt.Font getFont()>();
+        fm = virtualinvoke g2.<java.awt.Graphics2D: java.awt.FontMetrics getFontMetrics(java.awt.Font)>($stack7);
+        $stack8 = virtualinvoke this.<org.jfree.chart.title.ShortTextTitle: java.lang.String getText()>();
+        bounds = staticinvoke <org.jfree.chart.text.TextUtilities: java.awt.geom.Rectangle2D getTextBounds(java.lang.String,java.awt.Graphics2D,java.awt.FontMetrics)>($stack8, g2, fm);
+        $stack9 = virtualinvoke bounds.<java.awt.geom.Rectangle2D: double getWidth()>();
+        $stack10 = $stack9 cmpg w;
+    
+        if $stack10 > 0 goto label1;
+        $stack13 = new org.jfree.chart.util.Size2D;
+        $stack12 = virtualinvoke bounds.<java.awt.geom.Rectangle2D: double getHeight()>();
+        specialinvoke $stack13.<org.jfree.chart.util.Size2D: void <init>(double,double)>(w, $stack12);
+    
+        return $stack13;
+    
+      label1:
+        $stack11 = new org.jfree.chart.util.Size2D;
+        specialinvoke $stack11.<org.jfree.chart.util.Size2D: void <init>(double,double)>(0.0, 0.0);
+    
+        return $stack11;
+    }
+
+    // ---- method: <org.jfree.chart.title.ShortTextTitle: java.lang.Object draw(java.awt.Graphics2D,java.awt.geom.Rectangle2D,java.lang.Object)> ----
+    {
+        boolean $stack4;
+        double $stack7, $stack8;
+        float $stack10, $stack11;
+        java.awt.Font $stack5;
+        java.awt.Graphics2D g2;
+        java.awt.Paint $stack6;
+        java.awt.geom.Rectangle2D area#0, area#1, area#2, area#3;
+        java.lang.Object params;
+        java.lang.String $stack12;
+        org.jfree.chart.text.TextAnchor $stack9;
+        org.jfree.chart.title.ShortTextTitle this;
+    
+    
+        this := @this: org.jfree.chart.title.ShortTextTitle;
+        g2 := @parameter0: java.awt.Graphics2D;
+        area#0 := @parameter1: java.awt.geom.Rectangle2D;
+        params := @parameter2: java.lang.Object;
+        $stack4 = virtualinvoke area#0.<java.awt.geom.Rectangle2D: boolean isEmpty()>();
+    
+        if $stack4 == 0 goto label1;
+    
+        return null;
+    
+      label1:
+        area#1 = virtualinvoke this.<org.jfree.chart.title.ShortTextTitle: java.awt.geom.Rectangle2D trimMargin(java.awt.geom.Rectangle2D)>(area#0);
+        virtualinvoke this.<org.jfree.chart.title.ShortTextTitle: void drawBorder(java.awt.Graphics2D,java.awt.geom.Rectangle2D)>(g2, area#1);
+        area#2 = virtualinvoke this.<org.jfree.chart.title.ShortTextTitle: java.awt.geom.Rectangle2D trimBorder(java.awt.geom.Rectangle2D)>(area#1);
+        area#3 = virtualinvoke this.<org.jfree.chart.title.ShortTextTitle: java.awt.geom.Rectangle2D trimPadding(java.awt.geom.Rectangle2D)>(area#2);
+        $stack5 = virtualinvoke this.<org.jfree.chart.title.ShortTextTitle: java.awt.Font getFont()>();
+        virtualinvoke g2.<java.awt.Graphics2D: void setFont(java.awt.Font)>($stack5);
+        $stack6 = virtualinvoke this.<org.jfree.chart.title.ShortTextTitle: java.awt.Paint getPaint()>();
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>($stack6);
+        $stack12 = virtualinvoke this.<org.jfree.chart.title.ShortTextTitle: java.lang.String getText()>();
+        $stack7 = virtualinvoke area#3.<java.awt.geom.Rectangle2D: double getMinX()>();
+        $stack11 = (float) $stack7;
+        $stack8 = virtualinvoke area#3.<java.awt.geom.Rectangle2D: double getMinY()>();
+        $stack10 = (float) $stack8;
+        $stack9 = <org.jfree.chart.text.TextAnchor: org.jfree.chart.text.TextAnchor TOP_LEFT>;
+        staticinvoke <org.jfree.chart.text.TextUtilities: java.awt.geom.Rectangle2D drawAlignedString(java.lang.String,java.awt.Graphics2D,float,float,org.jfree.chart.text.TextAnchor)>($stack12, g2, $stack11, $stack10, $stack9);
+    
+        return null;
+    }
+
+    // ---- method: <org.jfree.chart.title.ShortTextTitle: void <init>(java.lang.String)> ----
+    {
+        java.lang.String text;
+        org.jfree.chart.title.ShortTextTitle this;
+    
+    
+        this := @this: org.jfree.chart.title.ShortTextTitle;
+        text := @parameter0: java.lang.String;
+        specialinvoke this.<org.jfree.chart.title.TextTitle: void <init>()>();
+        virtualinvoke this.<org.jfree.chart.title.ShortTextTitle: void setText(java.lang.String)>(text);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.title.ShortTextTitle: org.jfree.chart.util.Size2D arrangeRR(java.awt.Graphics2D,org.jfree.data.Range,org.jfree.data.Range)> ----
+    {
+        byte $stack11, $stack15;
+        double $stack10, $stack13, $stack14, $stack16, $stack17, $stack9;
+        java.awt.Font $stack6, $stack7;
+        java.awt.FontMetrics fm;
+        java.awt.Graphics2D g2;
+        java.awt.geom.Rectangle2D bounds;
+        java.lang.String $stack8;
+        org.jfree.chart.title.ShortTextTitle this;
+        org.jfree.chart.util.Size2D $stack12, $stack18;
+        org.jfree.data.Range heightRange, widthRange;
+    
+    
+        this := @this: org.jfree.chart.title.ShortTextTitle;
+        g2 := @parameter0: java.awt.Graphics2D;
+        widthRange := @parameter1: org.jfree.data.Range;
+        heightRange := @parameter2: org.jfree.data.Range;
+        $stack6 = virtualinvoke this.<org.jfree.chart.title.ShortTextTitle: java.awt.Font getFont()>();
+        virtualinvoke g2.<java.awt.Graphics2D: void setFont(java.awt.Font)>($stack6);
+        $stack7 = virtualinvoke this.<org.jfree.chart.title.ShortTextTitle: java.awt.Font getFont()>();
+        fm = virtualinvoke g2.<java.awt.Graphics2D: java.awt.FontMetrics getFontMetrics(java.awt.Font)>($stack7);
+        $stack8 = virtualinvoke this.<org.jfree.chart.title.ShortTextTitle: java.lang.String getText()>();
+        bounds = staticinvoke <org.jfree.chart.text.TextUtilities: java.awt.geom.Rectangle2D getTextBounds(java.lang.String,java.awt.Graphics2D,java.awt.FontMetrics)>($stack8, g2, fm);
+        $stack9 = virtualinvoke bounds.<java.awt.geom.Rectangle2D: double getWidth()>();
+        $stack10 = virtualinvoke widthRange.<org.jfree.data.Range: double getUpperBound()>();
+        $stack11 = $stack9 cmpg $stack10;
+    
+        if $stack11 > 0 goto label1;
+        $stack13 = virtualinvoke bounds.<java.awt.geom.Rectangle2D: double getHeight()>();
+        $stack14 = virtualinvoke heightRange.<org.jfree.data.Range: double getUpperBound()>();
+        $stack15 = $stack13 cmpg $stack14;
+    
+        if $stack15 > 0 goto label1;
+        $stack18 = new org.jfree.chart.util.Size2D;
+        $stack17 = virtualinvoke bounds.<java.awt.geom.Rectangle2D: double getWidth()>();
+        $stack16 = virtualinvoke bounds.<java.awt.geom.Rectangle2D: double getHeight()>();
+        specialinvoke $stack18.<org.jfree.chart.util.Size2D: void <init>(double,double)>($stack17, $stack16);
+    
+        return $stack18;
+    
+      label1:
+        $stack12 = new org.jfree.chart.util.Size2D;
+        specialinvoke $stack12.<org.jfree.chart.util.Size2D: void <init>(double,double)>(0.0, 0.0);
+    
+        return $stack12;
+    }
+
+    // ---- method: <org.jfree.chart.title.ShortTextTitle: org.jfree.chart.util.Size2D arrangeRN(java.awt.Graphics2D,org.jfree.data.Range)> ----
+    {
+        boolean $stack7;
+        double $stack6, $stack8, ww;
+        java.awt.Graphics2D g2;
+        org.jfree.chart.title.ShortTextTitle this;
+        org.jfree.chart.util.Size2D $stack9, s;
+        org.jfree.data.Range widthRange;
+    
+    
+        this := @this: org.jfree.chart.title.ShortTextTitle;
+        g2 := @parameter0: java.awt.Graphics2D;
+        widthRange := @parameter1: org.jfree.data.Range;
+        s = virtualinvoke this.<org.jfree.chart.title.ShortTextTitle: org.jfree.chart.util.Size2D arrangeNN(java.awt.Graphics2D)>(g2);
+        $stack6 = virtualinvoke s.<org.jfree.chart.util.Size2D: double getWidth()>();
+        $stack7 = virtualinvoke widthRange.<org.jfree.data.Range: boolean contains(double)>($stack6);
+    
+        if $stack7 == 0 goto label1;
+    
+        return s;
+    
+      label1:
+        $stack8 = virtualinvoke s.<org.jfree.chart.util.Size2D: double getWidth()>();
+        ww = virtualinvoke widthRange.<org.jfree.data.Range: double constrain(double)>($stack8);
+        $stack9 = virtualinvoke this.<org.jfree.chart.title.ShortTextTitle: org.jfree.chart.util.Size2D arrangeFN(java.awt.Graphics2D,double)>(g2, ww);
+    
+        return $stack9;
+    }
+
+    // ---- method: <org.jfree.chart.title.ShortTextTitle: org.jfree.chart.util.Size2D arrange(java.awt.Graphics2D,org.jfree.chart.block.RectangleConstraint)> ----
+    {
+        byte $stack11, $stack14;
+        double $stack10, $stack13, $stack15, $stack16, $stack17, $stack18, $stack25;
+        java.awt.Graphics2D g2;
+        java.lang.Object $stack23, $stack24, $stack29, $stack36, $stack37;
+        java.lang.RuntimeException #l2, #l3, #l4, #l6, #l7;
+        java.lang.Throwable #l0, #l1, #l5, #l8, #l9;
+        org.jfree.chart.block.LengthConstraintType $stack20, $stack21, $stack22, $stack26, $stack27, $stack28, $stack33, $stack34, $stack35, $stack7, $stack8, $stack9, h, w;
+        org.jfree.chart.block.RectangleConstraint cc, constraint;
+        org.jfree.chart.title.ShortTextTitle this;
+        org.jfree.chart.util.Size2D $stack12, $stack19, contentSize;
+        org.jfree.data.Range $stack30, $stack31, $stack32;
+    
+    
+        this := @this: org.jfree.chart.title.ShortTextTitle;
+        g2 := @parameter0: java.awt.Graphics2D;
+        constraint := @parameter1: org.jfree.chart.block.RectangleConstraint;
+        cc = virtualinvoke this.<org.jfree.chart.title.ShortTextTitle: org.jfree.chart.block.RectangleConstraint toContentConstraint(org.jfree.chart.block.RectangleConstraint)>(constraint);
+        w = virtualinvoke cc.<org.jfree.chart.block.RectangleConstraint: org.jfree.chart.block.LengthConstraintType getWidthConstraintType()>();
+        h = virtualinvoke cc.<org.jfree.chart.block.RectangleConstraint: org.jfree.chart.block.LengthConstraintType getHeightConstraintType()>();
+        contentSize = null;
+        $stack7 = <org.jfree.chart.block.LengthConstraintType: org.jfree.chart.block.LengthConstraintType NONE>;
+    
+        if w != $stack7 goto label05;
+        $stack33 = <org.jfree.chart.block.LengthConstraintType: org.jfree.chart.block.LengthConstraintType NONE>;
+    
+        if h != $stack33 goto label01;
+        contentSize = virtualinvoke this.<org.jfree.chart.title.ShortTextTitle: org.jfree.chart.util.Size2D arrangeNN(java.awt.Graphics2D)>(g2);
+    
+        goto label03;
+    
+      label01:
+        $stack34 = <org.jfree.chart.block.LengthConstraintType: org.jfree.chart.block.LengthConstraintType RANGE>;
+    
+        if h != $stack34 goto label02;
+        $stack37 = new java.lang.RuntimeException;
+        #l4 = (java.lang.RuntimeException) $stack37;
+        specialinvoke #l4.<java.lang.RuntimeException: void <init>(java.lang.String)>("Not yet implemented.");
+        #l8 = (java.lang.Throwable) $stack37;
+    
+        throw #l8;
+    
+      label02:
+        $stack35 = <org.jfree.chart.block.LengthConstraintType: org.jfree.chart.block.LengthConstraintType FIXED>;
+    
+        if h != $stack35 goto label03;
+        $stack36 = new java.lang.RuntimeException;
+        #l2 = (java.lang.RuntimeException) $stack36;
+        specialinvoke #l2.<java.lang.RuntimeException: void <init>(java.lang.String)>("Not yet implemented.");
+        #l1 = (java.lang.Throwable) $stack36;
+    
+        throw #l1;
+    
+      label03:
+        $stack10 = contentSize.<org.jfree.chart.util.Size2D: double width>;
+        $stack11 = $stack10 cmpg 0.0;
+    
+        if $stack11 <= 0 goto label04;
+        $stack13 = contentSize.<org.jfree.chart.util.Size2D: double height>;
+        $stack14 = $stack13 cmpg 0.0;
+    
+        if $stack14 > 0 goto label11;
+    
+      label04:
+        $stack12 = new org.jfree.chart.util.Size2D;
+        specialinvoke $stack12.<org.jfree.chart.util.Size2D: void <init>(double,double)>(0.0, 0.0);
+    
+        return $stack12;
+    
+      label05:
+        $stack8 = <org.jfree.chart.block.LengthConstraintType: org.jfree.chart.block.LengthConstraintType RANGE>;
+    
+        if w != $stack8 goto label08;
+        $stack26 = <org.jfree.chart.block.LengthConstraintType: org.jfree.chart.block.LengthConstraintType NONE>;
+    
+        if h != $stack26 goto label06;
+        $stack32 = virtualinvoke cc.<org.jfree.chart.block.RectangleConstraint: org.jfree.data.Range getWidthRange()>();
+        contentSize = virtualinvoke this.<org.jfree.chart.title.ShortTextTitle: org.jfree.chart.util.Size2D arrangeRN(java.awt.Graphics2D,org.jfree.data.Range)>(g2, $stack32);
+    
+        goto label03;
+    
+      label06:
+        $stack27 = <org.jfree.chart.block.LengthConstraintType: org.jfree.chart.block.LengthConstraintType RANGE>;
+    
+        if h != $stack27 goto label07;
+        $stack31 = virtualinvoke cc.<org.jfree.chart.block.RectangleConstraint: org.jfree.data.Range getWidthRange()>();
+        $stack30 = virtualinvoke cc.<org.jfree.chart.block.RectangleConstraint: org.jfree.data.Range getHeightRange()>();
+        contentSize = virtualinvoke this.<org.jfree.chart.title.ShortTextTitle: org.jfree.chart.util.Size2D arrangeRR(java.awt.Graphics2D,org.jfree.data.Range,org.jfree.data.Range)>(g2, $stack31, $stack30);
+    
+        goto label03;
+    
+      label07:
+        $stack28 = <org.jfree.chart.block.LengthConstraintType: org.jfree.chart.block.LengthConstraintType FIXED>;
+    
+        if h != $stack28 goto label03;
+        $stack29 = new java.lang.RuntimeException;
+        #l7 = (java.lang.RuntimeException) $stack29;
+        specialinvoke #l7.<java.lang.RuntimeException: void <init>(java.lang.String)>("Not yet implemented.");
+        #l5 = (java.lang.Throwable) $stack29;
+    
+        throw #l5;
+    
+      label08:
+        $stack9 = <org.jfree.chart.block.LengthConstraintType: org.jfree.chart.block.LengthConstraintType FIXED>;
+    
+        if w != $stack9 goto label03;
+        $stack20 = <org.jfree.chart.block.LengthConstraintType: org.jfree.chart.block.LengthConstraintType NONE>;
+    
+        if h != $stack20 goto label09;
+        $stack25 = virtualinvoke cc.<org.jfree.chart.block.RectangleConstraint: double getWidth()>();
+        contentSize = virtualinvoke this.<org.jfree.chart.title.ShortTextTitle: org.jfree.chart.util.Size2D arrangeFN(java.awt.Graphics2D,double)>(g2, $stack25);
+    
+        goto label03;
+    
+      label09:
+        $stack21 = <org.jfree.chart.block.LengthConstraintType: org.jfree.chart.block.LengthConstraintType RANGE>;
+    
+        if h != $stack21 goto label10;
+        $stack24 = new java.lang.RuntimeException;
+        #l3 = (java.lang.RuntimeException) $stack24;
+        specialinvoke #l3.<java.lang.RuntimeException: void <init>(java.lang.String)>("Not yet implemented.");
+        #l9 = (java.lang.Throwable) $stack24;
+    
+        throw #l9;
+    
+      label10:
+        $stack22 = <org.jfree.chart.block.LengthConstraintType: org.jfree.chart.block.LengthConstraintType FIXED>;
+    
+        if h != $stack22 goto label03;
+        $stack23 = new java.lang.RuntimeException;
+        #l6 = (java.lang.RuntimeException) $stack23;
+        specialinvoke #l6.<java.lang.RuntimeException: void <init>(java.lang.String)>("Not yet implemented.");
+        #l0 = (java.lang.Throwable) $stack23;
+    
+        throw #l0;
+    
+      label11:
+        $stack19 = new org.jfree.chart.util.Size2D;
+        $stack15 = virtualinvoke contentSize.<org.jfree.chart.util.Size2D: double getWidth()>();
+        $stack18 = virtualinvoke this.<org.jfree.chart.title.ShortTextTitle: double calculateTotalWidth(double)>($stack15);
+        $stack16 = virtualinvoke contentSize.<org.jfree.chart.util.Size2D: double getHeight()>();
+        $stack17 = virtualinvoke this.<org.jfree.chart.title.ShortTextTitle: double calculateTotalHeight(double)>($stack16);
+        specialinvoke $stack19.<org.jfree.chart.util.Size2D: void <init>(double,double)>($stack18, $stack17);
+    
+        return $stack19;
+    }
+
+    // ---- method: <org.jfree.chart.title.ShortTextTitle: org.jfree.chart.util.Size2D arrangeNN(java.awt.Graphics2D)> ----
+    {
+        java.awt.Graphics2D g2;
+        org.jfree.chart.title.ShortTextTitle this;
+        org.jfree.chart.util.Size2D $stack4;
+        org.jfree.data.Range $stack3, max;
+    
+    
+        this := @this: org.jfree.chart.title.ShortTextTitle;
+        g2 := @parameter0: java.awt.Graphics2D;
+        $stack3 = new org.jfree.data.Range;
+        specialinvoke $stack3.<org.jfree.data.Range: void <init>(double,double)>(0.0, 3.4028234663852886E38);
+        max = $stack3;
+        $stack4 = virtualinvoke this.<org.jfree.chart.title.ShortTextTitle: org.jfree.chart.util.Size2D arrangeRR(java.awt.Graphics2D,org.jfree.data.Range,org.jfree.data.Range)>(g2, $stack3, $stack3);
+    
+        return $stack4;
+    }
+
+}

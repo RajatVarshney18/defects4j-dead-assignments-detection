@@ -1,0 +1,238 @@
+// ========================================================================
+// CLASS : org.jfree.data.io.CSV
+// ========================================================================
+
+[PUBLIC, SUPER] class org.jfree.data.io.CSV extends java.lang.Object {
+
+    // ---- method: <org.jfree.data.io.CSV: org.jfree.data.category.CategoryDataset readCategoryDataset(java.io.Reader)> ----
+    {
+        int lineIndex;
+        java.io.BufferedReader $stack8, reader;
+        java.io.Reader in;
+        java.lang.String line;
+        java.util.List columnKeys;
+        org.jfree.data.category.DefaultCategoryDataset $stack7, dataset;
+        org.jfree.data.io.CSV this;
+    
+    
+        this := @this: org.jfree.data.io.CSV;
+        in := @parameter0: java.io.Reader;
+        $stack7 = new org.jfree.data.category.DefaultCategoryDataset;
+        specialinvoke $stack7.<org.jfree.data.category.DefaultCategoryDataset: void <init>()>();
+        dataset = $stack7;
+        $stack8 = new java.io.BufferedReader;
+        specialinvoke $stack8.<java.io.BufferedReader: void <init>(java.io.Reader)>(in);
+        reader = $stack8;
+        columnKeys = null;
+        lineIndex = 0;
+        line = virtualinvoke $stack8.<java.io.BufferedReader: java.lang.String readLine()>();
+    
+      label1:
+        if line == null goto label4;
+    
+        if lineIndex != 0 goto label2;
+        columnKeys = specialinvoke this.<org.jfree.data.io.CSV: java.util.List extractColumnKeys(java.lang.String)>(line);
+    
+        goto label3;
+    
+      label2:
+        specialinvoke this.<org.jfree.data.io.CSV: void extractRowKeyAndData(java.lang.String,org.jfree.data.category.DefaultCategoryDataset,java.util.List)>(line, $stack7, columnKeys);
+    
+      label3:
+        line = virtualinvoke $stack8.<java.io.BufferedReader: java.lang.String readLine()>();
+        lineIndex = lineIndex + 1;
+    
+        goto label1;
+    
+      label4:
+        return $stack7;
+    }
+
+    // ---- method: <org.jfree.data.io.CSV: void <init>(char,char)> ----
+    {
+        char fieldDelimiter, textDelimiter;
+        org.jfree.data.io.CSV this;
+    
+    
+        this := @this: org.jfree.data.io.CSV;
+        fieldDelimiter := @parameter0: char;
+        textDelimiter := @parameter1: char;
+        specialinvoke this.<java.lang.Object: void <init>()>();
+        this.<org.jfree.data.io.CSV: char fieldDelimiter> = fieldDelimiter;
+        this.<org.jfree.data.io.CSV: char textDelimiter> = textDelimiter;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.io.CSV: java.util.List extractColumnKeys(java.lang.String)> ----
+    {
+        char $stack11, $stack12;
+        int $stack8, $stack9, fieldIndex, i#0, start;
+        java.lang.Object $stack7;
+        java.lang.String $stack10, $stack13, i#1, key, line;
+        java.util.ArrayList #l1, keys;
+        java.util.List #l0, #l2, #l3;
+        org.jfree.data.io.CSV this;
+    
+    
+        this := @this: org.jfree.data.io.CSV;
+        line := @parameter0: java.lang.String;
+        $stack7 = new java.util.ArrayList;
+        #l1 = (java.util.ArrayList) $stack7;
+        specialinvoke #l1.<java.util.ArrayList: void <init>()>();
+        keys = (java.util.ArrayList) $stack7;
+        fieldIndex = 0;
+        start = 0;
+        i#0 = 0;
+    
+      label1:
+        $stack8 = virtualinvoke line.<java.lang.String: int length()>();
+    
+        if i#0 >= $stack8 goto label4;
+        $stack12 = virtualinvoke line.<java.lang.String: char charAt(int)>(i#0);
+        $stack11 = this.<org.jfree.data.io.CSV: char fieldDelimiter>;
+    
+        if $stack12 != $stack11 goto label3;
+    
+        if fieldIndex <= 0 goto label2;
+        key = virtualinvoke line.<java.lang.String: java.lang.String substring(int,int)>(start, i#0);
+        $stack13 = specialinvoke this.<org.jfree.data.io.CSV: java.lang.String removeStringDelimiters(java.lang.String)>(key);
+        #l2 = (java.util.List) $stack7;
+        interfaceinvoke #l2.<java.util.List: boolean add(java.lang.Object)>($stack13);
+    
+      label2:
+        start = i#0 + 1;
+        fieldIndex = fieldIndex + 1;
+    
+      label3:
+        i#0 = i#0 + 1;
+    
+        goto label1;
+    
+      label4:
+        $stack9 = virtualinvoke line.<java.lang.String: int length()>();
+        i#1 = virtualinvoke line.<java.lang.String: java.lang.String substring(int,int)>(start, $stack9);
+        $stack10 = specialinvoke this.<org.jfree.data.io.CSV: java.lang.String removeStringDelimiters(java.lang.String)>(i#1);
+        #l3 = (java.util.List) $stack7;
+        interfaceinvoke #l3.<java.util.List: boolean add(java.lang.Object)>($stack10);
+        #l0 = (java.util.List) $stack7;
+    
+        return #l0;
+    }
+
+    // ---- method: <org.jfree.data.io.CSV: void <init>()> ----
+    {
+        org.jfree.data.io.CSV this;
+    
+    
+        this := @this: org.jfree.data.io.CSV;
+        specialinvoke this.<org.jfree.data.io.CSV: void <init>(char,char)>(44, 34);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.io.CSV: void extractRowKeyAndData(java.lang.String,org.jfree.data.category.DefaultCategoryDataset,java.util.List)> ----
+    {
+        char $stack16, $stack17;
+        int $stack10, $stack13, $stack20, $stack9, fieldIndex, i#0, start;
+        java.lang.Comparable #l1, #l3, $stack15, $stack22;
+        java.lang.Number #l0, #l2;
+        java.lang.Object $stack14, $stack21, i#1, key#1, rowKey;
+        java.lang.String $stack11, $stack12, $stack18, $stack19, key#0, line;
+        java.util.List columnKeys;
+        org.jfree.data.category.DefaultCategoryDataset dataset;
+        org.jfree.data.io.CSV this;
+    
+    
+        this := @this: org.jfree.data.io.CSV;
+        line := @parameter0: java.lang.String;
+        dataset := @parameter1: org.jfree.data.category.DefaultCategoryDataset;
+        columnKeys := @parameter2: java.util.List;
+        rowKey = null;
+        fieldIndex = 0;
+        start = 0;
+        i#0 = 0;
+    
+      label1:
+        $stack9 = virtualinvoke line.<java.lang.String: int length()>();
+    
+        if i#0 >= $stack9 goto label5;
+        $stack17 = virtualinvoke line.<java.lang.String: char charAt(int)>(i#0);
+        $stack16 = this.<org.jfree.data.io.CSV: char fieldDelimiter>;
+    
+        if $stack17 != $stack16 goto label4;
+    
+        if fieldIndex != 0 goto label2;
+        key#0 = virtualinvoke line.<java.lang.String: java.lang.String substring(int,int)>(start, i#0);
+        rowKey = specialinvoke this.<org.jfree.data.io.CSV: java.lang.String removeStringDelimiters(java.lang.String)>(key#0);
+    
+        goto label3;
+    
+      label2:
+        $stack18 = virtualinvoke line.<java.lang.String: java.lang.String substring(int,int)>(start, i#0);
+        $stack19 = specialinvoke this.<org.jfree.data.io.CSV: java.lang.String removeStringDelimiters(java.lang.String)>($stack18);
+        key#1 = staticinvoke <java.lang.Double: java.lang.Double valueOf(java.lang.String)>($stack19);
+        $stack20 = fieldIndex - 1;
+        $stack21 = interfaceinvoke columnKeys.<java.util.List: java.lang.Object get(int)>($stack20);
+        $stack22 = (java.lang.Comparable) $stack21;
+        #l0 = (java.lang.Number) key#1;
+        #l1 = (java.lang.Comparable) rowKey;
+        virtualinvoke dataset.<org.jfree.data.category.DefaultCategoryDataset: void addValue(java.lang.Number,java.lang.Comparable,java.lang.Comparable)>(#l0, #l1, $stack22);
+    
+      label3:
+        start = i#0 + 1;
+        fieldIndex = fieldIndex + 1;
+    
+      label4:
+        i#0 = i#0 + 1;
+    
+        goto label1;
+    
+      label5:
+        $stack10 = virtualinvoke line.<java.lang.String: int length()>();
+        $stack11 = virtualinvoke line.<java.lang.String: java.lang.String substring(int,int)>(start, $stack10);
+        $stack12 = specialinvoke this.<org.jfree.data.io.CSV: java.lang.String removeStringDelimiters(java.lang.String)>($stack11);
+        i#1 = staticinvoke <java.lang.Double: java.lang.Double valueOf(java.lang.String)>($stack12);
+        $stack13 = fieldIndex - 1;
+        $stack14 = interfaceinvoke columnKeys.<java.util.List: java.lang.Object get(int)>($stack13);
+        $stack15 = (java.lang.Comparable) $stack14;
+        #l3 = (java.lang.Comparable) rowKey;
+        #l2 = (java.lang.Number) i#1;
+        virtualinvoke dataset.<org.jfree.data.category.DefaultCategoryDataset: void addValue(java.lang.Number,java.lang.Comparable,java.lang.Comparable)>(#l2, #l3, $stack15);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.io.CSV: java.lang.String removeStringDelimiters(java.lang.String)> ----
+    {
+        char $stack3, $stack4, $stack7, $stack8;
+        int $stack10, $stack5, $stack6, $stack9;
+        java.lang.String k, key;
+        org.jfree.data.io.CSV this;
+    
+    
+        this := @this: org.jfree.data.io.CSV;
+        key := @parameter0: java.lang.String;
+        k = virtualinvoke key.<java.lang.String: java.lang.String trim()>();
+        $stack4 = virtualinvoke k.<java.lang.String: char charAt(int)>(0);
+        $stack3 = this.<org.jfree.data.io.CSV: char textDelimiter>;
+    
+        if $stack4 != $stack3 goto label1;
+        k = virtualinvoke k.<java.lang.String: java.lang.String substring(int)>(1);
+    
+      label1:
+        $stack5 = virtualinvoke k.<java.lang.String: int length()>();
+        $stack6 = $stack5 - 1;
+        $stack8 = virtualinvoke k.<java.lang.String: char charAt(int)>($stack6);
+        $stack7 = this.<org.jfree.data.io.CSV: char textDelimiter>;
+    
+        if $stack8 != $stack7 goto label2;
+        $stack9 = virtualinvoke k.<java.lang.String: int length()>();
+        $stack10 = $stack9 - 1;
+        k = virtualinvoke k.<java.lang.String: java.lang.String substring(int,int)>(0, $stack10);
+    
+      label2:
+        return k;
+    }
+
+}

@@ -1,0 +1,136 @@
+// ========================================================================
+// CLASS : org.jfree.chart.servlet.DisplayChart
+// ========================================================================
+
+[PUBLIC, SUPER] class org.jfree.chart.servlet.DisplayChart extends javax.servlet.http.HttpServlet {
+
+    // ---- method: <org.jfree.chart.servlet.DisplayChart: void <init>()> ----
+    {
+        org.jfree.chart.servlet.DisplayChart this;
+    
+    
+        this := @this: org.jfree.chart.servlet.DisplayChart;
+        specialinvoke this.<javax.servlet.http.HttpServlet: void <init>()>();
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.servlet.DisplayChart: void service(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)> ----
+    {
+        boolean $stack12, $stack16, $stack19, isChartInUserList, isChartPublic, isOneTimeChart;
+        int $stack14;
+        java.io.File $stack11, file;
+        java.lang.Object $stack13, $stack17, $stack26, $stack27;
+        java.lang.String $stack10, $stack15, $stack18, $stack21, $stack25, filename#0, filename#1;
+        java.lang.StringBuffer $stack20, $stack22, $stack23, $stack24;
+        java.lang.Throwable #l3, #l4, #l5;
+        javax.servlet.ServletException #l0, #l1, #l2;
+        javax.servlet.http.HttpServletRequest request;
+        javax.servlet.http.HttpServletResponse response;
+        javax.servlet.http.HttpSession session;
+        org.jfree.chart.servlet.ChartDeleter chartDeleter;
+        org.jfree.chart.servlet.DisplayChart this;
+    
+    
+        this := @this: org.jfree.chart.servlet.DisplayChart;
+        request := @parameter0: javax.servlet.http.HttpServletRequest;
+        response := @parameter1: javax.servlet.http.HttpServletResponse;
+        session = interfaceinvoke request.<javax.servlet.http.HttpServletRequest: javax.servlet.http.HttpSession getSession()>();
+        filename#0 = interfaceinvoke request.<javax.servlet.http.HttpServletRequest: java.lang.String getParameter(java.lang.String)>("filename");
+    
+        if filename#0 != null goto label1;
+        $stack27 = new javax.servlet.ServletException;
+        #l1 = (javax.servlet.ServletException) $stack27;
+        specialinvoke #l1.<javax.servlet.ServletException: void <init>(java.lang.String)>("Parameter \'filename\' must be supplied");
+        #l3 = (java.lang.Throwable) $stack27;
+    
+        throw #l3;
+    
+      label1:
+        filename#1 = staticinvoke <org.jfree.chart.servlet.ServletUtilities: java.lang.String searchReplace(java.lang.String,java.lang.String,java.lang.String)>(filename#0, "..", "");
+        $stack11 = new java.io.File;
+        $stack10 = staticinvoke <java.lang.System: java.lang.String getProperty(java.lang.String)>("java.io.tmpdir");
+        specialinvoke $stack11.<java.io.File: void <init>(java.lang.String,java.lang.String)>($stack10, filename#1);
+        file = $stack11;
+        $stack12 = virtualinvoke $stack11.<java.io.File: boolean exists()>();
+    
+        if $stack12 != 0 goto label2;
+        $stack26 = new javax.servlet.ServletException;
+        $stack20 = new java.lang.StringBuffer;
+        specialinvoke $stack20.<java.lang.StringBuffer: void <init>()>();
+        $stack22 = virtualinvoke $stack20.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>("File \'");
+        $stack21 = virtualinvoke $stack11.<java.io.File: java.lang.String getAbsolutePath()>();
+        $stack23 = virtualinvoke $stack22.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>($stack21);
+        $stack24 = virtualinvoke $stack23.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>("\' does not exist");
+        $stack25 = virtualinvoke $stack24.<java.lang.StringBuffer: java.lang.String toString()>();
+        #l0 = (javax.servlet.ServletException) $stack26;
+        specialinvoke #l0.<javax.servlet.ServletException: void <init>(java.lang.String)>($stack25);
+        #l4 = (java.lang.Throwable) $stack26;
+    
+        throw #l4;
+    
+      label2:
+        isChartInUserList = 0;
+        $stack13 = interfaceinvoke session.<javax.servlet.http.HttpSession: java.lang.Object getAttribute(java.lang.String)>("JFreeChart_Deleter");
+        chartDeleter = (org.jfree.chart.servlet.ChartDeleter) $stack13;
+    
+        if chartDeleter == null goto label3;
+        isChartInUserList = virtualinvoke chartDeleter.<org.jfree.chart.servlet.ChartDeleter: boolean isChartAvailable(java.lang.String)>(filename#1);
+    
+      label3:
+        isChartPublic = 0;
+        $stack14 = virtualinvoke filename#1.<java.lang.String: int length()>();
+    
+        if $stack14 < 6 goto label4;
+        $stack18 = virtualinvoke filename#1.<java.lang.String: java.lang.String substring(int,int)>(0, 6);
+        $stack19 = virtualinvoke $stack18.<java.lang.String: boolean equals(java.lang.Object)>("public");
+    
+        if $stack19 == 0 goto label4;
+        isChartPublic = 1;
+    
+      label4:
+        isOneTimeChart = 0;
+        $stack15 = staticinvoke <org.jfree.chart.servlet.ServletUtilities: java.lang.String getTempOneTimeFilePrefix()>();
+        $stack16 = virtualinvoke filename#1.<java.lang.String: boolean startsWith(java.lang.String)>($stack15);
+    
+        if $stack16 == 0 goto label5;
+        isOneTimeChart = 1;
+    
+      label5:
+        if isChartInUserList != 0 goto label6;
+    
+        if isChartPublic != 0 goto label6;
+    
+        if isOneTimeChart == 0 goto label7;
+    
+      label6:
+        staticinvoke <org.jfree.chart.servlet.ServletUtilities: void sendTempFile(java.io.File,javax.servlet.http.HttpServletResponse)>($stack11, response);
+    
+        if isOneTimeChart == 0 goto label8;
+        virtualinvoke $stack11.<java.io.File: boolean delete()>();
+    
+        goto label8;
+    
+      label7:
+        $stack17 = new javax.servlet.ServletException;
+        #l2 = (javax.servlet.ServletException) $stack17;
+        specialinvoke #l2.<javax.servlet.ServletException: void <init>(java.lang.String)>("Chart image not found");
+        #l5 = (java.lang.Throwable) $stack17;
+    
+        throw #l5;
+    
+      label8:
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.servlet.DisplayChart: void init()> ----
+    {
+        org.jfree.chart.servlet.DisplayChart this;
+    
+    
+        this := @this: org.jfree.chart.servlet.DisplayChart;
+    
+        return;
+    }
+
+}

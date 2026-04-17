@@ -1,0 +1,323 @@
+// ========================================================================
+// CLASS : org.jfree.chart.block.BlockBorder
+// ========================================================================
+
+[PUBLIC, SUPER] class org.jfree.chart.block.BlockBorder extends java.lang.Object implements org.jfree.chart.block.BlockFrame, java.io.Serializable {
+
+    // ---- method: <org.jfree.chart.block.BlockBorder: void <init>()> ----
+    {
+        java.awt.Paint #l0;
+        java.lang.Object $stack1;
+        org.jfree.chart.block.BlockBorder this;
+    
+    
+        this := @this: org.jfree.chart.block.BlockBorder;
+        $stack1 = <java.awt.Color: java.awt.Color black>;
+        #l0 = (java.awt.Paint) $stack1;
+        specialinvoke this.<org.jfree.chart.block.BlockBorder: void <init>(java.awt.Paint)>(#l0);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.block.BlockBorder: void draw(java.awt.Graphics2D,java.awt.geom.Rectangle2D)> ----
+    {
+        byte $stack30, $stack31, $stack32, $stack33;
+        double $stack21, $stack23, $stack25, $stack27, $stack34, $stack35, $stack36, $stack37, b, h, l, r, t, w, x, y;
+        java.awt.Graphics2D g2;
+        java.awt.Paint $stack28;
+        java.awt.Shape #l0, #l5, #l6, #l7;
+        java.awt.geom.Rectangle2D #l1, #l2, #l3, #l4, area;
+        java.awt.geom.Rectangle2D$Double #l8, rect;
+        java.lang.Object $stack29;
+        org.jfree.chart.block.BlockBorder this;
+        org.jfree.chart.util.RectangleInsets $stack20, $stack22, $stack24, $stack26;
+    
+    
+        this := @this: org.jfree.chart.block.BlockBorder;
+        g2 := @parameter0: java.awt.Graphics2D;
+        area := @parameter1: java.awt.geom.Rectangle2D;
+        $stack20 = this.<org.jfree.chart.block.BlockBorder: org.jfree.chart.util.RectangleInsets insets>;
+        $stack21 = virtualinvoke area.<java.awt.geom.Rectangle2D: double getHeight()>();
+        t = virtualinvoke $stack20.<org.jfree.chart.util.RectangleInsets: double calculateTopInset(double)>($stack21);
+        $stack22 = this.<org.jfree.chart.block.BlockBorder: org.jfree.chart.util.RectangleInsets insets>;
+        $stack23 = virtualinvoke area.<java.awt.geom.Rectangle2D: double getHeight()>();
+        b = virtualinvoke $stack22.<org.jfree.chart.util.RectangleInsets: double calculateBottomInset(double)>($stack23);
+        $stack24 = this.<org.jfree.chart.block.BlockBorder: org.jfree.chart.util.RectangleInsets insets>;
+        $stack25 = virtualinvoke area.<java.awt.geom.Rectangle2D: double getWidth()>();
+        l = virtualinvoke $stack24.<org.jfree.chart.util.RectangleInsets: double calculateLeftInset(double)>($stack25);
+        $stack26 = this.<org.jfree.chart.block.BlockBorder: org.jfree.chart.util.RectangleInsets insets>;
+        $stack27 = virtualinvoke area.<java.awt.geom.Rectangle2D: double getWidth()>();
+        r = virtualinvoke $stack26.<org.jfree.chart.util.RectangleInsets: double calculateRightInset(double)>($stack27);
+        x = virtualinvoke area.<java.awt.geom.Rectangle2D: double getX()>();
+        y = virtualinvoke area.<java.awt.geom.Rectangle2D: double getY()>();
+        w = virtualinvoke area.<java.awt.geom.Rectangle2D: double getWidth()>();
+        h = virtualinvoke area.<java.awt.geom.Rectangle2D: double getHeight()>();
+        $stack28 = this.<org.jfree.chart.block.BlockBorder: java.awt.Paint paint>;
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>($stack28);
+        $stack29 = new java.awt.geom.Rectangle2D$Double;
+        #l8 = (java.awt.geom.Rectangle2D$Double) $stack29;
+        specialinvoke #l8.<java.awt.geom.Rectangle2D$Double: void <init>()>();
+        rect = (java.awt.geom.Rectangle2D$Double) $stack29;
+        $stack30 = t cmpl 0.0;
+    
+        if $stack30 <= 0 goto label1;
+        #l2 = (java.awt.geom.Rectangle2D) $stack29;
+        virtualinvoke #l2.<java.awt.geom.Rectangle2D: void setRect(double,double,double,double)>(x, y, w, t);
+        #l5 = (java.awt.Shape) $stack29;
+        virtualinvoke g2.<java.awt.Graphics2D: void fill(java.awt.Shape)>(#l5);
+    
+      label1:
+        $stack31 = b cmpl 0.0;
+    
+        if $stack31 <= 0 goto label2;
+        $stack36 = y + h;
+        $stack37 = $stack36 - b;
+        #l4 = (java.awt.geom.Rectangle2D) $stack29;
+        virtualinvoke #l4.<java.awt.geom.Rectangle2D: void setRect(double,double,double,double)>(x, $stack37, w, b);
+        #l6 = (java.awt.Shape) $stack29;
+        virtualinvoke g2.<java.awt.Graphics2D: void fill(java.awt.Shape)>(#l6);
+    
+      label2:
+        $stack32 = l cmpl 0.0;
+    
+        if $stack32 <= 0 goto label3;
+        #l3 = (java.awt.geom.Rectangle2D) $stack29;
+        virtualinvoke #l3.<java.awt.geom.Rectangle2D: void setRect(double,double,double,double)>(x, y, l, h);
+        #l0 = (java.awt.Shape) $stack29;
+        virtualinvoke g2.<java.awt.Graphics2D: void fill(java.awt.Shape)>(#l0);
+    
+      label3:
+        $stack33 = r cmpl 0.0;
+    
+        if $stack33 <= 0 goto label4;
+        $stack34 = x + w;
+        $stack35 = $stack34 - r;
+        #l1 = (java.awt.geom.Rectangle2D) $stack29;
+        virtualinvoke #l1.<java.awt.geom.Rectangle2D: void setRect(double,double,double,double)>($stack35, y, r, h);
+        #l7 = (java.awt.Shape) $stack29;
+        virtualinvoke g2.<java.awt.Graphics2D: void fill(java.awt.Shape)>(#l7);
+    
+      label4:
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.block.BlockBorder: boolean equals(java.lang.Object)> ----
+    {
+        boolean $stack3, $stack6, $stack9;
+        java.awt.Paint $stack7, $stack8;
+        java.lang.Object obj;
+        org.jfree.chart.block.BlockBorder that, this;
+        org.jfree.chart.util.RectangleInsets $stack4, $stack5;
+    
+    
+        this := @this: org.jfree.chart.block.BlockBorder;
+        obj := @parameter0: java.lang.Object;
+    
+        if obj != this goto label1;
+    
+        return 1;
+    
+      label1:
+        $stack3 = obj instanceof org.jfree.chart.block.BlockBorder;
+    
+        if $stack3 != 0 goto label2;
+    
+        return 0;
+    
+      label2:
+        that = (org.jfree.chart.block.BlockBorder) obj;
+        $stack5 = this.<org.jfree.chart.block.BlockBorder: org.jfree.chart.util.RectangleInsets insets>;
+        $stack4 = that.<org.jfree.chart.block.BlockBorder: org.jfree.chart.util.RectangleInsets insets>;
+        $stack6 = virtualinvoke $stack5.<org.jfree.chart.util.RectangleInsets: boolean equals(java.lang.Object)>($stack4);
+    
+        if $stack6 != 0 goto label3;
+    
+        return 0;
+    
+      label3:
+        $stack8 = this.<org.jfree.chart.block.BlockBorder: java.awt.Paint paint>;
+        $stack7 = that.<org.jfree.chart.block.BlockBorder: java.awt.Paint paint>;
+        $stack9 = staticinvoke <org.jfree.chart.util.PaintUtilities: boolean equal(java.awt.Paint,java.awt.Paint)>($stack8, $stack7);
+    
+        if $stack9 != 0 goto label4;
+    
+        return 0;
+    
+      label4:
+        return 1;
+    }
+
+    // ---- method: <org.jfree.chart.block.BlockBorder: void <clinit>()> ----
+    {
+        java.awt.Paint #l0;
+        java.lang.Object $stack0;
+        org.jfree.chart.block.BlockBorder $stack2;
+        org.jfree.chart.util.RectangleInsets $stack1;
+    
+    
+        $stack2 = new org.jfree.chart.block.BlockBorder;
+        $stack1 = <org.jfree.chart.util.RectangleInsets: org.jfree.chart.util.RectangleInsets ZERO_INSETS>;
+        $stack0 = <java.awt.Color: java.awt.Color white>;
+        #l0 = (java.awt.Paint) $stack0;
+        specialinvoke $stack2.<org.jfree.chart.block.BlockBorder: void <init>(org.jfree.chart.util.RectangleInsets,java.awt.Paint)>($stack1, #l0);
+        <org.jfree.chart.block.BlockBorder: org.jfree.chart.block.BlockBorder NONE> = $stack2;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.block.BlockBorder: org.jfree.chart.util.RectangleInsets getInsets()> ----
+    {
+        org.jfree.chart.block.BlockBorder this;
+        org.jfree.chart.util.RectangleInsets $stack1;
+    
+    
+        this := @this: org.jfree.chart.block.BlockBorder;
+        $stack1 = this.<org.jfree.chart.block.BlockBorder: org.jfree.chart.util.RectangleInsets insets>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.block.BlockBorder: void writeObject(java.io.ObjectOutputStream)> ----
+    {
+        java.awt.Paint $stack2;
+        java.io.ObjectOutputStream stream;
+        org.jfree.chart.block.BlockBorder this;
+    
+    
+        this := @this: org.jfree.chart.block.BlockBorder;
+        stream := @parameter0: java.io.ObjectOutputStream;
+        virtualinvoke stream.<java.io.ObjectOutputStream: void defaultWriteObject()>();
+        $stack2 = this.<org.jfree.chart.block.BlockBorder: java.awt.Paint paint>;
+        staticinvoke <org.jfree.chart.util.SerialUtilities: void writePaint(java.awt.Paint,java.io.ObjectOutputStream)>($stack2, stream);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.block.BlockBorder: void <init>(double,double,double,double,java.awt.Paint)> ----
+    {
+        double bottom, left, right, top;
+        java.awt.Paint paint;
+        org.jfree.chart.block.BlockBorder this;
+        org.jfree.chart.util.RectangleInsets $stack10;
+    
+    
+        this := @this: org.jfree.chart.block.BlockBorder;
+        top := @parameter0: double;
+        left := @parameter1: double;
+        bottom := @parameter2: double;
+        right := @parameter3: double;
+        paint := @parameter4: java.awt.Paint;
+        $stack10 = new org.jfree.chart.util.RectangleInsets;
+        specialinvoke $stack10.<org.jfree.chart.util.RectangleInsets: void <init>(double,double,double,double)>(top, left, bottom, right);
+        specialinvoke this.<org.jfree.chart.block.BlockBorder: void <init>(org.jfree.chart.util.RectangleInsets,java.awt.Paint)>($stack10, paint);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.block.BlockBorder: void <init>(org.jfree.chart.util.RectangleInsets,java.awt.Paint)> ----
+    {
+        java.awt.Paint paint;
+        java.lang.IllegalArgumentException #l1, #l2;
+        java.lang.Object $stack3, $stack4;
+        java.lang.Throwable #l0, #l3;
+        org.jfree.chart.block.BlockBorder this;
+        org.jfree.chart.util.RectangleInsets insets;
+    
+    
+        this := @this: org.jfree.chart.block.BlockBorder;
+        insets := @parameter0: org.jfree.chart.util.RectangleInsets;
+        paint := @parameter1: java.awt.Paint;
+        specialinvoke this.<java.lang.Object: void <init>()>();
+    
+        if insets != null goto label1;
+        $stack4 = new java.lang.IllegalArgumentException;
+        #l2 = (java.lang.IllegalArgumentException) $stack4;
+        specialinvoke #l2.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'insets\' argument.");
+        #l0 = (java.lang.Throwable) $stack4;
+    
+        throw #l0;
+    
+      label1:
+        if paint != null goto label2;
+        $stack3 = new java.lang.IllegalArgumentException;
+        #l1 = (java.lang.IllegalArgumentException) $stack3;
+        specialinvoke #l1.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'paint\' argument.");
+        #l3 = (java.lang.Throwable) $stack3;
+    
+        throw #l3;
+    
+      label2:
+        this.<org.jfree.chart.block.BlockBorder: org.jfree.chart.util.RectangleInsets insets> = insets;
+        this.<org.jfree.chart.block.BlockBorder: java.awt.Paint paint> = paint;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.block.BlockBorder: java.awt.Paint getPaint()> ----
+    {
+        java.awt.Paint $stack1;
+        org.jfree.chart.block.BlockBorder this;
+    
+    
+        this := @this: org.jfree.chart.block.BlockBorder;
+        $stack1 = this.<org.jfree.chart.block.BlockBorder: java.awt.Paint paint>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.block.BlockBorder: void readObject(java.io.ObjectInputStream)> ----
+    {
+        java.awt.Paint $stack2;
+        java.io.ObjectInputStream stream;
+        org.jfree.chart.block.BlockBorder this;
+    
+    
+        this := @this: org.jfree.chart.block.BlockBorder;
+        stream := @parameter0: java.io.ObjectInputStream;
+        virtualinvoke stream.<java.io.ObjectInputStream: void defaultReadObject()>();
+        $stack2 = staticinvoke <org.jfree.chart.util.SerialUtilities: java.awt.Paint readPaint(java.io.ObjectInputStream)>(stream);
+        this.<org.jfree.chart.block.BlockBorder: java.awt.Paint paint> = $stack2;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.block.BlockBorder: void <init>(double,double,double,double)> ----
+    {
+        double bottom, left, right, top;
+        java.awt.Paint #l0;
+        java.lang.Object $stack10;
+        org.jfree.chart.block.BlockBorder this;
+        org.jfree.chart.util.RectangleInsets $stack9;
+    
+    
+        this := @this: org.jfree.chart.block.BlockBorder;
+        top := @parameter0: double;
+        left := @parameter1: double;
+        bottom := @parameter2: double;
+        right := @parameter3: double;
+        $stack9 = new org.jfree.chart.util.RectangleInsets;
+        specialinvoke $stack9.<org.jfree.chart.util.RectangleInsets: void <init>(double,double,double,double)>(top, left, bottom, right);
+        $stack10 = <java.awt.Color: java.awt.Color black>;
+        #l0 = (java.awt.Paint) $stack10;
+        specialinvoke this.<org.jfree.chart.block.BlockBorder: void <init>(org.jfree.chart.util.RectangleInsets,java.awt.Paint)>($stack9, #l0);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.block.BlockBorder: void <init>(java.awt.Paint)> ----
+    {
+        java.awt.Paint paint;
+        org.jfree.chart.block.BlockBorder this;
+        org.jfree.chart.util.RectangleInsets $stack2;
+    
+    
+        this := @this: org.jfree.chart.block.BlockBorder;
+        paint := @parameter0: java.awt.Paint;
+        $stack2 = new org.jfree.chart.util.RectangleInsets;
+        specialinvoke $stack2.<org.jfree.chart.util.RectangleInsets: void <init>(double,double,double,double)>(1.0, 1.0, 1.0, 1.0);
+        specialinvoke this.<org.jfree.chart.block.BlockBorder: void <init>(org.jfree.chart.util.RectangleInsets,java.awt.Paint)>($stack2, paint);
+    
+        return;
+    }
+
+}

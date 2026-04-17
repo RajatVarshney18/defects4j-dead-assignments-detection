@@ -1,0 +1,570 @@
+// ========================================================================
+// CLASS : org.jfree.chart.editor.DefaultNumberAxisEditor
+// ========================================================================
+
+[SUPER] class org.jfree.chart.editor.DefaultNumberAxisEditor extends org.jfree.chart.editor.DefaultAxisEditor implements java.awt.event.FocusListener {
+
+    // ---- method: <org.jfree.chart.editor.DefaultNumberAxisEditor: void attemptGridPaintSelection()> ----
+    {
+        java.awt.Color $stack3;
+        java.awt.Component #l1;
+        java.awt.Paint #l0;
+        java.lang.Object c, this;
+        java.lang.String $stack4;
+        java.util.ResourceBundle $stack2;
+        org.jfree.chart.editor.DefaultNumberAxisEditor #l2;
+        org.jfree.chart.ui.PaintSample $stack5;
+    
+    
+        this := @this: org.jfree.chart.editor.DefaultNumberAxisEditor;
+        $stack2 = <org.jfree.chart.editor.DefaultNumberAxisEditor: java.util.ResourceBundle localizationResources>;
+        $stack4 = virtualinvoke $stack2.<java.util.ResourceBundle: java.lang.String getString(java.lang.String)>("Grid_Color");
+        $stack3 = <java.awt.Color: java.awt.Color blue>;
+        #l1 = (java.awt.Component) this;
+        c = staticinvoke <javax.swing.JColorChooser: java.awt.Color showDialog(java.awt.Component,java.lang.String,java.awt.Color)>(#l1, $stack4, $stack3);
+    
+        if c == null goto label1;
+        #l2 = (org.jfree.chart.editor.DefaultNumberAxisEditor) this;
+        $stack5 = #l2.<org.jfree.chart.editor.DefaultNumberAxisEditor: org.jfree.chart.ui.PaintSample gridPaintSample>;
+        #l0 = (java.awt.Paint) c;
+        virtualinvoke $stack5.<org.jfree.chart.ui.PaintSample: void setPaint(java.awt.Paint)>(#l0);
+    
+      label1:
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.editor.DefaultNumberAxisEditor: void focusLost(java.awt.event.FocusEvent)> ----
+    {
+        java.awt.event.FocusEvent event;
+        java.lang.Object $stack3, $stack5;
+        javax.swing.JTextField $stack2, $stack4;
+        org.jfree.chart.editor.DefaultNumberAxisEditor this;
+    
+    
+        this := @this: org.jfree.chart.editor.DefaultNumberAxisEditor;
+        event := @parameter0: java.awt.event.FocusEvent;
+        $stack3 = virtualinvoke event.<java.awt.event.FocusEvent: java.lang.Object getSource()>();
+        $stack2 = this.<org.jfree.chart.editor.DefaultNumberAxisEditor: javax.swing.JTextField minimumRangeValue>;
+    
+        if $stack3 != $stack2 goto label1;
+        virtualinvoke this.<org.jfree.chart.editor.DefaultNumberAxisEditor: void validateMinimum()>();
+    
+        goto label2;
+    
+      label1:
+        $stack5 = virtualinvoke event.<java.awt.event.FocusEvent: java.lang.Object getSource()>();
+        $stack4 = this.<org.jfree.chart.editor.DefaultNumberAxisEditor: javax.swing.JTextField maximumRangeValue>;
+    
+        if $stack5 != $stack4 goto label2;
+        virtualinvoke this.<org.jfree.chart.editor.DefaultNumberAxisEditor: void validateMaximum()>();
+    
+      label2:
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.editor.DefaultNumberAxisEditor: void attemptGridStrokeSelection()> ----
+    {
+        int result;
+        java.awt.Component #l2;
+        java.awt.Stroke $stack9;
+        java.lang.Object this;
+        java.lang.String $stack7;
+        java.util.ResourceBundle $stack6;
+        org.jfree.chart.editor.DefaultNumberAxisEditor #l0, #l1, #l3;
+        org.jfree.chart.ui.StrokeChooserPanel $stack5, panel;
+        org.jfree.chart.ui.StrokeSample $stack4, $stack8;
+        org.jfree.chart.ui.StrokeSample[] $stack3;
+    
+    
+        this := @this: org.jfree.chart.editor.DefaultNumberAxisEditor;
+        $stack5 = new org.jfree.chart.ui.StrokeChooserPanel;
+        #l1 = (org.jfree.chart.editor.DefaultNumberAxisEditor) this;
+        $stack4 = #l1.<org.jfree.chart.editor.DefaultNumberAxisEditor: org.jfree.chart.ui.StrokeSample gridStrokeSample>;
+        #l0 = (org.jfree.chart.editor.DefaultNumberAxisEditor) this;
+        $stack3 = #l0.<org.jfree.chart.editor.DefaultNumberAxisEditor: org.jfree.chart.ui.StrokeSample[] availableStrokeSamples>;
+        specialinvoke $stack5.<org.jfree.chart.ui.StrokeChooserPanel: void <init>(org.jfree.chart.ui.StrokeSample,org.jfree.chart.ui.StrokeSample[])>($stack4, $stack3);
+        panel = $stack5;
+        $stack6 = <org.jfree.chart.editor.DefaultNumberAxisEditor: java.util.ResourceBundle localizationResources>;
+        $stack7 = virtualinvoke $stack6.<java.util.ResourceBundle: java.lang.String getString(java.lang.String)>("Stroke_Selection");
+        #l2 = (java.awt.Component) this;
+        result = staticinvoke <javax.swing.JOptionPane: int showConfirmDialog(java.awt.Component,java.lang.Object,java.lang.String,int,int)>(#l2, $stack5, $stack7, 2, -1);
+    
+        if result != 0 goto label1;
+        #l3 = (org.jfree.chart.editor.DefaultNumberAxisEditor) this;
+        $stack8 = #l3.<org.jfree.chart.editor.DefaultNumberAxisEditor: org.jfree.chart.ui.StrokeSample gridStrokeSample>;
+        $stack9 = virtualinvoke $stack5.<org.jfree.chart.ui.StrokeChooserPanel: java.awt.Stroke getSelectedStroke()>();
+        virtualinvoke $stack8.<org.jfree.chart.ui.StrokeSample: void setStroke(java.awt.Stroke)>($stack9);
+    
+      label1:
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.editor.DefaultNumberAxisEditor: boolean isAutoRange()> ----
+    {
+        boolean $stack1;
+        org.jfree.chart.editor.DefaultNumberAxisEditor this;
+    
+    
+        this := @this: org.jfree.chart.editor.DefaultNumberAxisEditor;
+        $stack1 = this.<org.jfree.chart.editor.DefaultNumberAxisEditor: boolean autoRange>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.editor.DefaultNumberAxisEditor: void <init>(org.jfree.chart.axis.NumberAxis)> ----
+    {
+        boolean $stack26, $stack39, $stack4, $stack52, $stack61, $stack62;
+        double $stack36, $stack49, $stack5, $stack6;
+        java.awt.BasicStroke #l15, #l20, #l3, #l34;
+        java.awt.Component #l1, #l14, #l18, #l2, #l22, #l24, #l26, #l31, #l5, #l7;
+        java.awt.Paint #l19;
+        java.awt.Stroke #l12, #l29, #l33, #l8;
+        java.lang.Object $stack12, $stack15, $stack18, $stack22, $stack24, $stack31, $stack32, $stack35, $stack44, $stack45, $stack48, $stack57, $stack58, $stack7, $stack9;
+        java.lang.String $stack27, $stack34, $stack37, $stack47, $stack50, $stack60;
+        java.util.ResourceBundle $stack25, $stack33, $stack46, $stack59;
+        javax.swing.JCheckBox $stack28, $stack29, $stack30;
+        javax.swing.JLabel #l10, #l27;
+        javax.swing.JPanel #l0, #l11, #l13, #l16, #l17, #l21, #l23, #l25, #l28, #l30, #l32, #l35, #l4, #l6, #l9, range;
+        javax.swing.JTabbedPane other;
+        javax.swing.JTextField $stack38, $stack40, $stack41, $stack42, $stack43, $stack51, $stack53, $stack54, $stack55, $stack56;
+        javax.swing.border.Border $stack23;
+        org.jfree.chart.axis.NumberAxis axis;
+        org.jfree.chart.editor.DefaultNumberAxisEditor this;
+        org.jfree.chart.ui.LCBLayout $stack21;
+        org.jfree.chart.ui.PaintSample $stack8;
+        org.jfree.chart.ui.StrokeSample $stack10, $stack14, $stack17, $stack20;
+        org.jfree.chart.ui.StrokeSample[] $stack11, $stack13, $stack16, $stack19;
+    
+    
+        this := @this: org.jfree.chart.editor.DefaultNumberAxisEditor;
+        axis := @parameter0: org.jfree.chart.axis.NumberAxis;
+        specialinvoke this.<org.jfree.chart.editor.DefaultAxisEditor: void <init>(org.jfree.chart.axis.Axis)>(axis);
+        $stack4 = virtualinvoke axis.<org.jfree.chart.axis.NumberAxis: boolean isAutoRange()>();
+        this.<org.jfree.chart.editor.DefaultNumberAxisEditor: boolean autoRange> = $stack4;
+        $stack5 = virtualinvoke axis.<org.jfree.chart.axis.NumberAxis: double getLowerBound()>();
+        this.<org.jfree.chart.editor.DefaultNumberAxisEditor: double minimumValue> = $stack5;
+        $stack6 = virtualinvoke axis.<org.jfree.chart.axis.NumberAxis: double getUpperBound()>();
+        this.<org.jfree.chart.editor.DefaultNumberAxisEditor: double maximumValue> = $stack6;
+        $stack8 = new org.jfree.chart.ui.PaintSample;
+        $stack7 = <java.awt.Color: java.awt.Color blue>;
+        #l19 = (java.awt.Paint) $stack7;
+        specialinvoke $stack8.<org.jfree.chart.ui.PaintSample: void <init>(java.awt.Paint)>(#l19);
+        this.<org.jfree.chart.editor.DefaultNumberAxisEditor: org.jfree.chart.ui.PaintSample gridPaintSample> = $stack8;
+        $stack10 = new org.jfree.chart.ui.StrokeSample;
+        $stack9 = new java.awt.BasicStroke;
+        #l34 = (java.awt.BasicStroke) $stack9;
+        specialinvoke #l34.<java.awt.BasicStroke: void <init>(float)>(1.0F);
+        #l12 = (java.awt.Stroke) $stack9;
+        specialinvoke $stack10.<org.jfree.chart.ui.StrokeSample: void <init>(java.awt.Stroke)>(#l12);
+        this.<org.jfree.chart.editor.DefaultNumberAxisEditor: org.jfree.chart.ui.StrokeSample gridStrokeSample> = $stack10;
+        $stack11 = newarray (org.jfree.chart.ui.StrokeSample)[3];
+        this.<org.jfree.chart.editor.DefaultNumberAxisEditor: org.jfree.chart.ui.StrokeSample[] availableStrokeSamples> = $stack11;
+        $stack13 = this.<org.jfree.chart.editor.DefaultNumberAxisEditor: org.jfree.chart.ui.StrokeSample[] availableStrokeSamples>;
+        $stack14 = new org.jfree.chart.ui.StrokeSample;
+        $stack12 = new java.awt.BasicStroke;
+        #l3 = (java.awt.BasicStroke) $stack12;
+        specialinvoke #l3.<java.awt.BasicStroke: void <init>(float)>(1.0F);
+        #l29 = (java.awt.Stroke) $stack12;
+        specialinvoke $stack14.<org.jfree.chart.ui.StrokeSample: void <init>(java.awt.Stroke)>(#l29);
+        $stack13[0] = $stack14;
+        $stack16 = this.<org.jfree.chart.editor.DefaultNumberAxisEditor: org.jfree.chart.ui.StrokeSample[] availableStrokeSamples>;
+        $stack17 = new org.jfree.chart.ui.StrokeSample;
+        $stack15 = new java.awt.BasicStroke;
+        #l15 = (java.awt.BasicStroke) $stack15;
+        specialinvoke #l15.<java.awt.BasicStroke: void <init>(float)>(2.0F);
+        #l33 = (java.awt.Stroke) $stack15;
+        specialinvoke $stack17.<org.jfree.chart.ui.StrokeSample: void <init>(java.awt.Stroke)>(#l33);
+        $stack16[1] = $stack17;
+        $stack19 = this.<org.jfree.chart.editor.DefaultNumberAxisEditor: org.jfree.chart.ui.StrokeSample[] availableStrokeSamples>;
+        $stack20 = new org.jfree.chart.ui.StrokeSample;
+        $stack18 = new java.awt.BasicStroke;
+        #l20 = (java.awt.BasicStroke) $stack18;
+        specialinvoke #l20.<java.awt.BasicStroke: void <init>(float)>(3.0F);
+        #l8 = (java.awt.Stroke) $stack18;
+        specialinvoke $stack20.<org.jfree.chart.ui.StrokeSample: void <init>(java.awt.Stroke)>(#l8);
+        $stack19[2] = $stack20;
+        other = virtualinvoke this.<org.jfree.chart.editor.DefaultNumberAxisEditor: javax.swing.JTabbedPane getOtherTabs()>();
+        $stack22 = new javax.swing.JPanel;
+        $stack21 = new org.jfree.chart.ui.LCBLayout;
+        specialinvoke $stack21.<org.jfree.chart.ui.LCBLayout: void <init>(int)>(3);
+        #l32 = (javax.swing.JPanel) $stack22;
+        specialinvoke #l32.<javax.swing.JPanel: void <init>(java.awt.LayoutManager)>($stack21);
+        range = (javax.swing.JPanel) $stack22;
+        $stack23 = staticinvoke <javax.swing.BorderFactory: javax.swing.border.Border createEmptyBorder(int,int,int,int)>(4, 4, 4, 4);
+        #l35 = (javax.swing.JPanel) $stack22;
+        virtualinvoke #l35.<javax.swing.JPanel: void setBorder(javax.swing.border.Border)>($stack23);
+        $stack24 = new javax.swing.JPanel;
+        #l28 = (javax.swing.JPanel) $stack24;
+        specialinvoke #l28.<javax.swing.JPanel: void <init>()>();
+        #l18 = (java.awt.Component) $stack24;
+        #l17 = (javax.swing.JPanel) $stack22;
+        virtualinvoke #l17.<javax.swing.JPanel: java.awt.Component add(java.awt.Component)>(#l18);
+        $stack28 = new javax.swing.JCheckBox;
+        $stack25 = <org.jfree.chart.editor.DefaultNumberAxisEditor: java.util.ResourceBundle localizationResources>;
+        $stack27 = virtualinvoke $stack25.<java.util.ResourceBundle: java.lang.String getString(java.lang.String)>("Auto-adjust_range");
+        $stack26 = this.<org.jfree.chart.editor.DefaultNumberAxisEditor: boolean autoRange>;
+        specialinvoke $stack28.<javax.swing.JCheckBox: void <init>(java.lang.String,boolean)>($stack27, $stack26);
+        this.<org.jfree.chart.editor.DefaultNumberAxisEditor: javax.swing.JCheckBox autoRangeCheckBox> = $stack28;
+        $stack29 = this.<org.jfree.chart.editor.DefaultNumberAxisEditor: javax.swing.JCheckBox autoRangeCheckBox>;
+        virtualinvoke $stack29.<javax.swing.JCheckBox: void setActionCommand(java.lang.String)>("AutoRangeOnOff");
+        $stack30 = this.<org.jfree.chart.editor.DefaultNumberAxisEditor: javax.swing.JCheckBox autoRangeCheckBox>;
+        virtualinvoke $stack30.<javax.swing.JCheckBox: void addActionListener(java.awt.event.ActionListener)>(this);
+        $stack31 = this.<org.jfree.chart.editor.DefaultNumberAxisEditor: javax.swing.JCheckBox autoRangeCheckBox>;
+        #l14 = (java.awt.Component) $stack31;
+        #l13 = (javax.swing.JPanel) $stack22;
+        virtualinvoke #l13.<javax.swing.JPanel: java.awt.Component add(java.awt.Component)>(#l14);
+        $stack32 = new javax.swing.JPanel;
+        #l11 = (javax.swing.JPanel) $stack32;
+        specialinvoke #l11.<javax.swing.JPanel: void <init>()>();
+        #l6 = (javax.swing.JPanel) $stack22;
+        #l7 = (java.awt.Component) $stack32;
+        virtualinvoke #l6.<javax.swing.JPanel: java.awt.Component add(java.awt.Component)>(#l7);
+        $stack35 = new javax.swing.JLabel;
+        $stack33 = <org.jfree.chart.editor.DefaultNumberAxisEditor: java.util.ResourceBundle localizationResources>;
+        $stack34 = virtualinvoke $stack33.<java.util.ResourceBundle: java.lang.String getString(java.lang.String)>("Minimum_range_value");
+        #l10 = (javax.swing.JLabel) $stack35;
+        specialinvoke #l10.<javax.swing.JLabel: void <init>(java.lang.String)>($stack34);
+        #l24 = (java.awt.Component) $stack35;
+        #l23 = (javax.swing.JPanel) $stack22;
+        virtualinvoke #l23.<javax.swing.JPanel: java.awt.Component add(java.awt.Component)>(#l24);
+        $stack38 = new javax.swing.JTextField;
+        $stack36 = this.<org.jfree.chart.editor.DefaultNumberAxisEditor: double minimumValue>;
+        $stack37 = staticinvoke <java.lang.Double: java.lang.String toString(double)>($stack36);
+        specialinvoke $stack38.<javax.swing.JTextField: void <init>(java.lang.String)>($stack37);
+        this.<org.jfree.chart.editor.DefaultNumberAxisEditor: javax.swing.JTextField minimumRangeValue> = $stack38;
+        $stack40 = this.<org.jfree.chart.editor.DefaultNumberAxisEditor: javax.swing.JTextField minimumRangeValue>;
+        $stack39 = this.<org.jfree.chart.editor.DefaultNumberAxisEditor: boolean autoRange>;
+    
+        if $stack39 != 0 goto label1;
+        $stack62 = 1;
+    
+        goto label2;
+    
+      label1:
+        $stack62 = 0;
+    
+      label2:
+        virtualinvoke $stack40.<javax.swing.JTextField: void setEnabled(boolean)>($stack62);
+        $stack41 = this.<org.jfree.chart.editor.DefaultNumberAxisEditor: javax.swing.JTextField minimumRangeValue>;
+        virtualinvoke $stack41.<javax.swing.JTextField: void setActionCommand(java.lang.String)>("MinimumRange");
+        $stack42 = this.<org.jfree.chart.editor.DefaultNumberAxisEditor: javax.swing.JTextField minimumRangeValue>;
+        virtualinvoke $stack42.<javax.swing.JTextField: void addActionListener(java.awt.event.ActionListener)>(this);
+        $stack43 = this.<org.jfree.chart.editor.DefaultNumberAxisEditor: javax.swing.JTextField minimumRangeValue>;
+        virtualinvoke $stack43.<javax.swing.JTextField: void addFocusListener(java.awt.event.FocusListener)>(this);
+        $stack44 = this.<org.jfree.chart.editor.DefaultNumberAxisEditor: javax.swing.JTextField minimumRangeValue>;
+        #l21 = (javax.swing.JPanel) $stack22;
+        #l22 = (java.awt.Component) $stack44;
+        virtualinvoke #l21.<javax.swing.JPanel: java.awt.Component add(java.awt.Component)>(#l22);
+        $stack45 = new javax.swing.JPanel;
+        #l9 = (javax.swing.JPanel) $stack45;
+        specialinvoke #l9.<javax.swing.JPanel: void <init>()>();
+        #l31 = (java.awt.Component) $stack45;
+        #l30 = (javax.swing.JPanel) $stack22;
+        virtualinvoke #l30.<javax.swing.JPanel: java.awt.Component add(java.awt.Component)>(#l31);
+        $stack48 = new javax.swing.JLabel;
+        $stack46 = <org.jfree.chart.editor.DefaultNumberAxisEditor: java.util.ResourceBundle localizationResources>;
+        $stack47 = virtualinvoke $stack46.<java.util.ResourceBundle: java.lang.String getString(java.lang.String)>("Maximum_range_value");
+        #l27 = (javax.swing.JLabel) $stack48;
+        specialinvoke #l27.<javax.swing.JLabel: void <init>(java.lang.String)>($stack47);
+        #l26 = (java.awt.Component) $stack48;
+        #l25 = (javax.swing.JPanel) $stack22;
+        virtualinvoke #l25.<javax.swing.JPanel: java.awt.Component add(java.awt.Component)>(#l26);
+        $stack51 = new javax.swing.JTextField;
+        $stack49 = this.<org.jfree.chart.editor.DefaultNumberAxisEditor: double maximumValue>;
+        $stack50 = staticinvoke <java.lang.Double: java.lang.String toString(double)>($stack49);
+        specialinvoke $stack51.<javax.swing.JTextField: void <init>(java.lang.String)>($stack50);
+        this.<org.jfree.chart.editor.DefaultNumberAxisEditor: javax.swing.JTextField maximumRangeValue> = $stack51;
+        $stack53 = this.<org.jfree.chart.editor.DefaultNumberAxisEditor: javax.swing.JTextField maximumRangeValue>;
+        $stack52 = this.<org.jfree.chart.editor.DefaultNumberAxisEditor: boolean autoRange>;
+    
+        if $stack52 != 0 goto label3;
+        $stack61 = 1;
+    
+        goto label4;
+    
+      label3:
+        $stack61 = 0;
+    
+      label4:
+        virtualinvoke $stack53.<javax.swing.JTextField: void setEnabled(boolean)>($stack61);
+        $stack54 = this.<org.jfree.chart.editor.DefaultNumberAxisEditor: javax.swing.JTextField maximumRangeValue>;
+        virtualinvoke $stack54.<javax.swing.JTextField: void setActionCommand(java.lang.String)>("MaximumRange");
+        $stack55 = this.<org.jfree.chart.editor.DefaultNumberAxisEditor: javax.swing.JTextField maximumRangeValue>;
+        virtualinvoke $stack55.<javax.swing.JTextField: void addActionListener(java.awt.event.ActionListener)>(this);
+        $stack56 = this.<org.jfree.chart.editor.DefaultNumberAxisEditor: javax.swing.JTextField maximumRangeValue>;
+        virtualinvoke $stack56.<javax.swing.JTextField: void addFocusListener(java.awt.event.FocusListener)>(this);
+        $stack57 = this.<org.jfree.chart.editor.DefaultNumberAxisEditor: javax.swing.JTextField maximumRangeValue>;
+        #l4 = (javax.swing.JPanel) $stack22;
+        #l5 = (java.awt.Component) $stack57;
+        virtualinvoke #l4.<javax.swing.JPanel: java.awt.Component add(java.awt.Component)>(#l5);
+        $stack58 = new javax.swing.JPanel;
+        #l16 = (javax.swing.JPanel) $stack58;
+        specialinvoke #l16.<javax.swing.JPanel: void <init>()>();
+        #l0 = (javax.swing.JPanel) $stack22;
+        #l1 = (java.awt.Component) $stack58;
+        virtualinvoke #l0.<javax.swing.JPanel: java.awt.Component add(java.awt.Component)>(#l1);
+        $stack59 = <org.jfree.chart.editor.DefaultNumberAxisEditor: java.util.ResourceBundle localizationResources>;
+        $stack60 = virtualinvoke $stack59.<java.util.ResourceBundle: java.lang.String getString(java.lang.String)>("Range");
+        #l2 = (java.awt.Component) $stack22;
+        virtualinvoke other.<javax.swing.JTabbedPane: java.awt.Component add(java.lang.String,java.awt.Component)>($stack60, #l2);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.editor.DefaultNumberAxisEditor: void setAxisProperties(org.jfree.chart.axis.Axis)> ----
+    {
+        boolean $stack3, $stack4;
+        double $stack5, $stack6;
+        org.jfree.chart.axis.Axis axis;
+        org.jfree.chart.axis.NumberAxis numberAxis;
+        org.jfree.chart.editor.DefaultNumberAxisEditor this;
+    
+    
+        this := @this: org.jfree.chart.editor.DefaultNumberAxisEditor;
+        axis := @parameter0: org.jfree.chart.axis.Axis;
+        specialinvoke this.<org.jfree.chart.editor.DefaultAxisEditor: void setAxisProperties(org.jfree.chart.axis.Axis)>(axis);
+        numberAxis = (org.jfree.chart.axis.NumberAxis) axis;
+        $stack3 = this.<org.jfree.chart.editor.DefaultNumberAxisEditor: boolean autoRange>;
+        virtualinvoke numberAxis.<org.jfree.chart.axis.NumberAxis: void setAutoRange(boolean)>($stack3);
+        $stack4 = this.<org.jfree.chart.editor.DefaultNumberAxisEditor: boolean autoRange>;
+    
+        if $stack4 != 0 goto label1;
+        $stack6 = this.<org.jfree.chart.editor.DefaultNumberAxisEditor: double minimumValue>;
+        $stack5 = this.<org.jfree.chart.editor.DefaultNumberAxisEditor: double maximumValue>;
+        virtualinvoke numberAxis.<org.jfree.chart.axis.NumberAxis: void setRange(double,double)>($stack6, $stack5);
+    
+      label1:
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.editor.DefaultNumberAxisEditor: double getMaximumValue()> ----
+    {
+        double $stack1;
+        org.jfree.chart.editor.DefaultNumberAxisEditor this;
+    
+    
+        this := @this: org.jfree.chart.editor.DefaultNumberAxisEditor;
+        $stack1 = this.<org.jfree.chart.editor.DefaultNumberAxisEditor: double maximumValue>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.editor.DefaultNumberAxisEditor: void validateMinimum()> ----
+    {
+        byte $stack7;
+        double $stack6, $stack8, newMin;
+        java.lang.String $stack10, $stack5;
+        java.lang.Throwable $stack11, e;
+        javax.swing.JTextField $stack4, $stack9;
+        org.jfree.chart.editor.DefaultNumberAxisEditor this;
+    
+    
+        this := @this: org.jfree.chart.editor.DefaultNumberAxisEditor;
+    
+      label1:
+        $stack4 = this.<org.jfree.chart.editor.DefaultNumberAxisEditor: javax.swing.JTextField minimumRangeValue>;
+        $stack5 = virtualinvoke $stack4.<javax.swing.JTextField: java.lang.String getText()>();
+        newMin = staticinvoke <java.lang.Double: double parseDouble(java.lang.String)>($stack5);
+        $stack6 = this.<org.jfree.chart.editor.DefaultNumberAxisEditor: double maximumValue>;
+        $stack7 = newMin cmpl $stack6;
+    
+        if $stack7 < 0 goto label2;
+        newMin = this.<org.jfree.chart.editor.DefaultNumberAxisEditor: double minimumValue>;
+    
+      label2:
+        goto label4;
+    
+      label3:
+        $stack11 := @caughtexception;
+        e = $stack11;
+        newMin = this.<org.jfree.chart.editor.DefaultNumberAxisEditor: double minimumValue>;
+    
+      label4:
+        this.<org.jfree.chart.editor.DefaultNumberAxisEditor: double minimumValue> = newMin;
+        $stack9 = this.<org.jfree.chart.editor.DefaultNumberAxisEditor: javax.swing.JTextField minimumRangeValue>;
+        $stack8 = this.<org.jfree.chart.editor.DefaultNumberAxisEditor: double minimumValue>;
+        $stack10 = staticinvoke <java.lang.Double: java.lang.String toString(double)>($stack8);
+        virtualinvoke $stack9.<javax.swing.JTextField: void setText(java.lang.String)>($stack10);
+    
+        return;
+    
+     catch java.lang.NumberFormatException from label1 to label2 with label3;
+    }
+
+    // ---- method: <org.jfree.chart.editor.DefaultNumberAxisEditor: void validateMaximum()> ----
+    {
+        byte $stack7;
+        double $stack6, $stack8, newMax;
+        java.lang.String $stack10, $stack5;
+        java.lang.Throwable $stack11, e;
+        javax.swing.JTextField $stack4, $stack9;
+        org.jfree.chart.editor.DefaultNumberAxisEditor this;
+    
+    
+        this := @this: org.jfree.chart.editor.DefaultNumberAxisEditor;
+    
+      label1:
+        $stack4 = this.<org.jfree.chart.editor.DefaultNumberAxisEditor: javax.swing.JTextField maximumRangeValue>;
+        $stack5 = virtualinvoke $stack4.<javax.swing.JTextField: java.lang.String getText()>();
+        newMax = staticinvoke <java.lang.Double: double parseDouble(java.lang.String)>($stack5);
+        $stack6 = this.<org.jfree.chart.editor.DefaultNumberAxisEditor: double minimumValue>;
+        $stack7 = newMax cmpg $stack6;
+    
+        if $stack7 > 0 goto label2;
+        newMax = this.<org.jfree.chart.editor.DefaultNumberAxisEditor: double maximumValue>;
+    
+      label2:
+        goto label4;
+    
+      label3:
+        $stack11 := @caughtexception;
+        e = $stack11;
+        newMax = this.<org.jfree.chart.editor.DefaultNumberAxisEditor: double maximumValue>;
+    
+      label4:
+        this.<org.jfree.chart.editor.DefaultNumberAxisEditor: double maximumValue> = newMax;
+        $stack9 = this.<org.jfree.chart.editor.DefaultNumberAxisEditor: javax.swing.JTextField maximumRangeValue>;
+        $stack8 = this.<org.jfree.chart.editor.DefaultNumberAxisEditor: double maximumValue>;
+        $stack10 = staticinvoke <java.lang.Double: java.lang.String toString(double)>($stack8);
+        virtualinvoke $stack9.<javax.swing.JTextField: void setText(java.lang.String)>($stack10);
+    
+        return;
+    
+     catch java.lang.NumberFormatException from label1 to label2 with label3;
+    }
+
+    // ---- method: <org.jfree.chart.editor.DefaultNumberAxisEditor: void actionPerformed(java.awt.event.ActionEvent)> ----
+    {
+        boolean $stack3, $stack4, $stack5, $stack6, $stack7;
+        java.awt.event.ActionEvent event;
+        java.lang.String command;
+        org.jfree.chart.editor.DefaultNumberAxisEditor this;
+    
+    
+        this := @this: org.jfree.chart.editor.DefaultNumberAxisEditor;
+        event := @parameter0: java.awt.event.ActionEvent;
+        command = virtualinvoke event.<java.awt.event.ActionEvent: java.lang.String getActionCommand()>();
+        $stack3 = virtualinvoke command.<java.lang.String: boolean equals(java.lang.Object)>("GridStroke");
+    
+        if $stack3 == 0 goto label1;
+        specialinvoke this.<org.jfree.chart.editor.DefaultNumberAxisEditor: void attemptGridStrokeSelection()>();
+    
+        goto label6;
+    
+      label1:
+        $stack4 = virtualinvoke command.<java.lang.String: boolean equals(java.lang.Object)>("GridPaint");
+    
+        if $stack4 == 0 goto label2;
+        specialinvoke this.<org.jfree.chart.editor.DefaultNumberAxisEditor: void attemptGridPaintSelection()>();
+    
+        goto label6;
+    
+      label2:
+        $stack5 = virtualinvoke command.<java.lang.String: boolean equals(java.lang.Object)>("AutoRangeOnOff");
+    
+        if $stack5 == 0 goto label3;
+        virtualinvoke this.<org.jfree.chart.editor.DefaultNumberAxisEditor: void toggleAutoRange()>();
+    
+        goto label6;
+    
+      label3:
+        $stack6 = virtualinvoke command.<java.lang.String: boolean equals(java.lang.Object)>("MinimumRange");
+    
+        if $stack6 == 0 goto label4;
+        virtualinvoke this.<org.jfree.chart.editor.DefaultNumberAxisEditor: void validateMinimum()>();
+    
+        goto label6;
+    
+      label4:
+        $stack7 = virtualinvoke command.<java.lang.String: boolean equals(java.lang.Object)>("MaximumRange");
+    
+        if $stack7 == 0 goto label5;
+        virtualinvoke this.<org.jfree.chart.editor.DefaultNumberAxisEditor: void validateMaximum()>();
+    
+        goto label6;
+    
+      label5:
+        specialinvoke this.<org.jfree.chart.editor.DefaultAxisEditor: void actionPerformed(java.awt.event.ActionEvent)>(event);
+    
+      label6:
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.editor.DefaultNumberAxisEditor: void <clinit>()> ----
+    {
+        java.util.ResourceBundle $stack0;
+    
+    
+        $stack0 = staticinvoke <org.jfree.chart.util.ResourceBundleWrapper: java.util.ResourceBundle getBundle(java.lang.String)>("org.jfree.chart.editor.LocalizationBundle");
+        <org.jfree.chart.editor.DefaultNumberAxisEditor: java.util.ResourceBundle localizationResources> = $stack0;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.editor.DefaultNumberAxisEditor: double getMinimumValue()> ----
+    {
+        double $stack1;
+        org.jfree.chart.editor.DefaultNumberAxisEditor this;
+    
+    
+        this := @this: org.jfree.chart.editor.DefaultNumberAxisEditor;
+        $stack1 = this.<org.jfree.chart.editor.DefaultNumberAxisEditor: double minimumValue>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.editor.DefaultNumberAxisEditor: void focusGained(java.awt.event.FocusEvent)> ----
+    {
+        java.awt.event.FocusEvent event;
+        org.jfree.chart.editor.DefaultNumberAxisEditor this;
+    
+    
+        this := @this: org.jfree.chart.editor.DefaultNumberAxisEditor;
+        event := @parameter0: java.awt.event.FocusEvent;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.editor.DefaultNumberAxisEditor: void toggleAutoRange()> ----
+    {
+        boolean $stack2, $stack3;
+        double $stack10, $stack6;
+        java.lang.String $stack12, $stack8;
+        javax.swing.JCheckBox $stack1;
+        javax.swing.JTextField $stack11, $stack13, $stack4, $stack5, $stack7, $stack9;
+        org.jfree.chart.editor.DefaultNumberAxisEditor this;
+    
+    
+        this := @this: org.jfree.chart.editor.DefaultNumberAxisEditor;
+        $stack1 = this.<org.jfree.chart.editor.DefaultNumberAxisEditor: javax.swing.JCheckBox autoRangeCheckBox>;
+        $stack2 = virtualinvoke $stack1.<javax.swing.JCheckBox: boolean isSelected()>();
+        this.<org.jfree.chart.editor.DefaultNumberAxisEditor: boolean autoRange> = $stack2;
+        $stack3 = this.<org.jfree.chart.editor.DefaultNumberAxisEditor: boolean autoRange>;
+    
+        if $stack3 == 0 goto label1;
+        $stack7 = this.<org.jfree.chart.editor.DefaultNumberAxisEditor: javax.swing.JTextField minimumRangeValue>;
+        $stack6 = this.<org.jfree.chart.editor.DefaultNumberAxisEditor: double minimumValue>;
+        $stack8 = staticinvoke <java.lang.Double: java.lang.String toString(double)>($stack6);
+        virtualinvoke $stack7.<javax.swing.JTextField: void setText(java.lang.String)>($stack8);
+        $stack9 = this.<org.jfree.chart.editor.DefaultNumberAxisEditor: javax.swing.JTextField minimumRangeValue>;
+        virtualinvoke $stack9.<javax.swing.JTextField: void setEnabled(boolean)>(0);
+        $stack11 = this.<org.jfree.chart.editor.DefaultNumberAxisEditor: javax.swing.JTextField maximumRangeValue>;
+        $stack10 = this.<org.jfree.chart.editor.DefaultNumberAxisEditor: double maximumValue>;
+        $stack12 = staticinvoke <java.lang.Double: java.lang.String toString(double)>($stack10);
+        virtualinvoke $stack11.<javax.swing.JTextField: void setText(java.lang.String)>($stack12);
+        $stack13 = this.<org.jfree.chart.editor.DefaultNumberAxisEditor: javax.swing.JTextField maximumRangeValue>;
+        virtualinvoke $stack13.<javax.swing.JTextField: void setEnabled(boolean)>(0);
+    
+        goto label2;
+    
+      label1:
+        $stack4 = this.<org.jfree.chart.editor.DefaultNumberAxisEditor: javax.swing.JTextField minimumRangeValue>;
+        virtualinvoke $stack4.<javax.swing.JTextField: void setEnabled(boolean)>(1);
+        $stack5 = this.<org.jfree.chart.editor.DefaultNumberAxisEditor: javax.swing.JTextField maximumRangeValue>;
+        virtualinvoke $stack5.<javax.swing.JTextField: void setEnabled(boolean)>(1);
+    
+      label2:
+        return;
+    }
+
+}

@@ -1,0 +1,148 @@
+// ========================================================================
+// CLASS : org.jfree.data.function.NormalDistributionFunction2D
+// ========================================================================
+
+[PUBLIC, SUPER] class org.jfree.data.function.NormalDistributionFunction2D extends java.lang.Object implements org.jfree.data.function.Function2D, java.io.Serializable {
+
+    // ---- method: <org.jfree.data.function.NormalDistributionFunction2D: double getMean()> ----
+    {
+        double $stack1;
+        org.jfree.data.function.NormalDistributionFunction2D this;
+    
+    
+        this := @this: org.jfree.data.function.NormalDistributionFunction2D;
+        $stack1 = this.<org.jfree.data.function.NormalDistributionFunction2D: double mean>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.data.function.NormalDistributionFunction2D: double getValue(double)> ----
+    {
+        double $stack10, $stack11, $stack12, $stack5, $stack6, $stack7, $stack8, $stack9, x, z;
+        org.jfree.data.function.NormalDistributionFunction2D this;
+    
+    
+        this := @this: org.jfree.data.function.NormalDistributionFunction2D;
+        x := @parameter0: double;
+        $stack5 = this.<org.jfree.data.function.NormalDistributionFunction2D: double mean>;
+        z = x - $stack5;
+        $stack10 = this.<org.jfree.data.function.NormalDistributionFunction2D: double factor>;
+        $stack6 = neg z;
+        $stack7 = $stack6 * z;
+        $stack8 = this.<org.jfree.data.function.NormalDistributionFunction2D: double denominator>;
+        $stack9 = $stack7 / $stack8;
+        $stack11 = staticinvoke <java.lang.Math: double exp(double)>($stack9);
+        $stack12 = $stack10 * $stack11;
+    
+        return $stack12;
+    }
+
+    // ---- method: <org.jfree.data.function.NormalDistributionFunction2D: int hashCode()> ----
+    {
+        byte result#0;
+        double $stack2, $stack3;
+        int result#1, result#2;
+        org.jfree.data.function.NormalDistributionFunction2D this;
+    
+    
+        this := @this: org.jfree.data.function.NormalDistributionFunction2D;
+        result#0 = 29;
+        $stack2 = this.<org.jfree.data.function.NormalDistributionFunction2D: double mean>;
+        result#1 = staticinvoke <org.jfree.chart.util.HashUtilities: int hashCode(int,double)>(29, $stack2);
+        $stack3 = this.<org.jfree.data.function.NormalDistributionFunction2D: double std>;
+        result#2 = staticinvoke <org.jfree.chart.util.HashUtilities: int hashCode(int,double)>(result#1, $stack3);
+    
+        return result#2;
+    }
+
+    // ---- method: <org.jfree.data.function.NormalDistributionFunction2D: double getStandardDeviation()> ----
+    {
+        double $stack1;
+        org.jfree.data.function.NormalDistributionFunction2D this;
+    
+    
+        this := @this: org.jfree.data.function.NormalDistributionFunction2D;
+        $stack1 = this.<org.jfree.data.function.NormalDistributionFunction2D: double std>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.data.function.NormalDistributionFunction2D: void <init>(double,double)> ----
+    {
+        byte $stack5;
+        double $stack10, $stack6, $stack7, $stack8, $stack9, mean, std;
+        java.lang.IllegalArgumentException #l1;
+        java.lang.Object $stack11;
+        java.lang.Throwable #l0;
+        org.jfree.data.function.NormalDistributionFunction2D this;
+    
+    
+        this := @this: org.jfree.data.function.NormalDistributionFunction2D;
+        mean := @parameter0: double;
+        std := @parameter1: double;
+        specialinvoke this.<java.lang.Object: void <init>()>();
+        $stack5 = std cmpg 0.0;
+    
+        if $stack5 > 0 goto label1;
+        $stack11 = new java.lang.IllegalArgumentException;
+        #l1 = (java.lang.IllegalArgumentException) $stack11;
+        specialinvoke #l1.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Requires \'std\' > 0.");
+        #l0 = (java.lang.Throwable) $stack11;
+    
+        throw #l0;
+    
+      label1:
+        this.<org.jfree.data.function.NormalDistributionFunction2D: double mean> = mean;
+        this.<org.jfree.data.function.NormalDistributionFunction2D: double std> = std;
+        $stack6 = staticinvoke <java.lang.Math: double sqrt(double)>(6.283185307179586);
+        $stack7 = std * $stack6;
+        $stack8 = 1.0 / $stack7;
+        this.<org.jfree.data.function.NormalDistributionFunction2D: double factor> = $stack8;
+        $stack9 = 2.0 * std;
+        $stack10 = $stack9 * std;
+        this.<org.jfree.data.function.NormalDistributionFunction2D: double denominator> = $stack10;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.function.NormalDistributionFunction2D: boolean equals(java.lang.Object)> ----
+    {
+        boolean $stack3;
+        byte $stack6, $stack9;
+        double $stack4, $stack5, $stack7, $stack8;
+        java.lang.Object obj;
+        org.jfree.data.function.NormalDistributionFunction2D that, this;
+    
+    
+        this := @this: org.jfree.data.function.NormalDistributionFunction2D;
+        obj := @parameter0: java.lang.Object;
+        $stack3 = obj instanceof org.jfree.data.function.NormalDistributionFunction2D;
+    
+        if $stack3 != 0 goto label1;
+    
+        return 0;
+    
+      label1:
+        that = (org.jfree.data.function.NormalDistributionFunction2D) obj;
+        $stack4 = this.<org.jfree.data.function.NormalDistributionFunction2D: double mean>;
+        $stack5 = that.<org.jfree.data.function.NormalDistributionFunction2D: double mean>;
+        $stack6 = $stack4 cmpl $stack5;
+    
+        if $stack6 == 0 goto label2;
+    
+        return 0;
+    
+      label2:
+        $stack7 = this.<org.jfree.data.function.NormalDistributionFunction2D: double std>;
+        $stack8 = that.<org.jfree.data.function.NormalDistributionFunction2D: double std>;
+        $stack9 = $stack7 cmpl $stack8;
+    
+        if $stack9 == 0 goto label3;
+    
+        return 0;
+    
+      label3:
+        return 1;
+    }
+
+}

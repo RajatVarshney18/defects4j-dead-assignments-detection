@@ -1,0 +1,272 @@
+// ========================================================================
+// CLASS : org.jfree.chart.renderer.xy.YIntervalRenderer
+// ========================================================================
+
+[PUBLIC, SUPER] class org.jfree.chart.renderer.xy.YIntervalRenderer extends org.jfree.chart.renderer.xy.AbstractXYItemRenderer implements org.jfree.chart.util.PublicCloneable, java.lang.Cloneable, java.io.Serializable, org.jfree.chart.renderer.xy.XYItemRenderer {
+
+    // ---- method: <org.jfree.chart.renderer.xy.YIntervalRenderer: org.jfree.data.Range findRangeBounds(org.jfree.data.xy.XYDataset)> ----
+    {
+        org.jfree.chart.renderer.xy.YIntervalRenderer this;
+        org.jfree.data.Range $stack2;
+        org.jfree.data.xy.XYDataset dataset;
+    
+    
+        this := @this: org.jfree.chart.renderer.xy.YIntervalRenderer;
+        dataset := @parameter0: org.jfree.data.xy.XYDataset;
+        $stack2 = virtualinvoke this.<org.jfree.chart.renderer.xy.YIntervalRenderer: org.jfree.data.Range findRangeBounds(org.jfree.data.xy.XYDataset,boolean)>(dataset, 1);
+    
+        return $stack2;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.xy.YIntervalRenderer: boolean equals(java.lang.Object)> ----
+    {
+        boolean $stack3, $stack6, $stack7;
+        java.lang.Object obj;
+        org.jfree.chart.labels.XYItemLabelGenerator $stack4, $stack5;
+        org.jfree.chart.renderer.xy.YIntervalRenderer that, this;
+    
+    
+        this := @this: org.jfree.chart.renderer.xy.YIntervalRenderer;
+        obj := @parameter0: java.lang.Object;
+    
+        if obj != this goto label1;
+    
+        return 1;
+    
+      label1:
+        $stack3 = obj instanceof org.jfree.chart.renderer.xy.YIntervalRenderer;
+    
+        if $stack3 != 0 goto label2;
+    
+        return 0;
+    
+      label2:
+        that = (org.jfree.chart.renderer.xy.YIntervalRenderer) obj;
+        $stack5 = this.<org.jfree.chart.renderer.xy.YIntervalRenderer: org.jfree.chart.labels.XYItemLabelGenerator additionalItemLabelGenerator>;
+        $stack4 = that.<org.jfree.chart.renderer.xy.YIntervalRenderer: org.jfree.chart.labels.XYItemLabelGenerator additionalItemLabelGenerator>;
+        $stack6 = staticinvoke <org.jfree.chart.util.ObjectUtilities: boolean equal(java.lang.Object,java.lang.Object)>($stack5, $stack4);
+    
+        if $stack6 != 0 goto label3;
+    
+        return 0;
+    
+      label3:
+        $stack7 = specialinvoke this.<org.jfree.chart.renderer.xy.AbstractXYItemRenderer: boolean equals(java.lang.Object)>(obj);
+    
+        return $stack7;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.xy.YIntervalRenderer: void drawItem(java.awt.Graphics2D,org.jfree.chart.renderer.xy.XYItemRendererState,java.awt.geom.Rectangle2D,org.jfree.chart.plot.XYPlot,org.jfree.chart.axis.ValueAxis,org.jfree.chart.axis.ValueAxis,org.jfree.data.xy.XYDataset,int,int,boolean,int)> ----
+    {
+        boolean $stack38, selected;
+        double x, xx, yHigh, yLow, yyHigh, yyLow;
+        int item, pass, series;
+        java.awt.Graphics2D g2;
+        java.awt.Paint p;
+        java.awt.Shape #l0, #l2, bottom, shape, top;
+        java.awt.Stroke s;
+        java.awt.geom.Line2D #l1;
+        java.awt.geom.Line2D$Double $stack40, $stack41;
+        java.awt.geom.Rectangle2D dataArea;
+        java.lang.Object $stack39, line;
+        org.jfree.chart.ChartRenderingInfo $stack43;
+        org.jfree.chart.axis.ValueAxis domainAxis, rangeAxis;
+        org.jfree.chart.entity.EntityCollection entities;
+        org.jfree.chart.plot.PlotOrientation $stack36, $stack37, orientation;
+        org.jfree.chart.plot.PlotRenderingInfo $stack35, $stack42;
+        org.jfree.chart.plot.XYPlot plot;
+        org.jfree.chart.renderer.xy.XYItemRendererState state;
+        org.jfree.chart.renderer.xy.YIntervalRenderer this;
+        org.jfree.chart.util.RectangleEdge xAxisLocation, yAxisLocation;
+        org.jfree.data.xy.IntervalXYDataset intervalDataset;
+        org.jfree.data.xy.XYDataset dataset;
+    
+    
+        this := @this: org.jfree.chart.renderer.xy.YIntervalRenderer;
+        g2 := @parameter0: java.awt.Graphics2D;
+        state := @parameter1: org.jfree.chart.renderer.xy.XYItemRendererState;
+        dataArea := @parameter2: java.awt.geom.Rectangle2D;
+        plot := @parameter3: org.jfree.chart.plot.XYPlot;
+        domainAxis := @parameter4: org.jfree.chart.axis.ValueAxis;
+        rangeAxis := @parameter5: org.jfree.chart.axis.ValueAxis;
+        dataset := @parameter6: org.jfree.data.xy.XYDataset;
+        series := @parameter7: int;
+        item := @parameter8: int;
+        selected := @parameter9: boolean;
+        pass := @parameter10: int;
+        entities = null;
+        $stack35 = virtualinvoke state.<org.jfree.chart.renderer.xy.XYItemRendererState: org.jfree.chart.plot.PlotRenderingInfo getInfo()>();
+    
+        if $stack35 == null goto label1;
+        $stack42 = virtualinvoke state.<org.jfree.chart.renderer.xy.XYItemRendererState: org.jfree.chart.plot.PlotRenderingInfo getInfo()>();
+        $stack43 = virtualinvoke $stack42.<org.jfree.chart.plot.PlotRenderingInfo: org.jfree.chart.ChartRenderingInfo getOwner()>();
+        entities = virtualinvoke $stack43.<org.jfree.chart.ChartRenderingInfo: org.jfree.chart.entity.EntityCollection getEntityCollection()>();
+    
+      label1:
+        intervalDataset = (org.jfree.data.xy.IntervalXYDataset) dataset;
+        x = interfaceinvoke intervalDataset.<org.jfree.data.xy.IntervalXYDataset: double getXValue(int,int)>(series, item);
+        yLow = interfaceinvoke intervalDataset.<org.jfree.data.xy.IntervalXYDataset: double getStartYValue(int,int)>(series, item);
+        yHigh = interfaceinvoke intervalDataset.<org.jfree.data.xy.IntervalXYDataset: double getEndYValue(int,int)>(series, item);
+        xAxisLocation = virtualinvoke plot.<org.jfree.chart.plot.XYPlot: org.jfree.chart.util.RectangleEdge getDomainAxisEdge()>();
+        yAxisLocation = virtualinvoke plot.<org.jfree.chart.plot.XYPlot: org.jfree.chart.util.RectangleEdge getRangeAxisEdge()>();
+        xx = virtualinvoke domainAxis.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)>(x, dataArea, xAxisLocation);
+        yyLow = virtualinvoke rangeAxis.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)>(yLow, dataArea, yAxisLocation);
+        yyHigh = virtualinvoke rangeAxis.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)>(yHigh, dataArea, yAxisLocation);
+        p = virtualinvoke this.<org.jfree.chart.renderer.xy.YIntervalRenderer: java.awt.Paint getItemPaint(int,int,boolean)>(series, item, selected);
+        s = virtualinvoke this.<org.jfree.chart.renderer.xy.YIntervalRenderer: java.awt.Stroke getItemStroke(int,int,boolean)>(series, item, selected);
+        line = null;
+        shape = virtualinvoke this.<org.jfree.chart.renderer.xy.YIntervalRenderer: java.awt.Shape getItemShape(int,int,boolean)>(series, item, selected);
+        top = null;
+        bottom = null;
+        orientation = virtualinvoke plot.<org.jfree.chart.plot.XYPlot: org.jfree.chart.plot.PlotOrientation getOrientation()>();
+        $stack36 = <org.jfree.chart.plot.PlotOrientation: org.jfree.chart.plot.PlotOrientation HORIZONTAL>;
+    
+        if orientation != $stack36 goto label2;
+        $stack41 = new java.awt.geom.Line2D$Double;
+        specialinvoke $stack41.<java.awt.geom.Line2D$Double: void <init>(double,double,double,double)>(yyLow, xx, yyHigh, xx);
+        line = $stack41;
+        top = staticinvoke <org.jfree.chart.util.ShapeUtilities: java.awt.Shape createTranslatedShape(java.awt.Shape,double,double)>(shape, yyHigh, xx);
+        bottom = staticinvoke <org.jfree.chart.util.ShapeUtilities: java.awt.Shape createTranslatedShape(java.awt.Shape,double,double)>(shape, yyLow, xx);
+    
+        goto label3;
+    
+      label2:
+        $stack37 = <org.jfree.chart.plot.PlotOrientation: org.jfree.chart.plot.PlotOrientation VERTICAL>;
+    
+        if orientation != $stack37 goto label3;
+        $stack40 = new java.awt.geom.Line2D$Double;
+        specialinvoke $stack40.<java.awt.geom.Line2D$Double: void <init>(double,double,double,double)>(xx, yyLow, xx, yyHigh);
+        line = $stack40;
+        top = staticinvoke <org.jfree.chart.util.ShapeUtilities: java.awt.Shape createTranslatedShape(java.awt.Shape,double,double)>(shape, xx, yyHigh);
+        bottom = staticinvoke <org.jfree.chart.util.ShapeUtilities: java.awt.Shape createTranslatedShape(java.awt.Shape,double,double)>(shape, xx, yyLow);
+    
+      label3:
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>(p);
+        virtualinvoke g2.<java.awt.Graphics2D: void setStroke(java.awt.Stroke)>(s);
+        #l0 = (java.awt.Shape) line;
+        virtualinvoke g2.<java.awt.Graphics2D: void draw(java.awt.Shape)>(#l0);
+        virtualinvoke g2.<java.awt.Graphics2D: void fill(java.awt.Shape)>(top);
+        virtualinvoke g2.<java.awt.Graphics2D: void fill(java.awt.Shape)>(bottom);
+        $stack38 = virtualinvoke this.<org.jfree.chart.renderer.xy.YIntervalRenderer: boolean isItemLabelVisible(int,int,boolean)>(series, item, selected);
+    
+        if $stack38 == 0 goto label4;
+        virtualinvoke this.<org.jfree.chart.renderer.xy.YIntervalRenderer: void drawItemLabel(java.awt.Graphics2D,org.jfree.chart.plot.PlotOrientation,org.jfree.data.xy.XYDataset,int,int,boolean,double,double,boolean)>(g2, orientation, dataset, series, item, selected, xx, yyHigh, 0);
+        specialinvoke this.<org.jfree.chart.renderer.xy.YIntervalRenderer: void drawAdditionalItemLabel(java.awt.Graphics2D,org.jfree.chart.plot.PlotOrientation,org.jfree.data.xy.XYDataset,int,int,double,double)>(g2, orientation, dataset, series, item, xx, yyLow);
+    
+      label4:
+        if entities == null goto label5;
+        #l1 = (java.awt.geom.Line2D) line;
+        $stack39 = virtualinvoke #l1.<java.awt.geom.Line2D: java.awt.Rectangle getBounds()>();
+        #l2 = (java.awt.Shape) $stack39;
+        virtualinvoke this.<org.jfree.chart.renderer.xy.YIntervalRenderer: void addEntity(org.jfree.chart.entity.EntityCollection,java.awt.Shape,org.jfree.data.xy.XYDataset,int,int,boolean,double,double)>(entities, #l2, dataset, series, item, selected, 0.0, 0.0);
+    
+      label5:
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.xy.YIntervalRenderer: org.jfree.chart.labels.XYItemLabelGenerator getAdditionalItemLabelGenerator()> ----
+    {
+        org.jfree.chart.labels.XYItemLabelGenerator $stack1;
+        org.jfree.chart.renderer.xy.YIntervalRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.xy.YIntervalRenderer;
+        $stack1 = this.<org.jfree.chart.renderer.xy.YIntervalRenderer: org.jfree.chart.labels.XYItemLabelGenerator additionalItemLabelGenerator>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.xy.YIntervalRenderer: void setAdditionalItemLabelGenerator(org.jfree.chart.labels.XYItemLabelGenerator)> ----
+    {
+        org.jfree.chart.labels.XYItemLabelGenerator generator;
+        org.jfree.chart.renderer.xy.YIntervalRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.xy.YIntervalRenderer;
+        generator := @parameter0: org.jfree.chart.labels.XYItemLabelGenerator;
+        this.<org.jfree.chart.renderer.xy.YIntervalRenderer: org.jfree.chart.labels.XYItemLabelGenerator additionalItemLabelGenerator> = generator;
+        virtualinvoke this.<org.jfree.chart.renderer.xy.YIntervalRenderer: void fireChangeEvent()>();
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.xy.YIntervalRenderer: java.lang.Object clone()> ----
+    {
+        java.lang.Object $stack1;
+        org.jfree.chart.renderer.xy.YIntervalRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.xy.YIntervalRenderer;
+        $stack1 = specialinvoke this.<org.jfree.chart.renderer.xy.AbstractXYItemRenderer: java.lang.Object clone()>();
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.xy.YIntervalRenderer: void drawAdditionalItemLabel(java.awt.Graphics2D,org.jfree.chart.plot.PlotOrientation,org.jfree.data.xy.XYDataset,int,int,double,double)> ----
+    {
+        double $stack18, $stack19, $stack21, x, y;
+        float $stack23, $stack24;
+        int item, series;
+        java.awt.Font labelFont;
+        java.awt.Graphics2D g2;
+        java.awt.Paint paint;
+        java.awt.geom.Point2D anchorPoint;
+        java.lang.String label;
+        org.jfree.chart.labels.ItemLabelAnchor $stack17;
+        org.jfree.chart.labels.ItemLabelPosition position;
+        org.jfree.chart.labels.XYItemLabelGenerator $stack15, $stack16;
+        org.jfree.chart.plot.PlotOrientation orientation;
+        org.jfree.chart.renderer.xy.YIntervalRenderer this;
+        org.jfree.chart.text.TextAnchor $stack20, $stack22;
+        org.jfree.data.xy.XYDataset dataset;
+    
+    
+        this := @this: org.jfree.chart.renderer.xy.YIntervalRenderer;
+        g2 := @parameter0: java.awt.Graphics2D;
+        orientation := @parameter1: org.jfree.chart.plot.PlotOrientation;
+        dataset := @parameter2: org.jfree.data.xy.XYDataset;
+        series := @parameter3: int;
+        item := @parameter4: int;
+        x := @parameter5: double;
+        y := @parameter6: double;
+        $stack15 = this.<org.jfree.chart.renderer.xy.YIntervalRenderer: org.jfree.chart.labels.XYItemLabelGenerator additionalItemLabelGenerator>;
+    
+        if $stack15 != null goto label1;
+    
+        return;
+    
+      label1:
+        labelFont = virtualinvoke this.<org.jfree.chart.renderer.xy.YIntervalRenderer: java.awt.Font getItemLabelFont(int,int,boolean)>(series, item, 0);
+        paint = virtualinvoke this.<org.jfree.chart.renderer.xy.YIntervalRenderer: java.awt.Paint getItemLabelPaint(int,int,boolean)>(series, item, 0);
+        virtualinvoke g2.<java.awt.Graphics2D: void setFont(java.awt.Font)>(labelFont);
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>(paint);
+        $stack16 = this.<org.jfree.chart.renderer.xy.YIntervalRenderer: org.jfree.chart.labels.XYItemLabelGenerator additionalItemLabelGenerator>;
+        label = interfaceinvoke $stack16.<org.jfree.chart.labels.XYItemLabelGenerator: java.lang.String generateLabel(org.jfree.data.xy.XYDataset,int,int)>(dataset, series, item);
+        position = virtualinvoke this.<org.jfree.chart.renderer.xy.YIntervalRenderer: org.jfree.chart.labels.ItemLabelPosition getNegativeItemLabelPosition(int,int,boolean)>(series, item, 0);
+        $stack17 = virtualinvoke position.<org.jfree.chart.labels.ItemLabelPosition: org.jfree.chart.labels.ItemLabelAnchor getItemLabelAnchor()>();
+        anchorPoint = virtualinvoke this.<org.jfree.chart.renderer.xy.YIntervalRenderer: java.awt.geom.Point2D calculateLabelAnchorPoint(org.jfree.chart.labels.ItemLabelAnchor,double,double,org.jfree.chart.plot.PlotOrientation)>($stack17, x, y, orientation);
+        $stack18 = virtualinvoke anchorPoint.<java.awt.geom.Point2D: double getX()>();
+        $stack24 = (float) $stack18;
+        $stack19 = virtualinvoke anchorPoint.<java.awt.geom.Point2D: double getY()>();
+        $stack23 = (float) $stack19;
+        $stack22 = virtualinvoke position.<org.jfree.chart.labels.ItemLabelPosition: org.jfree.chart.text.TextAnchor getTextAnchor()>();
+        $stack21 = virtualinvoke position.<org.jfree.chart.labels.ItemLabelPosition: double getAngle()>();
+        $stack20 = virtualinvoke position.<org.jfree.chart.labels.ItemLabelPosition: org.jfree.chart.text.TextAnchor getRotationAnchor()>();
+        staticinvoke <org.jfree.chart.text.TextUtilities: void drawRotatedString(java.lang.String,java.awt.Graphics2D,float,float,org.jfree.chart.text.TextAnchor,double,org.jfree.chart.text.TextAnchor)>(label, g2, $stack24, $stack23, $stack22, $stack21, $stack20);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.xy.YIntervalRenderer: void <init>()> ----
+    {
+        org.jfree.chart.renderer.xy.YIntervalRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.xy.YIntervalRenderer;
+        specialinvoke this.<org.jfree.chart.renderer.xy.AbstractXYItemRenderer: void <init>()>();
+        this.<org.jfree.chart.renderer.xy.YIntervalRenderer: org.jfree.chart.labels.XYItemLabelGenerator additionalItemLabelGenerator> = null;
+    
+        return;
+    }
+
+}

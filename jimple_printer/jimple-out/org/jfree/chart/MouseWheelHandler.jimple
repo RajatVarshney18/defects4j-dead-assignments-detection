@@ -1,0 +1,157 @@
+// ========================================================================
+// CLASS : org.jfree.chart.MouseWheelHandler
+// ========================================================================
+
+[SUPER] class org.jfree.chart.MouseWheelHandler extends java.lang.Object implements java.awt.event.MouseWheelListener, java.io.Serializable {
+
+    // ---- method: <org.jfree.chart.MouseWheelHandler: void setZoomFactor(double)> ----
+    {
+        double zoomFactor;
+        org.jfree.chart.MouseWheelHandler this;
+    
+    
+        this := @this: org.jfree.chart.MouseWheelHandler;
+        zoomFactor := @parameter0: double;
+        this.<org.jfree.chart.MouseWheelHandler: double zoomFactor> = zoomFactor;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.MouseWheelHandler: void mouseWheelMoved(java.awt.event.MouseWheelEvent)> ----
+    {
+        boolean $stack6, $stack7;
+        int $stack8;
+        java.awt.event.MouseWheelEvent e;
+        org.jfree.chart.ChartPanel $stack5;
+        org.jfree.chart.JFreeChart chart;
+        org.jfree.chart.MouseWheelHandler this;
+        org.jfree.chart.plot.PiePlot zoomable#1;
+        org.jfree.chart.plot.Plot plot;
+        org.jfree.chart.plot.Zoomable zoomable#0;
+    
+    
+        this := @this: org.jfree.chart.MouseWheelHandler;
+        e := @parameter0: java.awt.event.MouseWheelEvent;
+        $stack5 = this.<org.jfree.chart.MouseWheelHandler: org.jfree.chart.ChartPanel chartPanel>;
+        chart = virtualinvoke $stack5.<org.jfree.chart.ChartPanel: org.jfree.chart.JFreeChart getChart()>();
+    
+        if chart != null goto label1;
+    
+        return;
+    
+      label1:
+        plot = virtualinvoke chart.<org.jfree.chart.JFreeChart: org.jfree.chart.plot.Plot getPlot()>();
+        $stack6 = plot instanceof org.jfree.chart.plot.Zoomable;
+    
+        if $stack6 == 0 goto label2;
+        zoomable#0 = (org.jfree.chart.plot.Zoomable) plot;
+        specialinvoke this.<org.jfree.chart.MouseWheelHandler: void handleZoomable(org.jfree.chart.plot.Zoomable,java.awt.event.MouseWheelEvent)>(zoomable#0, e);
+    
+        goto label3;
+    
+      label2:
+        $stack7 = plot instanceof org.jfree.chart.plot.PiePlot;
+    
+        if $stack7 == 0 goto label3;
+        zoomable#1 = (org.jfree.chart.plot.PiePlot) plot;
+        $stack8 = virtualinvoke e.<java.awt.event.MouseWheelEvent: int getWheelRotation()>();
+        virtualinvoke zoomable#1.<org.jfree.chart.plot.PiePlot: void handleMouseWheelRotation(int)>($stack8);
+    
+      label3:
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.MouseWheelHandler: double getZoomFactor()> ----
+    {
+        double $stack1;
+        org.jfree.chart.MouseWheelHandler this;
+    
+    
+        this := @this: org.jfree.chart.MouseWheelHandler;
+        $stack1 = this.<org.jfree.chart.MouseWheelHandler: double zoomFactor>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.MouseWheelHandler: void handleZoomable(org.jfree.chart.plot.Zoomable,java.awt.event.MouseWheelEvent)> ----
+    {
+        boolean $stack15, $stack18, $stack20, notifyState;
+        double $stack16, zf;
+        int clicks;
+        java.awt.Point $stack13;
+        java.awt.event.MouseWheelEvent e;
+        java.awt.geom.Point2D p;
+        java.awt.geom.Rectangle2D $stack14;
+        org.jfree.chart.ChartPanel $stack11, $stack12, $stack17, $stack19;
+        org.jfree.chart.ChartRenderingInfo info;
+        org.jfree.chart.MouseWheelHandler this;
+        org.jfree.chart.plot.Plot plot;
+        org.jfree.chart.plot.PlotRenderingInfo pinfo;
+        org.jfree.chart.plot.Zoomable zoomable;
+    
+    
+        this := @this: org.jfree.chart.MouseWheelHandler;
+        zoomable := @parameter0: org.jfree.chart.plot.Zoomable;
+        e := @parameter1: java.awt.event.MouseWheelEvent;
+        $stack11 = this.<org.jfree.chart.MouseWheelHandler: org.jfree.chart.ChartPanel chartPanel>;
+        info = virtualinvoke $stack11.<org.jfree.chart.ChartPanel: org.jfree.chart.ChartRenderingInfo getChartRenderingInfo()>();
+        pinfo = virtualinvoke info.<org.jfree.chart.ChartRenderingInfo: org.jfree.chart.plot.PlotRenderingInfo getPlotInfo()>();
+        $stack12 = this.<org.jfree.chart.MouseWheelHandler: org.jfree.chart.ChartPanel chartPanel>;
+        $stack13 = virtualinvoke e.<java.awt.event.MouseWheelEvent: java.awt.Point getPoint()>();
+        p = virtualinvoke $stack12.<org.jfree.chart.ChartPanel: java.awt.geom.Point2D translateScreenToJava2D(java.awt.Point)>($stack13);
+        $stack14 = virtualinvoke pinfo.<org.jfree.chart.plot.PlotRenderingInfo: java.awt.geom.Rectangle2D getDataArea()>();
+        $stack15 = virtualinvoke $stack14.<java.awt.geom.Rectangle2D: boolean contains(java.awt.geom.Point2D)>(p);
+    
+        if $stack15 != 0 goto label1;
+    
+        return;
+    
+      label1:
+        plot = (org.jfree.chart.plot.Plot) zoomable;
+        notifyState = virtualinvoke plot.<org.jfree.chart.plot.Plot: boolean isNotify()>();
+        virtualinvoke plot.<org.jfree.chart.plot.Plot: void setNotify(boolean)>(0);
+        clicks = virtualinvoke e.<java.awt.event.MouseWheelEvent: int getWheelRotation()>();
+        $stack16 = this.<org.jfree.chart.MouseWheelHandler: double zoomFactor>;
+        zf = 1.0 + $stack16;
+    
+        if clicks >= 0 goto label2;
+        zf = 1.0 / zf;
+    
+      label2:
+        $stack17 = this.<org.jfree.chart.MouseWheelHandler: org.jfree.chart.ChartPanel chartPanel>;
+        $stack18 = virtualinvoke $stack17.<org.jfree.chart.ChartPanel: boolean isDomainZoomable()>();
+    
+        if $stack18 == 0 goto label3;
+        interfaceinvoke zoomable.<org.jfree.chart.plot.Zoomable: void zoomDomainAxes(double,org.jfree.chart.plot.PlotRenderingInfo,java.awt.geom.Point2D,boolean)>(zf, pinfo, p, 1);
+    
+      label3:
+        $stack19 = this.<org.jfree.chart.MouseWheelHandler: org.jfree.chart.ChartPanel chartPanel>;
+        $stack20 = virtualinvoke $stack19.<org.jfree.chart.ChartPanel: boolean isRangeZoomable()>();
+    
+        if $stack20 == 0 goto label4;
+        interfaceinvoke zoomable.<org.jfree.chart.plot.Zoomable: void zoomRangeAxes(double,org.jfree.chart.plot.PlotRenderingInfo,java.awt.geom.Point2D,boolean)>(zf, pinfo, p, 1);
+    
+      label4:
+        virtualinvoke plot.<org.jfree.chart.plot.Plot: void setNotify(boolean)>(notifyState);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.MouseWheelHandler: void <init>(org.jfree.chart.ChartPanel)> ----
+    {
+        org.jfree.chart.ChartPanel $stack2, chartPanel;
+        org.jfree.chart.MouseWheelHandler this;
+    
+    
+        this := @this: org.jfree.chart.MouseWheelHandler;
+        chartPanel := @parameter0: org.jfree.chart.ChartPanel;
+        specialinvoke this.<java.lang.Object: void <init>()>();
+        this.<org.jfree.chart.MouseWheelHandler: org.jfree.chart.ChartPanel chartPanel> = chartPanel;
+        this.<org.jfree.chart.MouseWheelHandler: double zoomFactor> = 0.1;
+        $stack2 = this.<org.jfree.chart.MouseWheelHandler: org.jfree.chart.ChartPanel chartPanel>;
+        virtualinvoke $stack2.<org.jfree.chart.ChartPanel: void addMouseWheelListener(java.awt.event.MouseWheelListener)>(this);
+    
+        return;
+    }
+
+}

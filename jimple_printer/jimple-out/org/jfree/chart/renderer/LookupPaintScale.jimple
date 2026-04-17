@@ -1,0 +1,367 @@
+// ========================================================================
+// CLASS : org.jfree.chart.renderer.LookupPaintScale
+// ========================================================================
+
+[PUBLIC, SUPER] class org.jfree.chart.renderer.LookupPaintScale extends java.lang.Object implements org.jfree.chart.util.PublicCloneable, java.io.Serializable, org.jfree.chart.renderer.PaintScale {
+
+    // ---- method: <org.jfree.chart.renderer.LookupPaintScale: java.lang.Object clone()> ----
+    {
+        java.lang.Object $stack2, $stack3, $stack4;
+        java.util.ArrayList #l0;
+        java.util.Collection #l1;
+        org.jfree.chart.renderer.LookupPaintScale clone, this;
+    
+    
+        this := @this: org.jfree.chart.renderer.LookupPaintScale;
+        $stack2 = specialinvoke this.<java.lang.Object: java.lang.Object clone()>();
+        clone = (org.jfree.chart.renderer.LookupPaintScale) $stack2;
+        $stack4 = new java.util.ArrayList;
+        $stack3 = this.<org.jfree.chart.renderer.LookupPaintScale: java.util.List lookupTable>;
+        #l0 = (java.util.ArrayList) $stack4;
+        #l1 = (java.util.Collection) $stack3;
+        specialinvoke #l0.<java.util.ArrayList: void <init>(java.util.Collection)>(#l1);
+        clone.<org.jfree.chart.renderer.LookupPaintScale: java.util.List lookupTable> = (java.util.List) $stack4;
+    
+        return clone;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.LookupPaintScale: double getUpperBound()> ----
+    {
+        double $stack1;
+        org.jfree.chart.renderer.LookupPaintScale this;
+    
+    
+        this := @this: org.jfree.chart.renderer.LookupPaintScale;
+        $stack1 = this.<org.jfree.chart.renderer.LookupPaintScale: double upperBound>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.LookupPaintScale: void add(double,java.awt.Paint)> ----
+    {
+        double value;
+        int $stack8, $stack9, index;
+        java.awt.Paint paint;
+        java.util.List $stack10, $stack11, $stack7;
+        org.jfree.chart.renderer.LookupPaintScale this;
+        org.jfree.chart.renderer.LookupPaintScale$PaintItem $stack6, item;
+    
+    
+        this := @this: org.jfree.chart.renderer.LookupPaintScale;
+        value := @parameter0: double;
+        paint := @parameter1: java.awt.Paint;
+        $stack6 = new org.jfree.chart.renderer.LookupPaintScale$PaintItem;
+        specialinvoke $stack6.<org.jfree.chart.renderer.LookupPaintScale$PaintItem: void <init>(double,java.awt.Paint)>(value, paint);
+        item = $stack6;
+        $stack7 = this.<org.jfree.chart.renderer.LookupPaintScale: java.util.List lookupTable>;
+        index = staticinvoke <java.util.Collections: int binarySearch(java.util.List,java.lang.Object)>($stack7, $stack6);
+    
+        if index < 0 goto label1;
+        $stack11 = this.<org.jfree.chart.renderer.LookupPaintScale: java.util.List lookupTable>;
+        interfaceinvoke $stack11.<java.util.List: java.lang.Object set(int,java.lang.Object)>(index, $stack6);
+    
+        goto label2;
+    
+      label1:
+        $stack10 = this.<org.jfree.chart.renderer.LookupPaintScale: java.util.List lookupTable>;
+        $stack8 = index + 1;
+        $stack9 = neg $stack8;
+        interfaceinvoke $stack10.<java.util.List: void add(int,java.lang.Object)>($stack9, $stack6);
+    
+      label2:
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.LookupPaintScale: void readObject(java.io.ObjectInputStream)> ----
+    {
+        java.awt.Paint $stack2;
+        java.io.ObjectInputStream stream;
+        org.jfree.chart.renderer.LookupPaintScale this;
+    
+    
+        this := @this: org.jfree.chart.renderer.LookupPaintScale;
+        stream := @parameter0: java.io.ObjectInputStream;
+        virtualinvoke stream.<java.io.ObjectInputStream: void defaultReadObject()>();
+        $stack2 = staticinvoke <org.jfree.chart.util.SerialUtilities: java.awt.Paint readPaint(java.io.ObjectInputStream)>(stream);
+        this.<org.jfree.chart.renderer.LookupPaintScale: java.awt.Paint defaultPaint> = $stack2;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.LookupPaintScale: double getLowerBound()> ----
+    {
+        double $stack1;
+        org.jfree.chart.renderer.LookupPaintScale this;
+    
+    
+        this := @this: org.jfree.chart.renderer.LookupPaintScale;
+        $stack1 = this.<org.jfree.chart.renderer.LookupPaintScale: double lowerBound>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.LookupPaintScale: boolean equals(java.lang.Object)> ----
+    {
+        boolean $stack12, $stack15, $stack3;
+        byte $stack6, $stack9;
+        double $stack4, $stack5, $stack7, $stack8;
+        java.awt.Paint $stack10, $stack11;
+        java.lang.Object obj;
+        java.util.List $stack13, $stack14;
+        org.jfree.chart.renderer.LookupPaintScale that, this;
+    
+    
+        this := @this: org.jfree.chart.renderer.LookupPaintScale;
+        obj := @parameter0: java.lang.Object;
+    
+        if obj != this goto label1;
+    
+        return 1;
+    
+      label1:
+        $stack3 = obj instanceof org.jfree.chart.renderer.LookupPaintScale;
+    
+        if $stack3 != 0 goto label2;
+    
+        return 0;
+    
+      label2:
+        that = (org.jfree.chart.renderer.LookupPaintScale) obj;
+        $stack4 = this.<org.jfree.chart.renderer.LookupPaintScale: double lowerBound>;
+        $stack5 = that.<org.jfree.chart.renderer.LookupPaintScale: double lowerBound>;
+        $stack6 = $stack4 cmpl $stack5;
+    
+        if $stack6 == 0 goto label3;
+    
+        return 0;
+    
+      label3:
+        $stack7 = this.<org.jfree.chart.renderer.LookupPaintScale: double upperBound>;
+        $stack8 = that.<org.jfree.chart.renderer.LookupPaintScale: double upperBound>;
+        $stack9 = $stack7 cmpl $stack8;
+    
+        if $stack9 == 0 goto label4;
+    
+        return 0;
+    
+      label4:
+        $stack11 = this.<org.jfree.chart.renderer.LookupPaintScale: java.awt.Paint defaultPaint>;
+        $stack10 = that.<org.jfree.chart.renderer.LookupPaintScale: java.awt.Paint defaultPaint>;
+        $stack12 = staticinvoke <org.jfree.chart.util.PaintUtilities: boolean equal(java.awt.Paint,java.awt.Paint)>($stack11, $stack10);
+    
+        if $stack12 != 0 goto label5;
+    
+        return 0;
+    
+      label5:
+        $stack14 = this.<org.jfree.chart.renderer.LookupPaintScale: java.util.List lookupTable>;
+        $stack13 = that.<org.jfree.chart.renderer.LookupPaintScale: java.util.List lookupTable>;
+        $stack15 = interfaceinvoke $stack14.<java.util.List: boolean equals(java.lang.Object)>($stack13);
+    
+        if $stack15 != 0 goto label6;
+    
+        return 0;
+    
+      label6:
+        return 1;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.LookupPaintScale: void <init>(double,double,java.awt.Paint)> ----
+    {
+        byte $stack6;
+        double lowerBound, upperBound;
+        java.awt.Paint defaultPaint;
+        java.lang.IllegalArgumentException #l1, #l2;
+        java.lang.Object $stack7, $stack8, $stack9;
+        java.lang.Throwable #l0, #l4;
+        java.util.ArrayList #l3;
+        org.jfree.chart.renderer.LookupPaintScale this;
+    
+    
+        this := @this: org.jfree.chart.renderer.LookupPaintScale;
+        lowerBound := @parameter0: double;
+        upperBound := @parameter1: double;
+        defaultPaint := @parameter2: java.awt.Paint;
+        specialinvoke this.<java.lang.Object: void <init>()>();
+        $stack6 = lowerBound cmpl upperBound;
+    
+        if $stack6 < 0 goto label1;
+        $stack9 = new java.lang.IllegalArgumentException;
+        #l1 = (java.lang.IllegalArgumentException) $stack9;
+        specialinvoke #l1.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Requires lowerBound < upperBound.");
+        #l4 = (java.lang.Throwable) $stack9;
+    
+        throw #l4;
+    
+      label1:
+        if defaultPaint != null goto label2;
+        $stack8 = new java.lang.IllegalArgumentException;
+        #l2 = (java.lang.IllegalArgumentException) $stack8;
+        specialinvoke #l2.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'paint\' argument.");
+        #l0 = (java.lang.Throwable) $stack8;
+    
+        throw #l0;
+    
+      label2:
+        this.<org.jfree.chart.renderer.LookupPaintScale: double lowerBound> = lowerBound;
+        this.<org.jfree.chart.renderer.LookupPaintScale: double upperBound> = upperBound;
+        this.<org.jfree.chart.renderer.LookupPaintScale: java.awt.Paint defaultPaint> = defaultPaint;
+        $stack7 = new java.util.ArrayList;
+        #l3 = (java.util.ArrayList) $stack7;
+        specialinvoke #l3.<java.util.ArrayList: void <init>()>();
+        this.<org.jfree.chart.renderer.LookupPaintScale: java.util.List lookupTable> = (java.util.List) $stack7;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.LookupPaintScale: void writeObject(java.io.ObjectOutputStream)> ----
+    {
+        java.awt.Paint $stack2;
+        java.io.ObjectOutputStream stream;
+        org.jfree.chart.renderer.LookupPaintScale this;
+    
+    
+        this := @this: org.jfree.chart.renderer.LookupPaintScale;
+        stream := @parameter0: java.io.ObjectOutputStream;
+        virtualinvoke stream.<java.io.ObjectOutputStream: void defaultWriteObject()>();
+        $stack2 = this.<org.jfree.chart.renderer.LookupPaintScale: java.awt.Paint defaultPaint>;
+        staticinvoke <org.jfree.chart.util.SerialUtilities: void writePaint(java.awt.Paint,java.io.ObjectOutputStream)>($stack2, stream);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.LookupPaintScale: void <init>()> ----
+    {
+        java.awt.Paint #l0;
+        java.lang.Object $stack1;
+        org.jfree.chart.renderer.LookupPaintScale this;
+    
+    
+        this := @this: org.jfree.chart.renderer.LookupPaintScale;
+        $stack1 = <java.awt.Color: java.awt.Color lightGray>;
+        #l0 = (java.awt.Paint) $stack1;
+        specialinvoke this.<org.jfree.chart.renderer.LookupPaintScale: void <init>(double,double,java.awt.Paint)>(0.0, 1.0, #l0);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.LookupPaintScale: java.awt.Paint getDefaultPaint()> ----
+    {
+        java.awt.Paint $stack1;
+        org.jfree.chart.renderer.LookupPaintScale this;
+    
+    
+        this := @this: org.jfree.chart.renderer.LookupPaintScale;
+        $stack1 = this.<org.jfree.chart.renderer.LookupPaintScale: java.awt.Paint defaultPaint>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.LookupPaintScale: java.awt.Paint getPaint(double)> ----
+    {
+        byte $stack11, $stack16, $stack24, $stack31, $stack9;
+        double $stack10, $stack15, $stack23, $stack30, $stack8, value;
+        int $stack18, $stack19, $stack27, count, current, high, low;
+        java.awt.Paint $stack20, $stack32, $stack33, $stack34, $stack35;
+        java.lang.Object $stack14, $stack22, $stack26, $stack29;
+        java.util.List $stack12, $stack13, $stack17, $stack21, $stack25, $stack28;
+        org.jfree.chart.renderer.LookupPaintScale this;
+        org.jfree.chart.renderer.LookupPaintScale$PaintItem item;
+    
+    
+        this := @this: org.jfree.chart.renderer.LookupPaintScale;
+        value := @parameter0: double;
+        $stack8 = this.<org.jfree.chart.renderer.LookupPaintScale: double lowerBound>;
+        $stack9 = value cmpg $stack8;
+    
+        if $stack9 >= 0 goto label01;
+        $stack35 = this.<org.jfree.chart.renderer.LookupPaintScale: java.awt.Paint defaultPaint>;
+    
+        return $stack35;
+    
+      label01:
+        $stack10 = this.<org.jfree.chart.renderer.LookupPaintScale: double upperBound>;
+        $stack11 = value cmpl $stack10;
+    
+        if $stack11 <= 0 goto label02;
+        $stack34 = this.<org.jfree.chart.renderer.LookupPaintScale: java.awt.Paint defaultPaint>;
+    
+        return $stack34;
+    
+      label02:
+        $stack12 = this.<org.jfree.chart.renderer.LookupPaintScale: java.util.List lookupTable>;
+        count = interfaceinvoke $stack12.<java.util.List: int size()>();
+    
+        if count != 0 goto label03;
+        $stack33 = this.<org.jfree.chart.renderer.LookupPaintScale: java.awt.Paint defaultPaint>;
+    
+        return $stack33;
+    
+      label03:
+        $stack13 = this.<org.jfree.chart.renderer.LookupPaintScale: java.util.List lookupTable>;
+        $stack14 = interfaceinvoke $stack13.<java.util.List: java.lang.Object get(int)>(0);
+        item = (org.jfree.chart.renderer.LookupPaintScale$PaintItem) $stack14;
+        $stack15 = item.<org.jfree.chart.renderer.LookupPaintScale$PaintItem: double value>;
+        $stack16 = value cmpg $stack15;
+    
+        if $stack16 >= 0 goto label04;
+        $stack32 = this.<org.jfree.chart.renderer.LookupPaintScale: java.awt.Paint defaultPaint>;
+    
+        return $stack32;
+    
+      label04:
+        low = 0;
+        $stack17 = this.<org.jfree.chart.renderer.LookupPaintScale: java.util.List lookupTable>;
+        $stack18 = interfaceinvoke $stack17.<java.util.List: int size()>();
+        high = $stack18 - 1;
+    
+      label05:
+        $stack19 = high - low;
+    
+        if $stack19 <= 1 goto label08;
+        $stack27 = low + high;
+        current = $stack27 / 2;
+        $stack28 = this.<org.jfree.chart.renderer.LookupPaintScale: java.util.List lookupTable>;
+        $stack29 = interfaceinvoke $stack28.<java.util.List: java.lang.Object get(int)>(current);
+        item = (org.jfree.chart.renderer.LookupPaintScale$PaintItem) $stack29;
+        $stack30 = item.<org.jfree.chart.renderer.LookupPaintScale$PaintItem: double value>;
+        $stack31 = value cmpl $stack30;
+    
+        if $stack31 < 0 goto label06;
+        low = current;
+    
+        goto label07;
+    
+      label06:
+        high = current;
+    
+      label07:
+        goto label05;
+    
+      label08:
+        if high <= low goto label09;
+        $stack21 = this.<org.jfree.chart.renderer.LookupPaintScale: java.util.List lookupTable>;
+        $stack22 = interfaceinvoke $stack21.<java.util.List: java.lang.Object get(int)>(high);
+        item = (org.jfree.chart.renderer.LookupPaintScale$PaintItem) $stack22;
+        $stack23 = item.<org.jfree.chart.renderer.LookupPaintScale$PaintItem: double value>;
+        $stack24 = value cmpg $stack23;
+    
+        if $stack24 >= 0 goto label09;
+        $stack25 = this.<org.jfree.chart.renderer.LookupPaintScale: java.util.List lookupTable>;
+        $stack26 = interfaceinvoke $stack25.<java.util.List: java.lang.Object get(int)>(low);
+        item = (org.jfree.chart.renderer.LookupPaintScale$PaintItem) $stack26;
+    
+      label09:
+        if item == null goto label10;
+        $stack20 = item.<org.jfree.chart.renderer.LookupPaintScale$PaintItem: java.awt.Paint paint>;
+    
+        goto label11;
+    
+      label10:
+        $stack20 = this.<org.jfree.chart.renderer.LookupPaintScale: java.awt.Paint defaultPaint>;
+    
+      label11:
+        return $stack20;
+    }
+
+}

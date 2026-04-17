@@ -1,0 +1,796 @@
+// ========================================================================
+// CLASS : org.jfree.data.time.Week
+// ========================================================================
+
+[PUBLIC, SUPER] class org.jfree.data.time.Week extends org.jfree.data.time.RegularTimePeriod implements java.io.Serializable {
+
+    // ---- method: <org.jfree.data.time.Week: void <init>(java.util.Date)> ----
+    {
+        java.util.Date time;
+        java.util.Locale $stack2;
+        java.util.TimeZone $stack3;
+        org.jfree.data.time.Week this;
+    
+    
+        this := @this: org.jfree.data.time.Week;
+        time := @parameter0: java.util.Date;
+        $stack3 = staticinvoke <java.util.TimeZone: java.util.TimeZone getDefault()>();
+        $stack2 = staticinvoke <java.util.Locale: java.util.Locale getDefault()>();
+        specialinvoke this.<org.jfree.data.time.Week: void <init>(java.util.Date,java.util.TimeZone,java.util.Locale)>(time, $stack3, $stack2);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.time.Week: org.jfree.data.time.RegularTimePeriod previous()> ----
+    {
+        byte $stack4, $stack9;
+        int $stack11, $stack7, yy;
+        java.util.Calendar prevYearCalendar;
+        org.jfree.data.time.Week $stack12, $stack8, result, this;
+        short $stack10, $stack5, $stack6;
+    
+    
+        this := @this: org.jfree.data.time.Week;
+        $stack4 = this.<org.jfree.data.time.Week: byte week>;
+    
+        if $stack4 == 1 goto label1;
+        $stack12 = new org.jfree.data.time.Week;
+        $stack9 = this.<org.jfree.data.time.Week: byte week>;
+        $stack11 = $stack9 - 1;
+        $stack10 = this.<org.jfree.data.time.Week: short year>;
+        specialinvoke $stack12.<org.jfree.data.time.Week: void <init>(int,int)>($stack11, $stack10);
+        result = $stack12;
+    
+        goto label3;
+    
+      label1:
+        $stack5 = this.<org.jfree.data.time.Week: short year>;
+    
+        if $stack5 <= 1900 goto label2;
+        $stack6 = this.<org.jfree.data.time.Week: short year>;
+        yy = $stack6 - 1;
+        prevYearCalendar = staticinvoke <java.util.Calendar: java.util.Calendar getInstance()>();
+        virtualinvoke prevYearCalendar.<java.util.Calendar: void set(int,int,int)>(yy, 11, 31);
+        $stack8 = new org.jfree.data.time.Week;
+        $stack7 = virtualinvoke prevYearCalendar.<java.util.Calendar: int getActualMaximum(int)>(3);
+        specialinvoke $stack8.<org.jfree.data.time.Week: void <init>(int,int)>($stack7, yy);
+        result = $stack8;
+    
+        goto label3;
+    
+      label2:
+        result = null;
+    
+      label3:
+        return result;
+    }
+
+    // ---- method: <org.jfree.data.time.Week: int hashCode()> ----
+    {
+        byte $stack3;
+        int $stack4, result#1, result#2;
+        org.jfree.data.time.Week this;
+        short $stack2, $stack5;
+    
+    
+        this := @this: org.jfree.data.time.Week;
+        $stack2 = 629;
+        $stack3 = this.<org.jfree.data.time.Week: byte week>;
+        result#1 = $stack2 + $stack3;
+        $stack4 = 37 * result#1;
+        $stack5 = this.<org.jfree.data.time.Week: short year>;
+        result#2 = $stack4 + $stack5;
+    
+        return result#2;
+    }
+
+    // ---- method: <org.jfree.data.time.Week: long getSerialIndex()> ----
+    {
+        byte $stack3;
+        long $stack2, $stack4, $stack5, $stack6;
+        org.jfree.data.time.Week this;
+        short $stack1;
+    
+    
+        this := @this: org.jfree.data.time.Week;
+        $stack1 = this.<org.jfree.data.time.Week: short year>;
+        $stack2 = (long) $stack1;
+        $stack4 = $stack2 * 53L;
+        $stack3 = this.<org.jfree.data.time.Week: byte week>;
+        $stack5 = (long) $stack3;
+        $stack6 = $stack4 + $stack5;
+    
+        return $stack6;
+    }
+
+    // ---- method: <org.jfree.data.time.Week: long getFirstMillisecond(java.util.Calendar)> ----
+    {
+        byte $stack5;
+        int $stack6;
+        java.lang.Object $stack3;
+        java.util.Calendar c, calendar;
+        java.util.Date $stack7;
+        long $stack8;
+        org.jfree.data.time.Week this;
+        short $stack4;
+    
+    
+        this := @this: org.jfree.data.time.Week;
+        calendar := @parameter0: java.util.Calendar;
+        $stack3 = virtualinvoke calendar.<java.util.Calendar: java.lang.Object clone()>();
+        c = (java.util.Calendar) $stack3;
+        virtualinvoke c.<java.util.Calendar: void clear()>();
+        $stack4 = this.<org.jfree.data.time.Week: short year>;
+        virtualinvoke c.<java.util.Calendar: void set(int,int)>(1, $stack4);
+        $stack5 = this.<org.jfree.data.time.Week: byte week>;
+        virtualinvoke c.<java.util.Calendar: void set(int,int)>(3, $stack5);
+        $stack6 = virtualinvoke c.<java.util.Calendar: int getFirstDayOfWeek()>();
+        virtualinvoke c.<java.util.Calendar: void set(int,int)>(7, $stack6);
+        virtualinvoke c.<java.util.Calendar: void set(int,int)>(10, 0);
+        virtualinvoke c.<java.util.Calendar: void set(int,int)>(12, 0);
+        virtualinvoke c.<java.util.Calendar: void set(int,int)>(13, 0);
+        virtualinvoke c.<java.util.Calendar: void set(int,int)>(14, 0);
+        $stack7 = virtualinvoke c.<java.util.Calendar: java.util.Date getTime()>();
+        $stack8 = virtualinvoke $stack7.<java.util.Date: long getTime()>();
+    
+        return $stack8;
+    }
+
+    // ---- method: <org.jfree.data.time.Week: org.jfree.data.time.Year evaluateAsYear(java.lang.String)> ----
+    {
+        java.lang.Object result#0;
+        java.lang.String s;
+        org.jfree.data.time.TimePeriodFormatException $stack3, e;
+        org.jfree.data.time.Year result#1;
+    
+    
+        s := @parameter0: java.lang.String;
+        result#0 = null;
+    
+      label1:
+        result#1 = staticinvoke <org.jfree.data.time.Year: org.jfree.data.time.Year parseYear(java.lang.String)>(s);
+    
+      label2:
+        goto label4;
+    
+      label3:
+        $stack3 := @caughtexception;
+        e = $stack3;
+    
+      label4:
+        return result#1;
+    
+     catch org.jfree.data.time.TimePeriodFormatException from label1 to label2 with label3;
+    }
+
+    // ---- method: <org.jfree.data.time.Week: int getWeek()> ----
+    {
+        byte $stack1;
+        org.jfree.data.time.Week this;
+    
+    
+        this := @this: org.jfree.data.time.Week;
+        $stack1 = this.<org.jfree.data.time.Week: byte week>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.data.time.Week: org.jfree.data.time.Year getYear()> ----
+    {
+        org.jfree.data.time.Week this;
+        org.jfree.data.time.Year $stack2;
+        short $stack1;
+    
+    
+        this := @this: org.jfree.data.time.Week;
+        $stack2 = new org.jfree.data.time.Year;
+        $stack1 = this.<org.jfree.data.time.Week: short year>;
+        specialinvoke $stack2.<org.jfree.data.time.Year: void <init>(int)>($stack1);
+    
+        return $stack2;
+    }
+
+    // ---- method: <org.jfree.data.time.Week: void peg(java.util.Calendar)> ----
+    {
+        java.util.Calendar calendar;
+        long $stack2, $stack3;
+        org.jfree.data.time.Week this;
+    
+    
+        this := @this: org.jfree.data.time.Week;
+        calendar := @parameter0: java.util.Calendar;
+        $stack2 = virtualinvoke this.<org.jfree.data.time.Week: long getFirstMillisecond(java.util.Calendar)>(calendar);
+        this.<org.jfree.data.time.Week: long firstMillisecond> = $stack2;
+        $stack3 = virtualinvoke this.<org.jfree.data.time.Week: long getLastMillisecond(java.util.Calendar)>(calendar);
+        this.<org.jfree.data.time.Week: long lastMillisecond> = $stack3;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.time.Week: void <init>(int,org.jfree.data.time.Year)> ----
+    {
+        byte $stack3;
+        int $stack4, week;
+        java.lang.IllegalArgumentException #l1;
+        java.lang.Object $stack7;
+        java.lang.Throwable #l0;
+        java.util.Calendar $stack6;
+        org.jfree.data.time.Week this;
+        org.jfree.data.time.Year year;
+        short $stack5;
+    
+    
+        this := @this: org.jfree.data.time.Week;
+        week := @parameter0: int;
+        year := @parameter1: org.jfree.data.time.Year;
+        specialinvoke this.<org.jfree.data.time.RegularTimePeriod: void <init>()>();
+    
+        if week >= 1 goto label1;
+    
+        if week <= 53 goto label1;
+        $stack7 = new java.lang.IllegalArgumentException;
+        #l1 = (java.lang.IllegalArgumentException) $stack7;
+        specialinvoke #l1.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("The \'week\' argument must be in the range 1 - 53.");
+        #l0 = (java.lang.Throwable) $stack7;
+    
+        throw #l0;
+    
+      label1:
+        $stack3 = (byte) week;
+        this.<org.jfree.data.time.Week: byte week> = $stack3;
+        $stack4 = virtualinvoke year.<org.jfree.data.time.Year: int getYear()>();
+        $stack5 = (short) $stack4;
+        this.<org.jfree.data.time.Week: short year> = $stack5;
+        $stack6 = staticinvoke <java.util.Calendar: java.util.Calendar getInstance()>();
+        virtualinvoke this.<org.jfree.data.time.Week: void peg(java.util.Calendar)>($stack6);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.time.Week: org.jfree.data.time.RegularTimePeriod next()> ----
+    {
+        byte $stack11, $stack15, $stack4, $stack6;
+        int $stack13, $stack17, $stack9, actualMaxWeek;
+        java.util.Calendar calendar;
+        org.jfree.data.time.Week $stack10, $stack14, $stack18, result, this;
+        short $stack12, $stack16, $stack5, $stack7, $stack8;
+    
+    
+        this := @this: org.jfree.data.time.Week;
+        $stack4 = this.<org.jfree.data.time.Week: byte week>;
+    
+        if $stack4 >= 52 goto label1;
+        $stack18 = new org.jfree.data.time.Week;
+        $stack15 = this.<org.jfree.data.time.Week: byte week>;
+        $stack17 = $stack15 + 1;
+        $stack16 = this.<org.jfree.data.time.Week: short year>;
+        specialinvoke $stack18.<org.jfree.data.time.Week: void <init>(int,int)>($stack17, $stack16);
+        result = $stack18;
+    
+        goto label4;
+    
+      label1:
+        calendar = staticinvoke <java.util.Calendar: java.util.Calendar getInstance()>();
+        $stack5 = this.<org.jfree.data.time.Week: short year>;
+        virtualinvoke calendar.<java.util.Calendar: void set(int,int,int)>($stack5, 11, 31);
+        actualMaxWeek = virtualinvoke calendar.<java.util.Calendar: int getActualMaximum(int)>(3);
+        $stack6 = this.<org.jfree.data.time.Week: byte week>;
+    
+        if $stack6 >= actualMaxWeek goto label2;
+        $stack14 = new org.jfree.data.time.Week;
+        $stack11 = this.<org.jfree.data.time.Week: byte week>;
+        $stack13 = $stack11 + 1;
+        $stack12 = this.<org.jfree.data.time.Week: short year>;
+        specialinvoke $stack14.<org.jfree.data.time.Week: void <init>(int,int)>($stack13, $stack12);
+        result = $stack14;
+    
+        goto label4;
+    
+      label2:
+        $stack7 = this.<org.jfree.data.time.Week: short year>;
+    
+        if $stack7 >= 9999 goto label3;
+        $stack10 = new org.jfree.data.time.Week;
+        $stack8 = this.<org.jfree.data.time.Week: short year>;
+        $stack9 = $stack8 + 1;
+        specialinvoke $stack10.<org.jfree.data.time.Week: void <init>(int,int)>(1, $stack9);
+        result = $stack10;
+    
+        goto label4;
+    
+      label3:
+        result = null;
+    
+      label4:
+        return result;
+    }
+
+    // ---- method: <org.jfree.data.time.Week: void <init>(java.util.Date,java.util.TimeZone,java.util.Locale)> ----
+    {
+        byte $stack11, $stack8;
+        int $stack12, $stack13, $stack14, $stack7, $stack9, tempWeek, yyyy;
+        java.lang.IllegalArgumentException #l1, #l3, #l4;
+        java.lang.Object $stack16, $stack17, $stack18;
+        java.lang.Throwable #l0, #l2, #l5;
+        java.util.Calendar calendar;
+        java.util.Date time;
+        java.util.Locale locale;
+        java.util.TimeZone zone;
+        org.jfree.data.time.Week this;
+        short $stack10, $stack15;
+    
+    
+        this := @this: org.jfree.data.time.Week;
+        time := @parameter0: java.util.Date;
+        zone := @parameter1: java.util.TimeZone;
+        locale := @parameter2: java.util.Locale;
+        specialinvoke this.<org.jfree.data.time.RegularTimePeriod: void <init>()>();
+    
+        if time != null goto label1;
+        $stack18 = new java.lang.IllegalArgumentException;
+        #l1 = (java.lang.IllegalArgumentException) $stack18;
+        specialinvoke #l1.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'time\' argument.");
+        #l5 = (java.lang.Throwable) $stack18;
+    
+        throw #l5;
+    
+      label1:
+        if zone != null goto label2;
+        $stack17 = new java.lang.IllegalArgumentException;
+        #l3 = (java.lang.IllegalArgumentException) $stack17;
+        specialinvoke #l3.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'zone\' argument.");
+        #l0 = (java.lang.Throwable) $stack17;
+    
+        throw #l0;
+    
+      label2:
+        if locale != null goto label3;
+        $stack16 = new java.lang.IllegalArgumentException;
+        #l4 = (java.lang.IllegalArgumentException) $stack16;
+        specialinvoke #l4.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'locale\' argument.");
+        #l2 = (java.lang.Throwable) $stack16;
+    
+        throw #l2;
+    
+      label3:
+        calendar = staticinvoke <java.util.Calendar: java.util.Calendar getInstance(java.util.TimeZone,java.util.Locale)>(zone, locale);
+        virtualinvoke calendar.<java.util.Calendar: void setTime(java.util.Date)>(time);
+        tempWeek = virtualinvoke calendar.<java.util.Calendar: int get(int)>(3);
+    
+        if tempWeek != 1 goto label4;
+        $stack12 = virtualinvoke calendar.<java.util.Calendar: int get(int)>(2);
+    
+        if $stack12 != 11 goto label4;
+        this.<org.jfree.data.time.Week: byte week> = 1;
+        $stack13 = virtualinvoke calendar.<java.util.Calendar: int get(int)>(1);
+        $stack14 = $stack13 + 1;
+        $stack15 = (short) $stack14;
+        this.<org.jfree.data.time.Week: short year> = $stack15;
+    
+        goto label6;
+    
+      label4:
+        $stack7 = staticinvoke <java.lang.Math: int min(int,int)>(tempWeek, 53);
+        $stack8 = (byte) $stack7;
+        this.<org.jfree.data.time.Week: byte week> = $stack8;
+        yyyy = virtualinvoke calendar.<java.util.Calendar: int get(int)>(1);
+        $stack9 = virtualinvoke calendar.<java.util.Calendar: int get(int)>(2);
+    
+        if $stack9 != 0 goto label5;
+        $stack11 = this.<org.jfree.data.time.Week: byte week>;
+    
+        if $stack11 < 52 goto label5;
+        yyyy = yyyy + -1;
+    
+      label5:
+        $stack10 = (short) yyyy;
+        this.<org.jfree.data.time.Week: short year> = $stack10;
+    
+      label6:
+        virtualinvoke this.<org.jfree.data.time.Week: void peg(java.util.Calendar)>(calendar);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.time.Week: java.lang.String toString()> ----
+    {
+        byte $stack2;
+        java.lang.String $stack8;
+        java.lang.StringBuffer $stack1, $stack3, $stack4, $stack6, $stack7;
+        org.jfree.data.time.Week this;
+        short $stack5;
+    
+    
+        this := @this: org.jfree.data.time.Week;
+        $stack1 = new java.lang.StringBuffer;
+        specialinvoke $stack1.<java.lang.StringBuffer: void <init>()>();
+        $stack3 = virtualinvoke $stack1.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>("Week ");
+        $stack2 = this.<org.jfree.data.time.Week: byte week>;
+        $stack4 = virtualinvoke $stack3.<java.lang.StringBuffer: java.lang.StringBuffer append(int)>($stack2);
+        $stack6 = virtualinvoke $stack4.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>(", ");
+        $stack5 = this.<org.jfree.data.time.Week: short year>;
+        $stack7 = virtualinvoke $stack6.<java.lang.StringBuffer: java.lang.StringBuffer append(int)>($stack5);
+        $stack8 = virtualinvoke $stack7.<java.lang.StringBuffer: java.lang.String toString()>();
+    
+        return $stack8;
+    }
+
+    // ---- method: <org.jfree.data.time.Week: long getLastMillisecond(java.util.Calendar)> ----
+    {
+        byte $stack5;
+        int $stack6, $stack7;
+        java.lang.Object $stack3;
+        java.util.Calendar c, calendar;
+        java.util.Date $stack8;
+        long $stack10, $stack9;
+        org.jfree.data.time.Week this;
+        short $stack4;
+    
+    
+        this := @this: org.jfree.data.time.Week;
+        calendar := @parameter0: java.util.Calendar;
+        $stack3 = virtualinvoke calendar.<java.util.Calendar: java.lang.Object clone()>();
+        c = (java.util.Calendar) $stack3;
+        virtualinvoke c.<java.util.Calendar: void clear()>();
+        $stack4 = this.<org.jfree.data.time.Week: short year>;
+        virtualinvoke c.<java.util.Calendar: void set(int,int)>(1, $stack4);
+        $stack5 = this.<org.jfree.data.time.Week: byte week>;
+        $stack6 = $stack5 + 1;
+        virtualinvoke c.<java.util.Calendar: void set(int,int)>(3, $stack6);
+        $stack7 = virtualinvoke c.<java.util.Calendar: int getFirstDayOfWeek()>();
+        virtualinvoke c.<java.util.Calendar: void set(int,int)>(7, $stack7);
+        virtualinvoke c.<java.util.Calendar: void set(int,int)>(10, 0);
+        virtualinvoke c.<java.util.Calendar: void set(int,int)>(12, 0);
+        virtualinvoke c.<java.util.Calendar: void set(int,int)>(13, 0);
+        virtualinvoke c.<java.util.Calendar: void set(int,int)>(14, 0);
+        $stack8 = virtualinvoke c.<java.util.Calendar: java.util.Date getTime()>();
+        $stack9 = virtualinvoke $stack8.<java.util.Date: long getTime()>();
+        $stack10 = $stack9 - 1L;
+    
+        return $stack10;
+    }
+
+    // ---- method: <org.jfree.data.time.Week: int stringToWeek(java.lang.String)> ----
+    {
+        byte result#0;
+        int result#1;
+        java.lang.String s#0, s#1, s#2;
+        java.lang.Throwable $stack3, e;
+    
+    
+        s#0 := @parameter0: java.lang.String;
+        result#0 = -1;
+        s#1 = virtualinvoke s#0.<java.lang.String: java.lang.String replace(char,char)>(87, 32);
+        s#2 = virtualinvoke s#1.<java.lang.String: java.lang.String trim()>();
+    
+      label1:
+        result#1 = staticinvoke <java.lang.Integer: int parseInt(java.lang.String)>(s#2);
+    
+        if result#1 < 1 goto label2;
+    
+        if result#1 <= 53 goto label3;
+    
+      label2:
+        result#1 = -1;
+    
+      label3:
+        goto label5;
+    
+      label4:
+        $stack3 := @caughtexception;
+        e = $stack3;
+    
+      label5:
+        return result#1;
+    
+     catch java.lang.NumberFormatException from label1 to label3 with label4;
+    }
+
+    // ---- method: <org.jfree.data.time.Week: void <init>()> ----
+    {
+        java.util.Date $stack1;
+        org.jfree.data.time.Week this;
+    
+    
+        this := @this: org.jfree.data.time.Week;
+        $stack1 = new java.util.Date;
+        specialinvoke $stack1.<java.util.Date: void <init>()>();
+        specialinvoke this.<org.jfree.data.time.Week: void <init>(java.util.Date)>($stack1);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.time.Week: long getFirstMillisecond()> ----
+    {
+        long $stack1;
+        org.jfree.data.time.Week this;
+    
+    
+        this := @this: org.jfree.data.time.Week;
+        $stack1 = this.<org.jfree.data.time.Week: long firstMillisecond>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.data.time.Week: int compareTo(java.lang.Object)> ----
+    {
+        boolean $stack4, $stack5;
+        byte $stack9;
+        int $stack10, $stack8, result;
+        java.lang.Object o1;
+        org.jfree.data.time.Week this, w;
+        org.jfree.data.time.Year $stack7;
+        short $stack6;
+    
+    
+        this := @this: org.jfree.data.time.Week;
+        o1 := @parameter0: java.lang.Object;
+        $stack4 = o1 instanceof org.jfree.data.time.Week;
+    
+        if $stack4 == 0 goto label2;
+        w = (org.jfree.data.time.Week) o1;
+        $stack6 = this.<org.jfree.data.time.Week: short year>;
+        $stack7 = virtualinvoke w.<org.jfree.data.time.Week: org.jfree.data.time.Year getYear()>();
+        $stack8 = virtualinvoke $stack7.<org.jfree.data.time.Year: int getYear()>();
+        result = $stack6 - $stack8;
+    
+        if result != 0 goto label1;
+        $stack9 = this.<org.jfree.data.time.Week: byte week>;
+        $stack10 = virtualinvoke w.<org.jfree.data.time.Week: int getWeek()>();
+        result = $stack9 - $stack10;
+    
+      label1:
+        goto label4;
+    
+      label2:
+        $stack5 = o1 instanceof org.jfree.data.time.RegularTimePeriod;
+    
+        if $stack5 == 0 goto label3;
+        result = 0;
+    
+        goto label4;
+    
+      label3:
+        result = 1;
+    
+      label4:
+        return result;
+    }
+
+    // ---- method: <org.jfree.data.time.Week: long getLastMillisecond()> ----
+    {
+        long $stack1;
+        org.jfree.data.time.Week this;
+    
+    
+        this := @this: org.jfree.data.time.Week;
+        $stack1 = this.<org.jfree.data.time.Week: long lastMillisecond>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.data.time.Week: void <init>(java.util.Date,java.util.TimeZone)> ----
+    {
+        java.util.Date time;
+        java.util.Locale $stack3;
+        java.util.TimeZone zone;
+        org.jfree.data.time.Week this;
+    
+    
+        this := @this: org.jfree.data.time.Week;
+        time := @parameter0: java.util.Date;
+        zone := @parameter1: java.util.TimeZone;
+        $stack3 = staticinvoke <java.util.Locale: java.util.Locale getDefault()>();
+        specialinvoke this.<org.jfree.data.time.Week: void <init>(java.util.Date,java.util.TimeZone,java.util.Locale)>(time, zone, $stack3);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.time.Week: int findSeparator(java.lang.String)> ----
+    {
+        int result;
+        java.lang.String s;
+    
+    
+        s := @parameter0: java.lang.String;
+        result = virtualinvoke s.<java.lang.String: int indexOf(int)>(45);
+    
+        if result != -1 goto label1;
+        result = virtualinvoke s.<java.lang.String: int indexOf(int)>(44);
+    
+      label1:
+        if result != -1 goto label2;
+        result = virtualinvoke s.<java.lang.String: int indexOf(int)>(32);
+    
+      label2:
+        if result != -1 goto label3;
+        result = virtualinvoke s.<java.lang.String: int indexOf(int)>(46);
+    
+      label3:
+        return result;
+    }
+
+    // ---- method: <org.jfree.data.time.Week: int getYearValue()> ----
+    {
+        org.jfree.data.time.Week this;
+        short $stack1;
+    
+    
+        this := @this: org.jfree.data.time.Week;
+        $stack1 = this.<org.jfree.data.time.Week: short year>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.data.time.Week: void <init>(int,int)> ----
+    {
+        byte $stack3;
+        int week, year;
+        java.lang.IllegalArgumentException #l1;
+        java.lang.Object $stack6;
+        java.lang.Throwable #l0;
+        java.util.Calendar $stack5;
+        org.jfree.data.time.Week this;
+        short $stack4;
+    
+    
+        this := @this: org.jfree.data.time.Week;
+        week := @parameter0: int;
+        year := @parameter1: int;
+        specialinvoke this.<org.jfree.data.time.RegularTimePeriod: void <init>()>();
+    
+        if week >= 1 goto label1;
+    
+        if week <= 53 goto label1;
+        $stack6 = new java.lang.IllegalArgumentException;
+        #l1 = (java.lang.IllegalArgumentException) $stack6;
+        specialinvoke #l1.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("The \'week\' argument must be in the range 1 - 53.");
+        #l0 = (java.lang.Throwable) $stack6;
+    
+        throw #l0;
+    
+      label1:
+        $stack3 = (byte) week;
+        this.<org.jfree.data.time.Week: byte week> = $stack3;
+        $stack4 = (short) year;
+        this.<org.jfree.data.time.Week: short year> = $stack4;
+        $stack5 = staticinvoke <java.util.Calendar: java.util.Calendar getInstance()>();
+        virtualinvoke this.<org.jfree.data.time.Week: void peg(java.util.Calendar)>($stack5);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.time.Week: org.jfree.data.time.Week parseWeek(java.lang.String)> ----
+    {
+        int $stack10, $stack9, i, w#0, w#1;
+        java.lang.Object $stack12, $stack14, $stack16, $stack7;
+        java.lang.String $stack11, $stack8, s#0, s#1, s1, s2;
+        java.lang.Throwable #l0, #l1, #l4, #l6;
+        org.jfree.data.time.TimePeriodFormatException #l2, #l3, #l5, #l7;
+        org.jfree.data.time.Week $stack13, $stack15, result;
+        org.jfree.data.time.Year y#0, y#1;
+    
+    
+        s#0 := @parameter0: java.lang.String;
+        result = null;
+    
+        if s#0 == null goto label4;
+        s#1 = virtualinvoke s#0.<java.lang.String: java.lang.String trim()>();
+        i = staticinvoke <org.jfree.data.time.Week: int findSeparator(java.lang.String)>(s#1);
+    
+        if i == -1 goto label5;
+        $stack8 = virtualinvoke s#1.<java.lang.String: java.lang.String substring(int,int)>(0, i);
+        s1 = virtualinvoke $stack8.<java.lang.String: java.lang.String trim()>();
+        $stack10 = i + 1;
+        $stack9 = virtualinvoke s#1.<java.lang.String: int length()>();
+        $stack11 = virtualinvoke s#1.<java.lang.String: java.lang.String substring(int,int)>($stack10, $stack9);
+        s2 = virtualinvoke $stack11.<java.lang.String: java.lang.String trim()>();
+        y#0 = staticinvoke <org.jfree.data.time.Week: org.jfree.data.time.Year evaluateAsYear(java.lang.String)>(s1);
+    
+        if y#0 == null goto label2;
+        w#0 = staticinvoke <org.jfree.data.time.Week: int stringToWeek(java.lang.String)>(s2);
+    
+        if w#0 != -1 goto label1;
+        $stack16 = new org.jfree.data.time.TimePeriodFormatException;
+        #l3 = (org.jfree.data.time.TimePeriodFormatException) $stack16;
+        specialinvoke #l3.<org.jfree.data.time.TimePeriodFormatException: void <init>(java.lang.String)>("Can\'t evaluate the week.");
+        #l1 = (java.lang.Throwable) $stack16;
+    
+        throw #l1;
+    
+      label1:
+        $stack15 = new org.jfree.data.time.Week;
+        specialinvoke $stack15.<org.jfree.data.time.Week: void <init>(int,org.jfree.data.time.Year)>(w#0, y#0);
+        result = $stack15;
+    
+        goto label7;
+    
+      label2:
+        y#1 = staticinvoke <org.jfree.data.time.Week: org.jfree.data.time.Year evaluateAsYear(java.lang.String)>(s2);
+    
+        if y#1 == null goto label6;
+        w#1 = staticinvoke <org.jfree.data.time.Week: int stringToWeek(java.lang.String)>(s1);
+    
+        if w#1 != -1 goto label3;
+        $stack14 = new org.jfree.data.time.TimePeriodFormatException;
+        #l2 = (org.jfree.data.time.TimePeriodFormatException) $stack14;
+        specialinvoke #l2.<org.jfree.data.time.TimePeriodFormatException: void <init>(java.lang.String)>("Can\'t evaluate the week.");
+        #l0 = (java.lang.Throwable) $stack14;
+    
+        throw #l0;
+    
+      label3:
+        $stack13 = new org.jfree.data.time.Week;
+        specialinvoke $stack13.<org.jfree.data.time.Week: void <init>(int,org.jfree.data.time.Year)>(w#1, y#1);
+        result = $stack13;
+    
+        goto label7;
+    
+      label4:
+        return result;
+    
+      label5:
+        $stack7 = new org.jfree.data.time.TimePeriodFormatException;
+        #l5 = (org.jfree.data.time.TimePeriodFormatException) $stack7;
+        specialinvoke #l5.<org.jfree.data.time.TimePeriodFormatException: void <init>(java.lang.String)>("Could not find separator.");
+        #l4 = (java.lang.Throwable) $stack7;
+    
+        throw #l4;
+    
+      label6:
+        $stack12 = new org.jfree.data.time.TimePeriodFormatException;
+        #l7 = (org.jfree.data.time.TimePeriodFormatException) $stack12;
+        specialinvoke #l7.<org.jfree.data.time.TimePeriodFormatException: void <init>(java.lang.String)>("Can\'t evaluate the year.");
+        #l6 = (java.lang.Throwable) $stack12;
+    
+        throw #l6;
+    
+      label7:
+        goto label4;
+    }
+
+    // ---- method: <org.jfree.data.time.Week: boolean equals(java.lang.Object)> ----
+    {
+        boolean $stack3;
+        byte $stack4, $stack5;
+        java.lang.Object obj;
+        org.jfree.data.time.Week that, this;
+        short $stack6, $stack7;
+    
+    
+        this := @this: org.jfree.data.time.Week;
+        obj := @parameter0: java.lang.Object;
+    
+        if obj != this goto label1;
+    
+        return 1;
+    
+      label1:
+        $stack3 = obj instanceof org.jfree.data.time.Week;
+    
+        if $stack3 != 0 goto label2;
+    
+        return 0;
+    
+      label2:
+        that = (org.jfree.data.time.Week) obj;
+        $stack5 = this.<org.jfree.data.time.Week: byte week>;
+        $stack4 = that.<org.jfree.data.time.Week: byte week>;
+    
+        if $stack5 == $stack4 goto label3;
+    
+        return 0;
+    
+      label3:
+        $stack7 = this.<org.jfree.data.time.Week: short year>;
+        $stack6 = that.<org.jfree.data.time.Week: short year>;
+    
+        if $stack7 == $stack6 goto label4;
+    
+        return 0;
+    
+      label4:
+        return 1;
+    }
+
+}

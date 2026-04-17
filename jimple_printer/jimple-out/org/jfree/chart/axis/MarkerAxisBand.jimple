@@ -1,0 +1,343 @@
+// ========================================================================
+// CLASS : org.jfree.chart.axis.MarkerAxisBand
+// ========================================================================
+
+[PUBLIC, SUPER] class org.jfree.chart.axis.MarkerAxisBand extends java.lang.Object implements java.io.Serializable {
+
+    // ---- method: <org.jfree.chart.axis.MarkerAxisBand: void addMarker(org.jfree.chart.plot.IntervalMarker)> ----
+    {
+        java.util.List $stack2;
+        org.jfree.chart.axis.MarkerAxisBand this;
+        org.jfree.chart.plot.IntervalMarker marker;
+    
+    
+        this := @this: org.jfree.chart.axis.MarkerAxisBand;
+        marker := @parameter0: org.jfree.chart.plot.IntervalMarker;
+        $stack2 = this.<org.jfree.chart.axis.MarkerAxisBand: java.util.List markers>;
+        interfaceinvoke $stack2.<java.util.List: boolean add(java.lang.Object)>(marker);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.axis.MarkerAxisBand: int hashCode()> ----
+    {
+        int $stack4, $stack6, $stack7, result#1, result#2;
+        java.awt.Font $stack2;
+        java.util.List $stack5;
+        org.jfree.chart.axis.MarkerAxisBand this;
+        short $stack3;
+    
+    
+        this := @this: org.jfree.chart.axis.MarkerAxisBand;
+        $stack3 = 703;
+        $stack2 = this.<org.jfree.chart.axis.MarkerAxisBand: java.awt.Font font>;
+        $stack4 = virtualinvoke $stack2.<java.awt.Font: int hashCode()>();
+        result#1 = $stack3 + $stack4;
+        $stack6 = 19 * result#1;
+        $stack5 = this.<org.jfree.chart.axis.MarkerAxisBand: java.util.List markers>;
+        $stack7 = interfaceinvoke $stack5.<java.util.List: int hashCode()>();
+        result#2 = $stack6 + $stack7;
+    
+        return result#2;
+    }
+
+    // ---- method: <org.jfree.chart.axis.MarkerAxisBand: double getHeight(java.awt.Graphics2D)> ----
+    {
+        double $stack10, $stack12, $stack13, $stack14, $stack15, $stack16, $stack17, $stack9, result;
+        float $stack11;
+        int $stack6;
+        java.awt.Font $stack7;
+        java.awt.Graphics2D g2;
+        java.awt.font.FontRenderContext $stack8;
+        java.awt.font.LineMetrics metrics;
+        java.util.List $stack5;
+        org.jfree.chart.axis.MarkerAxisBand this;
+    
+    
+        this := @this: org.jfree.chart.axis.MarkerAxisBand;
+        g2 := @parameter0: java.awt.Graphics2D;
+        result = 0.0;
+        $stack5 = this.<org.jfree.chart.axis.MarkerAxisBand: java.util.List markers>;
+        $stack6 = interfaceinvoke $stack5.<java.util.List: int size()>();
+    
+        if $stack6 <= 0 goto label1;
+        $stack7 = this.<org.jfree.chart.axis.MarkerAxisBand: java.awt.Font font>;
+        $stack8 = virtualinvoke g2.<java.awt.Graphics2D: java.awt.font.FontRenderContext getFontRenderContext()>();
+        metrics = virtualinvoke $stack7.<java.awt.Font: java.awt.font.LineMetrics getLineMetrics(java.lang.String,java.awt.font.FontRenderContext)>("123g", $stack8);
+        $stack9 = this.<org.jfree.chart.axis.MarkerAxisBand: double topOuterGap>;
+        $stack10 = this.<org.jfree.chart.axis.MarkerAxisBand: double topInnerGap>;
+        $stack12 = $stack9 + $stack10;
+        $stack11 = virtualinvoke metrics.<java.awt.font.LineMetrics: float getHeight()>();
+        $stack13 = (double) $stack11;
+        $stack14 = $stack12 + $stack13;
+        $stack15 = this.<org.jfree.chart.axis.MarkerAxisBand: double bottomInnerGap>;
+        $stack16 = $stack14 + $stack15;
+        $stack17 = this.<org.jfree.chart.axis.MarkerAxisBand: double bottomOuterGap>;
+        result = $stack16 + $stack17;
+    
+      label1:
+        return result;
+    }
+
+    // ---- method: <org.jfree.chart.axis.MarkerAxisBand: void draw(java.awt.Graphics2D,java.awt.geom.Rectangle2D,java.awt.geom.Rectangle2D,double,double)> ----
+    {
+        boolean $stack23;
+        double $stack27, $stack28, $stack31, $stack32, $stack37, $stack38, $stack39, $stack40, $stack41, $stack42, $stack43, e, end, h, s, start, x, y;
+        float $stack45;
+        java.awt.Composite #l5, originalComposite;
+        java.awt.Font $stack50;
+        java.awt.Graphics2D g2;
+        java.awt.Paint #l3, $stack47, $stack48;
+        java.awt.Shape #l0, #l4;
+        java.awt.geom.Rectangle2D #l1, dataArea, plotArea;
+        java.awt.geom.Rectangle2D$Double #l2, r;
+        java.lang.Object $stack24, $stack44, $stack46, $stack49;
+        java.lang.String $stack51;
+        java.util.Iterator iterator;
+        java.util.List $stack22;
+        org.jfree.chart.axis.MarkerAxisBand this;
+        org.jfree.chart.axis.NumberAxis $stack25, $stack29, $stack34, $stack36;
+        org.jfree.chart.plot.IntervalMarker marker;
+        org.jfree.chart.util.RectangleEdge $stack33, $stack35;
+        org.jfree.data.Range $stack26, $stack30;
+    
+    
+        this := @this: org.jfree.chart.axis.MarkerAxisBand;
+        g2 := @parameter0: java.awt.Graphics2D;
+        plotArea := @parameter1: java.awt.geom.Rectangle2D;
+        dataArea := @parameter2: java.awt.geom.Rectangle2D;
+        x := @parameter3: double;
+        y := @parameter4: double;
+        h = virtualinvoke this.<org.jfree.chart.axis.MarkerAxisBand: double getHeight(java.awt.Graphics2D)>(g2);
+        $stack22 = this.<org.jfree.chart.axis.MarkerAxisBand: java.util.List markers>;
+        iterator = interfaceinvoke $stack22.<java.util.List: java.util.Iterator iterator()>();
+    
+      label1:
+        $stack23 = interfaceinvoke iterator.<java.util.Iterator: boolean hasNext()>();
+    
+        if $stack23 == 0 goto label2;
+        $stack24 = interfaceinvoke iterator.<java.util.Iterator: java.lang.Object next()>();
+        marker = (org.jfree.chart.plot.IntervalMarker) $stack24;
+        $stack28 = virtualinvoke marker.<org.jfree.chart.plot.IntervalMarker: double getStartValue()>();
+        $stack25 = this.<org.jfree.chart.axis.MarkerAxisBand: org.jfree.chart.axis.NumberAxis axis>;
+        $stack26 = virtualinvoke $stack25.<org.jfree.chart.axis.NumberAxis: org.jfree.data.Range getRange()>();
+        $stack27 = virtualinvoke $stack26.<org.jfree.data.Range: double getLowerBound()>();
+        start = staticinvoke <java.lang.Math: double max(double,double)>($stack28, $stack27);
+        $stack32 = virtualinvoke marker.<org.jfree.chart.plot.IntervalMarker: double getEndValue()>();
+        $stack29 = this.<org.jfree.chart.axis.MarkerAxisBand: org.jfree.chart.axis.NumberAxis axis>;
+        $stack30 = virtualinvoke $stack29.<org.jfree.chart.axis.NumberAxis: org.jfree.data.Range getRange()>();
+        $stack31 = virtualinvoke $stack30.<org.jfree.data.Range: double getUpperBound()>();
+        end = staticinvoke <java.lang.Math: double min(double,double)>($stack32, $stack31);
+        $stack34 = this.<org.jfree.chart.axis.MarkerAxisBand: org.jfree.chart.axis.NumberAxis axis>;
+        $stack33 = <org.jfree.chart.util.RectangleEdge: org.jfree.chart.util.RectangleEdge BOTTOM>;
+        s = virtualinvoke $stack34.<org.jfree.chart.axis.NumberAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)>(start, dataArea, $stack33);
+        $stack36 = this.<org.jfree.chart.axis.MarkerAxisBand: org.jfree.chart.axis.NumberAxis axis>;
+        $stack35 = <org.jfree.chart.util.RectangleEdge: org.jfree.chart.util.RectangleEdge BOTTOM>;
+        e = virtualinvoke $stack36.<org.jfree.chart.axis.NumberAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)>(end, dataArea, $stack35);
+        $stack44 = new java.awt.geom.Rectangle2D$Double;
+        $stack37 = this.<org.jfree.chart.axis.MarkerAxisBand: double topOuterGap>;
+        $stack43 = y + $stack37;
+        $stack42 = e - s;
+        $stack38 = this.<org.jfree.chart.axis.MarkerAxisBand: double topOuterGap>;
+        $stack39 = h - $stack38;
+        $stack40 = this.<org.jfree.chart.axis.MarkerAxisBand: double bottomOuterGap>;
+        $stack41 = $stack39 - $stack40;
+        #l2 = (java.awt.geom.Rectangle2D$Double) $stack44;
+        specialinvoke #l2.<java.awt.geom.Rectangle2D$Double: void <init>(double,double,double,double)>(s, $stack43, $stack42, $stack41);
+        r = (java.awt.geom.Rectangle2D$Double) $stack44;
+        originalComposite = virtualinvoke g2.<java.awt.Graphics2D: java.awt.Composite getComposite()>();
+        $stack45 = virtualinvoke marker.<org.jfree.chart.plot.IntervalMarker: float getAlpha()>();
+        $stack46 = staticinvoke <java.awt.AlphaComposite: java.awt.AlphaComposite getInstance(int,float)>(3, $stack45);
+        #l5 = (java.awt.Composite) $stack46;
+        virtualinvoke g2.<java.awt.Graphics2D: void setComposite(java.awt.Composite)>(#l5);
+        $stack47 = virtualinvoke marker.<org.jfree.chart.plot.IntervalMarker: java.awt.Paint getPaint()>();
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>($stack47);
+        #l4 = (java.awt.Shape) $stack44;
+        virtualinvoke g2.<java.awt.Graphics2D: void fill(java.awt.Shape)>(#l4);
+        $stack48 = virtualinvoke marker.<org.jfree.chart.plot.IntervalMarker: java.awt.Paint getOutlinePaint()>();
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>($stack48);
+        #l0 = (java.awt.Shape) $stack44;
+        virtualinvoke g2.<java.awt.Graphics2D: void draw(java.awt.Shape)>(#l0);
+        virtualinvoke g2.<java.awt.Graphics2D: void setComposite(java.awt.Composite)>(originalComposite);
+        $stack49 = <java.awt.Color: java.awt.Color black>;
+        #l3 = (java.awt.Paint) $stack49;
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>(#l3);
+        $stack50 = this.<org.jfree.chart.axis.MarkerAxisBand: java.awt.Font font>;
+        $stack51 = virtualinvoke marker.<org.jfree.chart.plot.IntervalMarker: java.lang.String getLabel()>();
+        #l1 = (java.awt.geom.Rectangle2D) $stack44;
+        specialinvoke this.<org.jfree.chart.axis.MarkerAxisBand: void drawStringInRect(java.awt.Graphics2D,java.awt.geom.Rectangle2D,java.awt.Font,java.lang.String)>(g2, #l1, $stack50, $stack51);
+    
+        goto label1;
+    
+      label2:
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.axis.MarkerAxisBand: boolean equals(java.lang.Object)> ----
+    {
+        boolean $stack18, $stack21, $stack3;
+        byte $stack12, $stack15, $stack6, $stack9;
+        double $stack10, $stack11, $stack13, $stack14, $stack4, $stack5, $stack7, $stack8;
+        java.awt.Font $stack16, $stack17;
+        java.lang.Object obj;
+        java.util.List $stack19, $stack20;
+        org.jfree.chart.axis.MarkerAxisBand that, this;
+    
+    
+        this := @this: org.jfree.chart.axis.MarkerAxisBand;
+        obj := @parameter0: java.lang.Object;
+    
+        if obj != this goto label1;
+    
+        return 1;
+    
+      label1:
+        $stack3 = obj instanceof org.jfree.chart.axis.MarkerAxisBand;
+    
+        if $stack3 != 0 goto label2;
+    
+        return 0;
+    
+      label2:
+        that = (org.jfree.chart.axis.MarkerAxisBand) obj;
+        $stack4 = this.<org.jfree.chart.axis.MarkerAxisBand: double topOuterGap>;
+        $stack5 = that.<org.jfree.chart.axis.MarkerAxisBand: double topOuterGap>;
+        $stack6 = $stack4 cmpl $stack5;
+    
+        if $stack6 == 0 goto label3;
+    
+        return 0;
+    
+      label3:
+        $stack7 = this.<org.jfree.chart.axis.MarkerAxisBand: double topInnerGap>;
+        $stack8 = that.<org.jfree.chart.axis.MarkerAxisBand: double topInnerGap>;
+        $stack9 = $stack7 cmpl $stack8;
+    
+        if $stack9 == 0 goto label4;
+    
+        return 0;
+    
+      label4:
+        $stack10 = this.<org.jfree.chart.axis.MarkerAxisBand: double bottomInnerGap>;
+        $stack11 = that.<org.jfree.chart.axis.MarkerAxisBand: double bottomInnerGap>;
+        $stack12 = $stack10 cmpl $stack11;
+    
+        if $stack12 == 0 goto label5;
+    
+        return 0;
+    
+      label5:
+        $stack13 = this.<org.jfree.chart.axis.MarkerAxisBand: double bottomOuterGap>;
+        $stack14 = that.<org.jfree.chart.axis.MarkerAxisBand: double bottomOuterGap>;
+        $stack15 = $stack13 cmpl $stack14;
+    
+        if $stack15 == 0 goto label6;
+    
+        return 0;
+    
+      label6:
+        $stack17 = this.<org.jfree.chart.axis.MarkerAxisBand: java.awt.Font font>;
+        $stack16 = that.<org.jfree.chart.axis.MarkerAxisBand: java.awt.Font font>;
+        $stack18 = staticinvoke <org.jfree.chart.util.ObjectUtilities: boolean equal(java.lang.Object,java.lang.Object)>($stack17, $stack16);
+    
+        if $stack18 != 0 goto label7;
+    
+        return 0;
+    
+      label7:
+        $stack20 = this.<org.jfree.chart.axis.MarkerAxisBand: java.util.List markers>;
+        $stack19 = that.<org.jfree.chart.axis.MarkerAxisBand: java.util.List markers>;
+        $stack21 = staticinvoke <org.jfree.chart.util.ObjectUtilities: boolean equal(java.lang.Object,java.lang.Object)>($stack20, $stack19);
+    
+        if $stack21 != 0 goto label8;
+    
+        return 0;
+    
+      label8:
+        return 1;
+    }
+
+    // ---- method: <org.jfree.chart.axis.MarkerAxisBand: void <init>(org.jfree.chart.axis.NumberAxis,double,double,double,double,java.awt.Font)> ----
+    {
+        double bottomInnerGap, bottomOuterGap, topInnerGap, topOuterGap;
+        java.awt.Font font;
+        java.lang.Object $stack11;
+        java.util.ArrayList #l0;
+        org.jfree.chart.axis.MarkerAxisBand this;
+        org.jfree.chart.axis.NumberAxis axis;
+    
+    
+        this := @this: org.jfree.chart.axis.MarkerAxisBand;
+        axis := @parameter0: org.jfree.chart.axis.NumberAxis;
+        topOuterGap := @parameter1: double;
+        topInnerGap := @parameter2: double;
+        bottomOuterGap := @parameter3: double;
+        bottomInnerGap := @parameter4: double;
+        font := @parameter5: java.awt.Font;
+        specialinvoke this.<java.lang.Object: void <init>()>();
+        this.<org.jfree.chart.axis.MarkerAxisBand: org.jfree.chart.axis.NumberAxis axis> = axis;
+        this.<org.jfree.chart.axis.MarkerAxisBand: double topOuterGap> = topOuterGap;
+        this.<org.jfree.chart.axis.MarkerAxisBand: double topInnerGap> = topInnerGap;
+        this.<org.jfree.chart.axis.MarkerAxisBand: double bottomOuterGap> = bottomOuterGap;
+        this.<org.jfree.chart.axis.MarkerAxisBand: double bottomInnerGap> = bottomInnerGap;
+        this.<org.jfree.chart.axis.MarkerAxisBand: java.awt.Font font> = font;
+        $stack11 = new java.util.ArrayList;
+        #l0 = (java.util.ArrayList) $stack11;
+        specialinvoke #l0.<java.util.ArrayList: void <init>()>();
+        this.<org.jfree.chart.axis.MarkerAxisBand: java.util.List markers> = (java.util.List) $stack11;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.axis.MarkerAxisBand: void drawStringInRect(java.awt.Graphics2D,java.awt.geom.Rectangle2D,java.awt.Font,java.lang.String)> ----
+    {
+        byte $stack12;
+        double $stack10, $stack11, $stack14, $stack15, $stack17, $stack18, $stack19, $stack22, $stack23, $stack24, $stack25, x;
+        float $stack16, $stack20, $stack21;
+        java.awt.Font font;
+        java.awt.FontMetrics fm;
+        java.awt.Graphics2D g2;
+        java.awt.font.FontRenderContext $stack13;
+        java.awt.font.LineMetrics metrics;
+        java.awt.geom.Rectangle2D bounds, r;
+        java.lang.String text;
+        org.jfree.chart.axis.MarkerAxisBand this;
+    
+    
+        this := @this: org.jfree.chart.axis.MarkerAxisBand;
+        g2 := @parameter0: java.awt.Graphics2D;
+        bounds := @parameter1: java.awt.geom.Rectangle2D;
+        font := @parameter2: java.awt.Font;
+        text := @parameter3: java.lang.String;
+        virtualinvoke g2.<java.awt.Graphics2D: void setFont(java.awt.Font)>(font);
+        fm = virtualinvoke g2.<java.awt.Graphics2D: java.awt.FontMetrics getFontMetrics(java.awt.Font)>(font);
+        r = staticinvoke <org.jfree.chart.text.TextUtilities: java.awt.geom.Rectangle2D getTextBounds(java.lang.String,java.awt.Graphics2D,java.awt.FontMetrics)>(text, g2, fm);
+        x = virtualinvoke bounds.<java.awt.geom.Rectangle2D: double getX()>();
+        $stack10 = virtualinvoke r.<java.awt.geom.Rectangle2D: double getWidth()>();
+        $stack11 = virtualinvoke bounds.<java.awt.geom.Rectangle2D: double getWidth()>();
+        $stack12 = $stack10 cmpg $stack11;
+    
+        if $stack12 >= 0 goto label1;
+        $stack22 = virtualinvoke bounds.<java.awt.geom.Rectangle2D: double getWidth()>();
+        $stack23 = virtualinvoke r.<java.awt.geom.Rectangle2D: double getWidth()>();
+        $stack24 = $stack22 - $stack23;
+        $stack25 = $stack24 / 2.0;
+        x = x + $stack25;
+    
+      label1:
+        $stack13 = virtualinvoke g2.<java.awt.Graphics2D: java.awt.font.FontRenderContext getFontRenderContext()>();
+        metrics = virtualinvoke font.<java.awt.Font: java.awt.font.LineMetrics getLineMetrics(java.lang.String,java.awt.font.FontRenderContext)>(text, $stack13);
+        $stack21 = (float) x;
+        $stack14 = virtualinvoke bounds.<java.awt.geom.Rectangle2D: double getMaxY()>();
+        $stack15 = this.<org.jfree.chart.axis.MarkerAxisBand: double bottomInnerGap>;
+        $stack17 = $stack14 - $stack15;
+        $stack16 = virtualinvoke metrics.<java.awt.font.LineMetrics: float getDescent()>();
+        $stack18 = (double) $stack16;
+        $stack19 = $stack17 - $stack18;
+        $stack20 = (float) $stack19;
+        virtualinvoke g2.<java.awt.Graphics2D: void drawString(java.lang.String,float,float)>(text, $stack21, $stack20);
+    
+        return;
+    }
+
+}

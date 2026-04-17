@@ -1,0 +1,236 @@
+// ========================================================================
+// CLASS : org.jfree.chart.renderer.GrayPaintScale
+// ========================================================================
+
+[PUBLIC, SUPER] class org.jfree.chart.renderer.GrayPaintScale extends java.lang.Object implements org.jfree.chart.util.PublicCloneable, java.io.Serializable, org.jfree.chart.renderer.PaintScale {
+
+    // ---- method: <org.jfree.chart.renderer.GrayPaintScale: double getLowerBound()> ----
+    {
+        double $stack1;
+        org.jfree.chart.renderer.GrayPaintScale this;
+    
+    
+        this := @this: org.jfree.chart.renderer.GrayPaintScale;
+        $stack1 = this.<org.jfree.chart.renderer.GrayPaintScale: double lowerBound>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.GrayPaintScale: void <init>()> ----
+    {
+        org.jfree.chart.renderer.GrayPaintScale this;
+    
+    
+        this := @this: org.jfree.chart.renderer.GrayPaintScale;
+        specialinvoke this.<org.jfree.chart.renderer.GrayPaintScale: void <init>(double,double)>(0.0, 1.0);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.GrayPaintScale: int hashCode()> ----
+    {
+        byte hash#0;
+        double $stack2, $stack3;
+        int $stack4, $stack5, hash#1, hash#2, hash#3;
+        org.jfree.chart.renderer.GrayPaintScale this;
+    
+    
+        this := @this: org.jfree.chart.renderer.GrayPaintScale;
+        hash#0 = 7;
+        $stack2 = this.<org.jfree.chart.renderer.GrayPaintScale: double lowerBound>;
+        hash#1 = staticinvoke <org.jfree.chart.util.HashUtilities: int hashCode(int,double)>(7, $stack2);
+        $stack3 = this.<org.jfree.chart.renderer.GrayPaintScale: double upperBound>;
+        hash#2 = staticinvoke <org.jfree.chart.util.HashUtilities: int hashCode(int,double)>(hash#1, $stack3);
+        $stack4 = 43 * hash#2;
+        $stack5 = this.<org.jfree.chart.renderer.GrayPaintScale: int alpha>;
+        hash#3 = $stack4 + $stack5;
+    
+        return hash#3;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.GrayPaintScale: java.lang.Object clone()> ----
+    {
+        java.lang.Object $stack1;
+        org.jfree.chart.renderer.GrayPaintScale this;
+    
+    
+        this := @this: org.jfree.chart.renderer.GrayPaintScale;
+        $stack1 = specialinvoke this.<java.lang.Object: java.lang.Object clone()>();
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.GrayPaintScale: void <init>(double,double)> ----
+    {
+        double lowerBound, upperBound;
+        org.jfree.chart.renderer.GrayPaintScale this;
+    
+    
+        this := @this: org.jfree.chart.renderer.GrayPaintScale;
+        lowerBound := @parameter0: double;
+        upperBound := @parameter1: double;
+        specialinvoke this.<org.jfree.chart.renderer.GrayPaintScale: void <init>(double,double,int)>(lowerBound, upperBound, 255);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.GrayPaintScale: double getUpperBound()> ----
+    {
+        double $stack1;
+        org.jfree.chart.renderer.GrayPaintScale this;
+    
+    
+        this := @this: org.jfree.chart.renderer.GrayPaintScale;
+        $stack1 = this.<org.jfree.chart.renderer.GrayPaintScale: double upperBound>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.GrayPaintScale: void <init>(double,double,int)> ----
+    {
+        byte $stack6;
+        double lowerBound, upperBound;
+        int alpha;
+        java.lang.IllegalArgumentException #l0, #l1;
+        java.lang.Object $stack7, $stack8;
+        java.lang.Throwable #l2, #l3;
+        org.jfree.chart.renderer.GrayPaintScale this;
+    
+    
+        this := @this: org.jfree.chart.renderer.GrayPaintScale;
+        lowerBound := @parameter0: double;
+        upperBound := @parameter1: double;
+        alpha := @parameter2: int;
+        specialinvoke this.<java.lang.Object: void <init>()>();
+        $stack6 = lowerBound cmpl upperBound;
+    
+        if $stack6 < 0 goto label1;
+        $stack8 = new java.lang.IllegalArgumentException;
+        #l0 = (java.lang.IllegalArgumentException) $stack8;
+        specialinvoke #l0.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Requires lowerBound < upperBound.");
+        #l3 = (java.lang.Throwable) $stack8;
+    
+        throw #l3;
+    
+      label1:
+        if alpha < 0 goto label2;
+    
+        if alpha <= 255 goto label3;
+    
+      label2:
+        $stack7 = new java.lang.IllegalArgumentException;
+        #l1 = (java.lang.IllegalArgumentException) $stack7;
+        specialinvoke #l1.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Requires alpha in the range 0 to 255.");
+        #l2 = (java.lang.Throwable) $stack7;
+    
+        throw #l2;
+    
+      label3:
+        this.<org.jfree.chart.renderer.GrayPaintScale: double lowerBound> = lowerBound;
+        this.<org.jfree.chart.renderer.GrayPaintScale: double upperBound> = upperBound;
+        this.<org.jfree.chart.renderer.GrayPaintScale: int alpha> = alpha;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.GrayPaintScale: boolean equals(java.lang.Object)> ----
+    {
+        boolean $stack3;
+        byte $stack6, $stack9;
+        double $stack4, $stack5, $stack7, $stack8;
+        int $stack10, $stack11;
+        java.lang.Object obj;
+        org.jfree.chart.renderer.GrayPaintScale that, this;
+    
+    
+        this := @this: org.jfree.chart.renderer.GrayPaintScale;
+        obj := @parameter0: java.lang.Object;
+    
+        if obj != this goto label1;
+    
+        return 1;
+    
+      label1:
+        $stack3 = obj instanceof org.jfree.chart.renderer.GrayPaintScale;
+    
+        if $stack3 != 0 goto label2;
+    
+        return 0;
+    
+      label2:
+        that = (org.jfree.chart.renderer.GrayPaintScale) obj;
+        $stack4 = this.<org.jfree.chart.renderer.GrayPaintScale: double lowerBound>;
+        $stack5 = that.<org.jfree.chart.renderer.GrayPaintScale: double lowerBound>;
+        $stack6 = $stack4 cmpl $stack5;
+    
+        if $stack6 == 0 goto label3;
+    
+        return 0;
+    
+      label3:
+        $stack7 = this.<org.jfree.chart.renderer.GrayPaintScale: double upperBound>;
+        $stack8 = that.<org.jfree.chart.renderer.GrayPaintScale: double upperBound>;
+        $stack9 = $stack7 cmpl $stack8;
+    
+        if $stack9 == 0 goto label4;
+    
+        return 0;
+    
+      label4:
+        $stack11 = this.<org.jfree.chart.renderer.GrayPaintScale: int alpha>;
+        $stack10 = that.<org.jfree.chart.renderer.GrayPaintScale: int alpha>;
+    
+        if $stack11 == $stack10 goto label5;
+    
+        return 0;
+    
+      label5:
+        return 1;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.GrayPaintScale: java.awt.Paint getPaint(double)> ----
+    {
+        double $stack10, $stack11, $stack12, $stack13, $stack14, $stack6, $stack7, $stack8, $stack9, v#0, v#1, value;
+        int $stack15, g;
+        java.awt.Color #l0;
+        java.awt.Paint #l1;
+        java.lang.Object $stack16;
+        org.jfree.chart.renderer.GrayPaintScale this;
+    
+    
+        this := @this: org.jfree.chart.renderer.GrayPaintScale;
+        value := @parameter0: double;
+        $stack6 = this.<org.jfree.chart.renderer.GrayPaintScale: double lowerBound>;
+        v#0 = staticinvoke <java.lang.Math: double max(double,double)>(value, $stack6);
+        $stack7 = this.<org.jfree.chart.renderer.GrayPaintScale: double upperBound>;
+        v#1 = staticinvoke <java.lang.Math: double min(double,double)>(v#0, $stack7);
+        $stack8 = this.<org.jfree.chart.renderer.GrayPaintScale: double lowerBound>;
+        $stack11 = v#1 - $stack8;
+        $stack9 = this.<org.jfree.chart.renderer.GrayPaintScale: double upperBound>;
+        $stack10 = this.<org.jfree.chart.renderer.GrayPaintScale: double lowerBound>;
+        $stack12 = $stack9 - $stack10;
+        $stack13 = $stack11 / $stack12;
+        $stack14 = $stack13 * 255.0;
+        g = (int) $stack14;
+        $stack16 = new java.awt.Color;
+        $stack15 = this.<org.jfree.chart.renderer.GrayPaintScale: int alpha>;
+        #l0 = (java.awt.Color) $stack16;
+        specialinvoke #l0.<java.awt.Color: void <init>(int,int,int,int)>(g, g, g, $stack15);
+        #l1 = (java.awt.Paint) $stack16;
+    
+        return #l1;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.GrayPaintScale: int getAlpha()> ----
+    {
+        int $stack1;
+        org.jfree.chart.renderer.GrayPaintScale this;
+    
+    
+        this := @this: org.jfree.chart.renderer.GrayPaintScale;
+        $stack1 = this.<org.jfree.chart.renderer.GrayPaintScale: int alpha>;
+    
+        return $stack1;
+    }
+
+}

@@ -1,0 +1,234 @@
+// ========================================================================
+// CLASS : org.jfree.data.gantt.TaskSeries
+// ========================================================================
+
+[PUBLIC, SUPER] class org.jfree.data.gantt.TaskSeries extends org.jfree.data.general.Series {
+
+    // ---- method: <org.jfree.data.gantt.TaskSeries: int getItemCount()> ----
+    {
+        int $stack2;
+        java.util.List $stack1;
+        org.jfree.data.gantt.TaskSeries this;
+    
+    
+        this := @this: org.jfree.data.gantt.TaskSeries;
+        $stack1 = this.<org.jfree.data.gantt.TaskSeries: java.util.List tasks>;
+        $stack2 = interfaceinvoke $stack1.<java.util.List: int size()>();
+    
+        return $stack2;
+    }
+
+    // ---- method: <org.jfree.data.gantt.TaskSeries: void removeAll()> ----
+    {
+        java.util.List $stack1;
+        org.jfree.data.gantt.TaskSeries this;
+    
+    
+        this := @this: org.jfree.data.gantt.TaskSeries;
+        $stack1 = this.<org.jfree.data.gantt.TaskSeries: java.util.List tasks>;
+        interfaceinvoke $stack1.<java.util.List: void clear()>();
+        virtualinvoke this.<org.jfree.data.gantt.TaskSeries: void fireSeriesChanged()>();
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.gantt.TaskSeries: org.jfree.data.gantt.Task get(int)> ----
+    {
+        int index;
+        java.lang.Object $stack3;
+        java.util.List $stack2;
+        org.jfree.data.gantt.Task $stack4;
+        org.jfree.data.gantt.TaskSeries this;
+    
+    
+        this := @this: org.jfree.data.gantt.TaskSeries;
+        index := @parameter0: int;
+        $stack2 = this.<org.jfree.data.gantt.TaskSeries: java.util.List tasks>;
+        $stack3 = interfaceinvoke $stack2.<java.util.List: java.lang.Object get(int)>(index);
+        $stack4 = (org.jfree.data.gantt.Task) $stack3;
+    
+        return $stack4;
+    }
+
+    // ---- method: <org.jfree.data.gantt.TaskSeries: java.lang.Object clone()> ----
+    {
+        java.lang.Object $stack2, $stack3;
+        java.util.Collection #l0, $stack4;
+        java.util.List $stack5;
+        org.jfree.data.gantt.TaskSeries clone, this;
+    
+    
+        this := @this: org.jfree.data.gantt.TaskSeries;
+        $stack2 = specialinvoke this.<org.jfree.data.general.Series: java.lang.Object clone()>();
+        clone = (org.jfree.data.gantt.TaskSeries) $stack2;
+        $stack3 = this.<org.jfree.data.gantt.TaskSeries: java.util.List tasks>;
+        #l0 = (java.util.Collection) $stack3;
+        $stack4 = staticinvoke <org.jfree.chart.util.ObjectUtilities: java.util.Collection deepClone(java.util.Collection)>(#l0);
+        $stack5 = (java.util.List) $stack4;
+        clone.<org.jfree.data.gantt.TaskSeries: java.util.List tasks> = $stack5;
+    
+        return clone;
+    }
+
+    // ---- method: <org.jfree.data.gantt.TaskSeries: void <init>(java.lang.String)> ----
+    {
+        java.lang.Comparable #l1;
+        java.lang.Object $stack2, name;
+        java.util.ArrayList #l0;
+        org.jfree.data.gantt.TaskSeries this;
+    
+    
+        this := @this: org.jfree.data.gantt.TaskSeries;
+        name := @parameter0: java.lang.String;
+        #l1 = (java.lang.Comparable) name;
+        specialinvoke this.<org.jfree.data.general.Series: void <init>(java.lang.Comparable)>(#l1);
+        $stack2 = new java.util.ArrayList;
+        #l0 = (java.util.ArrayList) $stack2;
+        specialinvoke #l0.<java.util.ArrayList: void <init>()>();
+        this.<org.jfree.data.gantt.TaskSeries: java.util.List tasks> = (java.util.List) $stack2;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.gantt.TaskSeries: void add(org.jfree.data.gantt.Task)> ----
+    {
+        java.lang.IllegalArgumentException #l1;
+        java.lang.Object $stack3;
+        java.lang.Throwable #l0;
+        java.util.List $stack2;
+        org.jfree.data.gantt.Task task;
+        org.jfree.data.gantt.TaskSeries this;
+    
+    
+        this := @this: org.jfree.data.gantt.TaskSeries;
+        task := @parameter0: org.jfree.data.gantt.Task;
+    
+        if task != null goto label1;
+        $stack3 = new java.lang.IllegalArgumentException;
+        #l1 = (java.lang.IllegalArgumentException) $stack3;
+        specialinvoke #l1.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'task\' argument.");
+        #l0 = (java.lang.Throwable) $stack3;
+    
+        throw #l0;
+    
+      label1:
+        $stack2 = this.<org.jfree.data.gantt.TaskSeries: java.util.List tasks>;
+        interfaceinvoke $stack2.<java.util.List: boolean add(java.lang.Object)>(task);
+        virtualinvoke this.<org.jfree.data.gantt.TaskSeries: void fireSeriesChanged()>();
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.gantt.TaskSeries: void remove(org.jfree.data.gantt.Task)> ----
+    {
+        java.util.List $stack2;
+        org.jfree.data.gantt.Task task;
+        org.jfree.data.gantt.TaskSeries this;
+    
+    
+        this := @this: org.jfree.data.gantt.TaskSeries;
+        task := @parameter0: org.jfree.data.gantt.Task;
+        $stack2 = this.<org.jfree.data.gantt.TaskSeries: java.util.List tasks>;
+        interfaceinvoke $stack2.<java.util.List: boolean remove(java.lang.Object)>(task);
+        virtualinvoke this.<org.jfree.data.gantt.TaskSeries: void fireSeriesChanged()>();
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.gantt.TaskSeries: java.util.List getTasks()> ----
+    {
+        java.util.List $stack1, $stack2;
+        org.jfree.data.gantt.TaskSeries this;
+    
+    
+        this := @this: org.jfree.data.gantt.TaskSeries;
+        $stack1 = this.<org.jfree.data.gantt.TaskSeries: java.util.List tasks>;
+        $stack2 = staticinvoke <java.util.Collections: java.util.List unmodifiableList(java.util.List)>($stack1);
+    
+        return $stack2;
+    }
+
+    // ---- method: <org.jfree.data.gantt.TaskSeries: boolean equals(java.lang.Object)> ----
+    {
+        boolean $stack3, $stack4, $stack7;
+        java.lang.Object obj;
+        java.util.List $stack5, $stack6;
+        org.jfree.data.gantt.TaskSeries that, this;
+    
+    
+        this := @this: org.jfree.data.gantt.TaskSeries;
+        obj := @parameter0: java.lang.Object;
+    
+        if obj != this goto label1;
+    
+        return 1;
+    
+      label1:
+        $stack3 = obj instanceof org.jfree.data.gantt.TaskSeries;
+    
+        if $stack3 != 0 goto label2;
+    
+        return 0;
+    
+      label2:
+        $stack4 = specialinvoke this.<org.jfree.data.general.Series: boolean equals(java.lang.Object)>(obj);
+    
+        if $stack4 != 0 goto label3;
+    
+        return 0;
+    
+      label3:
+        that = (org.jfree.data.gantt.TaskSeries) obj;
+        $stack6 = this.<org.jfree.data.gantt.TaskSeries: java.util.List tasks>;
+        $stack5 = that.<org.jfree.data.gantt.TaskSeries: java.util.List tasks>;
+        $stack7 = interfaceinvoke $stack6.<java.util.List: boolean equals(java.lang.Object)>($stack5);
+    
+        if $stack7 != 0 goto label4;
+    
+        return 0;
+    
+      label4:
+        return 1;
+    }
+
+    // ---- method: <org.jfree.data.gantt.TaskSeries: org.jfree.data.gantt.Task get(java.lang.String)> ----
+    {
+        boolean $stack10;
+        int count, i;
+        java.lang.Object $stack8;
+        java.lang.String $stack9, description;
+        java.util.List $stack6, $stack7;
+        org.jfree.data.gantt.Task result, t;
+        org.jfree.data.gantt.TaskSeries this;
+    
+    
+        this := @this: org.jfree.data.gantt.TaskSeries;
+        description := @parameter0: java.lang.String;
+        result = null;
+        $stack6 = this.<org.jfree.data.gantt.TaskSeries: java.util.List tasks>;
+        count = interfaceinvoke $stack6.<java.util.List: int size()>();
+        i = 0;
+    
+      label1:
+        if i >= count goto label3;
+        $stack7 = this.<org.jfree.data.gantt.TaskSeries: java.util.List tasks>;
+        $stack8 = interfaceinvoke $stack7.<java.util.List: java.lang.Object get(int)>(i);
+        t = (org.jfree.data.gantt.Task) $stack8;
+        $stack9 = virtualinvoke t.<org.jfree.data.gantt.Task: java.lang.String getDescription()>();
+        $stack10 = virtualinvoke $stack9.<java.lang.String: boolean equals(java.lang.Object)>(description);
+    
+        if $stack10 == 0 goto label2;
+        result = t;
+    
+        goto label3;
+    
+      label2:
+        i = i + 1;
+    
+        goto label1;
+    
+      label3:
+        return result;
+    }
+
+}

@@ -1,0 +1,114 @@
+// ========================================================================
+// CLASS : org.jfree.data.xml.RootHandler
+// ========================================================================
+
+[PUBLIC, SUPER] class org.jfree.data.xml.RootHandler extends org.xml.sax.helpers.DefaultHandler implements org.jfree.data.xml.DatasetTags {
+
+    // ---- method: <org.jfree.data.xml.RootHandler: org.xml.sax.helpers.DefaultHandler popSubHandler()> ----
+    {
+        java.lang.Object $stack2;
+        java.util.Stack $stack1;
+        org.jfree.data.xml.RootHandler this;
+        org.xml.sax.helpers.DefaultHandler $stack3;
+    
+    
+        this := @this: org.jfree.data.xml.RootHandler;
+        $stack1 = this.<org.jfree.data.xml.RootHandler: java.util.Stack subHandlers>;
+        $stack2 = virtualinvoke $stack1.<java.util.Stack: java.lang.Object pop()>();
+        $stack3 = (org.xml.sax.helpers.DefaultHandler) $stack2;
+    
+        return $stack3;
+    }
+
+    // ---- method: <org.jfree.data.xml.RootHandler: java.util.Stack getSubHandlers()> ----
+    {
+        java.util.Stack $stack1;
+        org.jfree.data.xml.RootHandler this;
+    
+    
+        this := @this: org.jfree.data.xml.RootHandler;
+        $stack1 = this.<org.jfree.data.xml.RootHandler: java.util.Stack subHandlers>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.data.xml.RootHandler: void characters(char[],int,int)> ----
+    {
+        char[] ch;
+        int length, start;
+        org.jfree.data.xml.RootHandler this;
+        org.xml.sax.helpers.DefaultHandler handler;
+    
+    
+        this := @this: org.jfree.data.xml.RootHandler;
+        ch := @parameter0: char[];
+        start := @parameter1: int;
+        length := @parameter2: int;
+        handler = virtualinvoke this.<org.jfree.data.xml.RootHandler: org.xml.sax.helpers.DefaultHandler getCurrentHandler()>();
+    
+        if handler == this goto label1;
+        virtualinvoke handler.<org.xml.sax.helpers.DefaultHandler: void characters(char[],int,int)>(ch, start, length);
+    
+      label1:
+        return;
+    }
+
+    // ---- method: <org.jfree.data.xml.RootHandler: void <init>()> ----
+    {
+        java.util.Stack $stack1;
+        org.jfree.data.xml.RootHandler this;
+    
+    
+        this := @this: org.jfree.data.xml.RootHandler;
+        specialinvoke this.<org.xml.sax.helpers.DefaultHandler: void <init>()>();
+        $stack1 = new java.util.Stack;
+        specialinvoke $stack1.<java.util.Stack: void <init>()>();
+        this.<org.jfree.data.xml.RootHandler: java.util.Stack subHandlers> = $stack1;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.xml.RootHandler: org.xml.sax.helpers.DefaultHandler getCurrentHandler()> ----
+    {
+        int $stack5;
+        java.lang.Object top;
+        java.util.Stack $stack3, $stack4, $stack6;
+        org.jfree.data.xml.RootHandler this;
+        org.xml.sax.helpers.DefaultHandler result;
+    
+    
+        this := @this: org.jfree.data.xml.RootHandler;
+        result = this;
+        $stack3 = this.<org.jfree.data.xml.RootHandler: java.util.Stack subHandlers>;
+    
+        if $stack3 == null goto label1;
+        $stack4 = this.<org.jfree.data.xml.RootHandler: java.util.Stack subHandlers>;
+        $stack5 = virtualinvoke $stack4.<java.util.Stack: int size()>();
+    
+        if $stack5 <= 0 goto label1;
+        $stack6 = this.<org.jfree.data.xml.RootHandler: java.util.Stack subHandlers>;
+        top = virtualinvoke $stack6.<java.util.Stack: java.lang.Object peek()>();
+    
+        if top == null goto label1;
+        result = (org.xml.sax.helpers.DefaultHandler) top;
+    
+      label1:
+        return result;
+    }
+
+    // ---- method: <org.jfree.data.xml.RootHandler: void pushSubHandler(org.xml.sax.helpers.DefaultHandler)> ----
+    {
+        java.util.Stack $stack2;
+        org.jfree.data.xml.RootHandler this;
+        org.xml.sax.helpers.DefaultHandler subhandler;
+    
+    
+        this := @this: org.jfree.data.xml.RootHandler;
+        subhandler := @parameter0: org.xml.sax.helpers.DefaultHandler;
+        $stack2 = this.<org.jfree.data.xml.RootHandler: java.util.Stack subHandlers>;
+        virtualinvoke $stack2.<java.util.Stack: java.lang.Object push(java.lang.Object)>(subhandler);
+    
+        return;
+    }
+
+}

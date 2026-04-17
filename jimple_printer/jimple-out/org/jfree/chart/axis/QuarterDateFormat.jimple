@@ -1,0 +1,225 @@
+// ========================================================================
+// CLASS : org.jfree.chart.axis.QuarterDateFormat
+// ========================================================================
+
+[PUBLIC, SUPER] class org.jfree.chart.axis.QuarterDateFormat extends java.text.DateFormat implements java.lang.Cloneable, java.io.Serializable {
+
+    // ---- method: <org.jfree.chart.axis.QuarterDateFormat: void <init>()> ----
+    {
+        java.util.TimeZone $stack1;
+        org.jfree.chart.axis.QuarterDateFormat this;
+    
+    
+        this := @this: org.jfree.chart.axis.QuarterDateFormat;
+        $stack1 = staticinvoke <java.util.TimeZone: java.util.TimeZone getDefault()>();
+        specialinvoke this.<org.jfree.chart.axis.QuarterDateFormat: void <init>(java.util.TimeZone)>($stack1);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.axis.QuarterDateFormat: void <init>(java.util.TimeZone)> ----
+    {
+        java.lang.String[] $stack2;
+        java.util.TimeZone zone;
+        org.jfree.chart.axis.QuarterDateFormat this;
+    
+    
+        this := @this: org.jfree.chart.axis.QuarterDateFormat;
+        zone := @parameter0: java.util.TimeZone;
+        $stack2 = <org.jfree.chart.axis.QuarterDateFormat: java.lang.String[] REGULAR_QUARTERS>;
+        specialinvoke this.<org.jfree.chart.axis.QuarterDateFormat: void <init>(java.util.TimeZone,java.lang.String[])>(zone, $stack2);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.axis.QuarterDateFormat: void <init>(java.util.TimeZone,java.lang.String[],boolean)> ----
+    {
+        boolean quarterFirst;
+        java.lang.IllegalArgumentException #l0;
+        java.lang.Object $stack5, $stack7;
+        java.lang.String[] $stack4, quarterSymbols;
+        java.lang.Throwable #l1;
+        java.text.NumberFormat $stack6;
+        java.util.GregorianCalendar #l2;
+        java.util.TimeZone zone;
+        org.jfree.chart.axis.QuarterDateFormat this;
+    
+    
+        this := @this: org.jfree.chart.axis.QuarterDateFormat;
+        zone := @parameter0: java.util.TimeZone;
+        quarterSymbols := @parameter1: java.lang.String[];
+        quarterFirst := @parameter2: boolean;
+        specialinvoke this.<java.text.DateFormat: void <init>()>();
+        $stack4 = <org.jfree.chart.axis.QuarterDateFormat: java.lang.String[] REGULAR_QUARTERS>;
+        this.<org.jfree.chart.axis.QuarterDateFormat: java.lang.String[] quarters> = $stack4;
+    
+        if zone != null goto label1;
+        $stack7 = new java.lang.IllegalArgumentException;
+        #l0 = (java.lang.IllegalArgumentException) $stack7;
+        specialinvoke #l0.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'zone\' argument.");
+        #l1 = (java.lang.Throwable) $stack7;
+    
+        throw #l1;
+    
+      label1:
+        $stack5 = new java.util.GregorianCalendar;
+        #l2 = (java.util.GregorianCalendar) $stack5;
+        specialinvoke #l2.<java.util.GregorianCalendar: void <init>(java.util.TimeZone)>(zone);
+        this.<org.jfree.chart.axis.QuarterDateFormat: java.util.Calendar calendar> = (java.util.Calendar) $stack5;
+        this.<org.jfree.chart.axis.QuarterDateFormat: java.lang.String[] quarters> = quarterSymbols;
+        this.<org.jfree.chart.axis.QuarterDateFormat: boolean quarterFirst> = quarterFirst;
+        $stack6 = staticinvoke <java.text.NumberFormat: java.text.NumberFormat getNumberInstance()>();
+        this.<org.jfree.chart.axis.QuarterDateFormat: java.text.NumberFormat numberFormat> = $stack6;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.axis.QuarterDateFormat: void <init>(java.util.TimeZone,java.lang.String[])> ----
+    {
+        java.lang.String[] quarterSymbols;
+        java.util.TimeZone zone;
+        org.jfree.chart.axis.QuarterDateFormat this;
+    
+    
+        this := @this: org.jfree.chart.axis.QuarterDateFormat;
+        zone := @parameter0: java.util.TimeZone;
+        quarterSymbols := @parameter1: java.lang.String[];
+        specialinvoke this.<org.jfree.chart.axis.QuarterDateFormat: void <init>(java.util.TimeZone,java.lang.String[],boolean)>(zone, quarterSymbols, 0);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.axis.QuarterDateFormat: boolean equals(java.lang.Object)> ----
+    {
+        boolean $stack3, $stack6, $stack7, $stack8, $stack9;
+        java.lang.Object obj;
+        java.lang.String[] $stack4, $stack5;
+        org.jfree.chart.axis.QuarterDateFormat that, this;
+    
+    
+        this := @this: org.jfree.chart.axis.QuarterDateFormat;
+        obj := @parameter0: java.lang.Object;
+    
+        if obj != this goto label1;
+    
+        return 1;
+    
+      label1:
+        $stack3 = obj instanceof org.jfree.chart.axis.QuarterDateFormat;
+    
+        if $stack3 != 0 goto label2;
+    
+        return 0;
+    
+      label2:
+        that = (org.jfree.chart.axis.QuarterDateFormat) obj;
+        $stack5 = this.<org.jfree.chart.axis.QuarterDateFormat: java.lang.String[] quarters>;
+        $stack4 = that.<org.jfree.chart.axis.QuarterDateFormat: java.lang.String[] quarters>;
+        $stack6 = staticinvoke <java.util.Arrays: boolean equals(java.lang.Object[],java.lang.Object[])>($stack5, $stack4);
+    
+        if $stack6 != 0 goto label3;
+    
+        return 0;
+    
+      label3:
+        $stack8 = this.<org.jfree.chart.axis.QuarterDateFormat: boolean quarterFirst>;
+        $stack7 = that.<org.jfree.chart.axis.QuarterDateFormat: boolean quarterFirst>;
+    
+        if $stack8 == $stack7 goto label4;
+    
+        return 0;
+    
+      label4:
+        $stack9 = specialinvoke this.<java.text.DateFormat: boolean equals(java.lang.Object)>(obj);
+    
+        return $stack9;
+    }
+
+    // ---- method: <org.jfree.chart.axis.QuarterDateFormat: java.util.Date parse(java.lang.String,java.text.ParsePosition)> ----
+    {
+        java.lang.String source;
+        java.text.ParsePosition pos;
+        org.jfree.chart.axis.QuarterDateFormat this;
+    
+    
+        this := @this: org.jfree.chart.axis.QuarterDateFormat;
+        source := @parameter0: java.lang.String;
+        pos := @parameter1: java.text.ParsePosition;
+    
+        return null;
+    }
+
+    // ---- method: <org.jfree.chart.axis.QuarterDateFormat: java.lang.StringBuffer format(java.util.Date,java.lang.StringBuffer,java.text.FieldPosition)> ----
+    {
+        boolean $stack10;
+        int month, quarter, year;
+        java.lang.String $stack12, $stack14;
+        java.lang.StringBuffer toAppendTo;
+        java.lang.String[] $stack11, $stack13;
+        java.text.FieldPosition fieldPosition;
+        java.util.Calendar $stack7, $stack8, $stack9;
+        java.util.Date date;
+        org.jfree.chart.axis.QuarterDateFormat this;
+    
+    
+        this := @this: org.jfree.chart.axis.QuarterDateFormat;
+        date := @parameter0: java.util.Date;
+        toAppendTo := @parameter1: java.lang.StringBuffer;
+        fieldPosition := @parameter2: java.text.FieldPosition;
+        $stack7 = this.<org.jfree.chart.axis.QuarterDateFormat: java.util.Calendar calendar>;
+        virtualinvoke $stack7.<java.util.Calendar: void setTime(java.util.Date)>(date);
+        $stack8 = this.<org.jfree.chart.axis.QuarterDateFormat: java.util.Calendar calendar>;
+        year = virtualinvoke $stack8.<java.util.Calendar: int get(int)>(1);
+        $stack9 = this.<org.jfree.chart.axis.QuarterDateFormat: java.util.Calendar calendar>;
+        month = virtualinvoke $stack9.<java.util.Calendar: int get(int)>(2);
+        quarter = month / 3;
+        $stack10 = this.<org.jfree.chart.axis.QuarterDateFormat: boolean quarterFirst>;
+    
+        if $stack10 == 0 goto label1;
+        $stack13 = this.<org.jfree.chart.axis.QuarterDateFormat: java.lang.String[] quarters>;
+        $stack14 = $stack13[quarter];
+        virtualinvoke toAppendTo.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>($stack14);
+        virtualinvoke toAppendTo.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>(" ");
+        virtualinvoke toAppendTo.<java.lang.StringBuffer: java.lang.StringBuffer append(int)>(year);
+    
+        goto label2;
+    
+      label1:
+        virtualinvoke toAppendTo.<java.lang.StringBuffer: java.lang.StringBuffer append(int)>(year);
+        virtualinvoke toAppendTo.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>(" ");
+        $stack11 = this.<org.jfree.chart.axis.QuarterDateFormat: java.lang.String[] quarters>;
+        $stack12 = $stack11[quarter];
+        virtualinvoke toAppendTo.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>($stack12);
+    
+      label2:
+        return toAppendTo;
+    }
+
+    // ---- method: <org.jfree.chart.axis.QuarterDateFormat: void <clinit>()> ----
+    {
+        java.lang.String[] $stack0, $stack1, $stack2;
+    
+    
+        $stack0 = newarray (java.lang.String)[4];
+        $stack0[0] = "1";
+        $stack0[1] = "2";
+        $stack0[2] = "3";
+        $stack0[3] = "4";
+        <org.jfree.chart.axis.QuarterDateFormat: java.lang.String[] REGULAR_QUARTERS> = $stack0;
+        $stack1 = newarray (java.lang.String)[4];
+        $stack1[0] = "I";
+        $stack1[1] = "II";
+        $stack1[2] = "III";
+        $stack1[3] = "IV";
+        <org.jfree.chart.axis.QuarterDateFormat: java.lang.String[] ROMAN_QUARTERS> = $stack1;
+        $stack2 = newarray (java.lang.String)[4];
+        $stack2[0] = "\u0391";
+        $stack2[1] = "\u0392";
+        $stack2[2] = "\u0393";
+        $stack2[3] = "\u0394";
+        <org.jfree.chart.axis.QuarterDateFormat: java.lang.String[] GREEK_QUARTERS> = $stack2;
+    
+        return;
+    }
+
+}

@@ -1,0 +1,144 @@
+// ========================================================================
+// CLASS : org.jfree.chart.needle.PlumNeedle
+// ========================================================================
+
+[PUBLIC, SUPER] class org.jfree.chart.needle.PlumNeedle extends org.jfree.chart.needle.MeterNeedle implements java.lang.Cloneable, java.io.Serializable {
+
+    // ---- method: <org.jfree.chart.needle.PlumNeedle: boolean equals(java.lang.Object)> ----
+    {
+        boolean $stack2, $stack3;
+        java.lang.Object obj;
+        org.jfree.chart.needle.PlumNeedle this;
+    
+    
+        this := @this: org.jfree.chart.needle.PlumNeedle;
+        obj := @parameter0: java.lang.Object;
+    
+        if obj != this goto label1;
+    
+        return 1;
+    
+      label1:
+        $stack2 = obj instanceof org.jfree.chart.needle.PlumNeedle;
+    
+        if $stack2 != 0 goto label2;
+    
+        return 0;
+    
+      label2:
+        $stack3 = specialinvoke this.<org.jfree.chart.needle.MeterNeedle: boolean equals(java.lang.Object)>(obj);
+    
+        if $stack3 != 0 goto label3;
+    
+        return 0;
+    
+      label3:
+        return 1;
+    }
+
+    // ---- method: <org.jfree.chart.needle.PlumNeedle: int hashCode()> ----
+    {
+        int $stack1;
+        org.jfree.chart.needle.PlumNeedle this;
+    
+    
+        this := @this: org.jfree.chart.needle.PlumNeedle;
+        $stack1 = specialinvoke this.<org.jfree.chart.needle.MeterNeedle: int hashCode()>();
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.needle.PlumNeedle: java.lang.Object clone()> ----
+    {
+        java.lang.Object $stack1;
+        org.jfree.chart.needle.PlumNeedle this;
+    
+    
+        this := @this: org.jfree.chart.needle.PlumNeedle;
+        $stack1 = specialinvoke this.<java.lang.Object: java.lang.Object clone()>();
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.needle.PlumNeedle: void drawNeedle(java.awt.Graphics2D,java.awt.geom.Rectangle2D,java.awt.geom.Point2D,double)> ----
+    {
+        byte $stack26;
+        double $stack15, $stack16, $stack17, $stack18, $stack19, $stack20, $stack21, $stack22, $stack23, $stack24, $stack27, $stack28, angle, diameter, halfX, radius#0, radius#1;
+        java.awt.Graphics2D g2;
+        java.awt.Shape #l2, #l5;
+        java.awt.geom.AffineTransform $stack29, $stack30;
+        java.awt.geom.Arc2D #l1, #l6, #l7;
+        java.awt.geom.Arc2D$Double #l0, shape;
+        java.awt.geom.Area #l3, #l4, s;
+        java.awt.geom.Point2D rotate;
+        java.awt.geom.Rectangle2D plotArea;
+        java.lang.Object $stack14, $stack25;
+        org.jfree.chart.needle.PlumNeedle this;
+    
+    
+        this := @this: org.jfree.chart.needle.PlumNeedle;
+        g2 := @parameter0: java.awt.Graphics2D;
+        plotArea := @parameter1: java.awt.geom.Rectangle2D;
+        rotate := @parameter2: java.awt.geom.Point2D;
+        angle := @parameter3: double;
+        $stack14 = new java.awt.geom.Arc2D$Double;
+        #l0 = (java.awt.geom.Arc2D$Double) $stack14;
+        specialinvoke #l0.<java.awt.geom.Arc2D$Double: void <init>(int)>(2);
+        shape = (java.awt.geom.Arc2D$Double) $stack14;
+        radius#0 = virtualinvoke plotArea.<java.awt.geom.Rectangle2D: double getHeight()>();
+        $stack15 = virtualinvoke plotArea.<java.awt.geom.Rectangle2D: double getWidth()>();
+        halfX = $stack15 / 2.0;
+        diameter = 2.0 * radius#0;
+        $stack16 = virtualinvoke plotArea.<java.awt.geom.Rectangle2D: double getMinX()>();
+        $stack17 = $stack16 + halfX;
+        $stack20 = $stack17 - radius#0;
+        $stack18 = virtualinvoke plotArea.<java.awt.geom.Rectangle2D: double getMinY()>();
+        $stack19 = $stack18 - radius#0;
+        #l1 = (java.awt.geom.Arc2D) $stack14;
+        virtualinvoke #l1.<java.awt.geom.Arc2D: void setFrame(double,double,double,double)>($stack20, $stack19, diameter, diameter);
+        $stack21 = halfX / radius#0;
+        $stack22 = staticinvoke <java.lang.Math: double asin(double)>($stack21);
+        radius#1 = staticinvoke <java.lang.Math: double toDegrees(double)>($stack22);
+        $stack23 = 270.0 - radius#1;
+        #l6 = (java.awt.geom.Arc2D) $stack14;
+        virtualinvoke #l6.<java.awt.geom.Arc2D: void setAngleStart(double)>($stack23);
+        $stack24 = 2.0 * radius#1;
+        #l7 = (java.awt.geom.Arc2D) $stack14;
+        virtualinvoke #l7.<java.awt.geom.Arc2D: void setAngleExtent(double)>($stack24);
+        $stack25 = new java.awt.geom.Area;
+        #l4 = (java.awt.geom.Area) $stack25;
+        #l5 = (java.awt.Shape) $stack14;
+        specialinvoke #l4.<java.awt.geom.Area: void <init>(java.awt.Shape)>(#l5);
+        s = (java.awt.geom.Area) $stack25;
+    
+        if rotate == null goto label1;
+        $stack26 = angle cmpl 0.0;
+    
+        if $stack26 == 0 goto label1;
+        $stack29 = virtualinvoke this.<org.jfree.chart.needle.PlumNeedle: java.awt.geom.AffineTransform getTransform()>();
+        $stack28 = virtualinvoke rotate.<java.awt.geom.Point2D: double getX()>();
+        $stack27 = virtualinvoke rotate.<java.awt.geom.Point2D: double getY()>();
+        virtualinvoke $stack29.<java.awt.geom.AffineTransform: void setToRotation(double,double,double)>(angle, $stack28, $stack27);
+        $stack30 = virtualinvoke this.<org.jfree.chart.needle.PlumNeedle: java.awt.geom.AffineTransform getTransform()>();
+        #l3 = (java.awt.geom.Area) $stack25;
+        virtualinvoke #l3.<java.awt.geom.Area: void transform(java.awt.geom.AffineTransform)>($stack30);
+    
+      label1:
+        #l2 = (java.awt.Shape) $stack25;
+        virtualinvoke this.<org.jfree.chart.needle.PlumNeedle: void defaultDisplay(java.awt.Graphics2D,java.awt.Shape)>(g2, #l2);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.needle.PlumNeedle: void <init>()> ----
+    {
+        org.jfree.chart.needle.PlumNeedle this;
+    
+    
+        this := @this: org.jfree.chart.needle.PlumNeedle;
+        specialinvoke this.<org.jfree.chart.needle.MeterNeedle: void <init>()>();
+    
+        return;
+    }
+
+}

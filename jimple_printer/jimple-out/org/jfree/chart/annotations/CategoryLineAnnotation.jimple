@@ -1,0 +1,556 @@
+// ========================================================================
+// CLASS : org.jfree.chart.annotations.CategoryLineAnnotation
+// ========================================================================
+
+[PUBLIC, SUPER] class org.jfree.chart.annotations.CategoryLineAnnotation extends org.jfree.chart.annotations.AbstractAnnotation implements org.jfree.chart.util.PublicCloneable, java.lang.Cloneable, java.io.Serializable, org.jfree.chart.annotations.CategoryAnnotation {
+
+    // ---- method: <org.jfree.chart.annotations.CategoryLineAnnotation: void setCategory1(java.lang.Comparable)> ----
+    {
+        java.lang.Comparable category;
+        java.lang.IllegalArgumentException #l1;
+        java.lang.Object $stack2;
+        java.lang.Throwable #l0;
+        org.jfree.chart.annotations.CategoryLineAnnotation this;
+    
+    
+        this := @this: org.jfree.chart.annotations.CategoryLineAnnotation;
+        category := @parameter0: java.lang.Comparable;
+    
+        if category != null goto label1;
+        $stack2 = new java.lang.IllegalArgumentException;
+        #l1 = (java.lang.IllegalArgumentException) $stack2;
+        specialinvoke #l1.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'category\' argument.");
+        #l0 = (java.lang.Throwable) $stack2;
+    
+        throw #l0;
+    
+      label1:
+        this.<org.jfree.chart.annotations.CategoryLineAnnotation: java.lang.Comparable category1> = category;
+        virtualinvoke this.<org.jfree.chart.annotations.CategoryLineAnnotation: void fireAnnotationChanged()>();
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.annotations.CategoryLineAnnotation: void setCategory2(java.lang.Comparable)> ----
+    {
+        java.lang.Comparable category;
+        java.lang.IllegalArgumentException #l1;
+        java.lang.Object $stack2;
+        java.lang.Throwable #l0;
+        org.jfree.chart.annotations.CategoryLineAnnotation this;
+    
+    
+        this := @this: org.jfree.chart.annotations.CategoryLineAnnotation;
+        category := @parameter0: java.lang.Comparable;
+    
+        if category != null goto label1;
+        $stack2 = new java.lang.IllegalArgumentException;
+        #l1 = (java.lang.IllegalArgumentException) $stack2;
+        specialinvoke #l1.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'category\' argument.");
+        #l0 = (java.lang.Throwable) $stack2;
+    
+        throw #l0;
+    
+      label1:
+        this.<org.jfree.chart.annotations.CategoryLineAnnotation: java.lang.Comparable category2> = category;
+        virtualinvoke this.<org.jfree.chart.annotations.CategoryLineAnnotation: void fireAnnotationChanged()>();
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.annotations.CategoryLineAnnotation: void draw(java.awt.Graphics2D,org.jfree.chart.plot.CategoryPlot,java.awt.geom.Rectangle2D,org.jfree.chart.axis.CategoryAxis,org.jfree.chart.axis.ValueAxis,int,org.jfree.chart.plot.PlotRenderingInfo)> ----
+    {
+        double $stack36, $stack38, $stack40, $stack42, lineX1, lineX2, lineY1, lineY2;
+        int $stack31, $stack32, $stack33, $stack34, catCount, catIndex1, catIndex2, rendererIndex;
+        java.awt.Graphics2D g2;
+        java.awt.Paint $stack29;
+        java.awt.Stroke $stack30;
+        java.awt.geom.Rectangle2D dataArea;
+        java.lang.Comparable $stack23, $stack24;
+        org.jfree.chart.annotations.CategoryLineAnnotation this;
+        org.jfree.chart.axis.AxisLocation $stack25, $stack26;
+        org.jfree.chart.axis.CategoryAnchor $stack35, $stack37, $stack39, $stack41;
+        org.jfree.chart.axis.CategoryAxis domainAxis;
+        org.jfree.chart.axis.ValueAxis rangeAxis;
+        org.jfree.chart.plot.CategoryPlot plot;
+        org.jfree.chart.plot.PlotOrientation $stack27, $stack28, orientation;
+        org.jfree.chart.plot.PlotRenderingInfo info;
+        org.jfree.chart.util.RectangleEdge domainEdge, rangeEdge;
+        org.jfree.data.category.CategoryDataset dataset;
+    
+    
+        this := @this: org.jfree.chart.annotations.CategoryLineAnnotation;
+        g2 := @parameter0: java.awt.Graphics2D;
+        plot := @parameter1: org.jfree.chart.plot.CategoryPlot;
+        dataArea := @parameter2: java.awt.geom.Rectangle2D;
+        domainAxis := @parameter3: org.jfree.chart.axis.CategoryAxis;
+        rangeAxis := @parameter4: org.jfree.chart.axis.ValueAxis;
+        rendererIndex := @parameter5: int;
+        info := @parameter6: org.jfree.chart.plot.PlotRenderingInfo;
+        dataset = virtualinvoke plot.<org.jfree.chart.plot.CategoryPlot: org.jfree.data.category.CategoryDataset getDataset()>();
+        $stack23 = this.<org.jfree.chart.annotations.CategoryLineAnnotation: java.lang.Comparable category1>;
+        catIndex1 = interfaceinvoke dataset.<org.jfree.data.category.CategoryDataset: int getColumnIndex(java.lang.Comparable)>($stack23);
+        $stack24 = this.<org.jfree.chart.annotations.CategoryLineAnnotation: java.lang.Comparable category2>;
+        catIndex2 = interfaceinvoke dataset.<org.jfree.data.category.CategoryDataset: int getColumnIndex(java.lang.Comparable)>($stack24);
+        catCount = interfaceinvoke dataset.<org.jfree.data.category.CategoryDataset: int getColumnCount()>();
+        lineX1 = 0.0;
+        lineY1 = 0.0;
+        lineX2 = 0.0;
+        lineY2 = 0.0;
+        orientation = virtualinvoke plot.<org.jfree.chart.plot.CategoryPlot: org.jfree.chart.plot.PlotOrientation getOrientation()>();
+        $stack25 = virtualinvoke plot.<org.jfree.chart.plot.CategoryPlot: org.jfree.chart.axis.AxisLocation getDomainAxisLocation()>();
+        domainEdge = staticinvoke <org.jfree.chart.plot.Plot: org.jfree.chart.util.RectangleEdge resolveDomainAxisLocation(org.jfree.chart.axis.AxisLocation,org.jfree.chart.plot.PlotOrientation)>($stack25, orientation);
+        $stack26 = virtualinvoke plot.<org.jfree.chart.plot.CategoryPlot: org.jfree.chart.axis.AxisLocation getRangeAxisLocation()>();
+        rangeEdge = staticinvoke <org.jfree.chart.plot.Plot: org.jfree.chart.util.RectangleEdge resolveRangeAxisLocation(org.jfree.chart.axis.AxisLocation,org.jfree.chart.plot.PlotOrientation)>($stack26, orientation);
+        $stack27 = <org.jfree.chart.plot.PlotOrientation: org.jfree.chart.plot.PlotOrientation HORIZONTAL>;
+    
+        if orientation != $stack27 goto label1;
+        $stack39 = <org.jfree.chart.axis.CategoryAnchor: org.jfree.chart.axis.CategoryAnchor MIDDLE>;
+        lineY1 = virtualinvoke domainAxis.<org.jfree.chart.axis.CategoryAxis: double getCategoryJava2DCoordinate(org.jfree.chart.axis.CategoryAnchor,int,int,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)>($stack39, catIndex1, catCount, dataArea, domainEdge);
+        $stack40 = this.<org.jfree.chart.annotations.CategoryLineAnnotation: double value1>;
+        lineX1 = virtualinvoke rangeAxis.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)>($stack40, dataArea, rangeEdge);
+        $stack41 = <org.jfree.chart.axis.CategoryAnchor: org.jfree.chart.axis.CategoryAnchor MIDDLE>;
+        lineY2 = virtualinvoke domainAxis.<org.jfree.chart.axis.CategoryAxis: double getCategoryJava2DCoordinate(org.jfree.chart.axis.CategoryAnchor,int,int,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)>($stack41, catIndex2, catCount, dataArea, domainEdge);
+        $stack42 = this.<org.jfree.chart.annotations.CategoryLineAnnotation: double value2>;
+        lineX2 = virtualinvoke rangeAxis.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)>($stack42, dataArea, rangeEdge);
+    
+        goto label2;
+    
+      label1:
+        $stack28 = <org.jfree.chart.plot.PlotOrientation: org.jfree.chart.plot.PlotOrientation VERTICAL>;
+    
+        if orientation != $stack28 goto label2;
+        $stack35 = <org.jfree.chart.axis.CategoryAnchor: org.jfree.chart.axis.CategoryAnchor MIDDLE>;
+        lineX1 = virtualinvoke domainAxis.<org.jfree.chart.axis.CategoryAxis: double getCategoryJava2DCoordinate(org.jfree.chart.axis.CategoryAnchor,int,int,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)>($stack35, catIndex1, catCount, dataArea, domainEdge);
+        $stack36 = this.<org.jfree.chart.annotations.CategoryLineAnnotation: double value1>;
+        lineY1 = virtualinvoke rangeAxis.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)>($stack36, dataArea, rangeEdge);
+        $stack37 = <org.jfree.chart.axis.CategoryAnchor: org.jfree.chart.axis.CategoryAnchor MIDDLE>;
+        lineX2 = virtualinvoke domainAxis.<org.jfree.chart.axis.CategoryAxis: double getCategoryJava2DCoordinate(org.jfree.chart.axis.CategoryAnchor,int,int,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)>($stack37, catIndex2, catCount, dataArea, domainEdge);
+        $stack38 = this.<org.jfree.chart.annotations.CategoryLineAnnotation: double value2>;
+        lineY2 = virtualinvoke rangeAxis.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)>($stack38, dataArea, rangeEdge);
+    
+      label2:
+        $stack29 = this.<org.jfree.chart.annotations.CategoryLineAnnotation: java.awt.Paint paint>;
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>($stack29);
+        $stack30 = this.<org.jfree.chart.annotations.CategoryLineAnnotation: java.awt.Stroke stroke>;
+        virtualinvoke g2.<java.awt.Graphics2D: void setStroke(java.awt.Stroke)>($stack30);
+        $stack34 = (int) lineX1;
+        $stack33 = (int) lineY1;
+        $stack32 = (int) lineX2;
+        $stack31 = (int) lineY2;
+        virtualinvoke g2.<java.awt.Graphics2D: void drawLine(int,int,int,int)>($stack34, $stack33, $stack32, $stack31);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.annotations.CategoryLineAnnotation: void setPaint(java.awt.Paint)> ----
+    {
+        java.awt.Paint paint;
+        java.lang.IllegalArgumentException #l0;
+        java.lang.Object $stack2;
+        java.lang.Throwable #l1;
+        org.jfree.chart.annotations.CategoryLineAnnotation this;
+    
+    
+        this := @this: org.jfree.chart.annotations.CategoryLineAnnotation;
+        paint := @parameter0: java.awt.Paint;
+    
+        if paint != null goto label1;
+        $stack2 = new java.lang.IllegalArgumentException;
+        #l0 = (java.lang.IllegalArgumentException) $stack2;
+        specialinvoke #l0.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'paint\' argument.");
+        #l1 = (java.lang.Throwable) $stack2;
+    
+        throw #l1;
+    
+      label1:
+        this.<org.jfree.chart.annotations.CategoryLineAnnotation: java.awt.Paint paint> = paint;
+        virtualinvoke this.<org.jfree.chart.annotations.CategoryLineAnnotation: void fireAnnotationChanged()>();
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.annotations.CategoryLineAnnotation: void setStroke(java.awt.Stroke)> ----
+    {
+        java.awt.Stroke stroke;
+        java.lang.IllegalArgumentException #l1;
+        java.lang.Object $stack2;
+        java.lang.Throwable #l0;
+        org.jfree.chart.annotations.CategoryLineAnnotation this;
+    
+    
+        this := @this: org.jfree.chart.annotations.CategoryLineAnnotation;
+        stroke := @parameter0: java.awt.Stroke;
+    
+        if stroke != null goto label1;
+        $stack2 = new java.lang.IllegalArgumentException;
+        #l1 = (java.lang.IllegalArgumentException) $stack2;
+        specialinvoke #l1.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'stroke\' argument.");
+        #l0 = (java.lang.Throwable) $stack2;
+    
+        throw #l0;
+    
+      label1:
+        this.<org.jfree.chart.annotations.CategoryLineAnnotation: java.awt.Stroke stroke> = stroke;
+        virtualinvoke this.<org.jfree.chart.annotations.CategoryLineAnnotation: void fireAnnotationChanged()>();
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.annotations.CategoryLineAnnotation: java.lang.Comparable getCategory2()> ----
+    {
+        java.lang.Comparable $stack1;
+        org.jfree.chart.annotations.CategoryLineAnnotation this;
+    
+    
+        this := @this: org.jfree.chart.annotations.CategoryLineAnnotation;
+        $stack1 = this.<org.jfree.chart.annotations.CategoryLineAnnotation: java.lang.Comparable category2>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.annotations.CategoryLineAnnotation: double getValue1()> ----
+    {
+        double $stack1;
+        org.jfree.chart.annotations.CategoryLineAnnotation this;
+    
+    
+        this := @this: org.jfree.chart.annotations.CategoryLineAnnotation;
+        $stack1 = this.<org.jfree.chart.annotations.CategoryLineAnnotation: double value1>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.annotations.CategoryLineAnnotation: java.lang.Object clone()> ----
+    {
+        java.lang.Object $stack1;
+        org.jfree.chart.annotations.CategoryLineAnnotation this;
+    
+    
+        this := @this: org.jfree.chart.annotations.CategoryLineAnnotation;
+        $stack1 = specialinvoke this.<org.jfree.chart.annotations.AbstractAnnotation: java.lang.Object clone()>();
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.annotations.CategoryLineAnnotation: java.awt.Paint getPaint()> ----
+    {
+        java.awt.Paint $stack1;
+        org.jfree.chart.annotations.CategoryLineAnnotation this;
+    
+    
+        this := @this: org.jfree.chart.annotations.CategoryLineAnnotation;
+        $stack1 = this.<org.jfree.chart.annotations.CategoryLineAnnotation: java.awt.Paint paint>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.annotations.CategoryLineAnnotation: void writeObject(java.io.ObjectOutputStream)> ----
+    {
+        java.awt.Paint $stack2;
+        java.awt.Stroke $stack3;
+        java.io.ObjectOutputStream stream;
+        org.jfree.chart.annotations.CategoryLineAnnotation this;
+    
+    
+        this := @this: org.jfree.chart.annotations.CategoryLineAnnotation;
+        stream := @parameter0: java.io.ObjectOutputStream;
+        virtualinvoke stream.<java.io.ObjectOutputStream: void defaultWriteObject()>();
+        $stack2 = this.<org.jfree.chart.annotations.CategoryLineAnnotation: java.awt.Paint paint>;
+        staticinvoke <org.jfree.chart.util.SerialUtilities: void writePaint(java.awt.Paint,java.io.ObjectOutputStream)>($stack2, stream);
+        $stack3 = this.<org.jfree.chart.annotations.CategoryLineAnnotation: java.awt.Stroke stroke>;
+        staticinvoke <org.jfree.chart.util.SerialUtilities: void writeStroke(java.awt.Stroke,java.io.ObjectOutputStream)>($stack3, stream);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.annotations.CategoryLineAnnotation: void setValue2(double)> ----
+    {
+        double value;
+        org.jfree.chart.annotations.CategoryLineAnnotation this;
+    
+    
+        this := @this: org.jfree.chart.annotations.CategoryLineAnnotation;
+        value := @parameter0: double;
+        this.<org.jfree.chart.annotations.CategoryLineAnnotation: double value2> = value;
+        virtualinvoke this.<org.jfree.chart.annotations.CategoryLineAnnotation: void fireAnnotationChanged()>();
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.annotations.CategoryLineAnnotation: void setValue1(double)> ----
+    {
+        double value;
+        org.jfree.chart.annotations.CategoryLineAnnotation this;
+    
+    
+        this := @this: org.jfree.chart.annotations.CategoryLineAnnotation;
+        value := @parameter0: double;
+        this.<org.jfree.chart.annotations.CategoryLineAnnotation: double value1> = value;
+        virtualinvoke this.<org.jfree.chart.annotations.CategoryLineAnnotation: void fireAnnotationChanged()>();
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.annotations.CategoryLineAnnotation: java.awt.Stroke getStroke()> ----
+    {
+        java.awt.Stroke $stack1;
+        org.jfree.chart.annotations.CategoryLineAnnotation this;
+    
+    
+        this := @this: org.jfree.chart.annotations.CategoryLineAnnotation;
+        $stack1 = this.<org.jfree.chart.annotations.CategoryLineAnnotation: java.awt.Stroke stroke>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.annotations.CategoryLineAnnotation: java.lang.Comparable getCategory1()> ----
+    {
+        java.lang.Comparable $stack1;
+        org.jfree.chart.annotations.CategoryLineAnnotation this;
+    
+    
+        this := @this: org.jfree.chart.annotations.CategoryLineAnnotation;
+        $stack1 = this.<org.jfree.chart.annotations.CategoryLineAnnotation: java.lang.Comparable category1>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.annotations.CategoryLineAnnotation: int hashCode()> ----
+    {
+        double $stack15, $stack7;
+        int $stack10, $stack11, $stack13, $stack14, $stack18, $stack19, $stack21, $stack22, $stack24, $stack25, $stack6, result#1, result#2, result#3, result#4, result#5, result#6;
+        java.awt.Paint $stack20;
+        java.awt.Stroke $stack23;
+        java.lang.Comparable $stack12, $stack4;
+        long $stack16, $stack17, $stack8, $stack9, temp#0, temp#1;
+        org.jfree.chart.annotations.CategoryLineAnnotation this;
+        short $stack5;
+    
+    
+        this := @this: org.jfree.chart.annotations.CategoryLineAnnotation;
+        $stack5 = 7141;
+        $stack4 = this.<org.jfree.chart.annotations.CategoryLineAnnotation: java.lang.Comparable category1>;
+        $stack6 = virtualinvoke $stack4.<java.lang.Object: int hashCode()>();
+        result#1 = $stack5 + $stack6;
+        $stack7 = this.<org.jfree.chart.annotations.CategoryLineAnnotation: double value1>;
+        temp#0 = staticinvoke <java.lang.Double: long doubleToLongBits(double)>($stack7);
+        $stack10 = 37 * result#1;
+        $stack8 = temp#0 >>> 32;
+        $stack9 = temp#0 ^ $stack8;
+        $stack11 = (int) $stack9;
+        result#2 = $stack10 + $stack11;
+        $stack13 = 37 * result#2;
+        $stack12 = this.<org.jfree.chart.annotations.CategoryLineAnnotation: java.lang.Comparable category2>;
+        $stack14 = virtualinvoke $stack12.<java.lang.Object: int hashCode()>();
+        result#3 = $stack13 + $stack14;
+        $stack15 = this.<org.jfree.chart.annotations.CategoryLineAnnotation: double value2>;
+        temp#1 = staticinvoke <java.lang.Double: long doubleToLongBits(double)>($stack15);
+        $stack18 = 37 * result#3;
+        $stack16 = temp#1 >>> 32;
+        $stack17 = temp#1 ^ $stack16;
+        $stack19 = (int) $stack17;
+        result#4 = $stack18 + $stack19;
+        $stack21 = 37 * result#4;
+        $stack20 = this.<org.jfree.chart.annotations.CategoryLineAnnotation: java.awt.Paint paint>;
+        $stack22 = staticinvoke <org.jfree.chart.util.HashUtilities: int hashCodeForPaint(java.awt.Paint)>($stack20);
+        result#5 = $stack21 + $stack22;
+        $stack24 = 37 * result#5;
+        $stack23 = this.<org.jfree.chart.annotations.CategoryLineAnnotation: java.awt.Stroke stroke>;
+        $stack25 = virtualinvoke $stack23.<java.lang.Object: int hashCode()>();
+        result#6 = $stack24 + $stack25;
+    
+        return result#6;
+    }
+
+    // ---- method: <org.jfree.chart.annotations.CategoryLineAnnotation: boolean equals(java.lang.Object)> ----
+    {
+        boolean $stack12, $stack18, $stack21, $stack3, $stack6;
+        byte $stack15, $stack9;
+        double $stack13, $stack14, $stack7, $stack8;
+        java.awt.Paint $stack16, $stack17;
+        java.awt.Stroke $stack19, $stack20;
+        java.lang.Comparable $stack10, $stack11, $stack4, $stack5;
+        java.lang.Object obj;
+        org.jfree.chart.annotations.CategoryLineAnnotation that, this;
+    
+    
+        this := @this: org.jfree.chart.annotations.CategoryLineAnnotation;
+        obj := @parameter0: java.lang.Object;
+    
+        if obj != this goto label1;
+    
+        return 1;
+    
+      label1:
+        $stack3 = obj instanceof org.jfree.chart.annotations.CategoryLineAnnotation;
+    
+        if $stack3 != 0 goto label2;
+    
+        return 0;
+    
+      label2:
+        that = (org.jfree.chart.annotations.CategoryLineAnnotation) obj;
+        $stack4 = this.<org.jfree.chart.annotations.CategoryLineAnnotation: java.lang.Comparable category1>;
+        $stack5 = virtualinvoke that.<org.jfree.chart.annotations.CategoryLineAnnotation: java.lang.Comparable getCategory1()>();
+        $stack6 = virtualinvoke $stack4.<java.lang.Object: boolean equals(java.lang.Object)>($stack5);
+    
+        if $stack6 != 0 goto label3;
+    
+        return 0;
+    
+      label3:
+        $stack7 = this.<org.jfree.chart.annotations.CategoryLineAnnotation: double value1>;
+        $stack8 = virtualinvoke that.<org.jfree.chart.annotations.CategoryLineAnnotation: double getValue1()>();
+        $stack9 = $stack7 cmpl $stack8;
+    
+        if $stack9 == 0 goto label4;
+    
+        return 0;
+    
+      label4:
+        $stack10 = this.<org.jfree.chart.annotations.CategoryLineAnnotation: java.lang.Comparable category2>;
+        $stack11 = virtualinvoke that.<org.jfree.chart.annotations.CategoryLineAnnotation: java.lang.Comparable getCategory2()>();
+        $stack12 = virtualinvoke $stack10.<java.lang.Object: boolean equals(java.lang.Object)>($stack11);
+    
+        if $stack12 != 0 goto label5;
+    
+        return 0;
+    
+      label5:
+        $stack13 = this.<org.jfree.chart.annotations.CategoryLineAnnotation: double value2>;
+        $stack14 = virtualinvoke that.<org.jfree.chart.annotations.CategoryLineAnnotation: double getValue2()>();
+        $stack15 = $stack13 cmpl $stack14;
+    
+        if $stack15 == 0 goto label6;
+    
+        return 0;
+    
+      label6:
+        $stack17 = this.<org.jfree.chart.annotations.CategoryLineAnnotation: java.awt.Paint paint>;
+        $stack16 = that.<org.jfree.chart.annotations.CategoryLineAnnotation: java.awt.Paint paint>;
+        $stack18 = staticinvoke <org.jfree.chart.util.PaintUtilities: boolean equal(java.awt.Paint,java.awt.Paint)>($stack17, $stack16);
+    
+        if $stack18 != 0 goto label7;
+    
+        return 0;
+    
+      label7:
+        $stack20 = this.<org.jfree.chart.annotations.CategoryLineAnnotation: java.awt.Stroke stroke>;
+        $stack19 = that.<org.jfree.chart.annotations.CategoryLineAnnotation: java.awt.Stroke stroke>;
+        $stack21 = staticinvoke <org.jfree.chart.util.ObjectUtilities: boolean equal(java.lang.Object,java.lang.Object)>($stack20, $stack19);
+    
+        if $stack21 != 0 goto label8;
+    
+        return 0;
+    
+      label8:
+        return 1;
+    }
+
+    // ---- method: <org.jfree.chart.annotations.CategoryLineAnnotation: void <init>(java.lang.Comparable,double,java.lang.Comparable,double,java.awt.Paint,java.awt.Stroke)> ----
+    {
+        double value1, value2;
+        java.awt.BasicStroke #l8;
+        java.awt.Paint paint;
+        java.awt.Stroke stroke;
+        java.lang.Comparable category1, category2;
+        java.lang.IllegalArgumentException #l2, #l3, #l4, #l6;
+        java.lang.Object $stack10, $stack11, $stack12, $stack13, $stack14, $stack9;
+        java.lang.Throwable #l0, #l1, #l5, #l7;
+        org.jfree.chart.annotations.CategoryLineAnnotation this;
+    
+    
+        this := @this: org.jfree.chart.annotations.CategoryLineAnnotation;
+        category1 := @parameter0: java.lang.Comparable;
+        value1 := @parameter1: double;
+        category2 := @parameter2: java.lang.Comparable;
+        value2 := @parameter3: double;
+        paint := @parameter4: java.awt.Paint;
+        stroke := @parameter5: java.awt.Stroke;
+        specialinvoke this.<org.jfree.chart.annotations.AbstractAnnotation: void <init>()>();
+        $stack9 = <java.awt.Color: java.awt.Color black>;
+        this.<org.jfree.chart.annotations.CategoryLineAnnotation: java.awt.Paint paint> = (java.awt.Paint) $stack9;
+        $stack10 = new java.awt.BasicStroke;
+        #l8 = (java.awt.BasicStroke) $stack10;
+        specialinvoke #l8.<java.awt.BasicStroke: void <init>(float)>(1.0F);
+        this.<org.jfree.chart.annotations.CategoryLineAnnotation: java.awt.Stroke stroke> = (java.awt.Stroke) $stack10;
+    
+        if category1 != null goto label1;
+        $stack14 = new java.lang.IllegalArgumentException;
+        #l3 = (java.lang.IllegalArgumentException) $stack14;
+        specialinvoke #l3.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'category1\' argument.");
+        #l0 = (java.lang.Throwable) $stack14;
+    
+        throw #l0;
+    
+      label1:
+        if category2 != null goto label2;
+        $stack13 = new java.lang.IllegalArgumentException;
+        #l4 = (java.lang.IllegalArgumentException) $stack13;
+        specialinvoke #l4.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'category2\' argument.");
+        #l5 = (java.lang.Throwable) $stack13;
+    
+        throw #l5;
+    
+      label2:
+        if paint != null goto label3;
+        $stack12 = new java.lang.IllegalArgumentException;
+        #l6 = (java.lang.IllegalArgumentException) $stack12;
+        specialinvoke #l6.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'paint\' argument.");
+        #l1 = (java.lang.Throwable) $stack12;
+    
+        throw #l1;
+    
+      label3:
+        if stroke != null goto label4;
+        $stack11 = new java.lang.IllegalArgumentException;
+        #l2 = (java.lang.IllegalArgumentException) $stack11;
+        specialinvoke #l2.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'stroke\' argument.");
+        #l7 = (java.lang.Throwable) $stack11;
+    
+        throw #l7;
+    
+      label4:
+        this.<org.jfree.chart.annotations.CategoryLineAnnotation: java.lang.Comparable category1> = category1;
+        this.<org.jfree.chart.annotations.CategoryLineAnnotation: double value1> = value1;
+        this.<org.jfree.chart.annotations.CategoryLineAnnotation: java.lang.Comparable category2> = category2;
+        this.<org.jfree.chart.annotations.CategoryLineAnnotation: double value2> = value2;
+        this.<org.jfree.chart.annotations.CategoryLineAnnotation: java.awt.Paint paint> = paint;
+        this.<org.jfree.chart.annotations.CategoryLineAnnotation: java.awt.Stroke stroke> = stroke;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.annotations.CategoryLineAnnotation: void readObject(java.io.ObjectInputStream)> ----
+    {
+        java.awt.Paint $stack2;
+        java.awt.Stroke $stack3;
+        java.io.ObjectInputStream stream;
+        org.jfree.chart.annotations.CategoryLineAnnotation this;
+    
+    
+        this := @this: org.jfree.chart.annotations.CategoryLineAnnotation;
+        stream := @parameter0: java.io.ObjectInputStream;
+        virtualinvoke stream.<java.io.ObjectInputStream: void defaultReadObject()>();
+        $stack2 = staticinvoke <org.jfree.chart.util.SerialUtilities: java.awt.Paint readPaint(java.io.ObjectInputStream)>(stream);
+        this.<org.jfree.chart.annotations.CategoryLineAnnotation: java.awt.Paint paint> = $stack2;
+        $stack3 = staticinvoke <org.jfree.chart.util.SerialUtilities: java.awt.Stroke readStroke(java.io.ObjectInputStream)>(stream);
+        this.<org.jfree.chart.annotations.CategoryLineAnnotation: java.awt.Stroke stroke> = $stack3;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.annotations.CategoryLineAnnotation: double getValue2()> ----
+    {
+        double $stack1;
+        org.jfree.chart.annotations.CategoryLineAnnotation this;
+    
+    
+        this := @this: org.jfree.chart.annotations.CategoryLineAnnotation;
+        $stack1 = this.<org.jfree.chart.annotations.CategoryLineAnnotation: double value2>;
+    
+        return $stack1;
+    }
+
+}

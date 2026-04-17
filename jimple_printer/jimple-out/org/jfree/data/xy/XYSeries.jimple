@@ -1,0 +1,1396 @@
+// ========================================================================
+// CLASS : org.jfree.data.xy.XYSeries
+// ========================================================================
+
+[PUBLIC, SUPER] class org.jfree.data.xy.XYSeries extends org.jfree.data.general.Series implements java.lang.Cloneable, java.io.Serializable {
+
+    // ---- method: <org.jfree.data.xy.XYSeries: void updateBoundsForAddedItem(org.jfree.data.xy.XYDataItem)> ----
+    {
+        double $stack11, $stack12, $stack13, $stack14, $stack6, $stack7, $stack8, $stack9, x, y;
+        java.lang.Number $stack10;
+        org.jfree.data.xy.XYDataItem item;
+        org.jfree.data.xy.XYSeries this;
+    
+    
+        this := @this: org.jfree.data.xy.XYSeries;
+        item := @parameter0: org.jfree.data.xy.XYDataItem;
+        x = virtualinvoke item.<org.jfree.data.xy.XYDataItem: double getXValue()>();
+        $stack6 = this.<org.jfree.data.xy.XYSeries: double minX>;
+        $stack7 = specialinvoke this.<org.jfree.data.xy.XYSeries: double minIgnoreNaN(double,double)>($stack6, x);
+        this.<org.jfree.data.xy.XYSeries: double minX> = $stack7;
+        $stack8 = this.<org.jfree.data.xy.XYSeries: double maxX>;
+        $stack9 = specialinvoke this.<org.jfree.data.xy.XYSeries: double maxIgnoreNaN(double,double)>($stack8, x);
+        this.<org.jfree.data.xy.XYSeries: double maxX> = $stack9;
+        $stack10 = virtualinvoke item.<org.jfree.data.xy.XYDataItem: java.lang.Number getY()>();
+    
+        if $stack10 == null goto label1;
+        y = virtualinvoke item.<org.jfree.data.xy.XYDataItem: double getYValue()>();
+        $stack11 = this.<org.jfree.data.xy.XYSeries: double minY>;
+        $stack12 = specialinvoke this.<org.jfree.data.xy.XYSeries: double minIgnoreNaN(double,double)>($stack11, y);
+        this.<org.jfree.data.xy.XYSeries: double minY> = $stack12;
+        $stack13 = this.<org.jfree.data.xy.XYSeries: double maxY>;
+        $stack14 = specialinvoke this.<org.jfree.data.xy.XYSeries: double maxIgnoreNaN(double,double)>($stack13, y);
+        this.<org.jfree.data.xy.XYSeries: double maxY> = $stack14;
+    
+      label1:
+        return;
+    }
+
+    // ---- method: <org.jfree.data.xy.XYSeries: void add(double,java.lang.Number)> ----
+    {
+        double x;
+        java.lang.Double #l0;
+        java.lang.Number #l1, y;
+        java.lang.Object $stack4;
+        org.jfree.data.xy.XYSeries this;
+    
+    
+        this := @this: org.jfree.data.xy.XYSeries;
+        x := @parameter0: double;
+        y := @parameter1: java.lang.Number;
+        $stack4 = new java.lang.Double;
+        #l0 = (java.lang.Double) $stack4;
+        specialinvoke #l0.<java.lang.Double: void <init>(double)>(x);
+        #l1 = (java.lang.Number) $stack4;
+        virtualinvoke this.<org.jfree.data.xy.XYSeries: void add(java.lang.Number,java.lang.Number)>(#l1, y);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.xy.XYSeries: java.util.List getItems()> ----
+    {
+        java.util.List $stack1, $stack2;
+        org.jfree.data.xy.XYSeries this;
+    
+    
+        this := @this: org.jfree.data.xy.XYSeries;
+        $stack1 = this.<org.jfree.data.xy.XYSeries: java.util.List data>;
+        $stack2 = staticinvoke <java.util.Collections: java.util.List unmodifiableList(java.util.List)>($stack1);
+    
+        return $stack2;
+    }
+
+    // ---- method: <org.jfree.data.xy.XYSeries: void add(double,double)> ----
+    {
+        double x, y;
+        java.lang.Double #l2, #l3;
+        java.lang.Number #l0, #l1;
+        java.lang.Object $stack5, $stack6;
+        org.jfree.data.xy.XYSeries this;
+    
+    
+        this := @this: org.jfree.data.xy.XYSeries;
+        x := @parameter0: double;
+        y := @parameter1: double;
+        $stack5 = new java.lang.Double;
+        #l2 = (java.lang.Double) $stack5;
+        specialinvoke #l2.<java.lang.Double: void <init>(double)>(x);
+        $stack6 = new java.lang.Double;
+        #l3 = (java.lang.Double) $stack6;
+        specialinvoke #l3.<java.lang.Double: void <init>(double)>(y);
+        #l0 = (java.lang.Number) $stack5;
+        #l1 = (java.lang.Number) $stack6;
+        virtualinvoke this.<org.jfree.data.xy.XYSeries: void add(java.lang.Number,java.lang.Number,boolean)>(#l0, #l1, 1);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.xy.XYSeries: org.jfree.data.xy.XYDataItem addOrUpdate(java.lang.Number,java.lang.Number)> ----
+    {
+        java.lang.Number x, y;
+        org.jfree.data.xy.XYDataItem $stack3, $stack4;
+        org.jfree.data.xy.XYSeries this;
+    
+    
+        this := @this: org.jfree.data.xy.XYSeries;
+        x := @parameter0: java.lang.Number;
+        y := @parameter1: java.lang.Number;
+        $stack3 = new org.jfree.data.xy.XYDataItem;
+        specialinvoke $stack3.<org.jfree.data.xy.XYDataItem: void <init>(java.lang.Number,java.lang.Number)>(x, y);
+        $stack4 = virtualinvoke this.<org.jfree.data.xy.XYSeries: org.jfree.data.xy.XYDataItem addOrUpdate(org.jfree.data.xy.XYDataItem)>($stack3);
+    
+        return $stack4;
+    }
+
+    // ---- method: <org.jfree.data.xy.XYSeries: int getItemCount()> ----
+    {
+        int $stack2;
+        java.util.List $stack1;
+        org.jfree.data.xy.XYSeries this;
+    
+    
+        this := @this: org.jfree.data.xy.XYSeries;
+        $stack1 = this.<org.jfree.data.xy.XYSeries: java.util.List data>;
+        $stack2 = interfaceinvoke $stack1.<java.util.List: int size()>();
+    
+        return $stack2;
+    }
+
+    // ---- method: <org.jfree.data.xy.XYSeries: org.jfree.data.xy.XYDataItem remove(java.lang.Number)> ----
+    {
+        int $stack2;
+        java.lang.Number x;
+        org.jfree.data.xy.XYDataItem $stack3;
+        org.jfree.data.xy.XYSeries this;
+    
+    
+        this := @this: org.jfree.data.xy.XYSeries;
+        x := @parameter0: java.lang.Number;
+        $stack2 = virtualinvoke this.<org.jfree.data.xy.XYSeries: int indexOf(java.lang.Number)>(x);
+        $stack3 = virtualinvoke this.<org.jfree.data.xy.XYSeries: org.jfree.data.xy.XYDataItem remove(int)>($stack2);
+    
+        return $stack3;
+    }
+
+    // ---- method: <org.jfree.data.xy.XYSeries: boolean getAutoSort()> ----
+    {
+        boolean $stack1;
+        org.jfree.data.xy.XYSeries this;
+    
+    
+        this := @this: org.jfree.data.xy.XYSeries;
+        $stack1 = this.<org.jfree.data.xy.XYSeries: boolean autoSort>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.data.xy.XYSeries: boolean getAllowDuplicateXValues()> ----
+    {
+        boolean $stack1;
+        org.jfree.data.xy.XYSeries this;
+    
+    
+        this := @this: org.jfree.data.xy.XYSeries;
+        $stack1 = this.<org.jfree.data.xy.XYSeries: boolean allowDuplicateXValues>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.data.xy.XYSeries: int hashCode()> ----
+    {
+        boolean $stack6, $stack8;
+        byte $stack10, $stack11;
+        int $stack12, $stack13, $stack14, $stack15, $stack16, $stack17, $stack18, $stack19, $stack4, $stack5, $stack7, $stack9, count, result#0, result#1, result#2, result#3;
+        org.jfree.data.xy.XYDataItem item#0, item#1, item#2;
+        org.jfree.data.xy.XYSeries this;
+    
+    
+        this := @this: org.jfree.data.xy.XYSeries;
+        result#0 = specialinvoke this.<org.jfree.data.general.Series: int hashCode()>();
+        count = virtualinvoke this.<org.jfree.data.xy.XYSeries: int getItemCount()>();
+    
+        if count <= 0 goto label1;
+        item#0 = virtualinvoke this.<org.jfree.data.xy.XYSeries: org.jfree.data.xy.XYDataItem getRawDataItem(int)>(0);
+        $stack18 = 29 * result#0;
+        $stack19 = virtualinvoke item#0.<org.jfree.data.xy.XYDataItem: int hashCode()>();
+        result#0 = $stack18 + $stack19;
+    
+      label1:
+        if count <= 1 goto label2;
+        $stack15 = count - 1;
+        item#1 = virtualinvoke this.<org.jfree.data.xy.XYSeries: org.jfree.data.xy.XYDataItem getRawDataItem(int)>($stack15);
+        $stack16 = 29 * result#0;
+        $stack17 = virtualinvoke item#1.<org.jfree.data.xy.XYDataItem: int hashCode()>();
+        result#0 = $stack16 + $stack17;
+    
+      label2:
+        if count <= 2 goto label3;
+        $stack12 = count / 2;
+        item#2 = virtualinvoke this.<org.jfree.data.xy.XYSeries: org.jfree.data.xy.XYDataItem getRawDataItem(int)>($stack12);
+        $stack13 = 29 * result#0;
+        $stack14 = virtualinvoke item#2.<org.jfree.data.xy.XYDataItem: int hashCode()>();
+        result#0 = $stack13 + $stack14;
+    
+      label3:
+        $stack4 = 29 * result#0;
+        $stack5 = this.<org.jfree.data.xy.XYSeries: int maximumItemCount>;
+        result#1 = $stack4 + $stack5;
+        $stack7 = 29 * result#1;
+        $stack6 = this.<org.jfree.data.xy.XYSeries: boolean autoSort>;
+    
+        if $stack6 == 0 goto label4;
+        $stack11 = 1;
+    
+        goto label5;
+    
+      label4:
+        $stack11 = 0;
+    
+      label5:
+        result#2 = $stack7 + $stack11;
+        $stack9 = 29 * result#2;
+        $stack8 = this.<org.jfree.data.xy.XYSeries: boolean allowDuplicateXValues>;
+    
+        if $stack8 == 0 goto label6;
+        $stack10 = 1;
+    
+        goto label7;
+    
+      label6:
+        $stack10 = 0;
+    
+      label7:
+        result#3 = $stack9 + $stack10;
+    
+        return result#3;
+    }
+
+    // ---- method: <org.jfree.data.xy.XYSeries: void add(double,java.lang.Number,boolean)> ----
+    {
+        boolean notify;
+        double x;
+        java.lang.Double #l1;
+        java.lang.Number #l0, y;
+        java.lang.Object $stack5;
+        org.jfree.data.xy.XYSeries this;
+    
+    
+        this := @this: org.jfree.data.xy.XYSeries;
+        x := @parameter0: double;
+        y := @parameter1: java.lang.Number;
+        notify := @parameter2: boolean;
+        $stack5 = new java.lang.Double;
+        #l1 = (java.lang.Double) $stack5;
+        specialinvoke #l1.<java.lang.Double: void <init>(double)>(x);
+        #l0 = (java.lang.Number) $stack5;
+        virtualinvoke this.<org.jfree.data.xy.XYSeries: void add(java.lang.Number,java.lang.Number,boolean)>(#l0, y, notify);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.xy.XYSeries: void add(org.jfree.data.xy.XYDataItem,boolean)> ----
+    {
+        boolean $stack16, $stack6, $stack7, notify;
+        int $stack10, $stack20, $stack25, $stack26, $stack27, $stack9, index#0, index#1, size;
+        java.lang.IllegalArgumentException #l0;
+        java.lang.Number $stack13;
+        java.lang.Object $stack12, $stack14, $stack17, $stack24, $stack29, $stack5;
+        java.lang.Throwable #l1, #l3, #l4;
+        java.util.List $stack11, $stack15, $stack18, $stack19, $stack21, $stack22, $stack23, $stack28, $stack8;
+        org.jfree.data.general.SeriesException #l2, #l5;
+        org.jfree.data.xy.XYDataItem index#2, item#0, item#1;
+        org.jfree.data.xy.XYSeries this;
+    
+    
+        this := @this: org.jfree.data.xy.XYSeries;
+        item#0 := @parameter0: org.jfree.data.xy.XYDataItem;
+        notify := @parameter1: boolean;
+    
+        if item#0 != null goto label01;
+        $stack29 = new java.lang.IllegalArgumentException;
+        #l0 = (java.lang.IllegalArgumentException) $stack29;
+        specialinvoke #l0.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'item\' argument.");
+        #l3 = (java.lang.Throwable) $stack29;
+    
+        throw #l3;
+    
+      label01:
+        $stack5 = virtualinvoke item#0.<org.jfree.data.xy.XYDataItem: java.lang.Object clone()>();
+        item#1 = (org.jfree.data.xy.XYDataItem) $stack5;
+        $stack6 = this.<org.jfree.data.xy.XYSeries: boolean autoSort>;
+    
+        if $stack6 == 0 goto label07;
+        $stack15 = this.<org.jfree.data.xy.XYSeries: java.util.List data>;
+        index#0 = staticinvoke <java.util.Collections: int binarySearch(java.util.List,java.lang.Object)>($stack15, item#1);
+    
+        if index#0 >= 0 goto label02;
+        $stack28 = this.<org.jfree.data.xy.XYSeries: java.util.List data>;
+        $stack26 = neg index#0;
+        $stack27 = $stack26 - 1;
+        interfaceinvoke $stack28.<java.util.List: void add(int,java.lang.Object)>($stack27, item#1);
+    
+        goto label13;
+    
+      label02:
+        $stack16 = this.<org.jfree.data.xy.XYSeries: boolean allowDuplicateXValues>;
+    
+        if $stack16 == 0 goto label12;
+        $stack18 = this.<org.jfree.data.xy.XYSeries: java.util.List data>;
+        size = interfaceinvoke $stack18.<java.util.List: int size()>();
+    
+      label03:
+        if index#0 >= size goto label04;
+        $stack23 = this.<org.jfree.data.xy.XYSeries: java.util.List data>;
+        $stack24 = interfaceinvoke $stack23.<java.util.List: java.lang.Object get(int)>(index#0);
+        $stack25 = virtualinvoke item#1.<org.jfree.data.xy.XYDataItem: int compareTo(java.lang.Object)>($stack24);
+    
+        if $stack25 != 0 goto label04;
+        index#0 = index#0 + 1;
+    
+        goto label03;
+    
+      label04:
+        $stack19 = this.<org.jfree.data.xy.XYSeries: java.util.List data>;
+        $stack20 = interfaceinvoke $stack19.<java.util.List: int size()>();
+    
+        if index#0 >= $stack20 goto label05;
+        $stack22 = this.<org.jfree.data.xy.XYSeries: java.util.List data>;
+        interfaceinvoke $stack22.<java.util.List: void add(int,java.lang.Object)>(index#0, item#1);
+    
+        goto label06;
+    
+      label05:
+        $stack21 = this.<org.jfree.data.xy.XYSeries: java.util.List data>;
+        interfaceinvoke $stack21.<java.util.List: boolean add(java.lang.Object)>(item#1);
+    
+      label06:
+        goto label13;
+    
+      label07:
+        $stack7 = this.<org.jfree.data.xy.XYSeries: boolean allowDuplicateXValues>;
+    
+        if $stack7 != 0 goto label08;
+        $stack13 = virtualinvoke item#1.<org.jfree.data.xy.XYDataItem: java.lang.Number getX()>();
+        index#1 = virtualinvoke this.<org.jfree.data.xy.XYSeries: int indexOf(java.lang.Number)>($stack13);
+    
+        if index#1 < 0 goto label08;
+        $stack14 = new org.jfree.data.general.SeriesException;
+        #l5 = (org.jfree.data.general.SeriesException) $stack14;
+        specialinvoke #l5.<org.jfree.data.general.SeriesException: void <init>(java.lang.String)>("X-value already exists.");
+        #l4 = (java.lang.Throwable) $stack14;
+    
+        throw #l4;
+    
+      label08:
+        $stack8 = this.<org.jfree.data.xy.XYSeries: java.util.List data>;
+        interfaceinvoke $stack8.<java.util.List: boolean add(java.lang.Object)>(item#1);
+    
+      label09:
+        specialinvoke this.<org.jfree.data.xy.XYSeries: void updateBoundsForAddedItem(org.jfree.data.xy.XYDataItem)>(item#1);
+        $stack10 = virtualinvoke this.<org.jfree.data.xy.XYSeries: int getItemCount()>();
+        $stack9 = this.<org.jfree.data.xy.XYSeries: int maximumItemCount>;
+    
+        if $stack10 <= $stack9 goto label10;
+        $stack11 = this.<org.jfree.data.xy.XYSeries: java.util.List data>;
+        $stack12 = interfaceinvoke $stack11.<java.util.List: java.lang.Object remove(int)>(0);
+        index#2 = (org.jfree.data.xy.XYDataItem) $stack12;
+        specialinvoke this.<org.jfree.data.xy.XYSeries: void updateBoundsForRemovedItem(org.jfree.data.xy.XYDataItem)>(index#2);
+    
+      label10:
+        if notify == 0 goto label11;
+        virtualinvoke this.<org.jfree.data.xy.XYSeries: void fireSeriesChanged()>();
+    
+      label11:
+        return;
+    
+      label12:
+        $stack17 = new org.jfree.data.general.SeriesException;
+        #l2 = (org.jfree.data.general.SeriesException) $stack17;
+        specialinvoke #l2.<org.jfree.data.general.SeriesException: void <init>(java.lang.String)>("X-value already exists.");
+        #l1 = (java.lang.Throwable) $stack17;
+    
+        throw #l1;
+    
+      label13:
+        goto label09;
+    }
+
+    // ---- method: <org.jfree.data.xy.XYSeries: java.lang.Number getY(int)> ----
+    {
+        int index;
+        java.lang.Number $stack3;
+        org.jfree.data.xy.XYDataItem $stack2;
+        org.jfree.data.xy.XYSeries this;
+    
+    
+        this := @this: org.jfree.data.xy.XYSeries;
+        index := @parameter0: int;
+        $stack2 = virtualinvoke this.<org.jfree.data.xy.XYSeries: org.jfree.data.xy.XYDataItem getRawDataItem(int)>(index);
+        $stack3 = virtualinvoke $stack2.<org.jfree.data.xy.XYDataItem: java.lang.Number getY()>();
+    
+        return $stack3;
+    }
+
+    // ---- method: <org.jfree.data.xy.XYSeries: double minIgnoreNaN(double,double)> ----
+    {
+        boolean $stack5, $stack6;
+        double $stack7, a, b;
+        org.jfree.data.xy.XYSeries this;
+    
+    
+        this := @this: org.jfree.data.xy.XYSeries;
+        a := @parameter0: double;
+        b := @parameter1: double;
+        $stack5 = staticinvoke <java.lang.Double: boolean isNaN(double)>(a);
+    
+        if $stack5 == 0 goto label1;
+    
+        return b;
+    
+      label1:
+        $stack6 = staticinvoke <java.lang.Double: boolean isNaN(double)>(b);
+    
+        if $stack6 == 0 goto label2;
+    
+        return a;
+    
+      label2:
+        $stack7 = staticinvoke <java.lang.Math: double min(double,double)>(a, b);
+    
+        return $stack7;
+    }
+
+    // ---- method: <org.jfree.data.xy.XYSeries: int getMaximumItemCount()> ----
+    {
+        int $stack1;
+        org.jfree.data.xy.XYSeries this;
+    
+    
+        this := @this: org.jfree.data.xy.XYSeries;
+        $stack1 = this.<org.jfree.data.xy.XYSeries: int maximumItemCount>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.data.xy.XYSeries: java.lang.Number getX(int)> ----
+    {
+        int index;
+        java.lang.Number $stack3;
+        org.jfree.data.xy.XYDataItem $stack2;
+        org.jfree.data.xy.XYSeries this;
+    
+    
+        this := @this: org.jfree.data.xy.XYSeries;
+        index := @parameter0: int;
+        $stack2 = virtualinvoke this.<org.jfree.data.xy.XYSeries: org.jfree.data.xy.XYDataItem getRawDataItem(int)>(index);
+        $stack3 = virtualinvoke $stack2.<org.jfree.data.xy.XYDataItem: java.lang.Number getX()>();
+    
+        return $stack3;
+    }
+
+    // ---- method: <org.jfree.data.xy.XYSeries: double getMaxX()> ----
+    {
+        double $stack1;
+        org.jfree.data.xy.XYSeries this;
+    
+    
+        this := @this: org.jfree.data.xy.XYSeries;
+        $stack1 = this.<org.jfree.data.xy.XYSeries: double maxX>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.data.xy.XYSeries: org.jfree.data.xy.XYDataItem getDataItem(int)> ----
+    {
+        int index;
+        java.lang.Object $stack4, $stack5;
+        java.util.List $stack3;
+        org.jfree.data.xy.XYDataItem $stack6, item;
+        org.jfree.data.xy.XYSeries this;
+    
+    
+        this := @this: org.jfree.data.xy.XYSeries;
+        index := @parameter0: int;
+        $stack3 = this.<org.jfree.data.xy.XYSeries: java.util.List data>;
+        $stack4 = interfaceinvoke $stack3.<java.util.List: java.lang.Object get(int)>(index);
+        item = (org.jfree.data.xy.XYDataItem) $stack4;
+        $stack5 = virtualinvoke item.<org.jfree.data.xy.XYDataItem: java.lang.Object clone()>();
+        $stack6 = (org.jfree.data.xy.XYDataItem) $stack5;
+    
+        return $stack6;
+    }
+
+    // ---- method: <org.jfree.data.xy.XYSeries: double getMinY()> ----
+    {
+        double $stack1;
+        org.jfree.data.xy.XYSeries this;
+    
+    
+        this := @this: org.jfree.data.xy.XYSeries;
+        $stack1 = this.<org.jfree.data.xy.XYSeries: double minY>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.data.xy.XYSeries: void clear()> ----
+    {
+        int $stack2;
+        java.util.List $stack1, $stack3;
+        org.jfree.data.xy.XYSeries this;
+    
+    
+        this := @this: org.jfree.data.xy.XYSeries;
+        $stack1 = this.<org.jfree.data.xy.XYSeries: java.util.List data>;
+        $stack2 = interfaceinvoke $stack1.<java.util.List: int size()>();
+    
+        if $stack2 <= 0 goto label1;
+        $stack3 = this.<org.jfree.data.xy.XYSeries: java.util.List data>;
+        interfaceinvoke $stack3.<java.util.List: void clear()>();
+        this.<org.jfree.data.xy.XYSeries: double minX> = #NaN;
+        this.<org.jfree.data.xy.XYSeries: double maxX> = #NaN;
+        this.<org.jfree.data.xy.XYSeries: double minY> = #NaN;
+        this.<org.jfree.data.xy.XYSeries: double maxY> = #NaN;
+        virtualinvoke this.<org.jfree.data.xy.XYSeries: void fireSeriesChanged()>();
+    
+      label1:
+        return;
+    }
+
+    // ---- method: <org.jfree.data.xy.XYSeries: void findBoundsByIteration()> ----
+    {
+        boolean $stack4;
+        java.lang.Object $stack5;
+        java.util.Iterator iterator;
+        java.util.List $stack3;
+        org.jfree.data.xy.XYDataItem item;
+        org.jfree.data.xy.XYSeries this;
+    
+    
+        this := @this: org.jfree.data.xy.XYSeries;
+        this.<org.jfree.data.xy.XYSeries: double minX> = #NaN;
+        this.<org.jfree.data.xy.XYSeries: double maxX> = #NaN;
+        this.<org.jfree.data.xy.XYSeries: double minY> = #NaN;
+        this.<org.jfree.data.xy.XYSeries: double maxY> = #NaN;
+        $stack3 = this.<org.jfree.data.xy.XYSeries: java.util.List data>;
+        iterator = interfaceinvoke $stack3.<java.util.List: java.util.Iterator iterator()>();
+    
+      label1:
+        $stack4 = interfaceinvoke iterator.<java.util.Iterator: boolean hasNext()>();
+    
+        if $stack4 == 0 goto label2;
+        $stack5 = interfaceinvoke iterator.<java.util.Iterator: java.lang.Object next()>();
+        item = (org.jfree.data.xy.XYDataItem) $stack5;
+        specialinvoke this.<org.jfree.data.xy.XYSeries: void updateBoundsForAddedItem(org.jfree.data.xy.XYDataItem)>(item);
+    
+        goto label1;
+    
+      label2:
+        return;
+    }
+
+    // ---- method: <org.jfree.data.xy.XYSeries: double[][] toArray()> ----
+    {
+        double $stack10, $stack7;
+        double[] $stack5, $stack8, $stack9;
+        double[][] result;
+        int i, itemCount;
+        java.lang.Number $stack6, y;
+        org.jfree.data.xy.XYSeries this;
+    
+    
+        this := @this: org.jfree.data.xy.XYSeries;
+        itemCount = virtualinvoke this.<org.jfree.data.xy.XYSeries: int getItemCount()>();
+        result = newmultiarray (double)[2][itemCount];
+        i = 0;
+    
+      label1:
+        if i >= itemCount goto label4;
+        $stack5 = result[0];
+        $stack6 = virtualinvoke this.<org.jfree.data.xy.XYSeries: java.lang.Number getX(int)>(i);
+        $stack7 = virtualinvoke $stack6.<java.lang.Number: double doubleValue()>();
+        $stack5[i] = $stack7;
+        y = virtualinvoke this.<org.jfree.data.xy.XYSeries: java.lang.Number getY(int)>(i);
+    
+        if y == null goto label2;
+        $stack9 = result[1];
+        $stack10 = virtualinvoke y.<java.lang.Number: double doubleValue()>();
+        $stack9[i] = $stack10;
+    
+        goto label3;
+    
+      label2:
+        $stack8 = result[1];
+        $stack8[i] = #NaN;
+    
+      label3:
+        i = i + 1;
+    
+        goto label1;
+    
+      label4:
+        return result;
+    }
+
+    // ---- method: <org.jfree.data.xy.XYSeries: void updateByIndex(int,java.lang.Number)> ----
+    {
+        boolean $stack9, iterate;
+        byte $stack15, $stack17;
+        double $stack10, $stack11, $stack12, $stack13, $stack14, $stack16, oldY, yy;
+        int index;
+        java.lang.Number y;
+        org.jfree.data.xy.XYDataItem item;
+        org.jfree.data.xy.XYSeries this;
+    
+    
+        this := @this: org.jfree.data.xy.XYSeries;
+        index := @parameter0: int;
+        y := @parameter1: java.lang.Number;
+        item = virtualinvoke this.<org.jfree.data.xy.XYSeries: org.jfree.data.xy.XYDataItem getRawDataItem(int)>(index);
+        iterate = 0;
+        oldY = virtualinvoke item.<org.jfree.data.xy.XYDataItem: double getYValue()>();
+        $stack9 = staticinvoke <java.lang.Double: boolean isNaN(double)>(oldY);
+    
+        if $stack9 != 0 goto label3;
+        $stack14 = this.<org.jfree.data.xy.XYSeries: double minY>;
+        $stack15 = oldY cmpg $stack14;
+    
+        if $stack15 <= 0 goto label1;
+        $stack16 = this.<org.jfree.data.xy.XYSeries: double maxY>;
+        $stack17 = oldY cmpl $stack16;
+    
+        if $stack17 < 0 goto label2;
+    
+      label1:
+        iterate = 1;
+    
+        goto label3;
+    
+      label2:
+        iterate = 0;
+    
+      label3:
+        virtualinvoke item.<org.jfree.data.xy.XYDataItem: void setY(java.lang.Number)>(y);
+    
+        if iterate == 0 goto label4;
+        specialinvoke this.<org.jfree.data.xy.XYSeries: void findBoundsByIteration()>();
+    
+        goto label5;
+    
+      label4:
+        if y == null goto label5;
+        yy = virtualinvoke y.<java.lang.Number: double doubleValue()>();
+        $stack10 = this.<org.jfree.data.xy.XYSeries: double minY>;
+        $stack11 = specialinvoke this.<org.jfree.data.xy.XYSeries: double minIgnoreNaN(double,double)>($stack10, yy);
+        this.<org.jfree.data.xy.XYSeries: double minY> = $stack11;
+        $stack12 = this.<org.jfree.data.xy.XYSeries: double maxY>;
+        $stack13 = specialinvoke this.<org.jfree.data.xy.XYSeries: double maxIgnoreNaN(double,double)>($stack12, yy);
+        this.<org.jfree.data.xy.XYSeries: double maxY> = $stack13;
+    
+      label5:
+        virtualinvoke this.<org.jfree.data.xy.XYSeries: void fireSeriesChanged()>();
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.xy.XYSeries: void <init>(java.lang.Comparable)> ----
+    {
+        java.lang.Comparable key;
+        org.jfree.data.xy.XYSeries this;
+    
+    
+        this := @this: org.jfree.data.xy.XYSeries;
+        key := @parameter0: java.lang.Comparable;
+        specialinvoke this.<org.jfree.data.xy.XYSeries: void <init>(java.lang.Comparable,boolean,boolean)>(key, 1, 1);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.xy.XYSeries: double maxIgnoreNaN(double,double)> ----
+    {
+        boolean $stack5, $stack6;
+        double $stack7, a, b;
+        org.jfree.data.xy.XYSeries this;
+    
+    
+        this := @this: org.jfree.data.xy.XYSeries;
+        a := @parameter0: double;
+        b := @parameter1: double;
+        $stack5 = staticinvoke <java.lang.Double: boolean isNaN(double)>(a);
+    
+        if $stack5 == 0 goto label1;
+    
+        return b;
+    
+      label1:
+        $stack6 = staticinvoke <java.lang.Double: boolean isNaN(double)>(b);
+    
+        if $stack6 == 0 goto label2;
+    
+        return a;
+    
+      label2:
+        $stack7 = staticinvoke <java.lang.Math: double max(double,double)>(a, b);
+    
+        return $stack7;
+    }
+
+    // ---- method: <org.jfree.data.xy.XYSeries: void add(java.lang.Number,java.lang.Number)> ----
+    {
+        java.lang.Number x, y;
+        org.jfree.data.xy.XYSeries this;
+    
+    
+        this := @this: org.jfree.data.xy.XYSeries;
+        x := @parameter0: java.lang.Number;
+        y := @parameter1: java.lang.Number;
+        virtualinvoke this.<org.jfree.data.xy.XYSeries: void add(java.lang.Number,java.lang.Number,boolean)>(x, y, 1);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.xy.XYSeries: void updateBoundsForRemovedItem(org.jfree.data.xy.XYDataItem)> ----
+    {
+        boolean $stack10, $stack17, $stack8, itemContributesToXBounds, itemContributesToYBounds;
+        byte $stack19, $stack21, $stack23, $stack25;
+        double $stack12, $stack16, $stack18, $stack20, $stack22, $stack24, x, y;
+        int $stack13, $stack14;
+        java.lang.Number $stack11, $stack15, $stack9;
+        org.jfree.data.xy.XYDataItem item;
+        org.jfree.data.xy.XYSeries this;
+    
+    
+        this := @this: org.jfree.data.xy.XYSeries;
+        item := @parameter0: org.jfree.data.xy.XYDataItem;
+        itemContributesToXBounds = 0;
+        itemContributesToYBounds = 0;
+        x = virtualinvoke item.<org.jfree.data.xy.XYDataItem: double getXValue()>();
+        $stack8 = staticinvoke <java.lang.Double: boolean isNaN(double)>(x);
+    
+        if $stack8 != 0 goto label2;
+        $stack22 = this.<org.jfree.data.xy.XYSeries: double minX>;
+        $stack23 = x cmpg $stack22;
+    
+        if $stack23 <= 0 goto label1;
+        $stack24 = this.<org.jfree.data.xy.XYSeries: double maxX>;
+        $stack25 = x cmpl $stack24;
+    
+        if $stack25 < 0 goto label2;
+    
+      label1:
+        itemContributesToXBounds = 1;
+    
+      label2:
+        $stack9 = virtualinvoke item.<org.jfree.data.xy.XYDataItem: java.lang.Number getY()>();
+    
+        if $stack9 == null goto label4;
+        y = virtualinvoke item.<org.jfree.data.xy.XYDataItem: double getYValue()>();
+        $stack17 = staticinvoke <java.lang.Double: boolean isNaN(double)>(y);
+    
+        if $stack17 != 0 goto label4;
+        $stack18 = this.<org.jfree.data.xy.XYSeries: double minY>;
+        $stack19 = y cmpg $stack18;
+    
+        if $stack19 <= 0 goto label3;
+        $stack20 = this.<org.jfree.data.xy.XYSeries: double maxY>;
+        $stack21 = y cmpl $stack20;
+    
+        if $stack21 < 0 goto label4;
+    
+      label3:
+        itemContributesToYBounds = 1;
+    
+      label4:
+        if itemContributesToYBounds == 0 goto label5;
+        specialinvoke this.<org.jfree.data.xy.XYSeries: void findBoundsByIteration()>();
+    
+        goto label7;
+    
+      label5:
+        if itemContributesToXBounds == 0 goto label7;
+        $stack10 = virtualinvoke this.<org.jfree.data.xy.XYSeries: boolean getAutoSort()>();
+    
+        if $stack10 == 0 goto label6;
+        $stack11 = virtualinvoke this.<org.jfree.data.xy.XYSeries: java.lang.Number getX(int)>(0);
+        $stack12 = virtualinvoke $stack11.<java.lang.Number: double doubleValue()>();
+        this.<org.jfree.data.xy.XYSeries: double minX> = $stack12;
+        $stack13 = virtualinvoke this.<org.jfree.data.xy.XYSeries: int getItemCount()>();
+        $stack14 = $stack13 - 1;
+        $stack15 = virtualinvoke this.<org.jfree.data.xy.XYSeries: java.lang.Number getX(int)>($stack14);
+        $stack16 = virtualinvoke $stack15.<java.lang.Number: double doubleValue()>();
+        this.<org.jfree.data.xy.XYSeries: double maxX> = $stack16;
+    
+        goto label7;
+    
+      label6:
+        specialinvoke this.<org.jfree.data.xy.XYSeries: void findBoundsByIteration()>();
+    
+      label7:
+        return;
+    }
+
+    // ---- method: <org.jfree.data.xy.XYSeries: void <init>(java.lang.Comparable,boolean,boolean)> ----
+    {
+        boolean allowDuplicateXValues, autoSort;
+        java.lang.Comparable key;
+        java.lang.Object $stack4;
+        java.util.ArrayList #l0;
+        org.jfree.data.xy.XYSeries this;
+    
+    
+        this := @this: org.jfree.data.xy.XYSeries;
+        key := @parameter0: java.lang.Comparable;
+        autoSort := @parameter1: boolean;
+        allowDuplicateXValues := @parameter2: boolean;
+        specialinvoke this.<org.jfree.data.general.Series: void <init>(java.lang.Comparable)>(key);
+        this.<org.jfree.data.xy.XYSeries: int maximumItemCount> = 2147483647;
+        $stack4 = new java.util.ArrayList;
+        #l0 = (java.util.ArrayList) $stack4;
+        specialinvoke #l0.<java.util.ArrayList: void <init>()>();
+        this.<org.jfree.data.xy.XYSeries: java.util.List data> = (java.util.List) $stack4;
+        this.<org.jfree.data.xy.XYSeries: boolean autoSort> = autoSort;
+        this.<org.jfree.data.xy.XYSeries: boolean allowDuplicateXValues> = allowDuplicateXValues;
+        this.<org.jfree.data.xy.XYSeries: double minX> = #NaN;
+        this.<org.jfree.data.xy.XYSeries: double maxX> = #NaN;
+        this.<org.jfree.data.xy.XYSeries: double minY> = #NaN;
+        this.<org.jfree.data.xy.XYSeries: double maxY> = #NaN;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.xy.XYSeries: void delete(int,int)> ----
+    {
+        int $stack3, end, start;
+        java.util.List $stack4, $stack5;
+        org.jfree.data.xy.XYSeries this;
+    
+    
+        this := @this: org.jfree.data.xy.XYSeries;
+        start := @parameter0: int;
+        end := @parameter1: int;
+        $stack4 = this.<org.jfree.data.xy.XYSeries: java.util.List data>;
+        $stack3 = end + 1;
+        $stack5 = interfaceinvoke $stack4.<java.util.List: java.util.List subList(int,int)>(start, $stack3);
+        interfaceinvoke $stack5.<java.util.List: void clear()>();
+        specialinvoke this.<org.jfree.data.xy.XYSeries: void findBoundsByIteration()>();
+        virtualinvoke this.<org.jfree.data.xy.XYSeries: void fireSeriesChanged()>();
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.xy.XYSeries: double getMinX()> ----
+    {
+        double $stack1;
+        org.jfree.data.xy.XYSeries this;
+    
+    
+        this := @this: org.jfree.data.xy.XYSeries;
+        $stack1 = this.<org.jfree.data.xy.XYSeries: double minX>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.data.xy.XYSeries: boolean equals(java.lang.Object)> ----
+    {
+        boolean $stack10, $stack13, $stack3, $stack4, $stack7, $stack8, $stack9;
+        int $stack5, $stack6;
+        java.lang.Object obj;
+        java.util.List $stack11, $stack12;
+        org.jfree.data.xy.XYSeries that, this;
+    
+    
+        this := @this: org.jfree.data.xy.XYSeries;
+        obj := @parameter0: java.lang.Object;
+    
+        if obj != this goto label1;
+    
+        return 1;
+    
+      label1:
+        $stack3 = obj instanceof org.jfree.data.xy.XYSeries;
+    
+        if $stack3 != 0 goto label2;
+    
+        return 0;
+    
+      label2:
+        $stack4 = specialinvoke this.<org.jfree.data.general.Series: boolean equals(java.lang.Object)>(obj);
+    
+        if $stack4 != 0 goto label3;
+    
+        return 0;
+    
+      label3:
+        that = (org.jfree.data.xy.XYSeries) obj;
+        $stack6 = this.<org.jfree.data.xy.XYSeries: int maximumItemCount>;
+        $stack5 = that.<org.jfree.data.xy.XYSeries: int maximumItemCount>;
+    
+        if $stack6 == $stack5 goto label4;
+    
+        return 0;
+    
+      label4:
+        $stack8 = this.<org.jfree.data.xy.XYSeries: boolean autoSort>;
+        $stack7 = that.<org.jfree.data.xy.XYSeries: boolean autoSort>;
+    
+        if $stack8 == $stack7 goto label5;
+    
+        return 0;
+    
+      label5:
+        $stack10 = this.<org.jfree.data.xy.XYSeries: boolean allowDuplicateXValues>;
+        $stack9 = that.<org.jfree.data.xy.XYSeries: boolean allowDuplicateXValues>;
+    
+        if $stack10 == $stack9 goto label6;
+    
+        return 0;
+    
+      label6:
+        $stack12 = this.<org.jfree.data.xy.XYSeries: java.util.List data>;
+        $stack11 = that.<org.jfree.data.xy.XYSeries: java.util.List data>;
+        $stack13 = staticinvoke <org.jfree.chart.util.ObjectUtilities: boolean equal(java.lang.Object,java.lang.Object)>($stack12, $stack11);
+    
+        if $stack13 != 0 goto label7;
+    
+        return 0;
+    
+      label7:
+        return 1;
+    }
+
+    // ---- method: <org.jfree.data.xy.XYSeries: void add(org.jfree.data.xy.XYDataItem)> ----
+    {
+        org.jfree.data.xy.XYDataItem item;
+        org.jfree.data.xy.XYSeries this;
+    
+    
+        this := @this: org.jfree.data.xy.XYSeries;
+        item := @parameter0: org.jfree.data.xy.XYDataItem;
+        virtualinvoke this.<org.jfree.data.xy.XYSeries: void add(org.jfree.data.xy.XYDataItem,boolean)>(item, 1);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.xy.XYSeries: org.jfree.data.xy.XYDataItem addOrUpdate(org.jfree.data.xy.XYDataItem)> ----
+    {
+        boolean $stack10, $stack13, $stack25, iterate;
+        byte $stack34, $stack36;
+        double $stack29, $stack30, $stack31, $stack32, $stack33, $stack35, oldY, yy;
+        int $stack15, $stack16, $stack19, $stack20, index;
+        java.lang.IllegalArgumentException #l1;
+        java.lang.Number $stack11, $stack26, $stack27, $stack28;
+        java.lang.Object $stack12, $stack18, $stack23, $stack24, $stack37;
+        java.lang.Throwable #l0;
+        java.util.List $stack14, $stack17, $stack21, $stack22;
+        org.jfree.data.xy.XYDataItem existing#0, existing#1, item#0, item#1, overwritten;
+        org.jfree.data.xy.XYSeries this;
+    
+    
+        this := @this: org.jfree.data.xy.XYSeries;
+        item#0 := @parameter0: org.jfree.data.xy.XYDataItem;
+    
+        if item#0 != null goto label01;
+        $stack37 = new java.lang.IllegalArgumentException;
+        #l1 = (java.lang.IllegalArgumentException) $stack37;
+        specialinvoke #l1.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'item\' argument.");
+        #l0 = (java.lang.Throwable) $stack37;
+    
+        throw #l0;
+    
+      label01:
+        $stack10 = this.<org.jfree.data.xy.XYSeries: boolean allowDuplicateXValues>;
+    
+        if $stack10 == 0 goto label02;
+        virtualinvoke this.<org.jfree.data.xy.XYSeries: void add(org.jfree.data.xy.XYDataItem)>(item#0);
+    
+        return null;
+    
+      label02:
+        overwritten = null;
+        $stack11 = virtualinvoke item#0.<org.jfree.data.xy.XYDataItem: java.lang.Number getX()>();
+        index = virtualinvoke this.<org.jfree.data.xy.XYSeries: int indexOf(java.lang.Number)>($stack11);
+    
+        if index < 0 goto label08;
+        $stack22 = this.<org.jfree.data.xy.XYSeries: java.util.List data>;
+        $stack23 = interfaceinvoke $stack22.<java.util.List: java.lang.Object get(int)>(index);
+        existing#0 = (org.jfree.data.xy.XYDataItem) $stack23;
+        $stack24 = virtualinvoke existing#0.<org.jfree.data.xy.XYDataItem: java.lang.Object clone()>();
+        overwritten = (org.jfree.data.xy.XYDataItem) $stack24;
+        iterate = 0;
+        oldY = virtualinvoke existing#0.<org.jfree.data.xy.XYDataItem: double getYValue()>();
+        $stack25 = staticinvoke <java.lang.Double: boolean isNaN(double)>(oldY);
+    
+        if $stack25 != 0 goto label05;
+        $stack33 = this.<org.jfree.data.xy.XYSeries: double minY>;
+        $stack34 = oldY cmpg $stack33;
+    
+        if $stack34 <= 0 goto label03;
+        $stack35 = this.<org.jfree.data.xy.XYSeries: double maxY>;
+        $stack36 = oldY cmpl $stack35;
+    
+        if $stack36 < 0 goto label04;
+    
+      label03:
+        iterate = 1;
+    
+        goto label05;
+    
+      label04:
+        iterate = 0;
+    
+      label05:
+        $stack26 = virtualinvoke item#0.<org.jfree.data.xy.XYDataItem: java.lang.Number getY()>();
+        virtualinvoke existing#0.<org.jfree.data.xy.XYDataItem: void setY(java.lang.Number)>($stack26);
+    
+        if iterate == 0 goto label06;
+        specialinvoke this.<org.jfree.data.xy.XYSeries: void findBoundsByIteration()>();
+    
+        goto label07;
+    
+      label06:
+        $stack27 = virtualinvoke item#0.<org.jfree.data.xy.XYDataItem: java.lang.Number getY()>();
+    
+        if $stack27 == null goto label07;
+        $stack28 = virtualinvoke item#0.<org.jfree.data.xy.XYDataItem: java.lang.Number getY()>();
+        yy = virtualinvoke $stack28.<java.lang.Number: double doubleValue()>();
+        $stack29 = this.<org.jfree.data.xy.XYSeries: double minY>;
+        $stack30 = specialinvoke this.<org.jfree.data.xy.XYSeries: double minIgnoreNaN(double,double)>($stack29, yy);
+        this.<org.jfree.data.xy.XYSeries: double minY> = $stack30;
+        $stack31 = this.<org.jfree.data.xy.XYSeries: double maxY>;
+        $stack32 = specialinvoke this.<org.jfree.data.xy.XYSeries: double minIgnoreNaN(double,double)>($stack31, yy);
+        this.<org.jfree.data.xy.XYSeries: double maxY> = $stack32;
+    
+      label07:
+        goto label11;
+    
+      label08:
+        $stack12 = virtualinvoke item#0.<org.jfree.data.xy.XYDataItem: java.lang.Object clone()>();
+        item#1 = (org.jfree.data.xy.XYDataItem) $stack12;
+        $stack13 = this.<org.jfree.data.xy.XYSeries: boolean autoSort>;
+    
+        if $stack13 == 0 goto label09;
+        $stack21 = this.<org.jfree.data.xy.XYSeries: java.util.List data>;
+        $stack19 = neg index;
+        $stack20 = $stack19 - 1;
+        interfaceinvoke $stack21.<java.util.List: void add(int,java.lang.Object)>($stack20, item#1);
+    
+        goto label10;
+    
+      label09:
+        $stack14 = this.<org.jfree.data.xy.XYSeries: java.util.List data>;
+        interfaceinvoke $stack14.<java.util.List: boolean add(java.lang.Object)>(item#1);
+    
+      label10:
+        specialinvoke this.<org.jfree.data.xy.XYSeries: void updateBoundsForAddedItem(org.jfree.data.xy.XYDataItem)>(item#1);
+        $stack16 = virtualinvoke this.<org.jfree.data.xy.XYSeries: int getItemCount()>();
+        $stack15 = this.<org.jfree.data.xy.XYSeries: int maximumItemCount>;
+    
+        if $stack16 <= $stack15 goto label11;
+        $stack17 = this.<org.jfree.data.xy.XYSeries: java.util.List data>;
+        $stack18 = interfaceinvoke $stack17.<java.util.List: java.lang.Object remove(int)>(0);
+        existing#1 = (org.jfree.data.xy.XYDataItem) $stack18;
+        specialinvoke this.<org.jfree.data.xy.XYSeries: void updateBoundsForRemovedItem(org.jfree.data.xy.XYDataItem)>(existing#1);
+    
+      label11:
+        virtualinvoke this.<org.jfree.data.xy.XYSeries: void fireSeriesChanged()>();
+    
+        return overwritten;
+    }
+
+    // ---- method: <org.jfree.data.xy.XYSeries: java.lang.Object clone()> ----
+    {
+        java.lang.Object $stack2, $stack3;
+        java.util.Collection #l0, $stack4;
+        java.util.List $stack5;
+        org.jfree.data.xy.XYSeries clone, this;
+    
+    
+        this := @this: org.jfree.data.xy.XYSeries;
+        $stack2 = specialinvoke this.<org.jfree.data.general.Series: java.lang.Object clone()>();
+        clone = (org.jfree.data.xy.XYSeries) $stack2;
+        $stack3 = this.<org.jfree.data.xy.XYSeries: java.util.List data>;
+        #l0 = (java.util.Collection) $stack3;
+        $stack4 = staticinvoke <org.jfree.chart.util.ObjectUtilities: java.util.Collection deepClone(java.util.Collection)>(#l0);
+        $stack5 = (java.util.List) $stack4;
+        clone.<org.jfree.data.xy.XYSeries: java.util.List data> = $stack5;
+    
+        return clone;
+    }
+
+    // ---- method: <org.jfree.data.xy.XYSeries: void update(java.lang.Number,java.lang.Number)> ----
+    {
+        int index;
+        java.lang.Number x, y;
+        java.lang.Object $stack8;
+        java.lang.String $stack7;
+        java.lang.StringBuffer $stack4, $stack5, $stack6;
+        java.lang.Throwable #l0;
+        org.jfree.data.general.SeriesException #l1;
+        org.jfree.data.xy.XYSeries this;
+    
+    
+        this := @this: org.jfree.data.xy.XYSeries;
+        x := @parameter0: java.lang.Number;
+        y := @parameter1: java.lang.Number;
+        index = virtualinvoke this.<org.jfree.data.xy.XYSeries: int indexOf(java.lang.Number)>(x);
+    
+        if index >= 0 goto label1;
+        $stack8 = new org.jfree.data.general.SeriesException;
+        $stack4 = new java.lang.StringBuffer;
+        specialinvoke $stack4.<java.lang.StringBuffer: void <init>()>();
+        $stack5 = virtualinvoke $stack4.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>("No observation for x = ");
+        $stack6 = virtualinvoke $stack5.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.Object)>(x);
+        $stack7 = virtualinvoke $stack6.<java.lang.StringBuffer: java.lang.String toString()>();
+        #l1 = (org.jfree.data.general.SeriesException) $stack8;
+        specialinvoke #l1.<org.jfree.data.general.SeriesException: void <init>(java.lang.String)>($stack7);
+        #l0 = (java.lang.Throwable) $stack8;
+    
+        throw #l0;
+    
+      label1:
+        virtualinvoke this.<org.jfree.data.xy.XYSeries: void updateByIndex(int,java.lang.Number)>(index, y);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.xy.XYSeries: org.jfree.data.xy.XYDataItem remove(int)> ----
+    {
+        int index;
+        java.lang.Object $stack4;
+        java.util.List $stack3;
+        org.jfree.data.xy.XYDataItem removed;
+        org.jfree.data.xy.XYSeries this;
+    
+    
+        this := @this: org.jfree.data.xy.XYSeries;
+        index := @parameter0: int;
+        $stack3 = this.<org.jfree.data.xy.XYSeries: java.util.List data>;
+        $stack4 = interfaceinvoke $stack3.<java.util.List: java.lang.Object remove(int)>(index);
+        removed = (org.jfree.data.xy.XYDataItem) $stack4;
+        specialinvoke this.<org.jfree.data.xy.XYSeries: void updateBoundsForRemovedItem(org.jfree.data.xy.XYDataItem)>(removed);
+        virtualinvoke this.<org.jfree.data.xy.XYSeries: void fireSeriesChanged()>();
+    
+        return removed;
+    }
+
+    // ---- method: <org.jfree.data.xy.XYSeries: org.jfree.data.xy.XYSeries createCopy(int,int)> ----
+    {
+        int $stack11, end, index, start;
+        java.io.PrintStream $stack16;
+        java.lang.Object $stack13, $stack14, $stack8, $stack9;
+        java.util.ArrayList #l0;
+        java.util.List $stack10, $stack12;
+        org.jfree.data.general.SeriesException $stack15, e;
+        org.jfree.data.xy.XYDataItem clone, item;
+        org.jfree.data.xy.XYSeries copy, this;
+    
+    
+        this := @this: org.jfree.data.xy.XYSeries;
+        start := @parameter0: int;
+        end := @parameter1: int;
+        $stack8 = specialinvoke this.<org.jfree.data.general.Series: java.lang.Object clone()>();
+        copy = (org.jfree.data.xy.XYSeries) $stack8;
+        $stack9 = new java.util.ArrayList;
+        #l0 = (java.util.ArrayList) $stack9;
+        specialinvoke #l0.<java.util.ArrayList: void <init>()>();
+        copy.<org.jfree.data.xy.XYSeries: java.util.List data> = (java.util.List) $stack9;
+        $stack10 = this.<org.jfree.data.xy.XYSeries: java.util.List data>;
+        $stack11 = interfaceinvoke $stack10.<java.util.List: int size()>();
+    
+        if $stack11 <= 0 goto label6;
+        index = start;
+    
+      label1:
+        if index > end goto label6;
+        $stack12 = this.<org.jfree.data.xy.XYSeries: java.util.List data>;
+        $stack13 = interfaceinvoke $stack12.<java.util.List: java.lang.Object get(int)>(index);
+        item = (org.jfree.data.xy.XYDataItem) $stack13;
+        $stack14 = virtualinvoke item.<org.jfree.data.xy.XYDataItem: java.lang.Object clone()>();
+        clone = (org.jfree.data.xy.XYDataItem) $stack14;
+    
+      label2:
+        virtualinvoke copy.<org.jfree.data.xy.XYSeries: void add(org.jfree.data.xy.XYDataItem)>(clone);
+    
+      label3:
+        goto label5;
+    
+      label4:
+        $stack15 := @caughtexception;
+        e = $stack15;
+        $stack16 = <java.lang.System: java.io.PrintStream err>;
+        virtualinvoke $stack16.<java.io.PrintStream: void println(java.lang.String)>("Unable to add cloned data item.");
+    
+      label5:
+        index = index + 1;
+    
+        goto label1;
+    
+      label6:
+        return copy;
+    
+     catch org.jfree.data.general.SeriesException from label2 to label3 with label4;
+    }
+
+    // ---- method: <org.jfree.data.xy.XYSeries: void <init>(java.lang.Comparable,boolean)> ----
+    {
+        boolean autoSort;
+        java.lang.Comparable key;
+        org.jfree.data.xy.XYSeries this;
+    
+    
+        this := @this: org.jfree.data.xy.XYSeries;
+        key := @parameter0: java.lang.Comparable;
+        autoSort := @parameter1: boolean;
+        specialinvoke this.<org.jfree.data.xy.XYSeries: void <init>(java.lang.Comparable,boolean,boolean)>(key, autoSort, 1);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.xy.XYSeries: void setMaximumItemCount(int)> ----
+    {
+        int $stack4, maximum, remove;
+        java.util.List $stack3, $stack5, $stack6;
+        org.jfree.data.xy.XYSeries this;
+    
+    
+        this := @this: org.jfree.data.xy.XYSeries;
+        maximum := @parameter0: int;
+        this.<org.jfree.data.xy.XYSeries: int maximumItemCount> = maximum;
+        $stack3 = this.<org.jfree.data.xy.XYSeries: java.util.List data>;
+        $stack4 = interfaceinvoke $stack3.<java.util.List: int size()>();
+        remove = $stack4 - maximum;
+    
+        if remove <= 0 goto label1;
+        $stack5 = this.<org.jfree.data.xy.XYSeries: java.util.List data>;
+        $stack6 = interfaceinvoke $stack5.<java.util.List: java.util.List subList(int,int)>(0, remove);
+        interfaceinvoke $stack6.<java.util.List: void clear()>();
+        specialinvoke this.<org.jfree.data.xy.XYSeries: void findBoundsByIteration()>();
+        virtualinvoke this.<org.jfree.data.xy.XYSeries: void fireSeriesChanged()>();
+    
+      label1:
+        return;
+    }
+
+    // ---- method: <org.jfree.data.xy.XYSeries: org.jfree.data.xy.XYDataItem addOrUpdate(double,double)> ----
+    {
+        double x, y;
+        java.lang.Double #l0, #l3;
+        java.lang.Number #l1, #l2;
+        java.lang.Object $stack5, $stack6;
+        org.jfree.data.xy.XYDataItem $stack7;
+        org.jfree.data.xy.XYSeries this;
+    
+    
+        this := @this: org.jfree.data.xy.XYSeries;
+        x := @parameter0: double;
+        y := @parameter1: double;
+        $stack5 = new java.lang.Double;
+        #l0 = (java.lang.Double) $stack5;
+        specialinvoke #l0.<java.lang.Double: void <init>(double)>(x);
+        $stack6 = new java.lang.Double;
+        #l3 = (java.lang.Double) $stack6;
+        specialinvoke #l3.<java.lang.Double: void <init>(double)>(y);
+        #l1 = (java.lang.Number) $stack5;
+        #l2 = (java.lang.Number) $stack6;
+        $stack7 = virtualinvoke this.<org.jfree.data.xy.XYSeries: org.jfree.data.xy.XYDataItem addOrUpdate(java.lang.Number,java.lang.Number)>(#l1, #l2);
+    
+        return $stack7;
+    }
+
+    // ---- method: <org.jfree.data.xy.XYSeries: void add(double,double,boolean)> ----
+    {
+        boolean notify;
+        double x, y;
+        java.lang.Double #l0, #l3;
+        java.lang.Number #l1, #l2;
+        java.lang.Object $stack6, $stack7;
+        org.jfree.data.xy.XYSeries this;
+    
+    
+        this := @this: org.jfree.data.xy.XYSeries;
+        x := @parameter0: double;
+        y := @parameter1: double;
+        notify := @parameter2: boolean;
+        $stack6 = new java.lang.Double;
+        #l0 = (java.lang.Double) $stack6;
+        specialinvoke #l0.<java.lang.Double: void <init>(double)>(x);
+        $stack7 = new java.lang.Double;
+        #l3 = (java.lang.Double) $stack7;
+        specialinvoke #l3.<java.lang.Double: void <init>(double)>(y);
+        #l2 = (java.lang.Number) $stack7;
+        #l1 = (java.lang.Number) $stack6;
+        virtualinvoke this.<org.jfree.data.xy.XYSeries: void add(java.lang.Number,java.lang.Number,boolean)>(#l1, #l2, notify);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.xy.XYSeries: org.jfree.data.xy.XYDataItem getRawDataItem(int)> ----
+    {
+        int index;
+        java.lang.Object $stack3;
+        java.util.List $stack2;
+        org.jfree.data.xy.XYDataItem $stack4;
+        org.jfree.data.xy.XYSeries this;
+    
+    
+        this := @this: org.jfree.data.xy.XYSeries;
+        index := @parameter0: int;
+        $stack2 = this.<org.jfree.data.xy.XYSeries: java.util.List data>;
+        $stack3 = interfaceinvoke $stack2.<java.util.List: java.lang.Object get(int)>(index);
+        $stack4 = (org.jfree.data.xy.XYDataItem) $stack3;
+    
+        return $stack4;
+    }
+
+    // ---- method: <org.jfree.data.xy.XYSeries: int indexOf(java.lang.Number)> ----
+    {
+        boolean $stack10, $stack4;
+        int $stack13, $stack6, i;
+        java.lang.Number $stack9, x;
+        java.lang.Object $stack8;
+        java.util.List $stack12, $stack5, $stack7;
+        org.jfree.data.xy.XYDataItem $stack11, item;
+        org.jfree.data.xy.XYSeries this;
+    
+    
+        this := @this: org.jfree.data.xy.XYSeries;
+        x := @parameter0: java.lang.Number;
+        $stack4 = this.<org.jfree.data.xy.XYSeries: boolean autoSort>;
+    
+        if $stack4 == 0 goto label1;
+        $stack12 = this.<org.jfree.data.xy.XYSeries: java.util.List data>;
+        $stack11 = new org.jfree.data.xy.XYDataItem;
+        specialinvoke $stack11.<org.jfree.data.xy.XYDataItem: void <init>(java.lang.Number,java.lang.Number)>(x, null);
+        $stack13 = staticinvoke <java.util.Collections: int binarySearch(java.util.List,java.lang.Object)>($stack12, $stack11);
+    
+        return $stack13;
+    
+      label1:
+        i = 0;
+    
+      label2:
+        $stack5 = this.<org.jfree.data.xy.XYSeries: java.util.List data>;
+        $stack6 = interfaceinvoke $stack5.<java.util.List: int size()>();
+    
+        if i >= $stack6 goto label4;
+        $stack7 = this.<org.jfree.data.xy.XYSeries: java.util.List data>;
+        $stack8 = interfaceinvoke $stack7.<java.util.List: java.lang.Object get(int)>(i);
+        item = (org.jfree.data.xy.XYDataItem) $stack8;
+        $stack9 = virtualinvoke item.<org.jfree.data.xy.XYDataItem: java.lang.Number getX()>();
+        $stack10 = virtualinvoke $stack9.<java.lang.Object: boolean equals(java.lang.Object)>(x);
+    
+        if $stack10 == 0 goto label3;
+    
+        return i;
+    
+      label3:
+        i = i + 1;
+    
+        goto label2;
+    
+      label4:
+        return -1;
+    }
+
+    // ---- method: <org.jfree.data.xy.XYSeries: double getMaxY()> ----
+    {
+        double $stack1;
+        org.jfree.data.xy.XYSeries this;
+    
+    
+        this := @this: org.jfree.data.xy.XYSeries;
+        $stack1 = this.<org.jfree.data.xy.XYSeries: double maxY>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.data.xy.XYSeries: void add(java.lang.Number,java.lang.Number,boolean)> ----
+    {
+        boolean notify;
+        java.lang.Number x, y;
+        org.jfree.data.xy.XYDataItem $stack5, item;
+        org.jfree.data.xy.XYSeries this;
+    
+    
+        this := @this: org.jfree.data.xy.XYSeries;
+        x := @parameter0: java.lang.Number;
+        y := @parameter1: java.lang.Number;
+        notify := @parameter2: boolean;
+        $stack5 = new org.jfree.data.xy.XYDataItem;
+        specialinvoke $stack5.<org.jfree.data.xy.XYDataItem: void <init>(java.lang.Number,java.lang.Number)>(x, y);
+        item = $stack5;
+        virtualinvoke this.<org.jfree.data.xy.XYSeries: void add(org.jfree.data.xy.XYDataItem,boolean)>($stack5, notify);
+    
+        return;
+    }
+
+}

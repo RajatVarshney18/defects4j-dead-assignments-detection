@@ -1,0 +1,618 @@
+// ========================================================================
+// CLASS : org.jfree.chart.renderer.xy.StackedXYAreaRenderer
+// ========================================================================
+
+[PUBLIC, SUPER] class org.jfree.chart.renderer.xy.StackedXYAreaRenderer extends org.jfree.chart.renderer.xy.XYAreaRenderer implements org.jfree.chart.util.PublicCloneable, java.lang.Cloneable, java.io.Serializable {
+
+    // ---- method: <org.jfree.chart.renderer.xy.StackedXYAreaRenderer: java.awt.Paint getShapePaint()> ----
+    {
+        java.awt.Paint $stack1;
+        org.jfree.chart.renderer.xy.StackedXYAreaRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.xy.StackedXYAreaRenderer;
+        $stack1 = this.<org.jfree.chart.renderer.xy.StackedXYAreaRenderer: java.awt.Paint shapePaint>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.xy.StackedXYAreaRenderer: void setShapeStroke(java.awt.Stroke)> ----
+    {
+        java.awt.Stroke shapeStroke;
+        org.jfree.chart.renderer.xy.StackedXYAreaRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.xy.StackedXYAreaRenderer;
+        shapeStroke := @parameter0: java.awt.Stroke;
+        this.<org.jfree.chart.renderer.xy.StackedXYAreaRenderer: java.awt.Stroke shapeStroke> = shapeStroke;
+        virtualinvoke this.<org.jfree.chart.renderer.xy.StackedXYAreaRenderer: void fireChangeEvent()>();
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.xy.StackedXYAreaRenderer: org.jfree.chart.renderer.xy.XYItemRendererState initialise(java.awt.Graphics2D,java.awt.geom.Rectangle2D,org.jfree.chart.plot.XYPlot,org.jfree.data.xy.XYDataset,org.jfree.chart.plot.PlotRenderingInfo)> ----
+    {
+        java.awt.Graphics2D g2;
+        java.awt.geom.Rectangle2D dataArea;
+        org.jfree.chart.plot.PlotRenderingInfo info;
+        org.jfree.chart.plot.XYPlot plot;
+        org.jfree.chart.renderer.xy.StackedXYAreaRenderer this;
+        org.jfree.chart.renderer.xy.StackedXYAreaRenderer$StackedXYAreaRendererState $stack7, state;
+        org.jfree.data.xy.XYDataset data;
+    
+    
+        this := @this: org.jfree.chart.renderer.xy.StackedXYAreaRenderer;
+        g2 := @parameter0: java.awt.Graphics2D;
+        dataArea := @parameter1: java.awt.geom.Rectangle2D;
+        plot := @parameter2: org.jfree.chart.plot.XYPlot;
+        data := @parameter3: org.jfree.data.xy.XYDataset;
+        info := @parameter4: org.jfree.chart.plot.PlotRenderingInfo;
+        $stack7 = new org.jfree.chart.renderer.xy.StackedXYAreaRenderer$StackedXYAreaRendererState;
+        specialinvoke $stack7.<org.jfree.chart.renderer.xy.StackedXYAreaRenderer$StackedXYAreaRendererState: void <init>(org.jfree.chart.plot.PlotRenderingInfo)>(info);
+        state = $stack7;
+        virtualinvoke $stack7.<org.jfree.chart.renderer.xy.XYItemRendererState: void setProcessVisibleItemsOnly(boolean)>(0);
+    
+        return $stack7;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.xy.StackedXYAreaRenderer: void writeObject(java.io.ObjectOutputStream)> ----
+    {
+        java.awt.Paint $stack2;
+        java.awt.Stroke $stack3;
+        java.io.ObjectOutputStream stream;
+        org.jfree.chart.renderer.xy.StackedXYAreaRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.xy.StackedXYAreaRenderer;
+        stream := @parameter0: java.io.ObjectOutputStream;
+        virtualinvoke stream.<java.io.ObjectOutputStream: void defaultWriteObject()>();
+        $stack2 = this.<org.jfree.chart.renderer.xy.StackedXYAreaRenderer: java.awt.Paint shapePaint>;
+        staticinvoke <org.jfree.chart.util.SerialUtilities: void writePaint(java.awt.Paint,java.io.ObjectOutputStream)>($stack2, stream);
+        $stack3 = this.<org.jfree.chart.renderer.xy.StackedXYAreaRenderer: java.awt.Stroke shapeStroke>;
+        staticinvoke <org.jfree.chart.util.SerialUtilities: void writeStroke(java.awt.Stroke,java.io.ObjectOutputStream)>($stack3, stream);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.xy.StackedXYAreaRenderer: boolean equals(java.lang.Object)> ----
+    {
+        boolean $stack10, $stack3, $stack4, $stack7;
+        java.awt.Paint $stack5, $stack6;
+        java.awt.Stroke $stack8, $stack9;
+        java.lang.Object obj;
+        org.jfree.chart.renderer.xy.StackedXYAreaRenderer that, this;
+    
+    
+        this := @this: org.jfree.chart.renderer.xy.StackedXYAreaRenderer;
+        obj := @parameter0: java.lang.Object;
+    
+        if obj != this goto label1;
+    
+        return 1;
+    
+      label1:
+        $stack3 = obj instanceof org.jfree.chart.renderer.xy.StackedXYAreaRenderer;
+    
+        if $stack3 == 0 goto label2;
+        $stack4 = specialinvoke this.<org.jfree.chart.renderer.xy.XYAreaRenderer: boolean equals(java.lang.Object)>(obj);
+    
+        if $stack4 != 0 goto label3;
+    
+      label2:
+        return 0;
+    
+      label3:
+        that = (org.jfree.chart.renderer.xy.StackedXYAreaRenderer) obj;
+        $stack6 = this.<org.jfree.chart.renderer.xy.StackedXYAreaRenderer: java.awt.Paint shapePaint>;
+        $stack5 = that.<org.jfree.chart.renderer.xy.StackedXYAreaRenderer: java.awt.Paint shapePaint>;
+        $stack7 = staticinvoke <org.jfree.chart.util.PaintUtilities: boolean equal(java.awt.Paint,java.awt.Paint)>($stack6, $stack5);
+    
+        if $stack7 != 0 goto label4;
+    
+        return 0;
+    
+      label4:
+        $stack9 = this.<org.jfree.chart.renderer.xy.StackedXYAreaRenderer: java.awt.Stroke shapeStroke>;
+        $stack8 = that.<org.jfree.chart.renderer.xy.StackedXYAreaRenderer: java.awt.Stroke shapeStroke>;
+        $stack10 = staticinvoke <org.jfree.chart.util.ObjectUtilities: boolean equal(java.lang.Object,java.lang.Object)>($stack9, $stack8);
+    
+        if $stack10 != 0 goto label5;
+    
+        return 0;
+    
+      label5:
+        return 1;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.xy.StackedXYAreaRenderer: void <init>()> ----
+    {
+        org.jfree.chart.renderer.xy.StackedXYAreaRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.xy.StackedXYAreaRenderer;
+        specialinvoke this.<org.jfree.chart.renderer.xy.StackedXYAreaRenderer: void <init>(int)>(4);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.xy.StackedXYAreaRenderer: void <init>(int)> ----
+    {
+        int type;
+        org.jfree.chart.renderer.xy.StackedXYAreaRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.xy.StackedXYAreaRenderer;
+        type := @parameter0: int;
+        specialinvoke this.<org.jfree.chart.renderer.xy.StackedXYAreaRenderer: void <init>(int,org.jfree.chart.labels.XYToolTipGenerator,org.jfree.chart.urls.XYURLGenerator)>(type, null, null);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.xy.StackedXYAreaRenderer: void <init>(int,org.jfree.chart.labels.XYToolTipGenerator,org.jfree.chart.urls.XYURLGenerator)> ----
+    {
+        int type;
+        org.jfree.chart.labels.XYToolTipGenerator labelGenerator;
+        org.jfree.chart.renderer.xy.StackedXYAreaRenderer this;
+        org.jfree.chart.urls.XYURLGenerator urlGenerator;
+    
+    
+        this := @this: org.jfree.chart.renderer.xy.StackedXYAreaRenderer;
+        type := @parameter0: int;
+        labelGenerator := @parameter1: org.jfree.chart.labels.XYToolTipGenerator;
+        urlGenerator := @parameter2: org.jfree.chart.urls.XYURLGenerator;
+        specialinvoke this.<org.jfree.chart.renderer.xy.XYAreaRenderer: void <init>(int,org.jfree.chart.labels.XYToolTipGenerator,org.jfree.chart.urls.XYURLGenerator)>(type, labelGenerator, urlGenerator);
+        this.<org.jfree.chart.renderer.xy.StackedXYAreaRenderer: java.awt.Paint shapePaint> = null;
+        this.<org.jfree.chart.renderer.xy.StackedXYAreaRenderer: java.awt.Stroke shapeStroke> = null;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.xy.StackedXYAreaRenderer: int getPassCount()> ----
+    {
+        org.jfree.chart.renderer.xy.StackedXYAreaRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.xy.StackedXYAreaRenderer;
+    
+        return 2;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.xy.StackedXYAreaRenderer: org.jfree.data.Range findRangeBounds(org.jfree.data.xy.XYDataset)> ----
+    {
+        org.jfree.chart.renderer.xy.StackedXYAreaRenderer this;
+        org.jfree.data.Range $stack3;
+        org.jfree.data.xy.TableXYDataset $stack2;
+        org.jfree.data.xy.XYDataset dataset;
+    
+    
+        this := @this: org.jfree.chart.renderer.xy.StackedXYAreaRenderer;
+        dataset := @parameter0: org.jfree.data.xy.XYDataset;
+    
+        if dataset == null goto label1;
+        $stack2 = (org.jfree.data.xy.TableXYDataset) dataset;
+        $stack3 = staticinvoke <org.jfree.data.general.DatasetUtilities: org.jfree.data.Range findStackedRangeBounds(org.jfree.data.xy.TableXYDataset)>($stack2);
+    
+        return $stack3;
+    
+      label1:
+        return null;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.xy.StackedXYAreaRenderer: void setShapePaint(java.awt.Paint)> ----
+    {
+        java.awt.Paint shapePaint;
+        org.jfree.chart.renderer.xy.StackedXYAreaRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.xy.StackedXYAreaRenderer;
+        shapePaint := @parameter0: java.awt.Paint;
+        this.<org.jfree.chart.renderer.xy.StackedXYAreaRenderer: java.awt.Paint shapePaint> = shapePaint;
+        virtualinvoke this.<org.jfree.chart.renderer.xy.StackedXYAreaRenderer: void fireChangeEvent()>();
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.xy.StackedXYAreaRenderer: double getPreviousHeight(org.jfree.data.xy.TableXYDataset,int,int)> ----
+    {
+        boolean $stack9;
+        double result, value;
+        int i, index, series;
+        org.jfree.chart.renderer.xy.StackedXYAreaRenderer this;
+        org.jfree.data.xy.TableXYDataset dataset;
+    
+    
+        this := @this: org.jfree.chart.renderer.xy.StackedXYAreaRenderer;
+        dataset := @parameter0: org.jfree.data.xy.TableXYDataset;
+        series := @parameter1: int;
+        index := @parameter2: int;
+        result = 0.0;
+        i = 0;
+    
+      label1:
+        if i >= series goto label3;
+        value = interfaceinvoke dataset.<org.jfree.data.xy.TableXYDataset: double getYValue(int,int)>(i, index);
+        $stack9 = staticinvoke <java.lang.Double: boolean isNaN(double)>(value);
+    
+        if $stack9 != 0 goto label2;
+        result = result + value;
+    
+      label2:
+        i = i + 1;
+    
+        goto label1;
+    
+      label3:
+        return result;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.xy.StackedXYAreaRenderer: java.lang.Object clone()> ----
+    {
+        java.lang.Object $stack1;
+        org.jfree.chart.renderer.xy.StackedXYAreaRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.xy.StackedXYAreaRenderer;
+        $stack1 = specialinvoke this.<org.jfree.chart.renderer.xy.XYAreaRenderer: java.lang.Object clone()>();
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.xy.StackedXYAreaRenderer: void drawItem(java.awt.Graphics2D,org.jfree.chart.renderer.xy.XYItemRendererState,java.awt.geom.Rectangle2D,org.jfree.chart.plot.XYPlot,org.jfree.chart.axis.ValueAxis,org.jfree.chart.axis.ValueAxis,org.jfree.data.xy.XYDataset,int,int,boolean,int)> ----
+    {
+        boolean $stack39, $stack43, $stack64, $stack65, $stack72, $stack76, nullPoint, selected;
+        double $stack106, $stack107, $stack42, $stack48, $stack49, $stack51, $stack52, $stack66, $stack78, $stack79, $stack94, ph0, ph1, transX0, transX1, transY0, transY1, transY2#0, transY2#2, transY2#3, x1, y0#0, y1;
+        int $stack100, $stack101, $stack103, $stack104, $stack108, $stack109, $stack118, $stack119, $stack121, $stack122, $stack67, $stack80, $stack81, $stack83, $stack84, $stack86, $stack87, $stack89, $stack90, $stack91, item, itemCount, pass, rangeAxisIndex#0, series, transY2#4;
+        java.awt.Graphics2D g2;
+        java.awt.Paint $stack58, $stack61, $stack74, seriesPaint;
+        java.awt.Point $stack105, point, transY2#1;
+        java.awt.Polygon $stack102, $stack110, $stack112, $stack120, $stack123, $stack82, $stack85, $stack88;
+        java.awt.Shape #l0, #l1, #l2, #l3, #l4, #l5, #l6;
+        java.awt.Stroke $stack59, $stack60, $stack73, seriesStroke;
+        java.awt.geom.Line2D $stack98, $stack99;
+        java.awt.geom.Rectangle2D dataArea;
+        java.awt.geom.Rectangle2D$Double $stack50, $stack53;
+        java.lang.Object $stack71, $stack75, $stack77, $stack97, transY2#5;
+        java.util.Stack $stack111, $stack113, $stack114, y0#1;
+        org.jfree.chart.axis.ValueAxis domainAxis, rangeAxis;
+        org.jfree.chart.entity.EntityCollection rangeAxisIndex#1;
+        org.jfree.chart.plot.PlotOrientation $stack116, $stack117, $stack44, $stack45, $stack46, $stack47, $stack54, $stack55, $stack56, $stack57, $stack62, $stack63, $stack69, $stack70, $stack95, $stack96, orientation;
+        org.jfree.chart.plot.XYCrosshairState y0#2;
+        org.jfree.chart.plot.XYPlot plot;
+        org.jfree.chart.renderer.xy.StackedXYAreaRenderer this;
+        org.jfree.chart.renderer.xy.StackedXYAreaRenderer$StackedXYAreaRendererState areaState;
+        org.jfree.chart.renderer.xy.XYItemRendererState state;
+        org.jfree.chart.util.RectangleEdge $stack115, $stack40, $stack41, $stack68, $stack92, $stack93;
+        org.jfree.data.xy.TableXYDataset tdataset;
+        org.jfree.data.xy.XYDataset dataset;
+    
+    
+        this := @this: org.jfree.chart.renderer.xy.StackedXYAreaRenderer;
+        g2 := @parameter0: java.awt.Graphics2D;
+        state := @parameter1: org.jfree.chart.renderer.xy.XYItemRendererState;
+        dataArea := @parameter2: java.awt.geom.Rectangle2D;
+        plot := @parameter3: org.jfree.chart.plot.XYPlot;
+        domainAxis := @parameter4: org.jfree.chart.axis.ValueAxis;
+        rangeAxis := @parameter5: org.jfree.chart.axis.ValueAxis;
+        dataset := @parameter6: org.jfree.data.xy.XYDataset;
+        series := @parameter7: int;
+        item := @parameter8: int;
+        selected := @parameter9: boolean;
+        pass := @parameter10: int;
+        orientation = virtualinvoke plot.<org.jfree.chart.plot.XYPlot: org.jfree.chart.plot.PlotOrientation getOrientation()>();
+        areaState = (org.jfree.chart.renderer.xy.StackedXYAreaRenderer$StackedXYAreaRendererState) state;
+        tdataset = (org.jfree.data.xy.TableXYDataset) dataset;
+        itemCount = interfaceinvoke tdataset.<org.jfree.data.xy.TableXYDataset: int getItemCount()>();
+        x1 = interfaceinvoke dataset.<org.jfree.data.xy.XYDataset: double getXValue(int,int)>(series, item);
+        y1 = interfaceinvoke dataset.<org.jfree.data.xy.XYDataset: double getYValue(int,int)>(series, item);
+        nullPoint = 0;
+        $stack39 = staticinvoke <java.lang.Double: boolean isNaN(double)>(y1);
+    
+        if $stack39 == 0 goto label01;
+        y1 = 0.0;
+        nullPoint = 1;
+    
+      label01:
+        ph1 = virtualinvoke this.<org.jfree.chart.renderer.xy.StackedXYAreaRenderer: double getPreviousHeight(org.jfree.data.xy.TableXYDataset,int,int)>(tdataset, series, item);
+        $stack40 = virtualinvoke plot.<org.jfree.chart.plot.XYPlot: org.jfree.chart.util.RectangleEdge getDomainAxisEdge()>();
+        transX1 = virtualinvoke domainAxis.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)>(x1, dataArea, $stack40);
+        $stack42 = y1 + ph1;
+        $stack41 = virtualinvoke plot.<org.jfree.chart.plot.XYPlot: org.jfree.chart.util.RectangleEdge getRangeAxisEdge()>();
+        transY1 = virtualinvoke rangeAxis.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)>($stack42, dataArea, $stack41);
+        seriesPaint = virtualinvoke this.<org.jfree.chart.renderer.xy.StackedXYAreaRenderer: java.awt.Paint getItemPaint(int,int,boolean)>(series, item, selected);
+        seriesStroke = virtualinvoke this.<org.jfree.chart.renderer.xy.StackedXYAreaRenderer: java.awt.Stroke getItemStroke(int,int,boolean)>(series, item, selected);
+    
+        if pass != 0 goto label14;
+    
+        if item != 0 goto label03;
+        $stack112 = new java.awt.Polygon;
+        specialinvoke $stack112.<java.awt.Polygon: void <init>()>();
+        virtualinvoke areaState.<org.jfree.chart.renderer.xy.StackedXYAreaRenderer$StackedXYAreaRendererState: void setSeriesArea(java.awt.Polygon)>($stack112);
+        $stack113 = virtualinvoke areaState.<org.jfree.chart.renderer.xy.StackedXYAreaRenderer$StackedXYAreaRendererState: java.util.Stack getCurrentSeriesPoints()>();
+        virtualinvoke areaState.<org.jfree.chart.renderer.xy.StackedXYAreaRenderer$StackedXYAreaRendererState: void setLastSeriesPoints(java.util.Stack)>($stack113);
+        $stack114 = new java.util.Stack;
+        specialinvoke $stack114.<java.util.Stack: void <init>()>();
+        virtualinvoke areaState.<org.jfree.chart.renderer.xy.StackedXYAreaRenderer$StackedXYAreaRendererState: void setCurrentSeriesPoints(java.util.Stack)>($stack114);
+        $stack115 = virtualinvoke plot.<org.jfree.chart.plot.XYPlot: org.jfree.chart.util.RectangleEdge getRangeAxisEdge()>();
+        transY2#0 = virtualinvoke rangeAxis.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)>(ph1, dataArea, $stack115);
+        $stack116 = <org.jfree.chart.plot.PlotOrientation: org.jfree.chart.plot.PlotOrientation VERTICAL>;
+    
+        if orientation != $stack116 goto label02;
+        $stack123 = virtualinvoke areaState.<org.jfree.chart.renderer.xy.StackedXYAreaRenderer$StackedXYAreaRendererState: java.awt.Polygon getSeriesArea()>();
+        $stack122 = (int) transX1;
+        $stack121 = (int) transY2#0;
+        virtualinvoke $stack123.<java.awt.Polygon: void addPoint(int,int)>($stack122, $stack121);
+    
+        goto label03;
+    
+      label02:
+        $stack117 = <org.jfree.chart.plot.PlotOrientation: org.jfree.chart.plot.PlotOrientation HORIZONTAL>;
+    
+        if orientation != $stack117 goto label03;
+        $stack120 = virtualinvoke areaState.<org.jfree.chart.renderer.xy.StackedXYAreaRenderer$StackedXYAreaRendererState: java.awt.Polygon getSeriesArea()>();
+        $stack119 = (int) transY2#0;
+        $stack118 = (int) transX1;
+        virtualinvoke $stack120.<java.awt.Polygon: void addPoint(int,int)>($stack119, $stack118);
+    
+      label03:
+        $stack62 = <org.jfree.chart.plot.PlotOrientation: org.jfree.chart.plot.PlotOrientation VERTICAL>;
+    
+        if orientation != $stack62 goto label04;
+        $stack105 = new java.awt.Point;
+        $stack104 = (int) transX1;
+        $stack103 = (int) transY1;
+        specialinvoke $stack105.<java.awt.Point: void <init>(int,int)>($stack104, $stack103);
+        transY2#1 = $stack105;
+        $stack110 = virtualinvoke areaState.<org.jfree.chart.renderer.xy.StackedXYAreaRenderer$StackedXYAreaRendererState: java.awt.Polygon getSeriesArea()>();
+        $stack106 = virtualinvoke $stack105.<java.awt.Point: double getX()>();
+        $stack109 = (int) $stack106;
+        $stack107 = virtualinvoke $stack105.<java.awt.Point: double getY()>();
+        $stack108 = (int) $stack107;
+        virtualinvoke $stack110.<java.awt.Polygon: void addPoint(int,int)>($stack109, $stack108);
+        $stack111 = virtualinvoke areaState.<org.jfree.chart.renderer.xy.StackedXYAreaRenderer$StackedXYAreaRendererState: java.util.Stack getCurrentSeriesPoints()>();
+        virtualinvoke $stack111.<java.util.Stack: java.lang.Object push(java.lang.Object)>($stack105);
+    
+        goto label05;
+    
+      label04:
+        $stack63 = <org.jfree.chart.plot.PlotOrientation: org.jfree.chart.plot.PlotOrientation HORIZONTAL>;
+    
+        if orientation != $stack63 goto label05;
+        $stack102 = virtualinvoke areaState.<org.jfree.chart.renderer.xy.StackedXYAreaRenderer$StackedXYAreaRendererState: java.awt.Polygon getSeriesArea()>();
+        $stack101 = (int) transY1;
+        $stack100 = (int) transX1;
+        virtualinvoke $stack102.<java.awt.Polygon: void addPoint(int,int)>($stack101, $stack100);
+    
+      label05:
+        $stack64 = virtualinvoke this.<org.jfree.chart.renderer.xy.StackedXYAreaRenderer: boolean getPlotLines()>();
+    
+        if $stack64 == 0 goto label08;
+    
+        if item <= 0 goto label08;
+        $stack89 = item - 1;
+        transY2#2 = interfaceinvoke dataset.<org.jfree.data.xy.XYDataset: double getXValue(int,int)>(series, $stack89);
+        $stack90 = item - 1;
+        y0#0 = interfaceinvoke dataset.<org.jfree.data.xy.XYDataset: double getYValue(int,int)>(series, $stack90);
+        $stack91 = item - 1;
+        ph0 = virtualinvoke this.<org.jfree.chart.renderer.xy.StackedXYAreaRenderer: double getPreviousHeight(org.jfree.data.xy.TableXYDataset,int,int)>(tdataset, series, $stack91);
+        $stack92 = virtualinvoke plot.<org.jfree.chart.plot.XYPlot: org.jfree.chart.util.RectangleEdge getDomainAxisEdge()>();
+        transX0 = virtualinvoke domainAxis.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)>(transY2#2, dataArea, $stack92);
+        $stack94 = y0#0 + ph0;
+        $stack93 = virtualinvoke plot.<org.jfree.chart.plot.XYPlot: org.jfree.chart.util.RectangleEdge getRangeAxisEdge()>();
+        transY0 = virtualinvoke rangeAxis.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)>($stack94, dataArea, $stack93);
+        $stack95 = <org.jfree.chart.plot.PlotOrientation: org.jfree.chart.plot.PlotOrientation VERTICAL>;
+    
+        if orientation != $stack95 goto label06;
+        $stack99 = virtualinvoke areaState.<org.jfree.chart.renderer.xy.StackedXYAreaRenderer$StackedXYAreaRendererState: java.awt.geom.Line2D getLine()>();
+        virtualinvoke $stack99.<java.awt.geom.Line2D: void setLine(double,double,double,double)>(transX0, transY0, transX1, transY1);
+    
+        goto label07;
+    
+      label06:
+        $stack96 = <org.jfree.chart.plot.PlotOrientation: org.jfree.chart.plot.PlotOrientation HORIZONTAL>;
+    
+        if orientation != $stack96 goto label07;
+        $stack98 = virtualinvoke areaState.<org.jfree.chart.renderer.xy.StackedXYAreaRenderer$StackedXYAreaRendererState: java.awt.geom.Line2D getLine()>();
+        virtualinvoke $stack98.<java.awt.geom.Line2D: void setLine(double,double,double,double)>(transY0, transX0, transY1, transX1);
+    
+      label07:
+        $stack97 = virtualinvoke areaState.<org.jfree.chart.renderer.xy.StackedXYAreaRenderer$StackedXYAreaRendererState: java.awt.geom.Line2D getLine()>();
+        #l3 = (java.awt.Shape) $stack97;
+        virtualinvoke g2.<java.awt.Graphics2D: void draw(java.awt.Shape)>(#l3);
+    
+      label08:
+        $stack65 = virtualinvoke this.<org.jfree.chart.renderer.xy.StackedXYAreaRenderer: boolean getPlotArea()>();
+    
+        if $stack65 == 0 goto label13;
+    
+        if item <= 0 goto label13;
+        $stack67 = itemCount - 1;
+    
+        if item != $stack67 goto label13;
+        $stack68 = virtualinvoke plot.<org.jfree.chart.plot.XYPlot: org.jfree.chart.util.RectangleEdge getRangeAxisEdge()>();
+        transY2#3 = virtualinvoke rangeAxis.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)>(ph1, dataArea, $stack68);
+        $stack69 = <org.jfree.chart.plot.PlotOrientation: org.jfree.chart.plot.PlotOrientation VERTICAL>;
+    
+        if orientation != $stack69 goto label09;
+        $stack88 = virtualinvoke areaState.<org.jfree.chart.renderer.xy.StackedXYAreaRenderer$StackedXYAreaRendererState: java.awt.Polygon getSeriesArea()>();
+        $stack87 = (int) transX1;
+        $stack86 = (int) transY2#3;
+        virtualinvoke $stack88.<java.awt.Polygon: void addPoint(int,int)>($stack87, $stack86);
+    
+        goto label10;
+    
+      label09:
+        $stack70 = <org.jfree.chart.plot.PlotOrientation: org.jfree.chart.plot.PlotOrientation HORIZONTAL>;
+    
+        if orientation != $stack70 goto label10;
+        $stack85 = virtualinvoke areaState.<org.jfree.chart.renderer.xy.StackedXYAreaRenderer$StackedXYAreaRendererState: java.awt.Polygon getSeriesArea()>();
+        $stack84 = (int) transY2#3;
+        $stack83 = (int) transX1;
+        virtualinvoke $stack85.<java.awt.Polygon: void addPoint(int,int)>($stack84, $stack83);
+    
+      label10:
+        if series == 0 goto label12;
+        y0#1 = virtualinvoke areaState.<org.jfree.chart.renderer.xy.StackedXYAreaRenderer$StackedXYAreaRendererState: java.util.Stack getLastSeriesPoints()>();
+    
+      label11:
+        $stack76 = virtualinvoke y0#1.<java.util.Stack: boolean empty()>();
+    
+        if $stack76 != 0 goto label12;
+        $stack77 = virtualinvoke y0#1.<java.util.Stack: java.lang.Object pop()>();
+        point = (java.awt.Point) $stack77;
+        $stack82 = virtualinvoke areaState.<org.jfree.chart.renderer.xy.StackedXYAreaRenderer$StackedXYAreaRendererState: java.awt.Polygon getSeriesArea()>();
+        $stack78 = virtualinvoke point.<java.awt.Point: double getX()>();
+        $stack81 = (int) $stack78;
+        $stack79 = virtualinvoke point.<java.awt.Point: double getY()>();
+        $stack80 = (int) $stack79;
+        virtualinvoke $stack82.<java.awt.Polygon: void addPoint(int,int)>($stack81, $stack80);
+    
+        goto label11;
+    
+      label12:
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>(seriesPaint);
+        virtualinvoke g2.<java.awt.Graphics2D: void setStroke(java.awt.Stroke)>(seriesStroke);
+        $stack71 = virtualinvoke areaState.<org.jfree.chart.renderer.xy.StackedXYAreaRenderer$StackedXYAreaRendererState: java.awt.Polygon getSeriesArea()>();
+        #l5 = (java.awt.Shape) $stack71;
+        virtualinvoke g2.<java.awt.Graphics2D: void fill(java.awt.Shape)>(#l5);
+        $stack72 = virtualinvoke this.<org.jfree.chart.renderer.xy.StackedXYAreaRenderer: boolean isOutline()>();
+    
+        if $stack72 == 0 goto label13;
+        $stack73 = virtualinvoke this.<org.jfree.chart.renderer.xy.StackedXYAreaRenderer: java.awt.Stroke lookupSeriesOutlineStroke(int)>(series);
+        virtualinvoke g2.<java.awt.Graphics2D: void setStroke(java.awt.Stroke)>($stack73);
+        $stack74 = virtualinvoke this.<org.jfree.chart.renderer.xy.StackedXYAreaRenderer: java.awt.Paint lookupSeriesOutlinePaint(int)>(series);
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>($stack74);
+        $stack75 = virtualinvoke areaState.<org.jfree.chart.renderer.xy.StackedXYAreaRenderer$StackedXYAreaRendererState: java.awt.Polygon getSeriesArea()>();
+        #l4 = (java.awt.Shape) $stack75;
+        virtualinvoke g2.<java.awt.Graphics2D: void draw(java.awt.Shape)>(#l4);
+    
+      label13:
+        transY2#4 = virtualinvoke plot.<org.jfree.chart.plot.XYPlot: int getDomainAxisIndex(org.jfree.chart.axis.ValueAxis)>(domainAxis);
+        rangeAxisIndex#0 = virtualinvoke plot.<org.jfree.chart.plot.XYPlot: int getRangeAxisIndex(org.jfree.chart.axis.ValueAxis)>(rangeAxis);
+        y0#2 = virtualinvoke state.<org.jfree.chart.renderer.xy.XYItemRendererState: org.jfree.chart.plot.XYCrosshairState getCrosshairState()>();
+        $stack66 = ph1 + y1;
+        virtualinvoke this.<org.jfree.chart.renderer.xy.StackedXYAreaRenderer: void updateCrosshairValues(org.jfree.chart.plot.CrosshairState,double,double,int,int,double,double,org.jfree.chart.plot.PlotOrientation)>(y0#2, x1, $stack66, transY2#4, rangeAxisIndex#0, transX1, transY1, orientation);
+    
+        goto label24;
+    
+      label14:
+        if pass != 1 goto label24;
+        transY2#5 = null;
+        $stack43 = virtualinvoke this.<org.jfree.chart.renderer.xy.StackedXYAreaRenderer: boolean getPlotShapes()>();
+    
+        if $stack43 == 0 goto label21;
+        transY2#5 = virtualinvoke this.<org.jfree.chart.renderer.xy.StackedXYAreaRenderer: java.awt.Shape getItemShape(int,int,boolean)>(series, item, selected);
+        $stack55 = virtualinvoke plot.<org.jfree.chart.plot.XYPlot: org.jfree.chart.plot.PlotOrientation getOrientation()>();
+        $stack54 = <org.jfree.chart.plot.PlotOrientation: org.jfree.chart.plot.PlotOrientation VERTICAL>;
+    
+        if $stack55 != $stack54 goto label15;
+        #l2 = (java.awt.Shape) transY2#5;
+        transY2#5 = staticinvoke <org.jfree.chart.util.ShapeUtilities: java.awt.Shape createTranslatedShape(java.awt.Shape,double,double)>(#l2, transX1, transY1);
+    
+        goto label16;
+    
+      label15:
+        $stack57 = virtualinvoke plot.<org.jfree.chart.plot.XYPlot: org.jfree.chart.plot.PlotOrientation getOrientation()>();
+        $stack56 = <org.jfree.chart.plot.PlotOrientation: org.jfree.chart.plot.PlotOrientation HORIZONTAL>;
+    
+        if $stack57 != $stack56 goto label16;
+        #l1 = (java.awt.Shape) transY2#5;
+        transY2#5 = staticinvoke <org.jfree.chart.util.ShapeUtilities: java.awt.Shape createTranslatedShape(java.awt.Shape,double,double)>(#l1, transY1, transX1);
+    
+      label16:
+        if nullPoint != 0 goto label23;
+        $stack58 = virtualinvoke this.<org.jfree.chart.renderer.xy.StackedXYAreaRenderer: java.awt.Paint getShapePaint()>();
+    
+        if $stack58 == null goto label17;
+        $stack61 = virtualinvoke this.<org.jfree.chart.renderer.xy.StackedXYAreaRenderer: java.awt.Paint getShapePaint()>();
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>($stack61);
+    
+        goto label18;
+    
+      label17:
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>(seriesPaint);
+    
+      label18:
+        $stack59 = virtualinvoke this.<org.jfree.chart.renderer.xy.StackedXYAreaRenderer: java.awt.Stroke getShapeStroke()>();
+    
+        if $stack59 == null goto label19;
+        $stack60 = virtualinvoke this.<org.jfree.chart.renderer.xy.StackedXYAreaRenderer: java.awt.Stroke getShapeStroke()>();
+        virtualinvoke g2.<java.awt.Graphics2D: void setStroke(java.awt.Stroke)>($stack60);
+    
+        goto label20;
+    
+      label19:
+        virtualinvoke g2.<java.awt.Graphics2D: void setStroke(java.awt.Stroke)>(seriesStroke);
+    
+      label20:
+        #l0 = (java.awt.Shape) transY2#5;
+        virtualinvoke g2.<java.awt.Graphics2D: void draw(java.awt.Shape)>(#l0);
+    
+        goto label23;
+    
+      label21:
+        $stack45 = virtualinvoke plot.<org.jfree.chart.plot.XYPlot: org.jfree.chart.plot.PlotOrientation getOrientation()>();
+        $stack44 = <org.jfree.chart.plot.PlotOrientation: org.jfree.chart.plot.PlotOrientation VERTICAL>;
+    
+        if $stack45 != $stack44 goto label22;
+        $stack53 = new java.awt.geom.Rectangle2D$Double;
+        $stack52 = transX1 - 3.0;
+        $stack51 = transY1 - 3.0;
+        specialinvoke $stack53.<java.awt.geom.Rectangle2D$Double: void <init>(double,double,double,double)>($stack52, $stack51, 6.0, 6.0);
+        transY2#5 = $stack53;
+    
+        goto label23;
+    
+      label22:
+        $stack47 = virtualinvoke plot.<org.jfree.chart.plot.XYPlot: org.jfree.chart.plot.PlotOrientation getOrientation()>();
+        $stack46 = <org.jfree.chart.plot.PlotOrientation: org.jfree.chart.plot.PlotOrientation HORIZONTAL>;
+    
+        if $stack47 != $stack46 goto label23;
+        $stack50 = new java.awt.geom.Rectangle2D$Double;
+        $stack49 = transY1 - 3.0;
+        $stack48 = transX1 - 3.0;
+        specialinvoke $stack50.<java.awt.geom.Rectangle2D$Double: void <init>(double,double,double,double)>($stack49, $stack48, 6.0, 6.0);
+        transY2#5 = $stack50;
+    
+      label23:
+        rangeAxisIndex#1 = virtualinvoke state.<org.jfree.chart.renderer.xy.XYItemRendererState: org.jfree.chart.entity.EntityCollection getEntityCollection()>();
+    
+        if rangeAxisIndex#1 == null goto label24;
+        #l6 = (java.awt.Shape) transY2#5;
+        virtualinvoke this.<org.jfree.chart.renderer.xy.StackedXYAreaRenderer: void addEntity(org.jfree.chart.entity.EntityCollection,java.awt.Shape,org.jfree.data.xy.XYDataset,int,int,boolean,double,double)>(rangeAxisIndex#1, #l6, dataset, series, item, selected, 0.0, 0.0);
+    
+      label24:
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.xy.StackedXYAreaRenderer: java.awt.Stroke getShapeStroke()> ----
+    {
+        java.awt.Stroke $stack1;
+        org.jfree.chart.renderer.xy.StackedXYAreaRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.xy.StackedXYAreaRenderer;
+        $stack1 = this.<org.jfree.chart.renderer.xy.StackedXYAreaRenderer: java.awt.Stroke shapeStroke>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.xy.StackedXYAreaRenderer: void readObject(java.io.ObjectInputStream)> ----
+    {
+        java.awt.Paint $stack2;
+        java.awt.Stroke $stack3;
+        java.io.ObjectInputStream stream;
+        org.jfree.chart.renderer.xy.StackedXYAreaRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.xy.StackedXYAreaRenderer;
+        stream := @parameter0: java.io.ObjectInputStream;
+        virtualinvoke stream.<java.io.ObjectInputStream: void defaultReadObject()>();
+        $stack2 = staticinvoke <org.jfree.chart.util.SerialUtilities: java.awt.Paint readPaint(java.io.ObjectInputStream)>(stream);
+        this.<org.jfree.chart.renderer.xy.StackedXYAreaRenderer: java.awt.Paint shapePaint> = $stack2;
+        $stack3 = staticinvoke <org.jfree.chart.util.SerialUtilities: java.awt.Stroke readStroke(java.io.ObjectInputStream)>(stream);
+        this.<org.jfree.chart.renderer.xy.StackedXYAreaRenderer: java.awt.Stroke shapeStroke> = $stack3;
+    
+        return;
+    }
+
+}

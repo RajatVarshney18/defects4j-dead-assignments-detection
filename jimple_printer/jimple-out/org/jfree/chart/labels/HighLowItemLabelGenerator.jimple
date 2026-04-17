@@ -1,0 +1,273 @@
+// ========================================================================
+// CLASS : org.jfree.chart.labels.HighLowItemLabelGenerator
+// ========================================================================
+
+[PUBLIC, SUPER] class org.jfree.chart.labels.HighLowItemLabelGenerator extends java.lang.Object implements org.jfree.chart.util.PublicCloneable, org.jfree.chart.labels.XYToolTipGenerator, org.jfree.chart.labels.XYItemLabelGenerator, java.lang.Cloneable, java.io.Serializable {
+
+    // ---- method: <org.jfree.chart.labels.HighLowItemLabelGenerator: java.lang.String generateToolTip(org.jfree.data.xy.XYDataset,int,int)> ----
+    {
+        boolean $stack12;
+        double $stack25, $stack32, $stack39, $stack46;
+        int item, series;
+        java.lang.Comparable $stack13;
+        java.lang.Number close, high, low, open, x;
+        java.lang.String $stack19, $stack26, $stack33, $stack40, $stack47, result;
+        java.lang.StringBuffer $stack16, $stack17, $stack20, $stack21, $stack22, $stack23, $stack27, $stack28, $stack29, $stack30, $stack34, $stack35, $stack36, $stack37, $stack41, $stack42, $stack43, $stack44, $stack48, $stack49;
+        java.text.DateFormat $stack18;
+        java.text.NumberFormat $stack24, $stack31, $stack38, $stack45;
+        java.util.Date $stack15, date;
+        long $stack14;
+        org.jfree.chart.labels.HighLowItemLabelGenerator this;
+        org.jfree.data.xy.OHLCDataset d;
+        org.jfree.data.xy.XYDataset dataset;
+    
+    
+        this := @this: org.jfree.chart.labels.HighLowItemLabelGenerator;
+        dataset := @parameter0: org.jfree.data.xy.XYDataset;
+        series := @parameter1: int;
+        item := @parameter2: int;
+        result = null;
+        $stack12 = dataset instanceof org.jfree.data.xy.OHLCDataset;
+    
+        if $stack12 == 0 goto label4;
+        d = (org.jfree.data.xy.OHLCDataset) dataset;
+        high = interfaceinvoke d.<org.jfree.data.xy.OHLCDataset: java.lang.Number getHigh(int,int)>(series, item);
+        low = interfaceinvoke d.<org.jfree.data.xy.OHLCDataset: java.lang.Number getLow(int,int)>(series, item);
+        open = interfaceinvoke d.<org.jfree.data.xy.OHLCDataset: java.lang.Number getOpen(int,int)>(series, item);
+        close = interfaceinvoke d.<org.jfree.data.xy.OHLCDataset: java.lang.Number getClose(int,int)>(series, item);
+        x = interfaceinvoke d.<org.jfree.data.xy.OHLCDataset: java.lang.Number getX(int,int)>(series, item);
+        $stack13 = interfaceinvoke d.<org.jfree.data.xy.OHLCDataset: java.lang.Comparable getSeriesKey(int)>(series);
+        result = virtualinvoke $stack13.<java.lang.Object: java.lang.String toString()>();
+    
+        if x == null goto label4;
+        $stack15 = new java.util.Date;
+        $stack14 = virtualinvoke x.<java.lang.Number: long longValue()>();
+        specialinvoke $stack15.<java.util.Date: void <init>(long)>($stack14);
+        date = $stack15;
+        $stack16 = new java.lang.StringBuffer;
+        specialinvoke $stack16.<java.lang.StringBuffer: void <init>()>();
+        $stack17 = virtualinvoke $stack16.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>(result);
+        $stack20 = virtualinvoke $stack17.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>("--> Date=");
+        $stack18 = this.<org.jfree.chart.labels.HighLowItemLabelGenerator: java.text.DateFormat dateFormatter>;
+        $stack19 = virtualinvoke $stack18.<java.text.DateFormat: java.lang.String format(java.util.Date)>($stack15);
+        $stack21 = virtualinvoke $stack20.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>($stack19);
+        result = virtualinvoke $stack21.<java.lang.StringBuffer: java.lang.String toString()>();
+    
+        if high == null goto label1;
+        $stack43 = new java.lang.StringBuffer;
+        specialinvoke $stack43.<java.lang.StringBuffer: void <init>()>();
+        $stack44 = virtualinvoke $stack43.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>(result);
+        $stack48 = virtualinvoke $stack44.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>(" High=");
+        $stack45 = this.<org.jfree.chart.labels.HighLowItemLabelGenerator: java.text.NumberFormat numberFormatter>;
+        $stack46 = virtualinvoke high.<java.lang.Number: double doubleValue()>();
+        $stack47 = virtualinvoke $stack45.<java.text.NumberFormat: java.lang.String format(double)>($stack46);
+        $stack49 = virtualinvoke $stack48.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>($stack47);
+        result = virtualinvoke $stack49.<java.lang.StringBuffer: java.lang.String toString()>();
+    
+      label1:
+        if low == null goto label2;
+        $stack36 = new java.lang.StringBuffer;
+        specialinvoke $stack36.<java.lang.StringBuffer: void <init>()>();
+        $stack37 = virtualinvoke $stack36.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>(result);
+        $stack41 = virtualinvoke $stack37.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>(" Low=");
+        $stack38 = this.<org.jfree.chart.labels.HighLowItemLabelGenerator: java.text.NumberFormat numberFormatter>;
+        $stack39 = virtualinvoke low.<java.lang.Number: double doubleValue()>();
+        $stack40 = virtualinvoke $stack38.<java.text.NumberFormat: java.lang.String format(double)>($stack39);
+        $stack42 = virtualinvoke $stack41.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>($stack40);
+        result = virtualinvoke $stack42.<java.lang.StringBuffer: java.lang.String toString()>();
+    
+      label2:
+        if open == null goto label3;
+        $stack29 = new java.lang.StringBuffer;
+        specialinvoke $stack29.<java.lang.StringBuffer: void <init>()>();
+        $stack30 = virtualinvoke $stack29.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>(result);
+        $stack34 = virtualinvoke $stack30.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>(" Open=");
+        $stack31 = this.<org.jfree.chart.labels.HighLowItemLabelGenerator: java.text.NumberFormat numberFormatter>;
+        $stack32 = virtualinvoke open.<java.lang.Number: double doubleValue()>();
+        $stack33 = virtualinvoke $stack31.<java.text.NumberFormat: java.lang.String format(double)>($stack32);
+        $stack35 = virtualinvoke $stack34.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>($stack33);
+        result = virtualinvoke $stack35.<java.lang.StringBuffer: java.lang.String toString()>();
+    
+      label3:
+        if close == null goto label4;
+        $stack22 = new java.lang.StringBuffer;
+        specialinvoke $stack22.<java.lang.StringBuffer: void <init>()>();
+        $stack23 = virtualinvoke $stack22.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>(result);
+        $stack27 = virtualinvoke $stack23.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>(" Close=");
+        $stack24 = this.<org.jfree.chart.labels.HighLowItemLabelGenerator: java.text.NumberFormat numberFormatter>;
+        $stack25 = virtualinvoke close.<java.lang.Number: double doubleValue()>();
+        $stack26 = virtualinvoke $stack24.<java.text.NumberFormat: java.lang.String format(double)>($stack25);
+        $stack28 = virtualinvoke $stack27.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>($stack26);
+        result = virtualinvoke $stack28.<java.lang.StringBuffer: java.lang.String toString()>();
+    
+      label4:
+        return result;
+    }
+
+    // ---- method: <org.jfree.chart.labels.HighLowItemLabelGenerator: void <init>(java.text.DateFormat,java.text.NumberFormat)> ----
+    {
+        java.lang.IllegalArgumentException #l0, #l1;
+        java.lang.Object $stack3, $stack4;
+        java.lang.Throwable #l2, #l3;
+        java.text.DateFormat dateFormatter;
+        java.text.NumberFormat numberFormatter;
+        org.jfree.chart.labels.HighLowItemLabelGenerator this;
+    
+    
+        this := @this: org.jfree.chart.labels.HighLowItemLabelGenerator;
+        dateFormatter := @parameter0: java.text.DateFormat;
+        numberFormatter := @parameter1: java.text.NumberFormat;
+        specialinvoke this.<java.lang.Object: void <init>()>();
+    
+        if dateFormatter != null goto label1;
+        $stack4 = new java.lang.IllegalArgumentException;
+        #l1 = (java.lang.IllegalArgumentException) $stack4;
+        specialinvoke #l1.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'dateFormatter\' argument.");
+        #l3 = (java.lang.Throwable) $stack4;
+    
+        throw #l3;
+    
+      label1:
+        if numberFormatter != null goto label2;
+        $stack3 = new java.lang.IllegalArgumentException;
+        #l0 = (java.lang.IllegalArgumentException) $stack3;
+        specialinvoke #l0.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'numberFormatter\' argument.");
+        #l2 = (java.lang.Throwable) $stack3;
+    
+        throw #l2;
+    
+      label2:
+        this.<org.jfree.chart.labels.HighLowItemLabelGenerator: java.text.DateFormat dateFormatter> = dateFormatter;
+        this.<org.jfree.chart.labels.HighLowItemLabelGenerator: java.text.NumberFormat numberFormatter> = numberFormatter;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.labels.HighLowItemLabelGenerator: void <init>()> ----
+    {
+        java.text.DateFormat $stack2;
+        java.text.NumberFormat $stack1;
+        org.jfree.chart.labels.HighLowItemLabelGenerator this;
+    
+    
+        this := @this: org.jfree.chart.labels.HighLowItemLabelGenerator;
+        $stack2 = staticinvoke <java.text.DateFormat: java.text.DateFormat getInstance()>();
+        $stack1 = staticinvoke <java.text.NumberFormat: java.text.NumberFormat getInstance()>();
+        specialinvoke this.<org.jfree.chart.labels.HighLowItemLabelGenerator: void <init>(java.text.DateFormat,java.text.NumberFormat)>($stack2, $stack1);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.labels.HighLowItemLabelGenerator: java.lang.String generateLabel(org.jfree.data.xy.XYDataset,int,int)> ----
+    {
+        int category, series;
+        org.jfree.chart.labels.HighLowItemLabelGenerator this;
+        org.jfree.data.xy.XYDataset dataset;
+    
+    
+        this := @this: org.jfree.chart.labels.HighLowItemLabelGenerator;
+        dataset := @parameter0: org.jfree.data.xy.XYDataset;
+        series := @parameter1: int;
+        category := @parameter2: int;
+    
+        return null;
+    }
+
+    // ---- method: <org.jfree.chart.labels.HighLowItemLabelGenerator: int hashCode()> ----
+    {
+        byte result#0;
+        int result#1, result#2;
+        java.text.DateFormat $stack2;
+        java.text.NumberFormat $stack3;
+        org.jfree.chart.labels.HighLowItemLabelGenerator this;
+    
+    
+        this := @this: org.jfree.chart.labels.HighLowItemLabelGenerator;
+        result#0 = 127;
+        $stack2 = this.<org.jfree.chart.labels.HighLowItemLabelGenerator: java.text.DateFormat dateFormatter>;
+        result#1 = staticinvoke <org.jfree.chart.util.HashUtilities: int hashCode(int,java.lang.Object)>(127, $stack2);
+        $stack3 = this.<org.jfree.chart.labels.HighLowItemLabelGenerator: java.text.NumberFormat numberFormatter>;
+        result#2 = staticinvoke <org.jfree.chart.util.HashUtilities: int hashCode(int,java.lang.Object)>(result#1, $stack3);
+    
+        return result#2;
+    }
+
+    // ---- method: <org.jfree.chart.labels.HighLowItemLabelGenerator: java.lang.Object clone()> ----
+    {
+        java.lang.Object $stack2, $stack6, $stack9;
+        java.text.DateFormat $stack10, $stack3, $stack8;
+        java.text.NumberFormat $stack4, $stack5, $stack7;
+        org.jfree.chart.labels.HighLowItemLabelGenerator clone, this;
+    
+    
+        this := @this: org.jfree.chart.labels.HighLowItemLabelGenerator;
+        $stack2 = specialinvoke this.<java.lang.Object: java.lang.Object clone()>();
+        clone = (org.jfree.chart.labels.HighLowItemLabelGenerator) $stack2;
+        $stack3 = this.<org.jfree.chart.labels.HighLowItemLabelGenerator: java.text.DateFormat dateFormatter>;
+    
+        if $stack3 == null goto label1;
+        $stack8 = this.<org.jfree.chart.labels.HighLowItemLabelGenerator: java.text.DateFormat dateFormatter>;
+        $stack9 = virtualinvoke $stack8.<java.text.DateFormat: java.lang.Object clone()>();
+        $stack10 = (java.text.DateFormat) $stack9;
+        clone.<org.jfree.chart.labels.HighLowItemLabelGenerator: java.text.DateFormat dateFormatter> = $stack10;
+    
+      label1:
+        $stack4 = this.<org.jfree.chart.labels.HighLowItemLabelGenerator: java.text.NumberFormat numberFormatter>;
+    
+        if $stack4 == null goto label2;
+        $stack5 = this.<org.jfree.chart.labels.HighLowItemLabelGenerator: java.text.NumberFormat numberFormatter>;
+        $stack6 = virtualinvoke $stack5.<java.text.NumberFormat: java.lang.Object clone()>();
+        $stack7 = (java.text.NumberFormat) $stack6;
+        clone.<org.jfree.chart.labels.HighLowItemLabelGenerator: java.text.NumberFormat numberFormatter> = $stack7;
+    
+      label2:
+        return clone;
+    }
+
+    // ---- method: <org.jfree.chart.labels.HighLowItemLabelGenerator: boolean equals(java.lang.Object)> ----
+    {
+        boolean $stack3, $stack6, $stack9;
+        java.lang.Object obj;
+        java.text.DateFormat $stack4, $stack5;
+        java.text.NumberFormat $stack7, $stack8;
+        org.jfree.chart.labels.HighLowItemLabelGenerator generator, this;
+    
+    
+        this := @this: org.jfree.chart.labels.HighLowItemLabelGenerator;
+        obj := @parameter0: java.lang.Object;
+    
+        if obj != this goto label1;
+    
+        return 1;
+    
+      label1:
+        $stack3 = obj instanceof org.jfree.chart.labels.HighLowItemLabelGenerator;
+    
+        if $stack3 != 0 goto label2;
+    
+        return 0;
+    
+      label2:
+        generator = (org.jfree.chart.labels.HighLowItemLabelGenerator) obj;
+        $stack5 = this.<org.jfree.chart.labels.HighLowItemLabelGenerator: java.text.DateFormat dateFormatter>;
+        $stack4 = generator.<org.jfree.chart.labels.HighLowItemLabelGenerator: java.text.DateFormat dateFormatter>;
+        $stack6 = virtualinvoke $stack5.<java.text.DateFormat: boolean equals(java.lang.Object)>($stack4);
+    
+        if $stack6 != 0 goto label3;
+    
+        return 0;
+    
+      label3:
+        $stack8 = this.<org.jfree.chart.labels.HighLowItemLabelGenerator: java.text.NumberFormat numberFormatter>;
+        $stack7 = generator.<org.jfree.chart.labels.HighLowItemLabelGenerator: java.text.NumberFormat numberFormatter>;
+        $stack9 = virtualinvoke $stack8.<java.text.NumberFormat: boolean equals(java.lang.Object)>($stack7);
+    
+        if $stack9 != 0 goto label4;
+    
+        return 0;
+    
+      label4:
+        return 1;
+    }
+
+}

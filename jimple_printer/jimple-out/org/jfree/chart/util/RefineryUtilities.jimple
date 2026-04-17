@@ -1,0 +1,423 @@
+// ========================================================================
+// CLASS : org.jfree.chart.util.RefineryUtilities
+// ========================================================================
+
+[PUBLIC, SUPER] class org.jfree.chart.util.RefineryUtilities extends java.lang.Object {
+
+    // ---- method: <org.jfree.chart.util.RefineryUtilities: java.lang.Class class$(java.lang.String)> ----
+    {
+        java.lang.Class $stack2;
+        java.lang.NoClassDefFoundError $stack4;
+        java.lang.String x0;
+        java.lang.Throwable $stack3, $stack5, x1;
+    
+    
+        x0 := @parameter0: java.lang.String;
+    
+      label1:
+        $stack2 = staticinvoke <java.lang.Class: java.lang.Class forName(java.lang.String)>(x0);
+    
+      label2:
+        return $stack2;
+    
+      label3:
+        $stack3 := @caughtexception;
+        x1 = $stack3;
+        $stack4 = new java.lang.NoClassDefFoundError;
+        specialinvoke $stack4.<java.lang.NoClassDefFoundError: void <init>()>();
+        $stack5 = virtualinvoke $stack4.<java.lang.NoClassDefFoundError: java.lang.Throwable initCause(java.lang.Throwable)>($stack3);
+    
+        throw $stack5;
+    
+     catch java.lang.ClassNotFoundException from label1 to label2 with label3;
+    }
+
+    // ---- method: <org.jfree.chart.util.RefineryUtilities: javax.swing.JPanel createTablePanel(javax.swing.table.TableModel)> ----
+    {
+        boolean $stack14;
+        int $stack9, columnIndex;
+        java.awt.BorderLayout #l7;
+        java.awt.Component #l4, #l6;
+        java.awt.LayoutManager #l1;
+        java.lang.Class $stack12, $stack13, c;
+        java.lang.Object $stack10, $stack15, $stack16, $stack6, $stack8;
+        javax.swing.JPanel $stack7, panel;
+        javax.swing.JScrollPane #l3;
+        javax.swing.JTable #l2, #l8, table;
+        javax.swing.table.TableCellRenderer #l0;
+        javax.swing.table.TableColumn column;
+        javax.swing.table.TableColumnModel $stack11;
+        javax.swing.table.TableModel model;
+        org.jfree.chart.util.NumberCellRenderer #l5;
+    
+    
+        model := @parameter0: javax.swing.table.TableModel;
+        $stack7 = new javax.swing.JPanel;
+        $stack6 = new java.awt.BorderLayout;
+        #l7 = (java.awt.BorderLayout) $stack6;
+        specialinvoke #l7.<java.awt.BorderLayout: void <init>()>();
+        #l1 = (java.awt.LayoutManager) $stack6;
+        specialinvoke $stack7.<javax.swing.JPanel: void <init>(java.awt.LayoutManager)>(#l1);
+        panel = $stack7;
+        $stack8 = new javax.swing.JTable;
+        #l2 = (javax.swing.JTable) $stack8;
+        specialinvoke #l2.<javax.swing.JTable: void <init>(javax.swing.table.TableModel)>(model);
+        table = (javax.swing.JTable) $stack8;
+        columnIndex = 0;
+    
+      label1:
+        $stack9 = interfaceinvoke model.<javax.swing.table.TableModel: int getColumnCount()>();
+    
+        if columnIndex >= $stack9 goto label5;
+        #l8 = (javax.swing.JTable) $stack8;
+        $stack11 = virtualinvoke #l8.<javax.swing.JTable: javax.swing.table.TableColumnModel getColumnModel()>();
+        column = interfaceinvoke $stack11.<javax.swing.table.TableColumnModel: javax.swing.table.TableColumn getColumn(int)>(columnIndex);
+        c = interfaceinvoke model.<javax.swing.table.TableModel: java.lang.Class getColumnClass(int)>(columnIndex);
+        $stack12 = <org.jfree.chart.util.RefineryUtilities: java.lang.Class class$java$lang$Number>;
+    
+        if $stack12 != null goto label2;
+        $stack13 = staticinvoke <org.jfree.chart.util.RefineryUtilities: java.lang.Class class$(java.lang.String)>("java.lang.Number");
+        <org.jfree.chart.util.RefineryUtilities: java.lang.Class class$java$lang$Number> = $stack13;
+    
+        goto label3;
+    
+      label2:
+        $stack13 = <org.jfree.chart.util.RefineryUtilities: java.lang.Class class$java$lang$Number>;
+    
+      label3:
+        $stack14 = virtualinvoke c.<java.lang.Object: boolean equals(java.lang.Object)>($stack13);
+    
+        if $stack14 == 0 goto label4;
+        $stack15 = new org.jfree.chart.util.NumberCellRenderer;
+        #l5 = (org.jfree.chart.util.NumberCellRenderer) $stack15;
+        specialinvoke #l5.<org.jfree.chart.util.NumberCellRenderer: void <init>()>();
+        #l0 = (javax.swing.table.TableCellRenderer) $stack15;
+        virtualinvoke column.<javax.swing.table.TableColumn: void setCellRenderer(javax.swing.table.TableCellRenderer)>(#l0);
+    
+      label4:
+        columnIndex = columnIndex + 1;
+    
+        goto label1;
+    
+      label5:
+        $stack10 = new javax.swing.JScrollPane;
+        #l4 = (java.awt.Component) $stack8;
+        #l3 = (javax.swing.JScrollPane) $stack10;
+        specialinvoke #l3.<javax.swing.JScrollPane: void <init>(java.awt.Component)>(#l4);
+        #l6 = (java.awt.Component) $stack10;
+        virtualinvoke $stack7.<javax.swing.JPanel: java.awt.Component add(java.awt.Component)>(#l6);
+    
+        return $stack7;
+    }
+
+    // ---- method: <org.jfree.chart.util.RefineryUtilities: javax.swing.JButton createJButton(java.lang.String,java.awt.Font)> ----
+    {
+        java.awt.Font font;
+        java.lang.String label;
+        javax.swing.JButton $stack3, result;
+    
+    
+        label := @parameter0: java.lang.String;
+        font := @parameter1: java.awt.Font;
+        $stack3 = new javax.swing.JButton;
+        specialinvoke $stack3.<javax.swing.JButton: void <init>(java.lang.String)>(label);
+        result = $stack3;
+        virtualinvoke $stack3.<javax.swing.JButton: void setFont(java.awt.Font)>(font);
+    
+        return $stack3;
+    }
+
+    // ---- method: <org.jfree.chart.util.RefineryUtilities: void positionFrameOnScreen(java.awt.Window,double,double)> ----
+    {
+        double $stack17, $stack18, $stack21, $stack22, horizontalPercent, verticalPercent;
+        int $stack11, $stack12, $stack13, $stack14, $stack15, $stack16, $stack19, $stack20, $stack23, $stack24, $stack25, $stack26, h, w, x, y;
+        java.awt.Dimension f;
+        java.awt.Rectangle s;
+        java.awt.Window frame;
+    
+    
+        frame := @parameter0: java.awt.Window;
+        horizontalPercent := @parameter1: double;
+        verticalPercent := @parameter2: double;
+        s = staticinvoke <org.jfree.chart.util.RefineryUtilities: java.awt.Rectangle getMaximumWindowBounds()>();
+        f = virtualinvoke frame.<java.awt.Window: java.awt.Dimension getSize()>();
+        $stack11 = s.<java.awt.Rectangle: int width>;
+        $stack12 = f.<java.awt.Dimension: int width>;
+        $stack13 = $stack11 - $stack12;
+        w = staticinvoke <java.lang.Math: int max(int,int)>($stack13, 0);
+        $stack14 = s.<java.awt.Rectangle: int height>;
+        $stack15 = f.<java.awt.Dimension: int height>;
+        $stack16 = $stack14 - $stack15;
+        h = staticinvoke <java.lang.Math: int max(int,int)>($stack16, 0);
+        $stack17 = (double) w;
+        $stack18 = horizontalPercent * $stack17;
+        $stack19 = (int) $stack18;
+        $stack20 = s.<java.awt.Rectangle: int x>;
+        x = $stack19 + $stack20;
+        $stack21 = (double) h;
+        $stack22 = verticalPercent * $stack21;
+        $stack23 = (int) $stack22;
+        $stack24 = s.<java.awt.Rectangle: int y>;
+        y = $stack23 + $stack24;
+        $stack26 = f.<java.awt.Dimension: int width>;
+        $stack25 = f.<java.awt.Dimension: int height>;
+        virtualinvoke frame.<java.awt.Window: void setBounds(int,int,int,int)>(x, y, $stack26, $stack25);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.util.RefineryUtilities: void centerFrameOnScreen(java.awt.Window)> ----
+    {
+        java.awt.Window frame;
+    
+    
+        frame := @parameter0: java.awt.Window;
+        staticinvoke <org.jfree.chart.util.RefineryUtilities: void positionFrameOnScreen(java.awt.Window,double,double)>(frame, 0.5, 0.5);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.util.RefineryUtilities: void positionDialogRelativeToParent(java.awt.Dialog,double,double)> ----
+    {
+        double $stack23, $stack24, $stack26, $stack27, horizontalPercent, verticalPercent;
+        int $stack15, $stack16, $stack17, $stack18, $stack19, $stack20, $stack21, $stack22, $stack25, $stack28, $stack29, $stack30, $stack31, $stack32, $stack33, $stack34, $stack35, $stack36, $stack37, $stack38, $stack39, $stack40, baseX, baseY, h, w, x#0, x#1, x#2, y#0, y#1, y#2;
+        java.awt.Container parent;
+        java.awt.Dialog dialog;
+        java.awt.Dimension d, p;
+        java.awt.Rectangle s;
+    
+    
+        dialog := @parameter0: java.awt.Dialog;
+        horizontalPercent := @parameter1: double;
+        verticalPercent := @parameter2: double;
+        d = virtualinvoke dialog.<java.awt.Dialog: java.awt.Dimension getSize()>();
+        parent = virtualinvoke dialog.<java.awt.Dialog: java.awt.Container getParent()>();
+        p = virtualinvoke parent.<java.awt.Container: java.awt.Dimension getSize()>();
+        $stack15 = virtualinvoke parent.<java.awt.Container: int getX()>();
+        $stack16 = d.<java.awt.Dimension: int width>;
+        baseX = $stack15 - $stack16;
+        $stack17 = virtualinvoke parent.<java.awt.Container: int getY()>();
+        $stack18 = d.<java.awt.Dimension: int height>;
+        baseY = $stack17 - $stack18;
+        $stack19 = d.<java.awt.Dimension: int width>;
+        $stack20 = p.<java.awt.Dimension: int width>;
+        w = $stack19 + $stack20;
+        $stack21 = d.<java.awt.Dimension: int height>;
+        $stack22 = p.<java.awt.Dimension: int height>;
+        h = $stack21 + $stack22;
+        $stack23 = (double) w;
+        $stack24 = horizontalPercent * $stack23;
+        $stack25 = (int) $stack24;
+        x#0 = baseX + $stack25;
+        $stack26 = (double) h;
+        $stack27 = verticalPercent * $stack26;
+        $stack28 = (int) $stack27;
+        y#0 = baseY + $stack28;
+        s = staticinvoke <org.jfree.chart.util.RefineryUtilities: java.awt.Rectangle getMaximumWindowBounds()>();
+        $stack29 = s.<java.awt.Rectangle: int width>;
+        $stack30 = d.<java.awt.Dimension: int width>;
+        $stack31 = $stack29 - $stack30;
+        x#1 = staticinvoke <java.lang.Math: int min(int,int)>(x#0, $stack31);
+        x#2 = staticinvoke <java.lang.Math: int max(int,int)>(x#1, 0);
+        $stack32 = s.<java.awt.Rectangle: int height>;
+        $stack33 = d.<java.awt.Dimension: int height>;
+        $stack34 = $stack32 - $stack33;
+        y#1 = staticinvoke <java.lang.Math: int min(int,int)>(y#0, $stack34);
+        y#2 = staticinvoke <java.lang.Math: int max(int,int)>(y#1, 0);
+        $stack35 = s.<java.awt.Rectangle: int x>;
+        $stack40 = x#2 + $stack35;
+        $stack36 = s.<java.awt.Rectangle: int y>;
+        $stack39 = y#2 + $stack36;
+        $stack38 = d.<java.awt.Dimension: int width>;
+        $stack37 = d.<java.awt.Dimension: int height>;
+        virtualinvoke dialog.<java.awt.Dialog: void setBounds(int,int,int,int)>($stack40, $stack39, $stack38, $stack37);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.util.RefineryUtilities: void centerDialogInParent(java.awt.Dialog)> ----
+    {
+        java.awt.Dialog dialog;
+    
+    
+        dialog := @parameter0: java.awt.Dialog;
+        staticinvoke <org.jfree.chart.util.RefineryUtilities: void positionDialogRelativeToParent(java.awt.Dialog,double,double)>(dialog, 0.5, 0.5);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.util.RefineryUtilities: void <init>()> ----
+    {
+        org.jfree.chart.util.RefineryUtilities this;
+    
+    
+        this := @this: org.jfree.chart.util.RefineryUtilities;
+        specialinvoke this.<java.lang.Object: void <init>()>();
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.util.RefineryUtilities: void positionFrameRandomly(java.awt.Window)> ----
+    {
+        double $stack1, $stack2;
+        java.awt.Window frame;
+    
+    
+        frame := @parameter0: java.awt.Window;
+        $stack2 = staticinvoke <java.lang.Math: double random()>();
+        $stack1 = staticinvoke <java.lang.Math: double random()>();
+        staticinvoke <org.jfree.chart.util.RefineryUtilities: void positionFrameOnScreen(java.awt.Window,double,double)>(frame, $stack2, $stack1);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.util.RefineryUtilities: java.awt.Point getCenterPoint()> ----
+    {
+        int $stack11, $stack12, $stack13, $stack14;
+        java.awt.Dimension method#1;
+        java.awt.GraphicsEnvironment localGraphicsEnvironment;
+        java.awt.Point $stack15, $stack7;
+        java.awt.Toolkit $stack10;
+        java.lang.Class $stack2, $stack4;
+        java.lang.Class[] $stack3;
+        java.lang.Object $stack6, $stack8;
+        java.lang.Object[] $stack5;
+        java.lang.Throwable $stack9, method#0;
+        java.lang.reflect.Method method#2;
+    
+    
+        localGraphicsEnvironment = staticinvoke <java.awt.GraphicsEnvironment: java.awt.GraphicsEnvironment getLocalGraphicsEnvironment()>();
+    
+      label1:
+        $stack2 = <org.jfree.chart.util.RefineryUtilities: java.lang.Class class$java$awt$GraphicsEnvironment>;
+    
+        if $stack2 != null goto label3;
+        $stack4 = staticinvoke <org.jfree.chart.util.RefineryUtilities: java.lang.Class class$(java.lang.String)>("java.awt.GraphicsEnvironment");
+        <org.jfree.chart.util.RefineryUtilities: java.lang.Class class$java$awt$GraphicsEnvironment> = $stack4;
+    
+        goto label4;
+    
+      label2:
+        $stack9 := @caughtexception;
+        method#0 = $stack9;
+        $stack10 = staticinvoke <java.awt.Toolkit: java.awt.Toolkit getDefaultToolkit()>();
+        method#1 = virtualinvoke $stack10.<java.awt.Toolkit: java.awt.Dimension getScreenSize()>();
+        $stack15 = new java.awt.Point;
+        $stack11 = method#1.<java.awt.Dimension: int width>;
+        $stack14 = $stack11 / 2;
+        $stack12 = method#1.<java.awt.Dimension: int height>;
+        $stack13 = $stack12 / 2;
+        specialinvoke $stack15.<java.awt.Point: void <init>(int,int)>($stack14, $stack13);
+    
+        return $stack15;
+    
+      label3:
+        $stack4 = <org.jfree.chart.util.RefineryUtilities: java.lang.Class class$java$awt$GraphicsEnvironment>;
+    
+      label4:
+        $stack3 = (java.lang.Class[]) null;
+        method#2 = virtualinvoke $stack4.<java.lang.Class: java.lang.reflect.Method getMethod(java.lang.String,java.lang.Class[])>("getCenterPoint", $stack3);
+        $stack5 = (java.lang.Object[]) null;
+        $stack6 = virtualinvoke method#2.<java.lang.reflect.Method: java.lang.Object invoke(java.lang.Object,java.lang.Object[])>(localGraphicsEnvironment, $stack5);
+        $stack7 = (java.awt.Point) $stack6;
+    
+      label5:
+        return $stack7;
+    
+     catch java.lang.Exception from label1 to label2 with label2;
+     catch java.lang.Exception from label3 to label5 with label2;
+    }
+
+    // ---- method: <org.jfree.chart.util.RefineryUtilities: java.awt.Rectangle getMaximumWindowBounds()> ----
+    {
+        int $stack11, $stack12;
+        java.awt.Dimension method#1;
+        java.awt.GraphicsEnvironment localGraphicsEnvironment;
+        java.awt.Rectangle $stack13, $stack7;
+        java.awt.Toolkit $stack10;
+        java.lang.Class $stack2, $stack4;
+        java.lang.Class[] $stack3;
+        java.lang.Object $stack6, $stack8;
+        java.lang.Object[] $stack5;
+        java.lang.Throwable $stack9, method#0;
+        java.lang.reflect.Method method#2;
+    
+    
+        localGraphicsEnvironment = staticinvoke <java.awt.GraphicsEnvironment: java.awt.GraphicsEnvironment getLocalGraphicsEnvironment()>();
+    
+      label1:
+        $stack2 = <org.jfree.chart.util.RefineryUtilities: java.lang.Class class$java$awt$GraphicsEnvironment>;
+    
+        if $stack2 != null goto label3;
+        $stack4 = staticinvoke <org.jfree.chart.util.RefineryUtilities: java.lang.Class class$(java.lang.String)>("java.awt.GraphicsEnvironment");
+        <org.jfree.chart.util.RefineryUtilities: java.lang.Class class$java$awt$GraphicsEnvironment> = $stack4;
+    
+        goto label4;
+    
+      label2:
+        $stack9 := @caughtexception;
+        method#0 = $stack9;
+        $stack10 = staticinvoke <java.awt.Toolkit: java.awt.Toolkit getDefaultToolkit()>();
+        method#1 = virtualinvoke $stack10.<java.awt.Toolkit: java.awt.Dimension getScreenSize()>();
+        $stack13 = new java.awt.Rectangle;
+        $stack12 = method#1.<java.awt.Dimension: int width>;
+        $stack11 = method#1.<java.awt.Dimension: int height>;
+        specialinvoke $stack13.<java.awt.Rectangle: void <init>(int,int,int,int)>(0, 0, $stack12, $stack11);
+    
+        return $stack13;
+    
+      label3:
+        $stack4 = <org.jfree.chart.util.RefineryUtilities: java.lang.Class class$java$awt$GraphicsEnvironment>;
+    
+      label4:
+        $stack3 = (java.lang.Class[]) null;
+        method#2 = virtualinvoke $stack4.<java.lang.Class: java.lang.reflect.Method getMethod(java.lang.String,java.lang.Class[])>("getMaximumWindowBounds", $stack3);
+        $stack5 = (java.lang.Object[]) null;
+        $stack6 = virtualinvoke method#2.<java.lang.reflect.Method: java.lang.Object invoke(java.lang.Object,java.lang.Object[])>(localGraphicsEnvironment, $stack5);
+        $stack7 = (java.awt.Rectangle) $stack6;
+    
+      label5:
+        return $stack7;
+    
+     catch java.lang.Exception from label1 to label2 with label2;
+     catch java.lang.Exception from label3 to label5 with label2;
+    }
+
+    // ---- method: <org.jfree.chart.util.RefineryUtilities: javax.swing.JLabel createJLabel(java.lang.String,java.awt.Font)> ----
+    {
+        java.awt.Font font;
+        java.lang.String text;
+        javax.swing.JLabel $stack3, result;
+    
+    
+        text := @parameter0: java.lang.String;
+        font := @parameter1: java.awt.Font;
+        $stack3 = new javax.swing.JLabel;
+        specialinvoke $stack3.<javax.swing.JLabel: void <init>(java.lang.String)>(text);
+        result = $stack3;
+        virtualinvoke $stack3.<javax.swing.JLabel: void setFont(java.awt.Font)>(font);
+    
+        return $stack3;
+    }
+
+    // ---- method: <org.jfree.chart.util.RefineryUtilities: javax.swing.JLabel createJLabel(java.lang.String,java.awt.Font,java.awt.Color)> ----
+    {
+        java.awt.Color color;
+        java.awt.Font font;
+        java.lang.String text;
+        javax.swing.JLabel $stack4, result;
+    
+    
+        text := @parameter0: java.lang.String;
+        font := @parameter1: java.awt.Font;
+        color := @parameter2: java.awt.Color;
+        $stack4 = new javax.swing.JLabel;
+        specialinvoke $stack4.<javax.swing.JLabel: void <init>(java.lang.String)>(text);
+        result = $stack4;
+        virtualinvoke $stack4.<javax.swing.JLabel: void setFont(java.awt.Font)>(font);
+        virtualinvoke $stack4.<javax.swing.JLabel: void setForeground(java.awt.Color)>(color);
+    
+        return $stack4;
+    }
+
+}

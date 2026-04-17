@@ -1,0 +1,172 @@
+// ========================================================================
+// CLASS : org.jfree.chart.renderer.xy.WindItemRenderer
+// ========================================================================
+
+[PUBLIC, SUPER] class org.jfree.chart.renderer.xy.WindItemRenderer extends org.jfree.chart.renderer.xy.AbstractXYItemRenderer implements org.jfree.chart.util.PublicCloneable, java.lang.Cloneable, java.io.Serializable, org.jfree.chart.renderer.xy.XYItemRenderer {
+
+    // ---- method: <org.jfree.chart.renderer.xy.WindItemRenderer: void <init>()> ----
+    {
+        org.jfree.chart.renderer.xy.WindItemRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.xy.WindItemRenderer;
+        specialinvoke this.<org.jfree.chart.renderer.xy.AbstractXYItemRenderer: void <init>()>();
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.xy.WindItemRenderer: void drawItem(java.awt.Graphics2D,org.jfree.chart.renderer.xy.XYItemRendererState,java.awt.geom.Rectangle2D,org.jfree.chart.plot.XYPlot,org.jfree.chart.axis.ValueAxis,org.jfree.chart.axis.ValueAxis,org.jfree.data.xy.XYDataset,int,int,boolean,int)> ----
+    {
+        boolean selected;
+        double $stack100, $stack101, $stack102, $stack103, $stack104, $stack60, $stack61, $stack62, $stack63, $stack64, $stack65, $stack66, $stack67, $stack68, $stack78, $stack79, $stack80, $stack81, $stack82, $stack83, $stack84, $stack85, $stack86, $stack87, $stack88, $stack89, $stack90, $stack92, $stack93, $stack94, $stack95, $stack96, $stack97, $stack98, $stack99, aldir, alx2, aly2, ardir, arx2, ary2, ax1, ax2, ay1, ay2, ralx2, raly2, rarx2, rary2, rax2, ray2, wdirt, windForce;
+        float $stack76, $stack77;
+        int diri, forcei, item, pass, series;
+        java.awt.Font $stack75;
+        java.awt.Graphics2D g2;
+        java.awt.Paint #l0, seriesPaint;
+        java.awt.Shape #l1, #l2, #l3;
+        java.awt.Stroke seriesStroke;
+        java.awt.geom.Line2D$Double #l4, #l5, #l6, line#0, line#1, line#2;
+        java.awt.geom.Rectangle2D plotArea;
+        java.lang.Number wforce, windDir, x;
+        java.lang.Object $stack105, $stack73, $stack74, $stack91;
+        java.lang.String dirforce;
+        java.lang.StringBuffer $stack69, $stack70, $stack71, $stack72;
+        org.jfree.chart.axis.ValueAxis domainAxis, rangeAxis;
+        org.jfree.chart.plot.XYPlot plot;
+        org.jfree.chart.renderer.xy.WindItemRenderer this;
+        org.jfree.chart.renderer.xy.XYItemRendererState state;
+        org.jfree.chart.util.RectangleEdge domainAxisLocation, rangeAxisLocation;
+        org.jfree.data.xy.WindDataset windData;
+        org.jfree.data.xy.XYDataset dataset;
+    
+    
+        this := @this: org.jfree.chart.renderer.xy.WindItemRenderer;
+        g2 := @parameter0: java.awt.Graphics2D;
+        state := @parameter1: org.jfree.chart.renderer.xy.XYItemRendererState;
+        plotArea := @parameter2: java.awt.geom.Rectangle2D;
+        plot := @parameter3: org.jfree.chart.plot.XYPlot;
+        domainAxis := @parameter4: org.jfree.chart.axis.ValueAxis;
+        rangeAxis := @parameter5: org.jfree.chart.axis.ValueAxis;
+        dataset := @parameter6: org.jfree.data.xy.XYDataset;
+        series := @parameter7: int;
+        item := @parameter8: int;
+        selected := @parameter9: boolean;
+        pass := @parameter10: int;
+        windData = (org.jfree.data.xy.WindDataset) dataset;
+        seriesPaint = virtualinvoke this.<org.jfree.chart.renderer.xy.WindItemRenderer: java.awt.Paint getItemPaint(int,int,boolean)>(series, item, selected);
+        seriesStroke = virtualinvoke this.<org.jfree.chart.renderer.xy.WindItemRenderer: java.awt.Stroke getItemStroke(int,int,boolean)>(series, item, selected);
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>(seriesPaint);
+        virtualinvoke g2.<java.awt.Graphics2D: void setStroke(java.awt.Stroke)>(seriesStroke);
+        x = interfaceinvoke windData.<org.jfree.data.xy.WindDataset: java.lang.Number getX(int,int)>(series, item);
+        windDir = interfaceinvoke windData.<org.jfree.data.xy.WindDataset: java.lang.Number getWindDirection(int,int)>(series, item);
+        wforce = interfaceinvoke windData.<org.jfree.data.xy.WindDataset: java.lang.Number getWindForce(int,int)>(series, item);
+        windForce = virtualinvoke wforce.<java.lang.Number: double doubleValue()>();
+        $stack60 = virtualinvoke windDir.<java.lang.Number: double doubleValue()>();
+        $stack61 = $stack60 * -30.0;
+        $stack62 = $stack61 - 90.0;
+        wdirt = staticinvoke <java.lang.Math: double toRadians(double)>($stack62);
+        domainAxisLocation = virtualinvoke plot.<org.jfree.chart.plot.XYPlot: org.jfree.chart.util.RectangleEdge getDomainAxisEdge()>();
+        rangeAxisLocation = virtualinvoke plot.<org.jfree.chart.plot.XYPlot: org.jfree.chart.util.RectangleEdge getRangeAxisEdge()>();
+        $stack63 = virtualinvoke x.<java.lang.Number: double doubleValue()>();
+        ax1 = virtualinvoke domainAxis.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)>($stack63, plotArea, domainAxisLocation);
+        ay1 = virtualinvoke rangeAxis.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)>(0.0, plotArea, rangeAxisLocation);
+        $stack66 = virtualinvoke x.<java.lang.Number: double doubleValue()>();
+        $stack64 = staticinvoke <java.lang.Math: double cos(double)>(wdirt);
+        $stack65 = windForce * $stack64;
+        $stack67 = $stack65 * 8000000.0;
+        rax2 = $stack66 + $stack67;
+        $stack68 = staticinvoke <java.lang.Math: double sin(double)>(wdirt);
+        ray2 = windForce * $stack68;
+        ax2 = virtualinvoke domainAxis.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)>(rax2, plotArea, domainAxisLocation);
+        ay2 = virtualinvoke rangeAxis.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)>(ray2, plotArea, rangeAxisLocation);
+        diri = virtualinvoke windDir.<java.lang.Number: int intValue()>();
+        forcei = virtualinvoke wforce.<java.lang.Number: int intValue()>();
+        $stack69 = new java.lang.StringBuffer;
+        specialinvoke $stack69.<java.lang.StringBuffer: void <init>()>();
+        $stack70 = virtualinvoke $stack69.<java.lang.StringBuffer: java.lang.StringBuffer append(int)>(diri);
+        $stack71 = virtualinvoke $stack70.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>("-");
+        $stack72 = virtualinvoke $stack71.<java.lang.StringBuffer: java.lang.StringBuffer append(int)>(forcei);
+        dirforce = virtualinvoke $stack72.<java.lang.StringBuffer: java.lang.String toString()>();
+        $stack73 = new java.awt.geom.Line2D$Double;
+        #l5 = (java.awt.geom.Line2D$Double) $stack73;
+        specialinvoke #l5.<java.awt.geom.Line2D$Double: void <init>(double,double,double,double)>(ax1, ay1, ax2, ay2);
+        line#0 = (java.awt.geom.Line2D$Double) $stack73;
+        #l2 = (java.awt.Shape) $stack73;
+        virtualinvoke g2.<java.awt.Graphics2D: void draw(java.awt.Shape)>(#l2);
+        $stack74 = <java.awt.Color: java.awt.Color blue>;
+        #l0 = (java.awt.Paint) $stack74;
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>(#l0);
+        $stack75 = new java.awt.Font;
+        specialinvoke $stack75.<java.awt.Font: void <init>(java.lang.String,int,int)>("Tahoma", 1, 9);
+        virtualinvoke g2.<java.awt.Graphics2D: void setFont(java.awt.Font)>($stack75);
+        $stack77 = (float) ax1;
+        $stack76 = (float) ay1;
+        virtualinvoke g2.<java.awt.Graphics2D: void drawString(java.lang.String,float,float)>(dirforce, $stack77, $stack76);
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>(seriesPaint);
+        virtualinvoke g2.<java.awt.Graphics2D: void setStroke(java.awt.Stroke)>(seriesStroke);
+        $stack78 = virtualinvoke windDir.<java.lang.Number: double doubleValue()>();
+        $stack79 = $stack78 * -30.0;
+        $stack80 = $stack79 - 90.0;
+        $stack81 = $stack80 - 5.0;
+        aldir = staticinvoke <java.lang.Math: double toRadians(double)>($stack81);
+        $stack82 = virtualinvoke wforce.<java.lang.Number: double doubleValue()>();
+        $stack83 = staticinvoke <java.lang.Math: double cos(double)>(aldir);
+        $stack84 = $stack82 * $stack83;
+        $stack85 = $stack84 * 8000000.0;
+        $stack86 = $stack85 * 0.8;
+        $stack87 = virtualinvoke x.<java.lang.Number: double doubleValue()>();
+        ralx2 = $stack86 + $stack87;
+        $stack88 = virtualinvoke wforce.<java.lang.Number: double doubleValue()>();
+        $stack89 = staticinvoke <java.lang.Math: double sin(double)>(aldir);
+        $stack90 = $stack88 * $stack89;
+        raly2 = $stack90 * 0.8;
+        alx2 = virtualinvoke domainAxis.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)>(ralx2, plotArea, domainAxisLocation);
+        aly2 = virtualinvoke rangeAxis.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)>(raly2, plotArea, rangeAxisLocation);
+        $stack91 = new java.awt.geom.Line2D$Double;
+        #l6 = (java.awt.geom.Line2D$Double) $stack91;
+        specialinvoke #l6.<java.awt.geom.Line2D$Double: void <init>(double,double,double,double)>(alx2, aly2, ax2, ay2);
+        line#1 = (java.awt.geom.Line2D$Double) $stack91;
+        #l1 = (java.awt.Shape) $stack91;
+        virtualinvoke g2.<java.awt.Graphics2D: void draw(java.awt.Shape)>(#l1);
+        $stack92 = virtualinvoke windDir.<java.lang.Number: double doubleValue()>();
+        $stack93 = $stack92 * -30.0;
+        $stack94 = $stack93 - 90.0;
+        $stack95 = $stack94 + 5.0;
+        ardir = staticinvoke <java.lang.Math: double toRadians(double)>($stack95);
+        $stack96 = virtualinvoke wforce.<java.lang.Number: double doubleValue()>();
+        $stack97 = staticinvoke <java.lang.Math: double cos(double)>(ardir);
+        $stack98 = $stack96 * $stack97;
+        $stack99 = $stack98 * 8000000.0;
+        $stack100 = $stack99 * 0.8;
+        $stack101 = virtualinvoke x.<java.lang.Number: double doubleValue()>();
+        rarx2 = $stack100 + $stack101;
+        $stack102 = virtualinvoke wforce.<java.lang.Number: double doubleValue()>();
+        $stack103 = staticinvoke <java.lang.Math: double sin(double)>(ardir);
+        $stack104 = $stack102 * $stack103;
+        rary2 = $stack104 * 0.8;
+        arx2 = virtualinvoke domainAxis.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)>(rarx2, plotArea, domainAxisLocation);
+        ary2 = virtualinvoke rangeAxis.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)>(rary2, plotArea, rangeAxisLocation);
+        $stack105 = new java.awt.geom.Line2D$Double;
+        #l4 = (java.awt.geom.Line2D$Double) $stack105;
+        specialinvoke #l4.<java.awt.geom.Line2D$Double: void <init>(double,double,double,double)>(arx2, ary2, ax2, ay2);
+        line#2 = (java.awt.geom.Line2D$Double) $stack105;
+        #l3 = (java.awt.Shape) $stack105;
+        virtualinvoke g2.<java.awt.Graphics2D: void draw(java.awt.Shape)>(#l3);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.xy.WindItemRenderer: java.lang.Object clone()> ----
+    {
+        java.lang.Object $stack1;
+        org.jfree.chart.renderer.xy.WindItemRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.xy.WindItemRenderer;
+        $stack1 = specialinvoke this.<org.jfree.chart.renderer.xy.AbstractXYItemRenderer: java.lang.Object clone()>();
+    
+        return $stack1;
+    }
+
+}

@@ -1,0 +1,2234 @@
+// ========================================================================
+// CLASS : org.jfree.chart.ChartFactory
+// ========================================================================
+
+[PUBLIC, SUPER, ABSTRACT] class org.jfree.chart.ChartFactory extends java.lang.Object {
+
+    // ---- method: <org.jfree.chart.ChartFactory: org.jfree.chart.JFreeChart createPieChart(java.lang.String,org.jfree.data.pie.PieDataset,boolean)> ----
+    {
+        boolean legend;
+        java.lang.String title;
+        java.util.Locale $stack3;
+        org.jfree.chart.JFreeChart $stack4;
+        org.jfree.data.pie.PieDataset dataset;
+    
+    
+        title := @parameter0: java.lang.String;
+        dataset := @parameter1: org.jfree.data.pie.PieDataset;
+        legend := @parameter2: boolean;
+        $stack3 = staticinvoke <java.util.Locale: java.util.Locale getDefault()>();
+        $stack4 = staticinvoke <org.jfree.chart.ChartFactory: org.jfree.chart.JFreeChart createPieChart(java.lang.String,org.jfree.data.pie.PieDataset,boolean,java.util.Locale)>(title, dataset, legend, $stack3);
+    
+        return $stack4;
+    }
+
+    // ---- method: <org.jfree.chart.ChartFactory: org.jfree.chart.JFreeChart createMultiplePieChart3D(java.lang.String,org.jfree.data.category.CategoryDataset,org.jfree.chart.util.TableOrder,boolean)> ----
+    {
+        boolean legend;
+        java.awt.Font $stack13, $stack19;
+        java.lang.IllegalArgumentException #l0;
+        java.lang.Object $stack22;
+        java.lang.String title;
+        java.lang.Throwable #l1;
+        org.jfree.chart.ChartTheme $stack21;
+        org.jfree.chart.JFreeChart $stack12, $stack17, $stack20, chart, pieChart;
+        org.jfree.chart.labels.StandardPieToolTipGenerator $stack16, tooltipGenerator;
+        org.jfree.chart.plot.MultiplePiePlot $stack10, plot;
+        org.jfree.chart.plot.PiePlot pp;
+        org.jfree.chart.plot.PiePlot3D $stack11;
+        org.jfree.chart.plot.Plot $stack18;
+        org.jfree.chart.title.TextTitle $stack14, seriesTitle;
+        org.jfree.chart.util.RectangleEdge $stack15;
+        org.jfree.chart.util.TableOrder order;
+        org.jfree.data.category.CategoryDataset dataset;
+    
+    
+        title := @parameter0: java.lang.String;
+        dataset := @parameter1: org.jfree.data.category.CategoryDataset;
+        order := @parameter2: org.jfree.chart.util.TableOrder;
+        legend := @parameter3: boolean;
+    
+        if order != null goto label1;
+        $stack22 = new java.lang.IllegalArgumentException;
+        #l0 = (java.lang.IllegalArgumentException) $stack22;
+        specialinvoke #l0.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'order\' argument.");
+        #l1 = (java.lang.Throwable) $stack22;
+    
+        throw #l1;
+    
+      label1:
+        $stack10 = new org.jfree.chart.plot.MultiplePiePlot;
+        specialinvoke $stack10.<org.jfree.chart.plot.MultiplePiePlot: void <init>(org.jfree.data.category.CategoryDataset)>(dataset);
+        plot = $stack10;
+        virtualinvoke $stack10.<org.jfree.chart.plot.MultiplePiePlot: void setDataExtractOrder(org.jfree.chart.util.TableOrder)>(order);
+        virtualinvoke $stack10.<org.jfree.chart.plot.MultiplePiePlot: void setBackgroundPaint(java.awt.Paint)>(null);
+        virtualinvoke $stack10.<org.jfree.chart.plot.MultiplePiePlot: void setOutlineStroke(java.awt.Stroke)>(null);
+        $stack12 = new org.jfree.chart.JFreeChart;
+        $stack11 = new org.jfree.chart.plot.PiePlot3D;
+        specialinvoke $stack11.<org.jfree.chart.plot.PiePlot3D: void <init>(org.jfree.data.pie.PieDataset)>(null);
+        specialinvoke $stack12.<org.jfree.chart.JFreeChart: void <init>(org.jfree.chart.plot.Plot)>($stack11);
+        pieChart = $stack12;
+        $stack14 = new org.jfree.chart.title.TextTitle;
+        $stack13 = new java.awt.Font;
+        specialinvoke $stack13.<java.awt.Font: void <init>(java.lang.String,int,int)>("Tahoma", 1, 12);
+        specialinvoke $stack14.<org.jfree.chart.title.TextTitle: void <init>(java.lang.String,java.awt.Font)>("Series Title", $stack13);
+        seriesTitle = $stack14;
+        $stack15 = <org.jfree.chart.util.RectangleEdge: org.jfree.chart.util.RectangleEdge BOTTOM>;
+        virtualinvoke $stack14.<org.jfree.chart.title.TextTitle: void setPosition(org.jfree.chart.util.RectangleEdge)>($stack15);
+        virtualinvoke $stack12.<org.jfree.chart.JFreeChart: void setTitle(org.jfree.chart.title.TextTitle)>($stack14);
+        virtualinvoke $stack12.<org.jfree.chart.JFreeChart: void removeLegend()>();
+        virtualinvoke $stack12.<org.jfree.chart.JFreeChart: void setBackgroundPaint(java.awt.Paint)>(null);
+        virtualinvoke $stack10.<org.jfree.chart.plot.MultiplePiePlot: void setPieChart(org.jfree.chart.JFreeChart)>($stack12);
+        $stack16 = new org.jfree.chart.labels.StandardPieToolTipGenerator;
+        specialinvoke $stack16.<org.jfree.chart.labels.StandardPieToolTipGenerator: void <init>()>();
+        tooltipGenerator = $stack16;
+        $stack17 = virtualinvoke $stack10.<org.jfree.chart.plot.MultiplePiePlot: org.jfree.chart.JFreeChart getPieChart()>();
+        $stack18 = virtualinvoke $stack17.<org.jfree.chart.JFreeChart: org.jfree.chart.plot.Plot getPlot()>();
+        pp = (org.jfree.chart.plot.PiePlot) $stack18;
+        virtualinvoke pp.<org.jfree.chart.plot.PiePlot: void setToolTipGenerator(org.jfree.chart.labels.PieToolTipGenerator)>($stack16);
+        $stack20 = new org.jfree.chart.JFreeChart;
+        $stack19 = <org.jfree.chart.JFreeChart: java.awt.Font DEFAULT_TITLE_FONT>;
+        specialinvoke $stack20.<org.jfree.chart.JFreeChart: void <init>(java.lang.String,java.awt.Font,org.jfree.chart.plot.Plot,boolean)>(title, $stack19, $stack10, legend);
+        chart = $stack20;
+        $stack21 = <org.jfree.chart.ChartFactory: org.jfree.chart.ChartTheme currentTheme>;
+        interfaceinvoke $stack21.<org.jfree.chart.ChartTheme: void apply(org.jfree.chart.JFreeChart)>($stack20);
+    
+        return $stack20;
+    }
+
+    // ---- method: <org.jfree.chart.ChartFactory: org.jfree.chart.JFreeChart createHighLowChart(java.lang.String,java.lang.String,java.lang.String,org.jfree.data.xy.OHLCDataset,org.jfree.chart.axis.Timeline,boolean)> ----
+    {
+        boolean legend;
+        java.awt.Font $stack16;
+        java.lang.String timeAxisLabel, title, valueAxisLabel;
+        org.jfree.chart.ChartTheme $stack18;
+        org.jfree.chart.JFreeChart $stack17, chart;
+        org.jfree.chart.axis.DateAxis $stack11, timeAxis;
+        org.jfree.chart.axis.NumberAxis $stack12, valueAxis;
+        org.jfree.chart.axis.Timeline timeline;
+        org.jfree.chart.labels.HighLowItemLabelGenerator $stack14;
+        org.jfree.chart.plot.XYPlot $stack15, plot;
+        org.jfree.chart.renderer.xy.HighLowRenderer $stack13, renderer;
+        org.jfree.data.xy.OHLCDataset dataset;
+    
+    
+        title := @parameter0: java.lang.String;
+        timeAxisLabel := @parameter1: java.lang.String;
+        valueAxisLabel := @parameter2: java.lang.String;
+        dataset := @parameter3: org.jfree.data.xy.OHLCDataset;
+        timeline := @parameter4: org.jfree.chart.axis.Timeline;
+        legend := @parameter5: boolean;
+        $stack11 = new org.jfree.chart.axis.DateAxis;
+        specialinvoke $stack11.<org.jfree.chart.axis.DateAxis: void <init>(java.lang.String)>(timeAxisLabel);
+        timeAxis = $stack11;
+        virtualinvoke $stack11.<org.jfree.chart.axis.DateAxis: void setTimeline(org.jfree.chart.axis.Timeline)>(timeline);
+        $stack12 = new org.jfree.chart.axis.NumberAxis;
+        specialinvoke $stack12.<org.jfree.chart.axis.NumberAxis: void <init>(java.lang.String)>(valueAxisLabel);
+        valueAxis = $stack12;
+        $stack13 = new org.jfree.chart.renderer.xy.HighLowRenderer;
+        specialinvoke $stack13.<org.jfree.chart.renderer.xy.HighLowRenderer: void <init>()>();
+        renderer = $stack13;
+        $stack14 = new org.jfree.chart.labels.HighLowItemLabelGenerator;
+        specialinvoke $stack14.<org.jfree.chart.labels.HighLowItemLabelGenerator: void <init>()>();
+        virtualinvoke $stack13.<org.jfree.chart.renderer.xy.HighLowRenderer: void setBaseToolTipGenerator(org.jfree.chart.labels.XYToolTipGenerator)>($stack14);
+        $stack15 = new org.jfree.chart.plot.XYPlot;
+        specialinvoke $stack15.<org.jfree.chart.plot.XYPlot: void <init>(org.jfree.data.xy.XYDataset,org.jfree.chart.axis.ValueAxis,org.jfree.chart.axis.ValueAxis,org.jfree.chart.renderer.xy.XYItemRenderer)>(dataset, $stack11, $stack12, $stack13);
+        plot = $stack15;
+        $stack17 = new org.jfree.chart.JFreeChart;
+        $stack16 = <org.jfree.chart.JFreeChart: java.awt.Font DEFAULT_TITLE_FONT>;
+        specialinvoke $stack17.<org.jfree.chart.JFreeChart: void <init>(java.lang.String,java.awt.Font,org.jfree.chart.plot.Plot,boolean)>(title, $stack16, $stack15, legend);
+        chart = $stack17;
+        $stack18 = <org.jfree.chart.ChartFactory: org.jfree.chart.ChartTheme currentTheme>;
+        interfaceinvoke $stack18.<org.jfree.chart.ChartTheme: void apply(org.jfree.chart.JFreeChart)>($stack17);
+    
+        return $stack17;
+    }
+
+    // ---- method: <org.jfree.chart.ChartFactory: org.jfree.chart.JFreeChart createXYLineChart(java.lang.String,java.lang.String,java.lang.String,org.jfree.data.xy.XYDataset,boolean)> ----
+    {
+        boolean legend;
+        java.awt.Font $stack15;
+        java.lang.String title, xAxisLabel, yAxisLabel;
+        org.jfree.chart.ChartTheme $stack17;
+        org.jfree.chart.JFreeChart $stack16, chart;
+        org.jfree.chart.axis.NumberAxis $stack10, $stack11, xAxis, yAxis;
+        org.jfree.chart.labels.StandardXYToolTipGenerator $stack14;
+        org.jfree.chart.plot.XYPlot $stack13, plot;
+        org.jfree.chart.renderer.xy.XYLineAndShapeRenderer $stack12, renderer;
+        org.jfree.data.xy.XYDataset dataset;
+    
+    
+        title := @parameter0: java.lang.String;
+        xAxisLabel := @parameter1: java.lang.String;
+        yAxisLabel := @parameter2: java.lang.String;
+        dataset := @parameter3: org.jfree.data.xy.XYDataset;
+        legend := @parameter4: boolean;
+        $stack10 = new org.jfree.chart.axis.NumberAxis;
+        specialinvoke $stack10.<org.jfree.chart.axis.NumberAxis: void <init>(java.lang.String)>(xAxisLabel);
+        xAxis = $stack10;
+        virtualinvoke $stack10.<org.jfree.chart.axis.NumberAxis: void setAutoRangeIncludesZero(boolean)>(0);
+        $stack11 = new org.jfree.chart.axis.NumberAxis;
+        specialinvoke $stack11.<org.jfree.chart.axis.NumberAxis: void <init>(java.lang.String)>(yAxisLabel);
+        yAxis = $stack11;
+        $stack12 = new org.jfree.chart.renderer.xy.XYLineAndShapeRenderer;
+        specialinvoke $stack12.<org.jfree.chart.renderer.xy.XYLineAndShapeRenderer: void <init>(boolean,boolean)>(1, 0);
+        renderer = $stack12;
+        $stack13 = new org.jfree.chart.plot.XYPlot;
+        specialinvoke $stack13.<org.jfree.chart.plot.XYPlot: void <init>(org.jfree.data.xy.XYDataset,org.jfree.chart.axis.ValueAxis,org.jfree.chart.axis.ValueAxis,org.jfree.chart.renderer.xy.XYItemRenderer)>(dataset, $stack10, $stack11, $stack12);
+        plot = $stack13;
+        $stack14 = new org.jfree.chart.labels.StandardXYToolTipGenerator;
+        specialinvoke $stack14.<org.jfree.chart.labels.StandardXYToolTipGenerator: void <init>()>();
+        interfaceinvoke $stack12.<org.jfree.chart.renderer.xy.XYItemRenderer: void setBaseToolTipGenerator(org.jfree.chart.labels.XYToolTipGenerator)>($stack14);
+        $stack16 = new org.jfree.chart.JFreeChart;
+        $stack15 = <org.jfree.chart.JFreeChart: java.awt.Font DEFAULT_TITLE_FONT>;
+        specialinvoke $stack16.<org.jfree.chart.JFreeChart: void <init>(java.lang.String,java.awt.Font,org.jfree.chart.plot.Plot,boolean)>(title, $stack15, $stack13, legend);
+        chart = $stack16;
+        $stack17 = <org.jfree.chart.ChartFactory: org.jfree.chart.ChartTheme currentTheme>;
+        interfaceinvoke $stack17.<org.jfree.chart.ChartTheme: void apply(org.jfree.chart.JFreeChart)>($stack16);
+    
+        return $stack16;
+    }
+
+    // ---- method: <org.jfree.chart.ChartFactory: org.jfree.chart.JFreeChart createBoxAndWhiskerChart(java.lang.String,java.lang.String,java.lang.String,org.jfree.data.statistics.BoxAndWhiskerCategoryDataset,boolean)> ----
+    {
+        boolean legend;
+        java.awt.Font $stack15;
+        java.lang.String categoryAxisLabel, title, valueAxisLabel;
+        org.jfree.chart.ChartTheme $stack17;
+        org.jfree.chart.JFreeChart $stack16, chart;
+        org.jfree.chart.axis.CategoryAxis $stack10, categoryAxis;
+        org.jfree.chart.axis.NumberAxis $stack11, valueAxis;
+        org.jfree.chart.labels.BoxAndWhiskerToolTipGenerator $stack13;
+        org.jfree.chart.plot.CategoryPlot $stack14, plot;
+        org.jfree.chart.renderer.category.BoxAndWhiskerRenderer $stack12, renderer;
+        org.jfree.data.statistics.BoxAndWhiskerCategoryDataset dataset;
+    
+    
+        title := @parameter0: java.lang.String;
+        categoryAxisLabel := @parameter1: java.lang.String;
+        valueAxisLabel := @parameter2: java.lang.String;
+        dataset := @parameter3: org.jfree.data.statistics.BoxAndWhiskerCategoryDataset;
+        legend := @parameter4: boolean;
+        $stack10 = new org.jfree.chart.axis.CategoryAxis;
+        specialinvoke $stack10.<org.jfree.chart.axis.CategoryAxis: void <init>(java.lang.String)>(categoryAxisLabel);
+        categoryAxis = $stack10;
+        $stack11 = new org.jfree.chart.axis.NumberAxis;
+        specialinvoke $stack11.<org.jfree.chart.axis.NumberAxis: void <init>(java.lang.String)>(valueAxisLabel);
+        valueAxis = $stack11;
+        virtualinvoke $stack11.<org.jfree.chart.axis.NumberAxis: void setAutoRangeIncludesZero(boolean)>(0);
+        $stack12 = new org.jfree.chart.renderer.category.BoxAndWhiskerRenderer;
+        specialinvoke $stack12.<org.jfree.chart.renderer.category.BoxAndWhiskerRenderer: void <init>()>();
+        renderer = $stack12;
+        $stack13 = new org.jfree.chart.labels.BoxAndWhiskerToolTipGenerator;
+        specialinvoke $stack13.<org.jfree.chart.labels.BoxAndWhiskerToolTipGenerator: void <init>()>();
+        virtualinvoke $stack12.<org.jfree.chart.renderer.category.BoxAndWhiskerRenderer: void setBaseToolTipGenerator(org.jfree.chart.labels.CategoryToolTipGenerator)>($stack13);
+        $stack14 = new org.jfree.chart.plot.CategoryPlot;
+        specialinvoke $stack14.<org.jfree.chart.plot.CategoryPlot: void <init>(org.jfree.data.category.CategoryDataset,org.jfree.chart.axis.CategoryAxis,org.jfree.chart.axis.ValueAxis,org.jfree.chart.renderer.category.CategoryItemRenderer)>(dataset, $stack10, $stack11, $stack12);
+        plot = $stack14;
+        $stack16 = new org.jfree.chart.JFreeChart;
+        $stack15 = <org.jfree.chart.JFreeChart: java.awt.Font DEFAULT_TITLE_FONT>;
+        specialinvoke $stack16.<org.jfree.chart.JFreeChart: void <init>(java.lang.String,java.awt.Font,org.jfree.chart.plot.Plot,boolean)>(title, $stack15, $stack14, legend);
+        chart = $stack16;
+        $stack17 = <org.jfree.chart.ChartFactory: org.jfree.chart.ChartTheme currentTheme>;
+        interfaceinvoke $stack17.<org.jfree.chart.ChartTheme: void apply(org.jfree.chart.JFreeChart)>($stack16);
+    
+        return $stack16;
+    }
+
+    // ---- method: <org.jfree.chart.ChartFactory: org.jfree.chart.JFreeChart createPieChart3D(java.lang.String,org.jfree.data.pie.PieDataset,boolean)> ----
+    {
+        boolean legend;
+        java.awt.Font $stack8;
+        java.lang.String title;
+        org.jfree.chart.ChartTheme $stack10;
+        org.jfree.chart.JFreeChart $stack9, chart;
+        org.jfree.chart.labels.StandardPieToolTipGenerator $stack7;
+        org.jfree.chart.plot.PiePlot3D $stack5, plot;
+        org.jfree.chart.util.RectangleInsets $stack6;
+        org.jfree.data.pie.PieDataset dataset;
+    
+    
+        title := @parameter0: java.lang.String;
+        dataset := @parameter1: org.jfree.data.pie.PieDataset;
+        legend := @parameter2: boolean;
+        $stack5 = new org.jfree.chart.plot.PiePlot3D;
+        specialinvoke $stack5.<org.jfree.chart.plot.PiePlot3D: void <init>(org.jfree.data.pie.PieDataset)>(dataset);
+        plot = $stack5;
+        $stack6 = new org.jfree.chart.util.RectangleInsets;
+        specialinvoke $stack6.<org.jfree.chart.util.RectangleInsets: void <init>(double,double,double,double)>(0.0, 5.0, 5.0, 5.0);
+        virtualinvoke $stack5.<org.jfree.chart.plot.PiePlot3D: void setInsets(org.jfree.chart.util.RectangleInsets)>($stack6);
+        $stack7 = new org.jfree.chart.labels.StandardPieToolTipGenerator;
+        specialinvoke $stack7.<org.jfree.chart.labels.StandardPieToolTipGenerator: void <init>()>();
+        virtualinvoke $stack5.<org.jfree.chart.plot.PiePlot3D: void setToolTipGenerator(org.jfree.chart.labels.PieToolTipGenerator)>($stack7);
+        $stack9 = new org.jfree.chart.JFreeChart;
+        $stack8 = <org.jfree.chart.JFreeChart: java.awt.Font DEFAULT_TITLE_FONT>;
+        specialinvoke $stack9.<org.jfree.chart.JFreeChart: void <init>(java.lang.String,java.awt.Font,org.jfree.chart.plot.Plot,boolean)>(title, $stack8, $stack5, legend);
+        chart = $stack9;
+        $stack10 = <org.jfree.chart.ChartFactory: org.jfree.chart.ChartTheme currentTheme>;
+        interfaceinvoke $stack10.<org.jfree.chart.ChartTheme: void apply(org.jfree.chart.JFreeChart)>($stack9);
+    
+        return $stack9;
+    }
+
+    // ---- method: <org.jfree.chart.ChartFactory: void <init>()> ----
+    {
+        org.jfree.chart.ChartFactory this;
+    
+    
+        this := @this: org.jfree.chart.ChartFactory;
+        specialinvoke this.<java.lang.Object: void <init>()>();
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.ChartFactory: org.jfree.chart.ChartTheme getChartTheme()> ----
+    {
+        org.jfree.chart.ChartTheme $stack0;
+    
+    
+        $stack0 = <org.jfree.chart.ChartFactory: org.jfree.chart.ChartTheme currentTheme>;
+    
+        return $stack0;
+    }
+
+    // ---- method: <org.jfree.chart.ChartFactory: org.jfree.chart.JFreeChart createBarChart3D(java.lang.String,java.lang.String,java.lang.String,org.jfree.data.category.CategoryDataset,boolean)> ----
+    {
+        boolean legend;
+        java.awt.Font $stack15;
+        java.lang.String categoryAxisLabel, title, valueAxisLabel;
+        org.jfree.chart.ChartTheme $stack17;
+        org.jfree.chart.JFreeChart $stack16, chart;
+        org.jfree.chart.axis.CategoryAxis3D $stack10, categoryAxis;
+        org.jfree.chart.axis.NumberAxis3D $stack11, valueAxis;
+        org.jfree.chart.labels.StandardCategoryToolTipGenerator $stack13;
+        org.jfree.chart.plot.CategoryPlot $stack14, plot;
+        org.jfree.chart.renderer.category.BarRenderer3D $stack12, renderer;
+        org.jfree.data.category.CategoryDataset dataset;
+    
+    
+        title := @parameter0: java.lang.String;
+        categoryAxisLabel := @parameter1: java.lang.String;
+        valueAxisLabel := @parameter2: java.lang.String;
+        dataset := @parameter3: org.jfree.data.category.CategoryDataset;
+        legend := @parameter4: boolean;
+        $stack10 = new org.jfree.chart.axis.CategoryAxis3D;
+        specialinvoke $stack10.<org.jfree.chart.axis.CategoryAxis3D: void <init>(java.lang.String)>(categoryAxisLabel);
+        categoryAxis = $stack10;
+        $stack11 = new org.jfree.chart.axis.NumberAxis3D;
+        specialinvoke $stack11.<org.jfree.chart.axis.NumberAxis3D: void <init>(java.lang.String)>(valueAxisLabel);
+        valueAxis = $stack11;
+        $stack12 = new org.jfree.chart.renderer.category.BarRenderer3D;
+        specialinvoke $stack12.<org.jfree.chart.renderer.category.BarRenderer3D: void <init>()>();
+        renderer = $stack12;
+        $stack13 = new org.jfree.chart.labels.StandardCategoryToolTipGenerator;
+        specialinvoke $stack13.<org.jfree.chart.labels.StandardCategoryToolTipGenerator: void <init>()>();
+        virtualinvoke $stack12.<org.jfree.chart.renderer.category.BarRenderer3D: void setBaseToolTipGenerator(org.jfree.chart.labels.CategoryToolTipGenerator)>($stack13);
+        $stack14 = new org.jfree.chart.plot.CategoryPlot;
+        specialinvoke $stack14.<org.jfree.chart.plot.CategoryPlot: void <init>(org.jfree.data.category.CategoryDataset,org.jfree.chart.axis.CategoryAxis,org.jfree.chart.axis.ValueAxis,org.jfree.chart.renderer.category.CategoryItemRenderer)>(dataset, $stack10, $stack11, $stack12);
+        plot = $stack14;
+        virtualinvoke $stack14.<org.jfree.chart.plot.CategoryPlot: void setForegroundAlpha(float)>(0.75F);
+        $stack16 = new org.jfree.chart.JFreeChart;
+        $stack15 = <org.jfree.chart.JFreeChart: java.awt.Font DEFAULT_TITLE_FONT>;
+        specialinvoke $stack16.<org.jfree.chart.JFreeChart: void <init>(java.lang.String,java.awt.Font,org.jfree.chart.plot.Plot,boolean)>(title, $stack15, $stack14, legend);
+        chart = $stack16;
+        $stack17 = <org.jfree.chart.ChartFactory: org.jfree.chart.ChartTheme currentTheme>;
+        interfaceinvoke $stack17.<org.jfree.chart.ChartTheme: void apply(org.jfree.chart.JFreeChart)>($stack16);
+    
+        return $stack16;
+    }
+
+    // ---- method: <org.jfree.chart.ChartFactory: org.jfree.chart.JFreeChart createXYAreaChart(java.lang.String,java.lang.String,java.lang.String,org.jfree.data.xy.XYDataset,boolean)> ----
+    {
+        boolean legend;
+        java.awt.Font $stack15;
+        java.lang.String title, xAxisLabel, yAxisLabel;
+        org.jfree.chart.ChartTheme $stack17;
+        org.jfree.chart.JFreeChart $stack16, chart;
+        org.jfree.chart.axis.NumberAxis $stack10, $stack11, xAxis, yAxis;
+        org.jfree.chart.labels.StandardXYToolTipGenerator $stack14;
+        org.jfree.chart.plot.XYPlot $stack12, plot;
+        org.jfree.chart.renderer.xy.XYAreaRenderer $stack13, renderer;
+        org.jfree.data.xy.XYDataset dataset;
+    
+    
+        title := @parameter0: java.lang.String;
+        xAxisLabel := @parameter1: java.lang.String;
+        yAxisLabel := @parameter2: java.lang.String;
+        dataset := @parameter3: org.jfree.data.xy.XYDataset;
+        legend := @parameter4: boolean;
+        $stack10 = new org.jfree.chart.axis.NumberAxis;
+        specialinvoke $stack10.<org.jfree.chart.axis.NumberAxis: void <init>(java.lang.String)>(xAxisLabel);
+        xAxis = $stack10;
+        virtualinvoke $stack10.<org.jfree.chart.axis.NumberAxis: void setAutoRangeIncludesZero(boolean)>(0);
+        $stack11 = new org.jfree.chart.axis.NumberAxis;
+        specialinvoke $stack11.<org.jfree.chart.axis.NumberAxis: void <init>(java.lang.String)>(yAxisLabel);
+        yAxis = $stack11;
+        $stack12 = new org.jfree.chart.plot.XYPlot;
+        specialinvoke $stack12.<org.jfree.chart.plot.XYPlot: void <init>(org.jfree.data.xy.XYDataset,org.jfree.chart.axis.ValueAxis,org.jfree.chart.axis.ValueAxis,org.jfree.chart.renderer.xy.XYItemRenderer)>(dataset, $stack10, $stack11, null);
+        plot = $stack12;
+        virtualinvoke $stack12.<org.jfree.chart.plot.XYPlot: void setForegroundAlpha(float)>(0.5F);
+        $stack13 = new org.jfree.chart.renderer.xy.XYAreaRenderer;
+        specialinvoke $stack13.<org.jfree.chart.renderer.xy.XYAreaRenderer: void <init>(int)>(4);
+        renderer = $stack13;
+        $stack14 = new org.jfree.chart.labels.StandardXYToolTipGenerator;
+        specialinvoke $stack14.<org.jfree.chart.labels.StandardXYToolTipGenerator: void <init>()>();
+        virtualinvoke $stack13.<org.jfree.chart.renderer.xy.XYAreaRenderer: void setBaseToolTipGenerator(org.jfree.chart.labels.XYToolTipGenerator)>($stack14);
+        virtualinvoke $stack12.<org.jfree.chart.plot.XYPlot: void setRenderer(org.jfree.chart.renderer.xy.XYItemRenderer)>($stack13);
+        $stack16 = new org.jfree.chart.JFreeChart;
+        $stack15 = <org.jfree.chart.JFreeChart: java.awt.Font DEFAULT_TITLE_FONT>;
+        specialinvoke $stack16.<org.jfree.chart.JFreeChart: void <init>(java.lang.String,java.awt.Font,org.jfree.chart.plot.Plot,boolean)>(title, $stack15, $stack12, legend);
+        chart = $stack16;
+        $stack17 = <org.jfree.chart.ChartFactory: org.jfree.chart.ChartTheme currentTheme>;
+        interfaceinvoke $stack17.<org.jfree.chart.ChartTheme: void apply(org.jfree.chart.JFreeChart)>($stack16);
+    
+        return $stack16;
+    }
+
+    // ---- method: <org.jfree.chart.ChartFactory: org.jfree.chart.JFreeChart createWaferMapChart(java.lang.String,org.jfree.data.general.WaferMapDataset,boolean)> ----
+    {
+        boolean legend;
+        java.awt.Font $stack8;
+        java.lang.String title;
+        org.jfree.chart.ChartTheme $stack10;
+        org.jfree.chart.JFreeChart $stack9, chart;
+        org.jfree.chart.plot.WaferMapPlot $stack6, plot;
+        org.jfree.chart.renderer.WaferMapRenderer $stack7, renderer;
+        org.jfree.data.general.WaferMapDataset dataset;
+    
+    
+        title := @parameter0: java.lang.String;
+        dataset := @parameter1: org.jfree.data.general.WaferMapDataset;
+        legend := @parameter2: boolean;
+        $stack6 = new org.jfree.chart.plot.WaferMapPlot;
+        specialinvoke $stack6.<org.jfree.chart.plot.WaferMapPlot: void <init>(org.jfree.data.general.WaferMapDataset)>(dataset);
+        plot = $stack6;
+        $stack7 = new org.jfree.chart.renderer.WaferMapRenderer;
+        specialinvoke $stack7.<org.jfree.chart.renderer.WaferMapRenderer: void <init>()>();
+        renderer = $stack7;
+        virtualinvoke $stack6.<org.jfree.chart.plot.WaferMapPlot: void setRenderer(org.jfree.chart.renderer.WaferMapRenderer)>($stack7);
+        $stack9 = new org.jfree.chart.JFreeChart;
+        $stack8 = <org.jfree.chart.JFreeChart: java.awt.Font DEFAULT_TITLE_FONT>;
+        specialinvoke $stack9.<org.jfree.chart.JFreeChart: void <init>(java.lang.String,java.awt.Font,org.jfree.chart.plot.Plot,boolean)>(title, $stack8, $stack6, legend);
+        chart = $stack9;
+        $stack10 = <org.jfree.chart.ChartFactory: org.jfree.chart.ChartTheme currentTheme>;
+        interfaceinvoke $stack10.<org.jfree.chart.ChartTheme: void apply(org.jfree.chart.JFreeChart)>($stack9);
+    
+        return $stack9;
+    }
+
+    // ---- method: <org.jfree.chart.ChartFactory: org.jfree.chart.JFreeChart createHistogram(java.lang.String,java.lang.String,java.lang.String,org.jfree.data.xy.IntervalXYDataset,boolean)> ----
+    {
+        boolean legend;
+        java.awt.Font $stack15;
+        java.lang.String title, xAxisLabel, yAxisLabel;
+        org.jfree.chart.ChartTheme $stack17;
+        org.jfree.chart.JFreeChart $stack16, chart;
+        org.jfree.chart.axis.NumberAxis $stack10, $stack11, xAxis, yAxis;
+        org.jfree.chart.labels.StandardXYToolTipGenerator $stack13;
+        org.jfree.chart.plot.XYPlot $stack14, plot;
+        org.jfree.chart.renderer.xy.XYBarRenderer $stack12, renderer;
+        org.jfree.data.xy.IntervalXYDataset dataset;
+    
+    
+        title := @parameter0: java.lang.String;
+        xAxisLabel := @parameter1: java.lang.String;
+        yAxisLabel := @parameter2: java.lang.String;
+        dataset := @parameter3: org.jfree.data.xy.IntervalXYDataset;
+        legend := @parameter4: boolean;
+        $stack10 = new org.jfree.chart.axis.NumberAxis;
+        specialinvoke $stack10.<org.jfree.chart.axis.NumberAxis: void <init>(java.lang.String)>(xAxisLabel);
+        xAxis = $stack10;
+        virtualinvoke $stack10.<org.jfree.chart.axis.NumberAxis: void setAutoRangeIncludesZero(boolean)>(0);
+        $stack11 = new org.jfree.chart.axis.NumberAxis;
+        specialinvoke $stack11.<org.jfree.chart.axis.NumberAxis: void <init>(java.lang.String)>(yAxisLabel);
+        yAxis = $stack11;
+        $stack12 = new org.jfree.chart.renderer.xy.XYBarRenderer;
+        specialinvoke $stack12.<org.jfree.chart.renderer.xy.XYBarRenderer: void <init>()>();
+        renderer = $stack12;
+        $stack13 = new org.jfree.chart.labels.StandardXYToolTipGenerator;
+        specialinvoke $stack13.<org.jfree.chart.labels.StandardXYToolTipGenerator: void <init>()>();
+        interfaceinvoke $stack12.<org.jfree.chart.renderer.xy.XYItemRenderer: void setBaseToolTipGenerator(org.jfree.chart.labels.XYToolTipGenerator)>($stack13);
+        $stack14 = new org.jfree.chart.plot.XYPlot;
+        specialinvoke $stack14.<org.jfree.chart.plot.XYPlot: void <init>(org.jfree.data.xy.XYDataset,org.jfree.chart.axis.ValueAxis,org.jfree.chart.axis.ValueAxis,org.jfree.chart.renderer.xy.XYItemRenderer)>(dataset, $stack10, $stack11, $stack12);
+        plot = $stack14;
+        $stack16 = new org.jfree.chart.JFreeChart;
+        $stack15 = <org.jfree.chart.JFreeChart: java.awt.Font DEFAULT_TITLE_FONT>;
+        specialinvoke $stack16.<org.jfree.chart.JFreeChart: void <init>(java.lang.String,java.awt.Font,org.jfree.chart.plot.Plot,boolean)>(title, $stack15, $stack14, legend);
+        chart = $stack16;
+        $stack17 = <org.jfree.chart.ChartFactory: org.jfree.chart.ChartTheme currentTheme>;
+        interfaceinvoke $stack17.<org.jfree.chart.ChartTheme: void apply(org.jfree.chart.JFreeChart)>($stack16);
+    
+        return $stack16;
+    }
+
+    // ---- method: <org.jfree.chart.ChartFactory: org.jfree.chart.JFreeChart createPieChart3D(java.lang.String,org.jfree.data.pie.PieDataset,boolean,java.util.Locale)> ----
+    {
+        boolean legend;
+        java.awt.Font $stack9;
+        java.lang.String title;
+        java.util.Locale locale;
+        org.jfree.chart.ChartTheme $stack11;
+        org.jfree.chart.JFreeChart $stack10, chart;
+        org.jfree.chart.labels.StandardPieToolTipGenerator $stack8;
+        org.jfree.chart.plot.PiePlot3D $stack6, plot;
+        org.jfree.chart.util.RectangleInsets $stack7;
+        org.jfree.data.pie.PieDataset dataset;
+    
+    
+        title := @parameter0: java.lang.String;
+        dataset := @parameter1: org.jfree.data.pie.PieDataset;
+        legend := @parameter2: boolean;
+        locale := @parameter3: java.util.Locale;
+        $stack6 = new org.jfree.chart.plot.PiePlot3D;
+        specialinvoke $stack6.<org.jfree.chart.plot.PiePlot3D: void <init>(org.jfree.data.pie.PieDataset)>(dataset);
+        plot = $stack6;
+        $stack7 = new org.jfree.chart.util.RectangleInsets;
+        specialinvoke $stack7.<org.jfree.chart.util.RectangleInsets: void <init>(double,double,double,double)>(0.0, 5.0, 5.0, 5.0);
+        virtualinvoke $stack6.<org.jfree.chart.plot.PiePlot3D: void setInsets(org.jfree.chart.util.RectangleInsets)>($stack7);
+        $stack8 = new org.jfree.chart.labels.StandardPieToolTipGenerator;
+        specialinvoke $stack8.<org.jfree.chart.labels.StandardPieToolTipGenerator: void <init>(java.util.Locale)>(locale);
+        virtualinvoke $stack6.<org.jfree.chart.plot.PiePlot3D: void setToolTipGenerator(org.jfree.chart.labels.PieToolTipGenerator)>($stack8);
+        $stack10 = new org.jfree.chart.JFreeChart;
+        $stack9 = <org.jfree.chart.JFreeChart: java.awt.Font DEFAULT_TITLE_FONT>;
+        specialinvoke $stack10.<org.jfree.chart.JFreeChart: void <init>(java.lang.String,java.awt.Font,org.jfree.chart.plot.Plot,boolean)>(title, $stack9, $stack6, legend);
+        chart = $stack10;
+        $stack11 = <org.jfree.chart.ChartFactory: org.jfree.chart.ChartTheme currentTheme>;
+        interfaceinvoke $stack11.<org.jfree.chart.ChartTheme: void apply(org.jfree.chart.JFreeChart)>($stack10);
+    
+        return $stack10;
+    }
+
+    // ---- method: <org.jfree.chart.ChartFactory: org.jfree.chart.JFreeChart createStackedBarChart3D(java.lang.String,java.lang.String,java.lang.String,org.jfree.data.category.CategoryDataset,boolean)> ----
+    {
+        boolean legend;
+        java.awt.Font $stack15;
+        java.lang.String categoryAxisLabel, title, valueAxisLabel;
+        org.jfree.chart.ChartTheme $stack17;
+        org.jfree.chart.JFreeChart $stack16, chart;
+        org.jfree.chart.axis.CategoryAxis3D $stack10, categoryAxis;
+        org.jfree.chart.axis.NumberAxis3D $stack11, valueAxis;
+        org.jfree.chart.labels.StandardCategoryToolTipGenerator $stack13;
+        org.jfree.chart.plot.CategoryPlot $stack14, plot;
+        org.jfree.chart.renderer.category.StackedBarRenderer3D $stack12, renderer;
+        org.jfree.data.category.CategoryDataset dataset;
+    
+    
+        title := @parameter0: java.lang.String;
+        categoryAxisLabel := @parameter1: java.lang.String;
+        valueAxisLabel := @parameter2: java.lang.String;
+        dataset := @parameter3: org.jfree.data.category.CategoryDataset;
+        legend := @parameter4: boolean;
+        $stack10 = new org.jfree.chart.axis.CategoryAxis3D;
+        specialinvoke $stack10.<org.jfree.chart.axis.CategoryAxis3D: void <init>(java.lang.String)>(categoryAxisLabel);
+        categoryAxis = $stack10;
+        $stack11 = new org.jfree.chart.axis.NumberAxis3D;
+        specialinvoke $stack11.<org.jfree.chart.axis.NumberAxis3D: void <init>(java.lang.String)>(valueAxisLabel);
+        valueAxis = $stack11;
+        $stack12 = new org.jfree.chart.renderer.category.StackedBarRenderer3D;
+        specialinvoke $stack12.<org.jfree.chart.renderer.category.StackedBarRenderer3D: void <init>()>();
+        renderer = $stack12;
+        $stack13 = new org.jfree.chart.labels.StandardCategoryToolTipGenerator;
+        specialinvoke $stack13.<org.jfree.chart.labels.StandardCategoryToolTipGenerator: void <init>()>();
+        interfaceinvoke $stack12.<org.jfree.chart.renderer.category.CategoryItemRenderer: void setBaseToolTipGenerator(org.jfree.chart.labels.CategoryToolTipGenerator)>($stack13);
+        $stack14 = new org.jfree.chart.plot.CategoryPlot;
+        specialinvoke $stack14.<org.jfree.chart.plot.CategoryPlot: void <init>(org.jfree.data.category.CategoryDataset,org.jfree.chart.axis.CategoryAxis,org.jfree.chart.axis.ValueAxis,org.jfree.chart.renderer.category.CategoryItemRenderer)>(dataset, $stack10, $stack11, $stack12);
+        plot = $stack14;
+        $stack16 = new org.jfree.chart.JFreeChart;
+        $stack15 = <org.jfree.chart.JFreeChart: java.awt.Font DEFAULT_TITLE_FONT>;
+        specialinvoke $stack16.<org.jfree.chart.JFreeChart: void <init>(java.lang.String,java.awt.Font,org.jfree.chart.plot.Plot,boolean)>(title, $stack15, $stack14, legend);
+        chart = $stack16;
+        $stack17 = <org.jfree.chart.ChartFactory: org.jfree.chart.ChartTheme currentTheme>;
+        interfaceinvoke $stack17.<org.jfree.chart.ChartTheme: void apply(org.jfree.chart.JFreeChart)>($stack16);
+    
+        return $stack16;
+    }
+
+    // ---- method: <org.jfree.chart.ChartFactory: org.jfree.chart.JFreeChart createBoxAndWhiskerChart(java.lang.String,java.lang.String,java.lang.String,org.jfree.data.statistics.BoxAndWhiskerXYDataset,boolean)> ----
+    {
+        boolean legend;
+        java.awt.Font $stack14;
+        java.lang.String timeAxisLabel, title, valueAxisLabel;
+        org.jfree.chart.ChartTheme $stack16;
+        org.jfree.chart.JFreeChart $stack15, chart;
+        org.jfree.chart.axis.DateAxis $stack10, timeAxis;
+        org.jfree.chart.axis.NumberAxis $stack11, valueAxis;
+        org.jfree.chart.plot.XYPlot $stack13, plot;
+        org.jfree.chart.renderer.xy.XYBoxAndWhiskerRenderer $stack12, renderer;
+        org.jfree.data.statistics.BoxAndWhiskerXYDataset dataset;
+    
+    
+        title := @parameter0: java.lang.String;
+        timeAxisLabel := @parameter1: java.lang.String;
+        valueAxisLabel := @parameter2: java.lang.String;
+        dataset := @parameter3: org.jfree.data.statistics.BoxAndWhiskerXYDataset;
+        legend := @parameter4: boolean;
+        $stack10 = new org.jfree.chart.axis.DateAxis;
+        specialinvoke $stack10.<org.jfree.chart.axis.DateAxis: void <init>(java.lang.String)>(timeAxisLabel);
+        timeAxis = $stack10;
+        $stack11 = new org.jfree.chart.axis.NumberAxis;
+        specialinvoke $stack11.<org.jfree.chart.axis.NumberAxis: void <init>(java.lang.String)>(valueAxisLabel);
+        valueAxis = $stack11;
+        virtualinvoke $stack11.<org.jfree.chart.axis.NumberAxis: void setAutoRangeIncludesZero(boolean)>(0);
+        $stack12 = new org.jfree.chart.renderer.xy.XYBoxAndWhiskerRenderer;
+        specialinvoke $stack12.<org.jfree.chart.renderer.xy.XYBoxAndWhiskerRenderer: void <init>(double)>(10.0);
+        renderer = $stack12;
+        $stack13 = new org.jfree.chart.plot.XYPlot;
+        specialinvoke $stack13.<org.jfree.chart.plot.XYPlot: void <init>(org.jfree.data.xy.XYDataset,org.jfree.chart.axis.ValueAxis,org.jfree.chart.axis.ValueAxis,org.jfree.chart.renderer.xy.XYItemRenderer)>(dataset, $stack10, $stack11, $stack12);
+        plot = $stack13;
+        $stack15 = new org.jfree.chart.JFreeChart;
+        $stack14 = <org.jfree.chart.JFreeChart: java.awt.Font DEFAULT_TITLE_FONT>;
+        specialinvoke $stack15.<org.jfree.chart.JFreeChart: void <init>(java.lang.String,java.awt.Font,org.jfree.chart.plot.Plot,boolean)>(title, $stack14, $stack13, legend);
+        chart = $stack15;
+        $stack16 = <org.jfree.chart.ChartFactory: org.jfree.chart.ChartTheme currentTheme>;
+        interfaceinvoke $stack16.<org.jfree.chart.ChartTheme: void apply(org.jfree.chart.JFreeChart)>($stack15);
+    
+        return $stack15;
+    }
+
+    // ---- method: <org.jfree.chart.ChartFactory: org.jfree.chart.JFreeChart createHighLowChart(java.lang.String,java.lang.String,java.lang.String,org.jfree.data.xy.OHLCDataset,boolean)> ----
+    {
+        boolean legend;
+        java.awt.Font $stack15;
+        java.lang.String timeAxisLabel, title, valueAxisLabel;
+        org.jfree.chart.ChartTheme $stack17;
+        org.jfree.chart.JFreeChart $stack16, chart;
+        org.jfree.chart.axis.DateAxis $stack10, timeAxis;
+        org.jfree.chart.axis.NumberAxis $stack11, valueAxis;
+        org.jfree.chart.labels.HighLowItemLabelGenerator $stack13;
+        org.jfree.chart.plot.XYPlot $stack14, plot;
+        org.jfree.chart.renderer.xy.HighLowRenderer $stack12, renderer;
+        org.jfree.data.xy.OHLCDataset dataset;
+    
+    
+        title := @parameter0: java.lang.String;
+        timeAxisLabel := @parameter1: java.lang.String;
+        valueAxisLabel := @parameter2: java.lang.String;
+        dataset := @parameter3: org.jfree.data.xy.OHLCDataset;
+        legend := @parameter4: boolean;
+        $stack10 = new org.jfree.chart.axis.DateAxis;
+        specialinvoke $stack10.<org.jfree.chart.axis.DateAxis: void <init>(java.lang.String)>(timeAxisLabel);
+        timeAxis = $stack10;
+        $stack11 = new org.jfree.chart.axis.NumberAxis;
+        specialinvoke $stack11.<org.jfree.chart.axis.NumberAxis: void <init>(java.lang.String)>(valueAxisLabel);
+        valueAxis = $stack11;
+        $stack12 = new org.jfree.chart.renderer.xy.HighLowRenderer;
+        specialinvoke $stack12.<org.jfree.chart.renderer.xy.HighLowRenderer: void <init>()>();
+        renderer = $stack12;
+        $stack13 = new org.jfree.chart.labels.HighLowItemLabelGenerator;
+        specialinvoke $stack13.<org.jfree.chart.labels.HighLowItemLabelGenerator: void <init>()>();
+        virtualinvoke $stack12.<org.jfree.chart.renderer.xy.HighLowRenderer: void setBaseToolTipGenerator(org.jfree.chart.labels.XYToolTipGenerator)>($stack13);
+        $stack14 = new org.jfree.chart.plot.XYPlot;
+        specialinvoke $stack14.<org.jfree.chart.plot.XYPlot: void <init>(org.jfree.data.xy.XYDataset,org.jfree.chart.axis.ValueAxis,org.jfree.chart.axis.ValueAxis,org.jfree.chart.renderer.xy.XYItemRenderer)>(dataset, $stack10, $stack11, $stack12);
+        plot = $stack14;
+        $stack16 = new org.jfree.chart.JFreeChart;
+        $stack15 = <org.jfree.chart.JFreeChart: java.awt.Font DEFAULT_TITLE_FONT>;
+        specialinvoke $stack16.<org.jfree.chart.JFreeChart: void <init>(java.lang.String,java.awt.Font,org.jfree.chart.plot.Plot,boolean)>(title, $stack15, $stack14, legend);
+        chart = $stack16;
+        $stack17 = <org.jfree.chart.ChartFactory: org.jfree.chart.ChartTheme currentTheme>;
+        interfaceinvoke $stack17.<org.jfree.chart.ChartTheme: void apply(org.jfree.chart.JFreeChart)>($stack16);
+    
+        return $stack16;
+    }
+
+    // ---- method: <org.jfree.chart.ChartFactory: org.jfree.chart.JFreeChart createPieChart(java.lang.String,org.jfree.data.pie.PieDataset,org.jfree.data.pie.PieDataset,int,boolean,boolean,java.util.Locale,boolean,boolean)> ----
+    {
+        boolean $stack27, greenForIncrease, legend, showDifference, subTitle;
+        byte $stack53, $stack59, $stack71, $stack76;
+        double $stack26, $stack47, $stack48, $stack49, $stack50, $stack51, $stack52, $stack54, $stack61, $stack69, $stack70, $stack74, $stack75, colorPerPercent, percentChange, shade;
+        int $stack55, $stack72, percentDiffForMaxScale;
+        java.awt.Color #l0, #l4;
+        java.awt.Font $stack28, $stack41;
+        java.awt.Paint #l2, #l5, #l6, #l7;
+        java.lang.Comparable #l1, #l3, key#0;
+        java.lang.Number newValue, oldValue;
+        java.lang.Object $stack46, $stack56, $stack67, $stack73, $stack77, $stack81, $stack82, key#1;
+        java.lang.String $stack42, $stack44, $stack45, $stack63, $stack68, title;
+        java.lang.StringBuffer $stack31, $stack32, $stack33, $stack34, $stack35, $stack36, $stack37, $stack38, $stack39, $stack40, $stack57, $stack58, $stack60, $stack64, $stack65, $stack66, $stack78, $stack79, $stack80;
+        java.text.NumberFormat $stack62;
+        java.util.Iterator it#0;
+        java.util.List keys;
+        java.util.Locale locale;
+        org.jfree.chart.ChartTheme $stack30;
+        org.jfree.chart.JFreeChart $stack29, it#1;
+        org.jfree.chart.labels.StandardPieSectionLabelGenerator $stack23;
+        org.jfree.chart.labels.StandardPieToolTipGenerator $stack25;
+        org.jfree.chart.plot.PiePlot $stack22, plot;
+        org.jfree.chart.title.TextTitle $stack43, key#2;
+        org.jfree.chart.util.RectangleInsets $stack24;
+        org.jfree.data.pie.DefaultPieDataset $stack83, series;
+        org.jfree.data.pie.PieDataset dataset, previousDataset;
+    
+    
+        title := @parameter0: java.lang.String;
+        dataset := @parameter1: org.jfree.data.pie.PieDataset;
+        previousDataset := @parameter2: org.jfree.data.pie.PieDataset;
+        percentDiffForMaxScale := @parameter3: int;
+        greenForIncrease := @parameter4: boolean;
+        legend := @parameter5: boolean;
+        locale := @parameter6: java.util.Locale;
+        subTitle := @parameter7: boolean;
+        showDifference := @parameter8: boolean;
+        $stack22 = new org.jfree.chart.plot.PiePlot;
+        specialinvoke $stack22.<org.jfree.chart.plot.PiePlot: void <init>(org.jfree.data.pie.PieDataset)>(dataset);
+        plot = $stack22;
+        $stack23 = new org.jfree.chart.labels.StandardPieSectionLabelGenerator;
+        specialinvoke $stack23.<org.jfree.chart.labels.StandardPieSectionLabelGenerator: void <init>(java.util.Locale)>(locale);
+        virtualinvoke $stack22.<org.jfree.chart.plot.PiePlot: void setLabelGenerator(org.jfree.chart.labels.PieSectionLabelGenerator)>($stack23);
+        $stack24 = new org.jfree.chart.util.RectangleInsets;
+        specialinvoke $stack24.<org.jfree.chart.util.RectangleInsets: void <init>(double,double,double,double)>(0.0, 5.0, 5.0, 5.0);
+        virtualinvoke $stack22.<org.jfree.chart.plot.PiePlot: void setInsets(org.jfree.chart.util.RectangleInsets)>($stack24);
+        $stack25 = new org.jfree.chart.labels.StandardPieToolTipGenerator;
+        specialinvoke $stack25.<org.jfree.chart.labels.StandardPieToolTipGenerator: void <init>(java.util.Locale)>(locale);
+        virtualinvoke $stack22.<org.jfree.chart.plot.PiePlot: void setToolTipGenerator(org.jfree.chart.labels.PieToolTipGenerator)>($stack25);
+        keys = interfaceinvoke dataset.<org.jfree.data.pie.PieDataset: java.util.List getKeys()>();
+        series = null;
+    
+        if showDifference == 0 goto label01;
+        $stack83 = new org.jfree.data.pie.DefaultPieDataset;
+        specialinvoke $stack83.<org.jfree.data.pie.DefaultPieDataset: void <init>()>();
+        series = $stack83;
+    
+      label01:
+        $stack26 = (double) percentDiffForMaxScale;
+        colorPerPercent = 255.0 / $stack26;
+        it#0 = interfaceinvoke keys.<java.util.List: java.util.Iterator iterator()>();
+    
+      label02:
+        $stack27 = interfaceinvoke it#0.<java.util.Iterator: boolean hasNext()>();
+    
+        if $stack27 == 0 goto label15;
+        $stack46 = interfaceinvoke it#0.<java.util.Iterator: java.lang.Object next()>();
+        key#0 = (java.lang.Comparable) $stack46;
+        newValue = interfaceinvoke dataset.<org.jfree.data.pie.PieDataset: java.lang.Number getValue(java.lang.Comparable)>(key#0);
+        oldValue = interfaceinvoke previousDataset.<org.jfree.data.pie.PieDataset: java.lang.Number getValue(java.lang.Comparable)>(key#0);
+    
+        if oldValue != null goto label08;
+    
+        if greenForIncrease == 0 goto label03;
+        $stack82 = <java.awt.Color: java.awt.Color green>;
+        #l6 = (java.awt.Paint) $stack82;
+        virtualinvoke $stack22.<org.jfree.chart.plot.PiePlot: void setSectionPaint(java.lang.Comparable,java.awt.Paint)>(key#0, #l6);
+    
+        goto label04;
+    
+      label03:
+        $stack77 = <java.awt.Color: java.awt.Color red>;
+        #l5 = (java.awt.Paint) $stack77;
+        virtualinvoke $stack22.<org.jfree.chart.plot.PiePlot: void setSectionPaint(java.lang.Comparable,java.awt.Paint)>(key#0, #l5);
+    
+      label04:
+        if showDifference == 0 goto label07;
+        $stack78 = new java.lang.StringBuffer;
+        specialinvoke $stack78.<java.lang.StringBuffer: void <init>()>();
+        $stack79 = virtualinvoke $stack78.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.Object)>(key#0);
+        $stack80 = virtualinvoke $stack79.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>(" (+100%)");
+        $stack81 = virtualinvoke $stack80.<java.lang.StringBuffer: java.lang.String toString()>();
+        #l3 = (java.lang.Comparable) $stack81;
+        virtualinvoke series.<org.jfree.data.pie.DefaultPieDataset: void setValue(java.lang.Comparable,java.lang.Number)>(#l3, newValue);
+    
+        goto label07;
+    
+      label05:
+        $stack68 = "";
+    
+      label06:
+        $stack64 = virtualinvoke $stack60.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>($stack68);
+        $stack62 = staticinvoke <java.text.NumberFormat: java.text.NumberFormat getPercentInstance()>();
+        $stack61 = percentChange / 100.0;
+        $stack63 = virtualinvoke $stack62.<java.text.NumberFormat: java.lang.String format(double)>($stack61);
+        $stack65 = virtualinvoke $stack64.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>($stack63);
+        $stack66 = virtualinvoke $stack65.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>(")");
+        $stack67 = virtualinvoke $stack66.<java.lang.StringBuffer: java.lang.String toString()>();
+        #l1 = (java.lang.Comparable) $stack67;
+        virtualinvoke series.<org.jfree.data.pie.DefaultPieDataset: void setValue(java.lang.Comparable,java.lang.Number)>(#l1, newValue);
+    
+      label07:
+        goto label02;
+    
+      label08:
+        $stack47 = virtualinvoke newValue.<java.lang.Number: double doubleValue()>();
+        $stack48 = virtualinvoke oldValue.<java.lang.Number: double doubleValue()>();
+        $stack49 = $stack47 / $stack48;
+        $stack50 = $stack49 - 1.0;
+        percentChange = $stack50 * 100.0;
+        $stack51 = staticinvoke <java.lang.Math: double abs(double)>(percentChange);
+        $stack52 = (double) percentDiffForMaxScale;
+        $stack53 = $stack51 cmpl $stack52;
+    
+        if $stack53 < 0 goto label09;
+        shade = 255.0;
+    
+        goto label10;
+    
+      label09:
+        $stack54 = staticinvoke <java.lang.Math: double abs(double)>(percentChange);
+        shade = $stack54 * colorPerPercent;
+    
+      label10:
+        if greenForIncrease == 0 goto label11;
+        $stack74 = virtualinvoke newValue.<java.lang.Number: double doubleValue()>();
+        $stack75 = virtualinvoke oldValue.<java.lang.Number: double doubleValue()>();
+        $stack76 = $stack74 cmpl $stack75;
+    
+        if $stack76 > 0 goto label12;
+    
+      label11:
+        if greenForIncrease != 0 goto label13;
+        $stack69 = virtualinvoke newValue.<java.lang.Number: double doubleValue()>();
+        $stack70 = virtualinvoke oldValue.<java.lang.Number: double doubleValue()>();
+        $stack71 = $stack69 cmpg $stack70;
+    
+        if $stack71 >= 0 goto label13;
+    
+      label12:
+        $stack73 = new java.awt.Color;
+        $stack72 = (int) shade;
+        #l4 = (java.awt.Color) $stack73;
+        specialinvoke #l4.<java.awt.Color: void <init>(int,int,int)>(0, $stack72, 0);
+        #l2 = (java.awt.Paint) $stack73;
+        virtualinvoke $stack22.<org.jfree.chart.plot.PiePlot: void setSectionPaint(java.lang.Comparable,java.awt.Paint)>(key#0, #l2);
+    
+        goto label14;
+    
+      label13:
+        $stack56 = new java.awt.Color;
+        $stack55 = (int) shade;
+        #l0 = (java.awt.Color) $stack56;
+        specialinvoke #l0.<java.awt.Color: void <init>(int,int,int)>($stack55, 0, 0);
+        #l7 = (java.awt.Paint) $stack56;
+        virtualinvoke $stack22.<org.jfree.chart.plot.PiePlot: void setSectionPaint(java.lang.Comparable,java.awt.Paint)>(key#0, #l7);
+    
+      label14:
+        if showDifference == 0 goto label07;
+        $stack57 = new java.lang.StringBuffer;
+        specialinvoke $stack57.<java.lang.StringBuffer: void <init>()>();
+        $stack58 = virtualinvoke $stack57.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.Object)>(key#0);
+        $stack60 = virtualinvoke $stack58.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>(" (");
+        $stack59 = percentChange cmpl 0.0;
+    
+        if $stack59 < 0 goto label05;
+        $stack68 = "+";
+    
+        goto label06;
+    
+      label15:
+        if showDifference == 0 goto label16;
+        virtualinvoke $stack22.<org.jfree.chart.plot.PiePlot: void setDataset(org.jfree.data.pie.PieDataset)>(series);
+    
+      label16:
+        $stack29 = new org.jfree.chart.JFreeChart;
+        $stack28 = <org.jfree.chart.JFreeChart: java.awt.Font DEFAULT_TITLE_FONT>;
+        specialinvoke $stack29.<org.jfree.chart.JFreeChart: void <init>(java.lang.String,java.awt.Font,org.jfree.chart.plot.Plot,boolean)>(title, $stack28, $stack22, legend);
+        it#1 = $stack29;
+    
+        if subTitle == 0 goto label21;
+        key#1 = null;
+        $stack43 = new org.jfree.chart.title.TextTitle;
+        $stack31 = new java.lang.StringBuffer;
+        specialinvoke $stack31.<java.lang.StringBuffer: void <init>()>();
+        $stack32 = virtualinvoke $stack31.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>("Bright ");
+    
+        if greenForIncrease == 0 goto label17;
+        $stack45 = "red";
+    
+        goto label18;
+    
+      label17:
+        $stack45 = "green";
+    
+      label18:
+        $stack33 = virtualinvoke $stack32.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>($stack45);
+        $stack34 = virtualinvoke $stack33.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>("=change >=-");
+        $stack35 = virtualinvoke $stack34.<java.lang.StringBuffer: java.lang.StringBuffer append(int)>(percentDiffForMaxScale);
+        $stack36 = virtualinvoke $stack35.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>("%, Bright ");
+    
+        if greenForIncrease != 0 goto label19;
+        $stack44 = "red";
+    
+        goto label20;
+    
+      label19:
+        $stack44 = "green";
+    
+      label20:
+        $stack37 = virtualinvoke $stack36.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>($stack44);
+        $stack38 = virtualinvoke $stack37.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>("=change >=+");
+        $stack39 = virtualinvoke $stack38.<java.lang.StringBuffer: java.lang.StringBuffer append(int)>(percentDiffForMaxScale);
+        $stack40 = virtualinvoke $stack39.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>("%");
+        $stack42 = virtualinvoke $stack40.<java.lang.StringBuffer: java.lang.String toString()>();
+        $stack41 = new java.awt.Font;
+        specialinvoke $stack41.<java.awt.Font: void <init>(java.lang.String,int,int)>("Tahoma", 0, 10);
+        specialinvoke $stack43.<org.jfree.chart.title.TextTitle: void <init>(java.lang.String,java.awt.Font)>($stack42, $stack41);
+        key#2 = $stack43;
+        virtualinvoke $stack29.<org.jfree.chart.JFreeChart: void addSubtitle(org.jfree.chart.title.Title)>($stack43);
+    
+      label21:
+        $stack30 = <org.jfree.chart.ChartFactory: org.jfree.chart.ChartTheme currentTheme>;
+        interfaceinvoke $stack30.<org.jfree.chart.ChartTheme: void apply(org.jfree.chart.JFreeChart)>($stack29);
+    
+        return $stack29;
+    }
+
+    // ---- method: <org.jfree.chart.ChartFactory: org.jfree.chart.JFreeChart createStackedAreaChart(java.lang.String,java.lang.String,java.lang.String,org.jfree.data.category.CategoryDataset,boolean)> ----
+    {
+        boolean legend;
+        java.awt.Font $stack15;
+        java.lang.String categoryAxisLabel, title, valueAxisLabel;
+        org.jfree.chart.ChartTheme $stack17;
+        org.jfree.chart.JFreeChart $stack16, chart;
+        org.jfree.chart.axis.CategoryAxis $stack10, categoryAxis;
+        org.jfree.chart.axis.NumberAxis $stack11, valueAxis;
+        org.jfree.chart.labels.StandardCategoryToolTipGenerator $stack13;
+        org.jfree.chart.plot.CategoryPlot $stack14, plot;
+        org.jfree.chart.renderer.category.StackedAreaRenderer $stack12, renderer;
+        org.jfree.data.category.CategoryDataset dataset;
+    
+    
+        title := @parameter0: java.lang.String;
+        categoryAxisLabel := @parameter1: java.lang.String;
+        valueAxisLabel := @parameter2: java.lang.String;
+        dataset := @parameter3: org.jfree.data.category.CategoryDataset;
+        legend := @parameter4: boolean;
+        $stack10 = new org.jfree.chart.axis.CategoryAxis;
+        specialinvoke $stack10.<org.jfree.chart.axis.CategoryAxis: void <init>(java.lang.String)>(categoryAxisLabel);
+        categoryAxis = $stack10;
+        virtualinvoke $stack10.<org.jfree.chart.axis.CategoryAxis: void setCategoryMargin(double)>(0.0);
+        $stack11 = new org.jfree.chart.axis.NumberAxis;
+        specialinvoke $stack11.<org.jfree.chart.axis.NumberAxis: void <init>(java.lang.String)>(valueAxisLabel);
+        valueAxis = $stack11;
+        $stack12 = new org.jfree.chart.renderer.category.StackedAreaRenderer;
+        specialinvoke $stack12.<org.jfree.chart.renderer.category.StackedAreaRenderer: void <init>()>();
+        renderer = $stack12;
+        $stack13 = new org.jfree.chart.labels.StandardCategoryToolTipGenerator;
+        specialinvoke $stack13.<org.jfree.chart.labels.StandardCategoryToolTipGenerator: void <init>()>();
+        virtualinvoke $stack12.<org.jfree.chart.renderer.category.StackedAreaRenderer: void setBaseToolTipGenerator(org.jfree.chart.labels.CategoryToolTipGenerator)>($stack13);
+        $stack14 = new org.jfree.chart.plot.CategoryPlot;
+        specialinvoke $stack14.<org.jfree.chart.plot.CategoryPlot: void <init>(org.jfree.data.category.CategoryDataset,org.jfree.chart.axis.CategoryAxis,org.jfree.chart.axis.ValueAxis,org.jfree.chart.renderer.category.CategoryItemRenderer)>(dataset, $stack10, $stack11, $stack12);
+        plot = $stack14;
+        $stack16 = new org.jfree.chart.JFreeChart;
+        $stack15 = <org.jfree.chart.JFreeChart: java.awt.Font DEFAULT_TITLE_FONT>;
+        specialinvoke $stack16.<org.jfree.chart.JFreeChart: void <init>(java.lang.String,java.awt.Font,org.jfree.chart.plot.Plot,boolean)>(title, $stack15, $stack14, legend);
+        chart = $stack16;
+        $stack17 = <org.jfree.chart.ChartFactory: org.jfree.chart.ChartTheme currentTheme>;
+        interfaceinvoke $stack17.<org.jfree.chart.ChartTheme: void apply(org.jfree.chart.JFreeChart)>($stack16);
+    
+        return $stack16;
+    }
+
+    // ---- method: <org.jfree.chart.ChartFactory: org.jfree.chart.JFreeChart createTimeSeriesChart(java.lang.String,java.lang.String,java.lang.String,org.jfree.data.xy.XYDataset,boolean)> ----
+    {
+        boolean legend;
+        java.awt.Font $stack15;
+        java.lang.Object toolTipGenerator#0;
+        java.lang.String timeAxisLabel, title, valueAxisLabel;
+        org.jfree.chart.ChartTheme $stack17;
+        org.jfree.chart.JFreeChart $stack16, chart;
+        org.jfree.chart.axis.DateAxis $stack11, timeAxis;
+        org.jfree.chart.axis.NumberAxis $stack12, valueAxis;
+        org.jfree.chart.labels.StandardXYToolTipGenerator toolTipGenerator#1;
+        org.jfree.chart.plot.XYPlot $stack13, plot;
+        org.jfree.chart.renderer.xy.XYLineAndShapeRenderer $stack14, renderer;
+        org.jfree.data.xy.XYDataset dataset;
+    
+    
+        title := @parameter0: java.lang.String;
+        timeAxisLabel := @parameter1: java.lang.String;
+        valueAxisLabel := @parameter2: java.lang.String;
+        dataset := @parameter3: org.jfree.data.xy.XYDataset;
+        legend := @parameter4: boolean;
+        $stack11 = new org.jfree.chart.axis.DateAxis;
+        specialinvoke $stack11.<org.jfree.chart.axis.DateAxis: void <init>(java.lang.String)>(timeAxisLabel);
+        timeAxis = $stack11;
+        virtualinvoke $stack11.<org.jfree.chart.axis.ValueAxis: void setLowerMargin(double)>(0.02);
+        virtualinvoke $stack11.<org.jfree.chart.axis.ValueAxis: void setUpperMargin(double)>(0.02);
+        $stack12 = new org.jfree.chart.axis.NumberAxis;
+        specialinvoke $stack12.<org.jfree.chart.axis.NumberAxis: void <init>(java.lang.String)>(valueAxisLabel);
+        valueAxis = $stack12;
+        virtualinvoke $stack12.<org.jfree.chart.axis.NumberAxis: void setAutoRangeIncludesZero(boolean)>(0);
+        $stack13 = new org.jfree.chart.plot.XYPlot;
+        specialinvoke $stack13.<org.jfree.chart.plot.XYPlot: void <init>(org.jfree.data.xy.XYDataset,org.jfree.chart.axis.ValueAxis,org.jfree.chart.axis.ValueAxis,org.jfree.chart.renderer.xy.XYItemRenderer)>(dataset, $stack11, $stack12, null);
+        plot = $stack13;
+        toolTipGenerator#0 = null;
+        toolTipGenerator#1 = staticinvoke <org.jfree.chart.labels.StandardXYToolTipGenerator: org.jfree.chart.labels.StandardXYToolTipGenerator getTimeSeriesInstance()>();
+        $stack14 = new org.jfree.chart.renderer.xy.XYLineAndShapeRenderer;
+        specialinvoke $stack14.<org.jfree.chart.renderer.xy.XYLineAndShapeRenderer: void <init>(boolean,boolean)>(1, 0);
+        renderer = $stack14;
+        virtualinvoke $stack14.<org.jfree.chart.renderer.xy.XYLineAndShapeRenderer: void setBaseToolTipGenerator(org.jfree.chart.labels.XYToolTipGenerator)>(toolTipGenerator#1);
+        virtualinvoke $stack13.<org.jfree.chart.plot.XYPlot: void setRenderer(org.jfree.chart.renderer.xy.XYItemRenderer)>($stack14);
+        $stack16 = new org.jfree.chart.JFreeChart;
+        $stack15 = <org.jfree.chart.JFreeChart: java.awt.Font DEFAULT_TITLE_FONT>;
+        specialinvoke $stack16.<org.jfree.chart.JFreeChart: void <init>(java.lang.String,java.awt.Font,org.jfree.chart.plot.Plot,boolean)>(title, $stack15, $stack13, legend);
+        chart = $stack16;
+        $stack17 = <org.jfree.chart.ChartFactory: org.jfree.chart.ChartTheme currentTheme>;
+        interfaceinvoke $stack17.<org.jfree.chart.ChartTheme: void apply(org.jfree.chart.JFreeChart)>($stack16);
+    
+        return $stack16;
+    }
+
+    // ---- method: <org.jfree.chart.ChartFactory: org.jfree.chart.JFreeChart createXYStepAreaChart(java.lang.String,java.lang.String,java.lang.String,org.jfree.data.xy.XYDataset,boolean)> ----
+    {
+        boolean legend;
+        java.awt.Font $stack15;
+        java.lang.String title, xAxisLabel, yAxisLabel;
+        org.jfree.chart.ChartTheme $stack17;
+        org.jfree.chart.JFreeChart $stack16, chart;
+        org.jfree.chart.axis.NumberAxis $stack10, $stack11, xAxis, yAxis;
+        org.jfree.chart.labels.StandardXYToolTipGenerator $stack13;
+        org.jfree.chart.plot.XYPlot $stack14, plot;
+        org.jfree.chart.renderer.xy.XYStepAreaRenderer $stack12, renderer;
+        org.jfree.data.xy.XYDataset dataset;
+    
+    
+        title := @parameter0: java.lang.String;
+        xAxisLabel := @parameter1: java.lang.String;
+        yAxisLabel := @parameter2: java.lang.String;
+        dataset := @parameter3: org.jfree.data.xy.XYDataset;
+        legend := @parameter4: boolean;
+        $stack10 = new org.jfree.chart.axis.NumberAxis;
+        specialinvoke $stack10.<org.jfree.chart.axis.NumberAxis: void <init>(java.lang.String)>(xAxisLabel);
+        xAxis = $stack10;
+        virtualinvoke $stack10.<org.jfree.chart.axis.NumberAxis: void setAutoRangeIncludesZero(boolean)>(0);
+        $stack11 = new org.jfree.chart.axis.NumberAxis;
+        specialinvoke $stack11.<org.jfree.chart.axis.NumberAxis: void <init>(java.lang.String)>(yAxisLabel);
+        yAxis = $stack11;
+        $stack12 = new org.jfree.chart.renderer.xy.XYStepAreaRenderer;
+        specialinvoke $stack12.<org.jfree.chart.renderer.xy.XYStepAreaRenderer: void <init>(int)>(3);
+        renderer = $stack12;
+        $stack13 = new org.jfree.chart.labels.StandardXYToolTipGenerator;
+        specialinvoke $stack13.<org.jfree.chart.labels.StandardXYToolTipGenerator: void <init>()>();
+        interfaceinvoke $stack12.<org.jfree.chart.renderer.xy.XYItemRenderer: void setBaseToolTipGenerator(org.jfree.chart.labels.XYToolTipGenerator)>($stack13);
+        $stack14 = new org.jfree.chart.plot.XYPlot;
+        specialinvoke $stack14.<org.jfree.chart.plot.XYPlot: void <init>(org.jfree.data.xy.XYDataset,org.jfree.chart.axis.ValueAxis,org.jfree.chart.axis.ValueAxis,org.jfree.chart.renderer.xy.XYItemRenderer)>(dataset, $stack10, $stack11, null);
+        plot = $stack14;
+        virtualinvoke $stack14.<org.jfree.chart.plot.XYPlot: void setRenderer(org.jfree.chart.renderer.xy.XYItemRenderer)>($stack12);
+        virtualinvoke $stack14.<org.jfree.chart.plot.XYPlot: void setDomainCrosshairVisible(boolean)>(0);
+        virtualinvoke $stack14.<org.jfree.chart.plot.XYPlot: void setRangeCrosshairVisible(boolean)>(0);
+        $stack16 = new org.jfree.chart.JFreeChart;
+        $stack15 = <org.jfree.chart.JFreeChart: java.awt.Font DEFAULT_TITLE_FONT>;
+        specialinvoke $stack16.<org.jfree.chart.JFreeChart: void <init>(java.lang.String,java.awt.Font,org.jfree.chart.plot.Plot,boolean)>(title, $stack15, $stack14, legend);
+        chart = $stack16;
+        $stack17 = <org.jfree.chart.ChartFactory: org.jfree.chart.ChartTheme currentTheme>;
+        interfaceinvoke $stack17.<org.jfree.chart.ChartTheme: void apply(org.jfree.chart.JFreeChart)>($stack16);
+    
+        return $stack16;
+    }
+
+    // ---- method: <org.jfree.chart.ChartFactory: org.jfree.chart.JFreeChart createStackedBarChart(java.lang.String,java.lang.String,java.lang.String,org.jfree.data.category.CategoryDataset,boolean)> ----
+    {
+        boolean legend;
+        java.awt.Font $stack15;
+        java.lang.String domainAxisLabel, rangeAxisLabel, title;
+        org.jfree.chart.ChartTheme $stack17;
+        org.jfree.chart.JFreeChart $stack16, chart;
+        org.jfree.chart.axis.CategoryAxis $stack10, categoryAxis;
+        org.jfree.chart.axis.NumberAxis $stack11, valueAxis;
+        org.jfree.chart.labels.StandardCategoryToolTipGenerator $stack13;
+        org.jfree.chart.plot.CategoryPlot $stack14, plot;
+        org.jfree.chart.renderer.category.StackedBarRenderer $stack12, renderer;
+        org.jfree.data.category.CategoryDataset dataset;
+    
+    
+        title := @parameter0: java.lang.String;
+        domainAxisLabel := @parameter1: java.lang.String;
+        rangeAxisLabel := @parameter2: java.lang.String;
+        dataset := @parameter3: org.jfree.data.category.CategoryDataset;
+        legend := @parameter4: boolean;
+        $stack10 = new org.jfree.chart.axis.CategoryAxis;
+        specialinvoke $stack10.<org.jfree.chart.axis.CategoryAxis: void <init>(java.lang.String)>(domainAxisLabel);
+        categoryAxis = $stack10;
+        $stack11 = new org.jfree.chart.axis.NumberAxis;
+        specialinvoke $stack11.<org.jfree.chart.axis.NumberAxis: void <init>(java.lang.String)>(rangeAxisLabel);
+        valueAxis = $stack11;
+        $stack12 = new org.jfree.chart.renderer.category.StackedBarRenderer;
+        specialinvoke $stack12.<org.jfree.chart.renderer.category.StackedBarRenderer: void <init>()>();
+        renderer = $stack12;
+        $stack13 = new org.jfree.chart.labels.StandardCategoryToolTipGenerator;
+        specialinvoke $stack13.<org.jfree.chart.labels.StandardCategoryToolTipGenerator: void <init>()>();
+        virtualinvoke $stack12.<org.jfree.chart.renderer.category.StackedBarRenderer: void setBaseToolTipGenerator(org.jfree.chart.labels.CategoryToolTipGenerator)>($stack13);
+        $stack14 = new org.jfree.chart.plot.CategoryPlot;
+        specialinvoke $stack14.<org.jfree.chart.plot.CategoryPlot: void <init>(org.jfree.data.category.CategoryDataset,org.jfree.chart.axis.CategoryAxis,org.jfree.chart.axis.ValueAxis,org.jfree.chart.renderer.category.CategoryItemRenderer)>(dataset, $stack10, $stack11, $stack12);
+        plot = $stack14;
+        $stack16 = new org.jfree.chart.JFreeChart;
+        $stack15 = <org.jfree.chart.JFreeChart: java.awt.Font DEFAULT_TITLE_FONT>;
+        specialinvoke $stack16.<org.jfree.chart.JFreeChart: void <init>(java.lang.String,java.awt.Font,org.jfree.chart.plot.Plot,boolean)>(title, $stack15, $stack14, legend);
+        chart = $stack16;
+        $stack17 = <org.jfree.chart.ChartFactory: org.jfree.chart.ChartTheme currentTheme>;
+        interfaceinvoke $stack17.<org.jfree.chart.ChartTheme: void apply(org.jfree.chart.JFreeChart)>($stack16);
+    
+        return $stack16;
+    }
+
+    // ---- method: <org.jfree.chart.ChartFactory: org.jfree.chart.JFreeChart createBarChart(java.lang.String,java.lang.String,java.lang.String,org.jfree.data.category.CategoryDataset,boolean)> ----
+    {
+        boolean legend;
+        java.awt.Font $stack23;
+        java.lang.String categoryAxisLabel, title, valueAxisLabel;
+        org.jfree.chart.ChartTheme $stack25;
+        org.jfree.chart.JFreeChart $stack24, chart;
+        org.jfree.chart.axis.CategoryAxis $stack12, categoryAxis;
+        org.jfree.chart.axis.NumberAxis $stack13, valueAxis;
+        org.jfree.chart.labels.ItemLabelAnchor $stack16, $stack19;
+        org.jfree.chart.labels.ItemLabelPosition $stack17, $stack20, position1, position2;
+        org.jfree.chart.labels.StandardCategoryToolTipGenerator $stack21;
+        org.jfree.chart.plot.CategoryPlot $stack22, plot;
+        org.jfree.chart.renderer.category.BarRenderer $stack14, renderer;
+        org.jfree.chart.text.TextAnchor $stack15, $stack18;
+        org.jfree.data.category.CategoryDataset dataset;
+    
+    
+        title := @parameter0: java.lang.String;
+        categoryAxisLabel := @parameter1: java.lang.String;
+        valueAxisLabel := @parameter2: java.lang.String;
+        dataset := @parameter3: org.jfree.data.category.CategoryDataset;
+        legend := @parameter4: boolean;
+        $stack12 = new org.jfree.chart.axis.CategoryAxis;
+        specialinvoke $stack12.<org.jfree.chart.axis.CategoryAxis: void <init>(java.lang.String)>(categoryAxisLabel);
+        categoryAxis = $stack12;
+        $stack13 = new org.jfree.chart.axis.NumberAxis;
+        specialinvoke $stack13.<org.jfree.chart.axis.NumberAxis: void <init>(java.lang.String)>(valueAxisLabel);
+        valueAxis = $stack13;
+        $stack14 = new org.jfree.chart.renderer.category.BarRenderer;
+        specialinvoke $stack14.<org.jfree.chart.renderer.category.BarRenderer: void <init>()>();
+        renderer = $stack14;
+        $stack17 = new org.jfree.chart.labels.ItemLabelPosition;
+        $stack16 = <org.jfree.chart.labels.ItemLabelAnchor: org.jfree.chart.labels.ItemLabelAnchor OUTSIDE12>;
+        $stack15 = <org.jfree.chart.text.TextAnchor: org.jfree.chart.text.TextAnchor BOTTOM_CENTER>;
+        specialinvoke $stack17.<org.jfree.chart.labels.ItemLabelPosition: void <init>(org.jfree.chart.labels.ItemLabelAnchor,org.jfree.chart.text.TextAnchor)>($stack16, $stack15);
+        position1 = $stack17;
+        virtualinvoke $stack14.<org.jfree.chart.renderer.category.BarRenderer: void setBasePositiveItemLabelPosition(org.jfree.chart.labels.ItemLabelPosition)>($stack17);
+        $stack20 = new org.jfree.chart.labels.ItemLabelPosition;
+        $stack19 = <org.jfree.chart.labels.ItemLabelAnchor: org.jfree.chart.labels.ItemLabelAnchor OUTSIDE6>;
+        $stack18 = <org.jfree.chart.text.TextAnchor: org.jfree.chart.text.TextAnchor TOP_CENTER>;
+        specialinvoke $stack20.<org.jfree.chart.labels.ItemLabelPosition: void <init>(org.jfree.chart.labels.ItemLabelAnchor,org.jfree.chart.text.TextAnchor)>($stack19, $stack18);
+        position2 = $stack20;
+        virtualinvoke $stack14.<org.jfree.chart.renderer.category.BarRenderer: void setBaseNegativeItemLabelPosition(org.jfree.chart.labels.ItemLabelPosition)>($stack20);
+        $stack21 = new org.jfree.chart.labels.StandardCategoryToolTipGenerator;
+        specialinvoke $stack21.<org.jfree.chart.labels.StandardCategoryToolTipGenerator: void <init>()>();
+        virtualinvoke $stack14.<org.jfree.chart.renderer.category.BarRenderer: void setBaseToolTipGenerator(org.jfree.chart.labels.CategoryToolTipGenerator)>($stack21);
+        $stack22 = new org.jfree.chart.plot.CategoryPlot;
+        specialinvoke $stack22.<org.jfree.chart.plot.CategoryPlot: void <init>(org.jfree.data.category.CategoryDataset,org.jfree.chart.axis.CategoryAxis,org.jfree.chart.axis.ValueAxis,org.jfree.chart.renderer.category.CategoryItemRenderer)>(dataset, $stack12, $stack13, $stack14);
+        plot = $stack22;
+        $stack24 = new org.jfree.chart.JFreeChart;
+        $stack23 = <org.jfree.chart.JFreeChart: java.awt.Font DEFAULT_TITLE_FONT>;
+        specialinvoke $stack24.<org.jfree.chart.JFreeChart: void <init>(java.lang.String,java.awt.Font,org.jfree.chart.plot.Plot,boolean)>(title, $stack23, $stack22, legend);
+        chart = $stack24;
+        $stack25 = <org.jfree.chart.ChartFactory: org.jfree.chart.ChartTheme currentTheme>;
+        interfaceinvoke $stack25.<org.jfree.chart.ChartTheme: void apply(org.jfree.chart.JFreeChart)>($stack24);
+    
+        return $stack24;
+    }
+
+    // ---- method: <org.jfree.chart.ChartFactory: org.jfree.chart.JFreeChart createStackedXYAreaChart(java.lang.String,java.lang.String,java.lang.String,org.jfree.data.xy.TableXYDataset,boolean)> ----
+    {
+        boolean legend;
+        java.awt.Font $stack15;
+        java.lang.String title, xAxisLabel, yAxisLabel;
+        org.jfree.chart.ChartTheme $stack17;
+        org.jfree.chart.JFreeChart $stack16, chart;
+        org.jfree.chart.axis.NumberAxis $stack10, $stack11, xAxis, yAxis;
+        org.jfree.chart.labels.StandardXYToolTipGenerator $stack13;
+        org.jfree.chart.plot.XYPlot $stack14, plot;
+        org.jfree.chart.renderer.xy.StackedXYAreaRenderer2 $stack12, renderer;
+        org.jfree.data.xy.TableXYDataset dataset;
+    
+    
+        title := @parameter0: java.lang.String;
+        xAxisLabel := @parameter1: java.lang.String;
+        yAxisLabel := @parameter2: java.lang.String;
+        dataset := @parameter3: org.jfree.data.xy.TableXYDataset;
+        legend := @parameter4: boolean;
+        $stack10 = new org.jfree.chart.axis.NumberAxis;
+        specialinvoke $stack10.<org.jfree.chart.axis.NumberAxis: void <init>(java.lang.String)>(xAxisLabel);
+        xAxis = $stack10;
+        virtualinvoke $stack10.<org.jfree.chart.axis.NumberAxis: void setAutoRangeIncludesZero(boolean)>(0);
+        virtualinvoke $stack10.<org.jfree.chart.axis.NumberAxis: void setLowerMargin(double)>(0.0);
+        virtualinvoke $stack10.<org.jfree.chart.axis.NumberAxis: void setUpperMargin(double)>(0.0);
+        $stack11 = new org.jfree.chart.axis.NumberAxis;
+        specialinvoke $stack11.<org.jfree.chart.axis.NumberAxis: void <init>(java.lang.String)>(yAxisLabel);
+        yAxis = $stack11;
+        $stack12 = new org.jfree.chart.renderer.xy.StackedXYAreaRenderer2;
+        specialinvoke $stack12.<org.jfree.chart.renderer.xy.StackedXYAreaRenderer2: void <init>()>();
+        renderer = $stack12;
+        $stack13 = new org.jfree.chart.labels.StandardXYToolTipGenerator;
+        specialinvoke $stack13.<org.jfree.chart.labels.StandardXYToolTipGenerator: void <init>()>();
+        virtualinvoke $stack12.<org.jfree.chart.renderer.xy.StackedXYAreaRenderer2: void setBaseToolTipGenerator(org.jfree.chart.labels.XYToolTipGenerator)>($stack13);
+        virtualinvoke $stack12.<org.jfree.chart.renderer.xy.StackedXYAreaRenderer2: void setOutline(boolean)>(1);
+        $stack14 = new org.jfree.chart.plot.XYPlot;
+        specialinvoke $stack14.<org.jfree.chart.plot.XYPlot: void <init>(org.jfree.data.xy.XYDataset,org.jfree.chart.axis.ValueAxis,org.jfree.chart.axis.ValueAxis,org.jfree.chart.renderer.xy.XYItemRenderer)>(dataset, $stack10, $stack11, $stack12);
+        plot = $stack14;
+        virtualinvoke $stack14.<org.jfree.chart.plot.XYPlot: void setRangeAxis(org.jfree.chart.axis.ValueAxis)>($stack11);
+        $stack16 = new org.jfree.chart.JFreeChart;
+        $stack15 = <org.jfree.chart.JFreeChart: java.awt.Font DEFAULT_TITLE_FONT>;
+        specialinvoke $stack16.<org.jfree.chart.JFreeChart: void <init>(java.lang.String,java.awt.Font,org.jfree.chart.plot.Plot,boolean)>(title, $stack15, $stack14, legend);
+        chart = $stack16;
+        $stack17 = <org.jfree.chart.ChartFactory: org.jfree.chart.ChartTheme currentTheme>;
+        interfaceinvoke $stack17.<org.jfree.chart.ChartTheme: void apply(org.jfree.chart.JFreeChart)>($stack16);
+    
+        return $stack16;
+    }
+
+    // ---- method: <org.jfree.chart.ChartFactory: org.jfree.chart.JFreeChart createRingChart(java.lang.String,org.jfree.data.pie.PieDataset,boolean,java.util.Locale)> ----
+    {
+        boolean legend;
+        java.awt.Font $stack10;
+        java.lang.String title;
+        java.util.Locale locale;
+        org.jfree.chart.ChartTheme $stack12;
+        org.jfree.chart.JFreeChart $stack11, chart;
+        org.jfree.chart.labels.StandardPieSectionLabelGenerator $stack7;
+        org.jfree.chart.labels.StandardPieToolTipGenerator $stack9;
+        org.jfree.chart.plot.RingPlot $stack6, plot;
+        org.jfree.chart.util.RectangleInsets $stack8;
+        org.jfree.data.pie.PieDataset dataset;
+    
+    
+        title := @parameter0: java.lang.String;
+        dataset := @parameter1: org.jfree.data.pie.PieDataset;
+        legend := @parameter2: boolean;
+        locale := @parameter3: java.util.Locale;
+        $stack6 = new org.jfree.chart.plot.RingPlot;
+        specialinvoke $stack6.<org.jfree.chart.plot.RingPlot: void <init>(org.jfree.data.pie.PieDataset)>(dataset);
+        plot = $stack6;
+        $stack7 = new org.jfree.chart.labels.StandardPieSectionLabelGenerator;
+        specialinvoke $stack7.<org.jfree.chart.labels.StandardPieSectionLabelGenerator: void <init>(java.util.Locale)>(locale);
+        virtualinvoke $stack6.<org.jfree.chart.plot.RingPlot: void setLabelGenerator(org.jfree.chart.labels.PieSectionLabelGenerator)>($stack7);
+        $stack8 = new org.jfree.chart.util.RectangleInsets;
+        specialinvoke $stack8.<org.jfree.chart.util.RectangleInsets: void <init>(double,double,double,double)>(0.0, 5.0, 5.0, 5.0);
+        virtualinvoke $stack6.<org.jfree.chart.plot.RingPlot: void setInsets(org.jfree.chart.util.RectangleInsets)>($stack8);
+        $stack9 = new org.jfree.chart.labels.StandardPieToolTipGenerator;
+        specialinvoke $stack9.<org.jfree.chart.labels.StandardPieToolTipGenerator: void <init>(java.util.Locale)>(locale);
+        virtualinvoke $stack6.<org.jfree.chart.plot.RingPlot: void setToolTipGenerator(org.jfree.chart.labels.PieToolTipGenerator)>($stack9);
+        $stack11 = new org.jfree.chart.JFreeChart;
+        $stack10 = <org.jfree.chart.JFreeChart: java.awt.Font DEFAULT_TITLE_FONT>;
+        specialinvoke $stack11.<org.jfree.chart.JFreeChart: void <init>(java.lang.String,java.awt.Font,org.jfree.chart.plot.Plot,boolean)>(title, $stack10, $stack6, legend);
+        chart = $stack11;
+        $stack12 = <org.jfree.chart.ChartFactory: org.jfree.chart.ChartTheme currentTheme>;
+        interfaceinvoke $stack12.<org.jfree.chart.ChartTheme: void apply(org.jfree.chart.JFreeChart)>($stack11);
+    
+        return $stack11;
+    }
+
+    // ---- method: <org.jfree.chart.ChartFactory: org.jfree.chart.JFreeChart createPieChart(java.lang.String,org.jfree.data.pie.PieDataset,org.jfree.data.pie.PieDataset,int,boolean,boolean,boolean,boolean)> ----
+    {
+        boolean $stack26, greenForIncrease, legend, showDifference, subTitle;
+        byte $stack52, $stack58, $stack70, $stack75;
+        double $stack25, $stack46, $stack47, $stack48, $stack49, $stack50, $stack51, $stack53, $stack60, $stack68, $stack69, $stack73, $stack74, colorPerPercent, percentChange, shade;
+        int $stack54, $stack71, percentDiffForMaxScale;
+        java.awt.Color #l2, #l4;
+        java.awt.Font $stack27, $stack40;
+        java.awt.Paint #l0, #l3, #l6, #l7;
+        java.lang.Comparable #l1, #l5, key#0;
+        java.lang.Number newValue, oldValue;
+        java.lang.Object $stack45, $stack55, $stack66, $stack72, $stack76, $stack80, $stack81, key#1;
+        java.lang.String $stack41, $stack43, $stack44, $stack62, $stack67, title;
+        java.lang.StringBuffer $stack30, $stack31, $stack32, $stack33, $stack34, $stack35, $stack36, $stack37, $stack38, $stack39, $stack56, $stack57, $stack59, $stack63, $stack64, $stack65, $stack77, $stack78, $stack79;
+        java.text.NumberFormat $stack61;
+        java.util.Iterator it#0;
+        java.util.List keys;
+        org.jfree.chart.ChartTheme $stack29;
+        org.jfree.chart.JFreeChart $stack28, it#1;
+        org.jfree.chart.labels.StandardPieSectionLabelGenerator $stack22;
+        org.jfree.chart.labels.StandardPieToolTipGenerator $stack24;
+        org.jfree.chart.plot.PiePlot $stack21, plot;
+        org.jfree.chart.title.TextTitle $stack42, key#2;
+        org.jfree.chart.util.RectangleInsets $stack23;
+        org.jfree.data.pie.DefaultPieDataset $stack82, series;
+        org.jfree.data.pie.PieDataset dataset, previousDataset;
+    
+    
+        title := @parameter0: java.lang.String;
+        dataset := @parameter1: org.jfree.data.pie.PieDataset;
+        previousDataset := @parameter2: org.jfree.data.pie.PieDataset;
+        percentDiffForMaxScale := @parameter3: int;
+        greenForIncrease := @parameter4: boolean;
+        legend := @parameter5: boolean;
+        subTitle := @parameter6: boolean;
+        showDifference := @parameter7: boolean;
+        $stack21 = new org.jfree.chart.plot.PiePlot;
+        specialinvoke $stack21.<org.jfree.chart.plot.PiePlot: void <init>(org.jfree.data.pie.PieDataset)>(dataset);
+        plot = $stack21;
+        $stack22 = new org.jfree.chart.labels.StandardPieSectionLabelGenerator;
+        specialinvoke $stack22.<org.jfree.chart.labels.StandardPieSectionLabelGenerator: void <init>()>();
+        virtualinvoke $stack21.<org.jfree.chart.plot.PiePlot: void setLabelGenerator(org.jfree.chart.labels.PieSectionLabelGenerator)>($stack22);
+        $stack23 = new org.jfree.chart.util.RectangleInsets;
+        specialinvoke $stack23.<org.jfree.chart.util.RectangleInsets: void <init>(double,double,double,double)>(0.0, 5.0, 5.0, 5.0);
+        virtualinvoke $stack21.<org.jfree.chart.plot.PiePlot: void setInsets(org.jfree.chart.util.RectangleInsets)>($stack23);
+        $stack24 = new org.jfree.chart.labels.StandardPieToolTipGenerator;
+        specialinvoke $stack24.<org.jfree.chart.labels.StandardPieToolTipGenerator: void <init>()>();
+        virtualinvoke $stack21.<org.jfree.chart.plot.PiePlot: void setToolTipGenerator(org.jfree.chart.labels.PieToolTipGenerator)>($stack24);
+        keys = interfaceinvoke dataset.<org.jfree.data.pie.PieDataset: java.util.List getKeys()>();
+        series = null;
+    
+        if showDifference == 0 goto label01;
+        $stack82 = new org.jfree.data.pie.DefaultPieDataset;
+        specialinvoke $stack82.<org.jfree.data.pie.DefaultPieDataset: void <init>()>();
+        series = $stack82;
+    
+      label01:
+        $stack25 = (double) percentDiffForMaxScale;
+        colorPerPercent = 255.0 / $stack25;
+        it#0 = interfaceinvoke keys.<java.util.List: java.util.Iterator iterator()>();
+    
+      label02:
+        $stack26 = interfaceinvoke it#0.<java.util.Iterator: boolean hasNext()>();
+    
+        if $stack26 == 0 goto label15;
+        $stack45 = interfaceinvoke it#0.<java.util.Iterator: java.lang.Object next()>();
+        key#0 = (java.lang.Comparable) $stack45;
+        newValue = interfaceinvoke dataset.<org.jfree.data.pie.PieDataset: java.lang.Number getValue(java.lang.Comparable)>(key#0);
+        oldValue = interfaceinvoke previousDataset.<org.jfree.data.pie.PieDataset: java.lang.Number getValue(java.lang.Comparable)>(key#0);
+    
+        if oldValue != null goto label08;
+    
+        if greenForIncrease == 0 goto label03;
+        $stack81 = <java.awt.Color: java.awt.Color green>;
+        #l6 = (java.awt.Paint) $stack81;
+        virtualinvoke $stack21.<org.jfree.chart.plot.PiePlot: void setSectionPaint(java.lang.Comparable,java.awt.Paint)>(key#0, #l6);
+    
+        goto label04;
+    
+      label03:
+        $stack76 = <java.awt.Color: java.awt.Color red>;
+        #l3 = (java.awt.Paint) $stack76;
+        virtualinvoke $stack21.<org.jfree.chart.plot.PiePlot: void setSectionPaint(java.lang.Comparable,java.awt.Paint)>(key#0, #l3);
+    
+      label04:
+        if showDifference == 0 goto label07;
+        $stack77 = new java.lang.StringBuffer;
+        specialinvoke $stack77.<java.lang.StringBuffer: void <init>()>();
+        $stack78 = virtualinvoke $stack77.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.Object)>(key#0);
+        $stack79 = virtualinvoke $stack78.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>(" (+100%)");
+        $stack80 = virtualinvoke $stack79.<java.lang.StringBuffer: java.lang.String toString()>();
+        #l1 = (java.lang.Comparable) $stack80;
+        virtualinvoke series.<org.jfree.data.pie.DefaultPieDataset: void setValue(java.lang.Comparable,java.lang.Number)>(#l1, newValue);
+    
+        goto label07;
+    
+      label05:
+        $stack67 = "";
+    
+      label06:
+        $stack63 = virtualinvoke $stack59.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>($stack67);
+        $stack61 = staticinvoke <java.text.NumberFormat: java.text.NumberFormat getPercentInstance()>();
+        $stack60 = percentChange / 100.0;
+        $stack62 = virtualinvoke $stack61.<java.text.NumberFormat: java.lang.String format(double)>($stack60);
+        $stack64 = virtualinvoke $stack63.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>($stack62);
+        $stack65 = virtualinvoke $stack64.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>(")");
+        $stack66 = virtualinvoke $stack65.<java.lang.StringBuffer: java.lang.String toString()>();
+        #l5 = (java.lang.Comparable) $stack66;
+        virtualinvoke series.<org.jfree.data.pie.DefaultPieDataset: void setValue(java.lang.Comparable,java.lang.Number)>(#l5, newValue);
+    
+      label07:
+        goto label02;
+    
+      label08:
+        $stack46 = virtualinvoke newValue.<java.lang.Number: double doubleValue()>();
+        $stack47 = virtualinvoke oldValue.<java.lang.Number: double doubleValue()>();
+        $stack48 = $stack46 / $stack47;
+        $stack49 = $stack48 - 1.0;
+        percentChange = $stack49 * 100.0;
+        $stack50 = staticinvoke <java.lang.Math: double abs(double)>(percentChange);
+        $stack51 = (double) percentDiffForMaxScale;
+        $stack52 = $stack50 cmpl $stack51;
+    
+        if $stack52 < 0 goto label09;
+        shade = 255.0;
+    
+        goto label10;
+    
+      label09:
+        $stack53 = staticinvoke <java.lang.Math: double abs(double)>(percentChange);
+        shade = $stack53 * colorPerPercent;
+    
+      label10:
+        if greenForIncrease == 0 goto label11;
+        $stack73 = virtualinvoke newValue.<java.lang.Number: double doubleValue()>();
+        $stack74 = virtualinvoke oldValue.<java.lang.Number: double doubleValue()>();
+        $stack75 = $stack73 cmpl $stack74;
+    
+        if $stack75 > 0 goto label12;
+    
+      label11:
+        if greenForIncrease != 0 goto label13;
+        $stack68 = virtualinvoke newValue.<java.lang.Number: double doubleValue()>();
+        $stack69 = virtualinvoke oldValue.<java.lang.Number: double doubleValue()>();
+        $stack70 = $stack68 cmpg $stack69;
+    
+        if $stack70 >= 0 goto label13;
+    
+      label12:
+        $stack72 = new java.awt.Color;
+        $stack71 = (int) shade;
+        #l4 = (java.awt.Color) $stack72;
+        specialinvoke #l4.<java.awt.Color: void <init>(int,int,int)>(0, $stack71, 0);
+        #l7 = (java.awt.Paint) $stack72;
+        virtualinvoke $stack21.<org.jfree.chart.plot.PiePlot: void setSectionPaint(java.lang.Comparable,java.awt.Paint)>(key#0, #l7);
+    
+        goto label14;
+    
+      label13:
+        $stack55 = new java.awt.Color;
+        $stack54 = (int) shade;
+        #l2 = (java.awt.Color) $stack55;
+        specialinvoke #l2.<java.awt.Color: void <init>(int,int,int)>($stack54, 0, 0);
+        #l0 = (java.awt.Paint) $stack55;
+        virtualinvoke $stack21.<org.jfree.chart.plot.PiePlot: void setSectionPaint(java.lang.Comparable,java.awt.Paint)>(key#0, #l0);
+    
+      label14:
+        if showDifference == 0 goto label07;
+        $stack56 = new java.lang.StringBuffer;
+        specialinvoke $stack56.<java.lang.StringBuffer: void <init>()>();
+        $stack57 = virtualinvoke $stack56.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.Object)>(key#0);
+        $stack59 = virtualinvoke $stack57.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>(" (");
+        $stack58 = percentChange cmpl 0.0;
+    
+        if $stack58 < 0 goto label05;
+        $stack67 = "+";
+    
+        goto label06;
+    
+      label15:
+        if showDifference == 0 goto label16;
+        virtualinvoke $stack21.<org.jfree.chart.plot.PiePlot: void setDataset(org.jfree.data.pie.PieDataset)>(series);
+    
+      label16:
+        $stack28 = new org.jfree.chart.JFreeChart;
+        $stack27 = <org.jfree.chart.JFreeChart: java.awt.Font DEFAULT_TITLE_FONT>;
+        specialinvoke $stack28.<org.jfree.chart.JFreeChart: void <init>(java.lang.String,java.awt.Font,org.jfree.chart.plot.Plot,boolean)>(title, $stack27, $stack21, legend);
+        it#1 = $stack28;
+    
+        if subTitle == 0 goto label21;
+        key#1 = null;
+        $stack42 = new org.jfree.chart.title.TextTitle;
+        $stack30 = new java.lang.StringBuffer;
+        specialinvoke $stack30.<java.lang.StringBuffer: void <init>()>();
+        $stack31 = virtualinvoke $stack30.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>("Bright ");
+    
+        if greenForIncrease == 0 goto label17;
+        $stack44 = "red";
+    
+        goto label18;
+    
+      label17:
+        $stack44 = "green";
+    
+      label18:
+        $stack32 = virtualinvoke $stack31.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>($stack44);
+        $stack33 = virtualinvoke $stack32.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>("=change >=-");
+        $stack34 = virtualinvoke $stack33.<java.lang.StringBuffer: java.lang.StringBuffer append(int)>(percentDiffForMaxScale);
+        $stack35 = virtualinvoke $stack34.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>("%, Bright ");
+    
+        if greenForIncrease != 0 goto label19;
+        $stack43 = "red";
+    
+        goto label20;
+    
+      label19:
+        $stack43 = "green";
+    
+      label20:
+        $stack36 = virtualinvoke $stack35.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>($stack43);
+        $stack37 = virtualinvoke $stack36.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>("=change >=+");
+        $stack38 = virtualinvoke $stack37.<java.lang.StringBuffer: java.lang.StringBuffer append(int)>(percentDiffForMaxScale);
+        $stack39 = virtualinvoke $stack38.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>("%");
+        $stack41 = virtualinvoke $stack39.<java.lang.StringBuffer: java.lang.String toString()>();
+        $stack40 = new java.awt.Font;
+        specialinvoke $stack40.<java.awt.Font: void <init>(java.lang.String,int,int)>("Tahoma", 0, 10);
+        specialinvoke $stack42.<org.jfree.chart.title.TextTitle: void <init>(java.lang.String,java.awt.Font)>($stack41, $stack40);
+        key#2 = $stack42;
+        virtualinvoke $stack28.<org.jfree.chart.JFreeChart: void addSubtitle(org.jfree.chart.title.Title)>($stack42);
+    
+      label21:
+        $stack29 = <org.jfree.chart.ChartFactory: org.jfree.chart.ChartTheme currentTheme>;
+        interfaceinvoke $stack29.<org.jfree.chart.ChartTheme: void apply(org.jfree.chart.JFreeChart)>($stack28);
+    
+        return $stack28;
+    }
+
+    // ---- method: <org.jfree.chart.ChartFactory: org.jfree.chart.JFreeChart createAreaChart(java.lang.String,java.lang.String,java.lang.String,org.jfree.data.category.CategoryDataset,boolean)> ----
+    {
+        boolean legend;
+        java.awt.Font $stack15;
+        java.lang.String categoryAxisLabel, title, valueAxisLabel;
+        org.jfree.chart.ChartTheme $stack17;
+        org.jfree.chart.JFreeChart $stack16, chart;
+        org.jfree.chart.axis.CategoryAxis $stack10, categoryAxis;
+        org.jfree.chart.axis.NumberAxis $stack11, valueAxis;
+        org.jfree.chart.labels.StandardCategoryToolTipGenerator $stack13;
+        org.jfree.chart.plot.CategoryPlot $stack14, plot;
+        org.jfree.chart.renderer.category.AreaRenderer $stack12, renderer;
+        org.jfree.data.category.CategoryDataset dataset;
+    
+    
+        title := @parameter0: java.lang.String;
+        categoryAxisLabel := @parameter1: java.lang.String;
+        valueAxisLabel := @parameter2: java.lang.String;
+        dataset := @parameter3: org.jfree.data.category.CategoryDataset;
+        legend := @parameter4: boolean;
+        $stack10 = new org.jfree.chart.axis.CategoryAxis;
+        specialinvoke $stack10.<org.jfree.chart.axis.CategoryAxis: void <init>(java.lang.String)>(categoryAxisLabel);
+        categoryAxis = $stack10;
+        virtualinvoke $stack10.<org.jfree.chart.axis.CategoryAxis: void setCategoryMargin(double)>(0.0);
+        $stack11 = new org.jfree.chart.axis.NumberAxis;
+        specialinvoke $stack11.<org.jfree.chart.axis.NumberAxis: void <init>(java.lang.String)>(valueAxisLabel);
+        valueAxis = $stack11;
+        $stack12 = new org.jfree.chart.renderer.category.AreaRenderer;
+        specialinvoke $stack12.<org.jfree.chart.renderer.category.AreaRenderer: void <init>()>();
+        renderer = $stack12;
+        $stack13 = new org.jfree.chart.labels.StandardCategoryToolTipGenerator;
+        specialinvoke $stack13.<org.jfree.chart.labels.StandardCategoryToolTipGenerator: void <init>()>();
+        virtualinvoke $stack12.<org.jfree.chart.renderer.category.AreaRenderer: void setBaseToolTipGenerator(org.jfree.chart.labels.CategoryToolTipGenerator)>($stack13);
+        $stack14 = new org.jfree.chart.plot.CategoryPlot;
+        specialinvoke $stack14.<org.jfree.chart.plot.CategoryPlot: void <init>(org.jfree.data.category.CategoryDataset,org.jfree.chart.axis.CategoryAxis,org.jfree.chart.axis.ValueAxis,org.jfree.chart.renderer.category.CategoryItemRenderer)>(dataset, $stack10, $stack11, $stack12);
+        plot = $stack14;
+        $stack16 = new org.jfree.chart.JFreeChart;
+        $stack15 = <org.jfree.chart.JFreeChart: java.awt.Font DEFAULT_TITLE_FONT>;
+        specialinvoke $stack16.<org.jfree.chart.JFreeChart: void <init>(java.lang.String,java.awt.Font,org.jfree.chart.plot.Plot,boolean)>(title, $stack15, $stack14, legend);
+        chart = $stack16;
+        $stack17 = <org.jfree.chart.ChartFactory: org.jfree.chart.ChartTheme currentTheme>;
+        interfaceinvoke $stack17.<org.jfree.chart.ChartTheme: void apply(org.jfree.chart.JFreeChart)>($stack16);
+    
+        return $stack16;
+    }
+
+    // ---- method: <org.jfree.chart.ChartFactory: org.jfree.chart.JFreeChart createWaterfallChart(java.lang.String,java.lang.String,java.lang.String,org.jfree.data.category.CategoryDataset,boolean)> ----
+    {
+        boolean legend;
+        java.awt.Font $stack25;
+        java.awt.Paint #l0;
+        java.lang.Object $stack23;
+        java.lang.String categoryAxisLabel, title, valueAxisLabel;
+        org.jfree.chart.ChartTheme $stack27;
+        org.jfree.chart.JFreeChart $stack26, chart;
+        org.jfree.chart.axis.CategoryAxis $stack13, categoryAxis;
+        org.jfree.chart.axis.NumberAxis $stack14, valueAxis;
+        org.jfree.chart.labels.ItemLabelAnchor $stack18;
+        org.jfree.chart.labels.ItemLabelPosition $stack19, position;
+        org.jfree.chart.labels.StandardCategoryToolTipGenerator $stack20, generator;
+        org.jfree.chart.plot.CategoryPlot $stack21, plot;
+        org.jfree.chart.plot.ValueMarker $stack22, baseline;
+        org.jfree.chart.renderer.category.WaterfallBarRenderer $stack15, renderer;
+        org.jfree.chart.text.TextAnchor $stack16, $stack17;
+        org.jfree.chart.util.Layer $stack24;
+        org.jfree.data.category.CategoryDataset dataset;
+    
+    
+        title := @parameter0: java.lang.String;
+        categoryAxisLabel := @parameter1: java.lang.String;
+        valueAxisLabel := @parameter2: java.lang.String;
+        dataset := @parameter3: org.jfree.data.category.CategoryDataset;
+        legend := @parameter4: boolean;
+        $stack13 = new org.jfree.chart.axis.CategoryAxis;
+        specialinvoke $stack13.<org.jfree.chart.axis.CategoryAxis: void <init>(java.lang.String)>(categoryAxisLabel);
+        categoryAxis = $stack13;
+        virtualinvoke $stack13.<org.jfree.chart.axis.CategoryAxis: void setCategoryMargin(double)>(0.0);
+        $stack14 = new org.jfree.chart.axis.NumberAxis;
+        specialinvoke $stack14.<org.jfree.chart.axis.NumberAxis: void <init>(java.lang.String)>(valueAxisLabel);
+        valueAxis = $stack14;
+        $stack15 = new org.jfree.chart.renderer.category.WaterfallBarRenderer;
+        specialinvoke $stack15.<org.jfree.chart.renderer.category.WaterfallBarRenderer: void <init>()>();
+        renderer = $stack15;
+        $stack19 = new org.jfree.chart.labels.ItemLabelPosition;
+        $stack18 = <org.jfree.chart.labels.ItemLabelAnchor: org.jfree.chart.labels.ItemLabelAnchor CENTER>;
+        $stack17 = <org.jfree.chart.text.TextAnchor: org.jfree.chart.text.TextAnchor CENTER>;
+        $stack16 = <org.jfree.chart.text.TextAnchor: org.jfree.chart.text.TextAnchor CENTER>;
+        specialinvoke $stack19.<org.jfree.chart.labels.ItemLabelPosition: void <init>(org.jfree.chart.labels.ItemLabelAnchor,org.jfree.chart.text.TextAnchor,org.jfree.chart.text.TextAnchor,double)>($stack18, $stack17, $stack16, 0.0);
+        position = $stack19;
+        virtualinvoke $stack15.<org.jfree.chart.renderer.category.WaterfallBarRenderer: void setBasePositiveItemLabelPosition(org.jfree.chart.labels.ItemLabelPosition)>($stack19);
+        virtualinvoke $stack15.<org.jfree.chart.renderer.category.WaterfallBarRenderer: void setBaseNegativeItemLabelPosition(org.jfree.chart.labels.ItemLabelPosition)>($stack19);
+        $stack20 = new org.jfree.chart.labels.StandardCategoryToolTipGenerator;
+        specialinvoke $stack20.<org.jfree.chart.labels.StandardCategoryToolTipGenerator: void <init>()>();
+        generator = $stack20;
+        virtualinvoke $stack15.<org.jfree.chart.renderer.category.WaterfallBarRenderer: void setBaseToolTipGenerator(org.jfree.chart.labels.CategoryToolTipGenerator)>($stack20);
+        $stack21 = new org.jfree.chart.plot.CategoryPlot;
+        specialinvoke $stack21.<org.jfree.chart.plot.CategoryPlot: void <init>(org.jfree.data.category.CategoryDataset,org.jfree.chart.axis.CategoryAxis,org.jfree.chart.axis.ValueAxis,org.jfree.chart.renderer.category.CategoryItemRenderer)>(dataset, $stack13, $stack14, $stack15);
+        plot = $stack21;
+        virtualinvoke $stack21.<org.jfree.chart.plot.CategoryPlot: void clearRangeMarkers()>();
+        $stack22 = new org.jfree.chart.plot.ValueMarker;
+        specialinvoke $stack22.<org.jfree.chart.plot.ValueMarker: void <init>(double)>(0.0);
+        baseline = $stack22;
+        $stack23 = <java.awt.Color: java.awt.Color black>;
+        #l0 = (java.awt.Paint) $stack23;
+        virtualinvoke $stack22.<org.jfree.chart.plot.Marker: void setPaint(java.awt.Paint)>(#l0);
+        $stack24 = <org.jfree.chart.util.Layer: org.jfree.chart.util.Layer FOREGROUND>;
+        virtualinvoke $stack21.<org.jfree.chart.plot.CategoryPlot: void addRangeMarker(org.jfree.chart.plot.Marker,org.jfree.chart.util.Layer)>($stack22, $stack24);
+        $stack26 = new org.jfree.chart.JFreeChart;
+        $stack25 = <org.jfree.chart.JFreeChart: java.awt.Font DEFAULT_TITLE_FONT>;
+        specialinvoke $stack26.<org.jfree.chart.JFreeChart: void <init>(java.lang.String,java.awt.Font,org.jfree.chart.plot.Plot,boolean)>(title, $stack25, $stack21, legend);
+        chart = $stack26;
+        $stack27 = <org.jfree.chart.ChartFactory: org.jfree.chart.ChartTheme currentTheme>;
+        interfaceinvoke $stack27.<org.jfree.chart.ChartTheme: void apply(org.jfree.chart.JFreeChart)>($stack26);
+    
+        return $stack26;
+    }
+
+    // ---- method: <org.jfree.chart.ChartFactory: org.jfree.chart.JFreeChart createLineChart(java.lang.String,java.lang.String,java.lang.String,org.jfree.data.category.CategoryDataset,boolean)> ----
+    {
+        boolean legend;
+        java.awt.Font $stack15;
+        java.lang.String categoryAxisLabel, title, valueAxisLabel;
+        org.jfree.chart.ChartTheme $stack17;
+        org.jfree.chart.JFreeChart $stack16, chart;
+        org.jfree.chart.axis.CategoryAxis $stack10, categoryAxis;
+        org.jfree.chart.axis.NumberAxis $stack11, valueAxis;
+        org.jfree.chart.labels.StandardCategoryToolTipGenerator $stack13;
+        org.jfree.chart.plot.CategoryPlot $stack14, plot;
+        org.jfree.chart.renderer.category.LineAndShapeRenderer $stack12, renderer;
+        org.jfree.data.category.CategoryDataset dataset;
+    
+    
+        title := @parameter0: java.lang.String;
+        categoryAxisLabel := @parameter1: java.lang.String;
+        valueAxisLabel := @parameter2: java.lang.String;
+        dataset := @parameter3: org.jfree.data.category.CategoryDataset;
+        legend := @parameter4: boolean;
+        $stack10 = new org.jfree.chart.axis.CategoryAxis;
+        specialinvoke $stack10.<org.jfree.chart.axis.CategoryAxis: void <init>(java.lang.String)>(categoryAxisLabel);
+        categoryAxis = $stack10;
+        $stack11 = new org.jfree.chart.axis.NumberAxis;
+        specialinvoke $stack11.<org.jfree.chart.axis.NumberAxis: void <init>(java.lang.String)>(valueAxisLabel);
+        valueAxis = $stack11;
+        $stack12 = new org.jfree.chart.renderer.category.LineAndShapeRenderer;
+        specialinvoke $stack12.<org.jfree.chart.renderer.category.LineAndShapeRenderer: void <init>(boolean,boolean)>(1, 0);
+        renderer = $stack12;
+        $stack13 = new org.jfree.chart.labels.StandardCategoryToolTipGenerator;
+        specialinvoke $stack13.<org.jfree.chart.labels.StandardCategoryToolTipGenerator: void <init>()>();
+        virtualinvoke $stack12.<org.jfree.chart.renderer.category.LineAndShapeRenderer: void setBaseToolTipGenerator(org.jfree.chart.labels.CategoryToolTipGenerator)>($stack13);
+        $stack14 = new org.jfree.chart.plot.CategoryPlot;
+        specialinvoke $stack14.<org.jfree.chart.plot.CategoryPlot: void <init>(org.jfree.data.category.CategoryDataset,org.jfree.chart.axis.CategoryAxis,org.jfree.chart.axis.ValueAxis,org.jfree.chart.renderer.category.CategoryItemRenderer)>(dataset, $stack10, $stack11, $stack12);
+        plot = $stack14;
+        $stack16 = new org.jfree.chart.JFreeChart;
+        $stack15 = <org.jfree.chart.JFreeChart: java.awt.Font DEFAULT_TITLE_FONT>;
+        specialinvoke $stack16.<org.jfree.chart.JFreeChart: void <init>(java.lang.String,java.awt.Font,org.jfree.chart.plot.Plot,boolean)>(title, $stack15, $stack14, legend);
+        chart = $stack16;
+        $stack17 = <org.jfree.chart.ChartFactory: org.jfree.chart.ChartTheme currentTheme>;
+        interfaceinvoke $stack17.<org.jfree.chart.ChartTheme: void apply(org.jfree.chart.JFreeChart)>($stack16);
+    
+        return $stack16;
+    }
+
+    // ---- method: <org.jfree.chart.ChartFactory: org.jfree.chart.JFreeChart createBubbleChart(java.lang.String,java.lang.String,java.lang.String,org.jfree.data.xy.XYZDataset,boolean)> ----
+    {
+        boolean legend;
+        java.awt.Font $stack15;
+        java.lang.String title, xAxisLabel, yAxisLabel;
+        org.jfree.chart.ChartTheme $stack17;
+        org.jfree.chart.JFreeChart $stack16, chart;
+        org.jfree.chart.axis.NumberAxis $stack10, $stack11, xAxis, yAxis;
+        org.jfree.chart.labels.StandardXYZToolTipGenerator $stack14;
+        org.jfree.chart.plot.XYPlot $stack12, plot;
+        org.jfree.chart.renderer.xy.XYBubbleRenderer $stack13, renderer;
+        org.jfree.data.xy.XYZDataset dataset;
+    
+    
+        title := @parameter0: java.lang.String;
+        xAxisLabel := @parameter1: java.lang.String;
+        yAxisLabel := @parameter2: java.lang.String;
+        dataset := @parameter3: org.jfree.data.xy.XYZDataset;
+        legend := @parameter4: boolean;
+        $stack10 = new org.jfree.chart.axis.NumberAxis;
+        specialinvoke $stack10.<org.jfree.chart.axis.NumberAxis: void <init>(java.lang.String)>(xAxisLabel);
+        xAxis = $stack10;
+        virtualinvoke $stack10.<org.jfree.chart.axis.NumberAxis: void setAutoRangeIncludesZero(boolean)>(0);
+        $stack11 = new org.jfree.chart.axis.NumberAxis;
+        specialinvoke $stack11.<org.jfree.chart.axis.NumberAxis: void <init>(java.lang.String)>(yAxisLabel);
+        yAxis = $stack11;
+        virtualinvoke $stack11.<org.jfree.chart.axis.NumberAxis: void setAutoRangeIncludesZero(boolean)>(0);
+        $stack12 = new org.jfree.chart.plot.XYPlot;
+        specialinvoke $stack12.<org.jfree.chart.plot.XYPlot: void <init>(org.jfree.data.xy.XYDataset,org.jfree.chart.axis.ValueAxis,org.jfree.chart.axis.ValueAxis,org.jfree.chart.renderer.xy.XYItemRenderer)>(dataset, $stack10, $stack11, null);
+        plot = $stack12;
+        $stack13 = new org.jfree.chart.renderer.xy.XYBubbleRenderer;
+        specialinvoke $stack13.<org.jfree.chart.renderer.xy.XYBubbleRenderer: void <init>(int)>(2);
+        renderer = $stack13;
+        $stack14 = new org.jfree.chart.labels.StandardXYZToolTipGenerator;
+        specialinvoke $stack14.<org.jfree.chart.labels.StandardXYZToolTipGenerator: void <init>()>();
+        interfaceinvoke $stack13.<org.jfree.chart.renderer.xy.XYItemRenderer: void setBaseToolTipGenerator(org.jfree.chart.labels.XYToolTipGenerator)>($stack14);
+        virtualinvoke $stack12.<org.jfree.chart.plot.XYPlot: void setRenderer(org.jfree.chart.renderer.xy.XYItemRenderer)>($stack13);
+        $stack16 = new org.jfree.chart.JFreeChart;
+        $stack15 = <org.jfree.chart.JFreeChart: java.awt.Font DEFAULT_TITLE_FONT>;
+        specialinvoke $stack16.<org.jfree.chart.JFreeChart: void <init>(java.lang.String,java.awt.Font,org.jfree.chart.plot.Plot,boolean)>(title, $stack15, $stack12, legend);
+        chart = $stack16;
+        $stack17 = <org.jfree.chart.ChartFactory: org.jfree.chart.ChartTheme currentTheme>;
+        interfaceinvoke $stack17.<org.jfree.chart.ChartTheme: void apply(org.jfree.chart.JFreeChart)>($stack16);
+    
+        return $stack16;
+    }
+
+    // ---- method: <org.jfree.chart.ChartFactory: org.jfree.chart.JFreeChart createCandlestickChart(java.lang.String,java.lang.String,java.lang.String,org.jfree.data.xy.OHLCDataset,boolean)> ----
+    {
+        boolean legend;
+        java.awt.Font $stack13;
+        java.lang.String timeAxisLabel, title, valueAxisLabel;
+        org.jfree.chart.ChartTheme $stack15;
+        org.jfree.chart.JFreeChart $stack14, chart;
+        org.jfree.chart.axis.DateAxis $stack9, timeAxis;
+        org.jfree.chart.axis.NumberAxis $stack10, valueAxis;
+        org.jfree.chart.plot.XYPlot $stack11, plot;
+        org.jfree.chart.renderer.xy.CandlestickRenderer $stack12;
+        org.jfree.data.xy.OHLCDataset dataset;
+    
+    
+        title := @parameter0: java.lang.String;
+        timeAxisLabel := @parameter1: java.lang.String;
+        valueAxisLabel := @parameter2: java.lang.String;
+        dataset := @parameter3: org.jfree.data.xy.OHLCDataset;
+        legend := @parameter4: boolean;
+        $stack9 = new org.jfree.chart.axis.DateAxis;
+        specialinvoke $stack9.<org.jfree.chart.axis.DateAxis: void <init>(java.lang.String)>(timeAxisLabel);
+        timeAxis = $stack9;
+        $stack10 = new org.jfree.chart.axis.NumberAxis;
+        specialinvoke $stack10.<org.jfree.chart.axis.NumberAxis: void <init>(java.lang.String)>(valueAxisLabel);
+        valueAxis = $stack10;
+        $stack11 = new org.jfree.chart.plot.XYPlot;
+        specialinvoke $stack11.<org.jfree.chart.plot.XYPlot: void <init>(org.jfree.data.xy.XYDataset,org.jfree.chart.axis.ValueAxis,org.jfree.chart.axis.ValueAxis,org.jfree.chart.renderer.xy.XYItemRenderer)>(dataset, $stack9, $stack10, null);
+        plot = $stack11;
+        $stack12 = new org.jfree.chart.renderer.xy.CandlestickRenderer;
+        specialinvoke $stack12.<org.jfree.chart.renderer.xy.CandlestickRenderer: void <init>()>();
+        virtualinvoke $stack11.<org.jfree.chart.plot.XYPlot: void setRenderer(org.jfree.chart.renderer.xy.XYItemRenderer)>($stack12);
+        $stack14 = new org.jfree.chart.JFreeChart;
+        $stack13 = <org.jfree.chart.JFreeChart: java.awt.Font DEFAULT_TITLE_FONT>;
+        specialinvoke $stack14.<org.jfree.chart.JFreeChart: void <init>(java.lang.String,java.awt.Font,org.jfree.chart.plot.Plot,boolean)>(title, $stack13, $stack11, legend);
+        chart = $stack14;
+        $stack15 = <org.jfree.chart.ChartFactory: org.jfree.chart.ChartTheme currentTheme>;
+        interfaceinvoke $stack15.<org.jfree.chart.ChartTheme: void apply(org.jfree.chart.JFreeChart)>($stack14);
+    
+        return $stack14;
+    }
+
+    // ---- method: <org.jfree.chart.ChartFactory: org.jfree.chart.JFreeChart createWindPlot(java.lang.String,java.lang.String,java.lang.String,org.jfree.data.xy.WindDataset,boolean)> ----
+    {
+        boolean legend;
+        java.awt.Font $stack15;
+        java.lang.String title, xAxisLabel, yAxisLabel;
+        org.jfree.chart.ChartTheme $stack17;
+        org.jfree.chart.JFreeChart $stack16, chart;
+        org.jfree.chart.axis.DateAxis $stack10, xAxis;
+        org.jfree.chart.axis.NumberAxis $stack11, yAxis;
+        org.jfree.chart.labels.StandardXYToolTipGenerator $stack13;
+        org.jfree.chart.plot.XYPlot $stack14, plot;
+        org.jfree.chart.renderer.xy.WindItemRenderer $stack12, renderer;
+        org.jfree.data.xy.WindDataset dataset;
+    
+    
+        title := @parameter0: java.lang.String;
+        xAxisLabel := @parameter1: java.lang.String;
+        yAxisLabel := @parameter2: java.lang.String;
+        dataset := @parameter3: org.jfree.data.xy.WindDataset;
+        legend := @parameter4: boolean;
+        $stack10 = new org.jfree.chart.axis.DateAxis;
+        specialinvoke $stack10.<org.jfree.chart.axis.DateAxis: void <init>(java.lang.String)>(xAxisLabel);
+        xAxis = $stack10;
+        $stack11 = new org.jfree.chart.axis.NumberAxis;
+        specialinvoke $stack11.<org.jfree.chart.axis.NumberAxis: void <init>(java.lang.String)>(yAxisLabel);
+        yAxis = $stack11;
+        virtualinvoke $stack11.<org.jfree.chart.axis.ValueAxis: void setRange(double,double)>(-12.0, 12.0);
+        $stack12 = new org.jfree.chart.renderer.xy.WindItemRenderer;
+        specialinvoke $stack12.<org.jfree.chart.renderer.xy.WindItemRenderer: void <init>()>();
+        renderer = $stack12;
+        $stack13 = new org.jfree.chart.labels.StandardXYToolTipGenerator;
+        specialinvoke $stack13.<org.jfree.chart.labels.StandardXYToolTipGenerator: void <init>()>();
+        virtualinvoke $stack12.<org.jfree.chart.renderer.xy.WindItemRenderer: void setBaseToolTipGenerator(org.jfree.chart.labels.XYToolTipGenerator)>($stack13);
+        $stack14 = new org.jfree.chart.plot.XYPlot;
+        specialinvoke $stack14.<org.jfree.chart.plot.XYPlot: void <init>(org.jfree.data.xy.XYDataset,org.jfree.chart.axis.ValueAxis,org.jfree.chart.axis.ValueAxis,org.jfree.chart.renderer.xy.XYItemRenderer)>(dataset, $stack10, $stack11, $stack12);
+        plot = $stack14;
+        $stack16 = new org.jfree.chart.JFreeChart;
+        $stack15 = <org.jfree.chart.JFreeChart: java.awt.Font DEFAULT_TITLE_FONT>;
+        specialinvoke $stack16.<org.jfree.chart.JFreeChart: void <init>(java.lang.String,java.awt.Font,org.jfree.chart.plot.Plot,boolean)>(title, $stack15, $stack14, legend);
+        chart = $stack16;
+        $stack17 = <org.jfree.chart.ChartFactory: org.jfree.chart.ChartTheme currentTheme>;
+        interfaceinvoke $stack17.<org.jfree.chart.ChartTheme: void apply(org.jfree.chart.JFreeChart)>($stack16);
+    
+        return $stack16;
+    }
+
+    // ---- method: <org.jfree.chart.ChartFactory: org.jfree.chart.JFreeChart createGanttChart(java.lang.String,java.lang.String,java.lang.String,org.jfree.data.category.IntervalCategoryDataset,boolean)> ----
+    {
+        boolean legend;
+        java.awt.Font $stack17;
+        java.lang.String categoryAxisLabel, dateAxisLabel, title;
+        java.text.DateFormat $stack13;
+        org.jfree.chart.ChartTheme $stack19;
+        org.jfree.chart.JFreeChart $stack18, chart;
+        org.jfree.chart.axis.CategoryAxis $stack10, categoryAxis;
+        org.jfree.chart.axis.DateAxis $stack11, dateAxis;
+        org.jfree.chart.labels.IntervalCategoryToolTipGenerator $stack14;
+        org.jfree.chart.plot.CategoryPlot $stack15, plot;
+        org.jfree.chart.plot.PlotOrientation $stack16;
+        org.jfree.chart.renderer.category.GanttRenderer $stack12, renderer;
+        org.jfree.data.category.IntervalCategoryDataset dataset;
+    
+    
+        title := @parameter0: java.lang.String;
+        categoryAxisLabel := @parameter1: java.lang.String;
+        dateAxisLabel := @parameter2: java.lang.String;
+        dataset := @parameter3: org.jfree.data.category.IntervalCategoryDataset;
+        legend := @parameter4: boolean;
+        $stack10 = new org.jfree.chart.axis.CategoryAxis;
+        specialinvoke $stack10.<org.jfree.chart.axis.CategoryAxis: void <init>(java.lang.String)>(categoryAxisLabel);
+        categoryAxis = $stack10;
+        $stack11 = new org.jfree.chart.axis.DateAxis;
+        specialinvoke $stack11.<org.jfree.chart.axis.DateAxis: void <init>(java.lang.String)>(dateAxisLabel);
+        dateAxis = $stack11;
+        $stack12 = new org.jfree.chart.renderer.category.GanttRenderer;
+        specialinvoke $stack12.<org.jfree.chart.renderer.category.GanttRenderer: void <init>()>();
+        renderer = $stack12;
+        $stack14 = new org.jfree.chart.labels.IntervalCategoryToolTipGenerator;
+        $stack13 = staticinvoke <java.text.DateFormat: java.text.DateFormat getDateInstance()>();
+        specialinvoke $stack14.<org.jfree.chart.labels.IntervalCategoryToolTipGenerator: void <init>(java.lang.String,java.text.DateFormat)>("{3} - {4}", $stack13);
+        interfaceinvoke $stack12.<org.jfree.chart.renderer.category.CategoryItemRenderer: void setBaseToolTipGenerator(org.jfree.chart.labels.CategoryToolTipGenerator)>($stack14);
+        $stack15 = new org.jfree.chart.plot.CategoryPlot;
+        specialinvoke $stack15.<org.jfree.chart.plot.CategoryPlot: void <init>(org.jfree.data.category.CategoryDataset,org.jfree.chart.axis.CategoryAxis,org.jfree.chart.axis.ValueAxis,org.jfree.chart.renderer.category.CategoryItemRenderer)>(dataset, $stack10, $stack11, $stack12);
+        plot = $stack15;
+        $stack16 = <org.jfree.chart.plot.PlotOrientation: org.jfree.chart.plot.PlotOrientation HORIZONTAL>;
+        virtualinvoke $stack15.<org.jfree.chart.plot.CategoryPlot: void setOrientation(org.jfree.chart.plot.PlotOrientation)>($stack16);
+        $stack18 = new org.jfree.chart.JFreeChart;
+        $stack17 = <org.jfree.chart.JFreeChart: java.awt.Font DEFAULT_TITLE_FONT>;
+        specialinvoke $stack18.<org.jfree.chart.JFreeChart: void <init>(java.lang.String,java.awt.Font,org.jfree.chart.plot.Plot,boolean)>(title, $stack17, $stack15, legend);
+        chart = $stack18;
+        $stack19 = <org.jfree.chart.ChartFactory: org.jfree.chart.ChartTheme currentTheme>;
+        interfaceinvoke $stack19.<org.jfree.chart.ChartTheme: void apply(org.jfree.chart.JFreeChart)>($stack18);
+    
+        return $stack18;
+    }
+
+    // ---- method: <org.jfree.chart.ChartFactory: org.jfree.chart.JFreeChart createScatterPlot(java.lang.String,java.lang.String,java.lang.String,org.jfree.data.xy.XYDataset,boolean)> ----
+    {
+        boolean legend;
+        java.awt.Font $stack15;
+        java.lang.String title, xAxisLabel, yAxisLabel;
+        org.jfree.chart.ChartTheme $stack17;
+        org.jfree.chart.JFreeChart $stack16, chart;
+        org.jfree.chart.axis.NumberAxis $stack10, $stack11, xAxis, yAxis;
+        org.jfree.chart.labels.StandardXYToolTipGenerator $stack14;
+        org.jfree.chart.plot.XYPlot $stack12, plot;
+        org.jfree.chart.renderer.xy.XYLineAndShapeRenderer $stack13, renderer;
+        org.jfree.data.xy.XYDataset dataset;
+    
+    
+        title := @parameter0: java.lang.String;
+        xAxisLabel := @parameter1: java.lang.String;
+        yAxisLabel := @parameter2: java.lang.String;
+        dataset := @parameter3: org.jfree.data.xy.XYDataset;
+        legend := @parameter4: boolean;
+        $stack10 = new org.jfree.chart.axis.NumberAxis;
+        specialinvoke $stack10.<org.jfree.chart.axis.NumberAxis: void <init>(java.lang.String)>(xAxisLabel);
+        xAxis = $stack10;
+        virtualinvoke $stack10.<org.jfree.chart.axis.NumberAxis: void setAutoRangeIncludesZero(boolean)>(0);
+        $stack11 = new org.jfree.chart.axis.NumberAxis;
+        specialinvoke $stack11.<org.jfree.chart.axis.NumberAxis: void <init>(java.lang.String)>(yAxisLabel);
+        yAxis = $stack11;
+        virtualinvoke $stack11.<org.jfree.chart.axis.NumberAxis: void setAutoRangeIncludesZero(boolean)>(0);
+        $stack12 = new org.jfree.chart.plot.XYPlot;
+        specialinvoke $stack12.<org.jfree.chart.plot.XYPlot: void <init>(org.jfree.data.xy.XYDataset,org.jfree.chart.axis.ValueAxis,org.jfree.chart.axis.ValueAxis,org.jfree.chart.renderer.xy.XYItemRenderer)>(dataset, $stack10, $stack11, null);
+        plot = $stack12;
+        $stack13 = new org.jfree.chart.renderer.xy.XYLineAndShapeRenderer;
+        specialinvoke $stack13.<org.jfree.chart.renderer.xy.XYLineAndShapeRenderer: void <init>(boolean,boolean)>(0, 1);
+        renderer = $stack13;
+        $stack14 = new org.jfree.chart.labels.StandardXYToolTipGenerator;
+        specialinvoke $stack14.<org.jfree.chart.labels.StandardXYToolTipGenerator: void <init>()>();
+        interfaceinvoke $stack13.<org.jfree.chart.renderer.xy.XYItemRenderer: void setBaseToolTipGenerator(org.jfree.chart.labels.XYToolTipGenerator)>($stack14);
+        virtualinvoke $stack12.<org.jfree.chart.plot.XYPlot: void setRenderer(org.jfree.chart.renderer.xy.XYItemRenderer)>($stack13);
+        $stack16 = new org.jfree.chart.JFreeChart;
+        $stack15 = <org.jfree.chart.JFreeChart: java.awt.Font DEFAULT_TITLE_FONT>;
+        specialinvoke $stack16.<org.jfree.chart.JFreeChart: void <init>(java.lang.String,java.awt.Font,org.jfree.chart.plot.Plot,boolean)>(title, $stack15, $stack12, legend);
+        chart = $stack16;
+        $stack17 = <org.jfree.chart.ChartFactory: org.jfree.chart.ChartTheme currentTheme>;
+        interfaceinvoke $stack17.<org.jfree.chart.ChartTheme: void apply(org.jfree.chart.JFreeChart)>($stack16);
+    
+        return $stack16;
+    }
+
+    // ---- method: <org.jfree.chart.ChartFactory: org.jfree.chart.JFreeChart createMultiplePieChart(java.lang.String,org.jfree.data.category.CategoryDataset,org.jfree.chart.util.TableOrder,boolean)> ----
+    {
+        boolean legend;
+        java.awt.Font $stack12;
+        java.lang.IllegalArgumentException #l0;
+        java.lang.Object $stack15;
+        java.lang.String title;
+        java.lang.Throwable #l1;
+        org.jfree.chart.ChartTheme $stack14;
+        org.jfree.chart.JFreeChart $stack10, $stack13, chart;
+        org.jfree.chart.labels.StandardPieToolTipGenerator $stack9, tooltipGenerator;
+        org.jfree.chart.plot.MultiplePiePlot $stack8, plot;
+        org.jfree.chart.plot.PiePlot pp;
+        org.jfree.chart.plot.Plot $stack11;
+        org.jfree.chart.util.TableOrder order;
+        org.jfree.data.category.CategoryDataset dataset;
+    
+    
+        title := @parameter0: java.lang.String;
+        dataset := @parameter1: org.jfree.data.category.CategoryDataset;
+        order := @parameter2: org.jfree.chart.util.TableOrder;
+        legend := @parameter3: boolean;
+    
+        if order != null goto label1;
+        $stack15 = new java.lang.IllegalArgumentException;
+        #l0 = (java.lang.IllegalArgumentException) $stack15;
+        specialinvoke #l0.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'order\' argument.");
+        #l1 = (java.lang.Throwable) $stack15;
+    
+        throw #l1;
+    
+      label1:
+        $stack8 = new org.jfree.chart.plot.MultiplePiePlot;
+        specialinvoke $stack8.<org.jfree.chart.plot.MultiplePiePlot: void <init>(org.jfree.data.category.CategoryDataset)>(dataset);
+        plot = $stack8;
+        virtualinvoke $stack8.<org.jfree.chart.plot.MultiplePiePlot: void setDataExtractOrder(org.jfree.chart.util.TableOrder)>(order);
+        virtualinvoke $stack8.<org.jfree.chart.plot.MultiplePiePlot: void setBackgroundPaint(java.awt.Paint)>(null);
+        virtualinvoke $stack8.<org.jfree.chart.plot.MultiplePiePlot: void setOutlineStroke(java.awt.Stroke)>(null);
+        $stack9 = new org.jfree.chart.labels.StandardPieToolTipGenerator;
+        specialinvoke $stack9.<org.jfree.chart.labels.StandardPieToolTipGenerator: void <init>()>();
+        tooltipGenerator = $stack9;
+        $stack10 = virtualinvoke $stack8.<org.jfree.chart.plot.MultiplePiePlot: org.jfree.chart.JFreeChart getPieChart()>();
+        $stack11 = virtualinvoke $stack10.<org.jfree.chart.JFreeChart: org.jfree.chart.plot.Plot getPlot()>();
+        pp = (org.jfree.chart.plot.PiePlot) $stack11;
+        virtualinvoke pp.<org.jfree.chart.plot.PiePlot: void setToolTipGenerator(org.jfree.chart.labels.PieToolTipGenerator)>($stack9);
+        $stack13 = new org.jfree.chart.JFreeChart;
+        $stack12 = <org.jfree.chart.JFreeChart: java.awt.Font DEFAULT_TITLE_FONT>;
+        specialinvoke $stack13.<org.jfree.chart.JFreeChart: void <init>(java.lang.String,java.awt.Font,org.jfree.chart.plot.Plot,boolean)>(title, $stack12, $stack8, legend);
+        chart = $stack13;
+        $stack14 = <org.jfree.chart.ChartFactory: org.jfree.chart.ChartTheme currentTheme>;
+        interfaceinvoke $stack14.<org.jfree.chart.ChartTheme: void apply(org.jfree.chart.JFreeChart)>($stack13);
+    
+        return $stack13;
+    }
+
+    // ---- method: <org.jfree.chart.ChartFactory: org.jfree.chart.JFreeChart createRingChart(java.lang.String,org.jfree.data.pie.PieDataset,boolean)> ----
+    {
+        boolean legend;
+        java.lang.String title;
+        java.util.Locale $stack3;
+        org.jfree.chart.JFreeChart $stack4;
+        org.jfree.data.pie.PieDataset dataset;
+    
+    
+        title := @parameter0: java.lang.String;
+        dataset := @parameter1: org.jfree.data.pie.PieDataset;
+        legend := @parameter2: boolean;
+        $stack3 = staticinvoke <java.util.Locale: java.util.Locale getDefault()>();
+        $stack4 = staticinvoke <org.jfree.chart.ChartFactory: org.jfree.chart.JFreeChart createRingChart(java.lang.String,org.jfree.data.pie.PieDataset,boolean,java.util.Locale)>(title, dataset, legend, $stack3);
+    
+        return $stack4;
+    }
+
+    // ---- method: <org.jfree.chart.ChartFactory: org.jfree.chart.JFreeChart createPolarChart(java.lang.String,org.jfree.data.xy.XYDataset,boolean)> ----
+    {
+        boolean legend;
+        java.awt.Font $stack10;
+        java.lang.String title;
+        org.jfree.chart.ChartTheme $stack12;
+        org.jfree.chart.JFreeChart $stack11, chart;
+        org.jfree.chart.axis.NumberAxis $stack7, rangeAxis;
+        org.jfree.chart.plot.PolarPlot $stack6, plot;
+        org.jfree.chart.renderer.DefaultPolarItemRenderer $stack9;
+        org.jfree.chart.util.RectangleInsets $stack8;
+        org.jfree.data.xy.XYDataset dataset;
+    
+    
+        title := @parameter0: java.lang.String;
+        dataset := @parameter1: org.jfree.data.xy.XYDataset;
+        legend := @parameter2: boolean;
+        $stack6 = new org.jfree.chart.plot.PolarPlot;
+        specialinvoke $stack6.<org.jfree.chart.plot.PolarPlot: void <init>()>();
+        plot = $stack6;
+        virtualinvoke $stack6.<org.jfree.chart.plot.PolarPlot: void setDataset(org.jfree.data.xy.XYDataset)>(dataset);
+        $stack7 = new org.jfree.chart.axis.NumberAxis;
+        specialinvoke $stack7.<org.jfree.chart.axis.NumberAxis: void <init>()>();
+        rangeAxis = $stack7;
+        virtualinvoke $stack7.<org.jfree.chart.axis.NumberAxis: void setAxisLineVisible(boolean)>(0);
+        virtualinvoke $stack7.<org.jfree.chart.axis.NumberAxis: void setTickMarksVisible(boolean)>(0);
+        $stack8 = new org.jfree.chart.util.RectangleInsets;
+        specialinvoke $stack8.<org.jfree.chart.util.RectangleInsets: void <init>(double,double,double,double)>(0.0, 0.0, 0.0, 0.0);
+        virtualinvoke $stack7.<org.jfree.chart.axis.NumberAxis: void setTickLabelInsets(org.jfree.chart.util.RectangleInsets)>($stack8);
+        virtualinvoke $stack6.<org.jfree.chart.plot.PolarPlot: void setAxis(org.jfree.chart.axis.ValueAxis)>($stack7);
+        $stack9 = new org.jfree.chart.renderer.DefaultPolarItemRenderer;
+        specialinvoke $stack9.<org.jfree.chart.renderer.DefaultPolarItemRenderer: void <init>()>();
+        virtualinvoke $stack6.<org.jfree.chart.plot.PolarPlot: void setRenderer(org.jfree.chart.renderer.PolarItemRenderer)>($stack9);
+        $stack11 = new org.jfree.chart.JFreeChart;
+        $stack10 = <org.jfree.chart.JFreeChart: java.awt.Font DEFAULT_TITLE_FONT>;
+        specialinvoke $stack11.<org.jfree.chart.JFreeChart: void <init>(java.lang.String,java.awt.Font,org.jfree.chart.plot.Plot,boolean)>(title, $stack10, $stack6, legend);
+        chart = $stack11;
+        $stack12 = <org.jfree.chart.ChartFactory: org.jfree.chart.ChartTheme currentTheme>;
+        interfaceinvoke $stack12.<org.jfree.chart.ChartTheme: void apply(org.jfree.chart.JFreeChart)>($stack11);
+    
+        return $stack11;
+    }
+
+    // ---- method: <org.jfree.chart.ChartFactory: org.jfree.chart.JFreeChart createXYStepChart(java.lang.String,java.lang.String,java.lang.String,org.jfree.data.xy.XYDataset,boolean)> ----
+    {
+        boolean legend;
+        java.awt.Font $stack16;
+        java.lang.String title, xAxisLabel, yAxisLabel;
+        org.jfree.chart.ChartTheme $stack18;
+        org.jfree.chart.JFreeChart $stack17, chart;
+        org.jfree.chart.axis.DateAxis $stack10, xAxis;
+        org.jfree.chart.axis.NumberAxis $stack11, yAxis;
+        org.jfree.chart.axis.TickUnitSource $stack12;
+        org.jfree.chart.labels.StandardXYToolTipGenerator $stack14;
+        org.jfree.chart.plot.XYPlot $stack15, plot;
+        org.jfree.chart.renderer.xy.XYStepRenderer $stack13, renderer;
+        org.jfree.data.xy.XYDataset dataset;
+    
+    
+        title := @parameter0: java.lang.String;
+        xAxisLabel := @parameter1: java.lang.String;
+        yAxisLabel := @parameter2: java.lang.String;
+        dataset := @parameter3: org.jfree.data.xy.XYDataset;
+        legend := @parameter4: boolean;
+        $stack10 = new org.jfree.chart.axis.DateAxis;
+        specialinvoke $stack10.<org.jfree.chart.axis.DateAxis: void <init>(java.lang.String)>(xAxisLabel);
+        xAxis = $stack10;
+        $stack11 = new org.jfree.chart.axis.NumberAxis;
+        specialinvoke $stack11.<org.jfree.chart.axis.NumberAxis: void <init>(java.lang.String)>(yAxisLabel);
+        yAxis = $stack11;
+        $stack12 = staticinvoke <org.jfree.chart.axis.NumberAxis: org.jfree.chart.axis.TickUnitSource createIntegerTickUnits()>();
+        virtualinvoke $stack11.<org.jfree.chart.axis.NumberAxis: void setStandardTickUnits(org.jfree.chart.axis.TickUnitSource)>($stack12);
+        $stack13 = new org.jfree.chart.renderer.xy.XYStepRenderer;
+        specialinvoke $stack13.<org.jfree.chart.renderer.xy.XYStepRenderer: void <init>()>();
+        renderer = $stack13;
+        $stack14 = new org.jfree.chart.labels.StandardXYToolTipGenerator;
+        specialinvoke $stack14.<org.jfree.chart.labels.StandardXYToolTipGenerator: void <init>()>();
+        interfaceinvoke $stack13.<org.jfree.chart.renderer.xy.XYItemRenderer: void setBaseToolTipGenerator(org.jfree.chart.labels.XYToolTipGenerator)>($stack14);
+        $stack15 = new org.jfree.chart.plot.XYPlot;
+        specialinvoke $stack15.<org.jfree.chart.plot.XYPlot: void <init>(org.jfree.data.xy.XYDataset,org.jfree.chart.axis.ValueAxis,org.jfree.chart.axis.ValueAxis,org.jfree.chart.renderer.xy.XYItemRenderer)>(dataset, $stack10, $stack11, null);
+        plot = $stack15;
+        virtualinvoke $stack15.<org.jfree.chart.plot.XYPlot: void setRenderer(org.jfree.chart.renderer.xy.XYItemRenderer)>($stack13);
+        virtualinvoke $stack15.<org.jfree.chart.plot.XYPlot: void setDomainCrosshairVisible(boolean)>(0);
+        virtualinvoke $stack15.<org.jfree.chart.plot.XYPlot: void setRangeCrosshairVisible(boolean)>(0);
+        $stack17 = new org.jfree.chart.JFreeChart;
+        $stack16 = <org.jfree.chart.JFreeChart: java.awt.Font DEFAULT_TITLE_FONT>;
+        specialinvoke $stack17.<org.jfree.chart.JFreeChart: void <init>(java.lang.String,java.awt.Font,org.jfree.chart.plot.Plot,boolean)>(title, $stack16, $stack15, legend);
+        chart = $stack17;
+        $stack18 = <org.jfree.chart.ChartFactory: org.jfree.chart.ChartTheme currentTheme>;
+        interfaceinvoke $stack18.<org.jfree.chart.ChartTheme: void apply(org.jfree.chart.JFreeChart)>($stack17);
+    
+        return $stack17;
+    }
+
+    // ---- method: <org.jfree.chart.ChartFactory: void <clinit>()> ----
+    {
+        org.jfree.chart.StandardChartTheme $stack0;
+    
+    
+        $stack0 = new org.jfree.chart.StandardChartTheme;
+        specialinvoke $stack0.<org.jfree.chart.StandardChartTheme: void <init>(java.lang.String)>("JFree");
+        <org.jfree.chart.ChartFactory: org.jfree.chart.ChartTheme currentTheme> = $stack0;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.ChartFactory: org.jfree.chart.JFreeChart createLineChart3D(java.lang.String,java.lang.String,java.lang.String,org.jfree.data.category.CategoryDataset,boolean)> ----
+    {
+        boolean legend;
+        java.awt.Font $stack15;
+        java.lang.String categoryAxisLabel, title, valueAxisLabel;
+        org.jfree.chart.ChartTheme $stack17;
+        org.jfree.chart.JFreeChart $stack16, chart;
+        org.jfree.chart.axis.CategoryAxis3D $stack10, categoryAxis;
+        org.jfree.chart.axis.NumberAxis3D $stack11, valueAxis;
+        org.jfree.chart.labels.StandardCategoryToolTipGenerator $stack13;
+        org.jfree.chart.plot.CategoryPlot $stack14, plot;
+        org.jfree.chart.renderer.category.LineRenderer3D $stack12, renderer;
+        org.jfree.data.category.CategoryDataset dataset;
+    
+    
+        title := @parameter0: java.lang.String;
+        categoryAxisLabel := @parameter1: java.lang.String;
+        valueAxisLabel := @parameter2: java.lang.String;
+        dataset := @parameter3: org.jfree.data.category.CategoryDataset;
+        legend := @parameter4: boolean;
+        $stack10 = new org.jfree.chart.axis.CategoryAxis3D;
+        specialinvoke $stack10.<org.jfree.chart.axis.CategoryAxis3D: void <init>(java.lang.String)>(categoryAxisLabel);
+        categoryAxis = $stack10;
+        $stack11 = new org.jfree.chart.axis.NumberAxis3D;
+        specialinvoke $stack11.<org.jfree.chart.axis.NumberAxis3D: void <init>(java.lang.String)>(valueAxisLabel);
+        valueAxis = $stack11;
+        $stack12 = new org.jfree.chart.renderer.category.LineRenderer3D;
+        specialinvoke $stack12.<org.jfree.chart.renderer.category.LineRenderer3D: void <init>()>();
+        renderer = $stack12;
+        $stack13 = new org.jfree.chart.labels.StandardCategoryToolTipGenerator;
+        specialinvoke $stack13.<org.jfree.chart.labels.StandardCategoryToolTipGenerator: void <init>()>();
+        virtualinvoke $stack12.<org.jfree.chart.renderer.category.LineRenderer3D: void setBaseToolTipGenerator(org.jfree.chart.labels.CategoryToolTipGenerator)>($stack13);
+        $stack14 = new org.jfree.chart.plot.CategoryPlot;
+        specialinvoke $stack14.<org.jfree.chart.plot.CategoryPlot: void <init>(org.jfree.data.category.CategoryDataset,org.jfree.chart.axis.CategoryAxis,org.jfree.chart.axis.ValueAxis,org.jfree.chart.renderer.category.CategoryItemRenderer)>(dataset, $stack10, $stack11, $stack12);
+        plot = $stack14;
+        $stack16 = new org.jfree.chart.JFreeChart;
+        $stack15 = <org.jfree.chart.JFreeChart: java.awt.Font DEFAULT_TITLE_FONT>;
+        specialinvoke $stack16.<org.jfree.chart.JFreeChart: void <init>(java.lang.String,java.awt.Font,org.jfree.chart.plot.Plot,boolean)>(title, $stack15, $stack14, legend);
+        chart = $stack16;
+        $stack17 = <org.jfree.chart.ChartFactory: org.jfree.chart.ChartTheme currentTheme>;
+        interfaceinvoke $stack17.<org.jfree.chart.ChartTheme: void apply(org.jfree.chart.JFreeChart)>($stack16);
+    
+        return $stack16;
+    }
+
+    // ---- method: <org.jfree.chart.ChartFactory: void setChartTheme(org.jfree.chart.ChartTheme)> ----
+    {
+        boolean $stack2, $stack4;
+        java.lang.IllegalArgumentException #l0;
+        java.lang.Object $stack9;
+        java.lang.String $stack3;
+        java.lang.Throwable #l1;
+        org.jfree.chart.ChartTheme theme;
+        org.jfree.chart.StandardChartTheme sct;
+        org.jfree.chart.renderer.category.GradientBarPainter $stack5;
+        org.jfree.chart.renderer.category.StandardBarPainter $stack7;
+        org.jfree.chart.renderer.xy.GradientXYBarPainter $stack6;
+        org.jfree.chart.renderer.xy.StandardXYBarPainter $stack8;
+    
+    
+        theme := @parameter0: org.jfree.chart.ChartTheme;
+    
+        if theme != null goto label1;
+        $stack9 = new java.lang.IllegalArgumentException;
+        #l0 = (java.lang.IllegalArgumentException) $stack9;
+        specialinvoke #l0.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'theme\' argument.");
+        #l1 = (java.lang.Throwable) $stack9;
+    
+        throw #l1;
+    
+      label1:
+        <org.jfree.chart.ChartFactory: org.jfree.chart.ChartTheme currentTheme> = theme;
+        $stack2 = theme instanceof org.jfree.chart.StandardChartTheme;
+    
+        if $stack2 == 0 goto label3;
+        sct = (org.jfree.chart.StandardChartTheme) theme;
+        $stack3 = virtualinvoke sct.<org.jfree.chart.StandardChartTheme: java.lang.String getName()>();
+        $stack4 = virtualinvoke $stack3.<java.lang.String: boolean equals(java.lang.Object)>("Legacy");
+    
+        if $stack4 == 0 goto label2;
+        $stack7 = new org.jfree.chart.renderer.category.StandardBarPainter;
+        specialinvoke $stack7.<org.jfree.chart.renderer.category.StandardBarPainter: void <init>()>();
+        staticinvoke <org.jfree.chart.renderer.category.BarRenderer: void setDefaultBarPainter(org.jfree.chart.renderer.category.BarPainter)>($stack7);
+        $stack8 = new org.jfree.chart.renderer.xy.StandardXYBarPainter;
+        specialinvoke $stack8.<org.jfree.chart.renderer.xy.StandardXYBarPainter: void <init>()>();
+        staticinvoke <org.jfree.chart.renderer.xy.XYBarRenderer: void setDefaultBarPainter(org.jfree.chart.renderer.xy.XYBarPainter)>($stack8);
+    
+        goto label3;
+    
+      label2:
+        $stack5 = new org.jfree.chart.renderer.category.GradientBarPainter;
+        specialinvoke $stack5.<org.jfree.chart.renderer.category.GradientBarPainter: void <init>()>();
+        staticinvoke <org.jfree.chart.renderer.category.BarRenderer: void setDefaultBarPainter(org.jfree.chart.renderer.category.BarPainter)>($stack5);
+        $stack6 = new org.jfree.chart.renderer.xy.GradientXYBarPainter;
+        specialinvoke $stack6.<org.jfree.chart.renderer.xy.GradientXYBarPainter: void <init>()>();
+        staticinvoke <org.jfree.chart.renderer.xy.XYBarRenderer: void setDefaultBarPainter(org.jfree.chart.renderer.xy.XYBarPainter)>($stack6);
+    
+      label3:
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.ChartFactory: org.jfree.chart.JFreeChart createXYBarChart(java.lang.String,java.lang.String,boolean,java.lang.String,org.jfree.data.xy.IntervalXYDataset,boolean)> ----
+    {
+        boolean dateAxis, legend;
+        java.awt.Font $stack17;
+        java.lang.Object domainAxis#0;
+        java.lang.String title, xAxisLabel, yAxisLabel;
+        org.jfree.chart.ChartTheme $stack19;
+        org.jfree.chart.JFreeChart $stack18, chart;
+        org.jfree.chart.axis.DateAxis $stack20;
+        org.jfree.chart.axis.NumberAxis $stack12, $stack13, axis#0, axis#1;
+        org.jfree.chart.axis.ValueAxis domainAxis#1;
+        org.jfree.chart.labels.StandardXYToolTipGenerator $stack15, tt;
+        org.jfree.chart.plot.XYPlot $stack16, plot;
+        org.jfree.chart.renderer.xy.XYBarRenderer $stack14, renderer;
+        org.jfree.data.xy.IntervalXYDataset dataset;
+    
+    
+        title := @parameter0: java.lang.String;
+        xAxisLabel := @parameter1: java.lang.String;
+        dateAxis := @parameter2: boolean;
+        yAxisLabel := @parameter3: java.lang.String;
+        dataset := @parameter4: org.jfree.data.xy.IntervalXYDataset;
+        legend := @parameter5: boolean;
+        domainAxis#0 = null;
+    
+        if dateAxis == 0 goto label1;
+        $stack20 = new org.jfree.chart.axis.DateAxis;
+        specialinvoke $stack20.<org.jfree.chart.axis.DateAxis: void <init>(java.lang.String)>(xAxisLabel);
+        domainAxis#1 = $stack20;
+    
+        goto label2;
+    
+      label1:
+        $stack12 = new org.jfree.chart.axis.NumberAxis;
+        specialinvoke $stack12.<org.jfree.chart.axis.NumberAxis: void <init>(java.lang.String)>(xAxisLabel);
+        axis#0 = $stack12;
+        virtualinvoke $stack12.<org.jfree.chart.axis.NumberAxis: void setAutoRangeIncludesZero(boolean)>(0);
+        domainAxis#1 = $stack12;
+    
+      label2:
+        $stack13 = new org.jfree.chart.axis.NumberAxis;
+        specialinvoke $stack13.<org.jfree.chart.axis.NumberAxis: void <init>(java.lang.String)>(yAxisLabel);
+        axis#1 = $stack13;
+        $stack14 = new org.jfree.chart.renderer.xy.XYBarRenderer;
+        specialinvoke $stack14.<org.jfree.chart.renderer.xy.XYBarRenderer: void <init>()>();
+        renderer = $stack14;
+    
+        if dateAxis == 0 goto label3;
+        tt = staticinvoke <org.jfree.chart.labels.StandardXYToolTipGenerator: org.jfree.chart.labels.StandardXYToolTipGenerator getTimeSeriesInstance()>();
+    
+        goto label4;
+    
+      label3:
+        $stack15 = new org.jfree.chart.labels.StandardXYToolTipGenerator;
+        specialinvoke $stack15.<org.jfree.chart.labels.StandardXYToolTipGenerator: void <init>()>();
+        tt = $stack15;
+    
+      label4:
+        virtualinvoke $stack14.<org.jfree.chart.renderer.xy.XYBarRenderer: void setBaseToolTipGenerator(org.jfree.chart.labels.XYToolTipGenerator)>(tt);
+        $stack16 = new org.jfree.chart.plot.XYPlot;
+        specialinvoke $stack16.<org.jfree.chart.plot.XYPlot: void <init>(org.jfree.data.xy.XYDataset,org.jfree.chart.axis.ValueAxis,org.jfree.chart.axis.ValueAxis,org.jfree.chart.renderer.xy.XYItemRenderer)>(dataset, domainAxis#1, $stack13, $stack14);
+        plot = $stack16;
+        $stack18 = new org.jfree.chart.JFreeChart;
+        $stack17 = <org.jfree.chart.JFreeChart: java.awt.Font DEFAULT_TITLE_FONT>;
+        specialinvoke $stack18.<org.jfree.chart.JFreeChart: void <init>(java.lang.String,java.awt.Font,org.jfree.chart.plot.Plot,boolean)>(title, $stack17, $stack16, legend);
+        chart = $stack18;
+        $stack19 = <org.jfree.chart.ChartFactory: org.jfree.chart.ChartTheme currentTheme>;
+        interfaceinvoke $stack19.<org.jfree.chart.ChartTheme: void apply(org.jfree.chart.JFreeChart)>($stack18);
+    
+        return $stack18;
+    }
+
+    // ---- method: <org.jfree.chart.ChartFactory: org.jfree.chart.JFreeChart createPieChart(java.lang.String,org.jfree.data.pie.PieDataset,boolean,java.util.Locale)> ----
+    {
+        boolean legend;
+        java.awt.Font $stack10;
+        java.lang.String title;
+        java.util.Locale locale;
+        org.jfree.chart.ChartTheme $stack12;
+        org.jfree.chart.JFreeChart $stack11, chart;
+        org.jfree.chart.labels.StandardPieSectionLabelGenerator $stack7;
+        org.jfree.chart.labels.StandardPieToolTipGenerator $stack9;
+        org.jfree.chart.plot.PiePlot $stack6, plot;
+        org.jfree.chart.util.RectangleInsets $stack8;
+        org.jfree.data.pie.PieDataset dataset;
+    
+    
+        title := @parameter0: java.lang.String;
+        dataset := @parameter1: org.jfree.data.pie.PieDataset;
+        legend := @parameter2: boolean;
+        locale := @parameter3: java.util.Locale;
+        $stack6 = new org.jfree.chart.plot.PiePlot;
+        specialinvoke $stack6.<org.jfree.chart.plot.PiePlot: void <init>(org.jfree.data.pie.PieDataset)>(dataset);
+        plot = $stack6;
+        $stack7 = new org.jfree.chart.labels.StandardPieSectionLabelGenerator;
+        specialinvoke $stack7.<org.jfree.chart.labels.StandardPieSectionLabelGenerator: void <init>(java.util.Locale)>(locale);
+        virtualinvoke $stack6.<org.jfree.chart.plot.PiePlot: void setLabelGenerator(org.jfree.chart.labels.PieSectionLabelGenerator)>($stack7);
+        $stack8 = new org.jfree.chart.util.RectangleInsets;
+        specialinvoke $stack8.<org.jfree.chart.util.RectangleInsets: void <init>(double,double,double,double)>(0.0, 5.0, 5.0, 5.0);
+        virtualinvoke $stack6.<org.jfree.chart.plot.PiePlot: void setInsets(org.jfree.chart.util.RectangleInsets)>($stack8);
+        $stack9 = new org.jfree.chart.labels.StandardPieToolTipGenerator;
+        specialinvoke $stack9.<org.jfree.chart.labels.StandardPieToolTipGenerator: void <init>(java.util.Locale)>(locale);
+        virtualinvoke $stack6.<org.jfree.chart.plot.PiePlot: void setToolTipGenerator(org.jfree.chart.labels.PieToolTipGenerator)>($stack9);
+        $stack11 = new org.jfree.chart.JFreeChart;
+        $stack10 = <org.jfree.chart.JFreeChart: java.awt.Font DEFAULT_TITLE_FONT>;
+        specialinvoke $stack11.<org.jfree.chart.JFreeChart: void <init>(java.lang.String,java.awt.Font,org.jfree.chart.plot.Plot,boolean)>(title, $stack10, $stack6, legend);
+        chart = $stack11;
+        $stack12 = <org.jfree.chart.ChartFactory: org.jfree.chart.ChartTheme currentTheme>;
+        interfaceinvoke $stack12.<org.jfree.chart.ChartTheme: void apply(org.jfree.chart.JFreeChart)>($stack11);
+    
+        return $stack11;
+    }
+
+}

@@ -1,0 +1,476 @@
+// ========================================================================
+// CLASS : org.jfree.chart.title.ImageTitle
+// ========================================================================
+
+[PUBLIC, SUPER] class org.jfree.chart.title.ImageTitle extends org.jfree.chart.title.Title {
+
+    // ---- method: <org.jfree.chart.title.ImageTitle: org.jfree.chart.util.Size2D drawHorizontal(java.awt.Graphics2D,java.awt.geom.Rectangle2D)> ----
+    {
+        double $stack23, $stack24, $stack25, $stack26, $stack35, $stack36, $stack37, $stack38, $stack39, $stack41, $stack42, $stack43, $stack44, $stack45, $stack46, $stack47, $stack48, $stack49, $stack50, $stack51, $stack52, bottomSpace#0, bottomSpace#1, h, leftSpace#0, leftSpace#1, rightSpace#0, rightSpace#1, startX, startY#0, startY#1, topSpace#0, topSpace#1, w;
+        int $stack30, $stack31, $stack32, $stack33;
+        java.awt.Graphics2D g2;
+        java.awt.Image $stack34;
+        java.awt.geom.Rectangle2D chartArea;
+        org.jfree.chart.title.ImageTitle this;
+        org.jfree.chart.util.HorizontalAlignment $stack27, $stack28, $stack29, horizontalAlignment;
+        org.jfree.chart.util.RectangleEdge $stack21, $stack22;
+        org.jfree.chart.util.RectangleInsets padding;
+        org.jfree.chart.util.Size2D $stack40;
+    
+    
+        this := @this: org.jfree.chart.title.ImageTitle;
+        g2 := @parameter0: java.awt.Graphics2D;
+        chartArea := @parameter1: java.awt.geom.Rectangle2D;
+        startY#0 = 0.0;
+        topSpace#0 = 0.0;
+        bottomSpace#0 = 0.0;
+        leftSpace#0 = 0.0;
+        rightSpace#0 = 0.0;
+        w = virtualinvoke this.<org.jfree.chart.title.ImageTitle: double getWidth()>();
+        h = virtualinvoke this.<org.jfree.chart.title.ImageTitle: double getHeight()>();
+        padding = virtualinvoke this.<org.jfree.chart.title.ImageTitle: org.jfree.chart.util.RectangleInsets getPadding()>();
+        topSpace#1 = virtualinvoke padding.<org.jfree.chart.util.RectangleInsets: double calculateTopOutset(double)>(h);
+        bottomSpace#1 = virtualinvoke padding.<org.jfree.chart.util.RectangleInsets: double calculateBottomOutset(double)>(h);
+        leftSpace#1 = virtualinvoke padding.<org.jfree.chart.util.RectangleInsets: double calculateLeftOutset(double)>(w);
+        rightSpace#1 = virtualinvoke padding.<org.jfree.chart.util.RectangleInsets: double calculateRightOutset(double)>(w);
+        $stack22 = virtualinvoke this.<org.jfree.chart.title.ImageTitle: org.jfree.chart.util.RectangleEdge getPosition()>();
+        $stack21 = <org.jfree.chart.util.RectangleEdge: org.jfree.chart.util.RectangleEdge TOP>;
+    
+        if $stack22 != $stack21 goto label1;
+        $stack52 = virtualinvoke chartArea.<java.awt.geom.Rectangle2D: double getY()>();
+        startY#1 = $stack52 + topSpace#1;
+    
+        goto label2;
+    
+      label1:
+        $stack23 = virtualinvoke chartArea.<java.awt.geom.Rectangle2D: double getY()>();
+        $stack24 = virtualinvoke chartArea.<java.awt.geom.Rectangle2D: double getHeight()>();
+        $stack25 = $stack23 + $stack24;
+        $stack26 = $stack25 - bottomSpace#1;
+        startY#1 = $stack26 - h;
+    
+      label2:
+        horizontalAlignment = virtualinvoke this.<org.jfree.chart.title.ImageTitle: org.jfree.chart.util.HorizontalAlignment getHorizontalAlignment()>();
+        startX = 0.0;
+        $stack27 = <org.jfree.chart.util.HorizontalAlignment: org.jfree.chart.util.HorizontalAlignment CENTER>;
+    
+        if horizontalAlignment != $stack27 goto label3;
+        $stack46 = virtualinvoke chartArea.<java.awt.geom.Rectangle2D: double getX()>();
+        $stack48 = $stack46 + leftSpace#1;
+        $stack47 = virtualinvoke chartArea.<java.awt.geom.Rectangle2D: double getWidth()>();
+        $stack49 = $stack47 / 2.0;
+        $stack50 = $stack48 + $stack49;
+        $stack51 = w / 2.0;
+        startX = $stack50 - $stack51;
+    
+        goto label5;
+    
+      label3:
+        $stack28 = <org.jfree.chart.util.HorizontalAlignment: org.jfree.chart.util.HorizontalAlignment LEFT>;
+    
+        if horizontalAlignment != $stack28 goto label4;
+        $stack45 = virtualinvoke chartArea.<java.awt.geom.Rectangle2D: double getX()>();
+        startX = $stack45 + leftSpace#1;
+    
+        goto label5;
+    
+      label4:
+        $stack29 = <org.jfree.chart.util.HorizontalAlignment: org.jfree.chart.util.HorizontalAlignment RIGHT>;
+    
+        if horizontalAlignment != $stack29 goto label5;
+        $stack41 = virtualinvoke chartArea.<java.awt.geom.Rectangle2D: double getX()>();
+        $stack42 = virtualinvoke chartArea.<java.awt.geom.Rectangle2D: double getWidth()>();
+        $stack43 = $stack41 + $stack42;
+        $stack44 = $stack43 - rightSpace#1;
+        startX = $stack44 - w;
+    
+      label5:
+        $stack34 = this.<org.jfree.chart.title.ImageTitle: java.awt.Image image>;
+        $stack33 = (int) startX;
+        $stack32 = (int) startY#1;
+        $stack31 = (int) w;
+        $stack30 = (int) h;
+        virtualinvoke g2.<java.awt.Graphics2D: boolean drawImage(java.awt.Image,int,int,int,int,java.awt.image.ImageObserver)>($stack34, $stack33, $stack32, $stack31, $stack30, null);
+        $stack40 = new org.jfree.chart.util.Size2D;
+        $stack35 = virtualinvoke chartArea.<java.awt.geom.Rectangle2D: double getWidth()>();
+        $stack36 = $stack35 + leftSpace#1;
+        $stack39 = $stack36 + rightSpace#1;
+        $stack37 = h + topSpace#1;
+        $stack38 = $stack37 + bottomSpace#1;
+        specialinvoke $stack40.<org.jfree.chart.util.Size2D: void <init>(double,double)>($stack39, $stack38);
+    
+        return $stack40;
+    }
+
+    // ---- method: <org.jfree.chart.title.ImageTitle: void <init>(java.awt.Image)> ----
+    {
+        int $stack6, $stack7;
+        java.awt.Image image;
+        org.jfree.chart.title.ImageTitle this;
+        org.jfree.chart.util.HorizontalAlignment $stack4;
+        org.jfree.chart.util.RectangleEdge $stack5;
+        org.jfree.chart.util.RectangleInsets $stack2;
+        org.jfree.chart.util.VerticalAlignment $stack3;
+    
+    
+        this := @this: org.jfree.chart.title.ImageTitle;
+        image := @parameter0: java.awt.Image;
+        $stack7 = virtualinvoke image.<java.awt.Image: int getHeight(java.awt.image.ImageObserver)>(null);
+        $stack6 = virtualinvoke image.<java.awt.Image: int getWidth(java.awt.image.ImageObserver)>(null);
+        $stack5 = <org.jfree.chart.title.Title: org.jfree.chart.util.RectangleEdge DEFAULT_POSITION>;
+        $stack4 = <org.jfree.chart.title.Title: org.jfree.chart.util.HorizontalAlignment DEFAULT_HORIZONTAL_ALIGNMENT>;
+        $stack3 = <org.jfree.chart.title.Title: org.jfree.chart.util.VerticalAlignment DEFAULT_VERTICAL_ALIGNMENT>;
+        $stack2 = <org.jfree.chart.title.Title: org.jfree.chart.util.RectangleInsets DEFAULT_PADDING>;
+        specialinvoke this.<org.jfree.chart.title.ImageTitle: void <init>(java.awt.Image,int,int,org.jfree.chart.util.RectangleEdge,org.jfree.chart.util.HorizontalAlignment,org.jfree.chart.util.VerticalAlignment,org.jfree.chart.util.RectangleInsets)>(image, $stack7, $stack6, $stack5, $stack4, $stack3, $stack2);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.title.ImageTitle: void <init>(java.awt.Image,int,int,org.jfree.chart.util.RectangleEdge,org.jfree.chart.util.HorizontalAlignment,org.jfree.chart.util.VerticalAlignment,org.jfree.chart.util.RectangleInsets)> ----
+    {
+        double $stack8, $stack9;
+        int height, width;
+        java.awt.Image image;
+        java.lang.NullPointerException #l1;
+        java.lang.Object $stack10;
+        java.lang.Throwable #l0;
+        org.jfree.chart.title.ImageTitle this;
+        org.jfree.chart.util.HorizontalAlignment horizontalAlignment;
+        org.jfree.chart.util.RectangleEdge position;
+        org.jfree.chart.util.RectangleInsets padding;
+        org.jfree.chart.util.VerticalAlignment verticalAlignment;
+    
+    
+        this := @this: org.jfree.chart.title.ImageTitle;
+        image := @parameter0: java.awt.Image;
+        height := @parameter1: int;
+        width := @parameter2: int;
+        position := @parameter3: org.jfree.chart.util.RectangleEdge;
+        horizontalAlignment := @parameter4: org.jfree.chart.util.HorizontalAlignment;
+        verticalAlignment := @parameter5: org.jfree.chart.util.VerticalAlignment;
+        padding := @parameter6: org.jfree.chart.util.RectangleInsets;
+        specialinvoke this.<org.jfree.chart.title.Title: void <init>(org.jfree.chart.util.RectangleEdge,org.jfree.chart.util.HorizontalAlignment,org.jfree.chart.util.VerticalAlignment,org.jfree.chart.util.RectangleInsets)>(position, horizontalAlignment, verticalAlignment, padding);
+    
+        if image != null goto label1;
+        $stack10 = new java.lang.NullPointerException;
+        #l1 = (java.lang.NullPointerException) $stack10;
+        specialinvoke #l1.<java.lang.NullPointerException: void <init>(java.lang.String)>("Null \'image\' argument.");
+        #l0 = (java.lang.Throwable) $stack10;
+    
+        throw #l0;
+    
+      label1:
+        this.<org.jfree.chart.title.ImageTitle: java.awt.Image image> = image;
+        $stack8 = (double) height;
+        virtualinvoke this.<org.jfree.chart.title.ImageTitle: void setHeight(double)>($stack8);
+        $stack9 = (double) width;
+        virtualinvoke this.<org.jfree.chart.title.ImageTitle: void setWidth(double)>($stack9);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.title.ImageTitle: boolean equals(java.lang.Object)> ----
+    {
+        boolean $stack3, $stack6, $stack7;
+        java.awt.Image $stack4, $stack5;
+        java.lang.Object obj;
+        org.jfree.chart.title.ImageTitle that, this;
+    
+    
+        this := @this: org.jfree.chart.title.ImageTitle;
+        obj := @parameter0: java.lang.Object;
+    
+        if obj != this goto label1;
+    
+        return 1;
+    
+      label1:
+        $stack3 = obj instanceof org.jfree.chart.title.ImageTitle;
+    
+        if $stack3 != 0 goto label2;
+    
+        return 0;
+    
+      label2:
+        that = (org.jfree.chart.title.ImageTitle) obj;
+        $stack5 = this.<org.jfree.chart.title.ImageTitle: java.awt.Image image>;
+        $stack4 = that.<org.jfree.chart.title.ImageTitle: java.awt.Image image>;
+        $stack6 = staticinvoke <org.jfree.chart.util.ObjectUtilities: boolean equal(java.lang.Object,java.lang.Object)>($stack5, $stack4);
+    
+        if $stack6 != 0 goto label3;
+    
+        return 0;
+    
+      label3:
+        $stack7 = specialinvoke this.<org.jfree.chart.title.Title: boolean equals(java.lang.Object)>(obj);
+    
+        return $stack7;
+    }
+
+    // ---- method: <org.jfree.chart.title.ImageTitle: void draw(java.awt.Graphics2D,java.awt.geom.Rectangle2D)> ----
+    {
+        java.awt.Graphics2D g2;
+        java.awt.geom.Rectangle2D area;
+        java.lang.Object $stack8;
+        java.lang.RuntimeException #l0;
+        java.lang.Throwable #l1;
+        org.jfree.chart.title.ImageTitle this;
+        org.jfree.chart.util.RectangleEdge $stack4, $stack5, $stack6, $stack7, position;
+    
+    
+        this := @this: org.jfree.chart.title.ImageTitle;
+        g2 := @parameter0: java.awt.Graphics2D;
+        area := @parameter1: java.awt.geom.Rectangle2D;
+        position = virtualinvoke this.<org.jfree.chart.title.ImageTitle: org.jfree.chart.util.RectangleEdge getPosition()>();
+        $stack4 = <org.jfree.chart.util.RectangleEdge: org.jfree.chart.util.RectangleEdge TOP>;
+    
+        if position == $stack4 goto label1;
+        $stack5 = <org.jfree.chart.util.RectangleEdge: org.jfree.chart.util.RectangleEdge BOTTOM>;
+    
+        if position != $stack5 goto label2;
+    
+      label1:
+        virtualinvoke this.<org.jfree.chart.title.ImageTitle: org.jfree.chart.util.Size2D drawHorizontal(java.awt.Graphics2D,java.awt.geom.Rectangle2D)>(g2, area);
+    
+        goto label5;
+    
+      label2:
+        $stack6 = <org.jfree.chart.util.RectangleEdge: org.jfree.chart.util.RectangleEdge LEFT>;
+    
+        if position == $stack6 goto label3;
+        $stack7 = <org.jfree.chart.util.RectangleEdge: org.jfree.chart.util.RectangleEdge RIGHT>;
+    
+        if position != $stack7 goto label4;
+    
+      label3:
+        virtualinvoke this.<org.jfree.chart.title.ImageTitle: org.jfree.chart.util.Size2D drawVertical(java.awt.Graphics2D,java.awt.geom.Rectangle2D)>(g2, area);
+    
+        goto label5;
+    
+      label4:
+        $stack8 = new java.lang.RuntimeException;
+        #l0 = (java.lang.RuntimeException) $stack8;
+        specialinvoke #l0.<java.lang.RuntimeException: void <init>(java.lang.String)>("Invalid title position.");
+        #l1 = (java.lang.Throwable) $stack8;
+    
+        throw #l1;
+    
+      label5:
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.title.ImageTitle: void <init>(java.awt.Image,org.jfree.chart.util.RectangleEdge,org.jfree.chart.util.HorizontalAlignment,org.jfree.chart.util.VerticalAlignment)> ----
+    {
+        int $stack6, $stack7;
+        java.awt.Image image;
+        org.jfree.chart.title.ImageTitle this;
+        org.jfree.chart.util.HorizontalAlignment horizontalAlignment;
+        org.jfree.chart.util.RectangleEdge position;
+        org.jfree.chart.util.RectangleInsets $stack5;
+        org.jfree.chart.util.VerticalAlignment verticalAlignment;
+    
+    
+        this := @this: org.jfree.chart.title.ImageTitle;
+        image := @parameter0: java.awt.Image;
+        position := @parameter1: org.jfree.chart.util.RectangleEdge;
+        horizontalAlignment := @parameter2: org.jfree.chart.util.HorizontalAlignment;
+        verticalAlignment := @parameter3: org.jfree.chart.util.VerticalAlignment;
+        $stack7 = virtualinvoke image.<java.awt.Image: int getHeight(java.awt.image.ImageObserver)>(null);
+        $stack6 = virtualinvoke image.<java.awt.Image: int getWidth(java.awt.image.ImageObserver)>(null);
+        $stack5 = <org.jfree.chart.title.Title: org.jfree.chart.util.RectangleInsets DEFAULT_PADDING>;
+        specialinvoke this.<org.jfree.chart.title.ImageTitle: void <init>(java.awt.Image,int,int,org.jfree.chart.util.RectangleEdge,org.jfree.chart.util.HorizontalAlignment,org.jfree.chart.util.VerticalAlignment,org.jfree.chart.util.RectangleInsets)>(image, $stack7, $stack6, position, horizontalAlignment, verticalAlignment, $stack5);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.title.ImageTitle: java.awt.Image getImage()> ----
+    {
+        java.awt.Image $stack1;
+        org.jfree.chart.title.ImageTitle this;
+    
+    
+        this := @this: org.jfree.chart.title.ImageTitle;
+        $stack1 = this.<org.jfree.chart.title.ImageTitle: java.awt.Image image>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.title.ImageTitle: java.lang.Object draw(java.awt.Graphics2D,java.awt.geom.Rectangle2D,java.lang.Object)> ----
+    {
+        java.awt.Graphics2D g2;
+        java.awt.geom.Rectangle2D area;
+        java.lang.Object params;
+        org.jfree.chart.title.ImageTitle this;
+    
+    
+        this := @this: org.jfree.chart.title.ImageTitle;
+        g2 := @parameter0: java.awt.Graphics2D;
+        area := @parameter1: java.awt.geom.Rectangle2D;
+        params := @parameter2: java.lang.Object;
+        virtualinvoke this.<org.jfree.chart.title.ImageTitle: void draw(java.awt.Graphics2D,java.awt.geom.Rectangle2D)>(g2, area);
+    
+        return null;
+    }
+
+    // ---- method: <org.jfree.chart.title.ImageTitle: void setImage(java.awt.Image)> ----
+    {
+        java.awt.Image image;
+        java.lang.NullPointerException #l1;
+        java.lang.Object $stack3;
+        java.lang.Throwable #l0;
+        org.jfree.chart.event.TitleChangeEvent $stack2;
+        org.jfree.chart.title.ImageTitle this;
+    
+    
+        this := @this: org.jfree.chart.title.ImageTitle;
+        image := @parameter0: java.awt.Image;
+    
+        if image != null goto label1;
+        $stack3 = new java.lang.NullPointerException;
+        #l1 = (java.lang.NullPointerException) $stack3;
+        specialinvoke #l1.<java.lang.NullPointerException: void <init>(java.lang.String)>("Null \'image\' argument.");
+        #l0 = (java.lang.Throwable) $stack3;
+    
+        throw #l0;
+    
+      label1:
+        this.<org.jfree.chart.title.ImageTitle: java.awt.Image image> = image;
+        $stack2 = new org.jfree.chart.event.TitleChangeEvent;
+        specialinvoke $stack2.<org.jfree.chart.event.TitleChangeEvent: void <init>(org.jfree.chart.title.Title)>(this);
+        virtualinvoke this.<org.jfree.chart.title.ImageTitle: void notifyListeners(org.jfree.chart.event.TitleChangeEvent)>($stack2);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.title.ImageTitle: org.jfree.chart.util.Size2D arrange(java.awt.Graphics2D,org.jfree.chart.block.RectangleConstraint)> ----
+    {
+        double $stack11, $stack12, $stack13, $stack14, $stack8, $stack9;
+        int $stack5, $stack7;
+        java.awt.Graphics2D g2;
+        java.awt.Image $stack4, $stack6;
+        org.jfree.chart.block.RectangleConstraint constraint;
+        org.jfree.chart.title.ImageTitle this;
+        org.jfree.chart.util.Size2D $stack10, $stack15, s;
+    
+    
+        this := @this: org.jfree.chart.title.ImageTitle;
+        g2 := @parameter0: java.awt.Graphics2D;
+        constraint := @parameter1: org.jfree.chart.block.RectangleConstraint;
+        $stack10 = new org.jfree.chart.util.Size2D;
+        $stack4 = this.<org.jfree.chart.title.ImageTitle: java.awt.Image image>;
+        $stack5 = virtualinvoke $stack4.<java.awt.Image: int getWidth(java.awt.image.ImageObserver)>(null);
+        $stack9 = (double) $stack5;
+        $stack6 = this.<org.jfree.chart.title.ImageTitle: java.awt.Image image>;
+        $stack7 = virtualinvoke $stack6.<java.awt.Image: int getHeight(java.awt.image.ImageObserver)>(null);
+        $stack8 = (double) $stack7;
+        specialinvoke $stack10.<org.jfree.chart.util.Size2D: void <init>(double,double)>($stack9, $stack8);
+        s = $stack10;
+        $stack15 = new org.jfree.chart.util.Size2D;
+        $stack11 = virtualinvoke $stack10.<org.jfree.chart.util.Size2D: double getWidth()>();
+        $stack14 = virtualinvoke this.<org.jfree.chart.title.ImageTitle: double calculateTotalWidth(double)>($stack11);
+        $stack12 = virtualinvoke $stack10.<org.jfree.chart.util.Size2D: double getHeight()>();
+        $stack13 = virtualinvoke this.<org.jfree.chart.title.ImageTitle: double calculateTotalHeight(double)>($stack12);
+        specialinvoke $stack15.<org.jfree.chart.util.Size2D: void <init>(double,double)>($stack14, $stack13);
+    
+        return $stack15;
+    }
+
+    // ---- method: <org.jfree.chart.title.ImageTitle: org.jfree.chart.util.Size2D drawVertical(java.awt.Graphics2D,java.awt.geom.Rectangle2D)> ----
+    {
+        double $stack23, $stack24, $stack33, $stack34, $stack35, $stack36, $stack37, $stack39, $stack40, $stack41, $stack42, $stack43, $stack44, $stack45, $stack46, $stack47, $stack48, bottomSpace, h, leftSpace, rightSpace, startX#0, startX#1, startY, topSpace, w;
+        int $stack28, $stack29, $stack30, $stack31;
+        java.awt.Graphics2D g2;
+        java.awt.Image $stack32;
+        java.awt.geom.Rectangle2D chartArea;
+        org.jfree.chart.title.ImageTitle this;
+        org.jfree.chart.util.RectangleEdge $stack21, $stack22;
+        org.jfree.chart.util.RectangleInsets padding;
+        org.jfree.chart.util.Size2D $stack38;
+        org.jfree.chart.util.VerticalAlignment $stack25, $stack26, $stack27, alignment;
+    
+    
+        this := @this: org.jfree.chart.title.ImageTitle;
+        g2 := @parameter0: java.awt.Graphics2D;
+        chartArea := @parameter1: java.awt.geom.Rectangle2D;
+        startX#0 = 0.0;
+        topSpace = 0.0;
+        bottomSpace = 0.0;
+        leftSpace = 0.0;
+        rightSpace = 0.0;
+        w = virtualinvoke this.<org.jfree.chart.title.ImageTitle: double getWidth()>();
+        h = virtualinvoke this.<org.jfree.chart.title.ImageTitle: double getHeight()>();
+        padding = virtualinvoke this.<org.jfree.chart.title.ImageTitle: org.jfree.chart.util.RectangleInsets getPadding()>();
+    
+        if padding == null goto label1;
+        topSpace = virtualinvoke padding.<org.jfree.chart.util.RectangleInsets: double calculateTopOutset(double)>(h);
+        bottomSpace = virtualinvoke padding.<org.jfree.chart.util.RectangleInsets: double calculateBottomOutset(double)>(h);
+        leftSpace = virtualinvoke padding.<org.jfree.chart.util.RectangleInsets: double calculateLeftOutset(double)>(w);
+        rightSpace = virtualinvoke padding.<org.jfree.chart.util.RectangleInsets: double calculateRightOutset(double)>(w);
+    
+      label1:
+        $stack22 = virtualinvoke this.<org.jfree.chart.title.ImageTitle: org.jfree.chart.util.RectangleEdge getPosition()>();
+        $stack21 = <org.jfree.chart.util.RectangleEdge: org.jfree.chart.util.RectangleEdge LEFT>;
+    
+        if $stack22 != $stack21 goto label2;
+        $stack48 = virtualinvoke chartArea.<java.awt.geom.Rectangle2D: double getX()>();
+        startX#1 = $stack48 + leftSpace;
+    
+        goto label3;
+    
+      label2:
+        $stack23 = virtualinvoke chartArea.<java.awt.geom.Rectangle2D: double getMaxX()>();
+        $stack24 = $stack23 - rightSpace;
+        startX#1 = $stack24 - w;
+    
+      label3:
+        alignment = virtualinvoke this.<org.jfree.chart.title.ImageTitle: org.jfree.chart.util.VerticalAlignment getVerticalAlignment()>();
+        startY = 0.0;
+        $stack25 = <org.jfree.chart.util.VerticalAlignment: org.jfree.chart.util.VerticalAlignment CENTER>;
+    
+        if alignment != $stack25 goto label4;
+        $stack42 = virtualinvoke chartArea.<java.awt.geom.Rectangle2D: double getMinY()>();
+        $stack44 = $stack42 + topSpace;
+        $stack43 = virtualinvoke chartArea.<java.awt.geom.Rectangle2D: double getHeight()>();
+        $stack45 = $stack43 / 2.0;
+        $stack46 = $stack44 + $stack45;
+        $stack47 = h / 2.0;
+        startY = $stack46 - $stack47;
+    
+        goto label6;
+    
+      label4:
+        $stack26 = <org.jfree.chart.util.VerticalAlignment: org.jfree.chart.util.VerticalAlignment TOP>;
+    
+        if alignment != $stack26 goto label5;
+        $stack41 = virtualinvoke chartArea.<java.awt.geom.Rectangle2D: double getMinY()>();
+        startY = $stack41 + topSpace;
+    
+        goto label6;
+    
+      label5:
+        $stack27 = <org.jfree.chart.util.VerticalAlignment: org.jfree.chart.util.VerticalAlignment BOTTOM>;
+    
+        if alignment != $stack27 goto label6;
+        $stack39 = virtualinvoke chartArea.<java.awt.geom.Rectangle2D: double getMaxY()>();
+        $stack40 = $stack39 - bottomSpace;
+        startY = $stack40 - h;
+    
+      label6:
+        $stack32 = this.<org.jfree.chart.title.ImageTitle: java.awt.Image image>;
+        $stack31 = (int) startX#1;
+        $stack30 = (int) startY;
+        $stack29 = (int) w;
+        $stack28 = (int) h;
+        virtualinvoke g2.<java.awt.Graphics2D: boolean drawImage(java.awt.Image,int,int,int,int,java.awt.image.ImageObserver)>($stack32, $stack31, $stack30, $stack29, $stack28, null);
+        $stack38 = new org.jfree.chart.util.Size2D;
+        $stack33 = virtualinvoke chartArea.<java.awt.geom.Rectangle2D: double getWidth()>();
+        $stack34 = $stack33 + leftSpace;
+        $stack37 = $stack34 + rightSpace;
+        $stack35 = h + topSpace;
+        $stack36 = $stack35 + bottomSpace;
+        specialinvoke $stack38.<org.jfree.chart.util.Size2D: void <init>(double,double)>($stack37, $stack36);
+    
+        return $stack38;
+    }
+
+}

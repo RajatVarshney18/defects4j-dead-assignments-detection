@@ -1,0 +1,108 @@
+// ========================================================================
+// CLASS : org.jfree.chart.servlet.ChartDeleter
+// ========================================================================
+
+[PUBLIC, SUPER] class org.jfree.chart.servlet.ChartDeleter extends java.lang.Object implements javax.servlet.http.HttpSessionBindingListener, java.io.Serializable {
+
+    // ---- method: <org.jfree.chart.servlet.ChartDeleter: void valueBound(javax.servlet.http.HttpSessionBindingEvent)> ----
+    {
+        javax.servlet.http.HttpSessionBindingEvent event;
+        org.jfree.chart.servlet.ChartDeleter this;
+    
+    
+        this := @this: org.jfree.chart.servlet.ChartDeleter;
+        event := @parameter0: javax.servlet.http.HttpSessionBindingEvent;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.servlet.ChartDeleter: void <init>()> ----
+    {
+        java.lang.Object $stack1;
+        java.util.ArrayList #l0;
+        org.jfree.chart.servlet.ChartDeleter this;
+    
+    
+        this := @this: org.jfree.chart.servlet.ChartDeleter;
+        specialinvoke this.<java.lang.Object: void <init>()>();
+        $stack1 = new java.util.ArrayList;
+        #l0 = (java.util.ArrayList) $stack1;
+        specialinvoke #l0.<java.util.ArrayList: void <init>()>();
+        this.<org.jfree.chart.servlet.ChartDeleter: java.util.List chartNames> = (java.util.List) $stack1;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.servlet.ChartDeleter: void addChart(java.lang.String)> ----
+    {
+        java.lang.String filename;
+        java.util.List $stack2;
+        org.jfree.chart.servlet.ChartDeleter this;
+    
+    
+        this := @this: org.jfree.chart.servlet.ChartDeleter;
+        filename := @parameter0: java.lang.String;
+        $stack2 = this.<org.jfree.chart.servlet.ChartDeleter: java.util.List chartNames>;
+        interfaceinvoke $stack2.<java.util.List: boolean add(java.lang.Object)>(filename);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.servlet.ChartDeleter: boolean isChartAvailable(java.lang.String)> ----
+    {
+        boolean $stack3;
+        java.lang.String filename;
+        java.util.List $stack2;
+        org.jfree.chart.servlet.ChartDeleter this;
+    
+    
+        this := @this: org.jfree.chart.servlet.ChartDeleter;
+        filename := @parameter0: java.lang.String;
+        $stack2 = this.<org.jfree.chart.servlet.ChartDeleter: java.util.List chartNames>;
+        $stack3 = interfaceinvoke $stack2.<java.util.List: boolean contains(java.lang.Object)>(filename);
+    
+        return $stack3;
+    }
+
+    // ---- method: <org.jfree.chart.servlet.ChartDeleter: void valueUnbound(javax.servlet.http.HttpSessionBindingEvent)> ----
+    {
+        boolean $stack10, $stack6;
+        java.io.File $stack9, file;
+        java.lang.Object $stack7, iter;
+        java.lang.String $stack8, filename;
+        java.util.Iterator #l0, #l1;
+        java.util.List $stack5;
+        javax.servlet.http.HttpSessionBindingEvent event;
+        org.jfree.chart.servlet.ChartDeleter this;
+    
+    
+        this := @this: org.jfree.chart.servlet.ChartDeleter;
+        event := @parameter0: javax.servlet.http.HttpSessionBindingEvent;
+        $stack5 = this.<org.jfree.chart.servlet.ChartDeleter: java.util.List chartNames>;
+        iter = interfaceinvoke $stack5.<java.util.List: java.util.ListIterator listIterator()>();
+    
+      label1:
+        #l1 = (java.util.Iterator) iter;
+        $stack6 = interfaceinvoke #l1.<java.util.Iterator: boolean hasNext()>();
+    
+        if $stack6 == 0 goto label3;
+        #l0 = (java.util.Iterator) iter;
+        $stack7 = interfaceinvoke #l0.<java.util.Iterator: java.lang.Object next()>();
+        filename = (java.lang.String) $stack7;
+        $stack9 = new java.io.File;
+        $stack8 = staticinvoke <java.lang.System: java.lang.String getProperty(java.lang.String)>("java.io.tmpdir");
+        specialinvoke $stack9.<java.io.File: void <init>(java.lang.String,java.lang.String)>($stack8, filename);
+        file = $stack9;
+        $stack10 = virtualinvoke $stack9.<java.io.File: boolean exists()>();
+    
+        if $stack10 == 0 goto label2;
+        virtualinvoke $stack9.<java.io.File: boolean delete()>();
+    
+      label2:
+        goto label1;
+    
+      label3:
+        return;
+    }
+
+}

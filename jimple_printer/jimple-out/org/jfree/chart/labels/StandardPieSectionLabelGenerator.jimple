@@ -1,0 +1,212 @@
+// ========================================================================
+// CLASS : org.jfree.chart.labels.StandardPieSectionLabelGenerator
+// ========================================================================
+
+[PUBLIC, SUPER] class org.jfree.chart.labels.StandardPieSectionLabelGenerator extends org.jfree.chart.labels.AbstractPieItemLabelGenerator implements org.jfree.chart.util.PublicCloneable, org.jfree.chart.labels.PieSectionLabelGenerator, java.lang.Cloneable, java.io.Serializable {
+
+    // ---- method: <org.jfree.chart.labels.StandardPieSectionLabelGenerator: void <init>(java.util.Locale)> ----
+    {
+        java.util.Locale locale;
+        org.jfree.chart.labels.StandardPieSectionLabelGenerator this;
+    
+    
+        this := @this: org.jfree.chart.labels.StandardPieSectionLabelGenerator;
+        locale := @parameter0: java.util.Locale;
+        specialinvoke this.<org.jfree.chart.labels.StandardPieSectionLabelGenerator: void <init>(java.lang.String,java.util.Locale)>("{0}", locale);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.labels.StandardPieSectionLabelGenerator: java.text.AttributedString getAttributedLabel(int)> ----
+    {
+        int section;
+        java.lang.Object $stack3;
+        java.text.AttributedString $stack4;
+        org.jfree.chart.labels.StandardPieSectionLabelGenerator this;
+        org.jfree.chart.util.ObjectList $stack2;
+    
+    
+        this := @this: org.jfree.chart.labels.StandardPieSectionLabelGenerator;
+        section := @parameter0: int;
+        $stack2 = this.<org.jfree.chart.labels.StandardPieSectionLabelGenerator: org.jfree.chart.util.ObjectList attributedLabels>;
+        $stack3 = virtualinvoke $stack2.<org.jfree.chart.util.ObjectList: java.lang.Object get(int)>(section);
+        $stack4 = (java.text.AttributedString) $stack3;
+    
+        return $stack4;
+    }
+
+    // ---- method: <org.jfree.chart.labels.StandardPieSectionLabelGenerator: java.text.AttributedString generateAttributedSectionLabel(org.jfree.data.pie.PieDataset,java.lang.Comparable)> ----
+    {
+        int $stack3;
+        java.lang.Comparable key;
+        java.text.AttributedString $stack4;
+        org.jfree.chart.labels.StandardPieSectionLabelGenerator this;
+        org.jfree.data.pie.PieDataset dataset;
+    
+    
+        this := @this: org.jfree.chart.labels.StandardPieSectionLabelGenerator;
+        dataset := @parameter0: org.jfree.data.pie.PieDataset;
+        key := @parameter1: java.lang.Comparable;
+        $stack3 = interfaceinvoke dataset.<org.jfree.data.pie.PieDataset: int getIndex(java.lang.Comparable)>(key);
+        $stack4 = virtualinvoke this.<org.jfree.chart.labels.StandardPieSectionLabelGenerator: java.text.AttributedString getAttributedLabel(int)>($stack3);
+    
+        return $stack4;
+    }
+
+    // ---- method: <org.jfree.chart.labels.StandardPieSectionLabelGenerator: void setAttributedLabel(int,java.text.AttributedString)> ----
+    {
+        int section;
+        java.text.AttributedString label;
+        org.jfree.chart.labels.StandardPieSectionLabelGenerator this;
+        org.jfree.chart.util.ObjectList $stack3;
+    
+    
+        this := @this: org.jfree.chart.labels.StandardPieSectionLabelGenerator;
+        section := @parameter0: int;
+        label := @parameter1: java.text.AttributedString;
+        $stack3 = this.<org.jfree.chart.labels.StandardPieSectionLabelGenerator: org.jfree.chart.util.ObjectList attributedLabels>;
+        virtualinvoke $stack3.<org.jfree.chart.util.ObjectList: void set(int,java.lang.Object)>(section, label);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.labels.StandardPieSectionLabelGenerator: void <init>(java.lang.String,java.util.Locale)> ----
+    {
+        java.lang.String labelFormat;
+        java.text.NumberFormat $stack3, $stack4;
+        java.util.Locale locale;
+        org.jfree.chart.labels.StandardPieSectionLabelGenerator this;
+    
+    
+        this := @this: org.jfree.chart.labels.StandardPieSectionLabelGenerator;
+        labelFormat := @parameter0: java.lang.String;
+        locale := @parameter1: java.util.Locale;
+        $stack4 = staticinvoke <java.text.NumberFormat: java.text.NumberFormat getNumberInstance(java.util.Locale)>(locale);
+        $stack3 = staticinvoke <java.text.NumberFormat: java.text.NumberFormat getPercentInstance(java.util.Locale)>(locale);
+        specialinvoke this.<org.jfree.chart.labels.StandardPieSectionLabelGenerator: void <init>(java.lang.String,java.text.NumberFormat,java.text.NumberFormat)>(labelFormat, $stack4, $stack3);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.labels.StandardPieSectionLabelGenerator: boolean equals(java.lang.Object)> ----
+    {
+        boolean $stack3, $stack6, $stack7;
+        java.lang.Object obj;
+        org.jfree.chart.labels.StandardPieSectionLabelGenerator that, this;
+        org.jfree.chart.util.ObjectList $stack4, $stack5;
+    
+    
+        this := @this: org.jfree.chart.labels.StandardPieSectionLabelGenerator;
+        obj := @parameter0: java.lang.Object;
+    
+        if obj != this goto label1;
+    
+        return 1;
+    
+      label1:
+        $stack3 = obj instanceof org.jfree.chart.labels.StandardPieSectionLabelGenerator;
+    
+        if $stack3 != 0 goto label2;
+    
+        return 0;
+    
+      label2:
+        that = (org.jfree.chart.labels.StandardPieSectionLabelGenerator) obj;
+        $stack5 = this.<org.jfree.chart.labels.StandardPieSectionLabelGenerator: org.jfree.chart.util.ObjectList attributedLabels>;
+        $stack4 = that.<org.jfree.chart.labels.StandardPieSectionLabelGenerator: org.jfree.chart.util.ObjectList attributedLabels>;
+        $stack6 = virtualinvoke $stack5.<org.jfree.chart.util.ObjectList: boolean equals(java.lang.Object)>($stack4);
+    
+        if $stack6 != 0 goto label3;
+    
+        return 0;
+    
+      label3:
+        $stack7 = specialinvoke this.<org.jfree.chart.labels.AbstractPieItemLabelGenerator: boolean equals(java.lang.Object)>(obj);
+    
+        if $stack7 != 0 goto label4;
+    
+        return 0;
+    
+      label4:
+        return 1;
+    }
+
+    // ---- method: <org.jfree.chart.labels.StandardPieSectionLabelGenerator: void <init>(java.lang.String)> ----
+    {
+        java.lang.String labelFormat;
+        java.text.NumberFormat $stack2, $stack3;
+        org.jfree.chart.labels.StandardPieSectionLabelGenerator this;
+    
+    
+        this := @this: org.jfree.chart.labels.StandardPieSectionLabelGenerator;
+        labelFormat := @parameter0: java.lang.String;
+        $stack3 = staticinvoke <java.text.NumberFormat: java.text.NumberFormat getNumberInstance()>();
+        $stack2 = staticinvoke <java.text.NumberFormat: java.text.NumberFormat getPercentInstance()>();
+        specialinvoke this.<org.jfree.chart.labels.StandardPieSectionLabelGenerator: void <init>(java.lang.String,java.text.NumberFormat,java.text.NumberFormat)>(labelFormat, $stack3, $stack2);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.labels.StandardPieSectionLabelGenerator: void <init>()> ----
+    {
+        java.text.NumberFormat $stack1, $stack2;
+        org.jfree.chart.labels.StandardPieSectionLabelGenerator this;
+    
+    
+        this := @this: org.jfree.chart.labels.StandardPieSectionLabelGenerator;
+        $stack2 = staticinvoke <java.text.NumberFormat: java.text.NumberFormat getNumberInstance()>();
+        $stack1 = staticinvoke <java.text.NumberFormat: java.text.NumberFormat getPercentInstance()>();
+        specialinvoke this.<org.jfree.chart.labels.StandardPieSectionLabelGenerator: void <init>(java.lang.String,java.text.NumberFormat,java.text.NumberFormat)>("{0}", $stack2, $stack1);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.labels.StandardPieSectionLabelGenerator: java.lang.Object clone()> ----
+    {
+        java.lang.Object $stack1;
+        org.jfree.chart.labels.StandardPieSectionLabelGenerator this;
+    
+    
+        this := @this: org.jfree.chart.labels.StandardPieSectionLabelGenerator;
+        $stack1 = specialinvoke this.<org.jfree.chart.labels.AbstractPieItemLabelGenerator: java.lang.Object clone()>();
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.labels.StandardPieSectionLabelGenerator: void <init>(java.lang.String,java.text.NumberFormat,java.text.NumberFormat)> ----
+    {
+        java.lang.String labelFormat;
+        java.text.NumberFormat numberFormat, percentFormat;
+        org.jfree.chart.labels.StandardPieSectionLabelGenerator this;
+        org.jfree.chart.util.ObjectList $stack4;
+    
+    
+        this := @this: org.jfree.chart.labels.StandardPieSectionLabelGenerator;
+        labelFormat := @parameter0: java.lang.String;
+        numberFormat := @parameter1: java.text.NumberFormat;
+        percentFormat := @parameter2: java.text.NumberFormat;
+        specialinvoke this.<org.jfree.chart.labels.AbstractPieItemLabelGenerator: void <init>(java.lang.String,java.text.NumberFormat,java.text.NumberFormat)>(labelFormat, numberFormat, percentFormat);
+        $stack4 = new org.jfree.chart.util.ObjectList;
+        specialinvoke $stack4.<org.jfree.chart.util.ObjectList: void <init>()>();
+        this.<org.jfree.chart.labels.StandardPieSectionLabelGenerator: org.jfree.chart.util.ObjectList attributedLabels> = $stack4;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.labels.StandardPieSectionLabelGenerator: java.lang.String generateSectionLabel(org.jfree.data.pie.PieDataset,java.lang.Comparable)> ----
+    {
+        java.lang.Comparable key;
+        java.lang.String $stack3;
+        org.jfree.chart.labels.StandardPieSectionLabelGenerator this;
+        org.jfree.data.pie.PieDataset dataset;
+    
+    
+        this := @this: org.jfree.chart.labels.StandardPieSectionLabelGenerator;
+        dataset := @parameter0: org.jfree.data.pie.PieDataset;
+        key := @parameter1: java.lang.Comparable;
+        $stack3 = specialinvoke this.<org.jfree.chart.labels.AbstractPieItemLabelGenerator: java.lang.String generateSectionLabel(org.jfree.data.pie.PieDataset,java.lang.Comparable)>(dataset, key);
+    
+        return $stack3;
+    }
+
+}

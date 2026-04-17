@@ -1,0 +1,863 @@
+// ========================================================================
+// CLASS : org.jfree.chart.util.RectangleInsets
+// ========================================================================
+
+[PUBLIC, SUPER] class org.jfree.chart.util.RectangleInsets extends java.lang.Object implements java.io.Serializable {
+
+    // ---- method: <org.jfree.chart.util.RectangleInsets: double calculateBottomInset(double)> ----
+    {
+        double $stack7, height, result;
+        org.jfree.chart.util.RectangleInsets this;
+        org.jfree.chart.util.UnitType $stack5, $stack6;
+    
+    
+        this := @this: org.jfree.chart.util.RectangleInsets;
+        height := @parameter0: double;
+        result = this.<org.jfree.chart.util.RectangleInsets: double bottom>;
+        $stack6 = this.<org.jfree.chart.util.RectangleInsets: org.jfree.chart.util.UnitType unitType>;
+        $stack5 = <org.jfree.chart.util.UnitType: org.jfree.chart.util.UnitType RELATIVE>;
+    
+        if $stack6 != $stack5 goto label1;
+        $stack7 = this.<org.jfree.chart.util.RectangleInsets: double bottom>;
+        result = $stack7 * height;
+    
+      label1:
+        return result;
+    }
+
+    // ---- method: <org.jfree.chart.util.RectangleInsets: void <init>(double,double,double,double)> ----
+    {
+        double bottom, left, right, top;
+        org.jfree.chart.util.RectangleInsets this;
+        org.jfree.chart.util.UnitType $stack9;
+    
+    
+        this := @this: org.jfree.chart.util.RectangleInsets;
+        top := @parameter0: double;
+        left := @parameter1: double;
+        bottom := @parameter2: double;
+        right := @parameter3: double;
+        $stack9 = <org.jfree.chart.util.UnitType: org.jfree.chart.util.UnitType ABSOLUTE>;
+        specialinvoke this.<org.jfree.chart.util.RectangleInsets: void <init>(org.jfree.chart.util.UnitType,double,double,double,double)>($stack9, top, left, bottom, right);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.util.RectangleInsets: void <init>(org.jfree.chart.util.UnitType,double,double,double,double)> ----
+    {
+        double bottom, left, right, top;
+        java.lang.IllegalArgumentException #l1;
+        java.lang.Object $stack10;
+        java.lang.Throwable #l0;
+        org.jfree.chart.util.RectangleInsets this;
+        org.jfree.chart.util.UnitType unitType;
+    
+    
+        this := @this: org.jfree.chart.util.RectangleInsets;
+        unitType := @parameter0: org.jfree.chart.util.UnitType;
+        top := @parameter1: double;
+        left := @parameter2: double;
+        bottom := @parameter3: double;
+        right := @parameter4: double;
+        specialinvoke this.<java.lang.Object: void <init>()>();
+    
+        if unitType != null goto label1;
+        $stack10 = new java.lang.IllegalArgumentException;
+        #l1 = (java.lang.IllegalArgumentException) $stack10;
+        specialinvoke #l1.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'unitType\' argument.");
+        #l0 = (java.lang.Throwable) $stack10;
+    
+        throw #l0;
+    
+      label1:
+        this.<org.jfree.chart.util.RectangleInsets: org.jfree.chart.util.UnitType unitType> = unitType;
+        this.<org.jfree.chart.util.RectangleInsets: double top> = top;
+        this.<org.jfree.chart.util.RectangleInsets: double bottom> = bottom;
+        this.<org.jfree.chart.util.RectangleInsets: double left> = left;
+        this.<org.jfree.chart.util.RectangleInsets: double right> = right;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.util.RectangleInsets: double calculateRightOutset(double)> ----
+    {
+        double $stack10, $stack11, $stack12, $stack7, $stack8, $stack9, result, width;
+        org.jfree.chart.util.RectangleInsets this;
+        org.jfree.chart.util.UnitType $stack5, $stack6;
+    
+    
+        this := @this: org.jfree.chart.util.RectangleInsets;
+        width := @parameter0: double;
+        result = this.<org.jfree.chart.util.RectangleInsets: double right>;
+        $stack6 = this.<org.jfree.chart.util.RectangleInsets: org.jfree.chart.util.UnitType unitType>;
+        $stack5 = <org.jfree.chart.util.UnitType: org.jfree.chart.util.UnitType RELATIVE>;
+    
+        if $stack6 != $stack5 goto label1;
+        $stack7 = this.<org.jfree.chart.util.RectangleInsets: double left>;
+        $stack8 = 1.0 - $stack7;
+        $stack9 = this.<org.jfree.chart.util.RectangleInsets: double right>;
+        $stack10 = $stack8 - $stack9;
+        $stack11 = width / $stack10;
+        $stack12 = this.<org.jfree.chart.util.RectangleInsets: double right>;
+        result = $stack11 * $stack12;
+    
+      label1:
+        return result;
+    }
+
+    // ---- method: <org.jfree.chart.util.RectangleInsets: double extendWidth(double)> ----
+    {
+        double $stack3, $stack4, $stack5, $stack6, width;
+        org.jfree.chart.util.RectangleInsets this;
+    
+    
+        this := @this: org.jfree.chart.util.RectangleInsets;
+        width := @parameter0: double;
+        $stack3 = virtualinvoke this.<org.jfree.chart.util.RectangleInsets: double calculateLeftOutset(double)>(width);
+        $stack4 = width + $stack3;
+        $stack5 = virtualinvoke this.<org.jfree.chart.util.RectangleInsets: double calculateRightOutset(double)>(width);
+        $stack6 = $stack4 + $stack5;
+    
+        return $stack6;
+    }
+
+    // ---- method: <org.jfree.chart.util.RectangleInsets: java.awt.geom.Rectangle2D createAdjustedRectangle(java.awt.geom.Rectangle2D,org.jfree.chart.util.LengthAdjustmentType,org.jfree.chart.util.LengthAdjustmentType)> ----
+    {
+        double $stack19, $stack20, $stack21, $stack22, $stack23, $stack24, $stack25, $stack26, h, leftOutset#0, leftOutset#1, leftOutset#2, leftOutset#3, w, x, y;
+        java.awt.geom.Rectangle2D #l1, base;
+        java.awt.geom.Rectangle2D$Double #l0;
+        java.lang.IllegalArgumentException #l2;
+        java.lang.Object $stack18, $stack27;
+        java.lang.Throwable #l3;
+        org.jfree.chart.util.LengthAdjustmentType $stack14, $stack15, $stack16, $stack17, horizontal, vertical;
+        org.jfree.chart.util.RectangleInsets this;
+    
+    
+        this := @this: org.jfree.chart.util.RectangleInsets;
+        base := @parameter0: java.awt.geom.Rectangle2D;
+        horizontal := @parameter1: org.jfree.chart.util.LengthAdjustmentType;
+        vertical := @parameter2: org.jfree.chart.util.LengthAdjustmentType;
+    
+        if base != null goto label1;
+        $stack27 = new java.lang.IllegalArgumentException;
+        #l2 = (java.lang.IllegalArgumentException) $stack27;
+        specialinvoke #l2.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'base\' argument.");
+        #l3 = (java.lang.Throwable) $stack27;
+    
+        throw #l3;
+    
+      label1:
+        x = virtualinvoke base.<java.awt.geom.Rectangle2D: double getX()>();
+        y = virtualinvoke base.<java.awt.geom.Rectangle2D: double getY()>();
+        w = virtualinvoke base.<java.awt.geom.Rectangle2D: double getWidth()>();
+        h = virtualinvoke base.<java.awt.geom.Rectangle2D: double getHeight()>();
+        $stack14 = <org.jfree.chart.util.LengthAdjustmentType: org.jfree.chart.util.LengthAdjustmentType EXPAND>;
+    
+        if horizontal != $stack14 goto label2;
+        leftOutset#0 = virtualinvoke this.<org.jfree.chart.util.RectangleInsets: double calculateLeftOutset(double)>(w);
+        x = x - leftOutset#0;
+        $stack25 = w + leftOutset#0;
+        $stack26 = virtualinvoke this.<org.jfree.chart.util.RectangleInsets: double calculateRightOutset(double)>(w);
+        w = $stack25 + $stack26;
+    
+        goto label3;
+    
+      label2:
+        $stack15 = <org.jfree.chart.util.LengthAdjustmentType: org.jfree.chart.util.LengthAdjustmentType CONTRACT>;
+    
+        if horizontal != $stack15 goto label3;
+        leftOutset#1 = virtualinvoke this.<org.jfree.chart.util.RectangleInsets: double calculateLeftInset(double)>(w);
+        x = x + leftOutset#1;
+        $stack23 = w - leftOutset#1;
+        $stack24 = virtualinvoke this.<org.jfree.chart.util.RectangleInsets: double calculateRightInset(double)>(w);
+        w = $stack23 - $stack24;
+    
+      label3:
+        $stack16 = <org.jfree.chart.util.LengthAdjustmentType: org.jfree.chart.util.LengthAdjustmentType EXPAND>;
+    
+        if vertical != $stack16 goto label4;
+        leftOutset#2 = virtualinvoke this.<org.jfree.chart.util.RectangleInsets: double calculateTopOutset(double)>(h);
+        y = y - leftOutset#2;
+        $stack21 = h + leftOutset#2;
+        $stack22 = virtualinvoke this.<org.jfree.chart.util.RectangleInsets: double calculateBottomOutset(double)>(h);
+        h = $stack21 + $stack22;
+    
+        goto label5;
+    
+      label4:
+        $stack17 = <org.jfree.chart.util.LengthAdjustmentType: org.jfree.chart.util.LengthAdjustmentType CONTRACT>;
+    
+        if vertical != $stack17 goto label5;
+        leftOutset#3 = virtualinvoke this.<org.jfree.chart.util.RectangleInsets: double calculateTopInset(double)>(h);
+        y = y + leftOutset#3;
+        $stack19 = h - leftOutset#3;
+        $stack20 = virtualinvoke this.<org.jfree.chart.util.RectangleInsets: double calculateBottomInset(double)>(h);
+        h = $stack19 - $stack20;
+    
+      label5:
+        $stack18 = new java.awt.geom.Rectangle2D$Double;
+        #l0 = (java.awt.geom.Rectangle2D$Double) $stack18;
+        specialinvoke #l0.<java.awt.geom.Rectangle2D$Double: void <init>(double,double,double,double)>(x, y, w, h);
+        #l1 = (java.awt.geom.Rectangle2D) $stack18;
+    
+        return #l1;
+    }
+
+    // ---- method: <org.jfree.chart.util.RectangleInsets: double trimWidth(double)> ----
+    {
+        double $stack3, $stack4, $stack5, $stack6, width;
+        org.jfree.chart.util.RectangleInsets this;
+    
+    
+        this := @this: org.jfree.chart.util.RectangleInsets;
+        width := @parameter0: double;
+        $stack3 = virtualinvoke this.<org.jfree.chart.util.RectangleInsets: double calculateLeftInset(double)>(width);
+        $stack4 = width - $stack3;
+        $stack5 = virtualinvoke this.<org.jfree.chart.util.RectangleInsets: double calculateRightInset(double)>(width);
+        $stack6 = $stack4 - $stack5;
+    
+        return $stack6;
+    }
+
+    // ---- method: <org.jfree.chart.util.RectangleInsets: double getLeft()> ----
+    {
+        double $stack1;
+        org.jfree.chart.util.RectangleInsets this;
+    
+    
+        this := @this: org.jfree.chart.util.RectangleInsets;
+        $stack1 = this.<org.jfree.chart.util.RectangleInsets: double left>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.util.RectangleInsets: boolean equals(java.lang.Object)> ----
+    {
+        boolean $stack3;
+        byte $stack11, $stack14, $stack17, $stack8;
+        double $stack10, $stack12, $stack13, $stack15, $stack16, $stack6, $stack7, $stack9;
+        java.lang.Object obj;
+        org.jfree.chart.util.RectangleInsets that, this;
+        org.jfree.chart.util.UnitType $stack4, $stack5;
+    
+    
+        this := @this: org.jfree.chart.util.RectangleInsets;
+        obj := @parameter0: java.lang.Object;
+    
+        if obj != this goto label1;
+    
+        return 1;
+    
+      label1:
+        $stack3 = obj instanceof org.jfree.chart.util.RectangleInsets;
+    
+        if $stack3 != 0 goto label2;
+    
+        return 0;
+    
+      label2:
+        that = (org.jfree.chart.util.RectangleInsets) obj;
+        $stack5 = that.<org.jfree.chart.util.RectangleInsets: org.jfree.chart.util.UnitType unitType>;
+        $stack4 = this.<org.jfree.chart.util.RectangleInsets: org.jfree.chart.util.UnitType unitType>;
+    
+        if $stack5 == $stack4 goto label3;
+    
+        return 0;
+    
+      label3:
+        $stack6 = this.<org.jfree.chart.util.RectangleInsets: double left>;
+        $stack7 = that.<org.jfree.chart.util.RectangleInsets: double left>;
+        $stack8 = $stack6 cmpl $stack7;
+    
+        if $stack8 == 0 goto label4;
+    
+        return 0;
+    
+      label4:
+        $stack9 = this.<org.jfree.chart.util.RectangleInsets: double right>;
+        $stack10 = that.<org.jfree.chart.util.RectangleInsets: double right>;
+        $stack11 = $stack9 cmpl $stack10;
+    
+        if $stack11 == 0 goto label5;
+    
+        return 0;
+    
+      label5:
+        $stack12 = this.<org.jfree.chart.util.RectangleInsets: double top>;
+        $stack13 = that.<org.jfree.chart.util.RectangleInsets: double top>;
+        $stack14 = $stack12 cmpl $stack13;
+    
+        if $stack14 == 0 goto label6;
+    
+        return 0;
+    
+      label6:
+        $stack15 = this.<org.jfree.chart.util.RectangleInsets: double bottom>;
+        $stack16 = that.<org.jfree.chart.util.RectangleInsets: double bottom>;
+        $stack17 = $stack15 cmpl $stack16;
+    
+        if $stack17 == 0 goto label7;
+    
+        return 0;
+    
+      label7:
+        return 1;
+    }
+
+    // ---- method: <org.jfree.chart.util.RectangleInsets: double calculateLeftInset(double)> ----
+    {
+        double $stack7, result, width;
+        org.jfree.chart.util.RectangleInsets this;
+        org.jfree.chart.util.UnitType $stack5, $stack6;
+    
+    
+        this := @this: org.jfree.chart.util.RectangleInsets;
+        width := @parameter0: double;
+        result = this.<org.jfree.chart.util.RectangleInsets: double left>;
+        $stack6 = this.<org.jfree.chart.util.RectangleInsets: org.jfree.chart.util.UnitType unitType>;
+        $stack5 = <org.jfree.chart.util.UnitType: org.jfree.chart.util.UnitType RELATIVE>;
+    
+        if $stack6 != $stack5 goto label1;
+        $stack7 = this.<org.jfree.chart.util.RectangleInsets: double left>;
+        result = $stack7 * width;
+    
+      label1:
+        return result;
+    }
+
+    // ---- method: <org.jfree.chart.util.RectangleInsets: double trimHeight(double)> ----
+    {
+        double $stack3, $stack4, $stack5, $stack6, height;
+        org.jfree.chart.util.RectangleInsets this;
+    
+    
+        this := @this: org.jfree.chart.util.RectangleInsets;
+        height := @parameter0: double;
+        $stack3 = virtualinvoke this.<org.jfree.chart.util.RectangleInsets: double calculateTopInset(double)>(height);
+        $stack4 = height - $stack3;
+        $stack5 = virtualinvoke this.<org.jfree.chart.util.RectangleInsets: double calculateBottomInset(double)>(height);
+        $stack6 = $stack4 - $stack5;
+    
+        return $stack6;
+    }
+
+    // ---- method: <org.jfree.chart.util.RectangleInsets: double getRight()> ----
+    {
+        double $stack1;
+        org.jfree.chart.util.RectangleInsets this;
+    
+    
+        this := @this: org.jfree.chart.util.RectangleInsets;
+        $stack1 = this.<org.jfree.chart.util.RectangleInsets: double right>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.util.RectangleInsets: double calculateTopOutset(double)> ----
+    {
+        double $stack10, $stack11, $stack12, $stack7, $stack8, $stack9, height, result;
+        org.jfree.chart.util.RectangleInsets this;
+        org.jfree.chart.util.UnitType $stack5, $stack6;
+    
+    
+        this := @this: org.jfree.chart.util.RectangleInsets;
+        height := @parameter0: double;
+        result = this.<org.jfree.chart.util.RectangleInsets: double top>;
+        $stack6 = this.<org.jfree.chart.util.RectangleInsets: org.jfree.chart.util.UnitType unitType>;
+        $stack5 = <org.jfree.chart.util.UnitType: org.jfree.chart.util.UnitType RELATIVE>;
+    
+        if $stack6 != $stack5 goto label1;
+        $stack7 = this.<org.jfree.chart.util.RectangleInsets: double top>;
+        $stack8 = 1.0 - $stack7;
+        $stack9 = this.<org.jfree.chart.util.RectangleInsets: double bottom>;
+        $stack10 = $stack8 - $stack9;
+        $stack11 = height / $stack10;
+        $stack12 = this.<org.jfree.chart.util.RectangleInsets: double top>;
+        result = $stack11 * $stack12;
+    
+      label1:
+        return result;
+    }
+
+    // ---- method: <org.jfree.chart.util.RectangleInsets: int hashCode()> ----
+    {
+        byte $stack12, $stack18, $stack24, $stack6;
+        double $stack11, $stack17, $stack23, $stack29, $stack30, $stack31, $stack32, $stack5;
+        int $stack10, $stack15, $stack16, $stack21, $stack22, $stack27, $stack28, $stack9, result#0, result#1, result#2, result#3, result#4;
+        long $stack13, $stack14, $stack19, $stack20, $stack25, $stack26, $stack7, $stack8, temp#0, temp#1, temp#2, temp#3;
+        org.jfree.chart.util.RectangleInsets this;
+        org.jfree.chart.util.UnitType $stack33, $stack4;
+    
+    
+        this := @this: org.jfree.chart.util.RectangleInsets;
+        $stack4 = this.<org.jfree.chart.util.RectangleInsets: org.jfree.chart.util.UnitType unitType>;
+    
+        if $stack4 == null goto label01;
+        $stack33 = this.<org.jfree.chart.util.RectangleInsets: org.jfree.chart.util.UnitType unitType>;
+        result#0 = virtualinvoke $stack33.<org.jfree.chart.util.UnitType: int hashCode()>();
+    
+        goto label02;
+    
+      label01:
+        result#0 = 0;
+    
+      label02:
+        $stack5 = this.<org.jfree.chart.util.RectangleInsets: double top>;
+        $stack6 = $stack5 cmpl 0.0;
+    
+        if $stack6 == 0 goto label03;
+        $stack32 = this.<org.jfree.chart.util.RectangleInsets: double top>;
+        temp#0 = staticinvoke <java.lang.Double: long doubleToLongBits(double)>($stack32);
+    
+        goto label04;
+    
+      label03:
+        temp#0 = 0L;
+    
+      label04:
+        $stack9 = 29 * result#0;
+        $stack7 = temp#0 >>> 32;
+        $stack8 = temp#0 ^ $stack7;
+        $stack10 = (int) $stack8;
+        result#1 = $stack9 + $stack10;
+        $stack11 = this.<org.jfree.chart.util.RectangleInsets: double bottom>;
+        $stack12 = $stack11 cmpl 0.0;
+    
+        if $stack12 == 0 goto label05;
+        $stack31 = this.<org.jfree.chart.util.RectangleInsets: double bottom>;
+        temp#1 = staticinvoke <java.lang.Double: long doubleToLongBits(double)>($stack31);
+    
+        goto label06;
+    
+      label05:
+        temp#1 = 0L;
+    
+      label06:
+        $stack15 = 29 * result#1;
+        $stack13 = temp#1 >>> 32;
+        $stack14 = temp#1 ^ $stack13;
+        $stack16 = (int) $stack14;
+        result#2 = $stack15 + $stack16;
+        $stack17 = this.<org.jfree.chart.util.RectangleInsets: double left>;
+        $stack18 = $stack17 cmpl 0.0;
+    
+        if $stack18 == 0 goto label07;
+        $stack30 = this.<org.jfree.chart.util.RectangleInsets: double left>;
+        temp#2 = staticinvoke <java.lang.Double: long doubleToLongBits(double)>($stack30);
+    
+        goto label08;
+    
+      label07:
+        temp#2 = 0L;
+    
+      label08:
+        $stack21 = 29 * result#2;
+        $stack19 = temp#2 >>> 32;
+        $stack20 = temp#2 ^ $stack19;
+        $stack22 = (int) $stack20;
+        result#3 = $stack21 + $stack22;
+        $stack23 = this.<org.jfree.chart.util.RectangleInsets: double right>;
+        $stack24 = $stack23 cmpl 0.0;
+    
+        if $stack24 == 0 goto label09;
+        $stack29 = this.<org.jfree.chart.util.RectangleInsets: double right>;
+        temp#3 = staticinvoke <java.lang.Double: long doubleToLongBits(double)>($stack29);
+    
+        goto label10;
+    
+      label09:
+        temp#3 = 0L;
+    
+      label10:
+        $stack27 = 29 * result#3;
+        $stack25 = temp#3 >>> 32;
+        $stack26 = temp#3 ^ $stack25;
+        $stack28 = (int) $stack26;
+        result#4 = $stack27 + $stack28;
+    
+        return result#4;
+    }
+
+    // ---- method: <org.jfree.chart.util.RectangleInsets: double extendHeight(double)> ----
+    {
+        double $stack3, $stack4, $stack5, $stack6, height;
+        org.jfree.chart.util.RectangleInsets this;
+    
+    
+        this := @this: org.jfree.chart.util.RectangleInsets;
+        height := @parameter0: double;
+        $stack3 = virtualinvoke this.<org.jfree.chart.util.RectangleInsets: double calculateTopOutset(double)>(height);
+        $stack4 = height + $stack3;
+        $stack5 = virtualinvoke this.<org.jfree.chart.util.RectangleInsets: double calculateBottomOutset(double)>(height);
+        $stack6 = $stack4 + $stack5;
+    
+        return $stack6;
+    }
+
+    // ---- method: <org.jfree.chart.util.RectangleInsets: double calculateRightInset(double)> ----
+    {
+        double $stack7, result, width;
+        org.jfree.chart.util.RectangleInsets this;
+        org.jfree.chart.util.UnitType $stack5, $stack6;
+    
+    
+        this := @this: org.jfree.chart.util.RectangleInsets;
+        width := @parameter0: double;
+        result = this.<org.jfree.chart.util.RectangleInsets: double right>;
+        $stack6 = this.<org.jfree.chart.util.RectangleInsets: org.jfree.chart.util.UnitType unitType>;
+        $stack5 = <org.jfree.chart.util.UnitType: org.jfree.chart.util.UnitType RELATIVE>;
+    
+        if $stack6 != $stack5 goto label1;
+        $stack7 = this.<org.jfree.chart.util.RectangleInsets: double right>;
+        result = $stack7 * width;
+    
+      label1:
+        return result;
+    }
+
+    // ---- method: <org.jfree.chart.util.RectangleInsets: java.awt.geom.Rectangle2D createInsetRectangle(java.awt.geom.Rectangle2D)> ----
+    {
+        java.awt.geom.Rectangle2D $stack2, base;
+        org.jfree.chart.util.RectangleInsets this;
+    
+    
+        this := @this: org.jfree.chart.util.RectangleInsets;
+        base := @parameter0: java.awt.geom.Rectangle2D;
+        $stack2 = virtualinvoke this.<org.jfree.chart.util.RectangleInsets: java.awt.geom.Rectangle2D createInsetRectangle(java.awt.geom.Rectangle2D,boolean,boolean)>(base, 1, 1);
+    
+        return $stack2;
+    }
+
+    // ---- method: <org.jfree.chart.util.RectangleInsets: java.awt.geom.Rectangle2D createOutsetRectangle(java.awt.geom.Rectangle2D,boolean,boolean)> ----
+    {
+        boolean horizontal, vertical;
+        double $stack12, $stack13, $stack14, $stack15, $stack16, $stack17, $stack18, $stack19, $stack20, $stack21, $stack23, $stack24, $stack25, $stack26, bottomMargin, leftMargin, rightMargin, topMargin;
+        java.awt.geom.Rectangle2D #l1, base;
+        java.awt.geom.Rectangle2D$Double #l0;
+        java.lang.IllegalArgumentException #l2;
+        java.lang.Object $stack22, $stack27;
+        java.lang.Throwable #l3;
+        org.jfree.chart.util.RectangleInsets this;
+    
+    
+        this := @this: org.jfree.chart.util.RectangleInsets;
+        base := @parameter0: java.awt.geom.Rectangle2D;
+        horizontal := @parameter1: boolean;
+        vertical := @parameter2: boolean;
+    
+        if base != null goto label1;
+        $stack27 = new java.lang.IllegalArgumentException;
+        #l2 = (java.lang.IllegalArgumentException) $stack27;
+        specialinvoke #l2.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'base\' argument.");
+        #l3 = (java.lang.Throwable) $stack27;
+    
+        throw #l3;
+    
+      label1:
+        topMargin = 0.0;
+        bottomMargin = 0.0;
+    
+        if vertical == 0 goto label2;
+        $stack25 = virtualinvoke base.<java.awt.geom.Rectangle2D: double getHeight()>();
+        topMargin = virtualinvoke this.<org.jfree.chart.util.RectangleInsets: double calculateTopOutset(double)>($stack25);
+        $stack26 = virtualinvoke base.<java.awt.geom.Rectangle2D: double getHeight()>();
+        bottomMargin = virtualinvoke this.<org.jfree.chart.util.RectangleInsets: double calculateBottomOutset(double)>($stack26);
+    
+      label2:
+        leftMargin = 0.0;
+        rightMargin = 0.0;
+    
+        if horizontal == 0 goto label3;
+        $stack23 = virtualinvoke base.<java.awt.geom.Rectangle2D: double getWidth()>();
+        leftMargin = virtualinvoke this.<org.jfree.chart.util.RectangleInsets: double calculateLeftOutset(double)>($stack23);
+        $stack24 = virtualinvoke base.<java.awt.geom.Rectangle2D: double getWidth()>();
+        rightMargin = virtualinvoke this.<org.jfree.chart.util.RectangleInsets: double calculateRightOutset(double)>($stack24);
+    
+      label3:
+        $stack22 = new java.awt.geom.Rectangle2D$Double;
+        $stack12 = virtualinvoke base.<java.awt.geom.Rectangle2D: double getX()>();
+        $stack21 = $stack12 - leftMargin;
+        $stack13 = virtualinvoke base.<java.awt.geom.Rectangle2D: double getY()>();
+        $stack20 = $stack13 - topMargin;
+        $stack14 = virtualinvoke base.<java.awt.geom.Rectangle2D: double getWidth()>();
+        $stack15 = $stack14 + leftMargin;
+        $stack19 = $stack15 + rightMargin;
+        $stack16 = virtualinvoke base.<java.awt.geom.Rectangle2D: double getHeight()>();
+        $stack17 = $stack16 + topMargin;
+        $stack18 = $stack17 + bottomMargin;
+        #l0 = (java.awt.geom.Rectangle2D$Double) $stack22;
+        specialinvoke #l0.<java.awt.geom.Rectangle2D$Double: void <init>(double,double,double,double)>($stack21, $stack20, $stack19, $stack18);
+        #l1 = (java.awt.geom.Rectangle2D) $stack22;
+    
+        return #l1;
+    }
+
+    // ---- method: <org.jfree.chart.util.RectangleInsets: void <init>()> ----
+    {
+        org.jfree.chart.util.RectangleInsets this;
+    
+    
+        this := @this: org.jfree.chart.util.RectangleInsets;
+        specialinvoke this.<org.jfree.chart.util.RectangleInsets: void <init>(double,double,double,double)>(1.0, 1.0, 1.0, 1.0);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.util.RectangleInsets: org.jfree.chart.util.UnitType getUnitType()> ----
+    {
+        org.jfree.chart.util.RectangleInsets this;
+        org.jfree.chart.util.UnitType $stack1;
+    
+    
+        this := @this: org.jfree.chart.util.RectangleInsets;
+        $stack1 = this.<org.jfree.chart.util.RectangleInsets: org.jfree.chart.util.UnitType unitType>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.util.RectangleInsets: double calculateBottomOutset(double)> ----
+    {
+        double $stack10, $stack11, $stack12, $stack7, $stack8, $stack9, height, result;
+        org.jfree.chart.util.RectangleInsets this;
+        org.jfree.chart.util.UnitType $stack5, $stack6;
+    
+    
+        this := @this: org.jfree.chart.util.RectangleInsets;
+        height := @parameter0: double;
+        result = this.<org.jfree.chart.util.RectangleInsets: double bottom>;
+        $stack6 = this.<org.jfree.chart.util.RectangleInsets: org.jfree.chart.util.UnitType unitType>;
+        $stack5 = <org.jfree.chart.util.UnitType: org.jfree.chart.util.UnitType RELATIVE>;
+    
+        if $stack6 != $stack5 goto label1;
+        $stack7 = this.<org.jfree.chart.util.RectangleInsets: double top>;
+        $stack8 = 1.0 - $stack7;
+        $stack9 = this.<org.jfree.chart.util.RectangleInsets: double bottom>;
+        $stack10 = $stack8 - $stack9;
+        $stack11 = height / $stack10;
+        $stack12 = this.<org.jfree.chart.util.RectangleInsets: double bottom>;
+        result = $stack11 * $stack12;
+    
+      label1:
+        return result;
+    }
+
+    // ---- method: <org.jfree.chart.util.RectangleInsets: java.lang.String toString()> ----
+    {
+        double $stack11, $stack2, $stack5, $stack8;
+        java.lang.String $stack15;
+        java.lang.StringBuffer $stack1, $stack10, $stack12, $stack13, $stack14, $stack3, $stack4, $stack6, $stack7, $stack9;
+        org.jfree.chart.util.RectangleInsets this;
+    
+    
+        this := @this: org.jfree.chart.util.RectangleInsets;
+        $stack1 = new java.lang.StringBuffer;
+        specialinvoke $stack1.<java.lang.StringBuffer: void <init>()>();
+        $stack3 = virtualinvoke $stack1.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>("RectangleInsets[t=");
+        $stack2 = this.<org.jfree.chart.util.RectangleInsets: double top>;
+        $stack4 = virtualinvoke $stack3.<java.lang.StringBuffer: java.lang.StringBuffer append(double)>($stack2);
+        $stack6 = virtualinvoke $stack4.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>(",l=");
+        $stack5 = this.<org.jfree.chart.util.RectangleInsets: double left>;
+        $stack7 = virtualinvoke $stack6.<java.lang.StringBuffer: java.lang.StringBuffer append(double)>($stack5);
+        $stack9 = virtualinvoke $stack7.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>(",b=");
+        $stack8 = this.<org.jfree.chart.util.RectangleInsets: double bottom>;
+        $stack10 = virtualinvoke $stack9.<java.lang.StringBuffer: java.lang.StringBuffer append(double)>($stack8);
+        $stack12 = virtualinvoke $stack10.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>(",r=");
+        $stack11 = this.<org.jfree.chart.util.RectangleInsets: double right>;
+        $stack13 = virtualinvoke $stack12.<java.lang.StringBuffer: java.lang.StringBuffer append(double)>($stack11);
+        $stack14 = virtualinvoke $stack13.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>("]");
+        $stack15 = virtualinvoke $stack14.<java.lang.StringBuffer: java.lang.String toString()>();
+    
+        return $stack15;
+    }
+
+    // ---- method: <org.jfree.chart.util.RectangleInsets: double calculateLeftOutset(double)> ----
+    {
+        double $stack10, $stack11, $stack12, $stack7, $stack8, $stack9, result, width;
+        org.jfree.chart.util.RectangleInsets this;
+        org.jfree.chart.util.UnitType $stack5, $stack6;
+    
+    
+        this := @this: org.jfree.chart.util.RectangleInsets;
+        width := @parameter0: double;
+        result = this.<org.jfree.chart.util.RectangleInsets: double left>;
+        $stack6 = this.<org.jfree.chart.util.RectangleInsets: org.jfree.chart.util.UnitType unitType>;
+        $stack5 = <org.jfree.chart.util.UnitType: org.jfree.chart.util.UnitType RELATIVE>;
+    
+        if $stack6 != $stack5 goto label1;
+        $stack7 = this.<org.jfree.chart.util.RectangleInsets: double left>;
+        $stack8 = 1.0 - $stack7;
+        $stack9 = this.<org.jfree.chart.util.RectangleInsets: double right>;
+        $stack10 = $stack8 - $stack9;
+        $stack11 = width / $stack10;
+        $stack12 = this.<org.jfree.chart.util.RectangleInsets: double left>;
+        result = $stack11 * $stack12;
+    
+      label1:
+        return result;
+    }
+
+    // ---- method: <org.jfree.chart.util.RectangleInsets: double getBottom()> ----
+    {
+        double $stack1;
+        org.jfree.chart.util.RectangleInsets this;
+    
+    
+        this := @this: org.jfree.chart.util.RectangleInsets;
+        $stack1 = this.<org.jfree.chart.util.RectangleInsets: double bottom>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.util.RectangleInsets: java.awt.geom.Rectangle2D createInsetRectangle(java.awt.geom.Rectangle2D,boolean,boolean)> ----
+    {
+        boolean horizontal, vertical;
+        double $stack12, $stack13, $stack14, $stack15, $stack16, $stack17, $stack18, $stack19, $stack20, $stack21, $stack23, $stack24, $stack25, $stack26, bottomMargin, leftMargin, rightMargin, topMargin;
+        java.awt.geom.Rectangle2D #l0, base;
+        java.awt.geom.Rectangle2D$Double #l1;
+        java.lang.IllegalArgumentException #l2;
+        java.lang.Object $stack22, $stack27;
+        java.lang.Throwable #l3;
+        org.jfree.chart.util.RectangleInsets this;
+    
+    
+        this := @this: org.jfree.chart.util.RectangleInsets;
+        base := @parameter0: java.awt.geom.Rectangle2D;
+        horizontal := @parameter1: boolean;
+        vertical := @parameter2: boolean;
+    
+        if base != null goto label1;
+        $stack27 = new java.lang.IllegalArgumentException;
+        #l2 = (java.lang.IllegalArgumentException) $stack27;
+        specialinvoke #l2.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'base\' argument.");
+        #l3 = (java.lang.Throwable) $stack27;
+    
+        throw #l3;
+    
+      label1:
+        topMargin = 0.0;
+        bottomMargin = 0.0;
+    
+        if vertical == 0 goto label2;
+        $stack25 = virtualinvoke base.<java.awt.geom.Rectangle2D: double getHeight()>();
+        topMargin = virtualinvoke this.<org.jfree.chart.util.RectangleInsets: double calculateTopInset(double)>($stack25);
+        $stack26 = virtualinvoke base.<java.awt.geom.Rectangle2D: double getHeight()>();
+        bottomMargin = virtualinvoke this.<org.jfree.chart.util.RectangleInsets: double calculateBottomInset(double)>($stack26);
+    
+      label2:
+        leftMargin = 0.0;
+        rightMargin = 0.0;
+    
+        if horizontal == 0 goto label3;
+        $stack23 = virtualinvoke base.<java.awt.geom.Rectangle2D: double getWidth()>();
+        leftMargin = virtualinvoke this.<org.jfree.chart.util.RectangleInsets: double calculateLeftInset(double)>($stack23);
+        $stack24 = virtualinvoke base.<java.awt.geom.Rectangle2D: double getWidth()>();
+        rightMargin = virtualinvoke this.<org.jfree.chart.util.RectangleInsets: double calculateRightInset(double)>($stack24);
+    
+      label3:
+        $stack22 = new java.awt.geom.Rectangle2D$Double;
+        $stack12 = virtualinvoke base.<java.awt.geom.Rectangle2D: double getX()>();
+        $stack21 = $stack12 + leftMargin;
+        $stack13 = virtualinvoke base.<java.awt.geom.Rectangle2D: double getY()>();
+        $stack20 = $stack13 + topMargin;
+        $stack14 = virtualinvoke base.<java.awt.geom.Rectangle2D: double getWidth()>();
+        $stack15 = $stack14 - leftMargin;
+        $stack19 = $stack15 - rightMargin;
+        $stack16 = virtualinvoke base.<java.awt.geom.Rectangle2D: double getHeight()>();
+        $stack17 = $stack16 - topMargin;
+        $stack18 = $stack17 - bottomMargin;
+        #l1 = (java.awt.geom.Rectangle2D$Double) $stack22;
+        specialinvoke #l1.<java.awt.geom.Rectangle2D$Double: void <init>(double,double,double,double)>($stack21, $stack20, $stack19, $stack18);
+        #l0 = (java.awt.geom.Rectangle2D) $stack22;
+    
+        return #l0;
+    }
+
+    // ---- method: <org.jfree.chart.util.RectangleInsets: double calculateTopInset(double)> ----
+    {
+        double $stack7, height, result;
+        org.jfree.chart.util.RectangleInsets this;
+        org.jfree.chart.util.UnitType $stack5, $stack6;
+    
+    
+        this := @this: org.jfree.chart.util.RectangleInsets;
+        height := @parameter0: double;
+        result = this.<org.jfree.chart.util.RectangleInsets: double top>;
+        $stack6 = this.<org.jfree.chart.util.RectangleInsets: org.jfree.chart.util.UnitType unitType>;
+        $stack5 = <org.jfree.chart.util.UnitType: org.jfree.chart.util.UnitType RELATIVE>;
+    
+        if $stack6 != $stack5 goto label1;
+        $stack7 = this.<org.jfree.chart.util.RectangleInsets: double top>;
+        result = $stack7 * height;
+    
+      label1:
+        return result;
+    }
+
+    // ---- method: <org.jfree.chart.util.RectangleInsets: void trim(java.awt.geom.Rectangle2D)> ----
+    {
+        double $stack14, $stack15, $stack16, $stack17, $stack18, $stack19, $stack20, $stack21, b, h, l, r, t, w;
+        java.awt.geom.Rectangle2D area;
+        org.jfree.chart.util.RectangleInsets this;
+    
+    
+        this := @this: org.jfree.chart.util.RectangleInsets;
+        area := @parameter0: java.awt.geom.Rectangle2D;
+        w = virtualinvoke area.<java.awt.geom.Rectangle2D: double getWidth()>();
+        h = virtualinvoke area.<java.awt.geom.Rectangle2D: double getHeight()>();
+        l = virtualinvoke this.<org.jfree.chart.util.RectangleInsets: double calculateLeftInset(double)>(w);
+        r = virtualinvoke this.<org.jfree.chart.util.RectangleInsets: double calculateRightInset(double)>(w);
+        t = virtualinvoke this.<org.jfree.chart.util.RectangleInsets: double calculateTopInset(double)>(h);
+        b = virtualinvoke this.<org.jfree.chart.util.RectangleInsets: double calculateBottomInset(double)>(h);
+        $stack14 = virtualinvoke area.<java.awt.geom.Rectangle2D: double getX()>();
+        $stack21 = $stack14 + l;
+        $stack15 = virtualinvoke area.<java.awt.geom.Rectangle2D: double getY()>();
+        $stack20 = $stack15 + t;
+        $stack16 = w - l;
+        $stack19 = $stack16 - r;
+        $stack17 = h - t;
+        $stack18 = $stack17 - b;
+        virtualinvoke area.<java.awt.geom.Rectangle2D: void setRect(double,double,double,double)>($stack21, $stack20, $stack19, $stack18);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.util.RectangleInsets: double getTop()> ----
+    {
+        double $stack1;
+        org.jfree.chart.util.RectangleInsets this;
+    
+    
+        this := @this: org.jfree.chart.util.RectangleInsets;
+        $stack1 = this.<org.jfree.chart.util.RectangleInsets: double top>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.util.RectangleInsets: void <clinit>()> ----
+    {
+        org.jfree.chart.util.RectangleInsets $stack1;
+        org.jfree.chart.util.UnitType $stack0;
+    
+    
+        $stack1 = new org.jfree.chart.util.RectangleInsets;
+        $stack0 = <org.jfree.chart.util.UnitType: org.jfree.chart.util.UnitType ABSOLUTE>;
+        specialinvoke $stack1.<org.jfree.chart.util.RectangleInsets: void <init>(org.jfree.chart.util.UnitType,double,double,double,double)>($stack0, 0.0, 0.0, 0.0, 0.0);
+        <org.jfree.chart.util.RectangleInsets: org.jfree.chart.util.RectangleInsets ZERO_INSETS> = $stack1;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.util.RectangleInsets: java.awt.geom.Rectangle2D createOutsetRectangle(java.awt.geom.Rectangle2D)> ----
+    {
+        java.awt.geom.Rectangle2D $stack2, base;
+        org.jfree.chart.util.RectangleInsets this;
+    
+    
+        this := @this: org.jfree.chart.util.RectangleInsets;
+        base := @parameter0: java.awt.geom.Rectangle2D;
+        $stack2 = virtualinvoke this.<org.jfree.chart.util.RectangleInsets: java.awt.geom.Rectangle2D createOutsetRectangle(java.awt.geom.Rectangle2D,boolean,boolean)>(base, 1, 1);
+    
+        return $stack2;
+    }
+
+}

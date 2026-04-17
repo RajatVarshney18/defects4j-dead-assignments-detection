@@ -1,0 +1,189 @@
+// ========================================================================
+// CLASS : org.jfree.chart.axis.NumberTickUnit
+// ========================================================================
+
+[PUBLIC, SUPER] class org.jfree.chart.axis.NumberTickUnit extends org.jfree.chart.axis.TickUnit implements java.io.Serializable {
+
+    // ---- method: <org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat)> ----
+    {
+        double size;
+        java.lang.IllegalArgumentException #l1;
+        java.lang.Object $stack4;
+        java.lang.Throwable #l0;
+        java.text.NumberFormat formatter;
+        org.jfree.chart.axis.NumberTickUnit this;
+    
+    
+        this := @this: org.jfree.chart.axis.NumberTickUnit;
+        size := @parameter0: double;
+        formatter := @parameter1: java.text.NumberFormat;
+        specialinvoke this.<org.jfree.chart.axis.TickUnit: void <init>(double)>(size);
+    
+        if formatter != null goto label1;
+        $stack4 = new java.lang.IllegalArgumentException;
+        #l1 = (java.lang.IllegalArgumentException) $stack4;
+        specialinvoke #l1.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'formatter\' argument.");
+        #l0 = (java.lang.Throwable) $stack4;
+    
+        throw #l0;
+    
+      label1:
+        this.<org.jfree.chart.axis.NumberTickUnit: java.text.NumberFormat formatter> = formatter;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat,int)> ----
+    {
+        double size;
+        int minorTickCount;
+        java.lang.IllegalArgumentException #l1;
+        java.lang.Object $stack5;
+        java.lang.Throwable #l0;
+        java.text.NumberFormat formatter;
+        org.jfree.chart.axis.NumberTickUnit this;
+    
+    
+        this := @this: org.jfree.chart.axis.NumberTickUnit;
+        size := @parameter0: double;
+        formatter := @parameter1: java.text.NumberFormat;
+        minorTickCount := @parameter2: int;
+        specialinvoke this.<org.jfree.chart.axis.TickUnit: void <init>(double,int)>(size, minorTickCount);
+    
+        if formatter != null goto label1;
+        $stack5 = new java.lang.IllegalArgumentException;
+        #l1 = (java.lang.IllegalArgumentException) $stack5;
+        specialinvoke #l1.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'formatter\' argument.");
+        #l0 = (java.lang.Throwable) $stack5;
+    
+        throw #l0;
+    
+      label1:
+        this.<org.jfree.chart.axis.NumberTickUnit: java.text.NumberFormat formatter> = formatter;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.axis.NumberTickUnit: java.lang.String valueToString(double)> ----
+    {
+        double value;
+        java.lang.String $stack4;
+        java.text.NumberFormat $stack3;
+        org.jfree.chart.axis.NumberTickUnit this;
+    
+    
+        this := @this: org.jfree.chart.axis.NumberTickUnit;
+        value := @parameter0: double;
+        $stack3 = this.<org.jfree.chart.axis.NumberTickUnit: java.text.NumberFormat formatter>;
+        $stack4 = virtualinvoke $stack3.<java.text.NumberFormat: java.lang.String format(double)>(value);
+    
+        return $stack4;
+    }
+
+    // ---- method: <org.jfree.chart.axis.NumberTickUnit: void <init>(double)> ----
+    {
+        double size;
+        java.text.NumberFormat $stack3;
+        org.jfree.chart.axis.NumberTickUnit this;
+    
+    
+        this := @this: org.jfree.chart.axis.NumberTickUnit;
+        size := @parameter0: double;
+        $stack3 = staticinvoke <java.text.NumberFormat: java.text.NumberFormat getNumberInstance()>();
+        specialinvoke this.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat)>(size, $stack3);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.axis.NumberTickUnit: int hashCode()> ----
+    {
+        int $stack3, $stack5, result#0, result#1;
+        java.text.NumberFormat $stack2, $stack4;
+        org.jfree.chart.axis.NumberTickUnit this;
+    
+    
+        this := @this: org.jfree.chart.axis.NumberTickUnit;
+        result#0 = specialinvoke this.<org.jfree.chart.axis.TickUnit: int hashCode()>();
+        $stack3 = 29 * result#0;
+        $stack2 = this.<org.jfree.chart.axis.NumberTickUnit: java.text.NumberFormat formatter>;
+    
+        if $stack2 == null goto label1;
+        $stack4 = this.<org.jfree.chart.axis.NumberTickUnit: java.text.NumberFormat formatter>;
+        $stack5 = virtualinvoke $stack4.<java.text.NumberFormat: int hashCode()>();
+    
+        goto label2;
+    
+      label1:
+        $stack5 = 0;
+    
+      label2:
+        result#1 = $stack3 + $stack5;
+    
+        return result#1;
+    }
+
+    // ---- method: <org.jfree.chart.axis.NumberTickUnit: java.lang.String toString()> ----
+    {
+        double $stack2;
+        java.lang.String $stack3, $stack7;
+        java.lang.StringBuffer $stack1, $stack4, $stack5, $stack6;
+        org.jfree.chart.axis.NumberTickUnit this;
+    
+    
+        this := @this: org.jfree.chart.axis.NumberTickUnit;
+        $stack1 = new java.lang.StringBuffer;
+        specialinvoke $stack1.<java.lang.StringBuffer: void <init>()>();
+        $stack4 = virtualinvoke $stack1.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>("[size=");
+        $stack2 = virtualinvoke this.<org.jfree.chart.axis.NumberTickUnit: double getSize()>();
+        $stack3 = virtualinvoke this.<org.jfree.chart.axis.NumberTickUnit: java.lang.String valueToString(double)>($stack2);
+        $stack5 = virtualinvoke $stack4.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>($stack3);
+        $stack6 = virtualinvoke $stack5.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>("]");
+        $stack7 = virtualinvoke $stack6.<java.lang.StringBuffer: java.lang.String toString()>();
+    
+        return $stack7;
+    }
+
+    // ---- method: <org.jfree.chart.axis.NumberTickUnit: boolean equals(java.lang.Object)> ----
+    {
+        boolean $stack3, $stack4, $stack7;
+        java.lang.Object obj;
+        java.text.NumberFormat $stack5, $stack6;
+        org.jfree.chart.axis.NumberTickUnit that, this;
+    
+    
+        this := @this: org.jfree.chart.axis.NumberTickUnit;
+        obj := @parameter0: java.lang.Object;
+    
+        if obj != this goto label1;
+    
+        return 1;
+    
+      label1:
+        $stack3 = obj instanceof org.jfree.chart.axis.NumberTickUnit;
+    
+        if $stack3 != 0 goto label2;
+    
+        return 0;
+    
+      label2:
+        $stack4 = specialinvoke this.<org.jfree.chart.axis.TickUnit: boolean equals(java.lang.Object)>(obj);
+    
+        if $stack4 != 0 goto label3;
+    
+        return 0;
+    
+      label3:
+        that = (org.jfree.chart.axis.NumberTickUnit) obj;
+        $stack6 = this.<org.jfree.chart.axis.NumberTickUnit: java.text.NumberFormat formatter>;
+        $stack5 = that.<org.jfree.chart.axis.NumberTickUnit: java.text.NumberFormat formatter>;
+        $stack7 = virtualinvoke $stack6.<java.text.NumberFormat: boolean equals(java.lang.Object)>($stack5);
+    
+        if $stack7 != 0 goto label4;
+    
+        return 0;
+    
+      label4:
+        return 1;
+    }
+
+}

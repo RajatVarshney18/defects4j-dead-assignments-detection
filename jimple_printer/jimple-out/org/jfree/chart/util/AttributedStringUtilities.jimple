@@ -1,0 +1,109 @@
+// ========================================================================
+// CLASS : org.jfree.chart.util.AttributedStringUtilities
+// ========================================================================
+
+[PUBLIC, SUPER] class org.jfree.chart.util.AttributedStringUtilities extends java.lang.Object {
+
+    // ---- method: <org.jfree.chart.util.AttributedStringUtilities: void <init>()> ----
+    {
+        org.jfree.chart.util.AttributedStringUtilities this;
+    
+    
+        this := @this: org.jfree.chart.util.AttributedStringUtilities;
+        specialinvoke this.<java.lang.Object: void <init>()>();
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.util.AttributedStringUtilities: boolean equal(java.text.AttributedString,java.text.AttributedString)> ----
+    {
+        boolean $stack12, $stack13, $stack14;
+        char c1, c2;
+        int i, limit1, limit2, start;
+        java.text.AttributedCharacterIterator it1, it2;
+        java.text.AttributedString s1, s2;
+        java.util.Map m1, m2;
+    
+    
+        s1 := @parameter0: java.text.AttributedString;
+        s2 := @parameter1: java.text.AttributedString;
+    
+        if s1 != null goto label03;
+    
+        if s2 != null goto label01;
+        $stack14 = 1;
+    
+        goto label02;
+    
+      label01:
+        $stack14 = 0;
+    
+      label02:
+        return $stack14;
+    
+      label03:
+        if s2 != null goto label04;
+    
+        return 0;
+    
+      label04:
+        it1 = virtualinvoke s1.<java.text.AttributedString: java.text.AttributedCharacterIterator getIterator()>();
+        it2 = virtualinvoke s2.<java.text.AttributedString: java.text.AttributedCharacterIterator getIterator()>();
+        c1 = interfaceinvoke it1.<java.text.AttributedCharacterIterator: char first()>();
+        c2 = interfaceinvoke it2.<java.text.AttributedCharacterIterator: char first()>();
+        start = 0;
+    
+      label05:
+        if c1 == 65535 goto label11;
+        limit1 = interfaceinvoke it1.<java.text.AttributedCharacterIterator: int getRunLimit()>();
+        limit2 = interfaceinvoke it2.<java.text.AttributedCharacterIterator: int getRunLimit()>();
+    
+        if limit1 == limit2 goto label06;
+    
+        return 0;
+    
+      label06:
+        m1 = interfaceinvoke it1.<java.text.AttributedCharacterIterator: java.util.Map getAttributes()>();
+        m2 = interfaceinvoke it2.<java.text.AttributedCharacterIterator: java.util.Map getAttributes()>();
+        $stack13 = interfaceinvoke m1.<java.util.Map: boolean equals(java.lang.Object)>(m2);
+    
+        if $stack13 != 0 goto label07;
+    
+        return 0;
+    
+      label07:
+        i = start;
+    
+      label08:
+        if i >= limit1 goto label10;
+    
+        if c1 == c2 goto label09;
+    
+        return 0;
+    
+      label09:
+        c1 = interfaceinvoke it1.<java.text.AttributedCharacterIterator: char next()>();
+        c2 = interfaceinvoke it2.<java.text.AttributedCharacterIterator: char next()>();
+        i = i + 1;
+    
+        goto label08;
+    
+      label10:
+        start = limit1;
+    
+        goto label05;
+    
+      label11:
+        if c2 != 65535 goto label12;
+        $stack12 = 1;
+    
+        goto label13;
+    
+      label12:
+        $stack12 = 0;
+    
+      label13:
+        return $stack12;
+    }
+
+}

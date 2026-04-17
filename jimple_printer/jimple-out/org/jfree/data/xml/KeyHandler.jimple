@@ -1,0 +1,177 @@
+// ========================================================================
+// CLASS : org.jfree.data.xml.KeyHandler
+// ========================================================================
+
+[PUBLIC, SUPER] class org.jfree.data.xml.KeyHandler extends org.xml.sax.helpers.DefaultHandler implements org.jfree.data.xml.DatasetTags {
+
+    // ---- method: <org.jfree.data.xml.KeyHandler: void endElement(java.lang.String,java.lang.String,java.lang.String)> ----
+    {
+        boolean $stack4;
+        java.lang.Comparable #l0;
+        java.lang.Object $stack11, $stack9;
+        java.lang.String $stack8, localName, namespaceURI, qName;
+        java.lang.StringBuffer $stack5, $stack6, $stack7;
+        java.lang.Throwable #l1;
+        org.jfree.data.xml.ItemHandler $stack10, $stack13;
+        org.jfree.data.xml.KeyHandler this;
+        org.jfree.data.xml.RootHandler $stack12, $stack14, $stack16;
+        org.jfree.data.xml.ValueHandler $stack15;
+        org.xml.sax.SAXException #l2;
+    
+    
+        this := @this: org.jfree.data.xml.KeyHandler;
+        namespaceURI := @parameter0: java.lang.String;
+        localName := @parameter1: java.lang.String;
+        qName := @parameter2: java.lang.String;
+        $stack4 = virtualinvoke qName.<java.lang.String: boolean equals(java.lang.Object)>("Key");
+    
+        if $stack4 == 0 goto label1;
+        $stack10 = this.<org.jfree.data.xml.KeyHandler: org.jfree.data.xml.ItemHandler itemHandler>;
+        $stack11 = virtualinvoke this.<org.jfree.data.xml.KeyHandler: java.lang.String getCurrentText()>();
+        #l0 = (java.lang.Comparable) $stack11;
+        virtualinvoke $stack10.<org.jfree.data.xml.ItemHandler: void setKey(java.lang.Comparable)>(#l0);
+        $stack12 = this.<org.jfree.data.xml.KeyHandler: org.jfree.data.xml.RootHandler rootHandler>;
+        virtualinvoke $stack12.<org.jfree.data.xml.RootHandler: org.xml.sax.helpers.DefaultHandler popSubHandler()>();
+        $stack16 = this.<org.jfree.data.xml.KeyHandler: org.jfree.data.xml.RootHandler rootHandler>;
+        $stack15 = new org.jfree.data.xml.ValueHandler;
+        $stack14 = this.<org.jfree.data.xml.KeyHandler: org.jfree.data.xml.RootHandler rootHandler>;
+        $stack13 = this.<org.jfree.data.xml.KeyHandler: org.jfree.data.xml.ItemHandler itemHandler>;
+        specialinvoke $stack15.<org.jfree.data.xml.ValueHandler: void <init>(org.jfree.data.xml.RootHandler,org.jfree.data.xml.ItemHandler)>($stack14, $stack13);
+        virtualinvoke $stack16.<org.jfree.data.xml.RootHandler: void pushSubHandler(org.xml.sax.helpers.DefaultHandler)>($stack15);
+    
+        goto label2;
+    
+      label1:
+        $stack9 = new org.xml.sax.SAXException;
+        $stack5 = new java.lang.StringBuffer;
+        specialinvoke $stack5.<java.lang.StringBuffer: void <init>()>();
+        $stack6 = virtualinvoke $stack5.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>("Expecting </Key> but found ");
+        $stack7 = virtualinvoke $stack6.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>(qName);
+        $stack8 = virtualinvoke $stack7.<java.lang.StringBuffer: java.lang.String toString()>();
+        #l2 = (org.xml.sax.SAXException) $stack9;
+        specialinvoke #l2.<org.xml.sax.SAXException: void <init>(java.lang.String)>($stack8);
+        #l1 = (java.lang.Throwable) $stack9;
+    
+        throw #l1;
+    
+      label2:
+        return;
+    }
+
+    // ---- method: <org.jfree.data.xml.KeyHandler: void clearCurrentText()> ----
+    {
+        int $stack3;
+        java.lang.StringBuffer $stack1, $stack2;
+        org.jfree.data.xml.KeyHandler this;
+    
+    
+        this := @this: org.jfree.data.xml.KeyHandler;
+        $stack2 = this.<org.jfree.data.xml.KeyHandler: java.lang.StringBuffer currentText>;
+        $stack1 = this.<org.jfree.data.xml.KeyHandler: java.lang.StringBuffer currentText>;
+        $stack3 = virtualinvoke $stack1.<java.lang.StringBuffer: int length()>();
+        virtualinvoke $stack2.<java.lang.StringBuffer: java.lang.StringBuffer delete(int,int)>(0, $stack3);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.xml.KeyHandler: java.lang.String getCurrentText()> ----
+    {
+        java.lang.String $stack2;
+        java.lang.StringBuffer $stack1;
+        org.jfree.data.xml.KeyHandler this;
+    
+    
+        this := @this: org.jfree.data.xml.KeyHandler;
+        $stack1 = this.<org.jfree.data.xml.KeyHandler: java.lang.StringBuffer currentText>;
+        $stack2 = virtualinvoke $stack1.<java.lang.StringBuffer: java.lang.String toString()>();
+    
+        return $stack2;
+    }
+
+    // ---- method: <org.jfree.data.xml.KeyHandler: void startElement(java.lang.String,java.lang.String,java.lang.String,org.xml.sax.Attributes)> ----
+    {
+        boolean $stack5;
+        java.lang.Object $stack10;
+        java.lang.String $stack9, localName, namespaceURI, qName;
+        java.lang.StringBuffer $stack6, $stack7, $stack8;
+        java.lang.Throwable #l1;
+        org.jfree.data.xml.KeyHandler this;
+        org.xml.sax.Attributes atts;
+        org.xml.sax.SAXException #l0;
+    
+    
+        this := @this: org.jfree.data.xml.KeyHandler;
+        namespaceURI := @parameter0: java.lang.String;
+        localName := @parameter1: java.lang.String;
+        qName := @parameter2: java.lang.String;
+        atts := @parameter3: org.xml.sax.Attributes;
+        $stack5 = virtualinvoke qName.<java.lang.String: boolean equals(java.lang.Object)>("Key");
+    
+        if $stack5 == 0 goto label1;
+        virtualinvoke this.<org.jfree.data.xml.KeyHandler: void clearCurrentText()>();
+    
+        goto label2;
+    
+      label1:
+        $stack10 = new org.xml.sax.SAXException;
+        $stack6 = new java.lang.StringBuffer;
+        specialinvoke $stack6.<java.lang.StringBuffer: void <init>()>();
+        $stack7 = virtualinvoke $stack6.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>("Expecting <Key> but found ");
+        $stack8 = virtualinvoke $stack7.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>(qName);
+        $stack9 = virtualinvoke $stack8.<java.lang.StringBuffer: java.lang.String toString()>();
+        #l0 = (org.xml.sax.SAXException) $stack10;
+        specialinvoke #l0.<org.xml.sax.SAXException: void <init>(java.lang.String)>($stack9);
+        #l1 = (java.lang.Throwable) $stack10;
+    
+        throw #l1;
+    
+      label2:
+        return;
+    }
+
+    // ---- method: <org.jfree.data.xml.KeyHandler: void characters(char[],int,int)> ----
+    {
+        char[] ch;
+        int length, start;
+        java.lang.String $stack6;
+        java.lang.StringBuffer $stack4, $stack5;
+        org.jfree.data.xml.KeyHandler this;
+    
+    
+        this := @this: org.jfree.data.xml.KeyHandler;
+        ch := @parameter0: char[];
+        start := @parameter1: int;
+        length := @parameter2: int;
+        $stack4 = this.<org.jfree.data.xml.KeyHandler: java.lang.StringBuffer currentText>;
+    
+        if $stack4 == null goto label1;
+        $stack5 = this.<org.jfree.data.xml.KeyHandler: java.lang.StringBuffer currentText>;
+        $stack6 = staticinvoke <java.lang.String: java.lang.String copyValueOf(char[],int,int)>(ch, start, length);
+        virtualinvoke $stack5.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>($stack6);
+    
+      label1:
+        return;
+    }
+
+    // ---- method: <org.jfree.data.xml.KeyHandler: void <init>(org.jfree.data.xml.RootHandler,org.jfree.data.xml.ItemHandler)> ----
+    {
+        java.lang.StringBuffer $stack3;
+        org.jfree.data.xml.ItemHandler itemHandler;
+        org.jfree.data.xml.KeyHandler this;
+        org.jfree.data.xml.RootHandler rootHandler;
+    
+    
+        this := @this: org.jfree.data.xml.KeyHandler;
+        rootHandler := @parameter0: org.jfree.data.xml.RootHandler;
+        itemHandler := @parameter1: org.jfree.data.xml.ItemHandler;
+        specialinvoke this.<org.xml.sax.helpers.DefaultHandler: void <init>()>();
+        this.<org.jfree.data.xml.KeyHandler: org.jfree.data.xml.RootHandler rootHandler> = rootHandler;
+        this.<org.jfree.data.xml.KeyHandler: org.jfree.data.xml.ItemHandler itemHandler> = itemHandler;
+        $stack3 = new java.lang.StringBuffer;
+        specialinvoke $stack3.<java.lang.StringBuffer: void <init>()>();
+        this.<org.jfree.data.xml.KeyHandler: java.lang.StringBuffer currentText> = $stack3;
+    
+        return;
+    }
+
+}
