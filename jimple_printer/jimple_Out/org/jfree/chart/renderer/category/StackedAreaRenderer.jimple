@@ -1,0 +1,638 @@
+// ========================================================================
+// CLASS : org.jfree.chart.renderer.category.StackedAreaRenderer
+// ========================================================================
+
+[PUBLIC, SUPER] class org.jfree.chart.renderer.category.StackedAreaRenderer extends org.jfree.chart.renderer.category.AreaRenderer implements org.jfree.chart.util.PublicCloneable, java.lang.Cloneable, java.io.Serializable {
+
+    // ---- method: <org.jfree.chart.renderer.category.StackedAreaRenderer: int getPassCount()> ----
+    {
+        org.jfree.chart.renderer.category.StackedAreaRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.category.StackedAreaRenderer;
+    
+        return 2;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.category.StackedAreaRenderer: double[] averageStackValues(double[],double[])> ----
+    {
+        double $stack10, $stack11, $stack4, $stack5, $stack6, $stack7, $stack8, $stack9;
+        double[] result, stack1, stack2;
+        org.jfree.chart.renderer.category.StackedAreaRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.category.StackedAreaRenderer;
+        stack1 := @parameter0: double[];
+        stack2 := @parameter1: double[];
+        result = newarray (double)[2];
+        $stack4 = stack1[0];
+        $stack5 = stack2[0];
+        $stack6 = $stack4 + $stack5;
+        $stack7 = $stack6 / 2.0;
+        result[0] = $stack7;
+        $stack8 = stack1[1];
+        $stack9 = stack2[1];
+        $stack10 = $stack8 + $stack9;
+        $stack11 = $stack10 / 2.0;
+        result[1] = $stack11;
+    
+        return result;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.category.StackedAreaRenderer: void setRenderAsPercentages(boolean)> ----
+    {
+        boolean asPercentages;
+        org.jfree.chart.event.RendererChangeEvent $stack2;
+        org.jfree.chart.renderer.category.StackedAreaRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.category.StackedAreaRenderer;
+        asPercentages := @parameter0: boolean;
+        this.<org.jfree.chart.renderer.category.StackedAreaRenderer: boolean renderAsPercentages> = asPercentages;
+        $stack2 = new org.jfree.chart.event.RendererChangeEvent;
+        specialinvoke $stack2.<org.jfree.chart.event.RendererChangeEvent: void <init>(java.lang.Object)>(this);
+        virtualinvoke this.<org.jfree.chart.renderer.category.StackedAreaRenderer: void notifyListeners(org.jfree.chart.event.RendererChangeEvent)>($stack2);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.category.StackedAreaRenderer: double[] getStackValues(org.jfree.data.category.CategoryDataset,int,int)> ----
+    {
+        boolean $stack10, $stack9;
+        byte $stack11;
+        double $stack12, $stack13, $stack14, $stack15, v;
+        double[] result;
+        int i, index, series;
+        java.lang.Number n;
+        org.jfree.chart.renderer.category.StackedAreaRenderer this;
+        org.jfree.data.category.CategoryDataset dataset;
+    
+    
+        this := @this: org.jfree.chart.renderer.category.StackedAreaRenderer;
+        dataset := @parameter0: org.jfree.data.category.CategoryDataset;
+        series := @parameter1: int;
+        index := @parameter2: int;
+        result = newarray (double)[2];
+        i = 0;
+    
+      label1:
+        if i >= series goto label5;
+        $stack9 = virtualinvoke this.<org.jfree.chart.renderer.category.StackedAreaRenderer: boolean isSeriesVisible(int)>(i);
+    
+        if $stack9 == 0 goto label4;
+        v = 0.0;
+        n = interfaceinvoke dataset.<org.jfree.data.category.CategoryDataset: java.lang.Number getValue(int,int)>(i, index);
+    
+        if n == null goto label2;
+        v = virtualinvoke n.<java.lang.Number: double doubleValue()>();
+    
+      label2:
+        $stack10 = staticinvoke <java.lang.Double: boolean isNaN(double)>(v);
+    
+        if $stack10 != 0 goto label4;
+        $stack11 = v cmpl 0.0;
+    
+        if $stack11 < 0 goto label3;
+        $stack14 = result[1];
+        $stack15 = $stack14 + v;
+        result[1] = $stack15;
+    
+        goto label4;
+    
+      label3:
+        $stack12 = result[0];
+        $stack13 = $stack12 + v;
+        result[0] = $stack13;
+    
+      label4:
+        i = i + 1;
+    
+        goto label1;
+    
+      label5:
+        return result;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.category.StackedAreaRenderer: double getPreviousHeight(org.jfree.data.category.CategoryDataset,int,int)> ----
+    {
+        boolean $stack12, $stack13;
+        double result, total, v;
+        int category, i, series;
+        java.lang.Number n;
+        org.jfree.chart.renderer.category.StackedAreaRenderer this;
+        org.jfree.data.category.CategoryDataset dataset;
+    
+    
+        this := @this: org.jfree.chart.renderer.category.StackedAreaRenderer;
+        dataset := @parameter0: org.jfree.data.category.CategoryDataset;
+        series := @parameter1: int;
+        category := @parameter2: int;
+        result = 0.0;
+        total = 0.0;
+        $stack12 = this.<org.jfree.chart.renderer.category.StackedAreaRenderer: boolean renderAsPercentages>;
+    
+        if $stack12 == 0 goto label1;
+        total = staticinvoke <org.jfree.data.DataUtilities: double calculateColumnTotal(org.jfree.data.Values2D,int)>(dataset, category);
+    
+      label1:
+        i = 0;
+    
+      label2:
+        if i >= series goto label5;
+        n = interfaceinvoke dataset.<org.jfree.data.category.CategoryDataset: java.lang.Number getValue(int,int)>(i, category);
+    
+        if n == null goto label4;
+        v = virtualinvoke n.<java.lang.Number: double doubleValue()>();
+        $stack13 = this.<org.jfree.chart.renderer.category.StackedAreaRenderer: boolean renderAsPercentages>;
+    
+        if $stack13 == 0 goto label3;
+        v = v / total;
+    
+      label3:
+        result = result + v;
+    
+      label4:
+        i = i + 1;
+    
+        goto label2;
+    
+      label5:
+        return result;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.category.StackedAreaRenderer: boolean equals(java.lang.Object)> ----
+    {
+        boolean $stack3, $stack4, $stack5, $stack6;
+        java.lang.Object obj;
+        org.jfree.chart.renderer.category.StackedAreaRenderer that, this;
+    
+    
+        this := @this: org.jfree.chart.renderer.category.StackedAreaRenderer;
+        obj := @parameter0: java.lang.Object;
+    
+        if obj != this goto label1;
+    
+        return 1;
+    
+      label1:
+        $stack3 = obj instanceof org.jfree.chart.renderer.category.StackedAreaRenderer;
+    
+        if $stack3 != 0 goto label2;
+    
+        return 0;
+    
+      label2:
+        that = (org.jfree.chart.renderer.category.StackedAreaRenderer) obj;
+        $stack5 = this.<org.jfree.chart.renderer.category.StackedAreaRenderer: boolean renderAsPercentages>;
+        $stack4 = that.<org.jfree.chart.renderer.category.StackedAreaRenderer: boolean renderAsPercentages>;
+    
+        if $stack5 == $stack4 goto label3;
+    
+        return 0;
+    
+      label3:
+        $stack6 = specialinvoke this.<org.jfree.chart.renderer.category.AreaRenderer: boolean equals(java.lang.Object)>(obj);
+    
+        return $stack6;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.category.StackedAreaRenderer: void <init>()> ----
+    {
+        org.jfree.chart.renderer.category.StackedAreaRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.category.StackedAreaRenderer;
+        specialinvoke this.<org.jfree.chart.renderer.category.StackedAreaRenderer: void <init>(boolean)>(0);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.category.StackedAreaRenderer: void drawItem(java.awt.Graphics2D,org.jfree.chart.renderer.category.CategoryItemRendererState,java.awt.geom.Rectangle2D,org.jfree.chart.plot.CategoryPlot,org.jfree.chart.axis.CategoryAxis,org.jfree.chart.axis.ValueAxis,org.jfree.data.category.CategoryDataset,int,int,int)> ----
+    {
+        byte $stack110, $stack116, $stack66, $stack74, $stack85;
+        double $stack103, $stack104, $stack105, $stack106, $stack107, $stack108, $stack109, $stack114, $stack115, $stack120, $stack121, $stack122, $stack123, $stack128, $stack129, $stack130, $stack131, $stack67, $stack68, $stack69, $stack70, $stack71, $stack72, $stack73, $stack75, $stack76, $stack77, $stack78, $stack83, $stack84, $stack86, $stack87, $stack88, $stack89, xx0, xx1, xxLeft, xxRight, y0, y1, y2, yleft#0, yleft#2, yright#0, yright#1;
+        double[] adjStackLeft, adjStackRight, stack0, stack1, stack2, stackLeft, stackRight;
+        float $stack100, $stack101, $stack102, $stack111, $stack112, $stack113, $stack117, $stack118, $stack119, $stack124, $stack125, $stack126, $stack127, $stack132, $stack133, $stack134, $stack135, $stack79, $stack80, $stack81, $stack82, $stack90, $stack91, $stack92, $stack93, $stack97, $stack98, $stack99, transStack1#0, transStack1#1, transStackLeft#0, transStackLeft#1, transY1#0, transY1#1, transYLeft#0, transYLeft#1, transYRight#0, transYRight#1, yleft#1, yleft#3;
+        int $stack49, $stack50, $stack51, $stack52, $stack53, $stack55, $stack56, $stack57, $stack58, $stack59, $stack60, $stack61, $stack63, column, itemCount, pass, row;
+        java.awt.Graphics2D g2;
+        java.awt.Paint $stack94, transStack1#2;
+        java.awt.Shape #l0, #l10, #l28, #l30, #l43;
+        java.awt.Stroke $stack95;
+        java.awt.geom.GeneralPath #l1, #l11, #l12, #l13, #l14, #l15, #l16, #l17, #l18, #l19, #l2, #l20, #l21, #l22, #l23, #l24, #l25, #l26, #l27, #l29, #l3, #l31, #l32, #l33, #l34, #l35, #l36, #l37, #l38, #l39, #l4, #l40, #l41, #l42, #l44, #l5, #l6, #l7, #l8, #l9, entityArea#1, left, right, transStackLeft#2;
+        java.awt.geom.Rectangle2D dataArea;
+        java.lang.Number n#0, n#1, n#2;
+        java.lang.Object $stack64, $stack65, $stack96, entityArea#0;
+        org.jfree.chart.axis.CategoryAxis domainAxis;
+        org.jfree.chart.axis.ValueAxis rangeAxis;
+        org.jfree.chart.entity.EntityCollection entities;
+        org.jfree.chart.plot.CategoryPlot plot;
+        org.jfree.chart.renderer.category.CategoryItemRendererState state;
+        org.jfree.chart.renderer.category.StackedAreaRenderer this;
+        org.jfree.chart.util.RectangleEdge $stack48, $stack54, $stack62, edge1;
+        org.jfree.data.category.CategoryDataset dataset;
+    
+    
+        this := @this: org.jfree.chart.renderer.category.StackedAreaRenderer;
+        g2 := @parameter0: java.awt.Graphics2D;
+        state := @parameter1: org.jfree.chart.renderer.category.CategoryItemRendererState;
+        dataArea := @parameter2: java.awt.geom.Rectangle2D;
+        plot := @parameter3: org.jfree.chart.plot.CategoryPlot;
+        domainAxis := @parameter4: org.jfree.chart.axis.CategoryAxis;
+        rangeAxis := @parameter5: org.jfree.chart.axis.ValueAxis;
+        dataset := @parameter6: org.jfree.data.category.CategoryDataset;
+        row := @parameter7: int;
+        column := @parameter8: int;
+        pass := @parameter9: int;
+        entityArea#0 = null;
+        entities = virtualinvoke state.<org.jfree.chart.renderer.category.CategoryItemRendererState: org.jfree.chart.entity.EntityCollection getEntityCollection()>();
+        y1 = 0.0;
+        n#0 = interfaceinvoke dataset.<org.jfree.data.category.CategoryDataset: java.lang.Number getValue(int,int)>(row, column);
+    
+        if n#0 == null goto label01;
+        y1 = virtualinvoke n#0.<java.lang.Number: double doubleValue()>();
+    
+      label01:
+        stack1 = virtualinvoke this.<org.jfree.chart.renderer.category.StackedAreaRenderer: double[] getStackValues(org.jfree.data.category.CategoryDataset,int,int)>(dataset, row, column);
+        $stack49 = virtualinvoke this.<org.jfree.chart.renderer.category.StackedAreaRenderer: int getColumnCount()>();
+        $stack48 = virtualinvoke plot.<org.jfree.chart.plot.CategoryPlot: org.jfree.chart.util.RectangleEdge getDomainAxisEdge()>();
+        xx1 = virtualinvoke domainAxis.<org.jfree.chart.axis.CategoryAxis: double getCategoryMiddle(int,int,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)>(column, $stack49, dataArea, $stack48);
+        y0 = 0.0;
+        $stack50 = column - 1;
+        $stack51 = staticinvoke <java.lang.Math: int max(int,int)>($stack50, 0);
+        n#1 = interfaceinvoke dataset.<org.jfree.data.category.CategoryDataset: java.lang.Number getValue(int,int)>(row, $stack51);
+    
+        if n#1 == null goto label02;
+        y0 = virtualinvoke n#1.<java.lang.Number: double doubleValue()>();
+    
+      label02:
+        $stack52 = column - 1;
+        $stack53 = staticinvoke <java.lang.Math: int max(int,int)>($stack52, 0);
+        stack0 = virtualinvoke this.<org.jfree.chart.renderer.category.StackedAreaRenderer: double[] getStackValues(org.jfree.data.category.CategoryDataset,int,int)>(dataset, row, $stack53);
+        $stack55 = virtualinvoke this.<org.jfree.chart.renderer.category.StackedAreaRenderer: int getColumnCount()>();
+        $stack54 = virtualinvoke plot.<org.jfree.chart.plot.CategoryPlot: org.jfree.chart.util.RectangleEdge getDomainAxisEdge()>();
+        xx0 = virtualinvoke domainAxis.<org.jfree.chart.axis.CategoryAxis: double getCategoryStart(int,int,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)>(column, $stack55, dataArea, $stack54);
+        itemCount = interfaceinvoke dataset.<org.jfree.data.category.CategoryDataset: int getColumnCount()>();
+        y2 = 0.0;
+        $stack57 = column + 1;
+        $stack56 = itemCount - 1;
+        $stack58 = staticinvoke <java.lang.Math: int min(int,int)>($stack57, $stack56);
+        n#2 = interfaceinvoke dataset.<org.jfree.data.category.CategoryDataset: java.lang.Number getValue(int,int)>(row, $stack58);
+    
+        if n#2 == null goto label03;
+        y2 = virtualinvoke n#2.<java.lang.Number: double doubleValue()>();
+    
+      label03:
+        $stack60 = column + 1;
+        $stack59 = itemCount - 1;
+        $stack61 = staticinvoke <java.lang.Math: int min(int,int)>($stack60, $stack59);
+        stack2 = virtualinvoke this.<org.jfree.chart.renderer.category.StackedAreaRenderer: double[] getStackValues(org.jfree.data.category.CategoryDataset,int,int)>(dataset, row, $stack61);
+        $stack63 = virtualinvoke this.<org.jfree.chart.renderer.category.StackedAreaRenderer: int getColumnCount()>();
+        $stack62 = virtualinvoke plot.<org.jfree.chart.plot.CategoryPlot: org.jfree.chart.util.RectangleEdge getDomainAxisEdge()>();
+        xxLeft = xx0;
+        xxRight = virtualinvoke domainAxis.<org.jfree.chart.axis.CategoryAxis: double getCategoryEnd(int,int,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)>(column, $stack63, dataArea, $stack62);
+        stackLeft = specialinvoke this.<org.jfree.chart.renderer.category.StackedAreaRenderer: double[] averageStackValues(double[],double[])>(stack0, stack1);
+        stackRight = specialinvoke this.<org.jfree.chart.renderer.category.StackedAreaRenderer: double[] averageStackValues(double[],double[])>(stack1, stack2);
+        adjStackLeft = specialinvoke this.<org.jfree.chart.renderer.category.StackedAreaRenderer: double[] adjustedStackValues(double[],double[])>(stack0, stack1);
+        adjStackRight = specialinvoke this.<org.jfree.chart.renderer.category.StackedAreaRenderer: double[] adjustedStackValues(double[],double[])>(stack1, stack2);
+        edge1 = virtualinvoke plot.<org.jfree.chart.plot.CategoryPlot: org.jfree.chart.util.RectangleEdge getRangeAxisEdge()>();
+        $stack64 = new java.awt.geom.GeneralPath;
+        #l14 = (java.awt.geom.GeneralPath) $stack64;
+        specialinvoke #l14.<java.awt.geom.GeneralPath: void <init>()>();
+        left = (java.awt.geom.GeneralPath) $stack64;
+        $stack65 = new java.awt.geom.GeneralPath;
+        #l22 = (java.awt.geom.GeneralPath) $stack65;
+        specialinvoke #l22.<java.awt.geom.GeneralPath: void <init>()>();
+        right = (java.awt.geom.GeneralPath) $stack65;
+        $stack66 = y1 cmpl 0.0;
+    
+        if $stack66 < 0 goto label08;
+        $stack103 = stack1[1];
+        $stack104 = y1 + $stack103;
+        $stack105 = virtualinvoke rangeAxis.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)>($stack104, dataArea, edge1);
+        transY1#0 = (float) $stack105;
+        $stack106 = stack1[1];
+        $stack107 = virtualinvoke rangeAxis.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)>($stack106, dataArea, edge1);
+        transStack1#0 = (float) $stack107;
+        $stack108 = adjStackLeft[1];
+        $stack109 = virtualinvoke rangeAxis.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)>($stack108, dataArea, edge1);
+        transStackLeft#0 = (float) $stack109;
+        $stack110 = y0 cmpl 0.0;
+    
+        if $stack110 < 0 goto label04;
+        $stack128 = y0 + y1;
+        $stack129 = $stack128 / 2.0;
+        $stack130 = stackLeft[1];
+        yleft#0 = $stack129 + $stack130;
+        $stack131 = virtualinvoke rangeAxis.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)>(yleft#0, dataArea, edge1);
+        transYLeft#0 = (float) $stack131;
+        $stack132 = (float) xx1;
+        #l13 = (java.awt.geom.GeneralPath) $stack64;
+        virtualinvoke #l13.<java.awt.geom.GeneralPath: void moveTo(float,float)>($stack132, transY1#0);
+        $stack133 = (float) xx1;
+        #l4 = (java.awt.geom.GeneralPath) $stack64;
+        virtualinvoke #l4.<java.awt.geom.GeneralPath: void lineTo(float,float)>($stack133, transStack1#0);
+        $stack134 = (float) xx0;
+        #l19 = (java.awt.geom.GeneralPath) $stack64;
+        virtualinvoke #l19.<java.awt.geom.GeneralPath: void lineTo(float,float)>($stack134, transStackLeft#0);
+        $stack135 = (float) xx0;
+        #l37 = (java.awt.geom.GeneralPath) $stack64;
+        virtualinvoke #l37.<java.awt.geom.GeneralPath: void lineTo(float,float)>($stack135, transYLeft#0);
+        #l32 = (java.awt.geom.GeneralPath) $stack64;
+        virtualinvoke #l32.<java.awt.geom.GeneralPath: void closePath()>();
+    
+        goto label05;
+    
+      label04:
+        $stack111 = (float) xx1;
+        #l23 = (java.awt.geom.GeneralPath) $stack64;
+        virtualinvoke #l23.<java.awt.geom.GeneralPath: void moveTo(float,float)>($stack111, transStack1#0);
+        $stack112 = (float) xx1;
+        #l33 = (java.awt.geom.GeneralPath) $stack64;
+        virtualinvoke #l33.<java.awt.geom.GeneralPath: void lineTo(float,float)>($stack112, transY1#0);
+        $stack113 = (float) xx0;
+        #l15 = (java.awt.geom.GeneralPath) $stack64;
+        virtualinvoke #l15.<java.awt.geom.GeneralPath: void lineTo(float,float)>($stack113, transStackLeft#0);
+        #l25 = (java.awt.geom.GeneralPath) $stack64;
+        virtualinvoke #l25.<java.awt.geom.GeneralPath: void closePath()>();
+    
+      label05:
+        $stack114 = adjStackRight[1];
+        $stack115 = virtualinvoke rangeAxis.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)>($stack114, dataArea, edge1);
+        yleft#1 = (float) $stack115;
+        $stack116 = y2 cmpl 0.0;
+    
+        if $stack116 < 0 goto label06;
+        $stack120 = y1 + y2;
+        $stack121 = $stack120 / 2.0;
+        $stack122 = stackRight[1];
+        yright#0 = $stack121 + $stack122;
+        $stack123 = virtualinvoke rangeAxis.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)>(yright#0, dataArea, edge1);
+        transYRight#0 = (float) $stack123;
+        $stack124 = (float) xx1;
+        #l7 = (java.awt.geom.GeneralPath) $stack65;
+        virtualinvoke #l7.<java.awt.geom.GeneralPath: void moveTo(float,float)>($stack124, transStack1#0);
+        $stack125 = (float) xx1;
+        #l44 = (java.awt.geom.GeneralPath) $stack65;
+        virtualinvoke #l44.<java.awt.geom.GeneralPath: void lineTo(float,float)>($stack125, transY1#0);
+        $stack126 = (float) xxRight;
+        #l21 = (java.awt.geom.GeneralPath) $stack65;
+        virtualinvoke #l21.<java.awt.geom.GeneralPath: void lineTo(float,float)>($stack126, transYRight#0);
+        $stack127 = (float) xxRight;
+        #l2 = (java.awt.geom.GeneralPath) $stack65;
+        virtualinvoke #l2.<java.awt.geom.GeneralPath: void lineTo(float,float)>($stack127, yleft#1);
+        #l20 = (java.awt.geom.GeneralPath) $stack65;
+        virtualinvoke #l20.<java.awt.geom.GeneralPath: void closePath()>();
+    
+        goto label07;
+    
+      label06:
+        $stack117 = (float) xx1;
+        #l6 = (java.awt.geom.GeneralPath) $stack65;
+        virtualinvoke #l6.<java.awt.geom.GeneralPath: void moveTo(float,float)>($stack117, transStack1#0);
+        $stack118 = (float) xx1;
+        #l41 = (java.awt.geom.GeneralPath) $stack65;
+        virtualinvoke #l41.<java.awt.geom.GeneralPath: void lineTo(float,float)>($stack118, transY1#0);
+        $stack119 = (float) xxRight;
+        #l35 = (java.awt.geom.GeneralPath) $stack65;
+        virtualinvoke #l35.<java.awt.geom.GeneralPath: void lineTo(float,float)>($stack119, yleft#1);
+        #l18 = (java.awt.geom.GeneralPath) $stack65;
+        virtualinvoke #l18.<java.awt.geom.GeneralPath: void closePath()>();
+    
+      label07:
+        goto label12;
+    
+      label08:
+        $stack67 = stack1[0];
+        $stack68 = y1 + $stack67;
+        $stack69 = virtualinvoke rangeAxis.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)>($stack68, dataArea, edge1);
+        transY1#1 = (float) $stack69;
+        $stack70 = stack1[0];
+        $stack71 = virtualinvoke rangeAxis.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)>($stack70, dataArea, edge1);
+        transStack1#1 = (float) $stack71;
+        $stack72 = adjStackLeft[0];
+        $stack73 = virtualinvoke rangeAxis.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)>($stack72, dataArea, edge1);
+        transStackLeft#1 = (float) $stack73;
+        $stack74 = y0 cmpl 0.0;
+    
+        if $stack74 < 0 goto label09;
+        $stack100 = (float) xx1;
+        #l1 = (java.awt.geom.GeneralPath) $stack64;
+        virtualinvoke #l1.<java.awt.geom.GeneralPath: void moveTo(float,float)>($stack100, transStack1#1);
+        $stack101 = (float) xx1;
+        #l26 = (java.awt.geom.GeneralPath) $stack64;
+        virtualinvoke #l26.<java.awt.geom.GeneralPath: void lineTo(float,float)>($stack101, transY1#1);
+        $stack102 = (float) xx0;
+        #l38 = (java.awt.geom.GeneralPath) $stack64;
+        virtualinvoke #l38.<java.awt.geom.GeneralPath: void lineTo(float,float)>($stack102, transStackLeft#1);
+        #l29 = (java.awt.geom.GeneralPath) $stack64;
+        virtualinvoke #l29.<java.awt.geom.GeneralPath: java.lang.Object clone()>();
+    
+        goto label10;
+    
+      label09:
+        $stack75 = y0 + y1;
+        $stack76 = $stack75 / 2.0;
+        $stack77 = stackLeft[0];
+        yleft#2 = $stack76 + $stack77;
+        $stack78 = virtualinvoke rangeAxis.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)>(yleft#2, dataArea, edge1);
+        transYLeft#1 = (float) $stack78;
+        $stack79 = (float) xx1;
+        #l40 = (java.awt.geom.GeneralPath) $stack64;
+        virtualinvoke #l40.<java.awt.geom.GeneralPath: void moveTo(float,float)>($stack79, transY1#1);
+        $stack80 = (float) xx1;
+        #l8 = (java.awt.geom.GeneralPath) $stack64;
+        virtualinvoke #l8.<java.awt.geom.GeneralPath: void lineTo(float,float)>($stack80, transStack1#1);
+        $stack81 = (float) xx0;
+        #l24 = (java.awt.geom.GeneralPath) $stack64;
+        virtualinvoke #l24.<java.awt.geom.GeneralPath: void lineTo(float,float)>($stack81, transStackLeft#1);
+        $stack82 = (float) xx0;
+        #l27 = (java.awt.geom.GeneralPath) $stack64;
+        virtualinvoke #l27.<java.awt.geom.GeneralPath: void lineTo(float,float)>($stack82, transYLeft#1);
+        #l11 = (java.awt.geom.GeneralPath) $stack64;
+        virtualinvoke #l11.<java.awt.geom.GeneralPath: void closePath()>();
+    
+      label10:
+        $stack83 = adjStackRight[0];
+        $stack84 = virtualinvoke rangeAxis.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)>($stack83, dataArea, edge1);
+        yleft#3 = (float) $stack84;
+        $stack85 = y2 cmpl 0.0;
+    
+        if $stack85 < 0 goto label11;
+        $stack97 = (float) xx1;
+        #l17 = (java.awt.geom.GeneralPath) $stack65;
+        virtualinvoke #l17.<java.awt.geom.GeneralPath: void moveTo(float,float)>($stack97, transStack1#1);
+        $stack98 = (float) xx1;
+        #l39 = (java.awt.geom.GeneralPath) $stack65;
+        virtualinvoke #l39.<java.awt.geom.GeneralPath: void lineTo(float,float)>($stack98, transY1#1);
+        $stack99 = (float) xxRight;
+        #l3 = (java.awt.geom.GeneralPath) $stack65;
+        virtualinvoke #l3.<java.awt.geom.GeneralPath: void lineTo(float,float)>($stack99, yleft#3);
+        #l36 = (java.awt.geom.GeneralPath) $stack65;
+        virtualinvoke #l36.<java.awt.geom.GeneralPath: void closePath()>();
+    
+        goto label12;
+    
+      label11:
+        $stack86 = y1 + y2;
+        $stack87 = $stack86 / 2.0;
+        $stack88 = stackRight[0];
+        yright#1 = $stack87 + $stack88;
+        $stack89 = virtualinvoke rangeAxis.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)>(yright#1, dataArea, edge1);
+        transYRight#1 = (float) $stack89;
+        $stack90 = (float) xx1;
+        #l34 = (java.awt.geom.GeneralPath) $stack65;
+        virtualinvoke #l34.<java.awt.geom.GeneralPath: void moveTo(float,float)>($stack90, transStack1#1);
+        $stack91 = (float) xx1;
+        #l16 = (java.awt.geom.GeneralPath) $stack65;
+        virtualinvoke #l16.<java.awt.geom.GeneralPath: void lineTo(float,float)>($stack91, transY1#1);
+        $stack92 = (float) xxRight;
+        #l5 = (java.awt.geom.GeneralPath) $stack65;
+        virtualinvoke #l5.<java.awt.geom.GeneralPath: void lineTo(float,float)>($stack92, transYRight#1);
+        $stack93 = (float) xxRight;
+        #l31 = (java.awt.geom.GeneralPath) $stack65;
+        virtualinvoke #l31.<java.awt.geom.GeneralPath: void lineTo(float,float)>($stack93, yleft#3);
+        #l12 = (java.awt.geom.GeneralPath) $stack65;
+        virtualinvoke #l12.<java.awt.geom.GeneralPath: void closePath()>();
+    
+      label12:
+        $stack94 = virtualinvoke this.<org.jfree.chart.renderer.category.StackedAreaRenderer: java.awt.Paint getItemPaint(int,int)>(row, column);
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>($stack94);
+        $stack95 = virtualinvoke this.<org.jfree.chart.renderer.category.StackedAreaRenderer: java.awt.Stroke getItemStroke(int,int)>(row, column);
+        virtualinvoke g2.<java.awt.Graphics2D: void setStroke(java.awt.Stroke)>($stack95);
+        transStack1#2 = virtualinvoke this.<org.jfree.chart.renderer.category.StackedAreaRenderer: java.awt.Paint getItemPaint(int,int)>(row, column);
+    
+        if pass != 0 goto label13;
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>(transStack1#2);
+        #l30 = (java.awt.Shape) $stack64;
+        virtualinvoke g2.<java.awt.Graphics2D: void fill(java.awt.Shape)>(#l30);
+        #l28 = (java.awt.Shape) $stack65;
+        virtualinvoke g2.<java.awt.Graphics2D: void fill(java.awt.Shape)>(#l28);
+    
+      label13:
+        if entities == null goto label14;
+        $stack96 = new java.awt.geom.GeneralPath;
+        #l42 = (java.awt.geom.GeneralPath) $stack96;
+        #l43 = (java.awt.Shape) $stack64;
+        specialinvoke #l42.<java.awt.geom.GeneralPath: void <init>(java.awt.Shape)>(#l43);
+        transStackLeft#2 = (java.awt.geom.GeneralPath) $stack96;
+        #l9 = (java.awt.geom.GeneralPath) $stack96;
+        #l10 = (java.awt.Shape) $stack65;
+        virtualinvoke #l9.<java.awt.geom.GeneralPath: void append(java.awt.Shape,boolean)>(#l10, 0);
+        entityArea#1 = (java.awt.geom.GeneralPath) $stack96;
+        #l0 = (java.awt.Shape) $stack96;
+        virtualinvoke this.<org.jfree.chart.renderer.category.StackedAreaRenderer: void addItemEntity(org.jfree.chart.entity.EntityCollection,org.jfree.data.category.CategoryDataset,int,int,java.awt.Shape)>(entities, dataset, row, column, #l0);
+    
+      label14:
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.category.StackedAreaRenderer: boolean getRenderAsPercentages()> ----
+    {
+        boolean $stack1;
+        org.jfree.chart.renderer.category.StackedAreaRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.category.StackedAreaRenderer;
+        $stack1 = this.<org.jfree.chart.renderer.category.StackedAreaRenderer: boolean renderAsPercentages>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.category.StackedAreaRenderer: org.jfree.data.Range findRangeBounds(org.jfree.data.category.CategoryDataset)> ----
+    {
+        boolean $stack2;
+        org.jfree.chart.renderer.category.StackedAreaRenderer this;
+        org.jfree.data.Range $stack3, $stack4;
+        org.jfree.data.category.CategoryDataset dataset;
+    
+    
+        this := @this: org.jfree.chart.renderer.category.StackedAreaRenderer;
+        dataset := @parameter0: org.jfree.data.category.CategoryDataset;
+        $stack2 = this.<org.jfree.chart.renderer.category.StackedAreaRenderer: boolean renderAsPercentages>;
+    
+        if $stack2 == 0 goto label1;
+        $stack4 = new org.jfree.data.Range;
+        specialinvoke $stack4.<org.jfree.data.Range: void <init>(double,double)>(0.0, 1.0);
+    
+        return $stack4;
+    
+      label1:
+        $stack3 = staticinvoke <org.jfree.data.general.DatasetUtilities: org.jfree.data.Range findStackedRangeBounds(org.jfree.data.category.CategoryDataset)>(dataset);
+    
+        return $stack3;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.category.StackedAreaRenderer: double[] adjustedStackValues(double[],double[])> ----
+    {
+        byte $stack15, $stack5, $stack7, $stack9;
+        double $stack10, $stack11, $stack12, $stack13, $stack14, $stack16, $stack17, $stack18, $stack19, $stack4, $stack6, $stack8;
+        double[] result, stack1, stack2;
+        org.jfree.chart.renderer.category.StackedAreaRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.category.StackedAreaRenderer;
+        stack1 := @parameter0: double[];
+        stack2 := @parameter1: double[];
+        result = newarray (double)[2];
+        $stack4 = stack1[0];
+        $stack5 = $stack4 cmpl 0.0;
+    
+        if $stack5 == 0 goto label1;
+        $stack14 = stack2[0];
+        $stack15 = $stack14 cmpl 0.0;
+    
+        if $stack15 != 0 goto label2;
+    
+      label1:
+        result[0] = 0.0;
+    
+        goto label3;
+    
+      label2:
+        $stack16 = stack1[0];
+        $stack17 = stack2[0];
+        $stack18 = $stack16 + $stack17;
+        $stack19 = $stack18 / 2.0;
+        result[0] = $stack19;
+    
+      label3:
+        $stack6 = stack1[1];
+        $stack7 = $stack6 cmpl 0.0;
+    
+        if $stack7 == 0 goto label4;
+        $stack8 = stack2[1];
+        $stack9 = $stack8 cmpl 0.0;
+    
+        if $stack9 != 0 goto label5;
+    
+      label4:
+        result[1] = 0.0;
+    
+        goto label6;
+    
+      label5:
+        $stack10 = stack1[1];
+        $stack11 = stack2[1];
+        $stack12 = $stack10 + $stack11;
+        $stack13 = $stack12 / 2.0;
+        result[1] = $stack13;
+    
+      label6:
+        return result;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.category.StackedAreaRenderer: void <init>(boolean)> ----
+    {
+        boolean renderAsPercentages;
+        org.jfree.chart.renderer.category.StackedAreaRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.category.StackedAreaRenderer;
+        renderAsPercentages := @parameter0: boolean;
+        specialinvoke this.<org.jfree.chart.renderer.category.AreaRenderer: void <init>()>();
+        this.<org.jfree.chart.renderer.category.StackedAreaRenderer: boolean renderAsPercentages> = renderAsPercentages;
+    
+        return;
+    }
+
+}

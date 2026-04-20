@@ -1,0 +1,663 @@
+// ========================================================================
+// CLASS : org.jfree.chart.axis.SegmentedTimeline$Segment
+// ========================================================================
+
+[PUBLIC, SUPER] class org.jfree.chart.axis.SegmentedTimeline$Segment extends java.lang.Object implements java.lang.Comparable, java.lang.Cloneable, java.io.Serializable {
+
+    // ---- method: <org.jfree.chart.axis.SegmentedTimeline$Segment: long getSegmentNumber()> ----
+    {
+        long $stack1;
+        org.jfree.chart.axis.SegmentedTimeline$Segment this;
+    
+    
+        this := @this: org.jfree.chart.axis.SegmentedTimeline$Segment;
+        $stack1 = this.<org.jfree.chart.axis.SegmentedTimeline$Segment: long segmentNumber>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.axis.SegmentedTimeline$Segment: void dec(long)> ----
+    {
+        long $stack10, $stack11, $stack12, $stack13, $stack14, $stack5, $stack6, $stack8, $stack9, m, n;
+        org.jfree.chart.axis.SegmentedTimeline $stack7;
+        org.jfree.chart.axis.SegmentedTimeline$Segment this;
+    
+    
+        this := @this: org.jfree.chart.axis.SegmentedTimeline$Segment;
+        n := @parameter0: long;
+        $stack5 = this.<org.jfree.chart.axis.SegmentedTimeline$Segment: long segmentNumber>;
+        $stack6 = $stack5 - n;
+        this.<org.jfree.chart.axis.SegmentedTimeline$Segment: long segmentNumber> = $stack6;
+        $stack7 = this.<org.jfree.chart.axis.SegmentedTimeline$Segment: org.jfree.chart.axis.SegmentedTimeline this$0>;
+        $stack8 = staticinvoke <org.jfree.chart.axis.SegmentedTimeline: long access$100(org.jfree.chart.axis.SegmentedTimeline)>($stack7);
+        m = n * $stack8;
+        $stack9 = this.<org.jfree.chart.axis.SegmentedTimeline$Segment: long segmentStart>;
+        $stack10 = $stack9 - m;
+        this.<org.jfree.chart.axis.SegmentedTimeline$Segment: long segmentStart> = $stack10;
+        $stack11 = this.<org.jfree.chart.axis.SegmentedTimeline$Segment: long segmentEnd>;
+        $stack12 = $stack11 - m;
+        this.<org.jfree.chart.axis.SegmentedTimeline$Segment: long segmentEnd> = $stack12;
+        $stack13 = this.<org.jfree.chart.axis.SegmentedTimeline$Segment: long millisecond>;
+        $stack14 = $stack13 - m;
+        this.<org.jfree.chart.axis.SegmentedTimeline$Segment: long millisecond> = $stack14;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.axis.SegmentedTimeline$Segment: boolean inExcludeSegments()> ----
+    {
+        boolean $stack6;
+        byte $stack5;
+        int $stack2;
+        long $stack3, $stack4;
+        org.jfree.chart.axis.SegmentedTimeline $stack1;
+        org.jfree.chart.axis.SegmentedTimeline$Segment this;
+    
+    
+        this := @this: org.jfree.chart.axis.SegmentedTimeline$Segment;
+        $stack3 = specialinvoke this.<org.jfree.chart.axis.SegmentedTimeline$Segment: long getSegmentNumberRelativeToGroup()>();
+        $stack1 = this.<org.jfree.chart.axis.SegmentedTimeline$Segment: org.jfree.chart.axis.SegmentedTimeline this$0>;
+        $stack2 = staticinvoke <org.jfree.chart.axis.SegmentedTimeline: int access$200(org.jfree.chart.axis.SegmentedTimeline)>($stack1);
+        $stack4 = (long) $stack2;
+        $stack5 = $stack3 cmp $stack4;
+    
+        if $stack5 < 0 goto label1;
+        $stack6 = 1;
+    
+        goto label2;
+    
+      label1:
+        $stack6 = 0;
+    
+      label2:
+        return $stack6;
+    }
+
+    // ---- method: <org.jfree.chart.axis.SegmentedTimeline$Segment: boolean contains(org.jfree.chart.axis.SegmentedTimeline$Segment)> ----
+    {
+        boolean $stack4;
+        long $stack2, $stack3;
+        org.jfree.chart.axis.SegmentedTimeline$Segment segment, this;
+    
+    
+        this := @this: org.jfree.chart.axis.SegmentedTimeline$Segment;
+        segment := @parameter0: org.jfree.chart.axis.SegmentedTimeline$Segment;
+        $stack3 = virtualinvoke segment.<org.jfree.chart.axis.SegmentedTimeline$Segment: long getSegmentStart()>();
+        $stack2 = virtualinvoke segment.<org.jfree.chart.axis.SegmentedTimeline$Segment: long getSegmentEnd()>();
+        $stack4 = virtualinvoke this.<org.jfree.chart.axis.SegmentedTimeline$Segment: boolean contains(long,long)>($stack3, $stack2);
+    
+        return $stack4;
+    }
+
+    // ---- method: <org.jfree.chart.axis.SegmentedTimeline$Segment: boolean after(org.jfree.chart.axis.SegmentedTimeline$Segment)> ----
+    {
+        boolean $stack5;
+        byte $stack4;
+        long $stack2, $stack3;
+        org.jfree.chart.axis.SegmentedTimeline$Segment other, this;
+    
+    
+        this := @this: org.jfree.chart.axis.SegmentedTimeline$Segment;
+        other := @parameter0: org.jfree.chart.axis.SegmentedTimeline$Segment;
+        $stack2 = this.<org.jfree.chart.axis.SegmentedTimeline$Segment: long segmentStart>;
+        $stack3 = virtualinvoke other.<org.jfree.chart.axis.SegmentedTimeline$Segment: long getSegmentEnd()>();
+        $stack4 = $stack2 cmp $stack3;
+    
+        if $stack4 <= 0 goto label1;
+        $stack5 = 1;
+    
+        goto label2;
+    
+      label1:
+        $stack5 = 0;
+    
+      label2:
+        return $stack5;
+    }
+
+    // ---- method: <org.jfree.chart.axis.SegmentedTimeline$Segment: long getMillisecond()> ----
+    {
+        long $stack1;
+        org.jfree.chart.axis.SegmentedTimeline$Segment this;
+    
+    
+        this := @this: org.jfree.chart.axis.SegmentedTimeline$Segment;
+        $stack1 = this.<org.jfree.chart.axis.SegmentedTimeline$Segment: long millisecond>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.axis.SegmentedTimeline$Segment: boolean contains(long)> ----
+    {
+        boolean $stack7;
+        byte $stack4, $stack6;
+        long $stack3, $stack5, millis;
+        org.jfree.chart.axis.SegmentedTimeline$Segment this;
+    
+    
+        this := @this: org.jfree.chart.axis.SegmentedTimeline$Segment;
+        millis := @parameter0: long;
+        $stack3 = this.<org.jfree.chart.axis.SegmentedTimeline$Segment: long segmentStart>;
+        $stack4 = $stack3 cmp millis;
+    
+        if $stack4 > 0 goto label1;
+        $stack5 = this.<org.jfree.chart.axis.SegmentedTimeline$Segment: long segmentEnd>;
+        $stack6 = millis cmp $stack5;
+    
+        if $stack6 > 0 goto label1;
+        $stack7 = 1;
+    
+        goto label2;
+    
+      label1:
+        $stack7 = 0;
+    
+      label2:
+        return $stack7;
+    }
+
+    // ---- method: <org.jfree.chart.axis.SegmentedTimeline$Segment: boolean contained(long,long)> ----
+    {
+        boolean $stack9;
+        byte $stack6, $stack8;
+        long $stack5, $stack7, from, to;
+        org.jfree.chart.axis.SegmentedTimeline$Segment this;
+    
+    
+        this := @this: org.jfree.chart.axis.SegmentedTimeline$Segment;
+        from := @parameter0: long;
+        to := @parameter1: long;
+        $stack5 = this.<org.jfree.chart.axis.SegmentedTimeline$Segment: long segmentStart>;
+        $stack6 = from cmp $stack5;
+    
+        if $stack6 > 0 goto label1;
+        $stack7 = this.<org.jfree.chart.axis.SegmentedTimeline$Segment: long segmentEnd>;
+        $stack8 = $stack7 cmp to;
+    
+        if $stack8 > 0 goto label1;
+        $stack9 = 1;
+    
+        goto label2;
+    
+      label1:
+        $stack9 = 0;
+    
+      label2:
+        return $stack9;
+    }
+
+    // ---- method: <org.jfree.chart.axis.SegmentedTimeline$Segment: boolean inIncludeSegments()> ----
+    {
+        boolean $stack6, $stack7;
+        byte $stack5;
+        int $stack2;
+        long $stack3, $stack4;
+        org.jfree.chart.axis.SegmentedTimeline $stack1;
+        org.jfree.chart.axis.SegmentedTimeline$Segment this;
+    
+    
+        this := @this: org.jfree.chart.axis.SegmentedTimeline$Segment;
+        $stack3 = specialinvoke this.<org.jfree.chart.axis.SegmentedTimeline$Segment: long getSegmentNumberRelativeToGroup()>();
+        $stack1 = this.<org.jfree.chart.axis.SegmentedTimeline$Segment: org.jfree.chart.axis.SegmentedTimeline this$0>;
+        $stack2 = staticinvoke <org.jfree.chart.axis.SegmentedTimeline: int access$200(org.jfree.chart.axis.SegmentedTimeline)>($stack1);
+        $stack4 = (long) $stack2;
+        $stack5 = $stack3 cmp $stack4;
+    
+        if $stack5 >= 0 goto label3;
+        $stack6 = virtualinvoke this.<org.jfree.chart.axis.SegmentedTimeline$Segment: boolean inExceptionSegments()>();
+    
+        if $stack6 != 0 goto label1;
+        $stack7 = 1;
+    
+        goto label2;
+    
+      label1:
+        $stack7 = 0;
+    
+      label2:
+        return $stack7;
+    
+      label3:
+        return 0;
+    }
+
+    // ---- method: <org.jfree.chart.axis.SegmentedTimeline$Segment: boolean inExceptionSegments()> ----
+    {
+        boolean $stack3;
+        int $stack2;
+        org.jfree.chart.axis.SegmentedTimeline $stack1;
+        org.jfree.chart.axis.SegmentedTimeline$Segment this;
+    
+    
+        this := @this: org.jfree.chart.axis.SegmentedTimeline$Segment;
+        $stack1 = this.<org.jfree.chart.axis.SegmentedTimeline$Segment: org.jfree.chart.axis.SegmentedTimeline this$0>;
+        $stack2 = staticinvoke <org.jfree.chart.axis.SegmentedTimeline: int access$400(org.jfree.chart.axis.SegmentedTimeline,org.jfree.chart.axis.SegmentedTimeline$Segment)>($stack1, this);
+    
+        if $stack2 < 0 goto label1;
+        $stack3 = 1;
+    
+        goto label2;
+    
+      label1:
+        $stack3 = 0;
+    
+      label2:
+        return $stack3;
+    }
+
+    // ---- method: <org.jfree.chart.axis.SegmentedTimeline$Segment: void moveIndexToEnd()> ----
+    {
+        long $stack1;
+        org.jfree.chart.axis.SegmentedTimeline$Segment this;
+    
+    
+        this := @this: org.jfree.chart.axis.SegmentedTimeline$Segment;
+        $stack1 = this.<org.jfree.chart.axis.SegmentedTimeline$Segment: long segmentEnd>;
+        this.<org.jfree.chart.axis.SegmentedTimeline$Segment: long millisecond> = $stack1;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.axis.SegmentedTimeline$Segment: int compareTo(java.lang.Object)> ----
+    {
+        boolean $stack3, $stack4;
+        java.lang.Object object;
+        org.jfree.chart.axis.SegmentedTimeline$Segment other, this;
+    
+    
+        this := @this: org.jfree.chart.axis.SegmentedTimeline$Segment;
+        object := @parameter0: java.lang.Object;
+        other = (org.jfree.chart.axis.SegmentedTimeline$Segment) object;
+        $stack3 = virtualinvoke this.<org.jfree.chart.axis.SegmentedTimeline$Segment: boolean before(org.jfree.chart.axis.SegmentedTimeline$Segment)>(other);
+    
+        if $stack3 == 0 goto label1;
+    
+        return -1;
+    
+      label1:
+        $stack4 = virtualinvoke this.<org.jfree.chart.axis.SegmentedTimeline$Segment: boolean after(org.jfree.chart.axis.SegmentedTimeline$Segment)>(other);
+    
+        if $stack4 == 0 goto label2;
+    
+        return 1;
+    
+      label2:
+        return 0;
+    }
+
+    // ---- method: <org.jfree.chart.axis.SegmentedTimeline$Segment: void dec()> ----
+    {
+        org.jfree.chart.axis.SegmentedTimeline$Segment this;
+    
+    
+        this := @this: org.jfree.chart.axis.SegmentedTimeline$Segment;
+        virtualinvoke this.<org.jfree.chart.axis.SegmentedTimeline$Segment: void dec(long)>(1L);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.axis.SegmentedTimeline$Segment: void <init>(org.jfree.chart.axis.SegmentedTimeline)> ----
+    {
+        org.jfree.chart.axis.SegmentedTimeline l1;
+        org.jfree.chart.axis.SegmentedTimeline$Segment this;
+    
+    
+        this := @this: org.jfree.chart.axis.SegmentedTimeline$Segment;
+        l1 := @parameter0: org.jfree.chart.axis.SegmentedTimeline;
+        this.<org.jfree.chart.axis.SegmentedTimeline$Segment: org.jfree.chart.axis.SegmentedTimeline this$0> = l1;
+        specialinvoke this.<java.lang.Object: void <init>()>();
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.axis.SegmentedTimeline$Segment: boolean contains(long,long)> ----
+    {
+        boolean $stack9;
+        byte $stack6, $stack8;
+        long $stack5, $stack7, from, to;
+        org.jfree.chart.axis.SegmentedTimeline$Segment this;
+    
+    
+        this := @this: org.jfree.chart.axis.SegmentedTimeline$Segment;
+        from := @parameter0: long;
+        to := @parameter1: long;
+        $stack5 = this.<org.jfree.chart.axis.SegmentedTimeline$Segment: long segmentStart>;
+        $stack6 = $stack5 cmp from;
+    
+        if $stack6 > 0 goto label1;
+        $stack7 = this.<org.jfree.chart.axis.SegmentedTimeline$Segment: long segmentEnd>;
+        $stack8 = to cmp $stack7;
+    
+        if $stack8 > 0 goto label1;
+        $stack9 = 1;
+    
+        goto label2;
+    
+      label1:
+        $stack9 = 0;
+    
+      label2:
+        return $stack9;
+    }
+
+    // ---- method: <org.jfree.chart.axis.SegmentedTimeline$Segment: void moveIndexToStart()> ----
+    {
+        long $stack1;
+        org.jfree.chart.axis.SegmentedTimeline$Segment this;
+    
+    
+        this := @this: org.jfree.chart.axis.SegmentedTimeline$Segment;
+        $stack1 = this.<org.jfree.chart.axis.SegmentedTimeline$Segment: long segmentStart>;
+        this.<org.jfree.chart.axis.SegmentedTimeline$Segment: long millisecond> = $stack1;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.axis.SegmentedTimeline$Segment: org.jfree.chart.axis.SegmentedTimeline$Segment intersect(long,long)> ----
+    {
+        byte $stack6, $stack8;
+        long $stack5, $stack7, from, to;
+        org.jfree.chart.axis.SegmentedTimeline$Segment this;
+    
+    
+        this := @this: org.jfree.chart.axis.SegmentedTimeline$Segment;
+        from := @parameter0: long;
+        to := @parameter1: long;
+        $stack5 = this.<org.jfree.chart.axis.SegmentedTimeline$Segment: long segmentStart>;
+        $stack6 = from cmp $stack5;
+    
+        if $stack6 > 0 goto label1;
+        $stack7 = this.<org.jfree.chart.axis.SegmentedTimeline$Segment: long segmentEnd>;
+        $stack8 = $stack7 cmp to;
+    
+        if $stack8 > 0 goto label1;
+    
+        return this;
+    
+      label1:
+        return null;
+    }
+
+    // ---- method: <org.jfree.chart.axis.SegmentedTimeline$Segment: long calculateSegmentNumber(long)> ----
+    {
+        byte $stack5;
+        long $stack10, $stack11, $stack12, $stack14, $stack16, $stack17, $stack18, $stack4, $stack7, $stack9, millis;
+        org.jfree.chart.axis.SegmentedTimeline $stack13, $stack15, $stack3, $stack6, $stack8;
+        org.jfree.chart.axis.SegmentedTimeline$Segment this;
+    
+    
+        this := @this: org.jfree.chart.axis.SegmentedTimeline$Segment;
+        millis := @parameter0: long;
+        $stack3 = this.<org.jfree.chart.axis.SegmentedTimeline$Segment: org.jfree.chart.axis.SegmentedTimeline this$0>;
+        $stack4 = staticinvoke <org.jfree.chart.axis.SegmentedTimeline: long access$000(org.jfree.chart.axis.SegmentedTimeline)>($stack3);
+        $stack5 = millis cmp $stack4;
+    
+        if $stack5 < 0 goto label1;
+        $stack13 = this.<org.jfree.chart.axis.SegmentedTimeline$Segment: org.jfree.chart.axis.SegmentedTimeline this$0>;
+        $stack14 = staticinvoke <org.jfree.chart.axis.SegmentedTimeline: long access$000(org.jfree.chart.axis.SegmentedTimeline)>($stack13);
+        $stack16 = millis - $stack14;
+        $stack15 = this.<org.jfree.chart.axis.SegmentedTimeline$Segment: org.jfree.chart.axis.SegmentedTimeline this$0>;
+        $stack17 = staticinvoke <org.jfree.chart.axis.SegmentedTimeline: long access$100(org.jfree.chart.axis.SegmentedTimeline)>($stack15);
+        $stack18 = $stack16 / $stack17;
+    
+        return $stack18;
+    
+      label1:
+        $stack6 = this.<org.jfree.chart.axis.SegmentedTimeline$Segment: org.jfree.chart.axis.SegmentedTimeline this$0>;
+        $stack7 = staticinvoke <org.jfree.chart.axis.SegmentedTimeline: long access$000(org.jfree.chart.axis.SegmentedTimeline)>($stack6);
+        $stack9 = millis - $stack7;
+        $stack8 = this.<org.jfree.chart.axis.SegmentedTimeline$Segment: org.jfree.chart.axis.SegmentedTimeline this$0>;
+        $stack10 = staticinvoke <org.jfree.chart.axis.SegmentedTimeline: long access$100(org.jfree.chart.axis.SegmentedTimeline)>($stack8);
+        $stack11 = $stack9 / $stack10;
+        $stack12 = $stack11 - 1L;
+    
+        return $stack12;
+    }
+
+    // ---- method: <org.jfree.chart.axis.SegmentedTimeline$Segment: java.util.Date getDate()> ----
+    {
+        java.util.Date $stack3;
+        long $stack1;
+        org.jfree.chart.axis.SegmentedTimeline $stack2;
+        org.jfree.chart.axis.SegmentedTimeline$Segment this;
+    
+    
+        this := @this: org.jfree.chart.axis.SegmentedTimeline$Segment;
+        $stack2 = this.<org.jfree.chart.axis.SegmentedTimeline$Segment: org.jfree.chart.axis.SegmentedTimeline this$0>;
+        $stack1 = this.<org.jfree.chart.axis.SegmentedTimeline$Segment: long millisecond>;
+        $stack3 = virtualinvoke $stack2.<org.jfree.chart.axis.SegmentedTimeline: java.util.Date getDate(long)>($stack1);
+    
+        return $stack3;
+    }
+
+    // ---- method: <org.jfree.chart.axis.SegmentedTimeline$Segment: boolean before(org.jfree.chart.axis.SegmentedTimeline$Segment)> ----
+    {
+        boolean $stack5;
+        byte $stack4;
+        long $stack2, $stack3;
+        org.jfree.chart.axis.SegmentedTimeline$Segment other, this;
+    
+    
+        this := @this: org.jfree.chart.axis.SegmentedTimeline$Segment;
+        other := @parameter0: org.jfree.chart.axis.SegmentedTimeline$Segment;
+        $stack2 = this.<org.jfree.chart.axis.SegmentedTimeline$Segment: long segmentEnd>;
+        $stack3 = virtualinvoke other.<org.jfree.chart.axis.SegmentedTimeline$Segment: long getSegmentStart()>();
+        $stack4 = $stack2 cmp $stack3;
+    
+        if $stack4 >= 0 goto label1;
+        $stack5 = 1;
+    
+        goto label2;
+    
+      label1:
+        $stack5 = 0;
+    
+      label2:
+        return $stack5;
+    }
+
+    // ---- method: <org.jfree.chart.axis.SegmentedTimeline$Segment: boolean equals(java.lang.Object)> ----
+    {
+        boolean $stack16, $stack3;
+        byte $stack12, $stack15, $stack6, $stack9;
+        java.lang.Object object;
+        long $stack10, $stack11, $stack13, $stack14, $stack4, $stack5, $stack7, $stack8;
+        org.jfree.chart.axis.SegmentedTimeline$Segment other, this;
+    
+    
+        this := @this: org.jfree.chart.axis.SegmentedTimeline$Segment;
+        object := @parameter0: java.lang.Object;
+        $stack3 = object instanceof org.jfree.chart.axis.SegmentedTimeline$Segment;
+    
+        if $stack3 == 0 goto label3;
+        other = (org.jfree.chart.axis.SegmentedTimeline$Segment) object;
+        $stack4 = this.<org.jfree.chart.axis.SegmentedTimeline$Segment: long segmentNumber>;
+        $stack5 = virtualinvoke other.<org.jfree.chart.axis.SegmentedTimeline$Segment: long getSegmentNumber()>();
+        $stack6 = $stack4 cmp $stack5;
+    
+        if $stack6 != 0 goto label1;
+        $stack7 = this.<org.jfree.chart.axis.SegmentedTimeline$Segment: long segmentStart>;
+        $stack8 = virtualinvoke other.<org.jfree.chart.axis.SegmentedTimeline$Segment: long getSegmentStart()>();
+        $stack9 = $stack7 cmp $stack8;
+    
+        if $stack9 != 0 goto label1;
+        $stack10 = this.<org.jfree.chart.axis.SegmentedTimeline$Segment: long segmentEnd>;
+        $stack11 = virtualinvoke other.<org.jfree.chart.axis.SegmentedTimeline$Segment: long getSegmentEnd()>();
+        $stack12 = $stack10 cmp $stack11;
+    
+        if $stack12 != 0 goto label1;
+        $stack13 = this.<org.jfree.chart.axis.SegmentedTimeline$Segment: long millisecond>;
+        $stack14 = virtualinvoke other.<org.jfree.chart.axis.SegmentedTimeline$Segment: long getMillisecond()>();
+        $stack15 = $stack13 cmp $stack14;
+    
+        if $stack15 != 0 goto label1;
+        $stack16 = 1;
+    
+        goto label2;
+    
+      label1:
+        $stack16 = 0;
+    
+      label2:
+        return $stack16;
+    
+      label3:
+        return 0;
+    }
+
+    // ---- method: <org.jfree.chart.axis.SegmentedTimeline$Segment: void <init>(org.jfree.chart.axis.SegmentedTimeline,long)> ----
+    {
+        long $stack10, $stack11, $stack12, $stack13, $stack4, $stack5, $stack6, $stack7, $stack8, $stack9, millisecond;
+        org.jfree.chart.axis.SegmentedTimeline l1;
+        org.jfree.chart.axis.SegmentedTimeline$Segment this;
+    
+    
+        this := @this: org.jfree.chart.axis.SegmentedTimeline$Segment;
+        l1 := @parameter0: org.jfree.chart.axis.SegmentedTimeline;
+        millisecond := @parameter1: long;
+        this.<org.jfree.chart.axis.SegmentedTimeline$Segment: org.jfree.chart.axis.SegmentedTimeline this$0> = l1;
+        specialinvoke this.<java.lang.Object: void <init>()>();
+        $stack4 = virtualinvoke this.<org.jfree.chart.axis.SegmentedTimeline$Segment: long calculateSegmentNumber(long)>(millisecond);
+        this.<org.jfree.chart.axis.SegmentedTimeline$Segment: long segmentNumber> = $stack4;
+        $stack7 = staticinvoke <org.jfree.chart.axis.SegmentedTimeline: long access$000(org.jfree.chart.axis.SegmentedTimeline)>(l1);
+        $stack5 = this.<org.jfree.chart.axis.SegmentedTimeline$Segment: long segmentNumber>;
+        $stack6 = staticinvoke <org.jfree.chart.axis.SegmentedTimeline: long access$100(org.jfree.chart.axis.SegmentedTimeline)>(l1);
+        $stack8 = $stack5 * $stack6;
+        $stack9 = $stack7 + $stack8;
+        this.<org.jfree.chart.axis.SegmentedTimeline$Segment: long segmentStart> = $stack9;
+        $stack10 = this.<org.jfree.chart.axis.SegmentedTimeline$Segment: long segmentStart>;
+        $stack11 = staticinvoke <org.jfree.chart.axis.SegmentedTimeline: long access$100(org.jfree.chart.axis.SegmentedTimeline)>(l1);
+        $stack12 = $stack10 + $stack11;
+        $stack13 = $stack12 - 1L;
+        this.<org.jfree.chart.axis.SegmentedTimeline$Segment: long segmentEnd> = $stack13;
+        this.<org.jfree.chart.axis.SegmentedTimeline$Segment: long millisecond> = millisecond;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.axis.SegmentedTimeline$Segment: long getSegmentEnd()> ----
+    {
+        long $stack1;
+        org.jfree.chart.axis.SegmentedTimeline$Segment this;
+    
+    
+        this := @this: org.jfree.chart.axis.SegmentedTimeline$Segment;
+        $stack1 = this.<org.jfree.chart.axis.SegmentedTimeline$Segment: long segmentEnd>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.axis.SegmentedTimeline$Segment: long getSegmentNumberRelativeToGroup()> ----
+    {
+        byte $stack7;
+        int $stack5, $stack9;
+        long $stack10, $stack4, $stack6, p;
+        org.jfree.chart.axis.SegmentedTimeline $stack3, $stack8;
+        org.jfree.chart.axis.SegmentedTimeline$Segment this;
+    
+    
+        this := @this: org.jfree.chart.axis.SegmentedTimeline$Segment;
+        $stack4 = this.<org.jfree.chart.axis.SegmentedTimeline$Segment: long segmentNumber>;
+        $stack3 = this.<org.jfree.chart.axis.SegmentedTimeline$Segment: org.jfree.chart.axis.SegmentedTimeline this$0>;
+        $stack5 = staticinvoke <org.jfree.chart.axis.SegmentedTimeline: int access$300(org.jfree.chart.axis.SegmentedTimeline)>($stack3);
+        $stack6 = (long) $stack5;
+        p = $stack4 % $stack6;
+        $stack7 = p cmp 0L;
+    
+        if $stack7 >= 0 goto label1;
+        $stack8 = this.<org.jfree.chart.axis.SegmentedTimeline$Segment: org.jfree.chart.axis.SegmentedTimeline this$0>;
+        $stack9 = staticinvoke <org.jfree.chart.axis.SegmentedTimeline: int access$300(org.jfree.chart.axis.SegmentedTimeline)>($stack8);
+        $stack10 = (long) $stack9;
+        p = p + $stack10;
+    
+      label1:
+        return p;
+    }
+
+    // ---- method: <org.jfree.chart.axis.SegmentedTimeline$Segment: void inc()> ----
+    {
+        org.jfree.chart.axis.SegmentedTimeline$Segment this;
+    
+    
+        this := @this: org.jfree.chart.axis.SegmentedTimeline$Segment;
+        virtualinvoke this.<org.jfree.chart.axis.SegmentedTimeline$Segment: void inc(long)>(1L);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.axis.SegmentedTimeline$Segment: long getSegmentCount()> ----
+    {
+        org.jfree.chart.axis.SegmentedTimeline$Segment this;
+    
+    
+        this := @this: org.jfree.chart.axis.SegmentedTimeline$Segment;
+    
+        return 1L;
+    }
+
+    // ---- method: <org.jfree.chart.axis.SegmentedTimeline$Segment: void inc(long)> ----
+    {
+        long $stack10, $stack11, $stack12, $stack13, $stack14, $stack5, $stack6, $stack8, $stack9, m, n;
+        org.jfree.chart.axis.SegmentedTimeline $stack7;
+        org.jfree.chart.axis.SegmentedTimeline$Segment this;
+    
+    
+        this := @this: org.jfree.chart.axis.SegmentedTimeline$Segment;
+        n := @parameter0: long;
+        $stack5 = this.<org.jfree.chart.axis.SegmentedTimeline$Segment: long segmentNumber>;
+        $stack6 = $stack5 + n;
+        this.<org.jfree.chart.axis.SegmentedTimeline$Segment: long segmentNumber> = $stack6;
+        $stack7 = this.<org.jfree.chart.axis.SegmentedTimeline$Segment: org.jfree.chart.axis.SegmentedTimeline this$0>;
+        $stack8 = staticinvoke <org.jfree.chart.axis.SegmentedTimeline: long access$100(org.jfree.chart.axis.SegmentedTimeline)>($stack7);
+        m = n * $stack8;
+        $stack9 = this.<org.jfree.chart.axis.SegmentedTimeline$Segment: long segmentStart>;
+        $stack10 = $stack9 + m;
+        this.<org.jfree.chart.axis.SegmentedTimeline$Segment: long segmentStart> = $stack10;
+        $stack11 = this.<org.jfree.chart.axis.SegmentedTimeline$Segment: long segmentEnd>;
+        $stack12 = $stack11 + m;
+        this.<org.jfree.chart.axis.SegmentedTimeline$Segment: long segmentEnd> = $stack12;
+        $stack13 = this.<org.jfree.chart.axis.SegmentedTimeline$Segment: long millisecond>;
+        $stack14 = $stack13 + m;
+        this.<org.jfree.chart.axis.SegmentedTimeline$Segment: long millisecond> = $stack14;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.axis.SegmentedTimeline$Segment: long getSegmentStart()> ----
+    {
+        long $stack1;
+        org.jfree.chart.axis.SegmentedTimeline$Segment this;
+    
+    
+        this := @this: org.jfree.chart.axis.SegmentedTimeline$Segment;
+        $stack1 = this.<org.jfree.chart.axis.SegmentedTimeline$Segment: long segmentStart>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.axis.SegmentedTimeline$Segment: org.jfree.chart.axis.SegmentedTimeline$Segment copy()> ----
+    {
+        java.lang.Object $stack2;
+        java.lang.Throwable $stack4, e;
+        org.jfree.chart.axis.SegmentedTimeline$Segment $stack3, this;
+    
+    
+        this := @this: org.jfree.chart.axis.SegmentedTimeline$Segment;
+    
+      label1:
+        $stack2 = virtualinvoke this.<java.lang.Object: java.lang.Object clone()>();
+        $stack3 = (org.jfree.chart.axis.SegmentedTimeline$Segment) $stack2;
+    
+      label2:
+        return $stack3;
+    
+      label3:
+        $stack4 := @caughtexception;
+        e = $stack4;
+    
+        return null;
+    
+     catch java.lang.CloneNotSupportedException from label1 to label2 with label3;
+    }
+
+}

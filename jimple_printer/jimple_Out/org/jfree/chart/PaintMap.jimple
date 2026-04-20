@@ -1,0 +1,266 @@
+// ========================================================================
+// CLASS : org.jfree.chart.PaintMap
+// ========================================================================
+
+[PUBLIC, SUPER] class org.jfree.chart.PaintMap extends java.lang.Object implements java.lang.Cloneable, java.io.Serializable {
+
+    // ---- method: <org.jfree.chart.PaintMap: void writeObject(java.io.ObjectOutputStream)> ----
+    {
+        boolean $stack9;
+        int $stack7;
+        java.awt.Paint paint;
+        java.io.ObjectOutputStream stream;
+        java.lang.Comparable key;
+        java.lang.Object $stack10;
+        java.util.Iterator iterator;
+        java.util.Map $stack6, $stack8;
+        java.util.Set keys;
+        org.jfree.chart.PaintMap this;
+    
+    
+        this := @this: org.jfree.chart.PaintMap;
+        stream := @parameter0: java.io.ObjectOutputStream;
+        virtualinvoke stream.<java.io.ObjectOutputStream: void defaultWriteObject()>();
+        $stack6 = this.<org.jfree.chart.PaintMap: java.util.Map store>;
+        $stack7 = interfaceinvoke $stack6.<java.util.Map: int size()>();
+        virtualinvoke stream.<java.io.ObjectOutputStream: void writeInt(int)>($stack7);
+        $stack8 = this.<org.jfree.chart.PaintMap: java.util.Map store>;
+        keys = interfaceinvoke $stack8.<java.util.Map: java.util.Set keySet()>();
+        iterator = interfaceinvoke keys.<java.util.Set: java.util.Iterator iterator()>();
+    
+      label1:
+        $stack9 = interfaceinvoke iterator.<java.util.Iterator: boolean hasNext()>();
+    
+        if $stack9 == 0 goto label2;
+        $stack10 = interfaceinvoke iterator.<java.util.Iterator: java.lang.Object next()>();
+        key = (java.lang.Comparable) $stack10;
+        virtualinvoke stream.<java.io.ObjectOutputStream: void writeObject(java.lang.Object)>(key);
+        paint = virtualinvoke this.<org.jfree.chart.PaintMap: java.awt.Paint getPaint(java.lang.Comparable)>(key);
+        staticinvoke <org.jfree.chart.util.SerialUtilities: void writePaint(java.awt.Paint,java.io.ObjectOutputStream)>(paint, stream);
+    
+        goto label1;
+    
+      label2:
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.PaintMap: void readObject(java.io.ObjectInputStream)> ----
+    {
+        int i, keyCount;
+        java.awt.Paint paint;
+        java.io.ObjectInputStream stream;
+        java.lang.Comparable key;
+        java.lang.Object $stack6, $stack7;
+        java.util.HashMap #l0;
+        java.util.Map $stack8;
+        org.jfree.chart.PaintMap this;
+    
+    
+        this := @this: org.jfree.chart.PaintMap;
+        stream := @parameter0: java.io.ObjectInputStream;
+        virtualinvoke stream.<java.io.ObjectInputStream: void defaultReadObject()>();
+        $stack6 = new java.util.HashMap;
+        #l0 = (java.util.HashMap) $stack6;
+        specialinvoke #l0.<java.util.HashMap: void <init>()>();
+        this.<org.jfree.chart.PaintMap: java.util.Map store> = (java.util.Map) $stack6;
+        keyCount = virtualinvoke stream.<java.io.ObjectInputStream: int readInt()>();
+        i = 0;
+    
+      label1:
+        if i >= keyCount goto label2;
+        $stack7 = virtualinvoke stream.<java.io.ObjectInputStream: java.lang.Object readObject()>();
+        key = (java.lang.Comparable) $stack7;
+        paint = staticinvoke <org.jfree.chart.util.SerialUtilities: java.awt.Paint readPaint(java.io.ObjectInputStream)>(stream);
+        $stack8 = this.<org.jfree.chart.PaintMap: java.util.Map store>;
+        interfaceinvoke $stack8.<java.util.Map: java.lang.Object put(java.lang.Object,java.lang.Object)>(key, paint);
+        i = i + 1;
+    
+        goto label1;
+    
+      label2:
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.PaintMap: void <init>()> ----
+    {
+        java.lang.Object $stack1;
+        java.util.HashMap #l0;
+        org.jfree.chart.PaintMap this;
+    
+    
+        this := @this: org.jfree.chart.PaintMap;
+        specialinvoke this.<java.lang.Object: void <init>()>();
+        $stack1 = new java.util.HashMap;
+        #l0 = (java.util.HashMap) $stack1;
+        specialinvoke #l0.<java.util.HashMap: void <init>()>();
+        this.<org.jfree.chart.PaintMap: java.util.Map store> = (java.util.Map) $stack1;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.PaintMap: boolean equals(java.lang.Object)> ----
+    {
+        boolean $stack14, $stack16, $stack8;
+        int $stack11, $stack12;
+        java.awt.Paint p1, p2;
+        java.lang.Comparable key;
+        java.lang.Object $stack15, obj;
+        java.util.Iterator iterator;
+        java.util.Map $stack10, $stack13, $stack9;
+        java.util.Set keys;
+        org.jfree.chart.PaintMap that, this;
+    
+    
+        this := @this: org.jfree.chart.PaintMap;
+        obj := @parameter0: java.lang.Object;
+    
+        if obj != this goto label1;
+    
+        return 1;
+    
+      label1:
+        $stack8 = obj instanceof org.jfree.chart.PaintMap;
+    
+        if $stack8 != 0 goto label2;
+    
+        return 0;
+    
+      label2:
+        that = (org.jfree.chart.PaintMap) obj;
+        $stack9 = this.<org.jfree.chart.PaintMap: java.util.Map store>;
+        $stack12 = interfaceinvoke $stack9.<java.util.Map: int size()>();
+        $stack10 = that.<org.jfree.chart.PaintMap: java.util.Map store>;
+        $stack11 = interfaceinvoke $stack10.<java.util.Map: int size()>();
+    
+        if $stack12 == $stack11 goto label3;
+    
+        return 0;
+    
+      label3:
+        $stack13 = this.<org.jfree.chart.PaintMap: java.util.Map store>;
+        keys = interfaceinvoke $stack13.<java.util.Map: java.util.Set keySet()>();
+        iterator = interfaceinvoke keys.<java.util.Set: java.util.Iterator iterator()>();
+    
+      label4:
+        $stack14 = interfaceinvoke iterator.<java.util.Iterator: boolean hasNext()>();
+    
+        if $stack14 == 0 goto label6;
+        $stack15 = interfaceinvoke iterator.<java.util.Iterator: java.lang.Object next()>();
+        key = (java.lang.Comparable) $stack15;
+        p1 = virtualinvoke this.<org.jfree.chart.PaintMap: java.awt.Paint getPaint(java.lang.Comparable)>(key);
+        p2 = virtualinvoke that.<org.jfree.chart.PaintMap: java.awt.Paint getPaint(java.lang.Comparable)>(key);
+        $stack16 = staticinvoke <org.jfree.chart.util.PaintUtilities: boolean equal(java.awt.Paint,java.awt.Paint)>(p1, p2);
+    
+        if $stack16 != 0 goto label5;
+    
+        return 0;
+    
+      label5:
+        goto label4;
+    
+      label6:
+        return 1;
+    }
+
+    // ---- method: <org.jfree.chart.PaintMap: boolean containsKey(java.lang.Comparable)> ----
+    {
+        boolean $stack3;
+        java.lang.Comparable key;
+        java.util.Map $stack2;
+        org.jfree.chart.PaintMap this;
+    
+    
+        this := @this: org.jfree.chart.PaintMap;
+        key := @parameter0: java.lang.Comparable;
+        $stack2 = this.<org.jfree.chart.PaintMap: java.util.Map store>;
+        $stack3 = interfaceinvoke $stack2.<java.util.Map: boolean containsKey(java.lang.Object)>(key);
+    
+        return $stack3;
+    }
+
+    // ---- method: <org.jfree.chart.PaintMap: java.lang.Object clone()> ----
+    {
+        java.lang.Object $stack1;
+        org.jfree.chart.PaintMap this;
+    
+    
+        this := @this: org.jfree.chart.PaintMap;
+        $stack1 = specialinvoke this.<java.lang.Object: java.lang.Object clone()>();
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.PaintMap: java.awt.Paint getPaint(java.lang.Comparable)> ----
+    {
+        java.awt.Paint $stack4;
+        java.lang.Comparable key;
+        java.lang.IllegalArgumentException #l1;
+        java.lang.Object $stack3, $stack5;
+        java.lang.Throwable #l0;
+        java.util.Map $stack2;
+        org.jfree.chart.PaintMap this;
+    
+    
+        this := @this: org.jfree.chart.PaintMap;
+        key := @parameter0: java.lang.Comparable;
+    
+        if key != null goto label1;
+        $stack5 = new java.lang.IllegalArgumentException;
+        #l1 = (java.lang.IllegalArgumentException) $stack5;
+        specialinvoke #l1.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'key\' argument.");
+        #l0 = (java.lang.Throwable) $stack5;
+    
+        throw #l0;
+    
+      label1:
+        $stack2 = this.<org.jfree.chart.PaintMap: java.util.Map store>;
+        $stack3 = interfaceinvoke $stack2.<java.util.Map: java.lang.Object get(java.lang.Object)>(key);
+        $stack4 = (java.awt.Paint) $stack3;
+    
+        return $stack4;
+    }
+
+    // ---- method: <org.jfree.chart.PaintMap: void put(java.lang.Comparable,java.awt.Paint)> ----
+    {
+        java.awt.Paint paint;
+        java.lang.Comparable key;
+        java.lang.IllegalArgumentException #l1;
+        java.lang.Object $stack4;
+        java.lang.Throwable #l0;
+        java.util.Map $stack3;
+        org.jfree.chart.PaintMap this;
+    
+    
+        this := @this: org.jfree.chart.PaintMap;
+        key := @parameter0: java.lang.Comparable;
+        paint := @parameter1: java.awt.Paint;
+    
+        if key != null goto label1;
+        $stack4 = new java.lang.IllegalArgumentException;
+        #l1 = (java.lang.IllegalArgumentException) $stack4;
+        specialinvoke #l1.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'key\' argument.");
+        #l0 = (java.lang.Throwable) $stack4;
+    
+        throw #l0;
+    
+      label1:
+        $stack3 = this.<org.jfree.chart.PaintMap: java.util.Map store>;
+        interfaceinvoke $stack3.<java.util.Map: java.lang.Object put(java.lang.Object,java.lang.Object)>(key, paint);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.PaintMap: void clear()> ----
+    {
+        java.util.Map $stack1;
+        org.jfree.chart.PaintMap this;
+    
+    
+        this := @this: org.jfree.chart.PaintMap;
+        $stack1 = this.<org.jfree.chart.PaintMap: java.util.Map store>;
+        interfaceinvoke $stack1.<java.util.Map: void clear()>();
+    
+        return;
+    }
+
+}

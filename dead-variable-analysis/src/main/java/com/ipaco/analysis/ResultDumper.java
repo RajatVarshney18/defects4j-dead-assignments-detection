@@ -1,103 +1,89 @@
 package com.ipaco.analysis;
 
-import sootup.core.jimple.common.stmt.Stmt;
-
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
 public class ResultDumper {
-   private final String       outputPath;
-    private final PrintWriter  writer;
-    private int                totalDead    = 0;
-    private int                totalMethods = 0;
 
-    // ----------------------------------------------------------------
-    // constructor — opens the file and writes the header immediately
-    // ----------------------------------------------------------------
+    private final String      outputPath;
+    private final PrintWriter writer;
+    private int totalDead    = 0;
+    private int totalMethods = 0;
+
     public ResultDumper(String outputPath) throws IOException {
         this.outputPath = outputPath;
-
-        // BufferedWriter for performance — we may write thousands of lines
-        FileWriter   fw = new FileWriter(outputPath, false); // false = overwrite
+        FileWriter    fw = new FileWriter(outputPath, false);
         BufferedWriter bw = new BufferedWriter(fw);
         this.writer = new PrintWriter(bw);
-
         writeHeader();
     }
 
-    // ----------------------------------------------------------------
-    // write the file header with timestamp and column legend
-    // ----------------------------------------------------------------
     private void writeHeader() {
-        String timestamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
-                               .format(new Date());
-
+        String ts = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+                        .format(new Date());
         writer.println("================================================================");
-        writer.println("  DEAD VARIABLE ANALYSIS — RESULTS");
-        writer.println("  Generated : " + timestamp);
+        writer.println("  DEAD VARIABLE ANALYSIS — PASS RESULTS");
+        writer.println("  Generated : " + ts);
         writer.println("================================================================");
         writer.println();
-        writer.println("FORMAT PER ENTRY:");
-        writer.println("  [CLASS]   fully qualified class name");
-        writer.println("  [METHOD]  method signature");
-        writer.println("  [FILE]    source file name");
-        writer.println("  [LINE]    source line number (-1 = no debug info in bytecode)");
-        writer.println("  [JIMPLE]  the dead Jimple IR statement");
-        writer.println("  [REASON]  classification and recommended action");
+        writer.println("  Each entry contains:");
+        writer.println("    [CLASS]        fully qualified class name");
+        writer.println("    [METHOD]       full method signature");
+        writer.println("    [SOURCE FILE]  Java source filename");
+        writer.println("    [SOURCE LINE]  line in original .java file");
+        writer.println("    [JIMPLE LINE]  statement index in Jimple body");
+        writer.println("    [JIMPLE IR]    the dead Jimple statement");
+        writer.println("    [REASON]       why it is dead + action");
+        writer.println();
+        writer.println("  Filtered out (not reported):");
+        writer.println("    - $stack temporaries (Jimple IR artefacts)");
+        writer.println("    - zero / null initialisations (IR artefacts)");
+        writer.println("    - invoke result locals (kept for side effects)");
+        writer.println("    - cast result locals (kept for CCE check)");
+        writer.println("    - @this / @parameter identity statements");
         writer.println();
         writer.println("================================================================");
         writer.println();
         writer.flush();
     }
 
-    // ----------------------------------------------------------------
-    // dump all dead entries for one method's result
-    // called once per method that has at least one dead statement
-    // ----------------------------------------------------------------
     public void dump(AnalysisResult result) {
-
         List<AnalysisResult.DeadEntry> entries = result.getDeadStatements();
-        if (entries.isEmpty()) {
-            return;
-        }
+        if (entries.isEmpty()) return;
 
         totalMethods++;
 
-        // method-level header
         writer.println("----------------------------------------------------------------");
-        writer.println("[CLASS]   " + result.getClassName());
-        writer.println("[METHOD]  " + result.getMethodSignature());
-        writer.println("[FILE]    " + result.getSourceFile());
+        writer.println("[CLASS]        " + result.getClassName());
+        writer.println("[METHOD]       " + result.getMethodSignature());
+        writer.println("[SOURCE FILE]  " + result.getSourceFile());
         writer.println();
 
-        // one block per dead statement
         for (AnalysisResult.DeadEntry entry : entries) {
             totalDead++;
 
-            Stmt stmt = entry.getStmt();
-            int  line = entry.getSourceLine();
+            int srcLine    = entry.getSourceLine();
+            int jimpleLine = entry.getJimpleLine();
 
-            writer.println("  [LINE]    "
-                    + (line > 0 ? String.valueOf(line) : "unavailable (no debug info)"));
+            writer.println("  [SOURCE LINE]  "
+                    + (srcLine > 0
+                       ? String.valueOf(srcLine)
+                       : "unavailable (compile without -g for debug info)"));
 
-            writer.println("  [JIMPLE]  " + stmt.toString());
+            writer.println("  [JIMPLE LINE]  " + jimpleLine);
 
-            writer.println("  [REASON]  " + entry.getReason());
+            writer.println("  [JIMPLE IR]    " + entry.getStmt().toString());
+
+            writer.println("  [REASON]       " + entry.getReason());
 
             writer.println();
         }
 
-        writer.flush(); // flush after each method so file is readable mid-run
+        writer.flush();
     }
 
-    // ----------------------------------------------------------------
-    // write the summary footer and close the file
-    // ----------------------------------------------------------------
     public void close(int totalMethodsAnalyzed) {
         writer.println("================================================================");
         writer.println("  SUMMARY");
@@ -107,7 +93,6 @@ public class ResultDumper {
         writer.println("  Total dead assignments found    : " + totalDead);
         writer.println("================================================================");
         writer.close();
-
         System.out.println("Results written to: " + outputPath);
     }
 }

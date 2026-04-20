@@ -1,0 +1,294 @@
+// ========================================================================
+// CLASS : org.jfree.chart.util.ArrayUtilities
+// ========================================================================
+
+[PUBLIC, SUPER] class org.jfree.chart.util.ArrayUtilities extends java.lang.Object {
+
+    // ---- method: <org.jfree.chart.util.ArrayUtilities: boolean hasDuplicateItems(java.lang.Object[])> ----
+    {
+        boolean $stack6;
+        int $stack5, i, j;
+        java.lang.Object o1, o2;
+        java.lang.Object[] array;
+    
+    
+        array := @parameter0: java.lang.Object[];
+        i = 0;
+    
+      label1:
+        $stack5 = lengthof array;
+    
+        if i >= $stack5 goto label5;
+        j = 0;
+    
+      label2:
+        if j >= i goto label4;
+        o1 = array[i];
+        o2 = array[j];
+    
+        if o1 == null goto label3;
+    
+        if o2 == null goto label3;
+        $stack6 = virtualinvoke o1.<java.lang.Object: boolean equals(java.lang.Object)>(o2);
+    
+        if $stack6 == 0 goto label3;
+    
+        return 1;
+    
+      label3:
+        j = j + 1;
+    
+        goto label2;
+    
+      label4:
+        i = i + 1;
+    
+        goto label1;
+    
+      label5:
+        return 0;
+    }
+
+    // ---- method: <org.jfree.chart.util.ArrayUtilities: boolean equalReferencesInArrays(java.lang.Object[],java.lang.Object[])> ----
+    {
+        boolean $stack12;
+        int $stack3, $stack4, $stack5, i;
+        java.lang.Object $stack10, $stack11, $stack6, $stack7, $stack8, $stack9;
+        java.lang.Object[] array1, array2;
+    
+    
+        array1 := @parameter0: java.lang.Object[];
+        array2 := @parameter1: java.lang.Object[];
+    
+        if array1 != null goto label03;
+    
+        if array2 != null goto label01;
+        $stack12 = 1;
+    
+        goto label02;
+    
+      label01:
+        $stack12 = 0;
+    
+      label02:
+        return $stack12;
+    
+      label03:
+        if array2 != null goto label04;
+    
+        return 0;
+    
+      label04:
+        $stack4 = lengthof array1;
+        $stack3 = lengthof array2;
+    
+        if $stack4 == $stack3 goto label05;
+    
+        return 0;
+    
+      label05:
+        i = 0;
+    
+      label06:
+        $stack5 = lengthof array1;
+    
+        if i >= $stack5 goto label10;
+        $stack6 = array1[i];
+    
+        if $stack6 != null goto label07;
+        $stack11 = array2[i];
+    
+        if $stack11 == null goto label07;
+    
+        return 0;
+    
+      label07:
+        $stack7 = array2[i];
+    
+        if $stack7 != null goto label08;
+        $stack10 = array1[i];
+    
+        if $stack10 == null goto label08;
+    
+        return 0;
+    
+      label08:
+        $stack9 = array1[i];
+        $stack8 = array2[i];
+    
+        if $stack9 == $stack8 goto label09;
+    
+        return 0;
+    
+      label09:
+        i = i + 1;
+    
+        goto label06;
+    
+      label10:
+        return 1;
+    }
+
+    // ---- method: <org.jfree.chart.util.ArrayUtilities: int compareVersionArrays(java.lang.Comparable[],java.lang.Comparable[])> ----
+    {
+        int $stack7, $stack8, i, length, retval;
+        java.lang.Comparable o1, o2;
+        java.lang.Comparable[] a1, a2;
+    
+    
+        a1 := @parameter0: java.lang.Comparable[];
+        a2 := @parameter1: java.lang.Comparable[];
+        $stack8 = lengthof a1;
+        $stack7 = lengthof a2;
+        length = staticinvoke <java.lang.Math: int min(int,int)>($stack8, $stack7);
+        i = 0;
+    
+      label1:
+        if i >= length goto label6;
+        o1 = a1[i];
+        o2 = a2[i];
+    
+        if o1 != null goto label2;
+    
+        if o2 != null goto label2;
+    
+        goto label5;
+    
+      label2:
+        if o1 != null goto label3;
+    
+        return 1;
+    
+      label3:
+        if o2 != null goto label4;
+    
+        return -1;
+    
+      label4:
+        retval = interfaceinvoke o1.<java.lang.Comparable: int compareTo(java.lang.Object)>(o2);
+    
+        if retval == 0 goto label5;
+    
+        return retval;
+    
+      label5:
+        i = i + 1;
+    
+        goto label1;
+    
+      label6:
+        return 0;
+    }
+
+    // ---- method: <org.jfree.chart.util.ArrayUtilities: float[][] clone(float[][])> ----
+    {
+        float[] child, copychild;
+        float[][] $stack10, array, result;
+        int $stack5, $stack6, $stack7, $stack8, $stack9, i;
+    
+    
+        array := @parameter0: float[][];
+    
+        if array != null goto label1;
+        $stack10 = (float[][]) null;
+    
+        return $stack10;
+    
+      label1:
+        $stack5 = lengthof array;
+        result = newarray (float[])[$stack5];
+        $stack6 = lengthof array;
+        staticinvoke <java.lang.System: void arraycopy(java.lang.Object,int,java.lang.Object,int,int)>(array, 0, result, 0, $stack6);
+        i = 0;
+    
+      label2:
+        $stack7 = lengthof array;
+    
+        if i >= $stack7 goto label3;
+        child = array[i];
+        $stack8 = lengthof child;
+        copychild = newarray (float)[$stack8];
+        $stack9 = lengthof child;
+        staticinvoke <java.lang.System: void arraycopy(java.lang.Object,int,java.lang.Object,int,int)>(child, 0, copychild, 0, $stack9);
+        result[i] = copychild;
+        i = i + 1;
+    
+        goto label2;
+    
+      label3:
+        return result;
+    }
+
+    // ---- method: <org.jfree.chart.util.ArrayUtilities: boolean equal(float[][],float[][])> ----
+    {
+        boolean $stack8, $stack9;
+        float[] $stack6, $stack7;
+        float[][] array1, array2;
+        int $stack3, $stack4, $stack5, i;
+    
+    
+        array1 := @parameter0: float[][];
+        array2 := @parameter1: float[][];
+    
+        if array1 != null goto label3;
+    
+        if array2 != null goto label1;
+        $stack9 = 1;
+    
+        goto label2;
+    
+      label1:
+        $stack9 = 0;
+    
+      label2:
+        return $stack9;
+    
+      label3:
+        if array2 != null goto label4;
+    
+        return 0;
+    
+      label4:
+        $stack4 = lengthof array1;
+        $stack3 = lengthof array2;
+    
+        if $stack4 == $stack3 goto label5;
+    
+        return 0;
+    
+      label5:
+        i = 0;
+    
+      label6:
+        $stack5 = lengthof array1;
+    
+        if i >= $stack5 goto label8;
+        $stack7 = array1[i];
+        $stack6 = array2[i];
+        $stack8 = staticinvoke <java.util.Arrays: boolean equals(float[],float[])>($stack7, $stack6);
+    
+        if $stack8 != 0 goto label7;
+    
+        return 0;
+    
+      label7:
+        i = i + 1;
+    
+        goto label6;
+    
+      label8:
+        return 1;
+    }
+
+    // ---- method: <org.jfree.chart.util.ArrayUtilities: void <init>()> ----
+    {
+        org.jfree.chart.util.ArrayUtilities this;
+    
+    
+        this := @this: org.jfree.chart.util.ArrayUtilities;
+        specialinvoke this.<java.lang.Object: void <init>()>();
+    
+        return;
+    }
+
+}

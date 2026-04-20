@@ -1,0 +1,723 @@
+// ========================================================================
+// CLASS : org.jfree.data.jdbc.JDBCXYDataset
+// ========================================================================
+
+[PUBLIC, SUPER] class org.jfree.data.jdbc.JDBCXYDataset extends org.jfree.data.xy.AbstractXYDataset implements org.jfree.data.RangeInfo, org.jfree.data.xy.XYDataset, org.jfree.data.xy.TableXYDataset {
+
+    // ---- method: <org.jfree.data.jdbc.JDBCXYDataset: void <init>()> ----
+    {
+        java.lang.String[] $stack1;
+        java.util.ArrayList $stack2;
+        org.jfree.data.jdbc.JDBCXYDataset this;
+    
+    
+        this := @this: org.jfree.data.jdbc.JDBCXYDataset;
+        specialinvoke this.<org.jfree.data.xy.AbstractXYDataset: void <init>()>();
+        $stack1 = newarray (java.lang.String)[0];
+        this.<org.jfree.data.jdbc.JDBCXYDataset: java.lang.String[] columnNames> = $stack1;
+        this.<org.jfree.data.jdbc.JDBCXYDataset: double maxValue> = 0.0;
+        this.<org.jfree.data.jdbc.JDBCXYDataset: double minValue> = 0.0;
+        this.<org.jfree.data.jdbc.JDBCXYDataset: boolean isTimeSeries> = 0;
+        $stack2 = new java.util.ArrayList;
+        specialinvoke $stack2.<java.util.ArrayList: void <init>()>();
+        this.<org.jfree.data.jdbc.JDBCXYDataset: java.util.ArrayList rows> = $stack2;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.jdbc.JDBCXYDataset: void <init>(java.lang.String,java.lang.String,java.lang.String,java.lang.String)> ----
+    {
+        java.lang.String driverName, password, url, user;
+        java.sql.Connection $stack5;
+        org.jfree.data.jdbc.JDBCXYDataset this;
+    
+    
+        this := @this: org.jfree.data.jdbc.JDBCXYDataset;
+        url := @parameter0: java.lang.String;
+        driverName := @parameter1: java.lang.String;
+        user := @parameter2: java.lang.String;
+        password := @parameter3: java.lang.String;
+        specialinvoke this.<org.jfree.data.jdbc.JDBCXYDataset: void <init>()>();
+        staticinvoke <java.lang.Class: java.lang.Class forName(java.lang.String)>(driverName);
+        $stack5 = staticinvoke <java.sql.DriverManager: java.sql.Connection getConnection(java.lang.String,java.lang.String,java.lang.String)>(url, user, password);
+        this.<org.jfree.data.jdbc.JDBCXYDataset: java.sql.Connection connection> = $stack5;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.jdbc.JDBCXYDataset: void executeQuery(java.sql.Connection,java.lang.String)> ----
+    {
+        boolean $stack22;
+        byte $stack35, $stack37;
+        double $stack34, $stack36, test;
+        int $stack18, $stack21, $stack24, $stack26, $stack30, $stack40, $stack44, $stack45, $stack51, $stack55, $stack56, $stack60, column#0, column#1, numberOfColumns, numberOfValidColumns, row#1, row#2, row#3, type#0, type#2, type#3, xObject#1;
+        int[] columnTypes;
+        java.io.PrintStream $stack49;
+        java.lang.Integer $stack41;
+        java.lang.Long $stack48;
+        java.lang.Number $stack33;
+        java.lang.Object $stack28, $stack32, $stack54, $stack59, $stack61, statement#0, testValue, xObject#0;
+        java.lang.String $stack58, query;
+        java.lang.String[] $stack19, $stack57;
+        java.lang.Throwable #l0, #l3, $stack62, $stack63, $stack64, $stack65, $stack66, $stack67, e#0, e#1, l16, metaData#1, metaData#2, type#1;
+        java.sql.Connection con;
+        java.sql.ResultSet resultSet;
+        java.sql.ResultSetMetaData metaData#0;
+        java.sql.SQLException #l1, #l2;
+        java.sql.Statement statement#1;
+        java.util.ArrayList $stack20, $stack23, $stack25, $stack27, $stack29, $stack31, $stack38, $stack39, $stack42, $stack43, $stack50, $stack52, $stack53, row#0, type#4, type#5, type#6, type#7;
+        java.util.Date $stack46;
+        long $stack47;
+        org.jfree.data.jdbc.JDBCXYDataset this;
+    
+    
+        this := @this: org.jfree.data.jdbc.JDBCXYDataset;
+        con := @parameter0: java.sql.Connection;
+        query := @parameter1: java.lang.String;
+    
+        if con != null goto label01;
+        $stack61 = new java.sql.SQLException;
+        #l2 = (java.sql.SQLException) $stack61;
+        specialinvoke #l2.<java.sql.SQLException: void <init>(java.lang.String)>("There is no database to execute the query.");
+        #l0 = (java.lang.Throwable) $stack61;
+    
+        throw #l0;
+    
+      label01:
+        resultSet = null;
+        statement#0 = null;
+    
+      label02:
+        statement#1 = interfaceinvoke con.<java.sql.Connection: java.sql.Statement createStatement()>();
+        resultSet = interfaceinvoke statement#1.<java.sql.Statement: java.sql.ResultSet executeQuery(java.lang.String)>(query);
+        metaData#0 = interfaceinvoke resultSet.<java.sql.ResultSet: java.sql.ResultSetMetaData getMetaData()>();
+        numberOfColumns = interfaceinvoke metaData#0.<java.sql.ResultSetMetaData: int getColumnCount()>();
+        numberOfValidColumns = 0;
+        columnTypes = newarray (int)[numberOfColumns];
+        column#0 = 0;
+    
+      label03:
+        if column#0 >= numberOfColumns goto label19;
+    
+      label04:
+        $stack60 = column#0 + 1;
+        type#0 = interfaceinvoke metaData#0.<java.sql.ResultSetMetaData: int getColumnType(int)>($stack60);
+    
+        switch(type#0)
+            {
+            case -7: goto label05;
+            case -5: goto label05;
+            case 2: goto label05;
+            case 3: goto label05;
+            case 4: goto label05;
+            case 5: goto label05;
+            case 6: goto label05;
+            case 7: goto label05;
+            case 8: goto label05;
+            case 91: goto label05;
+            case 92: goto label05;
+            case 93: goto label05;
+            default: goto label17;
+        };
+    
+      label05:
+        numberOfValidColumns = numberOfValidColumns + 1;
+        columnTypes[column#0] = type#0;
+    
+        goto label18;
+    
+      label06:
+        $stack64 := @caughtexception;
+        l16 = $stack64;
+    
+      label07:
+        if resultSet == null goto label11;
+    
+      label08:
+        interfaceinvoke resultSet.<java.sql.ResultSet: void close()>();
+    
+      label09:
+        goto label11;
+    
+      label10:
+        $stack63 := @caughtexception;
+        e#0 = $stack63;
+    
+      label11:
+        if statement#1 == null goto label15;
+    
+      label12:
+        interfaceinvoke statement#1.<java.sql.Statement: void close()>();
+    
+      label13:
+        goto label15;
+    
+      label14:
+        $stack62 := @caughtexception;
+        e#1 = $stack62;
+    
+      label15:
+        throw $stack64;
+    
+      label16:
+        $stack67 := @caughtexception;
+        type#1 = $stack67;
+        columnTypes[column#0] = 0;
+    
+        throw $stack67;
+    
+      label17:
+        columnTypes[column#0] = 0;
+    
+      label18:
+        goto label62;
+    
+      label19:
+        if numberOfValidColumns > 1 goto label24;
+        $stack59 = new java.sql.SQLException;
+    
+      label20:
+        #l1 = (java.sql.SQLException) $stack59;
+    
+      label21:
+        specialinvoke #l1.<java.sql.SQLException: void <init>(java.lang.String)>("Not enough valid columns where generated by query.");
+    
+      label22:
+        #l3 = (java.lang.Throwable) $stack59;
+    
+      label23:
+        throw #l3;
+    
+      label24:
+        $stack18 = numberOfValidColumns - 1;
+        $stack19 = newarray (java.lang.String)[$stack18];
+        this.<org.jfree.data.jdbc.JDBCXYDataset: java.lang.String[] columnNames> = $stack19;
+        column#1 = 0;
+        type#2 = 1;
+    
+      label25:
+        if type#2 >= numberOfColumns goto label27;
+        $stack55 = columnTypes[type#2];
+    
+        if $stack55 == 0 goto label26;
+        $stack57 = this.<org.jfree.data.jdbc.JDBCXYDataset: java.lang.String[] columnNames>;
+        $stack56 = type#2 + 1;
+        $stack58 = interfaceinvoke metaData#0.<java.sql.ResultSetMetaData: java.lang.String getColumnLabel(int)>($stack56);
+        $stack57[column#1] = $stack58;
+        column#1 = column#1 + 1;
+    
+      label26:
+        type#2 = type#2 + 1;
+    
+        goto label25;
+    
+      label27:
+        $stack20 = this.<org.jfree.data.jdbc.JDBCXYDataset: java.util.ArrayList rows>;
+    
+        if $stack20 == null goto label30;
+        type#3 = 0;
+    
+      label28:
+        $stack50 = this.<org.jfree.data.jdbc.JDBCXYDataset: java.util.ArrayList rows>;
+        $stack51 = virtualinvoke $stack50.<java.util.ArrayList: int size()>();
+    
+        if type#3 >= $stack51 goto label29;
+        $stack53 = this.<org.jfree.data.jdbc.JDBCXYDataset: java.util.ArrayList rows>;
+        $stack54 = virtualinvoke $stack53.<java.util.ArrayList: java.lang.Object get(int)>(type#3);
+        row#0 = (java.util.ArrayList) $stack54;
+        virtualinvoke row#0.<java.util.ArrayList: void clear()>();
+        type#3 = type#3 + 1;
+    
+        goto label28;
+    
+      label29:
+        $stack52 = this.<org.jfree.data.jdbc.JDBCXYDataset: java.util.ArrayList rows>;
+        virtualinvoke $stack52.<java.util.ArrayList: void clear()>();
+    
+      label30:
+        $stack21 = columnTypes[0];
+    
+        switch($stack21)
+            {
+            case 91: goto label31;
+            case 92: goto label31;
+            case 93: goto label31;
+            default: goto label32;
+        };
+    
+      label31:
+        this.<org.jfree.data.jdbc.JDBCXYDataset: boolean isTimeSeries> = 1;
+    
+        goto label33;
+    
+      label32:
+        this.<org.jfree.data.jdbc.JDBCXYDataset: boolean isTimeSeries> = 0;
+    
+      label33:
+        $stack22 = interfaceinvoke resultSet.<java.sql.ResultSet: boolean next()>();
+    
+        if $stack22 == 0 goto label41;
+        $stack42 = new java.util.ArrayList;
+        specialinvoke $stack42.<java.util.ArrayList: void <init>()>();
+        type#4 = $stack42;
+        row#1 = 0;
+    
+      label34:
+        if row#1 >= numberOfColumns goto label40;
+        $stack44 = row#1 + 1;
+        xObject#0 = interfaceinvoke resultSet.<java.sql.ResultSet: java.lang.Object getObject(int)>($stack44);
+        $stack45 = columnTypes[row#1];
+    
+        switch($stack45)
+            {
+            case -5: goto label36;
+            case 0: goto label35;
+            case 2: goto label36;
+            case 3: goto label36;
+            case 4: goto label36;
+            case 5: goto label36;
+            case 6: goto label36;
+            case 7: goto label36;
+            case 8: goto label36;
+            case 91: goto label37;
+            case 92: goto label37;
+            case 93: goto label37;
+            default: goto label38;
+        };
+    
+      label35:
+        goto label39;
+    
+      label36:
+        virtualinvoke $stack42.<java.util.ArrayList: boolean add(java.lang.Object)>(xObject#0);
+    
+        goto label39;
+    
+      label37:
+        $stack48 = new java.lang.Long;
+        $stack46 = (java.util.Date) xObject#0;
+        $stack47 = virtualinvoke $stack46.<java.util.Date: long getTime()>();
+        specialinvoke $stack48.<java.lang.Long: void <init>(long)>($stack47);
+        virtualinvoke $stack42.<java.util.ArrayList: boolean add(java.lang.Object)>($stack48);
+    
+        goto label39;
+    
+      label38:
+        $stack49 = <java.lang.System: java.io.PrintStream err>;
+        virtualinvoke $stack49.<java.io.PrintStream: void println(java.lang.String)>("Unknown data");
+        columnTypes[row#1] = 0;
+    
+      label39:
+        row#1 = row#1 + 1;
+    
+        goto label34;
+    
+      label40:
+        $stack43 = this.<org.jfree.data.jdbc.JDBCXYDataset: java.util.ArrayList rows>;
+        virtualinvoke $stack43.<java.util.ArrayList: boolean add(java.lang.Object)>($stack42);
+    
+        goto label33;
+    
+      label41:
+        $stack23 = this.<org.jfree.data.jdbc.JDBCXYDataset: java.util.ArrayList rows>;
+        $stack24 = virtualinvoke $stack23.<java.util.ArrayList: int size()>();
+    
+        if $stack24 != 0 goto label45;
+        $stack38 = new java.util.ArrayList;
+        specialinvoke $stack38.<java.util.ArrayList: void <init>()>();
+        type#5 = $stack38;
+        row#2 = 0;
+    
+      label42:
+        if row#2 >= numberOfColumns goto label44;
+        $stack40 = columnTypes[row#2];
+    
+        if $stack40 == 0 goto label43;
+        $stack41 = new java.lang.Integer;
+        specialinvoke $stack41.<java.lang.Integer: void <init>(int)>(0);
+        virtualinvoke $stack38.<java.util.ArrayList: boolean add(java.lang.Object)>($stack41);
+    
+      label43:
+        row#2 = row#2 + 1;
+    
+        goto label42;
+    
+      label44:
+        $stack39 = this.<org.jfree.data.jdbc.JDBCXYDataset: java.util.ArrayList rows>;
+        virtualinvoke $stack39.<java.util.ArrayList: boolean add(java.lang.Object)>($stack38);
+    
+      label45:
+        $stack25 = this.<org.jfree.data.jdbc.JDBCXYDataset: java.util.ArrayList rows>;
+        $stack26 = virtualinvoke $stack25.<java.util.ArrayList: int size()>();
+    
+        if $stack26 >= 1 goto label46;
+        this.<org.jfree.data.jdbc.JDBCXYDataset: double maxValue> = 0.0;
+        this.<org.jfree.data.jdbc.JDBCXYDataset: double minValue> = 0.0;
+    
+        goto label52;
+    
+      label46:
+        $stack27 = this.<org.jfree.data.jdbc.JDBCXYDataset: java.util.ArrayList rows>;
+        $stack28 = virtualinvoke $stack27.<java.util.ArrayList: java.lang.Object get(int)>(0);
+        type#6 = (java.util.ArrayList) $stack28;
+        this.<org.jfree.data.jdbc.JDBCXYDataset: double maxValue> = #-Infinity;
+        this.<org.jfree.data.jdbc.JDBCXYDataset: double minValue> = #Infinity;
+        row#3 = 0;
+    
+      label47:
+        $stack29 = this.<org.jfree.data.jdbc.JDBCXYDataset: java.util.ArrayList rows>;
+        $stack30 = virtualinvoke $stack29.<java.util.ArrayList: int size()>();
+    
+        if row#3 >= $stack30 goto label52;
+        $stack31 = this.<org.jfree.data.jdbc.JDBCXYDataset: java.util.ArrayList rows>;
+        $stack32 = virtualinvoke $stack31.<java.util.ArrayList: java.lang.Object get(int)>(row#3);
+        type#7 = (java.util.ArrayList) $stack32;
+        xObject#1 = 1;
+    
+      label48:
+        if xObject#1 >= numberOfColumns goto label51;
+        testValue = virtualinvoke type#7.<java.util.ArrayList: java.lang.Object get(int)>(xObject#1);
+    
+        if testValue == null goto label50;
+        $stack33 = (java.lang.Number) testValue;
+        test = virtualinvoke $stack33.<java.lang.Number: double doubleValue()>();
+        $stack34 = this.<org.jfree.data.jdbc.JDBCXYDataset: double minValue>;
+        $stack35 = test cmpg $stack34;
+    
+        if $stack35 >= 0 goto label49;
+        this.<org.jfree.data.jdbc.JDBCXYDataset: double minValue> = test;
+    
+      label49:
+        $stack36 = this.<org.jfree.data.jdbc.JDBCXYDataset: double maxValue>;
+        $stack37 = test cmpl $stack36;
+    
+        if $stack37 <= 0 goto label50;
+        this.<org.jfree.data.jdbc.JDBCXYDataset: double maxValue> = test;
+    
+      label50:
+        xObject#1 = xObject#1 + 1;
+    
+        goto label48;
+    
+      label51:
+        row#3 = row#3 + 1;
+    
+        goto label47;
+    
+      label52:
+        virtualinvoke this.<org.jfree.data.jdbc.JDBCXYDataset: void fireDatasetChanged()>();
+    
+      label53:
+        if resultSet == null goto label57;
+    
+      label54:
+        interfaceinvoke resultSet.<java.sql.ResultSet: void close()>();
+    
+      label55:
+        goto label57;
+    
+      label56:
+        $stack66 := @caughtexception;
+        metaData#1 = $stack66;
+    
+      label57:
+        if statement#1 == null goto label61;
+    
+      label58:
+        interfaceinvoke statement#1.<java.sql.Statement: void close()>();
+    
+      label59:
+        goto label61;
+    
+      label60:
+        $stack65 := @caughtexception;
+        metaData#2 = $stack65;
+    
+        goto label61;
+    
+      label61:
+        return;
+    
+      label62:
+        column#0 = column#0 + 1;
+    
+        goto label03;
+    
+      label63:
+        nop;
+    
+     catch java.lang.Throwable from label02 to label07 with label06;
+     catch java.sql.SQLException from label04 to label06 with label16;
+     catch java.lang.Exception from label08 to label09 with label10;
+     catch java.lang.Exception from label12 to label13 with label14;
+     catch java.lang.Throwable from label16 to label20 with label06;
+     catch java.sql.SQLException from label17 to label18 with label16;
+     catch java.lang.Throwable from label21 to label22 with label06;
+     catch java.lang.Throwable from label23 to label53 with label06;
+     catch java.lang.Exception from label54 to label55 with label56;
+     catch java.lang.Exception from label58 to label59 with label60;
+     catch java.lang.Throwable from label62 to label63 with label06;
+    }
+
+    // ---- method: <org.jfree.data.jdbc.JDBCXYDataset: java.lang.Number getY(int,int)> ----
+    {
+        int $stack6, itemIndex, seriesIndex;
+        java.lang.Number $stack8;
+        java.lang.Object $stack5, $stack7;
+        java.util.ArrayList $stack4, row;
+        org.jfree.data.jdbc.JDBCXYDataset this;
+    
+    
+        this := @this: org.jfree.data.jdbc.JDBCXYDataset;
+        seriesIndex := @parameter0: int;
+        itemIndex := @parameter1: int;
+        $stack4 = this.<org.jfree.data.jdbc.JDBCXYDataset: java.util.ArrayList rows>;
+        $stack5 = virtualinvoke $stack4.<java.util.ArrayList: java.lang.Object get(int)>(itemIndex);
+        row = (java.util.ArrayList) $stack5;
+        $stack6 = seriesIndex + 1;
+        $stack7 = virtualinvoke row.<java.util.ArrayList: java.lang.Object get(int)>($stack6);
+        $stack8 = (java.lang.Number) $stack7;
+    
+        return $stack8;
+    }
+
+    // ---- method: <org.jfree.data.jdbc.JDBCXYDataset: boolean isTimeSeries()> ----
+    {
+        boolean $stack1;
+        org.jfree.data.jdbc.JDBCXYDataset this;
+    
+    
+        this := @this: org.jfree.data.jdbc.JDBCXYDataset;
+        $stack1 = this.<org.jfree.data.jdbc.JDBCXYDataset: boolean isTimeSeries>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.data.jdbc.JDBCXYDataset: java.lang.Comparable getSeriesKey(int)> ----
+    {
+        int $stack3, seriesIndex;
+        java.lang.Comparable #l0, #l1;
+        java.lang.Object $stack7;
+        java.lang.String $stack5;
+        java.lang.String[] $stack2, $stack4, $stack6;
+        org.jfree.data.jdbc.JDBCXYDataset this;
+    
+    
+        this := @this: org.jfree.data.jdbc.JDBCXYDataset;
+        seriesIndex := @parameter0: int;
+        $stack2 = this.<org.jfree.data.jdbc.JDBCXYDataset: java.lang.String[] columnNames>;
+        $stack3 = lengthof $stack2;
+    
+        if seriesIndex >= $stack3 goto label1;
+        $stack4 = this.<org.jfree.data.jdbc.JDBCXYDataset: java.lang.String[] columnNames>;
+        $stack5 = $stack4[seriesIndex];
+    
+        if $stack5 == null goto label1;
+        $stack6 = this.<org.jfree.data.jdbc.JDBCXYDataset: java.lang.String[] columnNames>;
+        $stack7 = $stack6[seriesIndex];
+        #l0 = (java.lang.Comparable) $stack7;
+    
+        return #l0;
+    
+      label1:
+        #l1 = (java.lang.Comparable) "";
+    
+        return #l1;
+    }
+
+    // ---- method: <org.jfree.data.jdbc.JDBCXYDataset: java.lang.Number getX(int,int)> ----
+    {
+        int itemIndex, seriesIndex;
+        java.lang.Number $stack7;
+        java.lang.Object $stack5, $stack6;
+        java.util.ArrayList $stack4, row;
+        org.jfree.data.jdbc.JDBCXYDataset this;
+    
+    
+        this := @this: org.jfree.data.jdbc.JDBCXYDataset;
+        seriesIndex := @parameter0: int;
+        itemIndex := @parameter1: int;
+        $stack4 = this.<org.jfree.data.jdbc.JDBCXYDataset: java.util.ArrayList rows>;
+        $stack5 = virtualinvoke $stack4.<java.util.ArrayList: java.lang.Object get(int)>(itemIndex);
+        row = (java.util.ArrayList) $stack5;
+        $stack6 = virtualinvoke row.<java.util.ArrayList: java.lang.Object get(int)>(0);
+        $stack7 = (java.lang.Number) $stack6;
+    
+        return $stack7;
+    }
+
+    // ---- method: <org.jfree.data.jdbc.JDBCXYDataset: int getItemCount()> ----
+    {
+        int $stack1;
+        org.jfree.data.jdbc.JDBCXYDataset this;
+    
+    
+        this := @this: org.jfree.data.jdbc.JDBCXYDataset;
+        $stack1 = virtualinvoke this.<org.jfree.data.jdbc.JDBCXYDataset: int getItemCount(int)>(0);
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.data.jdbc.JDBCXYDataset: double getRangeLowerBound(boolean)> ----
+    {
+        boolean includeInterval;
+        double $stack2;
+        org.jfree.data.jdbc.JDBCXYDataset this;
+    
+    
+        this := @this: org.jfree.data.jdbc.JDBCXYDataset;
+        includeInterval := @parameter0: boolean;
+        $stack2 = this.<org.jfree.data.jdbc.JDBCXYDataset: double minValue>;
+    
+        return $stack2;
+    }
+
+    // ---- method: <org.jfree.data.jdbc.JDBCXYDataset: void <init>(java.sql.Connection)> ----
+    {
+        java.sql.Connection con;
+        org.jfree.data.jdbc.JDBCXYDataset this;
+    
+    
+        this := @this: org.jfree.data.jdbc.JDBCXYDataset;
+        con := @parameter0: java.sql.Connection;
+        specialinvoke this.<org.jfree.data.jdbc.JDBCXYDataset: void <init>()>();
+        this.<org.jfree.data.jdbc.JDBCXYDataset: java.sql.Connection connection> = con;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.jdbc.JDBCXYDataset: void setTimeSeries(boolean)> ----
+    {
+        boolean timeSeries;
+        org.jfree.data.jdbc.JDBCXYDataset this;
+    
+    
+        this := @this: org.jfree.data.jdbc.JDBCXYDataset;
+        timeSeries := @parameter0: boolean;
+        this.<org.jfree.data.jdbc.JDBCXYDataset: boolean isTimeSeries> = timeSeries;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.jdbc.JDBCXYDataset: org.jfree.data.Range getRangeBounds(boolean)> ----
+    {
+        boolean includeInterval;
+        double $stack2, $stack3;
+        org.jfree.data.Range $stack4;
+        org.jfree.data.jdbc.JDBCXYDataset this;
+    
+    
+        this := @this: org.jfree.data.jdbc.JDBCXYDataset;
+        includeInterval := @parameter0: boolean;
+        $stack4 = new org.jfree.data.Range;
+        $stack3 = this.<org.jfree.data.jdbc.JDBCXYDataset: double minValue>;
+        $stack2 = this.<org.jfree.data.jdbc.JDBCXYDataset: double maxValue>;
+        specialinvoke $stack4.<org.jfree.data.Range: void <init>(double,double)>($stack3, $stack2);
+    
+        return $stack4;
+    }
+
+    // ---- method: <org.jfree.data.jdbc.JDBCXYDataset: void executeQuery(java.lang.String)> ----
+    {
+        java.lang.String query;
+        java.sql.Connection $stack2;
+        org.jfree.data.jdbc.JDBCXYDataset this;
+    
+    
+        this := @this: org.jfree.data.jdbc.JDBCXYDataset;
+        query := @parameter0: java.lang.String;
+        $stack2 = this.<org.jfree.data.jdbc.JDBCXYDataset: java.sql.Connection connection>;
+        virtualinvoke this.<org.jfree.data.jdbc.JDBCXYDataset: void executeQuery(java.sql.Connection,java.lang.String)>($stack2, query);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.jdbc.JDBCXYDataset: int getSeriesCount()> ----
+    {
+        int $stack2;
+        java.lang.String[] $stack1;
+        org.jfree.data.jdbc.JDBCXYDataset this;
+    
+    
+        this := @this: org.jfree.data.jdbc.JDBCXYDataset;
+        $stack1 = this.<org.jfree.data.jdbc.JDBCXYDataset: java.lang.String[] columnNames>;
+        $stack2 = lengthof $stack1;
+    
+        return $stack2;
+    }
+
+    // ---- method: <org.jfree.data.jdbc.JDBCXYDataset: int getItemCount(int)> ----
+    {
+        int $stack3, seriesIndex;
+        java.util.ArrayList $stack2;
+        org.jfree.data.jdbc.JDBCXYDataset this;
+    
+    
+        this := @this: org.jfree.data.jdbc.JDBCXYDataset;
+        seriesIndex := @parameter0: int;
+        $stack2 = this.<org.jfree.data.jdbc.JDBCXYDataset: java.util.ArrayList rows>;
+        $stack3 = virtualinvoke $stack2.<java.util.ArrayList: int size()>();
+    
+        return $stack3;
+    }
+
+    // ---- method: <org.jfree.data.jdbc.JDBCXYDataset: double getRangeUpperBound(boolean)> ----
+    {
+        boolean includeInterval;
+        double $stack2;
+        org.jfree.data.jdbc.JDBCXYDataset this;
+    
+    
+        this := @this: org.jfree.data.jdbc.JDBCXYDataset;
+        includeInterval := @parameter0: boolean;
+        $stack2 = this.<org.jfree.data.jdbc.JDBCXYDataset: double maxValue>;
+    
+        return $stack2;
+    }
+
+    // ---- method: <org.jfree.data.jdbc.JDBCXYDataset: void <init>(java.sql.Connection,java.lang.String)> ----
+    {
+        java.lang.String query;
+        java.sql.Connection con;
+        org.jfree.data.jdbc.JDBCXYDataset this;
+    
+    
+        this := @this: org.jfree.data.jdbc.JDBCXYDataset;
+        con := @parameter0: java.sql.Connection;
+        query := @parameter1: java.lang.String;
+        specialinvoke this.<org.jfree.data.jdbc.JDBCXYDataset: void <init>(java.sql.Connection)>(con);
+        virtualinvoke this.<org.jfree.data.jdbc.JDBCXYDataset: void executeQuery(java.lang.String)>(query);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.jdbc.JDBCXYDataset: void close()> ----
+    {
+        java.io.PrintStream $stack4;
+        java.lang.Throwable $stack3, e;
+        java.sql.Connection $stack2;
+        org.jfree.data.jdbc.JDBCXYDataset this;
+    
+    
+        this := @this: org.jfree.data.jdbc.JDBCXYDataset;
+    
+      label1:
+        $stack2 = this.<org.jfree.data.jdbc.JDBCXYDataset: java.sql.Connection connection>;
+        interfaceinvoke $stack2.<java.sql.Connection: void close()>();
+    
+      label2:
+        goto label4;
+    
+      label3:
+        $stack3 := @caughtexception;
+        e = $stack3;
+        $stack4 = <java.lang.System: java.io.PrintStream err>;
+        virtualinvoke $stack4.<java.io.PrintStream: void println(java.lang.String)>("JdbcXYDataset: swallowing exception.");
+    
+      label4:
+        return;
+    
+     catch java.lang.Exception from label1 to label2 with label3;
+    }
+
+}

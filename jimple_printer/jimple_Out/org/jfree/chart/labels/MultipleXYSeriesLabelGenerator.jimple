@@ -1,0 +1,295 @@
+// ========================================================================
+// CLASS : org.jfree.chart.labels.MultipleXYSeriesLabelGenerator
+// ========================================================================
+
+[PUBLIC, SUPER] class org.jfree.chart.labels.MultipleXYSeriesLabelGenerator extends java.lang.Object implements org.jfree.chart.labels.XYSeriesLabelGenerator, org.jfree.chart.util.PublicCloneable, java.lang.Cloneable, java.io.Serializable {
+
+    // ---- method: <org.jfree.chart.labels.MultipleXYSeriesLabelGenerator: void addSeriesLabel(int,java.lang.String)> ----
+    {
+        int series;
+        java.lang.Integer $stack5, key;
+        java.lang.Object $stack7, labelList;
+        java.lang.String label;
+        java.util.ArrayList $stack8;
+        java.util.List #l0;
+        java.util.Map $stack6, $stack9;
+        org.jfree.chart.labels.MultipleXYSeriesLabelGenerator this;
+    
+    
+        this := @this: org.jfree.chart.labels.MultipleXYSeriesLabelGenerator;
+        series := @parameter0: int;
+        label := @parameter1: java.lang.String;
+        $stack5 = new java.lang.Integer;
+        specialinvoke $stack5.<java.lang.Integer: void <init>(int)>(series);
+        key = $stack5;
+        $stack6 = this.<org.jfree.chart.labels.MultipleXYSeriesLabelGenerator: java.util.Map seriesLabelLists>;
+        $stack7 = interfaceinvoke $stack6.<java.util.Map: java.lang.Object get(java.lang.Object)>($stack5);
+        labelList = (java.util.List) $stack7;
+    
+        if labelList != null goto label1;
+        $stack8 = new java.util.ArrayList;
+        specialinvoke $stack8.<java.util.ArrayList: void <init>()>();
+        labelList = $stack8;
+        $stack9 = this.<org.jfree.chart.labels.MultipleXYSeriesLabelGenerator: java.util.Map seriesLabelLists>;
+        interfaceinvoke $stack9.<java.util.Map: java.lang.Object put(java.lang.Object,java.lang.Object)>($stack5, $stack8);
+    
+      label1:
+        #l0 = (java.util.List) labelList;
+        interfaceinvoke #l0.<java.util.List: boolean add(java.lang.Object)>(label);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.labels.MultipleXYSeriesLabelGenerator: boolean equals(java.lang.Object)> ----
+    {
+        boolean $stack12, $stack3, $stack6, $stack9;
+        java.lang.Object obj;
+        java.lang.String $stack4, $stack5, $stack7, $stack8;
+        java.util.Map $stack10, $stack11;
+        org.jfree.chart.labels.MultipleXYSeriesLabelGenerator that, this;
+    
+    
+        this := @this: org.jfree.chart.labels.MultipleXYSeriesLabelGenerator;
+        obj := @parameter0: java.lang.Object;
+    
+        if obj != this goto label1;
+    
+        return 1;
+    
+      label1:
+        $stack3 = obj instanceof org.jfree.chart.labels.MultipleXYSeriesLabelGenerator;
+    
+        if $stack3 != 0 goto label2;
+    
+        return 0;
+    
+      label2:
+        that = (org.jfree.chart.labels.MultipleXYSeriesLabelGenerator) obj;
+        $stack5 = this.<org.jfree.chart.labels.MultipleXYSeriesLabelGenerator: java.lang.String formatPattern>;
+        $stack4 = that.<org.jfree.chart.labels.MultipleXYSeriesLabelGenerator: java.lang.String formatPattern>;
+        $stack6 = virtualinvoke $stack5.<java.lang.String: boolean equals(java.lang.Object)>($stack4);
+    
+        if $stack6 != 0 goto label3;
+    
+        return 0;
+    
+      label3:
+        $stack8 = this.<org.jfree.chart.labels.MultipleXYSeriesLabelGenerator: java.lang.String additionalFormatPattern>;
+        $stack7 = that.<org.jfree.chart.labels.MultipleXYSeriesLabelGenerator: java.lang.String additionalFormatPattern>;
+        $stack9 = virtualinvoke $stack8.<java.lang.String: boolean equals(java.lang.Object)>($stack7);
+    
+        if $stack9 != 0 goto label4;
+    
+        return 0;
+    
+      label4:
+        $stack11 = this.<org.jfree.chart.labels.MultipleXYSeriesLabelGenerator: java.util.Map seriesLabelLists>;
+        $stack10 = that.<org.jfree.chart.labels.MultipleXYSeriesLabelGenerator: java.util.Map seriesLabelLists>;
+        $stack12 = interfaceinvoke $stack11.<java.util.Map: boolean equals(java.lang.Object)>($stack10);
+    
+        if $stack12 != 0 goto label5;
+    
+        return 0;
+    
+      label5:
+        return 1;
+    }
+
+    // ---- method: <org.jfree.chart.labels.MultipleXYSeriesLabelGenerator: void clearSeriesLabels(int)> ----
+    {
+        int series;
+        java.lang.Integer $stack3, key;
+        java.util.Map $stack4;
+        org.jfree.chart.labels.MultipleXYSeriesLabelGenerator this;
+    
+    
+        this := @this: org.jfree.chart.labels.MultipleXYSeriesLabelGenerator;
+        series := @parameter0: int;
+        $stack3 = new java.lang.Integer;
+        specialinvoke $stack3.<java.lang.Integer: void <init>(int)>(series);
+        key = $stack3;
+        $stack4 = this.<org.jfree.chart.labels.MultipleXYSeriesLabelGenerator: java.util.Map seriesLabelLists>;
+        interfaceinvoke $stack4.<java.util.Map: java.lang.Object put(java.lang.Object,java.lang.Object)>($stack3, null);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.labels.MultipleXYSeriesLabelGenerator: java.lang.Object[] createItemArray(org.jfree.data.xy.XYDataset,int)> ----
+    {
+        int series;
+        java.lang.Comparable $stack4;
+        java.lang.Object[] result;
+        java.lang.String $stack5;
+        org.jfree.chart.labels.MultipleXYSeriesLabelGenerator this;
+        org.jfree.data.xy.XYDataset dataset;
+    
+    
+        this := @this: org.jfree.chart.labels.MultipleXYSeriesLabelGenerator;
+        dataset := @parameter0: org.jfree.data.xy.XYDataset;
+        series := @parameter1: int;
+        result = newarray (java.lang.Object)[1];
+        $stack4 = interfaceinvoke dataset.<org.jfree.data.xy.XYDataset: java.lang.Comparable getSeriesKey(int)>(series);
+        $stack5 = virtualinvoke $stack4.<java.lang.Object: java.lang.String toString()>();
+        result[0] = $stack5;
+    
+        return result;
+    }
+
+    // ---- method: <org.jfree.chart.labels.MultipleXYSeriesLabelGenerator: java.lang.String generateLabel(org.jfree.data.xy.XYDataset,int)> ----
+    {
+        int $stack17, i, series;
+        java.lang.IllegalArgumentException #l1;
+        java.lang.Integer $stack13, key;
+        java.lang.Object $stack15, $stack18, $stack20;
+        java.lang.Object[] $stack11, temp;
+        java.lang.String $stack10, $stack12, $stack16, $stack19, labelAddition;
+        java.lang.StringBuffer $stack9, label;
+        java.lang.Throwable #l0;
+        java.util.List extraLabels;
+        java.util.Map $stack14;
+        org.jfree.chart.labels.MultipleXYSeriesLabelGenerator this;
+        org.jfree.data.xy.XYDataset dataset;
+    
+    
+        this := @this: org.jfree.chart.labels.MultipleXYSeriesLabelGenerator;
+        dataset := @parameter0: org.jfree.data.xy.XYDataset;
+        series := @parameter1: int;
+    
+        if dataset != null goto label1;
+        $stack20 = new java.lang.IllegalArgumentException;
+        #l1 = (java.lang.IllegalArgumentException) $stack20;
+        specialinvoke #l1.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'dataset\' argument.");
+        #l0 = (java.lang.Throwable) $stack20;
+    
+        throw #l0;
+    
+      label1:
+        $stack9 = new java.lang.StringBuffer;
+        specialinvoke $stack9.<java.lang.StringBuffer: void <init>()>();
+        label = $stack9;
+        $stack10 = this.<org.jfree.chart.labels.MultipleXYSeriesLabelGenerator: java.lang.String formatPattern>;
+        $stack11 = virtualinvoke this.<org.jfree.chart.labels.MultipleXYSeriesLabelGenerator: java.lang.Object[] createItemArray(org.jfree.data.xy.XYDataset,int)>(dataset, series);
+        $stack12 = staticinvoke <java.text.MessageFormat: java.lang.String format(java.lang.String,java.lang.Object[])>($stack10, $stack11);
+        virtualinvoke $stack9.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>($stack12);
+        $stack13 = new java.lang.Integer;
+        specialinvoke $stack13.<java.lang.Integer: void <init>(int)>(series);
+        key = $stack13;
+        $stack14 = this.<org.jfree.chart.labels.MultipleXYSeriesLabelGenerator: java.util.Map seriesLabelLists>;
+        $stack15 = interfaceinvoke $stack14.<java.util.Map: java.lang.Object get(java.lang.Object)>($stack13);
+        extraLabels = (java.util.List) $stack15;
+    
+        if extraLabels == null goto label3;
+        temp = newarray (java.lang.Object)[1];
+        i = 0;
+    
+      label2:
+        $stack17 = interfaceinvoke extraLabels.<java.util.List: int size()>();
+    
+        if i >= $stack17 goto label3;
+        $stack18 = interfaceinvoke extraLabels.<java.util.List: java.lang.Object get(int)>(i);
+        temp[0] = $stack18;
+        $stack19 = this.<org.jfree.chart.labels.MultipleXYSeriesLabelGenerator: java.lang.String additionalFormatPattern>;
+        labelAddition = staticinvoke <java.text.MessageFormat: java.lang.String format(java.lang.String,java.lang.Object[])>($stack19, temp);
+        virtualinvoke $stack9.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>(labelAddition);
+        i = i + 1;
+    
+        goto label2;
+    
+      label3:
+        $stack16 = virtualinvoke $stack9.<java.lang.StringBuffer: java.lang.String toString()>();
+    
+        return $stack16;
+    }
+
+    // ---- method: <org.jfree.chart.labels.MultipleXYSeriesLabelGenerator: void <init>(java.lang.String)> ----
+    {
+        java.lang.IllegalArgumentException #l2;
+        java.lang.Object $stack2, $stack3;
+        java.lang.String format;
+        java.lang.Throwable #l0;
+        java.util.HashMap #l1;
+        org.jfree.chart.labels.MultipleXYSeriesLabelGenerator this;
+    
+    
+        this := @this: org.jfree.chart.labels.MultipleXYSeriesLabelGenerator;
+        format := @parameter0: java.lang.String;
+        specialinvoke this.<java.lang.Object: void <init>()>();
+    
+        if format != null goto label1;
+        $stack3 = new java.lang.IllegalArgumentException;
+        #l2 = (java.lang.IllegalArgumentException) $stack3;
+        specialinvoke #l2.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'format\' argument.");
+        #l0 = (java.lang.Throwable) $stack3;
+    
+        throw #l0;
+    
+      label1:
+        this.<org.jfree.chart.labels.MultipleXYSeriesLabelGenerator: java.lang.String formatPattern> = format;
+        this.<org.jfree.chart.labels.MultipleXYSeriesLabelGenerator: java.lang.String additionalFormatPattern> = "\n{0}";
+        $stack2 = new java.util.HashMap;
+        #l1 = (java.util.HashMap) $stack2;
+        specialinvoke #l1.<java.util.HashMap: void <init>()>();
+        this.<org.jfree.chart.labels.MultipleXYSeriesLabelGenerator: java.util.Map seriesLabelLists> = (java.util.Map) $stack2;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.labels.MultipleXYSeriesLabelGenerator: java.lang.Object clone()> ----
+    {
+        boolean $stack11, $stack13;
+        java.lang.Object $stack8, $stack9, entry, key, toAdd;
+        java.util.HashMap #l0;
+        java.util.Iterator iterator;
+        java.util.Map $stack10, $stack12, $stack14;
+        java.util.Set keys;
+        org.jfree.chart.labels.MultipleXYSeriesLabelGenerator clone, this;
+        org.jfree.chart.util.PublicCloneable pc;
+    
+    
+        this := @this: org.jfree.chart.labels.MultipleXYSeriesLabelGenerator;
+        $stack8 = specialinvoke this.<java.lang.Object: java.lang.Object clone()>();
+        clone = (org.jfree.chart.labels.MultipleXYSeriesLabelGenerator) $stack8;
+        $stack9 = new java.util.HashMap;
+        #l0 = (java.util.HashMap) $stack9;
+        specialinvoke #l0.<java.util.HashMap: void <init>()>();
+        clone.<org.jfree.chart.labels.MultipleXYSeriesLabelGenerator: java.util.Map seriesLabelLists> = (java.util.Map) $stack9;
+        $stack10 = this.<org.jfree.chart.labels.MultipleXYSeriesLabelGenerator: java.util.Map seriesLabelLists>;
+        keys = interfaceinvoke $stack10.<java.util.Map: java.util.Set keySet()>();
+        iterator = interfaceinvoke keys.<java.util.Set: java.util.Iterator iterator()>();
+    
+      label1:
+        $stack11 = interfaceinvoke iterator.<java.util.Iterator: boolean hasNext()>();
+    
+        if $stack11 == 0 goto label3;
+        key = interfaceinvoke iterator.<java.util.Iterator: java.lang.Object next()>();
+        $stack12 = this.<org.jfree.chart.labels.MultipleXYSeriesLabelGenerator: java.util.Map seriesLabelLists>;
+        entry = interfaceinvoke $stack12.<java.util.Map: java.lang.Object get(java.lang.Object)>(key);
+        toAdd = entry;
+        $stack13 = entry instanceof org.jfree.chart.util.PublicCloneable;
+    
+        if $stack13 == 0 goto label2;
+        pc = (org.jfree.chart.util.PublicCloneable) entry;
+        toAdd = interfaceinvoke pc.<org.jfree.chart.util.PublicCloneable: java.lang.Object clone()>();
+    
+      label2:
+        $stack14 = clone.<org.jfree.chart.labels.MultipleXYSeriesLabelGenerator: java.util.Map seriesLabelLists>;
+        interfaceinvoke $stack14.<java.util.Map: java.lang.Object put(java.lang.Object,java.lang.Object)>(key, toAdd);
+    
+        goto label1;
+    
+      label3:
+        return clone;
+    }
+
+    // ---- method: <org.jfree.chart.labels.MultipleXYSeriesLabelGenerator: void <init>()> ----
+    {
+        org.jfree.chart.labels.MultipleXYSeriesLabelGenerator this;
+    
+    
+        this := @this: org.jfree.chart.labels.MultipleXYSeriesLabelGenerator;
+        specialinvoke this.<org.jfree.chart.labels.MultipleXYSeriesLabelGenerator: void <init>(java.lang.String)>("{0}");
+    
+        return;
+    }
+
+}

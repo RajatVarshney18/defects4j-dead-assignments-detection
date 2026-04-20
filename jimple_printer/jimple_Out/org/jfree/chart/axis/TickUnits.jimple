@@ -1,0 +1,226 @@
+// ========================================================================
+// CLASS : org.jfree.chart.axis.TickUnits
+// ========================================================================
+
+[PUBLIC, SUPER] class org.jfree.chart.axis.TickUnits extends java.lang.Object implements org.jfree.chart.axis.TickUnitSource, java.lang.Cloneable, java.io.Serializable {
+
+    // ---- method: <org.jfree.chart.axis.TickUnits: void add(org.jfree.chart.axis.TickUnit)> ----
+    {
+        java.lang.NullPointerException #l1;
+        java.lang.Object $stack4;
+        java.lang.Throwable #l0;
+        java.util.List $stack2, $stack3;
+        org.jfree.chart.axis.TickUnit unit;
+        org.jfree.chart.axis.TickUnits this;
+    
+    
+        this := @this: org.jfree.chart.axis.TickUnits;
+        unit := @parameter0: org.jfree.chart.axis.TickUnit;
+    
+        if unit != null goto label1;
+        $stack4 = new java.lang.NullPointerException;
+        #l1 = (java.lang.NullPointerException) $stack4;
+        specialinvoke #l1.<java.lang.NullPointerException: void <init>(java.lang.String)>("Null \'unit\' argument.");
+        #l0 = (java.lang.Throwable) $stack4;
+    
+        throw #l0;
+    
+      label1:
+        $stack2 = this.<org.jfree.chart.axis.TickUnits: java.util.List tickUnits>;
+        interfaceinvoke $stack2.<java.util.List: boolean add(java.lang.Object)>(unit);
+        $stack3 = this.<org.jfree.chart.axis.TickUnits: java.util.List tickUnits>;
+        staticinvoke <java.util.Collections: void sort(java.util.List)>($stack3);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.axis.TickUnits: int size()> ----
+    {
+        int $stack2;
+        java.util.List $stack1;
+        org.jfree.chart.axis.TickUnits this;
+    
+    
+        this := @this: org.jfree.chart.axis.TickUnits;
+        $stack1 = this.<org.jfree.chart.axis.TickUnits: java.util.List tickUnits>;
+        $stack2 = interfaceinvoke $stack1.<java.util.List: int size()>();
+    
+        return $stack2;
+    }
+
+    // ---- method: <org.jfree.chart.axis.TickUnits: boolean equals(java.lang.Object)> ----
+    {
+        boolean $stack3, $stack6;
+        java.lang.Object obj;
+        java.util.List $stack4, $stack5;
+        org.jfree.chart.axis.TickUnits that, this;
+    
+    
+        this := @this: org.jfree.chart.axis.TickUnits;
+        obj := @parameter0: java.lang.Object;
+    
+        if obj != this goto label1;
+    
+        return 1;
+    
+      label1:
+        $stack3 = obj instanceof org.jfree.chart.axis.TickUnits;
+    
+        if $stack3 != 0 goto label2;
+    
+        return 0;
+    
+      label2:
+        that = (org.jfree.chart.axis.TickUnits) obj;
+        $stack5 = that.<org.jfree.chart.axis.TickUnits: java.util.List tickUnits>;
+        $stack4 = this.<org.jfree.chart.axis.TickUnits: java.util.List tickUnits>;
+        $stack6 = interfaceinvoke $stack5.<java.util.List: boolean equals(java.lang.Object)>($stack4);
+    
+        return $stack6;
+    }
+
+    // ---- method: <org.jfree.chart.axis.TickUnits: org.jfree.chart.axis.TickUnit getCeilingTickUnit(org.jfree.chart.axis.TickUnit)> ----
+    {
+        int $stack4, $stack7, $stack8, $stack9, index#0, index#1;
+        java.lang.Object $stack10, $stack13;
+        java.util.List $stack12, $stack3, $stack5, $stack6;
+        org.jfree.chart.axis.TickUnit $stack11, $stack14, unit;
+        org.jfree.chart.axis.TickUnits this;
+    
+    
+        this := @this: org.jfree.chart.axis.TickUnits;
+        unit := @parameter0: org.jfree.chart.axis.TickUnit;
+        $stack3 = this.<org.jfree.chart.axis.TickUnits: java.util.List tickUnits>;
+        index#0 = staticinvoke <java.util.Collections: int binarySearch(java.util.List,java.lang.Object)>($stack3, unit);
+    
+        if index#0 < 0 goto label1;
+        $stack12 = this.<org.jfree.chart.axis.TickUnits: java.util.List tickUnits>;
+        $stack13 = interfaceinvoke $stack12.<java.util.List: java.lang.Object get(int)>(index#0);
+        $stack14 = (org.jfree.chart.axis.TickUnit) $stack13;
+    
+        return $stack14;
+    
+      label1:
+        $stack4 = index#0 + 1;
+        index#1 = neg $stack4;
+        $stack6 = this.<org.jfree.chart.axis.TickUnits: java.util.List tickUnits>;
+        $stack5 = this.<org.jfree.chart.axis.TickUnits: java.util.List tickUnits>;
+        $stack7 = interfaceinvoke $stack5.<java.util.List: int size()>();
+        $stack8 = $stack7 - 1;
+        $stack9 = staticinvoke <java.lang.Math: int min(int,int)>(index#1, $stack8);
+        $stack10 = interfaceinvoke $stack6.<java.util.List: java.lang.Object get(int)>($stack9);
+        $stack11 = (org.jfree.chart.axis.TickUnit) $stack10;
+    
+        return $stack11;
+    }
+
+    // ---- method: <org.jfree.chart.axis.TickUnits: org.jfree.chart.axis.TickUnit getLargerTickUnit(org.jfree.chart.axis.TickUnit)> ----
+    {
+        int $stack6, $stack7, $stack8, index#0, index#1;
+        java.lang.Object $stack9;
+        java.util.List $stack3, $stack4, $stack5;
+        org.jfree.chart.axis.TickUnit $stack10, unit;
+        org.jfree.chart.axis.TickUnits this;
+    
+    
+        this := @this: org.jfree.chart.axis.TickUnits;
+        unit := @parameter0: org.jfree.chart.axis.TickUnit;
+        $stack3 = this.<org.jfree.chart.axis.TickUnits: java.util.List tickUnits>;
+        index#0 = staticinvoke <java.util.Collections: int binarySearch(java.util.List,java.lang.Object)>($stack3, unit);
+    
+        if index#0 < 0 goto label1;
+        index#1 = index#0 + 1;
+    
+        goto label2;
+    
+      label1:
+        index#1 = neg index#0;
+    
+      label2:
+        $stack5 = this.<org.jfree.chart.axis.TickUnits: java.util.List tickUnits>;
+        $stack4 = this.<org.jfree.chart.axis.TickUnits: java.util.List tickUnits>;
+        $stack6 = interfaceinvoke $stack4.<java.util.List: int size()>();
+        $stack7 = $stack6 - 1;
+        $stack8 = staticinvoke <java.lang.Math: int min(int,int)>(index#1, $stack7);
+        $stack9 = interfaceinvoke $stack5.<java.util.List: java.lang.Object get(int)>($stack8);
+        $stack10 = (org.jfree.chart.axis.TickUnit) $stack9;
+    
+        return $stack10;
+    }
+
+    // ---- method: <org.jfree.chart.axis.TickUnits: org.jfree.chart.axis.TickUnit get(int)> ----
+    {
+        int pos;
+        java.lang.Object $stack3;
+        java.util.List $stack2;
+        org.jfree.chart.axis.TickUnit $stack4;
+        org.jfree.chart.axis.TickUnits this;
+    
+    
+        this := @this: org.jfree.chart.axis.TickUnits;
+        pos := @parameter0: int;
+        $stack2 = this.<org.jfree.chart.axis.TickUnits: java.util.List tickUnits>;
+        $stack3 = interfaceinvoke $stack2.<java.util.List: java.lang.Object get(int)>(pos);
+        $stack4 = (org.jfree.chart.axis.TickUnit) $stack3;
+    
+        return $stack4;
+    }
+
+    // ---- method: <org.jfree.chart.axis.TickUnits: void <init>()> ----
+    {
+        java.lang.Object $stack1;
+        java.util.ArrayList #l0;
+        org.jfree.chart.axis.TickUnits this;
+    
+    
+        this := @this: org.jfree.chart.axis.TickUnits;
+        specialinvoke this.<java.lang.Object: void <init>()>();
+        $stack1 = new java.util.ArrayList;
+        #l0 = (java.util.ArrayList) $stack1;
+        specialinvoke #l0.<java.util.ArrayList: void <init>()>();
+        this.<org.jfree.chart.axis.TickUnits: java.util.List tickUnits> = (java.util.List) $stack1;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.axis.TickUnits: org.jfree.chart.axis.TickUnit getCeilingTickUnit(double)> ----
+    {
+        double size;
+        java.text.NumberFormat $stack3;
+        org.jfree.chart.axis.NumberTickUnit $stack4;
+        org.jfree.chart.axis.TickUnit $stack5;
+        org.jfree.chart.axis.TickUnits this;
+    
+    
+        this := @this: org.jfree.chart.axis.TickUnits;
+        size := @parameter0: double;
+        $stack4 = new org.jfree.chart.axis.NumberTickUnit;
+        $stack3 = staticinvoke <java.text.NumberFormat: java.text.NumberFormat getInstance()>();
+        specialinvoke $stack4.<org.jfree.chart.axis.NumberTickUnit: void <init>(double,java.text.NumberFormat)>(size, $stack3);
+        $stack5 = virtualinvoke this.<org.jfree.chart.axis.TickUnits: org.jfree.chart.axis.TickUnit getCeilingTickUnit(org.jfree.chart.axis.TickUnit)>($stack4);
+    
+        return $stack5;
+    }
+
+    // ---- method: <org.jfree.chart.axis.TickUnits: java.lang.Object clone()> ----
+    {
+        java.lang.Object $stack2, $stack3, $stack4;
+        java.util.ArrayList #l0;
+        java.util.Collection #l1;
+        org.jfree.chart.axis.TickUnits clone, this;
+    
+    
+        this := @this: org.jfree.chart.axis.TickUnits;
+        $stack2 = specialinvoke this.<java.lang.Object: java.lang.Object clone()>();
+        clone = (org.jfree.chart.axis.TickUnits) $stack2;
+        $stack4 = new java.util.ArrayList;
+        $stack3 = this.<org.jfree.chart.axis.TickUnits: java.util.List tickUnits>;
+        #l0 = (java.util.ArrayList) $stack4;
+        #l1 = (java.util.Collection) $stack3;
+        specialinvoke #l0.<java.util.ArrayList: void <init>(java.util.Collection)>(#l1);
+        clone.<org.jfree.chart.axis.TickUnits: java.util.List tickUnits> = (java.util.List) $stack4;
+    
+        return clone;
+    }
+
+}

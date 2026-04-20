@@ -1,0 +1,133 @@
+// ========================================================================
+// CLASS : org.jfree.chart.needle.ShipNeedle
+// ========================================================================
+
+[PUBLIC, SUPER] class org.jfree.chart.needle.ShipNeedle extends org.jfree.chart.needle.MeterNeedle implements java.lang.Cloneable, java.io.Serializable {
+
+    // ---- method: <org.jfree.chart.needle.ShipNeedle: void drawNeedle(java.awt.Graphics2D,java.awt.geom.Rectangle2D,java.awt.geom.Point2D,double)> ----
+    {
+        byte $stack18;
+        double $stack10, $stack11, $stack13, $stack14, $stack15, $stack19, $stack20, angle;
+        java.awt.Graphics2D g2;
+        java.awt.Shape #l4, #l5, #l8;
+        java.awt.geom.AffineTransform $stack12, $stack16, $stack17, $stack21, $stack22;
+        java.awt.geom.Arc2D$Double #l6, #l9;
+        java.awt.geom.GeneralPath #l0, #l1, #l10, #l2, #l3, #l7, shape;
+        java.awt.geom.Point2D rotate;
+        java.awt.geom.Rectangle2D plotArea;
+        java.lang.Object $stack7, $stack8, $stack9;
+        org.jfree.chart.needle.ShipNeedle this;
+    
+    
+        this := @this: org.jfree.chart.needle.ShipNeedle;
+        g2 := @parameter0: java.awt.Graphics2D;
+        plotArea := @parameter1: java.awt.geom.Rectangle2D;
+        rotate := @parameter2: java.awt.geom.Point2D;
+        angle := @parameter3: double;
+        $stack7 = new java.awt.geom.GeneralPath;
+        #l0 = (java.awt.geom.GeneralPath) $stack7;
+        specialinvoke #l0.<java.awt.geom.GeneralPath: void <init>()>();
+        shape = (java.awt.geom.GeneralPath) $stack7;
+        $stack8 = new java.awt.geom.Arc2D$Double;
+        #l6 = (java.awt.geom.Arc2D$Double) $stack8;
+        specialinvoke #l6.<java.awt.geom.Arc2D$Double: void <init>(double,double,double,double,double,double,int)>(-9.0, -7.0, 10.0, 14.0, 0.0, 25.5, 0);
+        #l8 = (java.awt.Shape) $stack8;
+        #l7 = (java.awt.geom.GeneralPath) $stack7;
+        virtualinvoke #l7.<java.awt.geom.GeneralPath: void append(java.awt.Shape,boolean)>(#l8, 1);
+        $stack9 = new java.awt.geom.Arc2D$Double;
+        #l9 = (java.awt.geom.Arc2D$Double) $stack9;
+        specialinvoke #l9.<java.awt.geom.Arc2D$Double: void <init>(double,double,double,double,double,double,int)>(0.0, -7.0, 10.0, 14.0, 154.5, 25.5, 0);
+        #l3 = (java.awt.geom.GeneralPath) $stack7;
+        #l4 = (java.awt.Shape) $stack9;
+        virtualinvoke #l3.<java.awt.geom.GeneralPath: void append(java.awt.Shape,boolean)>(#l4, 1);
+        #l1 = (java.awt.geom.GeneralPath) $stack7;
+        virtualinvoke #l1.<java.awt.geom.GeneralPath: void closePath()>();
+        $stack12 = virtualinvoke this.<org.jfree.chart.needle.ShipNeedle: java.awt.geom.AffineTransform getTransform()>();
+        $stack11 = virtualinvoke plotArea.<java.awt.geom.Rectangle2D: double getMinX()>();
+        $stack10 = virtualinvoke plotArea.<java.awt.geom.Rectangle2D: double getMaxY()>();
+        virtualinvoke $stack12.<java.awt.geom.AffineTransform: void setToTranslation(double,double)>($stack11, $stack10);
+        $stack16 = virtualinvoke this.<org.jfree.chart.needle.ShipNeedle: java.awt.geom.AffineTransform getTransform()>();
+        $stack15 = virtualinvoke plotArea.<java.awt.geom.Rectangle2D: double getWidth()>();
+        $stack13 = virtualinvoke plotArea.<java.awt.geom.Rectangle2D: double getHeight()>();
+        $stack14 = $stack13 / 3.0;
+        virtualinvoke $stack16.<java.awt.geom.AffineTransform: void scale(double,double)>($stack15, $stack14);
+        $stack17 = virtualinvoke this.<org.jfree.chart.needle.ShipNeedle: java.awt.geom.AffineTransform getTransform()>();
+        #l2 = (java.awt.geom.GeneralPath) $stack7;
+        virtualinvoke #l2.<java.awt.geom.GeneralPath: void transform(java.awt.geom.AffineTransform)>($stack17);
+    
+        if rotate == null goto label1;
+        $stack18 = angle cmpl 0.0;
+    
+        if $stack18 == 0 goto label1;
+        $stack21 = virtualinvoke this.<org.jfree.chart.needle.ShipNeedle: java.awt.geom.AffineTransform getTransform()>();
+        $stack20 = virtualinvoke rotate.<java.awt.geom.Point2D: double getX()>();
+        $stack19 = virtualinvoke rotate.<java.awt.geom.Point2D: double getY()>();
+        virtualinvoke $stack21.<java.awt.geom.AffineTransform: void setToRotation(double,double,double)>(angle, $stack20, $stack19);
+        $stack22 = virtualinvoke this.<org.jfree.chart.needle.ShipNeedle: java.awt.geom.AffineTransform getTransform()>();
+        #l10 = (java.awt.geom.GeneralPath) $stack7;
+        virtualinvoke #l10.<java.awt.geom.GeneralPath: void transform(java.awt.geom.AffineTransform)>($stack22);
+    
+      label1:
+        #l5 = (java.awt.Shape) $stack7;
+        virtualinvoke this.<org.jfree.chart.needle.ShipNeedle: void defaultDisplay(java.awt.Graphics2D,java.awt.Shape)>(g2, #l5);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.needle.ShipNeedle: void <init>()> ----
+    {
+        org.jfree.chart.needle.ShipNeedle this;
+    
+    
+        this := @this: org.jfree.chart.needle.ShipNeedle;
+        specialinvoke this.<org.jfree.chart.needle.MeterNeedle: void <init>()>();
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.needle.ShipNeedle: boolean equals(java.lang.Object)> ----
+    {
+        boolean $stack2, $stack3;
+        java.lang.Object object;
+        org.jfree.chart.needle.ShipNeedle this;
+    
+    
+        this := @this: org.jfree.chart.needle.ShipNeedle;
+        object := @parameter0: java.lang.Object;
+    
+        if object != null goto label1;
+    
+        return 0;
+    
+      label1:
+        if object != this goto label2;
+    
+        return 1;
+    
+      label2:
+        $stack2 = specialinvoke this.<org.jfree.chart.needle.MeterNeedle: boolean equals(java.lang.Object)>(object);
+    
+        if $stack2 == 0 goto label3;
+        $stack3 = object instanceof org.jfree.chart.needle.ShipNeedle;
+    
+        if $stack3 == 0 goto label3;
+    
+        return 1;
+    
+      label3:
+        return 0;
+    }
+
+    // ---- method: <org.jfree.chart.needle.ShipNeedle: java.lang.Object clone()> ----
+    {
+        java.lang.Object $stack1;
+        org.jfree.chart.needle.ShipNeedle this;
+    
+    
+        this := @this: org.jfree.chart.needle.ShipNeedle;
+        $stack1 = specialinvoke this.<java.lang.Object: java.lang.Object clone()>();
+    
+        return $stack1;
+    }
+
+}

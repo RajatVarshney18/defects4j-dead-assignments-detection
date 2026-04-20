@@ -1,0 +1,426 @@
+// ========================================================================
+// CLASS : org.jfree.chart.renderer.DefaultPolarItemRenderer
+// ========================================================================
+
+[PUBLIC, SUPER] class org.jfree.chart.renderer.DefaultPolarItemRenderer extends org.jfree.chart.renderer.AbstractRenderer implements org.jfree.chart.renderer.PolarItemRenderer {
+
+    // ---- method: <org.jfree.chart.renderer.DefaultPolarItemRenderer: boolean equals(java.lang.Object)> ----
+    {
+        boolean $stack3, $stack6, $stack7;
+        java.lang.Object obj;
+        org.jfree.chart.renderer.DefaultPolarItemRenderer that, this;
+        org.jfree.chart.util.BooleanList $stack4, $stack5;
+    
+    
+        this := @this: org.jfree.chart.renderer.DefaultPolarItemRenderer;
+        obj := @parameter0: java.lang.Object;
+    
+        if obj != null goto label1;
+    
+        return 0;
+    
+      label1:
+        $stack3 = obj instanceof org.jfree.chart.renderer.DefaultPolarItemRenderer;
+    
+        if $stack3 != 0 goto label2;
+    
+        return 0;
+    
+      label2:
+        that = (org.jfree.chart.renderer.DefaultPolarItemRenderer) obj;
+        $stack5 = this.<org.jfree.chart.renderer.DefaultPolarItemRenderer: org.jfree.chart.util.BooleanList seriesFilled>;
+        $stack4 = that.<org.jfree.chart.renderer.DefaultPolarItemRenderer: org.jfree.chart.util.BooleanList seriesFilled>;
+        $stack6 = virtualinvoke $stack5.<org.jfree.chart.util.BooleanList: boolean equals(java.lang.Object)>($stack4);
+    
+        if $stack6 != 0 goto label3;
+    
+        return 0;
+    
+      label3:
+        $stack7 = specialinvoke this.<org.jfree.chart.renderer.AbstractRenderer: boolean equals(java.lang.Object)>(obj);
+    
+        return $stack7;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.DefaultPolarItemRenderer: org.jfree.chart.plot.PolarPlot getPlot()> ----
+    {
+        org.jfree.chart.plot.PolarPlot $stack1;
+        org.jfree.chart.renderer.DefaultPolarItemRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.DefaultPolarItemRenderer;
+        $stack1 = this.<org.jfree.chart.renderer.DefaultPolarItemRenderer: org.jfree.chart.plot.PolarPlot plot>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.DefaultPolarItemRenderer: org.jfree.chart.plot.DrawingSupplier getDrawingSupplier()> ----
+    {
+        org.jfree.chart.plot.DrawingSupplier result;
+        org.jfree.chart.plot.PolarPlot p;
+        org.jfree.chart.renderer.DefaultPolarItemRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.DefaultPolarItemRenderer;
+        result = null;
+        p = virtualinvoke this.<org.jfree.chart.renderer.DefaultPolarItemRenderer: org.jfree.chart.plot.PolarPlot getPlot()>();
+    
+        if p == null goto label1;
+        result = virtualinvoke p.<org.jfree.chart.plot.PolarPlot: org.jfree.chart.plot.DrawingSupplier getDrawingSupplier()>();
+    
+      label1:
+        return result;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.DefaultPolarItemRenderer: org.jfree.chart.LegendItem getLegendItem(int)> ----
+    {
+        int series;
+        java.awt.Paint outlinePaint, paint;
+        java.awt.Shape shape;
+        java.awt.Stroke outlineStroke;
+        java.lang.Comparable $stack11;
+        java.lang.String description, label;
+        org.jfree.chart.LegendItem $stack12, result;
+        org.jfree.chart.plot.PolarPlot polarPlot;
+        org.jfree.chart.renderer.DefaultPolarItemRenderer this;
+        org.jfree.data.xy.XYDataset dataset;
+    
+    
+        this := @this: org.jfree.chart.renderer.DefaultPolarItemRenderer;
+        series := @parameter0: int;
+        result = null;
+        polarPlot = virtualinvoke this.<org.jfree.chart.renderer.DefaultPolarItemRenderer: org.jfree.chart.plot.PolarPlot getPlot()>();
+    
+        if polarPlot == null goto label1;
+        dataset = virtualinvoke polarPlot.<org.jfree.chart.plot.PolarPlot: org.jfree.data.xy.XYDataset getDataset()>();
+    
+        if dataset == null goto label1;
+        $stack11 = interfaceinvoke dataset.<org.jfree.data.xy.XYDataset: java.lang.Comparable getSeriesKey(int)>(series);
+        label = virtualinvoke $stack11.<java.lang.Object: java.lang.String toString()>();
+        description = label;
+        shape = virtualinvoke this.<org.jfree.chart.renderer.DefaultPolarItemRenderer: java.awt.Shape lookupSeriesShape(int)>(series);
+        paint = virtualinvoke this.<org.jfree.chart.renderer.DefaultPolarItemRenderer: java.awt.Paint lookupSeriesPaint(int)>(series);
+        outlinePaint = virtualinvoke this.<org.jfree.chart.renderer.DefaultPolarItemRenderer: java.awt.Paint lookupSeriesOutlinePaint(int)>(series);
+        outlineStroke = virtualinvoke this.<org.jfree.chart.renderer.DefaultPolarItemRenderer: java.awt.Stroke lookupSeriesOutlineStroke(int)>(series);
+        $stack12 = new org.jfree.chart.LegendItem;
+        specialinvoke $stack12.<org.jfree.chart.LegendItem: void <init>(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.awt.Shape,java.awt.Paint,java.awt.Stroke,java.awt.Paint)>(label, label, null, null, shape, paint, outlineStroke, outlinePaint);
+        result = $stack12;
+        virtualinvoke $stack12.<org.jfree.chart.LegendItem: void setDataset(org.jfree.data.general.Dataset)>(dataset);
+    
+      label1:
+        return result;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.DefaultPolarItemRenderer: void setPlot(org.jfree.chart.plot.PolarPlot)> ----
+    {
+        org.jfree.chart.plot.PolarPlot plot;
+        org.jfree.chart.renderer.DefaultPolarItemRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.DefaultPolarItemRenderer;
+        plot := @parameter0: org.jfree.chart.plot.PolarPlot;
+        this.<org.jfree.chart.renderer.DefaultPolarItemRenderer: org.jfree.chart.plot.PolarPlot plot> = plot;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.DefaultPolarItemRenderer: void setSeriesFilled(int,boolean)> ----
+    {
+        boolean filled;
+        int series;
+        java.lang.Boolean $stack4;
+        org.jfree.chart.renderer.DefaultPolarItemRenderer this;
+        org.jfree.chart.util.BooleanList $stack3;
+    
+    
+        this := @this: org.jfree.chart.renderer.DefaultPolarItemRenderer;
+        series := @parameter0: int;
+        filled := @parameter1: boolean;
+        $stack3 = this.<org.jfree.chart.renderer.DefaultPolarItemRenderer: org.jfree.chart.util.BooleanList seriesFilled>;
+        $stack4 = staticinvoke <java.lang.Boolean: java.lang.Boolean valueOf(boolean)>(filled);
+        virtualinvoke $stack3.<org.jfree.chart.util.BooleanList: void setBoolean(int,java.lang.Boolean)>(series, $stack4);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.DefaultPolarItemRenderer: void drawAngularGridLines(java.awt.Graphics2D,org.jfree.chart.plot.PolarPlot,java.util.List,java.awt.geom.Rectangle2D)> ----
+    {
+        boolean $stack19, $stack28;
+        double $stack22, axisMin, maxRadius;
+        float $stack31, $stack32;
+        int $stack24, $stack25, $stack26, $stack27, x, y;
+        java.awt.Font $stack15;
+        java.awt.Graphics2D g2;
+        java.awt.Paint $stack17, $stack23, $stack29;
+        java.awt.Point center, p;
+        java.awt.Stroke $stack16;
+        java.awt.geom.Rectangle2D dataArea;
+        java.lang.Number $stack21;
+        java.lang.Object $stack20;
+        java.lang.String $stack33;
+        java.util.Iterator iterator;
+        java.util.List ticks;
+        org.jfree.chart.axis.NumberTick tick;
+        org.jfree.chart.axis.ValueAxis $stack18;
+        org.jfree.chart.plot.PolarPlot plot;
+        org.jfree.chart.renderer.DefaultPolarItemRenderer this;
+        org.jfree.chart.text.TextAnchor $stack30;
+    
+    
+        this := @this: org.jfree.chart.renderer.DefaultPolarItemRenderer;
+        g2 := @parameter0: java.awt.Graphics2D;
+        plot := @parameter1: org.jfree.chart.plot.PolarPlot;
+        ticks := @parameter2: java.util.List;
+        dataArea := @parameter3: java.awt.geom.Rectangle2D;
+        $stack15 = virtualinvoke plot.<org.jfree.chart.plot.PolarPlot: java.awt.Font getAngleLabelFont()>();
+        virtualinvoke g2.<java.awt.Graphics2D: void setFont(java.awt.Font)>($stack15);
+        $stack16 = virtualinvoke plot.<org.jfree.chart.plot.PolarPlot: java.awt.Stroke getAngleGridlineStroke()>();
+        virtualinvoke g2.<java.awt.Graphics2D: void setStroke(java.awt.Stroke)>($stack16);
+        $stack17 = virtualinvoke plot.<org.jfree.chart.plot.PolarPlot: java.awt.Paint getAngleGridlinePaint()>();
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>($stack17);
+        $stack18 = virtualinvoke plot.<org.jfree.chart.plot.PolarPlot: org.jfree.chart.axis.ValueAxis getAxis()>();
+        axisMin = virtualinvoke $stack18.<org.jfree.chart.axis.ValueAxis: double getLowerBound()>();
+        maxRadius = virtualinvoke plot.<org.jfree.chart.plot.PolarPlot: double getMaxRadius()>();
+        center = virtualinvoke plot.<org.jfree.chart.plot.PolarPlot: java.awt.Point translateValueThetaRadiusToJava2D(double,double,java.awt.geom.Rectangle2D)>(axisMin, axisMin, dataArea);
+        iterator = interfaceinvoke ticks.<java.util.List: java.util.Iterator iterator()>();
+    
+      label1:
+        $stack19 = interfaceinvoke iterator.<java.util.Iterator: boolean hasNext()>();
+    
+        if $stack19 == 0 goto label3;
+        $stack20 = interfaceinvoke iterator.<java.util.Iterator: java.lang.Object next()>();
+        tick = (org.jfree.chart.axis.NumberTick) $stack20;
+        $stack21 = virtualinvoke tick.<org.jfree.chart.axis.NumberTick: java.lang.Number getNumber()>();
+        $stack22 = virtualinvoke $stack21.<java.lang.Number: double doubleValue()>();
+        p = virtualinvoke plot.<org.jfree.chart.plot.PolarPlot: java.awt.Point translateValueThetaRadiusToJava2D(double,double,java.awt.geom.Rectangle2D)>($stack22, maxRadius, dataArea);
+        $stack23 = virtualinvoke plot.<org.jfree.chart.plot.PolarPlot: java.awt.Paint getAngleGridlinePaint()>();
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>($stack23);
+        $stack27 = center.<java.awt.Point: int x>;
+        $stack26 = center.<java.awt.Point: int y>;
+        $stack25 = p.<java.awt.Point: int x>;
+        $stack24 = p.<java.awt.Point: int y>;
+        virtualinvoke g2.<java.awt.Graphics2D: void drawLine(int,int,int,int)>($stack27, $stack26, $stack25, $stack24);
+        $stack28 = virtualinvoke plot.<org.jfree.chart.plot.PolarPlot: boolean isAngleLabelsVisible()>();
+    
+        if $stack28 == 0 goto label2;
+        x = p.<java.awt.Point: int x>;
+        y = p.<java.awt.Point: int y>;
+        $stack29 = virtualinvoke plot.<org.jfree.chart.plot.PolarPlot: java.awt.Paint getAngleLabelPaint()>();
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>($stack29);
+        $stack33 = virtualinvoke tick.<org.jfree.chart.axis.NumberTick: java.lang.String getText()>();
+        $stack32 = (float) x;
+        $stack31 = (float) y;
+        $stack30 = <org.jfree.chart.text.TextAnchor: org.jfree.chart.text.TextAnchor CENTER>;
+        staticinvoke <org.jfree.chart.text.TextUtilities: java.awt.geom.Rectangle2D drawAlignedString(java.lang.String,java.awt.Graphics2D,float,float,org.jfree.chart.text.TextAnchor)>($stack33, g2, $stack32, $stack31, $stack30);
+    
+      label2:
+        goto label1;
+    
+      label3:
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.DefaultPolarItemRenderer: void drawRadialGridLines(java.awt.Graphics2D,org.jfree.chart.plot.PolarPlot,org.jfree.chart.axis.ValueAxis,java.util.List,java.awt.geom.Rectangle2D)> ----
+    {
+        boolean $stack20;
+        double $stack23, $stack28, $stack29, $stack30, $stack31, axisMin;
+        int $stack24, $stack25, $stack26, $stack27, d, r, upperLeftX, upperLeftY;
+        java.awt.Font $stack17;
+        java.awt.Graphics2D g2;
+        java.awt.Paint $stack18, $stack33;
+        java.awt.Point center, p;
+        java.awt.Shape #l0;
+        java.awt.Stroke $stack19;
+        java.awt.geom.Ellipse2D$Double #l1, ring;
+        java.awt.geom.Rectangle2D dataArea;
+        java.lang.Number $stack22;
+        java.lang.Object $stack21, $stack32;
+        java.util.Iterator iterator;
+        java.util.List ticks;
+        org.jfree.chart.axis.NumberTick tick;
+        org.jfree.chart.axis.ValueAxis radialAxis;
+        org.jfree.chart.plot.PolarPlot plot;
+        org.jfree.chart.renderer.DefaultPolarItemRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.DefaultPolarItemRenderer;
+        g2 := @parameter0: java.awt.Graphics2D;
+        plot := @parameter1: org.jfree.chart.plot.PolarPlot;
+        radialAxis := @parameter2: org.jfree.chart.axis.ValueAxis;
+        ticks := @parameter3: java.util.List;
+        dataArea := @parameter4: java.awt.geom.Rectangle2D;
+        $stack17 = virtualinvoke radialAxis.<org.jfree.chart.axis.ValueAxis: java.awt.Font getTickLabelFont()>();
+        virtualinvoke g2.<java.awt.Graphics2D: void setFont(java.awt.Font)>($stack17);
+        $stack18 = virtualinvoke plot.<org.jfree.chart.plot.PolarPlot: java.awt.Paint getRadiusGridlinePaint()>();
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>($stack18);
+        $stack19 = virtualinvoke plot.<org.jfree.chart.plot.PolarPlot: java.awt.Stroke getRadiusGridlineStroke()>();
+        virtualinvoke g2.<java.awt.Graphics2D: void setStroke(java.awt.Stroke)>($stack19);
+        axisMin = virtualinvoke radialAxis.<org.jfree.chart.axis.ValueAxis: double getLowerBound()>();
+        center = virtualinvoke plot.<org.jfree.chart.plot.PolarPlot: java.awt.Point translateValueThetaRadiusToJava2D(double,double,java.awt.geom.Rectangle2D)>(axisMin, axisMin, dataArea);
+        iterator = interfaceinvoke ticks.<java.util.List: java.util.Iterator iterator()>();
+    
+      label1:
+        $stack20 = interfaceinvoke iterator.<java.util.Iterator: boolean hasNext()>();
+    
+        if $stack20 == 0 goto label2;
+        $stack21 = interfaceinvoke iterator.<java.util.Iterator: java.lang.Object next()>();
+        tick = (org.jfree.chart.axis.NumberTick) $stack21;
+        $stack22 = virtualinvoke tick.<org.jfree.chart.axis.NumberTick: java.lang.Number getNumber()>();
+        $stack23 = virtualinvoke $stack22.<java.lang.Number: double doubleValue()>();
+        p = virtualinvoke plot.<org.jfree.chart.plot.PolarPlot: java.awt.Point translateValueThetaRadiusToJava2D(double,double,java.awt.geom.Rectangle2D)>(90.0, $stack23, dataArea);
+        $stack24 = p.<java.awt.Point: int x>;
+        $stack25 = center.<java.awt.Point: int x>;
+        r = $stack24 - $stack25;
+        $stack26 = center.<java.awt.Point: int x>;
+        upperLeftX = $stack26 - r;
+        $stack27 = center.<java.awt.Point: int y>;
+        upperLeftY = $stack27 - r;
+        d = 2 * r;
+        $stack32 = new java.awt.geom.Ellipse2D$Double;
+        $stack31 = (double) upperLeftX;
+        $stack30 = (double) upperLeftY;
+        $stack29 = (double) d;
+        $stack28 = (double) d;
+        #l1 = (java.awt.geom.Ellipse2D$Double) $stack32;
+        specialinvoke #l1.<java.awt.geom.Ellipse2D$Double: void <init>(double,double,double,double)>($stack31, $stack30, $stack29, $stack28);
+        ring = (java.awt.geom.Ellipse2D$Double) $stack32;
+        $stack33 = virtualinvoke plot.<org.jfree.chart.plot.PolarPlot: java.awt.Paint getRadiusGridlinePaint()>();
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>($stack33);
+        #l0 = (java.awt.Shape) $stack32;
+        virtualinvoke g2.<java.awt.Graphics2D: void draw(java.awt.Shape)>(#l0);
+    
+        goto label1;
+    
+      label2:
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.DefaultPolarItemRenderer: java.lang.Object clone()> ----
+    {
+        java.lang.Object $stack2, $stack4;
+        org.jfree.chart.renderer.DefaultPolarItemRenderer clone, this;
+        org.jfree.chart.util.BooleanList $stack3, $stack5;
+    
+    
+        this := @this: org.jfree.chart.renderer.DefaultPolarItemRenderer;
+        $stack2 = specialinvoke this.<org.jfree.chart.renderer.AbstractRenderer: java.lang.Object clone()>();
+        clone = (org.jfree.chart.renderer.DefaultPolarItemRenderer) $stack2;
+        $stack3 = this.<org.jfree.chart.renderer.DefaultPolarItemRenderer: org.jfree.chart.util.BooleanList seriesFilled>;
+        $stack4 = virtualinvoke $stack3.<org.jfree.chart.util.BooleanList: java.lang.Object clone()>();
+        $stack5 = (org.jfree.chart.util.BooleanList) $stack4;
+        clone.<org.jfree.chart.renderer.DefaultPolarItemRenderer: org.jfree.chart.util.BooleanList seriesFilled> = $stack5;
+    
+        return clone;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.DefaultPolarItemRenderer: boolean isSeriesFilled(int)> ----
+    {
+        boolean result;
+        int series;
+        java.lang.Boolean b;
+        org.jfree.chart.renderer.DefaultPolarItemRenderer this;
+        org.jfree.chart.util.BooleanList $stack4;
+    
+    
+        this := @this: org.jfree.chart.renderer.DefaultPolarItemRenderer;
+        series := @parameter0: int;
+        result = 0;
+        $stack4 = this.<org.jfree.chart.renderer.DefaultPolarItemRenderer: org.jfree.chart.util.BooleanList seriesFilled>;
+        b = virtualinvoke $stack4.<org.jfree.chart.util.BooleanList: java.lang.Boolean getBoolean(int)>(series);
+    
+        if b == null goto label1;
+        result = virtualinvoke b.<java.lang.Boolean: boolean booleanValue()>();
+    
+      label1:
+        return result;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.DefaultPolarItemRenderer: void <init>()> ----
+    {
+        org.jfree.chart.renderer.DefaultPolarItemRenderer this;
+        org.jfree.chart.util.BooleanList $stack1;
+    
+    
+        this := @this: org.jfree.chart.renderer.DefaultPolarItemRenderer;
+        specialinvoke this.<org.jfree.chart.renderer.AbstractRenderer: void <init>()>();
+        $stack1 = new org.jfree.chart.util.BooleanList;
+        specialinvoke $stack1.<org.jfree.chart.util.BooleanList: void <init>()>();
+        this.<org.jfree.chart.renderer.DefaultPolarItemRenderer: org.jfree.chart.util.BooleanList seriesFilled> = $stack1;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.DefaultPolarItemRenderer: void drawSeries(java.awt.Graphics2D,java.awt.geom.Rectangle2D,org.jfree.chart.plot.PlotRenderingInfo,org.jfree.chart.plot.PolarPlot,org.jfree.data.xy.XYDataset,int)> ----
+    {
+        boolean $stack18;
+        double radius, theta;
+        int $stack20, $stack21, i#0, numPoints, seriesIndex;
+        java.awt.Composite #l4, i#1;
+        java.awt.Graphics2D g2;
+        java.awt.Paint $stack16;
+        java.awt.Point p;
+        java.awt.Polygon #l0, #l3, poly;
+        java.awt.Shape #l1, #l2;
+        java.awt.Stroke $stack17;
+        java.awt.geom.Rectangle2D dataArea;
+        java.lang.Object $stack15, $stack19;
+        org.jfree.chart.plot.PlotRenderingInfo info;
+        org.jfree.chart.plot.PolarPlot plot;
+        org.jfree.chart.renderer.DefaultPolarItemRenderer this;
+        org.jfree.data.xy.XYDataset dataset;
+    
+    
+        this := @this: org.jfree.chart.renderer.DefaultPolarItemRenderer;
+        g2 := @parameter0: java.awt.Graphics2D;
+        dataArea := @parameter1: java.awt.geom.Rectangle2D;
+        info := @parameter2: org.jfree.chart.plot.PlotRenderingInfo;
+        plot := @parameter3: org.jfree.chart.plot.PolarPlot;
+        dataset := @parameter4: org.jfree.data.xy.XYDataset;
+        seriesIndex := @parameter5: int;
+        $stack15 = new java.awt.Polygon;
+        #l0 = (java.awt.Polygon) $stack15;
+        specialinvoke #l0.<java.awt.Polygon: void <init>()>();
+        poly = (java.awt.Polygon) $stack15;
+        numPoints = interfaceinvoke dataset.<org.jfree.data.xy.XYDataset: int getItemCount(int)>(seriesIndex);
+        i#0 = 0;
+    
+      label1:
+        if i#0 >= numPoints goto label2;
+        theta = interfaceinvoke dataset.<org.jfree.data.xy.XYDataset: double getXValue(int,int)>(seriesIndex, i#0);
+        radius = interfaceinvoke dataset.<org.jfree.data.xy.XYDataset: double getYValue(int,int)>(seriesIndex, i#0);
+        p = virtualinvoke plot.<org.jfree.chart.plot.PolarPlot: java.awt.Point translateValueThetaRadiusToJava2D(double,double,java.awt.geom.Rectangle2D)>(theta, radius, dataArea);
+        $stack21 = p.<java.awt.Point: int x>;
+        $stack20 = p.<java.awt.Point: int y>;
+        #l3 = (java.awt.Polygon) $stack15;
+        virtualinvoke #l3.<java.awt.Polygon: void addPoint(int,int)>($stack21, $stack20);
+        i#0 = i#0 + 1;
+    
+        goto label1;
+    
+      label2:
+        $stack16 = virtualinvoke this.<org.jfree.chart.renderer.DefaultPolarItemRenderer: java.awt.Paint lookupSeriesPaint(int)>(seriesIndex);
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>($stack16);
+        $stack17 = virtualinvoke this.<org.jfree.chart.renderer.DefaultPolarItemRenderer: java.awt.Stroke lookupSeriesStroke(int)>(seriesIndex);
+        virtualinvoke g2.<java.awt.Graphics2D: void setStroke(java.awt.Stroke)>($stack17);
+        $stack18 = virtualinvoke this.<org.jfree.chart.renderer.DefaultPolarItemRenderer: boolean isSeriesFilled(int)>(seriesIndex);
+    
+        if $stack18 == 0 goto label3;
+        i#1 = virtualinvoke g2.<java.awt.Graphics2D: java.awt.Composite getComposite()>();
+        $stack19 = staticinvoke <java.awt.AlphaComposite: java.awt.AlphaComposite getInstance(int,float)>(3, 0.5F);
+        #l4 = (java.awt.Composite) $stack19;
+        virtualinvoke g2.<java.awt.Graphics2D: void setComposite(java.awt.Composite)>(#l4);
+        #l1 = (java.awt.Shape) $stack15;
+        virtualinvoke g2.<java.awt.Graphics2D: void fill(java.awt.Shape)>(#l1);
+        virtualinvoke g2.<java.awt.Graphics2D: void setComposite(java.awt.Composite)>(i#1);
+    
+        goto label4;
+    
+      label3:
+        #l2 = (java.awt.Shape) $stack15;
+        virtualinvoke g2.<java.awt.Graphics2D: void draw(java.awt.Shape)>(#l2);
+    
+      label4:
+        return;
+    }
+
+}

@@ -1,0 +1,137 @@
+// ========================================================================
+// CLASS : org.jfree.data.xml.CategoryDatasetHandler
+// ========================================================================
+
+[PUBLIC, SUPER] class org.jfree.data.xml.CategoryDatasetHandler extends org.jfree.data.xml.RootHandler implements org.jfree.data.xml.DatasetTags {
+
+    // ---- method: <org.jfree.data.xml.CategoryDatasetHandler: void startElement(java.lang.String,java.lang.String,java.lang.String,org.xml.sax.Attributes)> ----
+    {
+        boolean $stack7, $stack8;
+        java.lang.Object $stack13;
+        java.lang.String $stack12, localName, namespaceURI, qName;
+        java.lang.StringBuffer $stack10, $stack11, $stack9;
+        java.lang.Throwable #l1;
+        java.util.Stack $stack15;
+        org.jfree.data.category.DefaultCategoryDataset $stack16;
+        org.jfree.data.xml.CategoryDatasetHandler this;
+        org.jfree.data.xml.CategorySeriesHandler $stack14, subhandler;
+        org.xml.sax.Attributes atts;
+        org.xml.sax.SAXException #l0;
+        org.xml.sax.helpers.DefaultHandler current;
+    
+    
+        this := @this: org.jfree.data.xml.CategoryDatasetHandler;
+        namespaceURI := @parameter0: java.lang.String;
+        localName := @parameter1: java.lang.String;
+        qName := @parameter2: java.lang.String;
+        atts := @parameter3: org.xml.sax.Attributes;
+        current = virtualinvoke this.<org.jfree.data.xml.CategoryDatasetHandler: org.xml.sax.helpers.DefaultHandler getCurrentHandler()>();
+    
+        if current == this goto label1;
+        virtualinvoke current.<org.xml.sax.helpers.DefaultHandler: void startElement(java.lang.String,java.lang.String,java.lang.String,org.xml.sax.Attributes)>(namespaceURI, localName, qName, atts);
+    
+        goto label4;
+    
+      label1:
+        $stack7 = virtualinvoke qName.<java.lang.String: boolean equals(java.lang.Object)>("CategoryDataset");
+    
+        if $stack7 == 0 goto label2;
+        $stack16 = new org.jfree.data.category.DefaultCategoryDataset;
+        specialinvoke $stack16.<org.jfree.data.category.DefaultCategoryDataset: void <init>()>();
+        this.<org.jfree.data.xml.CategoryDatasetHandler: org.jfree.data.category.DefaultCategoryDataset dataset> = $stack16;
+    
+        goto label4;
+    
+      label2:
+        $stack8 = virtualinvoke qName.<java.lang.String: boolean equals(java.lang.Object)>("Series");
+    
+        if $stack8 == 0 goto label3;
+        $stack14 = new org.jfree.data.xml.CategorySeriesHandler;
+        specialinvoke $stack14.<org.jfree.data.xml.CategorySeriesHandler: void <init>(org.jfree.data.xml.RootHandler)>(this);
+        subhandler = $stack14;
+        $stack15 = virtualinvoke this.<org.jfree.data.xml.CategoryDatasetHandler: java.util.Stack getSubHandlers()>();
+        virtualinvoke $stack15.<java.util.Stack: java.lang.Object push(java.lang.Object)>($stack14);
+        virtualinvoke $stack14.<org.jfree.data.xml.CategorySeriesHandler: void startElement(java.lang.String,java.lang.String,java.lang.String,org.xml.sax.Attributes)>(namespaceURI, localName, qName, atts);
+    
+        goto label4;
+    
+      label3:
+        $stack13 = new org.xml.sax.SAXException;
+        $stack9 = new java.lang.StringBuffer;
+        specialinvoke $stack9.<java.lang.StringBuffer: void <init>()>();
+        $stack10 = virtualinvoke $stack9.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>("Element not recognised: ");
+        $stack11 = virtualinvoke $stack10.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>(qName);
+        $stack12 = virtualinvoke $stack11.<java.lang.StringBuffer: java.lang.String toString()>();
+        #l0 = (org.xml.sax.SAXException) $stack13;
+        specialinvoke #l0.<org.xml.sax.SAXException: void <init>(java.lang.String)>($stack12);
+        #l1 = (java.lang.Throwable) $stack13;
+    
+        throw #l1;
+    
+      label4:
+        return;
+    }
+
+    // ---- method: <org.jfree.data.xml.CategoryDatasetHandler: void endElement(java.lang.String,java.lang.String,java.lang.String)> ----
+    {
+        java.lang.String localName, namespaceURI, qName;
+        org.jfree.data.xml.CategoryDatasetHandler this;
+        org.xml.sax.helpers.DefaultHandler current;
+    
+    
+        this := @this: org.jfree.data.xml.CategoryDatasetHandler;
+        namespaceURI := @parameter0: java.lang.String;
+        localName := @parameter1: java.lang.String;
+        qName := @parameter2: java.lang.String;
+        current = virtualinvoke this.<org.jfree.data.xml.CategoryDatasetHandler: org.xml.sax.helpers.DefaultHandler getCurrentHandler()>();
+    
+        if current == this goto label1;
+        virtualinvoke current.<org.xml.sax.helpers.DefaultHandler: void endElement(java.lang.String,java.lang.String,java.lang.String)>(namespaceURI, localName, qName);
+    
+      label1:
+        return;
+    }
+
+    // ---- method: <org.jfree.data.xml.CategoryDatasetHandler: org.jfree.data.category.CategoryDataset getDataset()> ----
+    {
+        org.jfree.data.category.DefaultCategoryDataset $stack1;
+        org.jfree.data.xml.CategoryDatasetHandler this;
+    
+    
+        this := @this: org.jfree.data.xml.CategoryDatasetHandler;
+        $stack1 = this.<org.jfree.data.xml.CategoryDatasetHandler: org.jfree.data.category.DefaultCategoryDataset dataset>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.data.xml.CategoryDatasetHandler: void <init>()> ----
+    {
+        org.jfree.data.xml.CategoryDatasetHandler this;
+    
+    
+        this := @this: org.jfree.data.xml.CategoryDatasetHandler;
+        specialinvoke this.<org.jfree.data.xml.RootHandler: void <init>()>();
+        this.<org.jfree.data.xml.CategoryDatasetHandler: org.jfree.data.category.DefaultCategoryDataset dataset> = null;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.xml.CategoryDatasetHandler: void addItem(java.lang.Comparable,java.lang.Comparable,java.lang.Number)> ----
+    {
+        java.lang.Comparable columnKey, rowKey;
+        java.lang.Number value;
+        org.jfree.data.category.DefaultCategoryDataset $stack4;
+        org.jfree.data.xml.CategoryDatasetHandler this;
+    
+    
+        this := @this: org.jfree.data.xml.CategoryDatasetHandler;
+        rowKey := @parameter0: java.lang.Comparable;
+        columnKey := @parameter1: java.lang.Comparable;
+        value := @parameter2: java.lang.Number;
+        $stack4 = this.<org.jfree.data.xml.CategoryDatasetHandler: org.jfree.data.category.DefaultCategoryDataset dataset>;
+        virtualinvoke $stack4.<org.jfree.data.category.DefaultCategoryDataset: void addValue(java.lang.Number,java.lang.Comparable,java.lang.Comparable)>(value, rowKey, columnKey);
+    
+        return;
+    }
+
+}

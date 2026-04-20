@@ -1,0 +1,771 @@
+// ========================================================================
+// CLASS : org.jfree.data.time.TimePeriodValues
+// ========================================================================
+
+[PUBLIC, SUPER] class org.jfree.data.time.TimePeriodValues extends org.jfree.data.general.Series implements java.io.Serializable {
+
+    // ---- method: <org.jfree.data.time.TimePeriodValues: java.lang.Number getValue(int)> ----
+    {
+        int index;
+        java.lang.Number $stack3;
+        org.jfree.data.time.TimePeriodValue $stack2;
+        org.jfree.data.time.TimePeriodValues this;
+    
+    
+        this := @this: org.jfree.data.time.TimePeriodValues;
+        index := @parameter0: int;
+        $stack2 = virtualinvoke this.<org.jfree.data.time.TimePeriodValues: org.jfree.data.time.TimePeriodValue getDataItem(int)>(index);
+        $stack3 = virtualinvoke $stack2.<org.jfree.data.time.TimePeriodValue: java.lang.Number getValue()>();
+    
+        return $stack3;
+    }
+
+    // ---- method: <org.jfree.data.time.TimePeriodValues: void update(int,java.lang.Number)> ----
+    {
+        int index;
+        java.lang.Number value;
+        org.jfree.data.time.TimePeriodValue item;
+        org.jfree.data.time.TimePeriodValues this;
+    
+    
+        this := @this: org.jfree.data.time.TimePeriodValues;
+        index := @parameter0: int;
+        value := @parameter1: java.lang.Number;
+        item = virtualinvoke this.<org.jfree.data.time.TimePeriodValues: org.jfree.data.time.TimePeriodValue getDataItem(int)>(index);
+        virtualinvoke item.<org.jfree.data.time.TimePeriodValue: void setValue(java.lang.Number)>(value);
+        virtualinvoke this.<org.jfree.data.time.TimePeriodValues: void fireSeriesChanged()>();
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.time.TimePeriodValues: org.jfree.data.time.TimePeriodValue getDataItem(int)> ----
+    {
+        int index;
+        java.lang.Object $stack3;
+        java.util.List $stack2;
+        org.jfree.data.time.TimePeriodValue $stack4;
+        org.jfree.data.time.TimePeriodValues this;
+    
+    
+        this := @this: org.jfree.data.time.TimePeriodValues;
+        index := @parameter0: int;
+        $stack2 = this.<org.jfree.data.time.TimePeriodValues: java.util.List data>;
+        $stack3 = interfaceinvoke $stack2.<java.util.List: java.lang.Object get(int)>(index);
+        $stack4 = (org.jfree.data.time.TimePeriodValue) $stack3;
+    
+        return $stack4;
+    }
+
+    // ---- method: <org.jfree.data.time.TimePeriodValues: int getMinMiddleIndex()> ----
+    {
+        int $stack1;
+        org.jfree.data.time.TimePeriodValues this;
+    
+    
+        this := @this: org.jfree.data.time.TimePeriodValues;
+        $stack1 = this.<org.jfree.data.time.TimePeriodValues: int minMiddleIndex>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.data.time.TimePeriodValues: java.lang.String getRangeDescription()> ----
+    {
+        java.lang.String $stack1;
+        org.jfree.data.time.TimePeriodValues this;
+    
+    
+        this := @this: org.jfree.data.time.TimePeriodValues;
+        $stack1 = this.<org.jfree.data.time.TimePeriodValues: java.lang.String range>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.data.time.TimePeriodValues: void recalculateBounds()> ----
+    {
+        int $stack4, i;
+        java.lang.Object $stack6;
+        java.util.List $stack3, $stack5;
+        org.jfree.data.time.TimePeriod $stack7;
+        org.jfree.data.time.TimePeriodValue tpv;
+        org.jfree.data.time.TimePeriodValues this;
+    
+    
+        this := @this: org.jfree.data.time.TimePeriodValues;
+        this.<org.jfree.data.time.TimePeriodValues: int minStartIndex> = -1;
+        this.<org.jfree.data.time.TimePeriodValues: int minMiddleIndex> = -1;
+        this.<org.jfree.data.time.TimePeriodValues: int minEndIndex> = -1;
+        this.<org.jfree.data.time.TimePeriodValues: int maxStartIndex> = -1;
+        this.<org.jfree.data.time.TimePeriodValues: int maxMiddleIndex> = -1;
+        this.<org.jfree.data.time.TimePeriodValues: int maxEndIndex> = -1;
+        i = 0;
+    
+      label1:
+        $stack3 = this.<org.jfree.data.time.TimePeriodValues: java.util.List data>;
+        $stack4 = interfaceinvoke $stack3.<java.util.List: int size()>();
+    
+        if i >= $stack4 goto label2;
+        $stack5 = this.<org.jfree.data.time.TimePeriodValues: java.util.List data>;
+        $stack6 = interfaceinvoke $stack5.<java.util.List: java.lang.Object get(int)>(i);
+        tpv = (org.jfree.data.time.TimePeriodValue) $stack6;
+        $stack7 = virtualinvoke tpv.<org.jfree.data.time.TimePeriodValue: org.jfree.data.time.TimePeriod getPeriod()>();
+        specialinvoke this.<org.jfree.data.time.TimePeriodValues: void updateBounds(org.jfree.data.time.TimePeriod,int)>($stack7, i);
+        i = i + 1;
+    
+        goto label1;
+    
+      label2:
+        return;
+    }
+
+    // ---- method: <org.jfree.data.time.TimePeriodValues: void add(org.jfree.data.time.TimePeriod,double)> ----
+    {
+        double value;
+        org.jfree.data.time.TimePeriod period;
+        org.jfree.data.time.TimePeriodValue $stack5, item;
+        org.jfree.data.time.TimePeriodValues this;
+    
+    
+        this := @this: org.jfree.data.time.TimePeriodValues;
+        period := @parameter0: org.jfree.data.time.TimePeriod;
+        value := @parameter1: double;
+        $stack5 = new org.jfree.data.time.TimePeriodValue;
+        specialinvoke $stack5.<org.jfree.data.time.TimePeriodValue: void <init>(org.jfree.data.time.TimePeriod,double)>(period, value);
+        item = $stack5;
+        virtualinvoke this.<org.jfree.data.time.TimePeriodValues: void add(org.jfree.data.time.TimePeriodValue)>($stack5);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.time.TimePeriodValues: java.lang.String getDomainDescription()> ----
+    {
+        java.lang.String $stack1;
+        org.jfree.data.time.TimePeriodValues this;
+    
+    
+        this := @this: org.jfree.data.time.TimePeriodValues;
+        $stack1 = this.<org.jfree.data.time.TimePeriodValues: java.lang.String domain>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.data.time.TimePeriodValues: int getMinStartIndex()> ----
+    {
+        int $stack1;
+        org.jfree.data.time.TimePeriodValues this;
+    
+    
+        this := @this: org.jfree.data.time.TimePeriodValues;
+        $stack1 = this.<org.jfree.data.time.TimePeriodValues: int minStartIndex>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.data.time.TimePeriodValues: boolean equals(java.lang.Object)> ----
+    {
+        boolean $stack12, $stack16, $stack5, $stack6, $stack9;
+        int $stack13, count, i;
+        java.lang.Object obj;
+        java.lang.String $stack10, $stack11, $stack7, $stack8;
+        org.jfree.data.time.TimePeriodValue $stack14, $stack15;
+        org.jfree.data.time.TimePeriodValues that, this;
+    
+    
+        this := @this: org.jfree.data.time.TimePeriodValues;
+        obj := @parameter0: java.lang.Object;
+    
+        if obj != this goto label1;
+    
+        return 1;
+    
+      label1:
+        $stack5 = obj instanceof org.jfree.data.time.TimePeriodValues;
+    
+        if $stack5 != 0 goto label2;
+    
+        return 0;
+    
+      label2:
+        $stack6 = specialinvoke this.<org.jfree.data.general.Series: boolean equals(java.lang.Object)>(obj);
+    
+        if $stack6 != 0 goto label3;
+    
+        return 0;
+    
+      label3:
+        that = (org.jfree.data.time.TimePeriodValues) obj;
+        $stack8 = virtualinvoke this.<org.jfree.data.time.TimePeriodValues: java.lang.String getDomainDescription()>();
+        $stack7 = virtualinvoke that.<org.jfree.data.time.TimePeriodValues: java.lang.String getDomainDescription()>();
+        $stack9 = staticinvoke <org.jfree.chart.util.ObjectUtilities: boolean equal(java.lang.Object,java.lang.Object)>($stack8, $stack7);
+    
+        if $stack9 != 0 goto label4;
+    
+        return 0;
+    
+      label4:
+        $stack11 = virtualinvoke this.<org.jfree.data.time.TimePeriodValues: java.lang.String getRangeDescription()>();
+        $stack10 = virtualinvoke that.<org.jfree.data.time.TimePeriodValues: java.lang.String getRangeDescription()>();
+        $stack12 = staticinvoke <org.jfree.chart.util.ObjectUtilities: boolean equal(java.lang.Object,java.lang.Object)>($stack11, $stack10);
+    
+        if $stack12 != 0 goto label5;
+    
+        return 0;
+    
+      label5:
+        count = virtualinvoke this.<org.jfree.data.time.TimePeriodValues: int getItemCount()>();
+        $stack13 = virtualinvoke that.<org.jfree.data.time.TimePeriodValues: int getItemCount()>();
+    
+        if count == $stack13 goto label6;
+    
+        return 0;
+    
+      label6:
+        i = 0;
+    
+      label7:
+        if i >= count goto label9;
+        $stack15 = virtualinvoke this.<org.jfree.data.time.TimePeriodValues: org.jfree.data.time.TimePeriodValue getDataItem(int)>(i);
+        $stack14 = virtualinvoke that.<org.jfree.data.time.TimePeriodValues: org.jfree.data.time.TimePeriodValue getDataItem(int)>(i);
+        $stack16 = virtualinvoke $stack15.<org.jfree.data.time.TimePeriodValue: boolean equals(java.lang.Object)>($stack14);
+    
+        if $stack16 != 0 goto label8;
+    
+        return 0;
+    
+      label8:
+        i = i + 1;
+    
+        goto label7;
+    
+      label9:
+        return 1;
+    }
+
+    // ---- method: <org.jfree.data.time.TimePeriodValues: void <init>(java.lang.Comparable,java.lang.String,java.lang.String)> ----
+    {
+        java.lang.Comparable name;
+        java.lang.Object $stack4;
+        java.lang.String domain, range;
+        java.util.ArrayList #l0;
+        org.jfree.data.time.TimePeriodValues this;
+    
+    
+        this := @this: org.jfree.data.time.TimePeriodValues;
+        name := @parameter0: java.lang.Comparable;
+        domain := @parameter1: java.lang.String;
+        range := @parameter2: java.lang.String;
+        specialinvoke this.<org.jfree.data.general.Series: void <init>(java.lang.Comparable)>(name);
+        this.<org.jfree.data.time.TimePeriodValues: int minStartIndex> = -1;
+        this.<org.jfree.data.time.TimePeriodValues: int maxStartIndex> = -1;
+        this.<org.jfree.data.time.TimePeriodValues: int minMiddleIndex> = -1;
+        this.<org.jfree.data.time.TimePeriodValues: int maxMiddleIndex> = -1;
+        this.<org.jfree.data.time.TimePeriodValues: int minEndIndex> = -1;
+        this.<org.jfree.data.time.TimePeriodValues: int maxEndIndex> = -1;
+        this.<org.jfree.data.time.TimePeriodValues: java.lang.String domain> = domain;
+        this.<org.jfree.data.time.TimePeriodValues: java.lang.String range> = range;
+        $stack4 = new java.util.ArrayList;
+        #l0 = (java.util.ArrayList) $stack4;
+        specialinvoke #l0.<java.util.ArrayList: void <init>()>();
+        this.<org.jfree.data.time.TimePeriodValues: java.util.List data> = (java.util.List) $stack4;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.time.TimePeriodValues: void setRangeDescription(java.lang.String)> ----
+    {
+        java.lang.String description, old;
+        org.jfree.data.time.TimePeriodValues this;
+    
+    
+        this := @this: org.jfree.data.time.TimePeriodValues;
+        description := @parameter0: java.lang.String;
+        old = this.<org.jfree.data.time.TimePeriodValues: java.lang.String range>;
+        this.<org.jfree.data.time.TimePeriodValues: java.lang.String range> = description;
+        virtualinvoke this.<org.jfree.data.time.TimePeriodValues: void firePropertyChange(java.lang.String,java.lang.Object,java.lang.Object)>("Range", old, description);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.time.TimePeriodValues: void delete(int,int)> ----
+    {
+        int $stack4, end, i, start;
+        java.util.List $stack5;
+        org.jfree.data.time.TimePeriodValues this;
+    
+    
+        this := @this: org.jfree.data.time.TimePeriodValues;
+        start := @parameter0: int;
+        end := @parameter1: int;
+        i = 0;
+    
+      label1:
+        $stack4 = end - start;
+    
+        if i > $stack4 goto label2;
+        $stack5 = this.<org.jfree.data.time.TimePeriodValues: java.util.List data>;
+        interfaceinvoke $stack5.<java.util.List: java.lang.Object remove(int)>(start);
+        i = i + 1;
+    
+        goto label1;
+    
+      label2:
+        specialinvoke this.<org.jfree.data.time.TimePeriodValues: void recalculateBounds()>();
+        virtualinvoke this.<org.jfree.data.time.TimePeriodValues: void fireSeriesChanged()>();
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.time.TimePeriodValues: java.lang.Object clone()> ----
+    {
+        int $stack2, $stack3;
+        org.jfree.data.time.TimePeriodValues clone, this;
+    
+    
+        this := @this: org.jfree.data.time.TimePeriodValues;
+        $stack2 = virtualinvoke this.<org.jfree.data.time.TimePeriodValues: int getItemCount()>();
+        $stack3 = $stack2 - 1;
+        clone = virtualinvoke this.<org.jfree.data.time.TimePeriodValues: org.jfree.data.time.TimePeriodValues createCopy(int,int)>(0, $stack3);
+    
+        return clone;
+    }
+
+    // ---- method: <org.jfree.data.time.TimePeriodValues: int getMinEndIndex()> ----
+    {
+        int $stack1;
+        org.jfree.data.time.TimePeriodValues this;
+    
+    
+        this := @this: org.jfree.data.time.TimePeriodValues;
+        $stack1 = this.<org.jfree.data.time.TimePeriodValues: int minEndIndex>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.data.time.TimePeriodValues: int getMaxStartIndex()> ----
+    {
+        int $stack1;
+        org.jfree.data.time.TimePeriodValues this;
+    
+    
+        this := @this: org.jfree.data.time.TimePeriodValues;
+        $stack1 = this.<org.jfree.data.time.TimePeriodValues: int maxStartIndex>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.data.time.TimePeriodValues: int getMaxMiddleIndex()> ----
+    {
+        int $stack1;
+        org.jfree.data.time.TimePeriodValues this;
+    
+    
+        this := @this: org.jfree.data.time.TimePeriodValues;
+        $stack1 = this.<org.jfree.data.time.TimePeriodValues: int maxMiddleIndex>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.data.time.TimePeriodValues: void updateBounds(org.jfree.data.time.TimePeriod,int)> ----
+    {
+        byte $stack29, $stack34, $stack45, $stack56, $stack61, $stack66;
+        int $stack19, $stack20, $stack21, $stack22, $stack23, $stack24, $stack25, $stack30, $stack35, $stack39, $stack46, $stack50, $stack57, $stack62, index;
+        java.util.Date $stack15, $stack16, $stack28, $stack33, $stack38, $stack42, $stack49, $stack53, $stack60, $stack65;
+        long $stack17, $stack18, $stack43, $stack44, $stack54, $stack55, e#0, e#1, end, middle, minMiddle#0, minMiddle#1, minStart#0, minStart#1, minStart#2, minStart#3, minStart#4, minStart#5, start;
+        org.jfree.data.time.TimePeriod $stack27, $stack32, $stack37, $stack41, $stack48, $stack52, $stack59, $stack64, period;
+        org.jfree.data.time.TimePeriodValue $stack26, $stack31, $stack36, $stack40, $stack47, $stack51, $stack58, $stack63;
+        org.jfree.data.time.TimePeriodValues this;
+    
+    
+        this := @this: org.jfree.data.time.TimePeriodValues;
+        period := @parameter0: org.jfree.data.time.TimePeriod;
+        index := @parameter1: int;
+        $stack15 = interfaceinvoke period.<org.jfree.data.time.TimePeriod: java.util.Date getStart()>();
+        start = virtualinvoke $stack15.<java.util.Date: long getTime()>();
+        $stack16 = interfaceinvoke period.<org.jfree.data.time.TimePeriod: java.util.Date getEnd()>();
+        end = virtualinvoke $stack16.<java.util.Date: long getTime()>();
+        $stack17 = end - start;
+        $stack18 = $stack17 / 2L;
+        middle = start + $stack18;
+        $stack19 = this.<org.jfree.data.time.TimePeriodValues: int minStartIndex>;
+    
+        if $stack19 < 0 goto label02;
+        $stack62 = this.<org.jfree.data.time.TimePeriodValues: int minStartIndex>;
+        $stack63 = virtualinvoke this.<org.jfree.data.time.TimePeriodValues: org.jfree.data.time.TimePeriodValue getDataItem(int)>($stack62);
+        $stack64 = virtualinvoke $stack63.<org.jfree.data.time.TimePeriodValue: org.jfree.data.time.TimePeriod getPeriod()>();
+        $stack65 = interfaceinvoke $stack64.<org.jfree.data.time.TimePeriod: java.util.Date getStart()>();
+        minStart#0 = virtualinvoke $stack65.<java.util.Date: long getTime()>();
+        $stack66 = start cmp minStart#0;
+    
+        if $stack66 >= 0 goto label01;
+        this.<org.jfree.data.time.TimePeriodValues: int minStartIndex> = index;
+    
+      label01:
+        goto label03;
+    
+      label02:
+        this.<org.jfree.data.time.TimePeriodValues: int minStartIndex> = index;
+    
+      label03:
+        $stack20 = this.<org.jfree.data.time.TimePeriodValues: int maxStartIndex>;
+    
+        if $stack20 < 0 goto label05;
+        $stack57 = this.<org.jfree.data.time.TimePeriodValues: int maxStartIndex>;
+        $stack58 = virtualinvoke this.<org.jfree.data.time.TimePeriodValues: org.jfree.data.time.TimePeriodValue getDataItem(int)>($stack57);
+        $stack59 = virtualinvoke $stack58.<org.jfree.data.time.TimePeriodValue: org.jfree.data.time.TimePeriod getPeriod()>();
+        $stack60 = interfaceinvoke $stack59.<org.jfree.data.time.TimePeriod: java.util.Date getStart()>();
+        minStart#1 = virtualinvoke $stack60.<java.util.Date: long getTime()>();
+        $stack61 = start cmp minStart#1;
+    
+        if $stack61 <= 0 goto label04;
+        this.<org.jfree.data.time.TimePeriodValues: int maxStartIndex> = index;
+    
+      label04:
+        goto label06;
+    
+      label05:
+        this.<org.jfree.data.time.TimePeriodValues: int maxStartIndex> = index;
+    
+      label06:
+        $stack21 = this.<org.jfree.data.time.TimePeriodValues: int minMiddleIndex>;
+    
+        if $stack21 < 0 goto label08;
+        $stack46 = this.<org.jfree.data.time.TimePeriodValues: int minMiddleIndex>;
+        $stack47 = virtualinvoke this.<org.jfree.data.time.TimePeriodValues: org.jfree.data.time.TimePeriodValue getDataItem(int)>($stack46);
+        $stack48 = virtualinvoke $stack47.<org.jfree.data.time.TimePeriodValue: org.jfree.data.time.TimePeriod getPeriod()>();
+        $stack49 = interfaceinvoke $stack48.<org.jfree.data.time.TimePeriod: java.util.Date getStart()>();
+        minStart#2 = virtualinvoke $stack49.<java.util.Date: long getTime()>();
+        $stack50 = this.<org.jfree.data.time.TimePeriodValues: int minMiddleIndex>;
+        $stack51 = virtualinvoke this.<org.jfree.data.time.TimePeriodValues: org.jfree.data.time.TimePeriodValue getDataItem(int)>($stack50);
+        $stack52 = virtualinvoke $stack51.<org.jfree.data.time.TimePeriodValue: org.jfree.data.time.TimePeriod getPeriod()>();
+        $stack53 = interfaceinvoke $stack52.<org.jfree.data.time.TimePeriod: java.util.Date getEnd()>();
+        e#0 = virtualinvoke $stack53.<java.util.Date: long getTime()>();
+        $stack54 = e#0 - minStart#2;
+        $stack55 = $stack54 / 2L;
+        minMiddle#0 = minStart#2 + $stack55;
+        $stack56 = middle cmp minMiddle#0;
+    
+        if $stack56 >= 0 goto label07;
+        this.<org.jfree.data.time.TimePeriodValues: int minMiddleIndex> = index;
+    
+      label07:
+        goto label09;
+    
+      label08:
+        this.<org.jfree.data.time.TimePeriodValues: int minMiddleIndex> = index;
+    
+      label09:
+        $stack22 = this.<org.jfree.data.time.TimePeriodValues: int maxMiddleIndex>;
+    
+        if $stack22 < 0 goto label11;
+        $stack35 = this.<org.jfree.data.time.TimePeriodValues: int minMiddleIndex>;
+        $stack36 = virtualinvoke this.<org.jfree.data.time.TimePeriodValues: org.jfree.data.time.TimePeriodValue getDataItem(int)>($stack35);
+        $stack37 = virtualinvoke $stack36.<org.jfree.data.time.TimePeriodValue: org.jfree.data.time.TimePeriod getPeriod()>();
+        $stack38 = interfaceinvoke $stack37.<org.jfree.data.time.TimePeriod: java.util.Date getStart()>();
+        minStart#3 = virtualinvoke $stack38.<java.util.Date: long getTime()>();
+        $stack39 = this.<org.jfree.data.time.TimePeriodValues: int minMiddleIndex>;
+        $stack40 = virtualinvoke this.<org.jfree.data.time.TimePeriodValues: org.jfree.data.time.TimePeriodValue getDataItem(int)>($stack39);
+        $stack41 = virtualinvoke $stack40.<org.jfree.data.time.TimePeriodValue: org.jfree.data.time.TimePeriod getPeriod()>();
+        $stack42 = interfaceinvoke $stack41.<org.jfree.data.time.TimePeriod: java.util.Date getEnd()>();
+        e#1 = virtualinvoke $stack42.<java.util.Date: long getTime()>();
+        $stack43 = e#1 - minStart#3;
+        $stack44 = $stack43 / 2L;
+        minMiddle#1 = minStart#3 + $stack44;
+        $stack45 = middle cmp minMiddle#1;
+    
+        if $stack45 <= 0 goto label10;
+        this.<org.jfree.data.time.TimePeriodValues: int maxMiddleIndex> = index;
+    
+      label10:
+        goto label12;
+    
+      label11:
+        this.<org.jfree.data.time.TimePeriodValues: int maxMiddleIndex> = index;
+    
+      label12:
+        $stack23 = this.<org.jfree.data.time.TimePeriodValues: int minEndIndex>;
+    
+        if $stack23 < 0 goto label14;
+        $stack30 = this.<org.jfree.data.time.TimePeriodValues: int minEndIndex>;
+        $stack31 = virtualinvoke this.<org.jfree.data.time.TimePeriodValues: org.jfree.data.time.TimePeriodValue getDataItem(int)>($stack30);
+        $stack32 = virtualinvoke $stack31.<org.jfree.data.time.TimePeriodValue: org.jfree.data.time.TimePeriod getPeriod()>();
+        $stack33 = interfaceinvoke $stack32.<org.jfree.data.time.TimePeriod: java.util.Date getEnd()>();
+        minStart#4 = virtualinvoke $stack33.<java.util.Date: long getTime()>();
+        $stack34 = end cmp minStart#4;
+    
+        if $stack34 >= 0 goto label13;
+        this.<org.jfree.data.time.TimePeriodValues: int minEndIndex> = index;
+    
+      label13:
+        goto label15;
+    
+      label14:
+        this.<org.jfree.data.time.TimePeriodValues: int minEndIndex> = index;
+    
+      label15:
+        $stack24 = this.<org.jfree.data.time.TimePeriodValues: int maxEndIndex>;
+    
+        if $stack24 < 0 goto label17;
+        $stack25 = this.<org.jfree.data.time.TimePeriodValues: int maxEndIndex>;
+        $stack26 = virtualinvoke this.<org.jfree.data.time.TimePeriodValues: org.jfree.data.time.TimePeriodValue getDataItem(int)>($stack25);
+        $stack27 = virtualinvoke $stack26.<org.jfree.data.time.TimePeriodValue: org.jfree.data.time.TimePeriod getPeriod()>();
+        $stack28 = interfaceinvoke $stack27.<org.jfree.data.time.TimePeriod: java.util.Date getEnd()>();
+        minStart#5 = virtualinvoke $stack28.<java.util.Date: long getTime()>();
+        $stack29 = end cmp minStart#5;
+    
+        if $stack29 <= 0 goto label16;
+        this.<org.jfree.data.time.TimePeriodValues: int maxEndIndex> = index;
+    
+      label16:
+        goto label18;
+    
+      label17:
+        this.<org.jfree.data.time.TimePeriodValues: int maxEndIndex> = index;
+    
+      label18:
+        return;
+    }
+
+    // ---- method: <org.jfree.data.time.TimePeriodValues: void add(org.jfree.data.time.TimePeriod,java.lang.Number)> ----
+    {
+        java.lang.Number value;
+        org.jfree.data.time.TimePeriod period;
+        org.jfree.data.time.TimePeriodValue $stack4, item;
+        org.jfree.data.time.TimePeriodValues this;
+    
+    
+        this := @this: org.jfree.data.time.TimePeriodValues;
+        period := @parameter0: org.jfree.data.time.TimePeriod;
+        value := @parameter1: java.lang.Number;
+        $stack4 = new org.jfree.data.time.TimePeriodValue;
+        specialinvoke $stack4.<org.jfree.data.time.TimePeriodValue: void <init>(org.jfree.data.time.TimePeriod,java.lang.Number)>(period, value);
+        item = $stack4;
+        virtualinvoke this.<org.jfree.data.time.TimePeriodValues: void add(org.jfree.data.time.TimePeriodValue)>($stack4);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.time.TimePeriodValues: int getItemCount()> ----
+    {
+        int $stack2;
+        java.util.List $stack1;
+        org.jfree.data.time.TimePeriodValues this;
+    
+    
+        this := @this: org.jfree.data.time.TimePeriodValues;
+        $stack1 = this.<org.jfree.data.time.TimePeriodValues: java.util.List data>;
+        $stack2 = interfaceinvoke $stack1.<java.util.List: int size()>();
+    
+        return $stack2;
+    }
+
+    // ---- method: <org.jfree.data.time.TimePeriodValues: org.jfree.data.time.TimePeriod getTimePeriod(int)> ----
+    {
+        int index;
+        org.jfree.data.time.TimePeriod $stack3;
+        org.jfree.data.time.TimePeriodValue $stack2;
+        org.jfree.data.time.TimePeriodValues this;
+    
+    
+        this := @this: org.jfree.data.time.TimePeriodValues;
+        index := @parameter0: int;
+        $stack2 = virtualinvoke this.<org.jfree.data.time.TimePeriodValues: org.jfree.data.time.TimePeriodValue getDataItem(int)>(index);
+        $stack3 = virtualinvoke $stack2.<org.jfree.data.time.TimePeriodValue: org.jfree.data.time.TimePeriod getPeriod()>();
+    
+        return $stack3;
+    }
+
+    // ---- method: <org.jfree.data.time.TimePeriodValues: void add(org.jfree.data.time.TimePeriodValue)> ----
+    {
+        int $stack4, $stack5;
+        java.lang.IllegalArgumentException #l1;
+        java.lang.Object $stack7;
+        java.lang.Throwable #l0;
+        java.util.List $stack2, $stack3;
+        org.jfree.data.time.TimePeriod $stack6;
+        org.jfree.data.time.TimePeriodValue item;
+        org.jfree.data.time.TimePeriodValues this;
+    
+    
+        this := @this: org.jfree.data.time.TimePeriodValues;
+        item := @parameter0: org.jfree.data.time.TimePeriodValue;
+    
+        if item != null goto label1;
+        $stack7 = new java.lang.IllegalArgumentException;
+        #l1 = (java.lang.IllegalArgumentException) $stack7;
+        specialinvoke #l1.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null item not allowed.");
+        #l0 = (java.lang.Throwable) $stack7;
+    
+        throw #l0;
+    
+      label1:
+        $stack2 = this.<org.jfree.data.time.TimePeriodValues: java.util.List data>;
+        interfaceinvoke $stack2.<java.util.List: boolean add(java.lang.Object)>(item);
+        $stack6 = virtualinvoke item.<org.jfree.data.time.TimePeriodValue: org.jfree.data.time.TimePeriod getPeriod()>();
+        $stack3 = this.<org.jfree.data.time.TimePeriodValues: java.util.List data>;
+        $stack4 = interfaceinvoke $stack3.<java.util.List: int size()>();
+        $stack5 = $stack4 - 1;
+        specialinvoke this.<org.jfree.data.time.TimePeriodValues: void updateBounds(org.jfree.data.time.TimePeriod,int)>($stack6, $stack5);
+        virtualinvoke this.<org.jfree.data.time.TimePeriodValues: void fireSeriesChanged()>();
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.time.TimePeriodValues: void <init>(java.lang.Comparable)> ----
+    {
+        java.lang.Comparable name;
+        org.jfree.data.time.TimePeriodValues this;
+    
+    
+        this := @this: org.jfree.data.time.TimePeriodValues;
+        name := @parameter0: java.lang.Comparable;
+        specialinvoke this.<org.jfree.data.time.TimePeriodValues: void <init>(java.lang.Comparable,java.lang.String,java.lang.String)>(name, "Time", "Value");
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.time.TimePeriodValues: int hashCode()> ----
+    {
+        int $stack10, $stack11, $stack12, $stack13, $stack14, $stack15, $stack16, $stack17, $stack18, $stack19, $stack21, $stack4, $stack6, $stack7, $stack8, $stack9, result#0, result#1, result#2, result#3, result#4, result#5, result#6, result#7, result#8;
+        java.lang.String $stack2, $stack20, $stack22, $stack3;
+        java.util.List $stack5;
+        org.jfree.data.time.TimePeriodValues this;
+    
+    
+        this := @this: org.jfree.data.time.TimePeriodValues;
+        $stack2 = this.<org.jfree.data.time.TimePeriodValues: java.lang.String domain>;
+    
+        if $stack2 == null goto label1;
+        $stack22 = this.<org.jfree.data.time.TimePeriodValues: java.lang.String domain>;
+        result#0 = virtualinvoke $stack22.<java.lang.String: int hashCode()>();
+    
+        goto label2;
+    
+      label1:
+        result#0 = 0;
+    
+      label2:
+        $stack4 = 29 * result#0;
+        $stack3 = this.<org.jfree.data.time.TimePeriodValues: java.lang.String range>;
+    
+        if $stack3 == null goto label3;
+        $stack20 = this.<org.jfree.data.time.TimePeriodValues: java.lang.String range>;
+        $stack21 = virtualinvoke $stack20.<java.lang.String: int hashCode()>();
+    
+        goto label4;
+    
+      label3:
+        $stack21 = 0;
+    
+      label4:
+        result#1 = $stack4 + $stack21;
+        $stack6 = 29 * result#1;
+        $stack5 = this.<org.jfree.data.time.TimePeriodValues: java.util.List data>;
+        $stack7 = interfaceinvoke $stack5.<java.util.List: int hashCode()>();
+        result#2 = $stack6 + $stack7;
+        $stack8 = 29 * result#2;
+        $stack9 = this.<org.jfree.data.time.TimePeriodValues: int minStartIndex>;
+        result#3 = $stack8 + $stack9;
+        $stack10 = 29 * result#3;
+        $stack11 = this.<org.jfree.data.time.TimePeriodValues: int maxStartIndex>;
+        result#4 = $stack10 + $stack11;
+        $stack12 = 29 * result#4;
+        $stack13 = this.<org.jfree.data.time.TimePeriodValues: int minMiddleIndex>;
+        result#5 = $stack12 + $stack13;
+        $stack14 = 29 * result#5;
+        $stack15 = this.<org.jfree.data.time.TimePeriodValues: int maxMiddleIndex>;
+        result#6 = $stack14 + $stack15;
+        $stack16 = 29 * result#6;
+        $stack17 = this.<org.jfree.data.time.TimePeriodValues: int minEndIndex>;
+        result#7 = $stack16 + $stack17;
+        $stack18 = 29 * result#7;
+        $stack19 = this.<org.jfree.data.time.TimePeriodValues: int maxEndIndex>;
+        result#8 = $stack18 + $stack19;
+    
+        return result#8;
+    }
+
+    // ---- method: <org.jfree.data.time.TimePeriodValues: org.jfree.data.time.TimePeriodValues createCopy(int,int)> ----
+    {
+        int $stack11, end, index, start;
+        java.io.PrintStream $stack16;
+        java.lang.Object $stack13, $stack14, $stack8, $stack9;
+        java.util.ArrayList #l0;
+        java.util.List $stack10, $stack12;
+        org.jfree.data.general.SeriesException $stack15, e;
+        org.jfree.data.time.TimePeriodValue clone, item;
+        org.jfree.data.time.TimePeriodValues copy, this;
+    
+    
+        this := @this: org.jfree.data.time.TimePeriodValues;
+        start := @parameter0: int;
+        end := @parameter1: int;
+        $stack8 = specialinvoke this.<org.jfree.data.general.Series: java.lang.Object clone()>();
+        copy = (org.jfree.data.time.TimePeriodValues) $stack8;
+        $stack9 = new java.util.ArrayList;
+        #l0 = (java.util.ArrayList) $stack9;
+        specialinvoke #l0.<java.util.ArrayList: void <init>()>();
+        copy.<org.jfree.data.time.TimePeriodValues: java.util.List data> = (java.util.List) $stack9;
+        $stack10 = this.<org.jfree.data.time.TimePeriodValues: java.util.List data>;
+        $stack11 = interfaceinvoke $stack10.<java.util.List: int size()>();
+    
+        if $stack11 <= 0 goto label6;
+        index = start;
+    
+      label1:
+        if index > end goto label6;
+        $stack12 = this.<org.jfree.data.time.TimePeriodValues: java.util.List data>;
+        $stack13 = interfaceinvoke $stack12.<java.util.List: java.lang.Object get(int)>(index);
+        item = (org.jfree.data.time.TimePeriodValue) $stack13;
+        $stack14 = virtualinvoke item.<org.jfree.data.time.TimePeriodValue: java.lang.Object clone()>();
+        clone = (org.jfree.data.time.TimePeriodValue) $stack14;
+    
+      label2:
+        virtualinvoke copy.<org.jfree.data.time.TimePeriodValues: void add(org.jfree.data.time.TimePeriodValue)>(clone);
+    
+      label3:
+        goto label5;
+    
+      label4:
+        $stack15 := @caughtexception;
+        e = $stack15;
+        $stack16 = <java.lang.System: java.io.PrintStream err>;
+        virtualinvoke $stack16.<java.io.PrintStream: void println(java.lang.String)>("Failed to add cloned item.");
+    
+      label5:
+        index = index + 1;
+    
+        goto label1;
+    
+      label6:
+        return copy;
+    
+     catch org.jfree.data.general.SeriesException from label2 to label3 with label4;
+    }
+
+    // ---- method: <org.jfree.data.time.TimePeriodValues: void setDomainDescription(java.lang.String)> ----
+    {
+        java.lang.String description, old;
+        org.jfree.data.time.TimePeriodValues this;
+    
+    
+        this := @this: org.jfree.data.time.TimePeriodValues;
+        description := @parameter0: java.lang.String;
+        old = this.<org.jfree.data.time.TimePeriodValues: java.lang.String domain>;
+        this.<org.jfree.data.time.TimePeriodValues: java.lang.String domain> = description;
+        virtualinvoke this.<org.jfree.data.time.TimePeriodValues: void firePropertyChange(java.lang.String,java.lang.Object,java.lang.Object)>("Domain", old, description);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.time.TimePeriodValues: int getMaxEndIndex()> ----
+    {
+        int $stack1;
+        org.jfree.data.time.TimePeriodValues this;
+    
+    
+        this := @this: org.jfree.data.time.TimePeriodValues;
+        $stack1 = this.<org.jfree.data.time.TimePeriodValues: int maxEndIndex>;
+    
+        return $stack1;
+    }
+
+}

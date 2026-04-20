@@ -1,0 +1,130 @@
+// ========================================================================
+// CLASS : org.jfree.chart.axis.CompassFormat
+// ========================================================================
+
+[PUBLIC, SUPER] class org.jfree.chart.axis.CompassFormat extends java.text.NumberFormat {
+
+    // ---- method: <org.jfree.chart.axis.CompassFormat: java.lang.StringBuffer format(double,java.lang.StringBuffer,java.text.FieldPosition)> ----
+    {
+        double number;
+        java.lang.String $stack5;
+        java.lang.StringBuffer $stack6, toAppendTo;
+        java.text.FieldPosition pos;
+        org.jfree.chart.axis.CompassFormat this;
+    
+    
+        this := @this: org.jfree.chart.axis.CompassFormat;
+        number := @parameter0: double;
+        toAppendTo := @parameter1: java.lang.StringBuffer;
+        pos := @parameter2: java.text.FieldPosition;
+        $stack5 = virtualinvoke this.<org.jfree.chart.axis.CompassFormat: java.lang.String getDirectionCode(double)>(number);
+        $stack6 = virtualinvoke toAppendTo.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>($stack5);
+    
+        return $stack6;
+    }
+
+    // ---- method: <org.jfree.chart.axis.CompassFormat: java.lang.Number parse(java.lang.String,java.text.ParsePosition)> ----
+    {
+        java.lang.String source;
+        java.text.ParsePosition parsePosition;
+        org.jfree.chart.axis.CompassFormat this;
+    
+    
+        this := @this: org.jfree.chart.axis.CompassFormat;
+        source := @parameter0: java.lang.String;
+        parsePosition := @parameter1: java.text.ParsePosition;
+    
+        return null;
+    }
+
+    // ---- method: <org.jfree.chart.axis.CompassFormat: void <clinit>()> ----
+    {
+        java.lang.String[] $stack0;
+    
+    
+        $stack0 = newarray (java.lang.String)[17];
+        $stack0[0] = "N";
+        $stack0[1] = "NNE";
+        $stack0[2] = "NE";
+        $stack0[3] = "ENE";
+        $stack0[4] = "E";
+        $stack0[5] = "ESE";
+        $stack0[6] = "SE";
+        $stack0[7] = "SSE";
+        $stack0[8] = "S";
+        $stack0[9] = "SSW";
+        $stack0[10] = "SW";
+        $stack0[11] = "WSW";
+        $stack0[12] = "W";
+        $stack0[13] = "WNW";
+        $stack0[14] = "NW";
+        $stack0[15] = "NNW";
+        $stack0[16] = "N";
+        <org.jfree.chart.axis.CompassFormat: java.lang.String[] DIRECTIONS> = $stack0;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.axis.CompassFormat: java.lang.String getDirectionCode(double)> ----
+    {
+        byte $stack4;
+        double $stack5, $stack6, direction#0, direction#1;
+        int $stack7, $stack8, index;
+        java.lang.String $stack10;
+        java.lang.String[] $stack9;
+        org.jfree.chart.axis.CompassFormat this;
+    
+    
+        this := @this: org.jfree.chart.axis.CompassFormat;
+        direction#0 := @parameter0: double;
+        direction#1 = direction#0 % 360.0;
+        $stack4 = direction#1 cmpg 0.0;
+    
+        if $stack4 >= 0 goto label1;
+        direction#1 = direction#1 + 360.0;
+    
+      label1:
+        $stack5 = direction#1 / 11.25;
+        $stack6 = staticinvoke <java.lang.Math: double floor(double)>($stack5);
+        $stack7 = (int) $stack6;
+        $stack8 = $stack7 + 1;
+        index = $stack8 / 2;
+        $stack9 = <org.jfree.chart.axis.CompassFormat: java.lang.String[] DIRECTIONS>;
+        $stack10 = $stack9[index];
+    
+        return $stack10;
+    }
+
+    // ---- method: <org.jfree.chart.axis.CompassFormat: void <init>()> ----
+    {
+        org.jfree.chart.axis.CompassFormat this;
+    
+    
+        this := @this: org.jfree.chart.axis.CompassFormat;
+        specialinvoke this.<java.text.NumberFormat: void <init>()>();
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.axis.CompassFormat: java.lang.StringBuffer format(long,java.lang.StringBuffer,java.text.FieldPosition)> ----
+    {
+        double $stack5;
+        java.lang.String $stack6;
+        java.lang.StringBuffer $stack7, toAppendTo;
+        java.text.FieldPosition pos;
+        long number;
+        org.jfree.chart.axis.CompassFormat this;
+    
+    
+        this := @this: org.jfree.chart.axis.CompassFormat;
+        number := @parameter0: long;
+        toAppendTo := @parameter1: java.lang.StringBuffer;
+        pos := @parameter2: java.text.FieldPosition;
+        $stack5 = (double) number;
+        $stack6 = virtualinvoke this.<org.jfree.chart.axis.CompassFormat: java.lang.String getDirectionCode(double)>($stack5);
+        $stack7 = virtualinvoke toAppendTo.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>($stack6);
+    
+        return $stack7;
+    }
+
+}

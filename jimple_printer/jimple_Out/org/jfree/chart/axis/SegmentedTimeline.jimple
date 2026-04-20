@@ -1,0 +1,1498 @@
+// ========================================================================
+// CLASS : org.jfree.chart.axis.SegmentedTimeline
+// ========================================================================
+
+[PUBLIC, SUPER] class org.jfree.chart.axis.SegmentedTimeline extends java.lang.Object implements org.jfree.chart.axis.Timeline, java.lang.Cloneable, java.io.Serializable {
+
+    // ---- method: <org.jfree.chart.axis.SegmentedTimeline: org.jfree.chart.axis.SegmentedTimeline newFifteenMinuteTimeline()> ----
+    {
+        long $stack2, $stack3, $stack4, $stack5;
+        org.jfree.chart.axis.SegmentedTimeline $stack1, $stack6, timeline;
+    
+    
+        $stack1 = new org.jfree.chart.axis.SegmentedTimeline;
+        specialinvoke $stack1.<org.jfree.chart.axis.SegmentedTimeline: void <init>(long,int,int)>(900000L, 28, 68);
+        timeline = $stack1;
+        $stack3 = staticinvoke <org.jfree.chart.axis.SegmentedTimeline: long firstMondayAfter1900()>();
+        $stack2 = virtualinvoke $stack1.<org.jfree.chart.axis.SegmentedTimeline: long getSegmentSize()>();
+        $stack4 = 36L * $stack2;
+        $stack5 = $stack3 + $stack4;
+        virtualinvoke $stack1.<org.jfree.chart.axis.SegmentedTimeline: void setStartTime(long)>($stack5);
+        $stack6 = staticinvoke <org.jfree.chart.axis.SegmentedTimeline: org.jfree.chart.axis.SegmentedTimeline newMondayThroughFridayTimeline()>();
+        virtualinvoke $stack1.<org.jfree.chart.axis.SegmentedTimeline: void setBaseTimeline(org.jfree.chart.axis.SegmentedTimeline)>($stack6);
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.axis.SegmentedTimeline: long getSegmentsIncludedSize()> ----
+    {
+        long $stack1;
+        org.jfree.chart.axis.SegmentedTimeline this;
+    
+    
+        this := @this: org.jfree.chart.axis.SegmentedTimeline;
+        $stack1 = this.<org.jfree.chart.axis.SegmentedTimeline: long segmentsIncludedSize>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.axis.SegmentedTimeline: int hashCode()> ----
+    {
+        int $stack12, $stack13, $stack7, result#1, result#2;
+        long $stack10, $stack11, $stack2, $stack3, $stack4, $stack5, $stack8, $stack9;
+        org.jfree.chart.axis.SegmentedTimeline this;
+        short $stack6;
+    
+    
+        this := @this: org.jfree.chart.axis.SegmentedTimeline;
+        $stack6 = 703;
+        $stack3 = this.<org.jfree.chart.axis.SegmentedTimeline: long segmentSize>;
+        $stack2 = this.<org.jfree.chart.axis.SegmentedTimeline: long segmentSize>;
+        $stack4 = $stack2 >>> 32;
+        $stack5 = $stack3 ^ $stack4;
+        $stack7 = (int) $stack5;
+        result#1 = $stack6 + $stack7;
+        $stack12 = 37 * result#1;
+        $stack9 = this.<org.jfree.chart.axis.SegmentedTimeline: long startTime>;
+        $stack8 = this.<org.jfree.chart.axis.SegmentedTimeline: long startTime>;
+        $stack10 = $stack8 >>> 32;
+        $stack11 = $stack9 ^ $stack10;
+        $stack13 = (int) $stack11;
+        result#2 = $stack12 + $stack13;
+    
+        return result#2;
+    }
+
+    // ---- method: <org.jfree.chart.axis.SegmentedTimeline: void addException(org.jfree.chart.axis.SegmentedTimeline$Segment)> ----
+    {
+        boolean $stack3;
+        int $stack4, $stack5, p;
+        java.util.List $stack6;
+        org.jfree.chart.axis.SegmentedTimeline this;
+        org.jfree.chart.axis.SegmentedTimeline$Segment segment;
+    
+    
+        this := @this: org.jfree.chart.axis.SegmentedTimeline;
+        segment := @parameter0: org.jfree.chart.axis.SegmentedTimeline$Segment;
+        $stack3 = virtualinvoke segment.<org.jfree.chart.axis.SegmentedTimeline$Segment: boolean inIncludeSegments()>();
+    
+        if $stack3 == 0 goto label1;
+        p = specialinvoke this.<org.jfree.chart.axis.SegmentedTimeline: int binarySearchExceptionSegments(org.jfree.chart.axis.SegmentedTimeline$Segment)>(segment);
+        $stack6 = this.<org.jfree.chart.axis.SegmentedTimeline: java.util.List exceptionSegments>;
+        $stack4 = p + 1;
+        $stack5 = neg $stack4;
+        interfaceinvoke $stack6.<java.util.List: void add(int,java.lang.Object)>($stack5, segment);
+    
+      label1:
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.axis.SegmentedTimeline: long firstMondayAfter1900()> ----
+    {
+        int $stack10, offset;
+        java.lang.Object $stack8, $stack9;
+        java.lang.String $stack7;
+        java.lang.StringBuffer $stack4, $stack5, $stack6;
+        java.util.Calendar #l0, #l1, #l4, #l6, #l7;
+        java.util.Date $stack11;
+        java.util.GregorianCalendar #l2, cal;
+        java.util.SimpleTimeZone #l5, z;
+        java.util.TimeZone #l3, $stack3;
+        long $stack12;
+    
+    
+        $stack3 = staticinvoke <java.util.TimeZone: java.util.TimeZone getDefault()>();
+        offset = virtualinvoke $stack3.<java.util.TimeZone: int getRawOffset()>();
+        $stack8 = new java.util.SimpleTimeZone;
+        $stack4 = new java.lang.StringBuffer;
+        specialinvoke $stack4.<java.lang.StringBuffer: void <init>()>();
+        $stack5 = virtualinvoke $stack4.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>("UTC-");
+        $stack6 = virtualinvoke $stack5.<java.lang.StringBuffer: java.lang.StringBuffer append(int)>(offset);
+        $stack7 = virtualinvoke $stack6.<java.lang.StringBuffer: java.lang.String toString()>();
+        #l5 = (java.util.SimpleTimeZone) $stack8;
+        specialinvoke #l5.<java.util.SimpleTimeZone: void <init>(int,java.lang.String)>(offset, $stack7);
+        z = (java.util.SimpleTimeZone) $stack8;
+        $stack9 = new java.util.GregorianCalendar;
+        #l3 = (java.util.TimeZone) $stack8;
+        #l2 = (java.util.GregorianCalendar) $stack9;
+        specialinvoke #l2.<java.util.GregorianCalendar: void <init>(java.util.TimeZone)>(#l3);
+        cal = (java.util.GregorianCalendar) $stack9;
+        #l6 = (java.util.Calendar) $stack9;
+        virtualinvoke #l6.<java.util.Calendar: void set(int,int,int,int,int,int)>(1900, 0, 1, 0, 0, 0);
+        #l4 = (java.util.Calendar) $stack9;
+        virtualinvoke #l4.<java.util.Calendar: void set(int,int)>(14, 0);
+    
+      label1:
+        #l7 = (java.util.Calendar) $stack9;
+        $stack10 = virtualinvoke #l7.<java.util.Calendar: int get(int)>(7);
+    
+        if $stack10 == 2 goto label2;
+        #l0 = (java.util.Calendar) $stack9;
+        virtualinvoke #l0.<java.util.Calendar: void add(int,int)>(5, 1);
+    
+        goto label1;
+    
+      label2:
+        #l1 = (java.util.Calendar) $stack9;
+        $stack11 = virtualinvoke #l1.<java.util.Calendar: java.util.Date getTime()>();
+        $stack12 = virtualinvoke $stack11.<java.util.Date: long getTime()>();
+    
+        return $stack12;
+    }
+
+    // ---- method: <org.jfree.chart.axis.SegmentedTimeline: long getExceptionSegmentCount(long,long)> ----
+    {
+        boolean $stack11;
+        byte $stack9;
+        int n;
+        java.lang.Object $stack13;
+        java.util.Iterator iter;
+        java.util.List $stack10;
+        long $stack12, $stack14, $stack15, $stack16, fromMillisecond, toMillisecond;
+        org.jfree.chart.axis.SegmentedTimeline this;
+        org.jfree.chart.axis.SegmentedTimeline$Segment intersection, segment;
+    
+    
+        this := @this: org.jfree.chart.axis.SegmentedTimeline;
+        fromMillisecond := @parameter0: long;
+        toMillisecond := @parameter1: long;
+        $stack9 = toMillisecond cmp fromMillisecond;
+    
+        if $stack9 >= 0 goto label1;
+    
+        return 0L;
+    
+      label1:
+        n = 0;
+        $stack10 = this.<org.jfree.chart.axis.SegmentedTimeline: java.util.List exceptionSegments>;
+        iter = interfaceinvoke $stack10.<java.util.List: java.util.Iterator iterator()>();
+    
+      label2:
+        $stack11 = interfaceinvoke iter.<java.util.Iterator: boolean hasNext()>();
+    
+        if $stack11 == 0 goto label4;
+        $stack13 = interfaceinvoke iter.<java.util.Iterator: java.lang.Object next()>();
+        segment = (org.jfree.chart.axis.SegmentedTimeline$Segment) $stack13;
+        intersection = virtualinvoke segment.<org.jfree.chart.axis.SegmentedTimeline$Segment: org.jfree.chart.axis.SegmentedTimeline$Segment intersect(long,long)>(fromMillisecond, toMillisecond);
+    
+        if intersection == null goto label3;
+        $stack14 = (long) n;
+        $stack15 = virtualinvoke intersection.<org.jfree.chart.axis.SegmentedTimeline$Segment: long getSegmentCount()>();
+        $stack16 = $stack14 + $stack15;
+        n = (int) $stack16;
+    
+      label3:
+        goto label2;
+    
+      label4:
+        $stack12 = (long) n;
+    
+        return $stack12;
+    }
+
+    // ---- method: <org.jfree.chart.axis.SegmentedTimeline: long access$100(org.jfree.chart.axis.SegmentedTimeline)> ----
+    {
+        long $stack1;
+        org.jfree.chart.axis.SegmentedTimeline x0;
+    
+    
+        x0 := @parameter0: org.jfree.chart.axis.SegmentedTimeline;
+        $stack1 = x0.<org.jfree.chart.axis.SegmentedTimeline: long segmentSize>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.axis.SegmentedTimeline: int getGroupSegmentCount()> ----
+    {
+        int $stack1;
+        org.jfree.chart.axis.SegmentedTimeline this;
+    
+    
+        this := @this: org.jfree.chart.axis.SegmentedTimeline;
+        $stack1 = this.<org.jfree.chart.axis.SegmentedTimeline: int groupSegmentCount>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.axis.SegmentedTimeline: long getSegmentsExcludedSize()> ----
+    {
+        long $stack1;
+        org.jfree.chart.axis.SegmentedTimeline this;
+    
+    
+        this := @this: org.jfree.chart.axis.SegmentedTimeline;
+        $stack1 = this.<org.jfree.chart.axis.SegmentedTimeline: long segmentsExcludedSize>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.axis.SegmentedTimeline: void <clinit>()> ----
+    {
+        int $stack11, offset;
+        java.lang.Object $stack10, $stack8;
+        java.lang.String $stack7;
+        java.lang.StringBuffer $stack4, $stack5, $stack6;
+        java.util.Calendar #l0, #l1, #l2, #l3, #l5;
+        java.util.Date $stack12;
+        java.util.GregorianCalendar #l4, cal;
+        java.util.SimpleTimeZone #l6;
+        java.util.TimeZone $stack2, $stack3, $stack9;
+        long $stack13;
+    
+    
+        $stack2 = staticinvoke <java.util.TimeZone: java.util.TimeZone getDefault()>();
+        <org.jfree.chart.axis.SegmentedTimeline: java.util.TimeZone DEFAULT_TIME_ZONE> = $stack2;
+        $stack3 = staticinvoke <java.util.TimeZone: java.util.TimeZone getDefault()>();
+        offset = virtualinvoke $stack3.<java.util.TimeZone: int getRawOffset()>();
+        $stack8 = new java.util.SimpleTimeZone;
+        $stack4 = new java.lang.StringBuffer;
+        specialinvoke $stack4.<java.lang.StringBuffer: void <init>()>();
+        $stack5 = virtualinvoke $stack4.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>("UTC-");
+        $stack6 = virtualinvoke $stack5.<java.lang.StringBuffer: java.lang.StringBuffer append(int)>(offset);
+        $stack7 = virtualinvoke $stack6.<java.lang.StringBuffer: java.lang.String toString()>();
+        #l6 = (java.util.SimpleTimeZone) $stack8;
+        specialinvoke #l6.<java.util.SimpleTimeZone: void <init>(int,java.lang.String)>(offset, $stack7);
+        <org.jfree.chart.axis.SegmentedTimeline: java.util.TimeZone NO_DST_TIME_ZONE> = (java.util.TimeZone) $stack8;
+        $stack10 = new java.util.GregorianCalendar;
+        $stack9 = <org.jfree.chart.axis.SegmentedTimeline: java.util.TimeZone NO_DST_TIME_ZONE>;
+        #l4 = (java.util.GregorianCalendar) $stack10;
+        specialinvoke #l4.<java.util.GregorianCalendar: void <init>(java.util.TimeZone)>($stack9);
+        cal = (java.util.GregorianCalendar) $stack10;
+        #l1 = (java.util.Calendar) $stack10;
+        virtualinvoke #l1.<java.util.Calendar: void set(int,int,int,int,int,int)>(1900, 0, 1, 0, 0, 0);
+        #l5 = (java.util.Calendar) $stack10;
+        virtualinvoke #l5.<java.util.Calendar: void set(int,int)>(14, 0);
+    
+      label1:
+        #l2 = (java.util.Calendar) $stack10;
+        $stack11 = virtualinvoke #l2.<java.util.Calendar: int get(int)>(7);
+    
+        if $stack11 == 2 goto label2;
+        #l3 = (java.util.Calendar) $stack10;
+        virtualinvoke #l3.<java.util.Calendar: void add(int,int)>(5, 1);
+    
+        goto label1;
+    
+      label2:
+        #l0 = (java.util.Calendar) $stack10;
+        $stack12 = virtualinvoke #l0.<java.util.Calendar: java.util.Date getTime()>();
+        $stack13 = virtualinvoke $stack12.<java.util.Date: long getTime()>();
+        <org.jfree.chart.axis.SegmentedTimeline: long FIRST_MONDAY_AFTER_1900> = $stack13;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.axis.SegmentedTimeline: java.util.List getExceptionSegments()> ----
+    {
+        java.util.List $stack1, $stack2;
+        org.jfree.chart.axis.SegmentedTimeline this;
+    
+    
+        this := @this: org.jfree.chart.axis.SegmentedTimeline;
+        $stack1 = this.<org.jfree.chart.axis.SegmentedTimeline: java.util.List exceptionSegments>;
+        $stack2 = staticinvoke <java.util.Collections: java.util.List unmodifiableList(java.util.List)>($stack1);
+    
+        return $stack2;
+    }
+
+    // ---- method: <org.jfree.chart.axis.SegmentedTimeline: boolean equals(java.lang.Object)> ----
+    {
+        boolean $stack21, $stack8, b0, b1, b2, b3, b4;
+        byte $stack11, $stack18;
+        int $stack12, $stack13, $stack14, $stack15;
+        java.lang.Object o;
+        java.util.List $stack19, $stack20;
+        long $stack10, $stack16, $stack17, $stack9;
+        org.jfree.chart.axis.SegmentedTimeline other, this;
+    
+    
+        this := @this: org.jfree.chart.axis.SegmentedTimeline;
+        o := @parameter0: java.lang.Object;
+        $stack8 = o instanceof org.jfree.chart.axis.SegmentedTimeline;
+    
+        if $stack8 == 0 goto label11;
+        other = (org.jfree.chart.axis.SegmentedTimeline) o;
+        $stack9 = this.<org.jfree.chart.axis.SegmentedTimeline: long segmentSize>;
+        $stack10 = virtualinvoke other.<org.jfree.chart.axis.SegmentedTimeline: long getSegmentSize()>();
+        $stack11 = $stack9 cmp $stack10;
+    
+        if $stack11 != 0 goto label01;
+        b0 = 1;
+    
+        goto label02;
+    
+      label01:
+        b0 = 0;
+    
+      label02:
+        $stack12 = this.<org.jfree.chart.axis.SegmentedTimeline: int segmentsIncluded>;
+        $stack13 = virtualinvoke other.<org.jfree.chart.axis.SegmentedTimeline: int getSegmentsIncluded()>();
+    
+        if $stack12 != $stack13 goto label03;
+        b1 = 1;
+    
+        goto label04;
+    
+      label03:
+        b1 = 0;
+    
+      label04:
+        $stack14 = this.<org.jfree.chart.axis.SegmentedTimeline: int segmentsExcluded>;
+        $stack15 = virtualinvoke other.<org.jfree.chart.axis.SegmentedTimeline: int getSegmentsExcluded()>();
+    
+        if $stack14 != $stack15 goto label05;
+        b2 = 1;
+    
+        goto label06;
+    
+      label05:
+        b2 = 0;
+    
+      label06:
+        $stack16 = this.<org.jfree.chart.axis.SegmentedTimeline: long startTime>;
+        $stack17 = virtualinvoke other.<org.jfree.chart.axis.SegmentedTimeline: long getStartTime()>();
+        $stack18 = $stack16 cmp $stack17;
+    
+        if $stack18 != 0 goto label07;
+        b3 = 1;
+    
+        goto label08;
+    
+      label07:
+        b3 = 0;
+    
+      label08:
+        $stack19 = this.<org.jfree.chart.axis.SegmentedTimeline: java.util.List exceptionSegments>;
+        $stack20 = virtualinvoke other.<org.jfree.chart.axis.SegmentedTimeline: java.util.List getExceptionSegments()>();
+        b4 = specialinvoke this.<org.jfree.chart.axis.SegmentedTimeline: boolean equals(java.lang.Object,java.lang.Object)>($stack19, $stack20);
+    
+        if b0 == 0 goto label09;
+    
+        if b1 == 0 goto label09;
+    
+        if b2 == 0 goto label09;
+    
+        if b3 == 0 goto label09;
+    
+        if b4 == 0 goto label09;
+        $stack21 = 1;
+    
+        goto label10;
+    
+      label09:
+        $stack21 = 0;
+    
+      label10:
+        return $stack21;
+    
+      label11:
+        return 0;
+    }
+
+    // ---- method: <org.jfree.chart.axis.SegmentedTimeline: int access$300(org.jfree.chart.axis.SegmentedTimeline)> ----
+    {
+        int $stack1;
+        org.jfree.chart.axis.SegmentedTimeline x0;
+    
+    
+        x0 := @parameter0: org.jfree.chart.axis.SegmentedTimeline;
+        $stack1 = x0.<org.jfree.chart.axis.SegmentedTimeline: int groupSegmentCount>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.axis.SegmentedTimeline: void setStartTime(long)> ----
+    {
+        long millisecond;
+        org.jfree.chart.axis.SegmentedTimeline this;
+    
+    
+        this := @this: org.jfree.chart.axis.SegmentedTimeline;
+        millisecond := @parameter0: long;
+        this.<org.jfree.chart.axis.SegmentedTimeline: long startTime> = millisecond;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.axis.SegmentedTimeline: long toTimelineValue(java.util.Date)> ----
+    {
+        java.util.Date date;
+        long $stack2, $stack3;
+        org.jfree.chart.axis.SegmentedTimeline this;
+    
+    
+        this := @this: org.jfree.chart.axis.SegmentedTimeline;
+        date := @parameter0: java.util.Date;
+        $stack2 = virtualinvoke this.<org.jfree.chart.axis.SegmentedTimeline: long getTime(java.util.Date)>(date);
+        $stack3 = virtualinvoke this.<org.jfree.chart.axis.SegmentedTimeline: long toTimelineValue(long)>($stack2);
+    
+        return $stack3;
+    }
+
+    // ---- method: <org.jfree.chart.axis.SegmentedTimeline: java.util.Date getDate(long)> ----
+    {
+        java.util.Calendar $stack4, $stack5;
+        java.util.Date $stack3, $stack6;
+        long value;
+        org.jfree.chart.axis.SegmentedTimeline this;
+    
+    
+        this := @this: org.jfree.chart.axis.SegmentedTimeline;
+        value := @parameter0: long;
+        $stack4 = this.<org.jfree.chart.axis.SegmentedTimeline: java.util.Calendar workingCalendarNoDST>;
+        $stack3 = new java.util.Date;
+        specialinvoke $stack3.<java.util.Date: void <init>(long)>(value);
+        virtualinvoke $stack4.<java.util.Calendar: void setTime(java.util.Date)>($stack3);
+        $stack5 = this.<org.jfree.chart.axis.SegmentedTimeline: java.util.Calendar workingCalendarNoDST>;
+        $stack6 = virtualinvoke $stack5.<java.util.Calendar: java.util.Date getTime()>();
+    
+        return $stack6;
+    }
+
+    // ---- method: <org.jfree.chart.axis.SegmentedTimeline: void addExceptions(java.util.List)> ----
+    {
+        boolean $stack3;
+        java.lang.Object $stack4;
+        java.util.Date $stack5;
+        java.util.Iterator iter;
+        java.util.List exceptionList;
+        org.jfree.chart.axis.SegmentedTimeline this;
+    
+    
+        this := @this: org.jfree.chart.axis.SegmentedTimeline;
+        exceptionList := @parameter0: java.util.List;
+        iter = interfaceinvoke exceptionList.<java.util.List: java.util.Iterator iterator()>();
+    
+      label1:
+        $stack3 = interfaceinvoke iter.<java.util.Iterator: boolean hasNext()>();
+    
+        if $stack3 == 0 goto label2;
+        $stack4 = interfaceinvoke iter.<java.util.Iterator: java.lang.Object next()>();
+        $stack5 = (java.util.Date) $stack4;
+        virtualinvoke this.<org.jfree.chart.axis.SegmentedTimeline: void addException(java.util.Date)>($stack5);
+    
+        goto label1;
+    
+      label2:
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.axis.SegmentedTimeline: long getStartTime()> ----
+    {
+        long $stack1;
+        org.jfree.chart.axis.SegmentedTimeline this;
+    
+    
+        this := @this: org.jfree.chart.axis.SegmentedTimeline;
+        $stack1 = this.<org.jfree.chart.axis.SegmentedTimeline: long startTime>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.axis.SegmentedTimeline: java.lang.Object clone()> ----
+    {
+        java.lang.Object $stack2;
+        org.jfree.chart.axis.SegmentedTimeline clone, this;
+    
+    
+        this := @this: org.jfree.chart.axis.SegmentedTimeline;
+        $stack2 = specialinvoke this.<java.lang.Object: java.lang.Object clone()>();
+        clone = (org.jfree.chart.axis.SegmentedTimeline) $stack2;
+    
+        return clone;
+    }
+
+    // ---- method: <org.jfree.chart.axis.SegmentedTimeline: long access$000(org.jfree.chart.axis.SegmentedTimeline)> ----
+    {
+        long $stack1;
+        org.jfree.chart.axis.SegmentedTimeline x0;
+    
+    
+        x0 := @parameter0: org.jfree.chart.axis.SegmentedTimeline;
+        $stack1 = x0.<org.jfree.chart.axis.SegmentedTimeline: long startTime>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.axis.SegmentedTimeline: long getSegmentsGroupSize()> ----
+    {
+        long $stack1;
+        org.jfree.chart.axis.SegmentedTimeline this;
+    
+    
+        this := @this: org.jfree.chart.axis.SegmentedTimeline;
+        $stack1 = this.<org.jfree.chart.axis.SegmentedTimeline: long segmentsGroupSize>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.axis.SegmentedTimeline: long getSegmentSize()> ----
+    {
+        long $stack1;
+        org.jfree.chart.axis.SegmentedTimeline this;
+    
+    
+        this := @this: org.jfree.chart.axis.SegmentedTimeline;
+        $stack1 = this.<org.jfree.chart.axis.SegmentedTimeline: long segmentSize>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.axis.SegmentedTimeline: int access$400(org.jfree.chart.axis.SegmentedTimeline,org.jfree.chart.axis.SegmentedTimeline$Segment)> ----
+    {
+        int $stack2;
+        org.jfree.chart.axis.SegmentedTimeline x0;
+        org.jfree.chart.axis.SegmentedTimeline$Segment x1;
+    
+    
+        x0 := @parameter0: org.jfree.chart.axis.SegmentedTimeline;
+        x1 := @parameter1: org.jfree.chart.axis.SegmentedTimeline$Segment;
+        $stack2 = specialinvoke x0.<org.jfree.chart.axis.SegmentedTimeline: int binarySearchExceptionSegments(org.jfree.chart.axis.SegmentedTimeline$Segment)>(x1);
+    
+        return $stack2;
+    }
+
+    // ---- method: <org.jfree.chart.axis.SegmentedTimeline: boolean getAdjustForDaylightSaving()> ----
+    {
+        boolean $stack1;
+        org.jfree.chart.axis.SegmentedTimeline this;
+    
+    
+        this := @this: org.jfree.chart.axis.SegmentedTimeline;
+        $stack1 = this.<org.jfree.chart.axis.SegmentedTimeline: boolean adjustForDaylightSaving>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.axis.SegmentedTimeline: boolean containsDomainRange(long,long)> ----
+    {
+        boolean $stack8, contains#0, contains#1;
+        byte $stack7;
+        java.lang.IllegalArgumentException #l0;
+        java.lang.Object $stack16;
+        java.lang.String $stack15;
+        java.lang.StringBuffer $stack10, $stack11, $stack12, $stack13, $stack14, $stack9;
+        java.lang.Throwable #l1;
+        long domainValueEnd, domainValueStart;
+        org.jfree.chart.axis.SegmentedTimeline this;
+        org.jfree.chart.axis.SegmentedTimeline$Segment segment;
+    
+    
+        this := @this: org.jfree.chart.axis.SegmentedTimeline;
+        domainValueStart := @parameter0: long;
+        domainValueEnd := @parameter1: long;
+        $stack7 = domainValueEnd cmp domainValueStart;
+    
+        if $stack7 >= 0 goto label1;
+        $stack16 = new java.lang.IllegalArgumentException;
+        $stack9 = new java.lang.StringBuffer;
+        specialinvoke $stack9.<java.lang.StringBuffer: void <init>()>();
+        $stack10 = virtualinvoke $stack9.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>("domainValueEnd (");
+        $stack11 = virtualinvoke $stack10.<java.lang.StringBuffer: java.lang.StringBuffer append(long)>(domainValueEnd);
+        $stack12 = virtualinvoke $stack11.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>(") < domainValueStart (");
+        $stack13 = virtualinvoke $stack12.<java.lang.StringBuffer: java.lang.StringBuffer append(long)>(domainValueStart);
+        $stack14 = virtualinvoke $stack13.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>(")");
+        $stack15 = virtualinvoke $stack14.<java.lang.StringBuffer: java.lang.String toString()>();
+        #l0 = (java.lang.IllegalArgumentException) $stack16;
+        specialinvoke #l0.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>($stack15);
+        #l1 = (java.lang.Throwable) $stack16;
+    
+        throw #l1;
+    
+      label1:
+        segment = virtualinvoke this.<org.jfree.chart.axis.SegmentedTimeline: org.jfree.chart.axis.SegmentedTimeline$Segment getSegment(long)>(domainValueStart);
+        contains#0 = 1;
+    
+      label2:
+        contains#1 = virtualinvoke segment.<org.jfree.chart.axis.SegmentedTimeline$Segment: boolean inIncludeSegments()>();
+        $stack8 = virtualinvoke segment.<org.jfree.chart.axis.SegmentedTimeline$Segment: boolean contains(long)>(domainValueEnd);
+    
+        if $stack8 == 0 goto label3;
+    
+        goto label4;
+    
+      label3:
+        virtualinvoke segment.<org.jfree.chart.axis.SegmentedTimeline$Segment: void inc()>();
+    
+        if contains#1 != 0 goto label2;
+    
+      label4:
+        return contains#1;
+    }
+
+    // ---- method: <org.jfree.chart.axis.SegmentedTimeline: void <init>(long,int,int)> ----
+    {
+        int $stack10, $stack11, $stack12, $stack16, $stack9, offset, segmentsExcluded, segmentsIncluded;
+        java.lang.Object $stack28, $stack30, $stack8;
+        java.lang.String $stack27;
+        java.lang.StringBuffer $stack24, $stack25, $stack26;
+        java.util.ArrayList #l1;
+        java.util.Calendar $stack7;
+        java.util.GregorianCalendar #l2;
+        java.util.Locale $stack29;
+        java.util.SimpleTimeZone #l0, z;
+        java.util.TimeZone #l3, $stack23;
+        long $stack13, $stack14, $stack15, $stack17, $stack18, $stack19, $stack20, $stack21, $stack22, segmentSize;
+        org.jfree.chart.axis.SegmentedTimeline this;
+    
+    
+        this := @this: org.jfree.chart.axis.SegmentedTimeline;
+        segmentSize := @parameter0: long;
+        segmentsIncluded := @parameter1: int;
+        segmentsExcluded := @parameter2: int;
+        specialinvoke this.<java.lang.Object: void <init>()>();
+        $stack7 = staticinvoke <java.util.Calendar: java.util.Calendar getInstance()>();
+        this.<org.jfree.chart.axis.SegmentedTimeline: java.util.Calendar workingCalendar> = $stack7;
+        $stack8 = new java.util.ArrayList;
+        #l1 = (java.util.ArrayList) $stack8;
+        specialinvoke #l1.<java.util.ArrayList: void <init>()>();
+        this.<org.jfree.chart.axis.SegmentedTimeline: java.util.List exceptionSegments> = (java.util.List) $stack8;
+        this.<org.jfree.chart.axis.SegmentedTimeline: boolean adjustForDaylightSaving> = 0;
+        this.<org.jfree.chart.axis.SegmentedTimeline: long segmentSize> = segmentSize;
+        this.<org.jfree.chart.axis.SegmentedTimeline: int segmentsIncluded> = segmentsIncluded;
+        this.<org.jfree.chart.axis.SegmentedTimeline: int segmentsExcluded> = segmentsExcluded;
+        $stack9 = this.<org.jfree.chart.axis.SegmentedTimeline: int segmentsIncluded>;
+        $stack10 = this.<org.jfree.chart.axis.SegmentedTimeline: int segmentsExcluded>;
+        $stack11 = $stack9 + $stack10;
+        this.<org.jfree.chart.axis.SegmentedTimeline: int groupSegmentCount> = $stack11;
+        $stack12 = this.<org.jfree.chart.axis.SegmentedTimeline: int segmentsIncluded>;
+        $stack13 = (long) $stack12;
+        $stack14 = this.<org.jfree.chart.axis.SegmentedTimeline: long segmentSize>;
+        $stack15 = $stack13 * $stack14;
+        this.<org.jfree.chart.axis.SegmentedTimeline: long segmentsIncludedSize> = $stack15;
+        $stack16 = this.<org.jfree.chart.axis.SegmentedTimeline: int segmentsExcluded>;
+        $stack17 = (long) $stack16;
+        $stack18 = this.<org.jfree.chart.axis.SegmentedTimeline: long segmentSize>;
+        $stack19 = $stack17 * $stack18;
+        this.<org.jfree.chart.axis.SegmentedTimeline: long segmentsExcludedSize> = $stack19;
+        $stack20 = this.<org.jfree.chart.axis.SegmentedTimeline: long segmentsIncludedSize>;
+        $stack21 = this.<org.jfree.chart.axis.SegmentedTimeline: long segmentsExcludedSize>;
+        $stack22 = $stack20 + $stack21;
+        this.<org.jfree.chart.axis.SegmentedTimeline: long segmentsGroupSize> = $stack22;
+        $stack23 = staticinvoke <java.util.TimeZone: java.util.TimeZone getDefault()>();
+        offset = virtualinvoke $stack23.<java.util.TimeZone: int getRawOffset()>();
+        $stack28 = new java.util.SimpleTimeZone;
+        $stack24 = new java.lang.StringBuffer;
+        specialinvoke $stack24.<java.lang.StringBuffer: void <init>()>();
+        $stack25 = virtualinvoke $stack24.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>("UTC-");
+        $stack26 = virtualinvoke $stack25.<java.lang.StringBuffer: java.lang.StringBuffer append(int)>(offset);
+        $stack27 = virtualinvoke $stack26.<java.lang.StringBuffer: java.lang.String toString()>();
+        #l0 = (java.util.SimpleTimeZone) $stack28;
+        specialinvoke #l0.<java.util.SimpleTimeZone: void <init>(int,java.lang.String)>(offset, $stack27);
+        z = (java.util.SimpleTimeZone) $stack28;
+        $stack30 = new java.util.GregorianCalendar;
+        $stack29 = staticinvoke <java.util.Locale: java.util.Locale getDefault()>();
+        #l2 = (java.util.GregorianCalendar) $stack30;
+        #l3 = (java.util.TimeZone) $stack28;
+        specialinvoke #l2.<java.util.GregorianCalendar: void <init>(java.util.TimeZone,java.util.Locale)>(#l3, $stack29);
+        this.<org.jfree.chart.axis.SegmentedTimeline: java.util.Calendar workingCalendarNoDST> = (java.util.Calendar) $stack30;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.axis.SegmentedTimeline: org.jfree.chart.axis.SegmentedTimeline getBaseTimeline()> ----
+    {
+        org.jfree.chart.axis.SegmentedTimeline $stack1, this;
+    
+    
+        this := @this: org.jfree.chart.axis.SegmentedTimeline;
+        $stack1 = this.<org.jfree.chart.axis.SegmentedTimeline: org.jfree.chart.axis.SegmentedTimeline baseTimeline>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.axis.SegmentedTimeline: void addBaseTimelineException(long)> ----
+    {
+        boolean $stack10, $stack15, $stack16;
+        byte $stack14;
+        long $stack11, $stack12, $stack13, domainValue, fromDomainValue, toDomainValue;
+        org.jfree.chart.axis.SegmentedTimeline $stack9, this;
+        org.jfree.chart.axis.SegmentedTimeline$Segment baseSegment, segment;
+    
+    
+        this := @this: org.jfree.chart.axis.SegmentedTimeline;
+        domainValue := @parameter0: long;
+        $stack9 = this.<org.jfree.chart.axis.SegmentedTimeline: org.jfree.chart.axis.SegmentedTimeline baseTimeline>;
+        baseSegment = virtualinvoke $stack9.<org.jfree.chart.axis.SegmentedTimeline: org.jfree.chart.axis.SegmentedTimeline$Segment getSegment(long)>(domainValue);
+        $stack10 = virtualinvoke baseSegment.<org.jfree.chart.axis.SegmentedTimeline$Segment: boolean inIncludeSegments()>();
+    
+        if $stack10 == 0 goto label4;
+        $stack11 = virtualinvoke baseSegment.<org.jfree.chart.axis.SegmentedTimeline$Segment: long getSegmentStart()>();
+        segment = virtualinvoke this.<org.jfree.chart.axis.SegmentedTimeline: org.jfree.chart.axis.SegmentedTimeline$Segment getSegment(long)>($stack11);
+    
+      label1:
+        $stack12 = virtualinvoke segment.<org.jfree.chart.axis.SegmentedTimeline$Segment: long getSegmentStart()>();
+        $stack13 = virtualinvoke baseSegment.<org.jfree.chart.axis.SegmentedTimeline$Segment: long getSegmentEnd()>();
+        $stack14 = $stack12 cmp $stack13;
+    
+        if $stack14 > 0 goto label4;
+        $stack15 = virtualinvoke segment.<org.jfree.chart.axis.SegmentedTimeline$Segment: boolean inIncludeSegments()>();
+    
+        if $stack15 == 0 goto label3;
+        fromDomainValue = virtualinvoke segment.<org.jfree.chart.axis.SegmentedTimeline$Segment: long getSegmentStart()>();
+    
+      label2:
+        toDomainValue = virtualinvoke segment.<org.jfree.chart.axis.SegmentedTimeline$Segment: long getSegmentEnd()>();
+        virtualinvoke segment.<org.jfree.chart.axis.SegmentedTimeline$Segment: void inc()>();
+        $stack16 = virtualinvoke segment.<org.jfree.chart.axis.SegmentedTimeline$Segment: boolean inIncludeSegments()>();
+    
+        if $stack16 != 0 goto label2;
+        virtualinvoke this.<org.jfree.chart.axis.SegmentedTimeline: void addException(long,long)>(fromDomainValue, toDomainValue);
+    
+        goto label1;
+    
+      label3:
+        virtualinvoke segment.<org.jfree.chart.axis.SegmentedTimeline$Segment: void inc()>();
+    
+        goto label1;
+    
+      label4:
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.axis.SegmentedTimeline: long toTimelineValue(long)> ----
+    {
+        boolean $stack25, $stack44;
+        byte $stack24, $stack32;
+        long $stack20, $stack21, $stack22, $stack23, $stack26, $stack27, $stack28, $stack29, $stack30, $stack31, $stack33, $stack34, $stack35, $stack36, $stack37, $stack38, $stack39, $stack40, $stack41, $stack42, $stack43, $stack45, $stack46, $stack47, $stack48, $stack49, groupIndex, groupMilliseconds, millisecond#0, millisecond#1, rawMilliseconds, result, shiftedSegmentedValue, wholeExceptionsBeforeDomainValue, x, y;
+        org.jfree.chart.axis.SegmentedTimeline this;
+        org.jfree.chart.axis.SegmentedTimeline$Segment segment;
+    
+    
+        this := @this: org.jfree.chart.axis.SegmentedTimeline;
+        millisecond#0 := @parameter0: long;
+        $stack20 = this.<org.jfree.chart.axis.SegmentedTimeline: long startTime>;
+        rawMilliseconds = millisecond#0 - $stack20;
+        $stack21 = this.<org.jfree.chart.axis.SegmentedTimeline: long segmentsGroupSize>;
+        groupMilliseconds = rawMilliseconds % $stack21;
+        $stack22 = this.<org.jfree.chart.axis.SegmentedTimeline: long segmentsGroupSize>;
+        groupIndex = rawMilliseconds / $stack22;
+        $stack23 = this.<org.jfree.chart.axis.SegmentedTimeline: long segmentsIncludedSize>;
+        $stack24 = groupMilliseconds cmp $stack23;
+    
+        if $stack24 < 0 goto label1;
+        $stack47 = this.<org.jfree.chart.axis.SegmentedTimeline: long startTime>;
+        $stack45 = this.<org.jfree.chart.axis.SegmentedTimeline: long segmentsGroupSize>;
+        $stack46 = groupIndex + 1L;
+        $stack48 = $stack45 * $stack46;
+        $stack49 = $stack47 + $stack48;
+        result = virtualinvoke this.<org.jfree.chart.axis.SegmentedTimeline: long toTimelineValue(long)>($stack49);
+    
+        goto label5;
+    
+      label1:
+        segment = virtualinvoke this.<org.jfree.chart.axis.SegmentedTimeline: org.jfree.chart.axis.SegmentedTimeline$Segment getSegment(long)>(millisecond#0);
+        $stack25 = virtualinvoke segment.<org.jfree.chart.axis.SegmentedTimeline$Segment: boolean inExceptionSegments()>();
+    
+        if $stack25 == 0 goto label3;
+    
+      label2:
+        $stack43 = virtualinvoke segment.<org.jfree.chart.axis.SegmentedTimeline$Segment: long getSegmentEnd()>();
+        millisecond#1 = $stack43 + 1L;
+        segment = virtualinvoke this.<org.jfree.chart.axis.SegmentedTimeline: org.jfree.chart.axis.SegmentedTimeline$Segment getSegment(long)>(millisecond#1);
+        $stack44 = virtualinvoke segment.<org.jfree.chart.axis.SegmentedTimeline$Segment: boolean inExceptionSegments()>();
+    
+        if $stack44 != 0 goto label2;
+        result = virtualinvoke this.<org.jfree.chart.axis.SegmentedTimeline: long toTimelineValue(long)>(millisecond#1);
+    
+        goto label5;
+    
+      label3:
+        $stack26 = this.<org.jfree.chart.axis.SegmentedTimeline: long startTime>;
+        shiftedSegmentedValue = millisecond#0 - $stack26;
+        $stack27 = this.<org.jfree.chart.axis.SegmentedTimeline: long segmentsGroupSize>;
+        x = shiftedSegmentedValue % $stack27;
+        $stack28 = this.<org.jfree.chart.axis.SegmentedTimeline: long segmentsGroupSize>;
+        y = shiftedSegmentedValue / $stack28;
+        $stack30 = this.<org.jfree.chart.axis.SegmentedTimeline: long startTime>;
+        $stack29 = millisecond#0 - 1L;
+        wholeExceptionsBeforeDomainValue = virtualinvoke this.<org.jfree.chart.axis.SegmentedTimeline: long getExceptionSegmentCount(long,long)>($stack30, $stack29);
+        $stack31 = this.<org.jfree.chart.axis.SegmentedTimeline: long segmentsIncludedSize>;
+        $stack32 = x cmp $stack31;
+    
+        if $stack32 >= 0 goto label4;
+        $stack38 = this.<org.jfree.chart.axis.SegmentedTimeline: long segmentsIncludedSize>;
+        $stack39 = $stack38 * y;
+        $stack41 = $stack39 + x;
+        $stack40 = this.<org.jfree.chart.axis.SegmentedTimeline: long segmentSize>;
+        $stack42 = wholeExceptionsBeforeDomainValue * $stack40;
+        result = $stack41 - $stack42;
+    
+        goto label5;
+    
+      label4:
+        $stack33 = this.<org.jfree.chart.axis.SegmentedTimeline: long segmentsIncludedSize>;
+        $stack34 = y + 1L;
+        $stack36 = $stack33 * $stack34;
+        $stack35 = this.<org.jfree.chart.axis.SegmentedTimeline: long segmentSize>;
+        $stack37 = wholeExceptionsBeforeDomainValue * $stack35;
+        result = $stack36 - $stack37;
+    
+      label5:
+        return result;
+    }
+
+    // ---- method: <org.jfree.chart.axis.SegmentedTimeline: void addBaseTimelineExclusions(long,long)> ----
+    {
+        boolean $stack32, $stack33, $stack35;
+        byte $stack15, $stack17, $stack28;
+        int $stack19, $stack30;
+        long $stack14, $stack16, $stack21, $stack22, $stack23, $stack24, $stack25, $stack26, $stack27, $stack31, baseExclusionRangeEnd, fromBaseDomainValue, fromDomainValue, toBaseDomainValue, toDomainValue;
+        org.jfree.chart.axis.SegmentedTimeline $stack13, $stack18, $stack20, $stack29, this;
+        org.jfree.chart.axis.SegmentedTimeline$BaseTimelineSegmentRange $stack34;
+        org.jfree.chart.axis.SegmentedTimeline$Segment baseSegment, segment;
+    
+    
+        this := @this: org.jfree.chart.axis.SegmentedTimeline;
+        fromBaseDomainValue := @parameter0: long;
+        toBaseDomainValue := @parameter1: long;
+        $stack13 = this.<org.jfree.chart.axis.SegmentedTimeline: org.jfree.chart.axis.SegmentedTimeline baseTimeline>;
+        baseSegment = virtualinvoke $stack13.<org.jfree.chart.axis.SegmentedTimeline: org.jfree.chart.axis.SegmentedTimeline$Segment getSegment(long)>(fromBaseDomainValue);
+    
+      label1:
+        $stack14 = virtualinvoke baseSegment.<org.jfree.chart.axis.SegmentedTimeline$Segment: long getSegmentStart()>();
+        $stack15 = $stack14 cmp toBaseDomainValue;
+    
+        if $stack15 > 0 goto label2;
+        $stack35 = virtualinvoke baseSegment.<org.jfree.chart.axis.SegmentedTimeline$Segment: boolean inExcludeSegments()>();
+    
+        if $stack35 != 0 goto label2;
+        virtualinvoke baseSegment.<org.jfree.chart.axis.SegmentedTimeline$Segment: void inc()>();
+    
+        goto label1;
+    
+      label2:
+        $stack16 = virtualinvoke baseSegment.<org.jfree.chart.axis.SegmentedTimeline$Segment: long getSegmentStart()>();
+        $stack17 = $stack16 cmp toBaseDomainValue;
+    
+        if $stack17 > 0 goto label7;
+        $stack23 = virtualinvoke baseSegment.<org.jfree.chart.axis.SegmentedTimeline$Segment: long getSegmentStart()>();
+        $stack18 = this.<org.jfree.chart.axis.SegmentedTimeline: org.jfree.chart.axis.SegmentedTimeline baseTimeline>;
+        $stack19 = virtualinvoke $stack18.<org.jfree.chart.axis.SegmentedTimeline: int getSegmentsExcluded()>();
+        $stack21 = (long) $stack19;
+        $stack20 = this.<org.jfree.chart.axis.SegmentedTimeline: org.jfree.chart.axis.SegmentedTimeline baseTimeline>;
+        $stack22 = virtualinvoke $stack20.<org.jfree.chart.axis.SegmentedTimeline: long getSegmentSize()>();
+        $stack24 = $stack21 * $stack22;
+        $stack25 = $stack23 + $stack24;
+        baseExclusionRangeEnd = $stack25 - 1L;
+        $stack26 = virtualinvoke baseSegment.<org.jfree.chart.axis.SegmentedTimeline$Segment: long getSegmentStart()>();
+        segment = virtualinvoke this.<org.jfree.chart.axis.SegmentedTimeline: org.jfree.chart.axis.SegmentedTimeline$Segment getSegment(long)>($stack26);
+    
+      label3:
+        $stack27 = virtualinvoke segment.<org.jfree.chart.axis.SegmentedTimeline$Segment: long getSegmentStart()>();
+        $stack28 = $stack27 cmp baseExclusionRangeEnd;
+    
+        if $stack28 > 0 goto label6;
+        $stack32 = virtualinvoke segment.<org.jfree.chart.axis.SegmentedTimeline$Segment: boolean inIncludeSegments()>();
+    
+        if $stack32 == 0 goto label5;
+        fromDomainValue = virtualinvoke segment.<org.jfree.chart.axis.SegmentedTimeline$Segment: long getSegmentStart()>();
+    
+      label4:
+        toDomainValue = virtualinvoke segment.<org.jfree.chart.axis.SegmentedTimeline$Segment: long getSegmentEnd()>();
+        virtualinvoke segment.<org.jfree.chart.axis.SegmentedTimeline$Segment: void inc()>();
+        $stack33 = virtualinvoke segment.<org.jfree.chart.axis.SegmentedTimeline$Segment: boolean inIncludeSegments()>();
+    
+        if $stack33 != 0 goto label4;
+        $stack34 = new org.jfree.chart.axis.SegmentedTimeline$BaseTimelineSegmentRange;
+        specialinvoke $stack34.<org.jfree.chart.axis.SegmentedTimeline$BaseTimelineSegmentRange: void <init>(org.jfree.chart.axis.SegmentedTimeline,long,long)>(this, fromDomainValue, toDomainValue);
+        specialinvoke this.<org.jfree.chart.axis.SegmentedTimeline: void addException(org.jfree.chart.axis.SegmentedTimeline$Segment)>($stack34);
+    
+        goto label3;
+    
+      label5:
+        virtualinvoke segment.<org.jfree.chart.axis.SegmentedTimeline$Segment: void inc()>();
+    
+        goto label3;
+    
+      label6:
+        $stack29 = this.<org.jfree.chart.axis.SegmentedTimeline: org.jfree.chart.axis.SegmentedTimeline baseTimeline>;
+        $stack30 = virtualinvoke $stack29.<org.jfree.chart.axis.SegmentedTimeline: int getGroupSegmentCount()>();
+        $stack31 = (long) $stack30;
+        virtualinvoke baseSegment.<org.jfree.chart.axis.SegmentedTimeline$Segment: void inc(long)>($stack31);
+    
+        goto label2;
+    
+      label7:
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.axis.SegmentedTimeline: org.jfree.chart.axis.SegmentedTimeline$Segment getSegment(java.util.Date)> ----
+    {
+        java.util.Date date;
+        long $stack2;
+        org.jfree.chart.axis.SegmentedTimeline this;
+        org.jfree.chart.axis.SegmentedTimeline$Segment $stack3;
+    
+    
+        this := @this: org.jfree.chart.axis.SegmentedTimeline;
+        date := @parameter0: java.util.Date;
+        $stack2 = virtualinvoke this.<org.jfree.chart.axis.SegmentedTimeline: long getTime(java.util.Date)>(date);
+        $stack3 = virtualinvoke this.<org.jfree.chart.axis.SegmentedTimeline: org.jfree.chart.axis.SegmentedTimeline$Segment getSegment(long)>($stack2);
+    
+        return $stack3;
+    }
+
+    // ---- method: <org.jfree.chart.axis.SegmentedTimeline: boolean containsDomainRange(java.util.Date,java.util.Date)> ----
+    {
+        boolean $stack5;
+        java.util.Date dateDomainValueEnd, dateDomainValueStart;
+        long $stack3, $stack4;
+        org.jfree.chart.axis.SegmentedTimeline this;
+    
+    
+        this := @this: org.jfree.chart.axis.SegmentedTimeline;
+        dateDomainValueStart := @parameter0: java.util.Date;
+        dateDomainValueEnd := @parameter1: java.util.Date;
+        $stack4 = virtualinvoke this.<org.jfree.chart.axis.SegmentedTimeline: long getTime(java.util.Date)>(dateDomainValueStart);
+        $stack3 = virtualinvoke this.<org.jfree.chart.axis.SegmentedTimeline: long getTime(java.util.Date)>(dateDomainValueEnd);
+        $stack5 = virtualinvoke this.<org.jfree.chart.axis.SegmentedTimeline: boolean containsDomainRange(long,long)>($stack4, $stack3);
+    
+        return $stack5;
+    }
+
+    // ---- method: <org.jfree.chart.axis.SegmentedTimeline: void addException(java.util.Date)> ----
+    {
+        java.util.Date exceptionDate;
+        long $stack2;
+        org.jfree.chart.axis.SegmentedTimeline this;
+    
+    
+        this := @this: org.jfree.chart.axis.SegmentedTimeline;
+        exceptionDate := @parameter0: java.util.Date;
+        $stack2 = virtualinvoke this.<org.jfree.chart.axis.SegmentedTimeline: long getTime(java.util.Date)>(exceptionDate);
+        virtualinvoke this.<org.jfree.chart.axis.SegmentedTimeline: void addException(long)>($stack2);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.axis.SegmentedTimeline: int access$200(org.jfree.chart.axis.SegmentedTimeline)> ----
+    {
+        int $stack1;
+        org.jfree.chart.axis.SegmentedTimeline x0;
+    
+    
+        x0 := @parameter0: org.jfree.chart.axis.SegmentedTimeline;
+        $stack1 = x0.<org.jfree.chart.axis.SegmentedTimeline: int segmentsIncluded>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.axis.SegmentedTimeline: int getSegmentsExcluded()> ----
+    {
+        int $stack1;
+        org.jfree.chart.axis.SegmentedTimeline this;
+    
+    
+        this := @this: org.jfree.chart.axis.SegmentedTimeline;
+        $stack1 = this.<org.jfree.chart.axis.SegmentedTimeline: int segmentsExcluded>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.axis.SegmentedTimeline: void addException(long,long)> ----
+    {
+        long fromDomainValue, toDomainValue;
+        org.jfree.chart.axis.SegmentedTimeline this;
+        org.jfree.chart.axis.SegmentedTimeline$SegmentRange $stack5;
+    
+    
+        this := @this: org.jfree.chart.axis.SegmentedTimeline;
+        fromDomainValue := @parameter0: long;
+        toDomainValue := @parameter1: long;
+        $stack5 = new org.jfree.chart.axis.SegmentedTimeline$SegmentRange;
+        specialinvoke $stack5.<org.jfree.chart.axis.SegmentedTimeline$SegmentRange: void <init>(org.jfree.chart.axis.SegmentedTimeline,long,long)>(this, fromDomainValue, toDomainValue);
+        specialinvoke this.<org.jfree.chart.axis.SegmentedTimeline: void addException(org.jfree.chart.axis.SegmentedTimeline$Segment)>($stack5);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.axis.SegmentedTimeline: void addBaseTimelineException(java.util.Date)> ----
+    {
+        java.util.Date date;
+        long $stack2;
+        org.jfree.chart.axis.SegmentedTimeline this;
+    
+    
+        this := @this: org.jfree.chart.axis.SegmentedTimeline;
+        date := @parameter0: java.util.Date;
+        $stack2 = virtualinvoke this.<org.jfree.chart.axis.SegmentedTimeline: long getTime(java.util.Date)>(date);
+        virtualinvoke this.<org.jfree.chart.axis.SegmentedTimeline: void addBaseTimelineException(long)>($stack2);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.axis.SegmentedTimeline: boolean containsDomainValue(long)> ----
+    {
+        boolean $stack4;
+        long millisecond;
+        org.jfree.chart.axis.SegmentedTimeline this;
+        org.jfree.chart.axis.SegmentedTimeline$Segment segment;
+    
+    
+        this := @this: org.jfree.chart.axis.SegmentedTimeline;
+        millisecond := @parameter0: long;
+        segment = virtualinvoke this.<org.jfree.chart.axis.SegmentedTimeline: org.jfree.chart.axis.SegmentedTimeline$Segment getSegment(long)>(millisecond);
+        $stack4 = virtualinvoke segment.<org.jfree.chart.axis.SegmentedTimeline$Segment: boolean inIncludeSegments()>();
+    
+        return $stack4;
+    }
+
+    // ---- method: <org.jfree.chart.axis.SegmentedTimeline: void setBaseTimeline(org.jfree.chart.axis.SegmentedTimeline)> ----
+    {
+        byte $stack11, $stack17, $stack4, $stack7;
+        java.lang.IllegalArgumentException #l0, #l1, #l6, #l7;
+        java.lang.Object $stack18, $stack19, $stack20, $stack21;
+        java.lang.Throwable #l2, #l3, #l4, #l5;
+        long $stack10, $stack12, $stack13, $stack14, $stack15, $stack16, $stack2, $stack3, $stack5, $stack6, $stack8, $stack9;
+        org.jfree.chart.axis.SegmentedTimeline baseTimeline, this;
+    
+    
+        this := @this: org.jfree.chart.axis.SegmentedTimeline;
+        baseTimeline := @parameter0: org.jfree.chart.axis.SegmentedTimeline;
+    
+        if baseTimeline == null goto label4;
+        $stack2 = virtualinvoke baseTimeline.<org.jfree.chart.axis.SegmentedTimeline: long getSegmentSize()>();
+        $stack3 = this.<org.jfree.chart.axis.SegmentedTimeline: long segmentSize>;
+        $stack4 = $stack2 cmp $stack3;
+    
+        if $stack4 >= 0 goto label1;
+        $stack21 = new java.lang.IllegalArgumentException;
+        #l0 = (java.lang.IllegalArgumentException) $stack21;
+        specialinvoke #l0.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("baseTimeline.getSegmentSize() is smaller than segmentSize");
+        #l4 = (java.lang.Throwable) $stack21;
+    
+        throw #l4;
+    
+      label1:
+        $stack5 = virtualinvoke baseTimeline.<org.jfree.chart.axis.SegmentedTimeline: long getStartTime()>();
+        $stack6 = this.<org.jfree.chart.axis.SegmentedTimeline: long startTime>;
+        $stack7 = $stack5 cmp $stack6;
+    
+        if $stack7 <= 0 goto label2;
+        $stack20 = new java.lang.IllegalArgumentException;
+        #l6 = (java.lang.IllegalArgumentException) $stack20;
+        specialinvoke #l6.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("baseTimeline.getStartTime() is after startTime");
+        #l3 = (java.lang.Throwable) $stack20;
+    
+        throw #l3;
+    
+      label2:
+        $stack8 = virtualinvoke baseTimeline.<org.jfree.chart.axis.SegmentedTimeline: long getSegmentSize()>();
+        $stack9 = this.<org.jfree.chart.axis.SegmentedTimeline: long segmentSize>;
+        $stack10 = $stack8 % $stack9;
+        $stack11 = $stack10 cmp 0L;
+    
+        if $stack11 == 0 goto label3;
+        $stack19 = new java.lang.IllegalArgumentException;
+        #l1 = (java.lang.IllegalArgumentException) $stack19;
+        specialinvoke #l1.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("baseTimeline.getSegmentSize() is not multiple of segmentSize");
+        #l2 = (java.lang.Throwable) $stack19;
+    
+        throw #l2;
+    
+      label3:
+        $stack12 = this.<org.jfree.chart.axis.SegmentedTimeline: long startTime>;
+        $stack13 = virtualinvoke baseTimeline.<org.jfree.chart.axis.SegmentedTimeline: long getStartTime()>();
+        $stack14 = $stack12 - $stack13;
+        $stack15 = this.<org.jfree.chart.axis.SegmentedTimeline: long segmentSize>;
+        $stack16 = $stack14 % $stack15;
+        $stack17 = $stack16 cmp 0L;
+    
+        if $stack17 == 0 goto label4;
+        $stack18 = new java.lang.IllegalArgumentException;
+        #l7 = (java.lang.IllegalArgumentException) $stack18;
+        specialinvoke #l7.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("baseTimeline is not aligned");
+        #l5 = (java.lang.Throwable) $stack18;
+    
+        throw #l5;
+    
+      label4:
+        this.<org.jfree.chart.axis.SegmentedTimeline: org.jfree.chart.axis.SegmentedTimeline baseTimeline> = baseTimeline;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.axis.SegmentedTimeline: boolean equals(java.lang.Object,java.lang.Object)> ----
+    {
+        boolean $stack3, $stack4;
+        java.lang.Object o, p;
+        org.jfree.chart.axis.SegmentedTimeline this;
+    
+    
+        this := @this: org.jfree.chart.axis.SegmentedTimeline;
+        o := @parameter0: java.lang.Object;
+        p := @parameter1: java.lang.Object;
+    
+        if o == p goto label1;
+    
+        if o == null goto label2;
+        $stack4 = virtualinvoke o.<java.lang.Object: boolean equals(java.lang.Object)>(p);
+    
+        if $stack4 == 0 goto label2;
+    
+      label1:
+        $stack3 = 1;
+    
+        goto label3;
+    
+      label2:
+        $stack3 = 0;
+    
+      label3:
+        return $stack3;
+    }
+
+    // ---- method: <org.jfree.chart.axis.SegmentedTimeline: org.jfree.chart.axis.SegmentedTimeline$Segment getSegment(long)> ----
+    {
+        long millisecond;
+        org.jfree.chart.axis.SegmentedTimeline this;
+        org.jfree.chart.axis.SegmentedTimeline$Segment $stack3;
+    
+    
+        this := @this: org.jfree.chart.axis.SegmentedTimeline;
+        millisecond := @parameter0: long;
+        $stack3 = new org.jfree.chart.axis.SegmentedTimeline$Segment;
+        specialinvoke $stack3.<org.jfree.chart.axis.SegmentedTimeline$Segment: void <init>(org.jfree.chart.axis.SegmentedTimeline,long)>(this, millisecond);
+    
+        return $stack3;
+    }
+
+    // ---- method: <org.jfree.chart.axis.SegmentedTimeline: void addException(long)> ----
+    {
+        long millisecond;
+        org.jfree.chart.axis.SegmentedTimeline this;
+        org.jfree.chart.axis.SegmentedTimeline$Segment $stack3;
+    
+    
+        this := @this: org.jfree.chart.axis.SegmentedTimeline;
+        millisecond := @parameter0: long;
+        $stack3 = new org.jfree.chart.axis.SegmentedTimeline$Segment;
+        specialinvoke $stack3.<org.jfree.chart.axis.SegmentedTimeline$Segment: void <init>(org.jfree.chart.axis.SegmentedTimeline,long)>(this, millisecond);
+        specialinvoke this.<org.jfree.chart.axis.SegmentedTimeline: void addException(org.jfree.chart.axis.SegmentedTimeline$Segment)>($stack3);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.axis.SegmentedTimeline: void setAdjustForDaylightSaving(boolean)> ----
+    {
+        boolean adjust;
+        org.jfree.chart.axis.SegmentedTimeline this;
+    
+    
+        this := @this: org.jfree.chart.axis.SegmentedTimeline;
+        adjust := @parameter0: boolean;
+        this.<org.jfree.chart.axis.SegmentedTimeline: boolean adjustForDaylightSaving> = adjust;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.axis.SegmentedTimeline: void setExceptionSegments(java.util.List)> ----
+    {
+        java.util.List exceptionSegments;
+        org.jfree.chart.axis.SegmentedTimeline this;
+    
+    
+        this := @this: org.jfree.chart.axis.SegmentedTimeline;
+        exceptionSegments := @parameter0: java.util.List;
+        this.<org.jfree.chart.axis.SegmentedTimeline: java.util.List exceptionSegments> = exceptionSegments;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.axis.SegmentedTimeline: int binarySearchExceptionSegments(org.jfree.chart.axis.SegmentedTimeline$Segment)> ----
+    {
+        boolean $stack13, $stack14, $stack15, $stack16;
+        int $stack10, $stack7, $stack8, $stack9, high, low, mid;
+        java.lang.IllegalStateException #l0;
+        java.lang.Object $stack12, $stack17;
+        java.lang.Throwable #l1;
+        java.util.List $stack11, $stack6;
+        org.jfree.chart.axis.SegmentedTimeline this;
+        org.jfree.chart.axis.SegmentedTimeline$Segment midSegment, segment;
+    
+    
+        this := @this: org.jfree.chart.axis.SegmentedTimeline;
+        segment := @parameter0: org.jfree.chart.axis.SegmentedTimeline$Segment;
+        low = 0;
+        $stack6 = this.<org.jfree.chart.axis.SegmentedTimeline: java.util.List exceptionSegments>;
+        $stack7 = interfaceinvoke $stack6.<java.util.List: int size()>();
+        high = $stack7 - 1;
+    
+      label1:
+        if low > high goto label5;
+        $stack10 = low + high;
+        mid = $stack10 / 2;
+        $stack11 = this.<org.jfree.chart.axis.SegmentedTimeline: java.util.List exceptionSegments>;
+        $stack12 = interfaceinvoke $stack11.<java.util.List: java.lang.Object get(int)>(mid);
+        midSegment = (org.jfree.chart.axis.SegmentedTimeline$Segment) $stack12;
+        $stack13 = virtualinvoke segment.<org.jfree.chart.axis.SegmentedTimeline$Segment: boolean contains(org.jfree.chart.axis.SegmentedTimeline$Segment)>(midSegment);
+    
+        if $stack13 != 0 goto label2;
+        $stack14 = virtualinvoke midSegment.<org.jfree.chart.axis.SegmentedTimeline$Segment: boolean contains(org.jfree.chart.axis.SegmentedTimeline$Segment)>(segment);
+    
+        if $stack14 == 0 goto label3;
+    
+      label2:
+        return mid;
+    
+      label3:
+        $stack15 = virtualinvoke midSegment.<org.jfree.chart.axis.SegmentedTimeline$Segment: boolean before(org.jfree.chart.axis.SegmentedTimeline$Segment)>(segment);
+    
+        if $stack15 == 0 goto label4;
+        low = mid + 1;
+    
+        goto label7;
+    
+      label4:
+        $stack16 = virtualinvoke midSegment.<org.jfree.chart.axis.SegmentedTimeline$Segment: boolean after(org.jfree.chart.axis.SegmentedTimeline$Segment)>(segment);
+    
+        if $stack16 == 0 goto label6;
+        high = mid - 1;
+    
+        goto label7;
+    
+      label5:
+        $stack8 = low + 1;
+        $stack9 = neg $stack8;
+    
+        return $stack9;
+    
+      label6:
+        $stack17 = new java.lang.IllegalStateException;
+        #l0 = (java.lang.IllegalStateException) $stack17;
+        specialinvoke #l0.<java.lang.IllegalStateException: void <init>(java.lang.String)>("Invalid condition.");
+        #l1 = (java.lang.Throwable) $stack17;
+    
+        throw #l1;
+    
+      label7:
+        goto label1;
+    }
+
+    // ---- method: <org.jfree.chart.axis.SegmentedTimeline: boolean containsDomainValue(java.util.Date)> ----
+    {
+        boolean $stack3;
+        java.util.Date date;
+        long $stack2;
+        org.jfree.chart.axis.SegmentedTimeline this;
+    
+    
+        this := @this: org.jfree.chart.axis.SegmentedTimeline;
+        date := @parameter0: java.util.Date;
+        $stack2 = virtualinvoke this.<org.jfree.chart.axis.SegmentedTimeline: long getTime(java.util.Date)>(date);
+        $stack3 = virtualinvoke this.<org.jfree.chart.axis.SegmentedTimeline: boolean containsDomainValue(long)>($stack2);
+    
+        return $stack3;
+    }
+
+    // ---- method: <org.jfree.chart.axis.SegmentedTimeline: long toMillisecond(long)> ----
+    {
+        boolean $stack28, $stack30, $stack33;
+        byte $stack18, $stack27, $stack32;
+        int i;
+        long $stack10, $stack11, $stack12, $stack13, $stack14, $stack15, $stack17, $stack19, $stack20, $stack21, $stack22, $stack23, $stack24, $stack25, $stack26, $stack29, $stack31, $stack9, exceptionSegmentCount, lastIndex#0, lastIndex#1, timelineValue;
+        org.jfree.chart.axis.SegmentedTimeline this;
+        org.jfree.chart.axis.SegmentedTimeline$Segment $stack16, result;
+    
+    
+        this := @this: org.jfree.chart.axis.SegmentedTimeline;
+        timelineValue := @parameter0: long;
+        $stack16 = new org.jfree.chart.axis.SegmentedTimeline$Segment;
+        $stack9 = this.<org.jfree.chart.axis.SegmentedTimeline: long startTime>;
+        $stack13 = $stack9 + timelineValue;
+        $stack10 = this.<org.jfree.chart.axis.SegmentedTimeline: long segmentsIncludedSize>;
+        $stack11 = timelineValue / $stack10;
+        $stack12 = this.<org.jfree.chart.axis.SegmentedTimeline: long segmentsExcludedSize>;
+        $stack14 = $stack11 * $stack12;
+        $stack15 = $stack13 + $stack14;
+        specialinvoke $stack16.<org.jfree.chart.axis.SegmentedTimeline$Segment: void <init>(org.jfree.chart.axis.SegmentedTimeline,long)>(this, $stack15);
+        result = $stack16;
+        lastIndex#0 = this.<org.jfree.chart.axis.SegmentedTimeline: long startTime>;
+    
+      label01:
+        $stack17 = $stack16.<org.jfree.chart.axis.SegmentedTimeline$Segment: long segmentStart>;
+        $stack18 = lastIndex#0 cmp $stack17;
+    
+        if $stack18 > 0 goto label10;
+    
+      label02:
+        $stack21 = $stack16.<org.jfree.chart.axis.SegmentedTimeline$Segment: long millisecond>;
+        $stack22 = this.<org.jfree.chart.axis.SegmentedTimeline: long segmentSize>;
+        $stack23 = $stack21 / $stack22;
+        $stack24 = this.<org.jfree.chart.axis.SegmentedTimeline: long segmentSize>;
+        $stack25 = $stack23 * $stack24;
+        $stack26 = $stack25 - 1L;
+        exceptionSegmentCount = virtualinvoke this.<org.jfree.chart.axis.SegmentedTimeline: long getExceptionSegmentCount(long,long)>(lastIndex#0, $stack26);
+        $stack27 = exceptionSegmentCount cmp 0L;
+    
+        if $stack27 <= 0 goto label06;
+        lastIndex#0 = $stack16.<org.jfree.chart.axis.SegmentedTimeline$Segment: long segmentStart>;
+        i = 0;
+    
+      label03:
+        $stack31 = (long) i;
+        $stack32 = $stack31 cmp exceptionSegmentCount;
+    
+        if $stack32 >= 0 goto label05;
+    
+      label04:
+        virtualinvoke $stack16.<org.jfree.chart.axis.SegmentedTimeline$Segment: void inc()>();
+        $stack33 = virtualinvoke $stack16.<org.jfree.chart.axis.SegmentedTimeline$Segment: boolean inExcludeSegments()>();
+    
+        if $stack33 != 0 goto label04;
+        i = i + 1;
+    
+        goto label03;
+    
+      label05:
+        goto label02;
+    
+      label06:
+        lastIndex#1 = $stack16.<org.jfree.chart.axis.SegmentedTimeline$Segment: long segmentStart>;
+    
+      label07:
+        $stack28 = virtualinvoke $stack16.<org.jfree.chart.axis.SegmentedTimeline$Segment: boolean inExceptionSegments()>();
+    
+        if $stack28 != 0 goto label08;
+        $stack30 = virtualinvoke $stack16.<org.jfree.chart.axis.SegmentedTimeline$Segment: boolean inExcludeSegments()>();
+    
+        if $stack30 == 0 goto label09;
+    
+      label08:
+        virtualinvoke $stack16.<org.jfree.chart.axis.SegmentedTimeline$Segment: void inc()>();
+        $stack29 = this.<org.jfree.chart.axis.SegmentedTimeline: long segmentSize>;
+        lastIndex#1 = lastIndex#1 + $stack29;
+    
+        goto label07;
+    
+      label09:
+        lastIndex#0 = lastIndex#1 + 1L;
+    
+        goto label01;
+    
+      label10:
+        $stack19 = $stack16.<org.jfree.chart.axis.SegmentedTimeline$Segment: long millisecond>;
+        $stack20 = virtualinvoke this.<org.jfree.chart.axis.SegmentedTimeline: long getTimeFromLong(long)>($stack19);
+    
+        return $stack20;
+    }
+
+    // ---- method: <org.jfree.chart.axis.SegmentedTimeline: long getTimeFromLong(long)> ----
+    {
+        boolean $stack5;
+        int $stack15, $stack16, $stack17, $stack18, $stack19, $stack20, $stack23;
+        java.util.Calendar $stack10, $stack11, $stack12, $stack13, $stack14, $stack21, $stack22, $stack24, $stack7, $stack8, $stack9;
+        java.util.Date $stack25, $stack6;
+        long date, result;
+        org.jfree.chart.axis.SegmentedTimeline this;
+    
+    
+        this := @this: org.jfree.chart.axis.SegmentedTimeline;
+        date := @parameter0: long;
+        result = date;
+        $stack5 = this.<org.jfree.chart.axis.SegmentedTimeline: boolean adjustForDaylightSaving>;
+    
+        if $stack5 == 0 goto label1;
+        $stack7 = this.<org.jfree.chart.axis.SegmentedTimeline: java.util.Calendar workingCalendarNoDST>;
+        $stack6 = new java.util.Date;
+        specialinvoke $stack6.<java.util.Date: void <init>(long)>(date);
+        virtualinvoke $stack7.<java.util.Calendar: void setTime(java.util.Date)>($stack6);
+        $stack9 = this.<org.jfree.chart.axis.SegmentedTimeline: java.util.Calendar workingCalendar>;
+        $stack8 = this.<org.jfree.chart.axis.SegmentedTimeline: java.util.Calendar workingCalendarNoDST>;
+        $stack20 = virtualinvoke $stack8.<java.util.Calendar: int get(int)>(1);
+        $stack10 = this.<org.jfree.chart.axis.SegmentedTimeline: java.util.Calendar workingCalendarNoDST>;
+        $stack19 = virtualinvoke $stack10.<java.util.Calendar: int get(int)>(2);
+        $stack11 = this.<org.jfree.chart.axis.SegmentedTimeline: java.util.Calendar workingCalendarNoDST>;
+        $stack18 = virtualinvoke $stack11.<java.util.Calendar: int get(int)>(5);
+        $stack12 = this.<org.jfree.chart.axis.SegmentedTimeline: java.util.Calendar workingCalendarNoDST>;
+        $stack17 = virtualinvoke $stack12.<java.util.Calendar: int get(int)>(11);
+        $stack13 = this.<org.jfree.chart.axis.SegmentedTimeline: java.util.Calendar workingCalendarNoDST>;
+        $stack16 = virtualinvoke $stack13.<java.util.Calendar: int get(int)>(12);
+        $stack14 = this.<org.jfree.chart.axis.SegmentedTimeline: java.util.Calendar workingCalendarNoDST>;
+        $stack15 = virtualinvoke $stack14.<java.util.Calendar: int get(int)>(13);
+        virtualinvoke $stack9.<java.util.Calendar: void set(int,int,int,int,int,int)>($stack20, $stack19, $stack18, $stack17, $stack16, $stack15);
+        $stack22 = this.<org.jfree.chart.axis.SegmentedTimeline: java.util.Calendar workingCalendar>;
+        $stack21 = this.<org.jfree.chart.axis.SegmentedTimeline: java.util.Calendar workingCalendarNoDST>;
+        $stack23 = virtualinvoke $stack21.<java.util.Calendar: int get(int)>(14);
+        virtualinvoke $stack22.<java.util.Calendar: void set(int,int)>(14, $stack23);
+        $stack24 = this.<org.jfree.chart.axis.SegmentedTimeline: java.util.Calendar workingCalendar>;
+        $stack25 = virtualinvoke $stack24.<java.util.Calendar: java.util.Date getTime()>();
+        result = virtualinvoke $stack25.<java.util.Date: long getTime()>();
+    
+      label1:
+        return result;
+    }
+
+    // ---- method: <org.jfree.chart.axis.SegmentedTimeline: int getSegmentsIncluded()> ----
+    {
+        int $stack1;
+        org.jfree.chart.axis.SegmentedTimeline this;
+    
+    
+        this := @this: org.jfree.chart.axis.SegmentedTimeline;
+        $stack1 = this.<org.jfree.chart.axis.SegmentedTimeline: int segmentsIncluded>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.axis.SegmentedTimeline: org.jfree.chart.axis.SegmentedTimeline newMondayThroughFridayTimeline()> ----
+    {
+        long $stack2;
+        org.jfree.chart.axis.SegmentedTimeline $stack1, timeline;
+    
+    
+        $stack1 = new org.jfree.chart.axis.SegmentedTimeline;
+        specialinvoke $stack1.<org.jfree.chart.axis.SegmentedTimeline: void <init>(long,int,int)>(86400000L, 5, 2);
+        timeline = $stack1;
+        $stack2 = staticinvoke <org.jfree.chart.axis.SegmentedTimeline: long firstMondayAfter1900()>();
+        virtualinvoke $stack1.<org.jfree.chart.axis.SegmentedTimeline: void setStartTime(long)>($stack2);
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.axis.SegmentedTimeline: long getTime(java.util.Date)> ----
+    {
+        boolean $stack5;
+        int $stack14, $stack15, $stack16, $stack17, $stack18, $stack19, $stack22;
+        java.util.Calendar $stack10, $stack11, $stack12, $stack13, $stack20, $stack21, $stack23, $stack6, $stack7, $stack8, $stack9;
+        java.util.Date date, revisedDate;
+        long result;
+        org.jfree.chart.axis.SegmentedTimeline this;
+    
+    
+        this := @this: org.jfree.chart.axis.SegmentedTimeline;
+        date := @parameter0: java.util.Date;
+        result = virtualinvoke date.<java.util.Date: long getTime()>();
+        $stack5 = this.<org.jfree.chart.axis.SegmentedTimeline: boolean adjustForDaylightSaving>;
+    
+        if $stack5 == 0 goto label1;
+        $stack6 = this.<org.jfree.chart.axis.SegmentedTimeline: java.util.Calendar workingCalendar>;
+        virtualinvoke $stack6.<java.util.Calendar: void setTime(java.util.Date)>(date);
+        $stack8 = this.<org.jfree.chart.axis.SegmentedTimeline: java.util.Calendar workingCalendarNoDST>;
+        $stack7 = this.<org.jfree.chart.axis.SegmentedTimeline: java.util.Calendar workingCalendar>;
+        $stack19 = virtualinvoke $stack7.<java.util.Calendar: int get(int)>(1);
+        $stack9 = this.<org.jfree.chart.axis.SegmentedTimeline: java.util.Calendar workingCalendar>;
+        $stack18 = virtualinvoke $stack9.<java.util.Calendar: int get(int)>(2);
+        $stack10 = this.<org.jfree.chart.axis.SegmentedTimeline: java.util.Calendar workingCalendar>;
+        $stack17 = virtualinvoke $stack10.<java.util.Calendar: int get(int)>(5);
+        $stack11 = this.<org.jfree.chart.axis.SegmentedTimeline: java.util.Calendar workingCalendar>;
+        $stack16 = virtualinvoke $stack11.<java.util.Calendar: int get(int)>(11);
+        $stack12 = this.<org.jfree.chart.axis.SegmentedTimeline: java.util.Calendar workingCalendar>;
+        $stack15 = virtualinvoke $stack12.<java.util.Calendar: int get(int)>(12);
+        $stack13 = this.<org.jfree.chart.axis.SegmentedTimeline: java.util.Calendar workingCalendar>;
+        $stack14 = virtualinvoke $stack13.<java.util.Calendar: int get(int)>(13);
+        virtualinvoke $stack8.<java.util.Calendar: void set(int,int,int,int,int,int)>($stack19, $stack18, $stack17, $stack16, $stack15, $stack14);
+        $stack21 = this.<org.jfree.chart.axis.SegmentedTimeline: java.util.Calendar workingCalendarNoDST>;
+        $stack20 = this.<org.jfree.chart.axis.SegmentedTimeline: java.util.Calendar workingCalendar>;
+        $stack22 = virtualinvoke $stack20.<java.util.Calendar: int get(int)>(14);
+        virtualinvoke $stack21.<java.util.Calendar: void set(int,int)>(14, $stack22);
+        $stack23 = this.<org.jfree.chart.axis.SegmentedTimeline: java.util.Calendar workingCalendarNoDST>;
+        revisedDate = virtualinvoke $stack23.<java.util.Calendar: java.util.Date getTime()>();
+        result = virtualinvoke revisedDate.<java.util.Date: long getTime()>();
+    
+      label1:
+        return result;
+    }
+
+}

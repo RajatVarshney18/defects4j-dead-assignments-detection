@@ -1,0 +1,676 @@
+// ========================================================================
+// CLASS : org.jfree.chart.util.ObjectUtilities
+// ========================================================================
+
+[PUBLIC, FINAL, SUPER] class org.jfree.chart.util.ObjectUtilities extends java.lang.Object {
+
+    // ---- method: <org.jfree.chart.util.ObjectUtilities: void setClassLoader(java.lang.ClassLoader)> ----
+    {
+        java.lang.ClassLoader classLoader;
+    
+    
+        classLoader := @parameter0: java.lang.ClassLoader;
+        <org.jfree.chart.util.ObjectUtilities: java.lang.ClassLoader classLoader> = classLoader;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.util.ObjectUtilities: java.lang.String[] parseVersions(java.lang.String)> ----
+    {
+        boolean $stack5;
+        int $stack6;
+        java.lang.Object[] $stack8;
+        java.lang.String $stack11, version;
+        java.lang.String[] $stack10, $stack12, $stack7, $stack9;
+        java.util.ArrayList $stack3, versions;
+        java.util.StringTokenizer $stack4, strtok;
+    
+    
+        version := @parameter0: java.lang.String;
+    
+        if version != null goto label1;
+        $stack12 = newarray (java.lang.String)[0];
+    
+        return $stack12;
+    
+      label1:
+        $stack3 = new java.util.ArrayList;
+        specialinvoke $stack3.<java.util.ArrayList: void <init>()>();
+        versions = $stack3;
+        $stack4 = new java.util.StringTokenizer;
+        specialinvoke $stack4.<java.util.StringTokenizer: void <init>(java.lang.String,java.lang.String)>(version, ".");
+        strtok = $stack4;
+    
+      label2:
+        $stack5 = virtualinvoke $stack4.<java.util.StringTokenizer: boolean hasMoreTokens()>();
+    
+        if $stack5 == 0 goto label3;
+        $stack11 = virtualinvoke $stack4.<java.util.StringTokenizer: java.lang.String nextToken()>();
+        virtualinvoke $stack3.<java.util.ArrayList: boolean add(java.lang.Object)>($stack11);
+    
+        goto label2;
+    
+      label3:
+        $stack6 = virtualinvoke $stack3.<java.util.ArrayList: int size()>();
+        $stack7 = newarray (java.lang.String)[$stack6];
+        $stack8 = virtualinvoke $stack3.<java.util.ArrayList: java.lang.Object[] toArray(java.lang.Object[])>($stack7);
+        $stack9 = (java.lang.String[]) $stack8;
+        $stack10 = (java.lang.String[]) $stack9;
+    
+        return $stack10;
+    }
+
+    // ---- method: <org.jfree.chart.util.ObjectUtilities: void <init>()> ----
+    {
+        org.jfree.chart.util.ObjectUtilities this;
+    
+    
+        this := @this: org.jfree.chart.util.ObjectUtilities;
+        specialinvoke this.<java.lang.Object: void <init>()>();
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.util.ObjectUtilities: java.lang.ClassLoader getClassLoader(java.lang.Class)> ----
+    {
+        boolean $stack5;
+        java.lang.Class c;
+        java.lang.ClassLoader $stack2, $stack6, $stack8, threadLoader#0, threadLoader#1;
+        java.lang.String $stack3, $stack4;
+        java.lang.Thread $stack7;
+    
+    
+        c := @parameter0: java.lang.Class;
+        $stack2 = <org.jfree.chart.util.ObjectUtilities: java.lang.ClassLoader classLoader>;
+    
+        if $stack2 == null goto label1;
+        $stack8 = <org.jfree.chart.util.ObjectUtilities: java.lang.ClassLoader classLoader>;
+    
+        return $stack8;
+    
+      label1:
+        $stack4 = "ThreadContext";
+        $stack3 = <org.jfree.chart.util.ObjectUtilities: java.lang.String classLoaderSource>;
+        $stack5 = virtualinvoke $stack4.<java.lang.String: boolean equals(java.lang.Object)>($stack3);
+    
+        if $stack5 == 0 goto label2;
+        $stack7 = staticinvoke <java.lang.Thread: java.lang.Thread currentThread()>();
+        threadLoader#0 = virtualinvoke $stack7.<java.lang.Thread: java.lang.ClassLoader getContextClassLoader()>();
+    
+        if threadLoader#0 == null goto label2;
+    
+        return threadLoader#0;
+    
+      label2:
+        threadLoader#1 = virtualinvoke c.<java.lang.Class: java.lang.ClassLoader getClassLoader()>();
+    
+        if threadLoader#1 != null goto label3;
+        $stack6 = staticinvoke <java.lang.ClassLoader: java.lang.ClassLoader getSystemClassLoader()>();
+    
+        return $stack6;
+    
+      label3:
+        return threadLoader#1;
+    }
+
+    // ---- method: <org.jfree.chart.util.ObjectUtilities: java.util.Collection deepClone(java.util.Collection)> ----
+    {
+        boolean $stack5;
+        java.lang.IllegalArgumentException #l1;
+        java.lang.Object $stack4, $stack6, $stack7, item;
+        java.lang.Throwable #l0;
+        java.util.Collection collection, result;
+        java.util.Iterator iterator;
+    
+    
+        collection := @parameter0: java.util.Collection;
+    
+        if collection != null goto label1;
+        $stack7 = new java.lang.IllegalArgumentException;
+        #l1 = (java.lang.IllegalArgumentException) $stack7;
+        specialinvoke #l1.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'collection\' argument.");
+        #l0 = (java.lang.Throwable) $stack7;
+    
+        throw #l0;
+    
+      label1:
+        $stack4 = staticinvoke <org.jfree.chart.util.ObjectUtilities: java.lang.Object clone(java.lang.Object)>(collection);
+        result = (java.util.Collection) $stack4;
+        interfaceinvoke result.<java.util.Collection: void clear()>();
+        iterator = interfaceinvoke collection.<java.util.Collection: java.util.Iterator iterator()>();
+    
+      label2:
+        $stack5 = interfaceinvoke iterator.<java.util.Iterator: boolean hasNext()>();
+    
+        if $stack5 == 0 goto label5;
+        item = interfaceinvoke iterator.<java.util.Iterator: java.lang.Object next()>();
+    
+        if item == null goto label3;
+        $stack6 = staticinvoke <org.jfree.chart.util.ObjectUtilities: java.lang.Object clone(java.lang.Object)>(item);
+        interfaceinvoke result.<java.util.Collection: boolean add(java.lang.Object)>($stack6);
+    
+        goto label4;
+    
+      label3:
+        interfaceinvoke result.<java.util.Collection: boolean add(java.lang.Object)>(null);
+    
+      label4:
+        goto label2;
+    
+      label5:
+        return result;
+    }
+
+    // ---- method: <org.jfree.chart.util.ObjectUtilities: java.lang.Object loadAndInstantiate(java.lang.String,java.lang.Class,java.lang.Class)> ----
+    {
+        boolean $stack5;
+        java.lang.Class c, source, type;
+        java.lang.ClassLoader loader#0;
+        java.lang.Object $stack6;
+        java.lang.String className;
+        java.lang.Throwable $stack7, loader#1;
+    
+    
+        className := @parameter0: java.lang.String;
+        source := @parameter1: java.lang.Class;
+        type := @parameter2: java.lang.Class;
+    
+      label1:
+        loader#0 = staticinvoke <org.jfree.chart.util.ObjectUtilities: java.lang.ClassLoader getClassLoader(java.lang.Class)>(source);
+        c = virtualinvoke loader#0.<java.lang.ClassLoader: java.lang.Class loadClass(java.lang.String)>(className);
+        $stack5 = virtualinvoke type.<java.lang.Class: boolean isAssignableFrom(java.lang.Class)>(c);
+    
+        if $stack5 == 0 goto label4;
+        $stack6 = virtualinvoke c.<java.lang.Class: java.lang.Object newInstance()>();
+    
+      label2:
+        return $stack6;
+    
+      label3:
+        $stack7 := @caughtexception;
+        loader#1 = $stack7;
+    
+        return null;
+    
+      label4:
+        goto label5;
+    
+      label5:
+        return null;
+    
+     catch java.lang.Exception from label1 to label2 with label3;
+    }
+
+    // ---- method: <org.jfree.chart.util.ObjectUtilities: java.lang.ClassLoader getClassLoader()> ----
+    {
+        java.lang.ClassLoader $stack0;
+    
+    
+        $stack0 = <org.jfree.chart.util.ObjectUtilities: java.lang.ClassLoader classLoader>;
+    
+        return $stack0;
+    }
+
+    // ---- method: <org.jfree.chart.util.ObjectUtilities: void <clinit>()> ----
+    {
+    
+        <org.jfree.chart.util.ObjectUtilities: java.lang.String classLoaderSource> = "ThreadContext";
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.util.ObjectUtilities: int hashCode(java.lang.Object)> ----
+    {
+        int result;
+        java.lang.Object object;
+    
+    
+        object := @parameter0: java.lang.Object;
+        result = 0;
+    
+        if object == null goto label1;
+        result = virtualinvoke object.<java.lang.Object: int hashCode()>();
+    
+      label1:
+        return result;
+    }
+
+    // ---- method: <org.jfree.chart.util.ObjectUtilities: java.lang.String getClassLoaderSource()> ----
+    {
+        java.lang.String $stack0;
+    
+    
+        $stack0 = <org.jfree.chart.util.ObjectUtilities: java.lang.String classLoaderSource>;
+    
+        return $stack0;
+    }
+
+    // ---- method: <org.jfree.chart.util.ObjectUtilities: java.net.URL getResourceRelative(java.lang.String,java.lang.Class)> ----
+    {
+        java.lang.Class c;
+        java.lang.ClassLoader cl;
+        java.lang.String cname, name;
+        java.net.URL $stack4;
+    
+    
+        name := @parameter0: java.lang.String;
+        c := @parameter1: java.lang.Class;
+        cl = staticinvoke <org.jfree.chart.util.ObjectUtilities: java.lang.ClassLoader getClassLoader(java.lang.Class)>(c);
+        cname = staticinvoke <org.jfree.chart.util.ObjectUtilities: java.lang.String convertName(java.lang.String,java.lang.Class)>(name, c);
+    
+        if cl != null goto label1;
+    
+        return null;
+    
+      label1:
+        $stack4 = virtualinvoke cl.<java.lang.ClassLoader: java.net.URL getResource(java.lang.String)>(cname);
+    
+        return $stack4;
+    }
+
+    // ---- method: <org.jfree.chart.util.ObjectUtilities: java.lang.Class class$(java.lang.String)> ----
+    {
+        java.lang.Class $stack2;
+        java.lang.NoClassDefFoundError $stack4;
+        java.lang.String x0;
+        java.lang.Throwable $stack3, $stack5, x1;
+    
+    
+        x0 := @parameter0: java.lang.String;
+    
+      label1:
+        $stack2 = staticinvoke <java.lang.Class: java.lang.Class forName(java.lang.String)>(x0);
+    
+      label2:
+        return $stack2;
+    
+      label3:
+        $stack3 := @caughtexception;
+        x1 = $stack3;
+        $stack4 = new java.lang.NoClassDefFoundError;
+        specialinvoke $stack4.<java.lang.NoClassDefFoundError: void <init>()>();
+        $stack5 = virtualinvoke $stack4.<java.lang.NoClassDefFoundError: java.lang.Throwable initCause(java.lang.Throwable)>($stack3);
+    
+        throw $stack5;
+    
+     catch java.lang.ClassNotFoundException from label1 to label2 with label3;
+    }
+
+    // ---- method: <org.jfree.chart.util.ObjectUtilities: java.lang.Object loadAndInstantiate(java.lang.String,java.lang.Class)> ----
+    {
+        java.lang.Class c, source;
+        java.lang.ClassLoader loader#0;
+        java.lang.Object $stack4;
+        java.lang.String className;
+        java.lang.Throwable $stack5, loader#1;
+    
+    
+        className := @parameter0: java.lang.String;
+        source := @parameter1: java.lang.Class;
+    
+      label1:
+        loader#0 = staticinvoke <org.jfree.chart.util.ObjectUtilities: java.lang.ClassLoader getClassLoader(java.lang.Class)>(source);
+        c = virtualinvoke loader#0.<java.lang.ClassLoader: java.lang.Class loadClass(java.lang.String)>(className);
+        $stack4 = virtualinvoke c.<java.lang.Class: java.lang.Object newInstance()>();
+    
+      label2:
+        return $stack4;
+    
+      label3:
+        $stack5 := @caughtexception;
+        loader#1 = $stack5;
+    
+        return null;
+    
+     catch java.lang.Exception from label1 to label2 with label3;
+    }
+
+    // ---- method: <org.jfree.chart.util.ObjectUtilities: java.lang.String convertName(java.lang.String,java.lang.Class)> ----
+    {
+        boolean $stack5, $stack6;
+        int index;
+        java.lang.Class c;
+        java.lang.String $stack12, $stack13, $stack8, baseName, name, pkgName;
+        java.lang.StringBuffer $stack10, $stack11, $stack7, $stack9;
+    
+    
+        name := @parameter0: java.lang.String;
+        c := @parameter1: java.lang.Class;
+        $stack5 = virtualinvoke name.<java.lang.String: boolean startsWith(java.lang.String)>("/");
+    
+        if $stack5 == 0 goto label1;
+        $stack13 = virtualinvoke name.<java.lang.String: java.lang.String substring(int)>(1);
+    
+        return $stack13;
+    
+      label1:
+        $stack6 = virtualinvoke c.<java.lang.Class: boolean isArray()>();
+    
+        if $stack6 == 0 goto label2;
+        c = virtualinvoke c.<java.lang.Class: java.lang.Class getComponentType()>();
+    
+        goto label1;
+    
+      label2:
+        baseName = virtualinvoke c.<java.lang.Class: java.lang.String getName()>();
+        index = virtualinvoke baseName.<java.lang.String: int lastIndexOf(int)>(46);
+    
+        if index != -1 goto label3;
+    
+        return name;
+    
+      label3:
+        pkgName = virtualinvoke baseName.<java.lang.String: java.lang.String substring(int,int)>(0, index);
+        $stack7 = new java.lang.StringBuffer;
+        specialinvoke $stack7.<java.lang.StringBuffer: void <init>()>();
+        $stack8 = virtualinvoke pkgName.<java.lang.String: java.lang.String replace(char,char)>(46, 47);
+        $stack9 = virtualinvoke $stack7.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>($stack8);
+        $stack10 = virtualinvoke $stack9.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>("/");
+        $stack11 = virtualinvoke $stack10.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>(name);
+        $stack12 = virtualinvoke $stack11.<java.lang.StringBuffer: java.lang.String toString()>();
+    
+        return $stack12;
+    }
+
+    // ---- method: <org.jfree.chart.util.ObjectUtilities: java.io.InputStream getResourceAsStream(java.lang.String,java.lang.Class)> ----
+    {
+        java.io.InputStream $stack4;
+        java.lang.Class context;
+        java.lang.String name;
+        java.lang.Throwable $stack5, e;
+        java.net.URL url;
+    
+    
+        name := @parameter0: java.lang.String;
+        context := @parameter1: java.lang.Class;
+        url = staticinvoke <org.jfree.chart.util.ObjectUtilities: java.net.URL getResource(java.lang.String,java.lang.Class)>(name, context);
+    
+        if url != null goto label1;
+    
+        return null;
+    
+      label1:
+        $stack4 = virtualinvoke url.<java.net.URL: java.io.InputStream openStream()>();
+    
+      label2:
+        return $stack4;
+    
+      label3:
+        $stack5 := @caughtexception;
+        e = $stack5;
+    
+        return null;
+    
+     catch java.io.IOException from label1 to label2 with label3;
+    }
+
+    // ---- method: <org.jfree.chart.util.ObjectUtilities: boolean equal(java.lang.Object,java.lang.Object)> ----
+    {
+        boolean $stack2;
+        java.lang.Object o1, o2;
+    
+    
+        o1 := @parameter0: java.lang.Object;
+        o2 := @parameter1: java.lang.Object;
+    
+        if o1 != o2 goto label1;
+    
+        return 1;
+    
+      label1:
+        if o1 == null goto label2;
+        $stack2 = virtualinvoke o1.<java.lang.Object: boolean equals(java.lang.Object)>(o2);
+    
+        return $stack2;
+    
+      label2:
+        return 0;
+    }
+
+    // ---- method: <org.jfree.chart.util.ObjectUtilities: java.io.InputStream getResourceRelativeAsStream(java.lang.String,java.lang.Class)> ----
+    {
+        java.io.InputStream $stack4;
+        java.lang.Class context;
+        java.lang.String name;
+        java.lang.Throwable $stack5, e;
+        java.net.URL url;
+    
+    
+        name := @parameter0: java.lang.String;
+        context := @parameter1: java.lang.Class;
+        url = staticinvoke <org.jfree.chart.util.ObjectUtilities: java.net.URL getResourceRelative(java.lang.String,java.lang.Class)>(name, context);
+    
+        if url != null goto label1;
+    
+        return null;
+    
+      label1:
+        $stack4 = virtualinvoke url.<java.net.URL: java.io.InputStream openStream()>();
+    
+      label2:
+        return $stack4;
+    
+      label3:
+        $stack5 := @caughtexception;
+        e = $stack5;
+    
+        return null;
+    
+     catch java.io.IOException from label1 to label2 with label3;
+    }
+
+    // ---- method: <org.jfree.chart.util.ObjectUtilities: void setClassLoaderSource(java.lang.String)> ----
+    {
+        java.lang.String classLoaderSource;
+    
+    
+        classLoaderSource := @parameter0: java.lang.String;
+        <org.jfree.chart.util.ObjectUtilities: java.lang.String classLoaderSource> = classLoaderSource;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.util.ObjectUtilities: boolean isJDK14()> ----
+    {
+        boolean $stack10, $stack8, $stack9;
+        int $stack7;
+        java.lang.Class $stack4, $stack5;
+        java.lang.ClassLoader loader;
+        java.lang.Comparable[] #l0, #l1;
+        java.lang.Object $stack11;
+        java.lang.Object[] $stack6, versions;
+        java.lang.String e#1;
+        java.lang.Throwable $stack12, $stack13, $stack14, e#0, e#2, e#3;
+    
+    
+        $stack4 = <org.jfree.chart.util.ObjectUtilities: java.lang.Class class$org$jfree$chart$util$ObjectUtilities>;
+    
+        if $stack4 != null goto label01;
+        $stack5 = staticinvoke <org.jfree.chart.util.ObjectUtilities: java.lang.Class class$(java.lang.String)>("org.jfree.chart.util.ObjectUtilities");
+        <org.jfree.chart.util.ObjectUtilities: java.lang.Class class$org$jfree$chart$util$ObjectUtilities> = $stack5;
+    
+        goto label02;
+    
+      label01:
+        $stack5 = <org.jfree.chart.util.ObjectUtilities: java.lang.Class class$org$jfree$chart$util$ObjectUtilities>;
+    
+      label02:
+        loader = staticinvoke <org.jfree.chart.util.ObjectUtilities: java.lang.ClassLoader getClassLoader(java.lang.Class)>($stack5);
+    
+        if loader == null goto label06;
+    
+      label03:
+        virtualinvoke loader.<java.lang.ClassLoader: java.lang.Class loadClass(java.lang.String)>("java.util.RandomAccess");
+        $stack10 = 1;
+    
+      label04:
+        return 1;
+    
+      label05:
+        $stack13 := @caughtexception;
+        e#0 = $stack13;
+    
+      label06:
+        e#1 = staticinvoke <java.lang.System: java.lang.String getProperty(java.lang.String)>("java.vm.specification.version");
+    
+        if e#1 != null goto label09;
+        $stack9 = 0;
+    
+      label07:
+        return 0;
+    
+      label08:
+        $stack12 := @caughtexception;
+        e#2 = $stack12;
+    
+        return 0;
+    
+      label09:
+        versions = staticinvoke <org.jfree.chart.util.ObjectUtilities: java.lang.String[] parseVersions(java.lang.String)>(e#1);
+        $stack6 = newarray (java.lang.String)[2];
+        $stack6[0] = "1";
+        $stack6[1] = "4";
+    
+      label10:
+        #l1 = (java.lang.Comparable[]) $stack6;
+        #l0 = (java.lang.Comparable[]) versions;
+    
+      label11:
+        $stack7 = staticinvoke <org.jfree.chart.util.ArrayUtilities: int compareVersionArrays(java.lang.Comparable[],java.lang.Comparable[])>(#l0, #l1);
+    
+        if $stack7 < 0 goto label12;
+        $stack8 = 1;
+    
+        goto label13;
+    
+      label12:
+        $stack8 = 0;
+    
+      label13:
+        return $stack8;
+    
+      label14:
+        $stack14 := @caughtexception;
+        e#3 = $stack14;
+    
+        return 0;
+    
+     catch java.lang.ClassNotFoundException from label03 to label04 with label14;
+     catch java.lang.Exception from label03 to label04 with label05;
+     catch java.lang.Exception from label06 to label07 with label08;
+     catch java.lang.Exception from label09 to label10 with label08;
+     catch java.lang.Exception from label11 to label13 with label08;
+    }
+
+    // ---- method: <org.jfree.chart.util.ObjectUtilities: java.net.URL getResource(java.lang.String,java.lang.Class)> ----
+    {
+        java.lang.Class c;
+        java.lang.ClassLoader cl;
+        java.lang.String name;
+        java.net.URL $stack3;
+    
+    
+        name := @parameter0: java.lang.String;
+        c := @parameter1: java.lang.Class;
+        cl = staticinvoke <org.jfree.chart.util.ObjectUtilities: java.lang.ClassLoader getClassLoader(java.lang.Class)>(c);
+    
+        if cl != null goto label1;
+    
+        return null;
+    
+      label1:
+        $stack3 = virtualinvoke cl.<java.lang.ClassLoader: java.net.URL getResource(java.lang.String)>(name);
+    
+        return $stack3;
+    }
+
+    // ---- method: <org.jfree.chart.util.ObjectUtilities: java.lang.Object clone(java.lang.Object)> ----
+    {
+        boolean $stack2, $stack6;
+        int $stack5;
+        java.lang.Class $stack4;
+        java.lang.Class[] $stack3;
+        java.lang.CloneNotSupportedException #l2;
+        java.lang.IllegalAccessException #l1;
+        java.lang.IllegalArgumentException #l6;
+        java.lang.NoSuchMethodException #l5;
+        java.lang.Object $stack10, $stack11, $stack12, $stack13, $stack14, $stack7, $stack9, object;
+        java.lang.Object[] $stack8;
+        java.lang.Throwable #l0, #l3, pc#2, pc#3, pc#4;
+        java.lang.reflect.InvocationTargetException #l4;
+        java.lang.reflect.Method pc#1;
+        org.jfree.chart.util.PublicCloneable pc#0;
+    
+    
+        object := @parameter0: java.lang.Object;
+    
+        if object != null goto label1;
+        $stack11 = new java.lang.IllegalArgumentException;
+        #l6 = (java.lang.IllegalArgumentException) $stack11;
+        specialinvoke #l6.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'object\' argument.");
+        #l3 = (java.lang.Throwable) $stack11;
+    
+        throw #l3;
+    
+      label1:
+        $stack2 = object instanceof org.jfree.chart.util.PublicCloneable;
+    
+        if $stack2 == 0 goto label2;
+        pc#0 = (org.jfree.chart.util.PublicCloneable) object;
+        $stack10 = interfaceinvoke pc#0.<org.jfree.chart.util.PublicCloneable: java.lang.Object clone()>();
+    
+        return $stack10;
+    
+      label2:
+        $stack4 = virtualinvoke object.<java.lang.Object: java.lang.Class getClass()>();
+        $stack3 = (java.lang.Class[]) null;
+        pc#1 = virtualinvoke $stack4.<java.lang.Class: java.lang.reflect.Method getMethod(java.lang.String,java.lang.Class[])>("clone", $stack3);
+        $stack5 = virtualinvoke pc#1.<java.lang.reflect.Method: int getModifiers()>();
+        $stack6 = staticinvoke <java.lang.reflect.Modifier: boolean isPublic(int)>($stack5);
+    
+        if $stack6 == 0 goto label8;
+        $stack8 = (java.lang.Object[]) null;
+        $stack9 = virtualinvoke pc#1.<java.lang.reflect.Method: java.lang.Object invoke(java.lang.Object,java.lang.Object[])>(object, $stack8);
+    
+      label3:
+        return $stack9;
+    
+      label4:
+        $stack12 := @caughtexception;
+        pc#2 = (java.lang.Throwable) $stack12;
+        #l4 = (java.lang.reflect.InvocationTargetException) $stack12;
+        virtualinvoke #l4.<java.lang.reflect.InvocationTargetException: void printStackTrace()>();
+    
+      label5:
+        $stack7 = new java.lang.CloneNotSupportedException;
+        #l2 = (java.lang.CloneNotSupportedException) $stack7;
+        specialinvoke #l2.<java.lang.CloneNotSupportedException: void <init>(java.lang.String)>("Failed to clone.");
+        #l0 = (java.lang.Throwable) $stack7;
+    
+        throw #l0;
+    
+      label6:
+        $stack14 := @caughtexception;
+        pc#3 = (java.lang.Throwable) $stack14;
+        #l5 = (java.lang.NoSuchMethodException) $stack14;
+        virtualinvoke #l5.<java.lang.NoSuchMethodException: void printStackTrace()>();
+    
+        goto label5;
+    
+      label7:
+        $stack13 := @caughtexception;
+        pc#4 = (java.lang.Throwable) $stack13;
+        #l1 = (java.lang.IllegalAccessException) $stack13;
+        virtualinvoke #l1.<java.lang.IllegalAccessException: void printStackTrace()>();
+    
+        goto label5;
+    
+      label8:
+        goto label5;
+    
+     catch java.lang.IllegalAccessException from label2 to label3 with label7;
+     catch java.lang.NoSuchMethodException from label2 to label3 with label6;
+     catch java.lang.reflect.InvocationTargetException from label2 to label3 with label4;
+    }
+
+}

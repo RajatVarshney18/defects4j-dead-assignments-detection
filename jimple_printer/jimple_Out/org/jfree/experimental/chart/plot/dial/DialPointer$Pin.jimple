@@ -1,0 +1,153 @@
+// ========================================================================
+// CLASS : org.jfree.experimental.chart.plot.dial.DialPointer$Pin
+// ========================================================================
+
+[PUBLIC, SUPER] class org.jfree.experimental.chart.plot.dial.DialPointer$Pin extends org.jfree.experimental.chart.plot.dial.DialPointer implements org.jfree.chart.util.PublicCloneable {
+
+    // ---- method: <org.jfree.experimental.chart.plot.dial.DialPointer$Pin: void <init>()> ----
+    {
+        org.jfree.experimental.chart.plot.dial.DialPointer$Pin this;
+    
+    
+        this := @this: org.jfree.experimental.chart.plot.dial.DialPointer$Pin;
+        specialinvoke this.<org.jfree.experimental.chart.plot.dial.DialPointer$Pin: void <init>(int)>(0);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.experimental.chart.plot.dial.DialPointer$Pin: void setPaint(java.awt.Paint)> ----
+    {
+        java.awt.Paint paint;
+        org.jfree.experimental.chart.plot.dial.DialLayerChangeEvent $stack2;
+        org.jfree.experimental.chart.plot.dial.DialPointer$Pin this;
+    
+    
+        this := @this: org.jfree.experimental.chart.plot.dial.DialPointer$Pin;
+        paint := @parameter0: java.awt.Paint;
+        this.<org.jfree.experimental.chart.plot.dial.DialPointer$Pin: java.awt.Paint paint> = paint;
+        $stack2 = new org.jfree.experimental.chart.plot.dial.DialLayerChangeEvent;
+        specialinvoke $stack2.<org.jfree.experimental.chart.plot.dial.DialLayerChangeEvent: void <init>(org.jfree.experimental.chart.plot.dial.DialLayer)>(this);
+        virtualinvoke this.<org.jfree.experimental.chart.plot.dial.DialPointer$Pin: void notifyListeners(org.jfree.experimental.chart.plot.dial.DialLayerChangeEvent)>($stack2);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.experimental.chart.plot.dial.DialPointer$Pin: java.awt.Paint getPaint()> ----
+    {
+        java.awt.Paint $stack1;
+        org.jfree.experimental.chart.plot.dial.DialPointer$Pin this;
+    
+    
+        this := @this: org.jfree.experimental.chart.plot.dial.DialPointer$Pin;
+        $stack1 = this.<org.jfree.experimental.chart.plot.dial.DialPointer$Pin: java.awt.Paint paint>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.experimental.chart.plot.dial.DialPointer$Pin: void draw(java.awt.Graphics2D,org.jfree.experimental.chart.plot.dial.DialPlot,java.awt.geom.Rectangle2D,java.awt.geom.Rectangle2D)> ----
+    {
+        double $stack16, $stack17, $stack21, $stack22, $stack23, $stack24, angle, value;
+        int $stack18, $stack19;
+        java.awt.Graphics2D g2;
+        java.awt.Paint $stack14;
+        java.awt.Shape #l2;
+        java.awt.Stroke $stack15;
+        java.awt.geom.Arc2D #l0;
+        java.awt.geom.Arc2D$Double #l3, arc;
+        java.awt.geom.Line2D$Double #l1, line;
+        java.awt.geom.Point2D pt;
+        java.awt.geom.Rectangle2D arcRect, frame, view;
+        java.lang.Object $stack20, $stack25;
+        org.jfree.experimental.chart.plot.dial.DialPlot plot;
+        org.jfree.experimental.chart.plot.dial.DialPointer$Pin this;
+        org.jfree.experimental.chart.plot.dial.DialScale scale;
+    
+    
+        this := @this: org.jfree.experimental.chart.plot.dial.DialPointer$Pin;
+        g2 := @parameter0: java.awt.Graphics2D;
+        plot := @parameter1: org.jfree.experimental.chart.plot.dial.DialPlot;
+        frame := @parameter2: java.awt.geom.Rectangle2D;
+        view := @parameter3: java.awt.geom.Rectangle2D;
+        $stack14 = this.<org.jfree.experimental.chart.plot.dial.DialPointer$Pin: java.awt.Paint paint>;
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>($stack14);
+        $stack15 = this.<org.jfree.experimental.chart.plot.dial.DialPointer$Pin: java.awt.Stroke stroke>;
+        virtualinvoke g2.<java.awt.Graphics2D: void setStroke(java.awt.Stroke)>($stack15);
+        $stack17 = this.<org.jfree.experimental.chart.plot.dial.DialPointer$Pin: double radius>;
+        $stack16 = this.<org.jfree.experimental.chart.plot.dial.DialPointer$Pin: double radius>;
+        arcRect = staticinvoke <org.jfree.experimental.chart.plot.dial.DialPlot: java.awt.geom.Rectangle2D rectangleByRadius(java.awt.geom.Rectangle2D,double,double)>(frame, $stack17, $stack16);
+        $stack18 = this.<org.jfree.experimental.chart.plot.dial.DialPointer$Pin: int datasetIndex>;
+        value = virtualinvoke plot.<org.jfree.experimental.chart.plot.dial.DialPlot: double getValue(int)>($stack18);
+        $stack19 = this.<org.jfree.experimental.chart.plot.dial.DialPointer$Pin: int datasetIndex>;
+        scale = virtualinvoke plot.<org.jfree.experimental.chart.plot.dial.DialPlot: org.jfree.experimental.chart.plot.dial.DialScale getScaleForDataset(int)>($stack19);
+        angle = interfaceinvoke scale.<org.jfree.experimental.chart.plot.dial.DialScale: double valueToAngle(double)>(value);
+        $stack20 = new java.awt.geom.Arc2D$Double;
+        #l3 = (java.awt.geom.Arc2D$Double) $stack20;
+        specialinvoke #l3.<java.awt.geom.Arc2D$Double: void <init>(java.awt.geom.Rectangle2D,double,double,int)>(arcRect, angle, 0.0, 0);
+        arc = (java.awt.geom.Arc2D$Double) $stack20;
+        #l0 = (java.awt.geom.Arc2D) $stack20;
+        pt = virtualinvoke #l0.<java.awt.geom.Arc2D: java.awt.geom.Point2D getEndPoint()>();
+        $stack25 = new java.awt.geom.Line2D$Double;
+        $stack24 = virtualinvoke frame.<java.awt.geom.Rectangle2D: double getCenterX()>();
+        $stack23 = virtualinvoke frame.<java.awt.geom.Rectangle2D: double getCenterY()>();
+        $stack22 = virtualinvoke pt.<java.awt.geom.Point2D: double getX()>();
+        $stack21 = virtualinvoke pt.<java.awt.geom.Point2D: double getY()>();
+        #l1 = (java.awt.geom.Line2D$Double) $stack25;
+        specialinvoke #l1.<java.awt.geom.Line2D$Double: void <init>(double,double,double,double)>($stack24, $stack23, $stack22, $stack21);
+        line = (java.awt.geom.Line2D$Double) $stack25;
+        #l2 = (java.awt.Shape) $stack25;
+        virtualinvoke g2.<java.awt.Graphics2D: void draw(java.awt.Shape)>(#l2);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.experimental.chart.plot.dial.DialPointer$Pin: void <init>(int)> ----
+    {
+        int datasetIndex;
+        java.awt.BasicStroke #l0;
+        java.lang.Object $stack2, $stack3;
+        org.jfree.experimental.chart.plot.dial.DialPointer$Pin this;
+    
+    
+        this := @this: org.jfree.experimental.chart.plot.dial.DialPointer$Pin;
+        datasetIndex := @parameter0: int;
+        specialinvoke this.<org.jfree.experimental.chart.plot.dial.DialPointer: void <init>(int)>(datasetIndex);
+        $stack2 = <java.awt.Color: java.awt.Color red>;
+        this.<org.jfree.experimental.chart.plot.dial.DialPointer$Pin: java.awt.Paint paint> = (java.awt.Paint) $stack2;
+        $stack3 = new java.awt.BasicStroke;
+        #l0 = (java.awt.BasicStroke) $stack3;
+        specialinvoke #l0.<java.awt.BasicStroke: void <init>(float,int,int)>(3.0F, 1, 2);
+        this.<org.jfree.experimental.chart.plot.dial.DialPointer$Pin: java.awt.Stroke stroke> = (java.awt.Stroke) $stack3;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.experimental.chart.plot.dial.DialPointer$Pin: java.awt.Stroke getStroke()> ----
+    {
+        java.awt.Stroke $stack1;
+        org.jfree.experimental.chart.plot.dial.DialPointer$Pin this;
+    
+    
+        this := @this: org.jfree.experimental.chart.plot.dial.DialPointer$Pin;
+        $stack1 = this.<org.jfree.experimental.chart.plot.dial.DialPointer$Pin: java.awt.Stroke stroke>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.experimental.chart.plot.dial.DialPointer$Pin: void setStroke(java.awt.Stroke)> ----
+    {
+        java.awt.Stroke stroke;
+        org.jfree.experimental.chart.plot.dial.DialLayerChangeEvent $stack2;
+        org.jfree.experimental.chart.plot.dial.DialPointer$Pin this;
+    
+    
+        this := @this: org.jfree.experimental.chart.plot.dial.DialPointer$Pin;
+        stroke := @parameter0: java.awt.Stroke;
+        this.<org.jfree.experimental.chart.plot.dial.DialPointer$Pin: java.awt.Stroke stroke> = stroke;
+        $stack2 = new org.jfree.experimental.chart.plot.dial.DialLayerChangeEvent;
+        specialinvoke $stack2.<org.jfree.experimental.chart.plot.dial.DialLayerChangeEvent: void <init>(org.jfree.experimental.chart.plot.dial.DialLayer)>(this);
+        virtualinvoke this.<org.jfree.experimental.chart.plot.dial.DialPointer$Pin: void notifyListeners(org.jfree.experimental.chart.plot.dial.DialLayerChangeEvent)>($stack2);
+    
+        return;
+    }
+
+}

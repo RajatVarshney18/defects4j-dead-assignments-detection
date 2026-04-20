@@ -1,0 +1,3681 @@
+// ========================================================================
+// CLASS : org.jfree.chart.ChartPanel
+// ========================================================================
+
+[PUBLIC, SUPER] class org.jfree.chart.ChartPanel extends javax.swing.JPanel implements org.jfree.chart.event.ChartChangeListener, java.awt.event.ActionListener, java.awt.event.MouseMotionListener, java.awt.print.Printable, java.awt.event.MouseListener, org.jfree.chart.event.ChartProgressListener, java.io.Serializable {
+
+    // ---- method: <org.jfree.chart.ChartPanel: void setHorizontalTraceLine(java.awt.geom.Line2D)> ----
+    {
+        java.awt.geom.Line2D line;
+        org.jfree.chart.ChartPanel this;
+    
+    
+        this := @this: org.jfree.chart.ChartPanel;
+        line := @parameter0: java.awt.geom.Line2D;
+        this.<org.jfree.chart.ChartPanel: java.awt.geom.Line2D horizontalTraceLine> = line;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.ChartPanel: void <init>(org.jfree.chart.JFreeChart,boolean,boolean,boolean,boolean,boolean)> ----
+    {
+        boolean print, properties, save, tooltips, zoom;
+        org.jfree.chart.ChartPanel this;
+        org.jfree.chart.JFreeChart chart;
+    
+    
+        this := @this: org.jfree.chart.ChartPanel;
+        chart := @parameter0: org.jfree.chart.JFreeChart;
+        properties := @parameter1: boolean;
+        save := @parameter2: boolean;
+        print := @parameter3: boolean;
+        zoom := @parameter4: boolean;
+        tooltips := @parameter5: boolean;
+        specialinvoke this.<org.jfree.chart.ChartPanel: void <init>(org.jfree.chart.JFreeChart,int,int,int,int,int,int,boolean,boolean,boolean,boolean,boolean,boolean)>(chart, 680, 420, 300, 200, 800, 600, 0, properties, save, print, zoom, tooltips);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.ChartPanel: int getZoomTriggerDistance()> ----
+    {
+        int $stack1;
+        org.jfree.chart.ChartPanel this;
+    
+    
+        this := @this: org.jfree.chart.ChartPanel;
+        $stack1 = this.<org.jfree.chart.ChartPanel: int zoomTriggerDistance>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.ChartPanel: void displayPopupMenu(int,int)> ----
+    {
+        boolean $stack21, $stack23, $stack25, $stack9, isDomainZoomable, isRangeZoomable;
+        int x, y;
+        java.awt.Component #l20;
+        java.lang.Object this;
+        javax.swing.JMenuItem $stack10, $stack11, $stack12, $stack13, $stack14, $stack15, $stack16, $stack17, $stack18, $stack20, $stack22, $stack24, $stack26, $stack27, $stack28, $stack29, $stack30, $stack31;
+        javax.swing.JPopupMenu $stack19, $stack7;
+        org.jfree.chart.ChartPanel #l0, #l1, #l10, #l11, #l12, #l13, #l14, #l15, #l16, #l17, #l18, #l19, #l2, #l21, #l3, #l4, #l5, #l6, #l7, #l8, #l9;
+        org.jfree.chart.JFreeChart $stack8;
+        org.jfree.chart.plot.Plot plot;
+        org.jfree.chart.plot.Zoomable z;
+    
+    
+        this := @this: org.jfree.chart.ChartPanel;
+        x := @parameter0: int;
+        y := @parameter1: int;
+        #l7 = (org.jfree.chart.ChartPanel) this;
+        $stack7 = #l7.<org.jfree.chart.ChartPanel: javax.swing.JPopupMenu popup>;
+    
+        if $stack7 == null goto label17;
+        #l21 = (org.jfree.chart.ChartPanel) this;
+        $stack8 = #l21.<org.jfree.chart.ChartPanel: org.jfree.chart.JFreeChart chart>;
+        plot = virtualinvoke $stack8.<org.jfree.chart.JFreeChart: org.jfree.chart.plot.Plot getPlot()>();
+        isDomainZoomable = 0;
+        isRangeZoomable = 0;
+        $stack9 = plot instanceof org.jfree.chart.plot.Zoomable;
+    
+        if $stack9 == 0 goto label01;
+        z = (org.jfree.chart.plot.Zoomable) plot;
+        isDomainZoomable = interfaceinvoke z.<org.jfree.chart.plot.Zoomable: boolean isDomainZoomable()>();
+        isRangeZoomable = interfaceinvoke z.<org.jfree.chart.plot.Zoomable: boolean isRangeZoomable()>();
+    
+      label01:
+        #l0 = (org.jfree.chart.ChartPanel) this;
+        $stack10 = #l0.<org.jfree.chart.ChartPanel: javax.swing.JMenuItem zoomInDomainMenuItem>;
+    
+        if $stack10 == null goto label02;
+        #l13 = (org.jfree.chart.ChartPanel) this;
+        $stack31 = #l13.<org.jfree.chart.ChartPanel: javax.swing.JMenuItem zoomInDomainMenuItem>;
+        virtualinvoke $stack31.<javax.swing.JMenuItem: void setEnabled(boolean)>(isDomainZoomable);
+    
+      label02:
+        #l8 = (org.jfree.chart.ChartPanel) this;
+        $stack11 = #l8.<org.jfree.chart.ChartPanel: javax.swing.JMenuItem zoomOutDomainMenuItem>;
+    
+        if $stack11 == null goto label03;
+        #l14 = (org.jfree.chart.ChartPanel) this;
+        $stack30 = #l14.<org.jfree.chart.ChartPanel: javax.swing.JMenuItem zoomOutDomainMenuItem>;
+        virtualinvoke $stack30.<javax.swing.JMenuItem: void setEnabled(boolean)>(isDomainZoomable);
+    
+      label03:
+        #l9 = (org.jfree.chart.ChartPanel) this;
+        $stack12 = #l9.<org.jfree.chart.ChartPanel: javax.swing.JMenuItem zoomResetDomainMenuItem>;
+    
+        if $stack12 == null goto label04;
+        #l2 = (org.jfree.chart.ChartPanel) this;
+        $stack29 = #l2.<org.jfree.chart.ChartPanel: javax.swing.JMenuItem zoomResetDomainMenuItem>;
+        virtualinvoke $stack29.<javax.swing.JMenuItem: void setEnabled(boolean)>(isDomainZoomable);
+    
+      label04:
+        #l18 = (org.jfree.chart.ChartPanel) this;
+        $stack13 = #l18.<org.jfree.chart.ChartPanel: javax.swing.JMenuItem zoomInRangeMenuItem>;
+    
+        if $stack13 == null goto label05;
+        #l4 = (org.jfree.chart.ChartPanel) this;
+        $stack28 = #l4.<org.jfree.chart.ChartPanel: javax.swing.JMenuItem zoomInRangeMenuItem>;
+        virtualinvoke $stack28.<javax.swing.JMenuItem: void setEnabled(boolean)>(isRangeZoomable);
+    
+      label05:
+        #l17 = (org.jfree.chart.ChartPanel) this;
+        $stack14 = #l17.<org.jfree.chart.ChartPanel: javax.swing.JMenuItem zoomOutRangeMenuItem>;
+    
+        if $stack14 == null goto label06;
+        #l19 = (org.jfree.chart.ChartPanel) this;
+        $stack27 = #l19.<org.jfree.chart.ChartPanel: javax.swing.JMenuItem zoomOutRangeMenuItem>;
+        virtualinvoke $stack27.<javax.swing.JMenuItem: void setEnabled(boolean)>(isRangeZoomable);
+    
+      label06:
+        #l16 = (org.jfree.chart.ChartPanel) this;
+        $stack15 = #l16.<org.jfree.chart.ChartPanel: javax.swing.JMenuItem zoomResetRangeMenuItem>;
+    
+        if $stack15 == null goto label07;
+        #l5 = (org.jfree.chart.ChartPanel) this;
+        $stack26 = #l5.<org.jfree.chart.ChartPanel: javax.swing.JMenuItem zoomResetRangeMenuItem>;
+        virtualinvoke $stack26.<javax.swing.JMenuItem: void setEnabled(boolean)>(isRangeZoomable);
+    
+      label07:
+        #l10 = (org.jfree.chart.ChartPanel) this;
+        $stack16 = #l10.<org.jfree.chart.ChartPanel: javax.swing.JMenuItem zoomInBothMenuItem>;
+    
+        if $stack16 == null goto label10;
+        #l3 = (org.jfree.chart.ChartPanel) this;
+        $stack24 = #l3.<org.jfree.chart.ChartPanel: javax.swing.JMenuItem zoomInBothMenuItem>;
+    
+        if isDomainZoomable == 0 goto label08;
+    
+        if isRangeZoomable == 0 goto label08;
+        $stack25 = 1;
+    
+        goto label09;
+    
+      label08:
+        $stack25 = 0;
+    
+      label09:
+        virtualinvoke $stack24.<javax.swing.JMenuItem: void setEnabled(boolean)>($stack25);
+    
+      label10:
+        #l6 = (org.jfree.chart.ChartPanel) this;
+        $stack17 = #l6.<org.jfree.chart.ChartPanel: javax.swing.JMenuItem zoomOutBothMenuItem>;
+    
+        if $stack17 == null goto label13;
+        #l15 = (org.jfree.chart.ChartPanel) this;
+        $stack22 = #l15.<org.jfree.chart.ChartPanel: javax.swing.JMenuItem zoomOutBothMenuItem>;
+    
+        if isDomainZoomable == 0 goto label11;
+    
+        if isRangeZoomable == 0 goto label11;
+        $stack23 = 1;
+    
+        goto label12;
+    
+      label11:
+        $stack23 = 0;
+    
+      label12:
+        virtualinvoke $stack22.<javax.swing.JMenuItem: void setEnabled(boolean)>($stack23);
+    
+      label13:
+        #l1 = (org.jfree.chart.ChartPanel) this;
+        $stack18 = #l1.<org.jfree.chart.ChartPanel: javax.swing.JMenuItem zoomResetBothMenuItem>;
+    
+        if $stack18 == null goto label16;
+        #l12 = (org.jfree.chart.ChartPanel) this;
+        $stack20 = #l12.<org.jfree.chart.ChartPanel: javax.swing.JMenuItem zoomResetBothMenuItem>;
+    
+        if isDomainZoomable == 0 goto label14;
+    
+        if isRangeZoomable == 0 goto label14;
+        $stack21 = 1;
+    
+        goto label15;
+    
+      label14:
+        $stack21 = 0;
+    
+      label15:
+        virtualinvoke $stack20.<javax.swing.JMenuItem: void setEnabled(boolean)>($stack21);
+    
+      label16:
+        #l11 = (org.jfree.chart.ChartPanel) this;
+        $stack19 = #l11.<org.jfree.chart.ChartPanel: javax.swing.JPopupMenu popup>;
+        #l20 = (java.awt.Component) this;
+        virtualinvoke $stack19.<javax.swing.JPopupMenu: void show(java.awt.Component,int,int)>(#l20, x, y);
+    
+      label17:
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.ChartPanel: java.awt.geom.Rectangle2D getScreenDataArea(int,int)> ----
+    {
+        int $stack8, subplotIndex, x, y;
+        java.awt.Point $stack9;
+        java.awt.geom.Point2D selectOrigin;
+        java.awt.geom.Rectangle2D $stack11, result;
+        org.jfree.chart.ChartPanel this;
+        org.jfree.chart.ChartRenderingInfo $stack7;
+        org.jfree.chart.plot.PlotRenderingInfo $stack10, plotInfo;
+    
+    
+        this := @this: org.jfree.chart.ChartPanel;
+        x := @parameter0: int;
+        y := @parameter1: int;
+        $stack7 = this.<org.jfree.chart.ChartPanel: org.jfree.chart.ChartRenderingInfo info>;
+        plotInfo = virtualinvoke $stack7.<org.jfree.chart.ChartRenderingInfo: org.jfree.chart.plot.PlotRenderingInfo getPlotInfo()>();
+        $stack8 = virtualinvoke plotInfo.<org.jfree.chart.plot.PlotRenderingInfo: int getSubplotCount()>();
+    
+        if $stack8 != 0 goto label1;
+        result = virtualinvoke this.<org.jfree.chart.ChartPanel: java.awt.geom.Rectangle2D getScreenDataArea()>();
+    
+        goto label3;
+    
+      label1:
+        $stack9 = new java.awt.Point;
+        specialinvoke $stack9.<java.awt.Point: void <init>(int,int)>(x, y);
+        selectOrigin = virtualinvoke this.<org.jfree.chart.ChartPanel: java.awt.geom.Point2D translateScreenToJava2D(java.awt.Point)>($stack9);
+        subplotIndex = virtualinvoke plotInfo.<org.jfree.chart.plot.PlotRenderingInfo: int getSubplotIndex(java.awt.geom.Point2D)>(selectOrigin);
+    
+        if subplotIndex != -1 goto label2;
+    
+        return null;
+    
+      label2:
+        $stack10 = virtualinvoke plotInfo.<org.jfree.chart.plot.PlotRenderingInfo: org.jfree.chart.plot.PlotRenderingInfo getSubplotInfo(int)>(subplotIndex);
+        $stack11 = virtualinvoke $stack10.<org.jfree.chart.plot.PlotRenderingInfo: java.awt.geom.Rectangle2D getDataArea()>();
+        result = virtualinvoke this.<org.jfree.chart.ChartPanel: java.awt.geom.Rectangle2D scale(java.awt.geom.Rectangle2D)>($stack11);
+    
+      label3:
+        return result;
+    }
+
+    // ---- method: <org.jfree.chart.ChartPanel: void setEnforceFileExtensions(boolean)> ----
+    {
+        boolean enforce;
+        org.jfree.chart.ChartPanel this;
+    
+    
+        this := @this: org.jfree.chart.ChartPanel;
+        enforce := @parameter0: boolean;
+        this.<org.jfree.chart.ChartPanel: boolean enforceFileExtensions> = enforce;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.ChartPanel: void mouseReleased(java.awt.event.MouseEvent)> ----
+    {
+        boolean $stack17, hZoom#0, hZoom#1, vZoom#0, vZoom#1, zoomTrigger1, zoomTrigger2;
+        byte $stack62, $stack67, $stack77, $stack86;
+        double $stack24, $stack26, $stack33, $stack34, $stack35, $stack36, $stack39, $stack40, $stack41, $stack42, $stack47, $stack48, $stack49, $stack50, $stack54, $stack55, $stack56, $stack57, $stack60, $stack61, $stack65, $stack66, $stack71, $stack72, $stack73, $stack75, $stack76, $stack80, $stack81, $stack82, $stack84, $stack85, h, w, x#0, y;
+        int $stack19, $stack20, $stack27, $stack28, $stack58, $stack63, $stack69, $stack74, $stack78, $stack83;
+        java.awt.Graphics $stack68;
+        java.awt.Graphics2D x#1;
+        java.awt.Point $stack23, $stack25, $stack29, $stack30, $stack32, $stack38, $stack44, $stack46, $stack51, $stack53, $stack59, $stack64, $stack70, $stack79;
+        java.awt.event.MouseEvent e;
+        java.awt.geom.Rectangle2D #l0, $stack16, $stack31, $stack37, $stack45, $stack52, screenDataArea;
+        java.awt.geom.Rectangle2D$Double #l1, zoomArea;
+        java.lang.Object $stack43;
+        javax.swing.JPopupMenu $stack18;
+        org.jfree.chart.ChartPanel this;
+        org.jfree.chart.plot.PlotOrientation $stack21, $stack22;
+    
+    
+        this := @this: org.jfree.chart.ChartPanel;
+        e := @parameter0: java.awt.event.MouseEvent;
+        $stack16 = this.<org.jfree.chart.ChartPanel: java.awt.geom.Rectangle2D zoomRectangle>;
+    
+        if $stack16 == null goto label17;
+        hZoom#0 = 0;
+        vZoom#0 = 0;
+        $stack22 = this.<org.jfree.chart.ChartPanel: org.jfree.chart.plot.PlotOrientation orientation>;
+        $stack21 = <org.jfree.chart.plot.PlotOrientation: org.jfree.chart.plot.PlotOrientation HORIZONTAL>;
+    
+        if $stack22 != $stack21 goto label01;
+        hZoom#1 = this.<org.jfree.chart.ChartPanel: boolean rangeZoomable>;
+        vZoom#1 = this.<org.jfree.chart.ChartPanel: boolean domainZoomable>;
+    
+        goto label02;
+    
+      label01:
+        hZoom#1 = this.<org.jfree.chart.ChartPanel: boolean domainZoomable>;
+        vZoom#1 = this.<org.jfree.chart.ChartPanel: boolean rangeZoomable>;
+    
+      label02:
+        if hZoom#1 == 0 goto label03;
+        $stack78 = virtualinvoke e.<java.awt.event.MouseEvent: int getX()>();
+        $stack80 = (double) $stack78;
+        $stack79 = this.<org.jfree.chart.ChartPanel: java.awt.Point zoomPoint>;
+        $stack81 = virtualinvoke $stack79.<java.awt.Point: double getX()>();
+        $stack82 = $stack80 - $stack81;
+        $stack84 = staticinvoke <java.lang.Math: double abs(double)>($stack82);
+        $stack83 = this.<org.jfree.chart.ChartPanel: int zoomTriggerDistance>;
+        $stack85 = (double) $stack83;
+        $stack86 = $stack84 cmpl $stack85;
+    
+        if $stack86 < 0 goto label03;
+        zoomTrigger1 = 1;
+    
+        goto label04;
+    
+      label03:
+        zoomTrigger1 = 0;
+    
+      label04:
+        if vZoom#1 == 0 goto label05;
+        $stack69 = virtualinvoke e.<java.awt.event.MouseEvent: int getY()>();
+        $stack71 = (double) $stack69;
+        $stack70 = this.<org.jfree.chart.ChartPanel: java.awt.Point zoomPoint>;
+        $stack72 = virtualinvoke $stack70.<java.awt.Point: double getY()>();
+        $stack73 = $stack71 - $stack72;
+        $stack75 = staticinvoke <java.lang.Math: double abs(double)>($stack73);
+        $stack74 = this.<org.jfree.chart.ChartPanel: int zoomTriggerDistance>;
+        $stack76 = (double) $stack74;
+        $stack77 = $stack75 cmpl $stack76;
+    
+        if $stack77 < 0 goto label05;
+        zoomTrigger2 = 1;
+    
+        goto label06;
+    
+      label05:
+        zoomTrigger2 = 0;
+    
+      label06:
+        if zoomTrigger1 != 0 goto label07;
+    
+        if zoomTrigger2 == 0 goto label15;
+    
+      label07:
+        if hZoom#1 == 0 goto label08;
+        $stack63 = virtualinvoke e.<java.awt.event.MouseEvent: int getX()>();
+        $stack65 = (double) $stack63;
+        $stack64 = this.<org.jfree.chart.ChartPanel: java.awt.Point zoomPoint>;
+        $stack66 = virtualinvoke $stack64.<java.awt.Point: double getX()>();
+        $stack67 = $stack65 cmpg $stack66;
+    
+        if $stack67 < 0 goto label09;
+    
+      label08:
+        if vZoom#1 == 0 goto label10;
+        $stack58 = virtualinvoke e.<java.awt.event.MouseEvent: int getY()>();
+        $stack60 = (double) $stack58;
+        $stack59 = this.<org.jfree.chart.ChartPanel: java.awt.Point zoomPoint>;
+        $stack61 = virtualinvoke $stack59.<java.awt.Point: double getY()>();
+        $stack62 = $stack60 cmpg $stack61;
+    
+        if $stack62 >= 0 goto label10;
+    
+      label09:
+        virtualinvoke this.<org.jfree.chart.ChartPanel: void restoreAutoBounds()>();
+    
+        goto label14;
+    
+      label10:
+        $stack23 = this.<org.jfree.chart.ChartPanel: java.awt.Point zoomPoint>;
+        $stack24 = virtualinvoke $stack23.<java.awt.Point: double getX()>();
+        $stack28 = (int) $stack24;
+        $stack25 = this.<org.jfree.chart.ChartPanel: java.awt.Point zoomPoint>;
+        $stack26 = virtualinvoke $stack25.<java.awt.Point: double getY()>();
+        $stack27 = (int) $stack26;
+        screenDataArea = virtualinvoke this.<org.jfree.chart.ChartPanel: java.awt.geom.Rectangle2D getScreenDataArea(int,int)>($stack28, $stack27);
+    
+        if vZoom#1 != 0 goto label11;
+        $stack51 = this.<org.jfree.chart.ChartPanel: java.awt.Point zoomPoint>;
+        x#0 = virtualinvoke $stack51.<java.awt.Point: double getX()>();
+        y = virtualinvoke screenDataArea.<java.awt.geom.Rectangle2D: double getMinY()>();
+        $stack52 = this.<org.jfree.chart.ChartPanel: java.awt.geom.Rectangle2D zoomRectangle>;
+        $stack57 = virtualinvoke $stack52.<java.awt.geom.Rectangle2D: double getWidth()>();
+        $stack54 = virtualinvoke screenDataArea.<java.awt.geom.Rectangle2D: double getMaxX()>();
+        $stack53 = this.<org.jfree.chart.ChartPanel: java.awt.Point zoomPoint>;
+        $stack55 = virtualinvoke $stack53.<java.awt.Point: double getX()>();
+        $stack56 = $stack54 - $stack55;
+        w = staticinvoke <java.lang.Math: double min(double,double)>($stack57, $stack56);
+        h = virtualinvoke screenDataArea.<java.awt.geom.Rectangle2D: double getHeight()>();
+    
+        goto label13;
+    
+      label11:
+        if hZoom#1 != 0 goto label12;
+        x#0 = virtualinvoke screenDataArea.<java.awt.geom.Rectangle2D: double getMinX()>();
+        $stack44 = this.<org.jfree.chart.ChartPanel: java.awt.Point zoomPoint>;
+        y = virtualinvoke $stack44.<java.awt.Point: double getY()>();
+        w = virtualinvoke screenDataArea.<java.awt.geom.Rectangle2D: double getWidth()>();
+        $stack45 = this.<org.jfree.chart.ChartPanel: java.awt.geom.Rectangle2D zoomRectangle>;
+        $stack50 = virtualinvoke $stack45.<java.awt.geom.Rectangle2D: double getHeight()>();
+        $stack47 = virtualinvoke screenDataArea.<java.awt.geom.Rectangle2D: double getMaxY()>();
+        $stack46 = this.<org.jfree.chart.ChartPanel: java.awt.Point zoomPoint>;
+        $stack48 = virtualinvoke $stack46.<java.awt.Point: double getY()>();
+        $stack49 = $stack47 - $stack48;
+        h = staticinvoke <java.lang.Math: double min(double,double)>($stack50, $stack49);
+    
+        goto label13;
+    
+      label12:
+        $stack29 = this.<org.jfree.chart.ChartPanel: java.awt.Point zoomPoint>;
+        x#0 = virtualinvoke $stack29.<java.awt.Point: double getX()>();
+        $stack30 = this.<org.jfree.chart.ChartPanel: java.awt.Point zoomPoint>;
+        y = virtualinvoke $stack30.<java.awt.Point: double getY()>();
+        $stack31 = this.<org.jfree.chart.ChartPanel: java.awt.geom.Rectangle2D zoomRectangle>;
+        $stack36 = virtualinvoke $stack31.<java.awt.geom.Rectangle2D: double getWidth()>();
+        $stack33 = virtualinvoke screenDataArea.<java.awt.geom.Rectangle2D: double getMaxX()>();
+        $stack32 = this.<org.jfree.chart.ChartPanel: java.awt.Point zoomPoint>;
+        $stack34 = virtualinvoke $stack32.<java.awt.Point: double getX()>();
+        $stack35 = $stack33 - $stack34;
+        w = staticinvoke <java.lang.Math: double min(double,double)>($stack36, $stack35);
+        $stack37 = this.<org.jfree.chart.ChartPanel: java.awt.geom.Rectangle2D zoomRectangle>;
+        $stack42 = virtualinvoke $stack37.<java.awt.geom.Rectangle2D: double getHeight()>();
+        $stack39 = virtualinvoke screenDataArea.<java.awt.geom.Rectangle2D: double getMaxY()>();
+        $stack38 = this.<org.jfree.chart.ChartPanel: java.awt.Point zoomPoint>;
+        $stack40 = virtualinvoke $stack38.<java.awt.Point: double getY()>();
+        $stack41 = $stack39 - $stack40;
+        h = staticinvoke <java.lang.Math: double min(double,double)>($stack42, $stack41);
+    
+      label13:
+        $stack43 = new java.awt.geom.Rectangle2D$Double;
+        #l1 = (java.awt.geom.Rectangle2D$Double) $stack43;
+        specialinvoke #l1.<java.awt.geom.Rectangle2D$Double: void <init>(double,double,double,double)>(x#0, y, w, h);
+        zoomArea = (java.awt.geom.Rectangle2D$Double) $stack43;
+        #l0 = (java.awt.geom.Rectangle2D) $stack43;
+        virtualinvoke this.<org.jfree.chart.ChartPanel: void zoom(java.awt.geom.Rectangle2D)>(#l0);
+    
+      label14:
+        this.<org.jfree.chart.ChartPanel: java.awt.Point zoomPoint> = null;
+        this.<org.jfree.chart.ChartPanel: java.awt.geom.Rectangle2D zoomRectangle> = null;
+    
+        goto label16;
+    
+      label15:
+        $stack68 = virtualinvoke this.<org.jfree.chart.ChartPanel: java.awt.Graphics getGraphics()>();
+        x#1 = (java.awt.Graphics2D) $stack68;
+        specialinvoke this.<org.jfree.chart.ChartPanel: void drawZoomRectangle(java.awt.Graphics2D)>(x#1);
+        virtualinvoke x#1.<java.awt.Graphics2D: void dispose()>();
+        this.<org.jfree.chart.ChartPanel: java.awt.Point zoomPoint> = null;
+        this.<org.jfree.chart.ChartPanel: java.awt.geom.Rectangle2D zoomRectangle> = null;
+    
+      label16:
+        goto label18;
+    
+      label17:
+        $stack17 = virtualinvoke e.<java.awt.event.MouseEvent: boolean isPopupTrigger()>();
+    
+        if $stack17 == 0 goto label18;
+        $stack18 = this.<org.jfree.chart.ChartPanel: javax.swing.JPopupMenu popup>;
+    
+        if $stack18 == null goto label18;
+        $stack20 = virtualinvoke e.<java.awt.event.MouseEvent: int getX()>();
+        $stack19 = virtualinvoke e.<java.awt.event.MouseEvent: int getY()>();
+        virtualinvoke this.<org.jfree.chart.ChartPanel: void displayPopupMenu(int,int)>($stack20, $stack19);
+    
+      label18:
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.ChartPanel: boolean isDomainZoomable()> ----
+    {
+        boolean $stack1;
+        org.jfree.chart.ChartPanel this;
+    
+    
+        this := @this: org.jfree.chart.ChartPanel;
+        $stack1 = this.<org.jfree.chart.ChartPanel: boolean domainZoomable>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.ChartPanel: double getZoomOutFactor()> ----
+    {
+        double $stack1;
+        org.jfree.chart.ChartPanel this;
+    
+    
+        this := @this: org.jfree.chart.ChartPanel;
+        $stack1 = this.<org.jfree.chart.ChartPanel: double zoomOutFactor>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.ChartPanel: void setMaximumDrawWidth(int)> ----
+    {
+        int width;
+        org.jfree.chart.ChartPanel this;
+    
+    
+        this := @this: org.jfree.chart.ChartPanel;
+        width := @parameter0: int;
+        this.<org.jfree.chart.ChartPanel: int maximumDrawWidth> = width;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.ChartPanel: boolean getHorizontalAxisTrace()> ----
+    {
+        boolean $stack1;
+        org.jfree.chart.ChartPanel this;
+    
+    
+        this := @this: org.jfree.chart.ChartPanel;
+        $stack1 = this.<org.jfree.chart.ChartPanel: boolean horizontalAxisTrace>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.ChartPanel: java.lang.Class class$(java.lang.String)> ----
+    {
+        java.lang.Class $stack2;
+        java.lang.NoClassDefFoundError $stack4;
+        java.lang.String x0;
+        java.lang.Throwable $stack3, $stack5, x1;
+    
+    
+        x0 := @parameter0: java.lang.String;
+    
+      label1:
+        $stack2 = staticinvoke <java.lang.Class: java.lang.Class forName(java.lang.String)>(x0);
+    
+      label2:
+        return $stack2;
+    
+      label3:
+        $stack3 := @caughtexception;
+        x1 = $stack3;
+        $stack4 = new java.lang.NoClassDefFoundError;
+        specialinvoke $stack4.<java.lang.NoClassDefFoundError: void <init>()>();
+        $stack5 = virtualinvoke $stack4.<java.lang.NoClassDefFoundError: java.lang.Throwable initCause(java.lang.Throwable)>($stack3);
+    
+        throw $stack5;
+    
+     catch java.lang.ClassNotFoundException from label1 to label2 with label3;
+    }
+
+    // ---- method: <org.jfree.chart.ChartPanel: org.jfree.chart.ChartRenderingInfo getChartRenderingInfo()> ----
+    {
+        org.jfree.chart.ChartPanel this;
+        org.jfree.chart.ChartRenderingInfo $stack1;
+    
+    
+        this := @this: org.jfree.chart.ChartPanel;
+        $stack1 = this.<org.jfree.chart.ChartPanel: org.jfree.chart.ChartRenderingInfo info>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.ChartPanel: java.awt.geom.Line2D getHorizontalTraceLine()> ----
+    {
+        java.awt.geom.Line2D $stack1;
+        org.jfree.chart.ChartPanel this;
+    
+    
+        this := @this: org.jfree.chart.ChartPanel;
+        $stack1 = this.<org.jfree.chart.ChartPanel: java.awt.geom.Line2D horizontalTraceLine>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.ChartPanel: void setInitialDelay(int)> ----
+    {
+        int delay;
+        org.jfree.chart.ChartPanel this;
+    
+    
+        this := @this: org.jfree.chart.ChartPanel;
+        delay := @parameter0: int;
+        this.<org.jfree.chart.ChartPanel: int ownToolTipInitialDelay> = delay;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.ChartPanel: void setMinimumDrawHeight(int)> ----
+    {
+        int height;
+        org.jfree.chart.ChartPanel this;
+    
+    
+        this := @this: org.jfree.chart.ChartPanel;
+        height := @parameter0: int;
+        this.<org.jfree.chart.ChartPanel: int minimumDrawHeight> = height;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.ChartPanel: void setMouseZoomable(boolean,boolean)> ----
+    {
+        boolean fillRectangle, flag;
+        org.jfree.chart.ChartPanel this;
+    
+    
+        this := @this: org.jfree.chart.ChartPanel;
+        flag := @parameter0: boolean;
+        fillRectangle := @parameter1: boolean;
+        virtualinvoke this.<org.jfree.chart.ChartPanel: void setDomainZoomable(boolean)>(flag);
+        virtualinvoke this.<org.jfree.chart.ChartPanel: void setRangeZoomable(boolean)>(flag);
+        virtualinvoke this.<org.jfree.chart.ChartPanel: void setFillZoomRectangle(boolean)>(fillRectangle);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.ChartPanel: java.util.EventListener[] getListeners(java.lang.Class)> ----
+    {
+        java.lang.Class $stack2, $stack3, listenerType;
+        java.lang.Object $stack7;
+        java.util.EventListener[] $stack4, $stack6;
+        javax.swing.event.EventListenerList $stack5;
+        org.jfree.chart.ChartPanel this;
+    
+    
+        this := @this: org.jfree.chart.ChartPanel;
+        listenerType := @parameter0: java.lang.Class;
+        $stack2 = <org.jfree.chart.ChartPanel: java.lang.Class class$org$jfree$chart$ChartMouseListener>;
+    
+        if $stack2 != null goto label1;
+        $stack3 = staticinvoke <org.jfree.chart.ChartPanel: java.lang.Class class$(java.lang.String)>("org.jfree.chart.ChartMouseListener");
+        <org.jfree.chart.ChartPanel: java.lang.Class class$org$jfree$chart$ChartMouseListener> = $stack3;
+    
+        goto label2;
+    
+      label1:
+        $stack3 = <org.jfree.chart.ChartPanel: java.lang.Class class$org$jfree$chart$ChartMouseListener>;
+    
+      label2:
+        if listenerType != $stack3 goto label3;
+        $stack5 = this.<org.jfree.chart.ChartPanel: javax.swing.event.EventListenerList chartMouseListeners>;
+        $stack6 = virtualinvoke $stack5.<javax.swing.event.EventListenerList: java.util.EventListener[] getListeners(java.lang.Class)>(listenerType);
+    
+        return $stack6;
+    
+      label3:
+        $stack4 = specialinvoke this.<javax.swing.JPanel: java.util.EventListener[] getListeners(java.lang.Class)>(listenerType);
+    
+        return $stack4;
+    }
+
+    // ---- method: <org.jfree.chart.ChartPanel: void addChartMouseListener(org.jfree.chart.ChartMouseListener)> ----
+    {
+        java.lang.Class $stack2, $stack3;
+        java.lang.IllegalArgumentException #l0;
+        java.lang.Object $stack5, $stack6;
+        java.lang.Throwable #l1;
+        javax.swing.event.EventListenerList $stack4;
+        org.jfree.chart.ChartMouseListener listener;
+        org.jfree.chart.ChartPanel this;
+    
+    
+        this := @this: org.jfree.chart.ChartPanel;
+        listener := @parameter0: org.jfree.chart.ChartMouseListener;
+    
+        if listener != null goto label1;
+        $stack6 = new java.lang.IllegalArgumentException;
+        #l0 = (java.lang.IllegalArgumentException) $stack6;
+        specialinvoke #l0.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'listener\' argument.");
+        #l1 = (java.lang.Throwable) $stack6;
+    
+        throw #l1;
+    
+      label1:
+        $stack4 = this.<org.jfree.chart.ChartPanel: javax.swing.event.EventListenerList chartMouseListeners>;
+        $stack2 = <org.jfree.chart.ChartPanel: java.lang.Class class$org$jfree$chart$ChartMouseListener>;
+    
+        if $stack2 != null goto label2;
+        $stack3 = staticinvoke <org.jfree.chart.ChartPanel: java.lang.Class class$(java.lang.String)>("org.jfree.chart.ChartMouseListener");
+        <org.jfree.chart.ChartPanel: java.lang.Class class$org$jfree$chart$ChartMouseListener> = $stack3;
+    
+        goto label3;
+    
+      label2:
+        $stack3 = <org.jfree.chart.ChartPanel: java.lang.Class class$org$jfree$chart$ChartMouseListener>;
+    
+      label3:
+        virtualinvoke $stack4.<javax.swing.event.EventListenerList: void add(java.lang.Class,java.util.EventListener)>($stack3, listener);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.ChartPanel: void drawVerticalAxisTrace(java.awt.Graphics2D,int)> ----
+    {
+        double $stack10, $stack12, $stack22, $stack24, $stack26, $stack27, $stack28, $stack29, $stack5, $stack7;
+        float $stack14, $stack15, $stack16, $stack17;
+        int $stack11, $stack13, $stack23, $stack25, $stack6, $stack8, y;
+        java.awt.Color $stack4;
+        java.awt.Graphics2D g2;
+        java.awt.Shape #l1, #l2;
+        java.awt.geom.Line2D $stack21, $stack9;
+        java.awt.geom.Line2D$Float #l0;
+        java.awt.geom.Rectangle2D dataArea;
+        java.lang.Object $stack18, $stack19, $stack20;
+        org.jfree.chart.ChartPanel this;
+    
+    
+        this := @this: org.jfree.chart.ChartPanel;
+        g2 := @parameter0: java.awt.Graphics2D;
+        y := @parameter1: int;
+        dataArea = virtualinvoke this.<org.jfree.chart.ChartPanel: java.awt.geom.Rectangle2D getScreenDataArea()>();
+        $stack4 = <java.awt.Color: java.awt.Color orange>;
+        virtualinvoke g2.<java.awt.Graphics2D: void setXORMode(java.awt.Color)>($stack4);
+        $stack5 = virtualinvoke dataArea.<java.awt.geom.Rectangle2D: double getMinY()>();
+        $stack6 = (int) $stack5;
+    
+        if $stack6 >= y goto label3;
+        $stack7 = virtualinvoke dataArea.<java.awt.geom.Rectangle2D: double getMaxY()>();
+        $stack8 = (int) $stack7;
+    
+        if y >= $stack8 goto label3;
+        $stack9 = this.<org.jfree.chart.ChartPanel: java.awt.geom.Line2D horizontalTraceLine>;
+    
+        if $stack9 == null goto label1;
+        $stack20 = this.<org.jfree.chart.ChartPanel: java.awt.geom.Line2D horizontalTraceLine>;
+        #l2 = (java.awt.Shape) $stack20;
+        virtualinvoke g2.<java.awt.Graphics2D: void draw(java.awt.Shape)>(#l2);
+        $stack21 = this.<org.jfree.chart.ChartPanel: java.awt.geom.Line2D horizontalTraceLine>;
+        $stack22 = virtualinvoke dataArea.<java.awt.geom.Rectangle2D: double getMinX()>();
+        $stack23 = (int) $stack22;
+        $stack29 = (double) $stack23;
+        $stack28 = (double) y;
+        $stack24 = virtualinvoke dataArea.<java.awt.geom.Rectangle2D: double getMaxX()>();
+        $stack25 = (int) $stack24;
+        $stack27 = (double) $stack25;
+        $stack26 = (double) y;
+        virtualinvoke $stack21.<java.awt.geom.Line2D: void setLine(double,double,double,double)>($stack29, $stack28, $stack27, $stack26);
+    
+        goto label2;
+    
+      label1:
+        $stack18 = new java.awt.geom.Line2D$Float;
+        $stack10 = virtualinvoke dataArea.<java.awt.geom.Rectangle2D: double getMinX()>();
+        $stack11 = (int) $stack10;
+        $stack17 = (float) $stack11;
+        $stack16 = (float) y;
+        $stack12 = virtualinvoke dataArea.<java.awt.geom.Rectangle2D: double getMaxX()>();
+        $stack13 = (int) $stack12;
+        $stack15 = (float) $stack13;
+        $stack14 = (float) y;
+        #l0 = (java.awt.geom.Line2D$Float) $stack18;
+        specialinvoke #l0.<java.awt.geom.Line2D$Float: void <init>(float,float,float,float)>($stack17, $stack16, $stack15, $stack14);
+        this.<org.jfree.chart.ChartPanel: java.awt.geom.Line2D horizontalTraceLine> = (java.awt.geom.Line2D) $stack18;
+    
+      label2:
+        $stack19 = this.<org.jfree.chart.ChartPanel: java.awt.geom.Line2D horizontalTraceLine>;
+        #l1 = (java.awt.Shape) $stack19;
+        virtualinvoke g2.<java.awt.Graphics2D: void draw(java.awt.Shape)>(#l1);
+    
+      label3:
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaintMode()>();
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.ChartPanel: void setZoomInFactor(double)> ----
+    {
+        double factor;
+        org.jfree.chart.ChartPanel this;
+    
+    
+        this := @this: org.jfree.chart.ChartPanel;
+        factor := @parameter0: double;
+        this.<org.jfree.chart.ChartPanel: double zoomInFactor> = factor;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.ChartPanel: void setHorizontalAxisTrace(boolean)> ----
+    {
+        boolean flag;
+        org.jfree.chart.ChartPanel this;
+    
+    
+        this := @this: org.jfree.chart.ChartPanel;
+        flag := @parameter0: boolean;
+        this.<org.jfree.chart.ChartPanel: boolean horizontalAxisTrace> = flag;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.ChartPanel: void setDismissDelay(int)> ----
+    {
+        int delay;
+        org.jfree.chart.ChartPanel this;
+    
+    
+        this := @this: org.jfree.chart.ChartPanel;
+        delay := @parameter0: int;
+        this.<org.jfree.chart.ChartPanel: int ownToolTipDismissDelay> = delay;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.ChartPanel: java.awt.geom.Rectangle2D scale(java.awt.geom.Rectangle2D)> ----
+    {
+        double $stack11, $stack12, $stack14, $stack15, $stack16, $stack17, $stack19, $stack20, $stack21, $stack22, $stack23, $stack24, h, w, x, y;
+        int $stack13, $stack18;
+        java.awt.Insets insets;
+        java.awt.geom.Rectangle2D #l1, rect;
+        java.awt.geom.Rectangle2D$Double #l0;
+        java.lang.Object $stack25;
+        org.jfree.chart.ChartPanel this;
+    
+    
+        this := @this: org.jfree.chart.ChartPanel;
+        rect := @parameter0: java.awt.geom.Rectangle2D;
+        insets = virtualinvoke this.<org.jfree.chart.ChartPanel: java.awt.Insets getInsets()>();
+        $stack11 = virtualinvoke rect.<java.awt.geom.Rectangle2D: double getX()>();
+        $stack12 = virtualinvoke this.<org.jfree.chart.ChartPanel: double getScaleX()>();
+        $stack14 = $stack11 * $stack12;
+        $stack13 = insets.<java.awt.Insets: int left>;
+        $stack15 = (double) $stack13;
+        x = $stack14 + $stack15;
+        $stack16 = virtualinvoke rect.<java.awt.geom.Rectangle2D: double getY()>();
+        $stack17 = virtualinvoke this.<org.jfree.chart.ChartPanel: double getScaleY()>();
+        $stack19 = $stack16 * $stack17;
+        $stack18 = insets.<java.awt.Insets: int top>;
+        $stack20 = (double) $stack18;
+        y = $stack19 + $stack20;
+        $stack21 = virtualinvoke rect.<java.awt.geom.Rectangle2D: double getWidth()>();
+        $stack22 = virtualinvoke this.<org.jfree.chart.ChartPanel: double getScaleX()>();
+        w = $stack21 * $stack22;
+        $stack23 = virtualinvoke rect.<java.awt.geom.Rectangle2D: double getHeight()>();
+        $stack24 = virtualinvoke this.<org.jfree.chart.ChartPanel: double getScaleY()>();
+        h = $stack23 * $stack24;
+        $stack25 = new java.awt.geom.Rectangle2D$Double;
+        #l0 = (java.awt.geom.Rectangle2D$Double) $stack25;
+        specialinvoke #l0.<java.awt.geom.Rectangle2D$Double: void <init>(double,double,double,double)>(x, y, w, h);
+        #l1 = (java.awt.geom.Rectangle2D) $stack25;
+    
+        return #l1;
+    }
+
+    // ---- method: <org.jfree.chart.ChartPanel: void <clinit>()> ----
+    {
+        java.util.ResourceBundle $stack0;
+    
+    
+        $stack0 = staticinvoke <java.util.ResourceBundle: java.util.ResourceBundle getBundle(java.lang.String)>("org.jfree.chart.LocalizationBundle");
+        <org.jfree.chart.ChartPanel: java.util.ResourceBundle localizationResources> = $stack0;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.ChartPanel: void <init>(org.jfree.chart.JFreeChart,int,int,int,int,int,int,boolean,boolean,boolean,boolean,boolean,boolean)> ----
+    {
+        boolean print, properties, save, tooltips, useBuffer, zoom;
+        int $stack20, $stack21, $stack22, height, maximumDrawHeight, maximumDrawWidth, minimumDrawHeight, minimumDrawWidth, width;
+        java.awt.Dimension $stack18;
+        javax.swing.JPopupMenu $stack19;
+        javax.swing.ToolTipManager ttm;
+        javax.swing.event.EventListenerList $stack16;
+        org.jfree.chart.ChartPanel this;
+        org.jfree.chart.ChartRenderingInfo $stack17;
+        org.jfree.chart.JFreeChart chart;
+        org.jfree.chart.plot.PlotOrientation $stack15;
+    
+    
+        this := @this: org.jfree.chart.ChartPanel;
+        chart := @parameter0: org.jfree.chart.JFreeChart;
+        width := @parameter1: int;
+        height := @parameter2: int;
+        minimumDrawWidth := @parameter3: int;
+        minimumDrawHeight := @parameter4: int;
+        maximumDrawWidth := @parameter5: int;
+        maximumDrawHeight := @parameter6: int;
+        useBuffer := @parameter7: boolean;
+        properties := @parameter8: boolean;
+        save := @parameter9: boolean;
+        print := @parameter10: boolean;
+        zoom := @parameter11: boolean;
+        tooltips := @parameter12: boolean;
+        specialinvoke this.<javax.swing.JPanel: void <init>()>();
+        $stack15 = <org.jfree.chart.plot.PlotOrientation: org.jfree.chart.plot.PlotOrientation VERTICAL>;
+        this.<org.jfree.chart.ChartPanel: org.jfree.chart.plot.PlotOrientation orientation> = $stack15;
+        this.<org.jfree.chart.ChartPanel: boolean domainZoomable> = 0;
+        this.<org.jfree.chart.ChartPanel: boolean rangeZoomable> = 0;
+        this.<org.jfree.chart.ChartPanel: java.awt.Point zoomPoint> = null;
+        this.<org.jfree.chart.ChartPanel: java.awt.geom.Rectangle2D zoomRectangle> = null;
+        this.<org.jfree.chart.ChartPanel: boolean fillZoomRectangle> = 0;
+        this.<org.jfree.chart.ChartPanel: boolean horizontalAxisTrace> = 0;
+        this.<org.jfree.chart.ChartPanel: boolean verticalAxisTrace> = 0;
+        this.<org.jfree.chart.ChartPanel: double zoomInFactor> = 0.5;
+        this.<org.jfree.chart.ChartPanel: double zoomOutFactor> = 2.0;
+        virtualinvoke this.<org.jfree.chart.ChartPanel: void setChart(org.jfree.chart.JFreeChart)>(chart);
+        $stack16 = new javax.swing.event.EventListenerList;
+        specialinvoke $stack16.<javax.swing.event.EventListenerList: void <init>()>();
+        this.<org.jfree.chart.ChartPanel: javax.swing.event.EventListenerList chartMouseListeners> = $stack16;
+        $stack17 = new org.jfree.chart.ChartRenderingInfo;
+        specialinvoke $stack17.<org.jfree.chart.ChartRenderingInfo: void <init>()>();
+        this.<org.jfree.chart.ChartPanel: org.jfree.chart.ChartRenderingInfo info> = $stack17;
+        $stack18 = new java.awt.Dimension;
+        specialinvoke $stack18.<java.awt.Dimension: void <init>(int,int)>(width, height);
+        virtualinvoke this.<org.jfree.chart.ChartPanel: void setPreferredSize(java.awt.Dimension)>($stack18);
+        this.<org.jfree.chart.ChartPanel: boolean useBuffer> = useBuffer;
+        this.<org.jfree.chart.ChartPanel: boolean refreshBuffer> = 0;
+        this.<org.jfree.chart.ChartPanel: int minimumDrawWidth> = minimumDrawWidth;
+        this.<org.jfree.chart.ChartPanel: int minimumDrawHeight> = minimumDrawHeight;
+        this.<org.jfree.chart.ChartPanel: int maximumDrawWidth> = maximumDrawWidth;
+        this.<org.jfree.chart.ChartPanel: int maximumDrawHeight> = maximumDrawHeight;
+        this.<org.jfree.chart.ChartPanel: int zoomTriggerDistance> = 10;
+        this.<org.jfree.chart.ChartPanel: javax.swing.JPopupMenu popup> = null;
+    
+        if properties != 0 goto label1;
+    
+        if save != 0 goto label1;
+    
+        if print != 0 goto label1;
+    
+        if zoom == 0 goto label2;
+    
+      label1:
+        $stack19 = virtualinvoke this.<org.jfree.chart.ChartPanel: javax.swing.JPopupMenu createPopupMenu(boolean,boolean,boolean,boolean)>(properties, save, print, zoom);
+        this.<org.jfree.chart.ChartPanel: javax.swing.JPopupMenu popup> = $stack19;
+    
+      label2:
+        virtualinvoke this.<org.jfree.chart.ChartPanel: void enableEvents(long)>(16L);
+        virtualinvoke this.<org.jfree.chart.ChartPanel: void enableEvents(long)>(32L);
+        virtualinvoke this.<org.jfree.chart.ChartPanel: void setDisplayToolTips(boolean)>(tooltips);
+        virtualinvoke this.<org.jfree.chart.ChartPanel: void addMouseListener(java.awt.event.MouseListener)>(this);
+        virtualinvoke this.<org.jfree.chart.ChartPanel: void addMouseMotionListener(java.awt.event.MouseMotionListener)>(this);
+        this.<org.jfree.chart.ChartPanel: boolean enforceFileExtensions> = 1;
+        ttm = staticinvoke <javax.swing.ToolTipManager: javax.swing.ToolTipManager sharedInstance()>();
+        $stack20 = virtualinvoke ttm.<javax.swing.ToolTipManager: int getInitialDelay()>();
+        this.<org.jfree.chart.ChartPanel: int ownToolTipInitialDelay> = $stack20;
+        $stack21 = virtualinvoke ttm.<javax.swing.ToolTipManager: int getDismissDelay()>();
+        this.<org.jfree.chart.ChartPanel: int ownToolTipDismissDelay> = $stack21;
+        $stack22 = virtualinvoke ttm.<javax.swing.ToolTipManager: int getReshowDelay()>();
+        this.<org.jfree.chart.ChartPanel: int ownToolTipReshowDelay> = $stack22;
+        this.<org.jfree.chart.ChartPanel: boolean zoomAroundAnchor> = 0;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.ChartPanel: void setVerticalTraceLine(java.awt.geom.Line2D)> ----
+    {
+        java.awt.geom.Line2D line;
+        org.jfree.chart.ChartPanel this;
+    
+    
+        this := @this: org.jfree.chart.ChartPanel;
+        line := @parameter0: java.awt.geom.Line2D;
+        this.<org.jfree.chart.ChartPanel: java.awt.geom.Line2D verticalTraceLine> = line;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.ChartPanel: void restoreAutoBounds()> ----
+    {
+        org.jfree.chart.ChartPanel this;
+    
+    
+        this := @this: org.jfree.chart.ChartPanel;
+        virtualinvoke this.<org.jfree.chart.ChartPanel: void restoreAutoDomainBounds()>();
+        virtualinvoke this.<org.jfree.chart.ChartPanel: void restoreAutoRangeBounds()>();
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.ChartPanel: void drawHorizontalAxisTrace(java.awt.Graphics2D,int)> ----
+    {
+        double $stack10, $stack12, $stack22, $stack24, $stack26, $stack27, $stack28, $stack29, $stack5, $stack7;
+        float $stack14, $stack15, $stack16, $stack17;
+        int $stack11, $stack13, $stack23, $stack25, $stack6, $stack8, x;
+        java.awt.Color $stack4;
+        java.awt.Graphics2D g2;
+        java.awt.Shape #l0, #l1;
+        java.awt.geom.Line2D $stack21, $stack9;
+        java.awt.geom.Line2D$Float #l2;
+        java.awt.geom.Rectangle2D dataArea;
+        java.lang.Object $stack18, $stack19, $stack20;
+        org.jfree.chart.ChartPanel this;
+    
+    
+        this := @this: org.jfree.chart.ChartPanel;
+        g2 := @parameter0: java.awt.Graphics2D;
+        x := @parameter1: int;
+        dataArea = virtualinvoke this.<org.jfree.chart.ChartPanel: java.awt.geom.Rectangle2D getScreenDataArea()>();
+        $stack4 = <java.awt.Color: java.awt.Color orange>;
+        virtualinvoke g2.<java.awt.Graphics2D: void setXORMode(java.awt.Color)>($stack4);
+        $stack5 = virtualinvoke dataArea.<java.awt.geom.Rectangle2D: double getMinX()>();
+        $stack6 = (int) $stack5;
+    
+        if $stack6 >= x goto label3;
+        $stack7 = virtualinvoke dataArea.<java.awt.geom.Rectangle2D: double getMaxX()>();
+        $stack8 = (int) $stack7;
+    
+        if x >= $stack8 goto label3;
+        $stack9 = this.<org.jfree.chart.ChartPanel: java.awt.geom.Line2D verticalTraceLine>;
+    
+        if $stack9 == null goto label1;
+        $stack20 = this.<org.jfree.chart.ChartPanel: java.awt.geom.Line2D verticalTraceLine>;
+        #l0 = (java.awt.Shape) $stack20;
+        virtualinvoke g2.<java.awt.Graphics2D: void draw(java.awt.Shape)>(#l0);
+        $stack21 = this.<org.jfree.chart.ChartPanel: java.awt.geom.Line2D verticalTraceLine>;
+        $stack29 = (double) x;
+        $stack22 = virtualinvoke dataArea.<java.awt.geom.Rectangle2D: double getMinY()>();
+        $stack23 = (int) $stack22;
+        $stack28 = (double) $stack23;
+        $stack27 = (double) x;
+        $stack24 = virtualinvoke dataArea.<java.awt.geom.Rectangle2D: double getMaxY()>();
+        $stack25 = (int) $stack24;
+        $stack26 = (double) $stack25;
+        virtualinvoke $stack21.<java.awt.geom.Line2D: void setLine(double,double,double,double)>($stack29, $stack28, $stack27, $stack26);
+    
+        goto label2;
+    
+      label1:
+        $stack18 = new java.awt.geom.Line2D$Float;
+        $stack17 = (float) x;
+        $stack10 = virtualinvoke dataArea.<java.awt.geom.Rectangle2D: double getMinY()>();
+        $stack11 = (int) $stack10;
+        $stack16 = (float) $stack11;
+        $stack15 = (float) x;
+        $stack12 = virtualinvoke dataArea.<java.awt.geom.Rectangle2D: double getMaxY()>();
+        $stack13 = (int) $stack12;
+        $stack14 = (float) $stack13;
+        #l2 = (java.awt.geom.Line2D$Float) $stack18;
+        specialinvoke #l2.<java.awt.geom.Line2D$Float: void <init>(float,float,float,float)>($stack17, $stack16, $stack15, $stack14);
+        this.<org.jfree.chart.ChartPanel: java.awt.geom.Line2D verticalTraceLine> = (java.awt.geom.Line2D) $stack18;
+    
+      label2:
+        $stack19 = this.<org.jfree.chart.ChartPanel: java.awt.geom.Line2D verticalTraceLine>;
+        #l1 = (java.awt.Shape) $stack19;
+        virtualinvoke g2.<java.awt.Graphics2D: void draw(java.awt.Shape)>(#l1);
+    
+      label3:
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaintMode()>();
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.ChartPanel: void restoreAutoDomainBounds()> ----
+    {
+        boolean $stack5;
+        java.awt.Point #l0, $stack6, zp;
+        java.awt.geom.Point2D #l1;
+        java.lang.Object $stack7;
+        org.jfree.chart.ChartPanel this;
+        org.jfree.chart.ChartRenderingInfo $stack8;
+        org.jfree.chart.JFreeChart $stack4;
+        org.jfree.chart.plot.Plot p;
+        org.jfree.chart.plot.PlotRenderingInfo $stack9;
+        org.jfree.chart.plot.Zoomable z;
+    
+    
+        this := @this: org.jfree.chart.ChartPanel;
+        $stack4 = this.<org.jfree.chart.ChartPanel: org.jfree.chart.JFreeChart chart>;
+        p = virtualinvoke $stack4.<org.jfree.chart.JFreeChart: org.jfree.chart.plot.Plot getPlot()>();
+        $stack5 = p instanceof org.jfree.chart.plot.Zoomable;
+    
+        if $stack5 == 0 goto label3;
+        z = (org.jfree.chart.plot.Zoomable) p;
+        $stack6 = this.<org.jfree.chart.ChartPanel: java.awt.Point zoomPoint>;
+    
+        if $stack6 == null goto label1;
+        $stack7 = this.<org.jfree.chart.ChartPanel: java.awt.Point zoomPoint>;
+    
+        goto label2;
+    
+      label1:
+        $stack7 = new java.awt.Point;
+        #l0 = (java.awt.Point) $stack7;
+        specialinvoke #l0.<java.awt.Point: void <init>()>();
+    
+      label2:
+        zp = (java.awt.Point) $stack7;
+        $stack8 = this.<org.jfree.chart.ChartPanel: org.jfree.chart.ChartRenderingInfo info>;
+        $stack9 = virtualinvoke $stack8.<org.jfree.chart.ChartRenderingInfo: org.jfree.chart.plot.PlotRenderingInfo getPlotInfo()>();
+        #l1 = (java.awt.geom.Point2D) $stack7;
+        interfaceinvoke z.<org.jfree.chart.plot.Zoomable: void zoomDomainAxes(double,org.jfree.chart.plot.PlotRenderingInfo,java.awt.geom.Point2D)>(0.0, $stack9, #l1);
+    
+      label3:
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.ChartPanel: void setFillZoomRectangle(boolean)> ----
+    {
+        boolean flag;
+        org.jfree.chart.ChartPanel this;
+    
+    
+        this := @this: org.jfree.chart.ChartPanel;
+        flag := @parameter0: boolean;
+        this.<org.jfree.chart.ChartPanel: boolean fillZoomRectangle> = flag;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.ChartPanel: boolean getRefreshBuffer()> ----
+    {
+        boolean $stack1;
+        org.jfree.chart.ChartPanel this;
+    
+    
+        this := @this: org.jfree.chart.ChartPanel;
+        $stack1 = this.<org.jfree.chart.ChartPanel: boolean refreshBuffer>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.ChartPanel: void setChart(org.jfree.chart.JFreeChart)> ----
+    {
+        boolean $stack10, $stack5, $stack8, $stack9;
+        org.jfree.chart.ChartPanel this;
+        org.jfree.chart.JFreeChart $stack12, $stack13, $stack4, $stack6, $stack7, chart;
+        org.jfree.chart.plot.Plot plot;
+        org.jfree.chart.plot.PlotOrientation $stack11;
+        org.jfree.chart.plot.Zoomable z;
+    
+    
+        this := @this: org.jfree.chart.ChartPanel;
+        chart := @parameter0: org.jfree.chart.JFreeChart;
+        $stack4 = this.<org.jfree.chart.ChartPanel: org.jfree.chart.JFreeChart chart>;
+    
+        if $stack4 == null goto label1;
+        $stack12 = this.<org.jfree.chart.ChartPanel: org.jfree.chart.JFreeChart chart>;
+        virtualinvoke $stack12.<org.jfree.chart.JFreeChart: void removeChangeListener(org.jfree.chart.event.ChartChangeListener)>(this);
+        $stack13 = this.<org.jfree.chart.ChartPanel: org.jfree.chart.JFreeChart chart>;
+        virtualinvoke $stack13.<org.jfree.chart.JFreeChart: void removeProgressListener(org.jfree.chart.event.ChartProgressListener)>(this);
+    
+      label1:
+        this.<org.jfree.chart.ChartPanel: org.jfree.chart.JFreeChart chart> = chart;
+    
+        if chart == null goto label3;
+        $stack6 = this.<org.jfree.chart.ChartPanel: org.jfree.chart.JFreeChart chart>;
+        virtualinvoke $stack6.<org.jfree.chart.JFreeChart: void addChangeListener(org.jfree.chart.event.ChartChangeListener)>(this);
+        $stack7 = this.<org.jfree.chart.ChartPanel: org.jfree.chart.JFreeChart chart>;
+        virtualinvoke $stack7.<org.jfree.chart.JFreeChart: void addProgressListener(org.jfree.chart.event.ChartProgressListener)>(this);
+        plot = virtualinvoke chart.<org.jfree.chart.JFreeChart: org.jfree.chart.plot.Plot getPlot()>();
+        this.<org.jfree.chart.ChartPanel: boolean domainZoomable> = 0;
+        this.<org.jfree.chart.ChartPanel: boolean rangeZoomable> = 0;
+        $stack8 = plot instanceof org.jfree.chart.plot.Zoomable;
+    
+        if $stack8 == 0 goto label2;
+        z = (org.jfree.chart.plot.Zoomable) plot;
+        $stack9 = interfaceinvoke z.<org.jfree.chart.plot.Zoomable: boolean isDomainZoomable()>();
+        this.<org.jfree.chart.ChartPanel: boolean domainZoomable> = $stack9;
+        $stack10 = interfaceinvoke z.<org.jfree.chart.plot.Zoomable: boolean isRangeZoomable()>();
+        this.<org.jfree.chart.ChartPanel: boolean rangeZoomable> = $stack10;
+        $stack11 = interfaceinvoke z.<org.jfree.chart.plot.Zoomable: org.jfree.chart.plot.PlotOrientation getOrientation()>();
+        this.<org.jfree.chart.ChartPanel: org.jfree.chart.plot.PlotOrientation orientation> = $stack11;
+    
+      label2:
+        goto label4;
+    
+      label3:
+        this.<org.jfree.chart.ChartPanel: boolean domainZoomable> = 0;
+        this.<org.jfree.chart.ChartPanel: boolean rangeZoomable> = 0;
+    
+      label4:
+        $stack5 = this.<org.jfree.chart.ChartPanel: boolean useBuffer>;
+    
+        if $stack5 == 0 goto label5;
+        this.<org.jfree.chart.ChartPanel: boolean refreshBuffer> = 1;
+    
+      label5:
+        virtualinvoke this.<org.jfree.chart.ChartPanel: void repaint()>();
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.ChartPanel: void doEditChartProperties()> ----
+    {
+        int result;
+        java.awt.Component #l2;
+        java.lang.Object this;
+        java.lang.String $stack5;
+        java.util.ResourceBundle $stack4;
+        org.jfree.chart.ChartPanel #l0, #l1;
+        org.jfree.chart.JFreeChart $stack3, $stack6;
+        org.jfree.chart.editor.ChartEditor editor;
+    
+    
+        this := @this: org.jfree.chart.ChartPanel;
+        #l0 = (org.jfree.chart.ChartPanel) this;
+        $stack3 = #l0.<org.jfree.chart.ChartPanel: org.jfree.chart.JFreeChart chart>;
+        editor = staticinvoke <org.jfree.chart.editor.ChartEditorManager: org.jfree.chart.editor.ChartEditor getChartEditor(org.jfree.chart.JFreeChart)>($stack3);
+        $stack4 = <org.jfree.chart.ChartPanel: java.util.ResourceBundle localizationResources>;
+        $stack5 = virtualinvoke $stack4.<java.util.ResourceBundle: java.lang.String getString(java.lang.String)>("Chart_Properties");
+        #l2 = (java.awt.Component) this;
+        result = staticinvoke <javax.swing.JOptionPane: int showConfirmDialog(java.awt.Component,java.lang.Object,java.lang.String,int,int)>(#l2, editor, $stack5, 2, -1);
+    
+        if result != 0 goto label1;
+        #l1 = (org.jfree.chart.ChartPanel) this;
+        $stack6 = #l1.<org.jfree.chart.ChartPanel: org.jfree.chart.JFreeChart chart>;
+        interfaceinvoke editor.<org.jfree.chart.editor.ChartEditor: void updateChart(org.jfree.chart.JFreeChart)>($stack6);
+    
+      label1:
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.ChartPanel: void mouseEntered(java.awt.event.MouseEvent)> ----
+    {
+        boolean $stack3;
+        int $stack4, $stack5, $stack6, $stack7, $stack8, $stack9;
+        java.awt.event.MouseEvent e;
+        javax.swing.ToolTipManager ttm;
+        org.jfree.chart.ChartPanel this;
+    
+    
+        this := @this: org.jfree.chart.ChartPanel;
+        e := @parameter0: java.awt.event.MouseEvent;
+        $stack3 = this.<org.jfree.chart.ChartPanel: boolean ownToolTipDelaysActive>;
+    
+        if $stack3 != 0 goto label1;
+        ttm = staticinvoke <javax.swing.ToolTipManager: javax.swing.ToolTipManager sharedInstance()>();
+        $stack4 = virtualinvoke ttm.<javax.swing.ToolTipManager: int getInitialDelay()>();
+        this.<org.jfree.chart.ChartPanel: int originalToolTipInitialDelay> = $stack4;
+        $stack5 = this.<org.jfree.chart.ChartPanel: int ownToolTipInitialDelay>;
+        virtualinvoke ttm.<javax.swing.ToolTipManager: void setInitialDelay(int)>($stack5);
+        $stack6 = virtualinvoke ttm.<javax.swing.ToolTipManager: int getReshowDelay()>();
+        this.<org.jfree.chart.ChartPanel: int originalToolTipReshowDelay> = $stack6;
+        $stack7 = this.<org.jfree.chart.ChartPanel: int ownToolTipReshowDelay>;
+        virtualinvoke ttm.<javax.swing.ToolTipManager: void setReshowDelay(int)>($stack7);
+        $stack8 = virtualinvoke ttm.<javax.swing.ToolTipManager: int getDismissDelay()>();
+        this.<org.jfree.chart.ChartPanel: int originalToolTipDismissDelay> = $stack8;
+        $stack9 = this.<org.jfree.chart.ChartPanel: int ownToolTipDismissDelay>;
+        virtualinvoke ttm.<javax.swing.ToolTipManager: void setDismissDelay(int)>($stack9);
+        this.<org.jfree.chart.ChartPanel: boolean ownToolTipDelaysActive> = 1;
+    
+      label1:
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.ChartPanel: double getScaleX()> ----
+    {
+        double $stack1;
+        org.jfree.chart.ChartPanel this;
+    
+    
+        this := @this: org.jfree.chart.ChartPanel;
+        $stack1 = this.<org.jfree.chart.ChartPanel: double scaleX>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.ChartPanel: boolean getFillZoomRectangle()> ----
+    {
+        boolean $stack1;
+        org.jfree.chart.ChartPanel this;
+    
+    
+        this := @this: org.jfree.chart.ChartPanel;
+        $stack1 = this.<org.jfree.chart.ChartPanel: boolean fillZoomRectangle>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.ChartPanel: java.awt.Point translateJava2DToScreen(java.awt.geom.Point2D)> ----
+    {
+        double $stack10, $stack11, $stack12, $stack14, $stack15, $stack16, $stack5, $stack6, $stack8, $stack9;
+        int $stack13, $stack7, x, y;
+        java.awt.Insets insets;
+        java.awt.Point $stack17;
+        java.awt.geom.Point2D java2DPoint;
+        org.jfree.chart.ChartPanel this;
+    
+    
+        this := @this: org.jfree.chart.ChartPanel;
+        java2DPoint := @parameter0: java.awt.geom.Point2D;
+        insets = virtualinvoke this.<org.jfree.chart.ChartPanel: java.awt.Insets getInsets()>();
+        $stack5 = virtualinvoke java2DPoint.<java.awt.geom.Point2D: double getX()>();
+        $stack6 = this.<org.jfree.chart.ChartPanel: double scaleX>;
+        $stack8 = $stack5 * $stack6;
+        $stack7 = insets.<java.awt.Insets: int left>;
+        $stack9 = (double) $stack7;
+        $stack10 = $stack8 + $stack9;
+        x = (int) $stack10;
+        $stack11 = virtualinvoke java2DPoint.<java.awt.geom.Point2D: double getY()>();
+        $stack12 = this.<org.jfree.chart.ChartPanel: double scaleY>;
+        $stack14 = $stack11 * $stack12;
+        $stack13 = insets.<java.awt.Insets: int top>;
+        $stack15 = (double) $stack13;
+        $stack16 = $stack14 + $stack15;
+        y = (int) $stack16;
+        $stack17 = new java.awt.Point;
+        specialinvoke $stack17.<java.awt.Point: void <init>(int,int)>(x, y);
+    
+        return $stack17;
+    }
+
+    // ---- method: <org.jfree.chart.ChartPanel: int getMaximumDrawWidth()> ----
+    {
+        int $stack1;
+        org.jfree.chart.ChartPanel this;
+    
+    
+        this := @this: org.jfree.chart.ChartPanel;
+        $stack1 = this.<org.jfree.chart.ChartPanel: int maximumDrawWidth>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.ChartPanel: boolean isEnforceFileExtensions()> ----
+    {
+        boolean $stack1;
+        org.jfree.chart.ChartPanel this;
+    
+    
+        this := @this: org.jfree.chart.ChartPanel;
+        $stack1 = this.<org.jfree.chart.ChartPanel: boolean enforceFileExtensions>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.ChartPanel: void mouseClicked(java.awt.event.MouseEvent)> ----
+    {
+        double $stack12, $stack13, $stack14, $stack18, $stack19, $stack20, $stack21, $stack22, $stack37, $stack38;
+        int $stack10, $stack11, $stack15, $stack16, $stack17, $stack29, $stack33, $stack9, i, x, y;
+        java.awt.Insets insets;
+        java.awt.event.MouseEvent event;
+        java.awt.geom.Point2D$Double #l0;
+        java.lang.Class $stack26, $stack27;
+        java.lang.Object $stack23, $stack39;
+        java.util.EventListener $stack34;
+        java.util.EventListener[] listeners;
+        javax.swing.event.EventListenerList $stack28;
+        org.jfree.chart.ChartMouseEvent $stack32, entities#1;
+        org.jfree.chart.ChartMouseListener $stack35;
+        org.jfree.chart.ChartPanel this;
+        org.jfree.chart.ChartRenderingInfo $stack30, $stack36;
+        org.jfree.chart.JFreeChart $stack24, $stack25, $stack31;
+        org.jfree.chart.entity.ChartEntity entity;
+        org.jfree.chart.entity.EntityCollection entities#0;
+    
+    
+        this := @this: org.jfree.chart.ChartPanel;
+        event := @parameter0: java.awt.event.MouseEvent;
+        insets = virtualinvoke this.<org.jfree.chart.ChartPanel: java.awt.Insets getInsets()>();
+        $stack9 = virtualinvoke event.<java.awt.event.MouseEvent: int getX()>();
+        $stack10 = insets.<java.awt.Insets: int left>;
+        $stack11 = $stack9 - $stack10;
+        $stack12 = (double) $stack11;
+        $stack13 = this.<org.jfree.chart.ChartPanel: double scaleX>;
+        $stack14 = $stack12 / $stack13;
+        x = (int) $stack14;
+        $stack15 = virtualinvoke event.<java.awt.event.MouseEvent: int getY()>();
+        $stack16 = insets.<java.awt.Insets: int top>;
+        $stack17 = $stack15 - $stack16;
+        $stack18 = (double) $stack17;
+        $stack19 = this.<org.jfree.chart.ChartPanel: double scaleY>;
+        $stack20 = $stack18 / $stack19;
+        y = (int) $stack20;
+        $stack23 = new java.awt.geom.Point2D$Double;
+        $stack22 = (double) x;
+        $stack21 = (double) y;
+        #l0 = (java.awt.geom.Point2D$Double) $stack23;
+        specialinvoke #l0.<java.awt.geom.Point2D$Double: void <init>(double,double)>($stack22, $stack21);
+        this.<org.jfree.chart.ChartPanel: java.awt.geom.Point2D anchor> = (java.awt.geom.Point2D) $stack23;
+        $stack24 = this.<org.jfree.chart.ChartPanel: org.jfree.chart.JFreeChart chart>;
+    
+        if $stack24 != null goto label1;
+    
+        return;
+    
+      label1:
+        $stack25 = this.<org.jfree.chart.ChartPanel: org.jfree.chart.JFreeChart chart>;
+        virtualinvoke $stack25.<org.jfree.chart.JFreeChart: void setNotify(boolean)>(1);
+        $stack28 = this.<org.jfree.chart.ChartPanel: javax.swing.event.EventListenerList chartMouseListeners>;
+        $stack26 = <org.jfree.chart.ChartPanel: java.lang.Class class$org$jfree$chart$ChartMouseListener>;
+    
+        if $stack26 != null goto label2;
+        $stack27 = staticinvoke <org.jfree.chart.ChartPanel: java.lang.Class class$(java.lang.String)>("org.jfree.chart.ChartMouseListener");
+        <org.jfree.chart.ChartPanel: java.lang.Class class$org$jfree$chart$ChartMouseListener> = $stack27;
+    
+        goto label3;
+    
+      label2:
+        $stack27 = <org.jfree.chart.ChartPanel: java.lang.Class class$org$jfree$chart$ChartMouseListener>;
+    
+      label3:
+        listeners = virtualinvoke $stack28.<javax.swing.event.EventListenerList: java.util.EventListener[] getListeners(java.lang.Class)>($stack27);
+        $stack29 = lengthof listeners;
+    
+        if $stack29 != 0 goto label4;
+    
+        return;
+    
+      label4:
+        entity = null;
+        $stack30 = this.<org.jfree.chart.ChartPanel: org.jfree.chart.ChartRenderingInfo info>;
+    
+        if $stack30 == null goto label5;
+        $stack36 = this.<org.jfree.chart.ChartPanel: org.jfree.chart.ChartRenderingInfo info>;
+        entities#0 = virtualinvoke $stack36.<org.jfree.chart.ChartRenderingInfo: org.jfree.chart.entity.EntityCollection getEntityCollection()>();
+    
+        if entities#0 == null goto label5;
+        $stack38 = (double) x;
+        $stack37 = (double) y;
+        entity = interfaceinvoke entities#0.<org.jfree.chart.entity.EntityCollection: org.jfree.chart.entity.ChartEntity getEntity(double,double)>($stack38, $stack37);
+    
+      label5:
+        $stack32 = new org.jfree.chart.ChartMouseEvent;
+        $stack31 = virtualinvoke this.<org.jfree.chart.ChartPanel: org.jfree.chart.JFreeChart getChart()>();
+        specialinvoke $stack32.<org.jfree.chart.ChartMouseEvent: void <init>(org.jfree.chart.JFreeChart,java.awt.event.MouseEvent,org.jfree.chart.entity.ChartEntity)>($stack31, event, entity);
+        entities#1 = $stack32;
+        $stack33 = lengthof listeners;
+        i = $stack33 - 1;
+    
+      label6:
+        if i < 0 goto label7;
+        $stack34 = listeners[i];
+        $stack35 = (org.jfree.chart.ChartMouseListener) $stack34;
+        interfaceinvoke $stack35.<org.jfree.chart.ChartMouseListener: void chartMouseClicked(org.jfree.chart.ChartMouseEvent)>($stack32);
+        i = i + -1;
+    
+        goto label6;
+    
+      label7:
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.ChartPanel: double getZoomInFactor()> ----
+    {
+        double $stack1;
+        org.jfree.chart.ChartPanel this;
+    
+    
+        this := @this: org.jfree.chart.ChartPanel;
+        $stack1 = this.<org.jfree.chart.ChartPanel: double zoomInFactor>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.ChartPanel: void drawZoomRectangle(java.awt.Graphics2D)> ----
+    {
+        boolean $stack4;
+        java.awt.Color $stack2;
+        java.awt.Graphics2D g2;
+        java.awt.Shape #l0, #l1;
+        java.awt.geom.Rectangle2D $stack3;
+        java.lang.Object $stack5, $stack6;
+        org.jfree.chart.ChartPanel this;
+    
+    
+        this := @this: org.jfree.chart.ChartPanel;
+        g2 := @parameter0: java.awt.Graphics2D;
+        $stack2 = <java.awt.Color: java.awt.Color gray>;
+        virtualinvoke g2.<java.awt.Graphics2D: void setXORMode(java.awt.Color)>($stack2);
+        $stack3 = this.<org.jfree.chart.ChartPanel: java.awt.geom.Rectangle2D zoomRectangle>;
+    
+        if $stack3 == null goto label2;
+        $stack4 = this.<org.jfree.chart.ChartPanel: boolean fillZoomRectangle>;
+    
+        if $stack4 == 0 goto label1;
+        $stack6 = this.<org.jfree.chart.ChartPanel: java.awt.geom.Rectangle2D zoomRectangle>;
+        #l0 = (java.awt.Shape) $stack6;
+        virtualinvoke g2.<java.awt.Graphics2D: void fill(java.awt.Shape)>(#l0);
+    
+        goto label2;
+    
+      label1:
+        $stack5 = this.<org.jfree.chart.ChartPanel: java.awt.geom.Rectangle2D zoomRectangle>;
+        #l1 = (java.awt.Shape) $stack5;
+        virtualinvoke g2.<java.awt.Graphics2D: void draw(java.awt.Shape)>(#l1);
+    
+      label2:
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaintMode()>();
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.ChartPanel: void setDomainZoomable(boolean)> ----
+    {
+        boolean $stack5, $stack6, $stack7, flag;
+        org.jfree.chart.ChartPanel this;
+        org.jfree.chart.JFreeChart $stack4;
+        org.jfree.chart.plot.Plot plot;
+        org.jfree.chart.plot.Zoomable z;
+    
+    
+        this := @this: org.jfree.chart.ChartPanel;
+        flag := @parameter0: boolean;
+    
+        if flag == 0 goto label4;
+        $stack4 = this.<org.jfree.chart.ChartPanel: org.jfree.chart.JFreeChart chart>;
+        plot = virtualinvoke $stack4.<org.jfree.chart.JFreeChart: org.jfree.chart.plot.Plot getPlot()>();
+        $stack5 = plot instanceof org.jfree.chart.plot.Zoomable;
+    
+        if $stack5 == 0 goto label3;
+        z = (org.jfree.chart.plot.Zoomable) plot;
+    
+        if flag == 0 goto label1;
+        $stack6 = interfaceinvoke z.<org.jfree.chart.plot.Zoomable: boolean isDomainZoomable()>();
+    
+        if $stack6 == 0 goto label1;
+        $stack7 = 1;
+    
+        goto label2;
+    
+      label1:
+        $stack7 = 0;
+    
+      label2:
+        this.<org.jfree.chart.ChartPanel: boolean domainZoomable> = $stack7;
+    
+      label3:
+        goto label5;
+    
+      label4:
+        this.<org.jfree.chart.ChartPanel: boolean domainZoomable> = 0;
+    
+      label5:
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.ChartPanel: javax.swing.JPopupMenu getPopupMenu()> ----
+    {
+        javax.swing.JPopupMenu $stack1;
+        org.jfree.chart.ChartPanel this;
+    
+    
+        this := @this: org.jfree.chart.ChartPanel;
+        $stack1 = this.<org.jfree.chart.ChartPanel: javax.swing.JPopupMenu popup>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.ChartPanel: void zoomOutDomain(double,double)> ----
+    {
+        boolean $stack14, $stack8;
+        double $stack10, x, y;
+        int $stack11, $stack12;
+        java.awt.Point $stack13;
+        java.awt.geom.Point2D $stack15;
+        org.jfree.chart.ChartPanel this;
+        org.jfree.chart.ChartRenderingInfo $stack9;
+        org.jfree.chart.JFreeChart $stack7;
+        org.jfree.chart.plot.Plot p;
+        org.jfree.chart.plot.PlotRenderingInfo $stack16;
+        org.jfree.chart.plot.Zoomable z;
+    
+    
+        this := @this: org.jfree.chart.ChartPanel;
+        x := @parameter0: double;
+        y := @parameter1: double;
+        $stack7 = this.<org.jfree.chart.ChartPanel: org.jfree.chart.JFreeChart chart>;
+        p = virtualinvoke $stack7.<org.jfree.chart.JFreeChart: org.jfree.chart.plot.Plot getPlot()>();
+        $stack8 = p instanceof org.jfree.chart.plot.Zoomable;
+    
+        if $stack8 == 0 goto label1;
+        z = (org.jfree.chart.plot.Zoomable) p;
+        $stack10 = this.<org.jfree.chart.ChartPanel: double zoomOutFactor>;
+        $stack9 = this.<org.jfree.chart.ChartPanel: org.jfree.chart.ChartRenderingInfo info>;
+        $stack16 = virtualinvoke $stack9.<org.jfree.chart.ChartRenderingInfo: org.jfree.chart.plot.PlotRenderingInfo getPlotInfo()>();
+        $stack13 = new java.awt.Point;
+        $stack12 = (int) x;
+        $stack11 = (int) y;
+        specialinvoke $stack13.<java.awt.Point: void <init>(int,int)>($stack12, $stack11);
+        $stack15 = virtualinvoke this.<org.jfree.chart.ChartPanel: java.awt.geom.Point2D translateScreenToJava2D(java.awt.Point)>($stack13);
+        $stack14 = this.<org.jfree.chart.ChartPanel: boolean zoomAroundAnchor>;
+        interfaceinvoke z.<org.jfree.chart.plot.Zoomable: void zoomDomainAxes(double,org.jfree.chart.plot.PlotRenderingInfo,java.awt.geom.Point2D,boolean)>($stack10, $stack16, $stack15, $stack14);
+    
+      label1:
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.ChartPanel: void setZoomOutFactor(double)> ----
+    {
+        double factor;
+        org.jfree.chart.ChartPanel this;
+    
+    
+        this := @this: org.jfree.chart.ChartPanel;
+        factor := @parameter0: double;
+        this.<org.jfree.chart.ChartPanel: double zoomOutFactor> = factor;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.ChartPanel: void setDisplayToolTips(boolean)> ----
+    {
+        boolean flag;
+        java.lang.Object this;
+        javax.swing.JComponent #l0, #l1;
+        javax.swing.ToolTipManager $stack2, $stack3;
+    
+    
+        this := @this: org.jfree.chart.ChartPanel;
+        flag := @parameter0: boolean;
+    
+        if flag == 0 goto label1;
+        $stack3 = staticinvoke <javax.swing.ToolTipManager: javax.swing.ToolTipManager sharedInstance()>();
+        #l0 = (javax.swing.JComponent) this;
+        virtualinvoke $stack3.<javax.swing.ToolTipManager: void registerComponent(javax.swing.JComponent)>(#l0);
+    
+        goto label2;
+    
+      label1:
+        $stack2 = staticinvoke <javax.swing.ToolTipManager: javax.swing.ToolTipManager sharedInstance()>();
+        #l1 = (javax.swing.JComponent) this;
+        virtualinvoke $stack2.<javax.swing.ToolTipManager: void unregisterComponent(javax.swing.JComponent)>(#l1);
+    
+      label2:
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.ChartPanel: java.awt.geom.Rectangle2D getScreenDataArea()> ----
+    {
+        double $stack13, $stack14, $stack16, $stack17, $stack18, $stack19, $stack21, $stack22, $stack23, $stack24, $stack25, $stack26, h, w, x, y;
+        int $stack15, $stack20;
+        java.awt.Insets insets;
+        java.awt.geom.Rectangle2D #l0, dataArea;
+        java.awt.geom.Rectangle2D$Double #l1;
+        java.lang.Object $stack27;
+        org.jfree.chart.ChartPanel this;
+        org.jfree.chart.ChartRenderingInfo $stack11;
+        org.jfree.chart.plot.PlotRenderingInfo $stack12;
+    
+    
+        this := @this: org.jfree.chart.ChartPanel;
+        $stack11 = this.<org.jfree.chart.ChartPanel: org.jfree.chart.ChartRenderingInfo info>;
+        $stack12 = virtualinvoke $stack11.<org.jfree.chart.ChartRenderingInfo: org.jfree.chart.plot.PlotRenderingInfo getPlotInfo()>();
+        dataArea = virtualinvoke $stack12.<org.jfree.chart.plot.PlotRenderingInfo: java.awt.geom.Rectangle2D getDataArea()>();
+        insets = virtualinvoke this.<org.jfree.chart.ChartPanel: java.awt.Insets getInsets()>();
+        $stack13 = virtualinvoke dataArea.<java.awt.geom.Rectangle2D: double getX()>();
+        $stack14 = this.<org.jfree.chart.ChartPanel: double scaleX>;
+        $stack16 = $stack13 * $stack14;
+        $stack15 = insets.<java.awt.Insets: int left>;
+        $stack17 = (double) $stack15;
+        x = $stack16 + $stack17;
+        $stack18 = virtualinvoke dataArea.<java.awt.geom.Rectangle2D: double getY()>();
+        $stack19 = this.<org.jfree.chart.ChartPanel: double scaleY>;
+        $stack21 = $stack18 * $stack19;
+        $stack20 = insets.<java.awt.Insets: int top>;
+        $stack22 = (double) $stack20;
+        y = $stack21 + $stack22;
+        $stack23 = virtualinvoke dataArea.<java.awt.geom.Rectangle2D: double getWidth()>();
+        $stack24 = this.<org.jfree.chart.ChartPanel: double scaleX>;
+        w = $stack23 * $stack24;
+        $stack25 = virtualinvoke dataArea.<java.awt.geom.Rectangle2D: double getHeight()>();
+        $stack26 = this.<org.jfree.chart.ChartPanel: double scaleY>;
+        h = $stack25 * $stack26;
+        $stack27 = new java.awt.geom.Rectangle2D$Double;
+        #l1 = (java.awt.geom.Rectangle2D$Double) $stack27;
+        specialinvoke #l1.<java.awt.geom.Rectangle2D$Double: void <init>(double,double,double,double)>(x, y, w, h);
+        #l0 = (java.awt.geom.Rectangle2D) $stack27;
+    
+        return #l0;
+    }
+
+    // ---- method: <org.jfree.chart.ChartPanel: void createChartPrintJob()> ----
+    {
+        boolean $stack5;
+        java.awt.Component #l1;
+        java.awt.print.PageFormat pf, pf2;
+        java.awt.print.Printable #l0;
+        java.awt.print.PrinterJob job;
+        java.lang.Object this;
+        java.lang.Throwable $stack6, e;
+    
+    
+        this := @this: org.jfree.chart.ChartPanel;
+        job = staticinvoke <java.awt.print.PrinterJob: java.awt.print.PrinterJob getPrinterJob()>();
+        pf = virtualinvoke job.<java.awt.print.PrinterJob: java.awt.print.PageFormat defaultPage()>();
+        pf2 = virtualinvoke job.<java.awt.print.PrinterJob: java.awt.print.PageFormat pageDialog(java.awt.print.PageFormat)>(pf);
+    
+        if pf2 == pf goto label4;
+        #l0 = (java.awt.print.Printable) this;
+        virtualinvoke job.<java.awt.print.PrinterJob: void setPrintable(java.awt.print.Printable,java.awt.print.PageFormat)>(#l0, pf2);
+        $stack5 = virtualinvoke job.<java.awt.print.PrinterJob: boolean printDialog()>();
+    
+        if $stack5 == 0 goto label4;
+    
+      label1:
+        virtualinvoke job.<java.awt.print.PrinterJob: void print()>();
+    
+      label2:
+        goto label4;
+    
+      label3:
+        $stack6 := @caughtexception;
+        e = $stack6;
+        #l1 = (java.awt.Component) this;
+        staticinvoke <javax.swing.JOptionPane: void showMessageDialog(java.awt.Component,java.lang.Object)>(#l1, $stack6);
+    
+      label4:
+        return;
+    
+     catch java.awt.print.PrinterException from label1 to label2 with label3;
+    }
+
+    // ---- method: <org.jfree.chart.ChartPanel: void setRefreshBuffer(boolean)> ----
+    {
+        boolean flag;
+        org.jfree.chart.ChartPanel this;
+    
+    
+        this := @this: org.jfree.chart.ChartPanel;
+        flag := @parameter0: boolean;
+        this.<org.jfree.chart.ChartPanel: boolean refreshBuffer> = flag;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.ChartPanel: java.awt.geom.Point2D translateScreenToJava2D(java.awt.Point)> ----
+    {
+        double $stack10, $stack11, $stack13, $stack14, $stack15, $stack16, $stack8, $stack9, x, y;
+        int $stack12, $stack7;
+        java.awt.Insets insets;
+        java.awt.Point screenPoint;
+        java.awt.geom.Point2D #l0;
+        java.awt.geom.Point2D$Double #l1;
+        java.lang.Object $stack17;
+        org.jfree.chart.ChartPanel this;
+    
+    
+        this := @this: org.jfree.chart.ChartPanel;
+        screenPoint := @parameter0: java.awt.Point;
+        insets = virtualinvoke this.<org.jfree.chart.ChartPanel: java.awt.Insets getInsets()>();
+        $stack8 = virtualinvoke screenPoint.<java.awt.Point: double getX()>();
+        $stack7 = insets.<java.awt.Insets: int left>;
+        $stack9 = (double) $stack7;
+        $stack10 = $stack8 - $stack9;
+        $stack11 = this.<org.jfree.chart.ChartPanel: double scaleX>;
+        x = $stack10 / $stack11;
+        $stack13 = virtualinvoke screenPoint.<java.awt.Point: double getY()>();
+        $stack12 = insets.<java.awt.Insets: int top>;
+        $stack14 = (double) $stack12;
+        $stack15 = $stack13 - $stack14;
+        $stack16 = this.<org.jfree.chart.ChartPanel: double scaleY>;
+        y = $stack15 / $stack16;
+        $stack17 = new java.awt.geom.Point2D$Double;
+        #l1 = (java.awt.geom.Point2D$Double) $stack17;
+        specialinvoke #l1.<java.awt.geom.Point2D$Double: void <init>(double,double)>(x, y);
+        #l0 = (java.awt.geom.Point2D) $stack17;
+    
+        return #l0;
+    }
+
+    // ---- method: <org.jfree.chart.ChartPanel: double getScaleY()> ----
+    {
+        double $stack1;
+        org.jfree.chart.ChartPanel this;
+    
+    
+        this := @this: org.jfree.chart.ChartPanel;
+        $stack1 = this.<org.jfree.chart.ChartPanel: double scaleY>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.ChartPanel: java.awt.geom.Line2D getVerticalTraceLine()> ----
+    {
+        java.awt.geom.Line2D $stack1;
+        org.jfree.chart.ChartPanel this;
+    
+    
+        this := @this: org.jfree.chart.ChartPanel;
+        $stack1 = this.<org.jfree.chart.ChartPanel: java.awt.geom.Line2D verticalTraceLine>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.ChartPanel: java.awt.Point getPointInRectangle(int,int,java.awt.geom.Rectangle2D)> ----
+    {
+        double $stack10, $stack11, $stack12, $stack13, $stack14, $stack15, $stack16, $stack17, $stack4, $stack5, $stack6, $stack7, $stack8, $stack9;
+        int x#0, x#1, y#0, y#1;
+        java.awt.Point $stack18;
+        java.awt.geom.Rectangle2D area;
+        org.jfree.chart.ChartPanel this;
+    
+    
+        this := @this: org.jfree.chart.ChartPanel;
+        x#0 := @parameter0: int;
+        y#0 := @parameter1: int;
+        area := @parameter2: java.awt.geom.Rectangle2D;
+        $stack4 = virtualinvoke area.<java.awt.geom.Rectangle2D: double getMinX()>();
+        $stack9 = staticinvoke <java.lang.Math: double ceil(double)>($stack4);
+        $stack7 = (double) x#0;
+        $stack5 = virtualinvoke area.<java.awt.geom.Rectangle2D: double getMaxX()>();
+        $stack6 = staticinvoke <java.lang.Math: double floor(double)>($stack5);
+        $stack8 = staticinvoke <java.lang.Math: double min(double,double)>($stack7, $stack6);
+        $stack10 = staticinvoke <java.lang.Math: double max(double,double)>($stack9, $stack8);
+        x#1 = (int) $stack10;
+        $stack11 = virtualinvoke area.<java.awt.geom.Rectangle2D: double getMinY()>();
+        $stack16 = staticinvoke <java.lang.Math: double ceil(double)>($stack11);
+        $stack14 = (double) y#0;
+        $stack12 = virtualinvoke area.<java.awt.geom.Rectangle2D: double getMaxY()>();
+        $stack13 = staticinvoke <java.lang.Math: double floor(double)>($stack12);
+        $stack15 = staticinvoke <java.lang.Math: double min(double,double)>($stack14, $stack13);
+        $stack17 = staticinvoke <java.lang.Math: double max(double,double)>($stack16, $stack15);
+        y#1 = (int) $stack17;
+        $stack18 = new java.awt.Point;
+        specialinvoke $stack18.<java.awt.Point: void <init>(int,int)>(x#1, y#1);
+    
+        return $stack18;
+    }
+
+    // ---- method: <org.jfree.chart.ChartPanel: void removeChartMouseListener(org.jfree.chart.ChartMouseListener)> ----
+    {
+        java.lang.Class $stack2, $stack3;
+        java.lang.Object $stack5;
+        javax.swing.event.EventListenerList $stack4;
+        org.jfree.chart.ChartMouseListener listener;
+        org.jfree.chart.ChartPanel this;
+    
+    
+        this := @this: org.jfree.chart.ChartPanel;
+        listener := @parameter0: org.jfree.chart.ChartMouseListener;
+        $stack4 = this.<org.jfree.chart.ChartPanel: javax.swing.event.EventListenerList chartMouseListeners>;
+        $stack2 = <org.jfree.chart.ChartPanel: java.lang.Class class$org$jfree$chart$ChartMouseListener>;
+    
+        if $stack2 != null goto label1;
+        $stack3 = staticinvoke <org.jfree.chart.ChartPanel: java.lang.Class class$(java.lang.String)>("org.jfree.chart.ChartMouseListener");
+        <org.jfree.chart.ChartPanel: java.lang.Class class$org$jfree$chart$ChartMouseListener> = $stack3;
+    
+        goto label2;
+    
+      label1:
+        $stack3 = <org.jfree.chart.ChartPanel: java.lang.Class class$org$jfree$chart$ChartMouseListener>;
+    
+      label2:
+        virtualinvoke $stack4.<javax.swing.event.EventListenerList: void remove(java.lang.Class,java.util.EventListener)>($stack3, listener);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.ChartPanel: void <init>(org.jfree.chart.JFreeChart)> ----
+    {
+        org.jfree.chart.ChartPanel this;
+        org.jfree.chart.JFreeChart chart;
+    
+    
+        this := @this: org.jfree.chart.ChartPanel;
+        chart := @parameter0: org.jfree.chart.JFreeChart;
+        specialinvoke this.<org.jfree.chart.ChartPanel: void <init>(org.jfree.chart.JFreeChart,int,int,int,int,int,int,boolean,boolean,boolean,boolean,boolean,boolean)>(chart, 680, 420, 300, 200, 800, 600, 0, 1, 1, 1, 1, 1);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.ChartPanel: void <init>(org.jfree.chart.JFreeChart,boolean)> ----
+    {
+        boolean useBuffer;
+        org.jfree.chart.ChartPanel this;
+        org.jfree.chart.JFreeChart chart;
+    
+    
+        this := @this: org.jfree.chart.ChartPanel;
+        chart := @parameter0: org.jfree.chart.JFreeChart;
+        useBuffer := @parameter1: boolean;
+        specialinvoke this.<org.jfree.chart.ChartPanel: void <init>(org.jfree.chart.JFreeChart,int,int,int,int,int,int,boolean,boolean,boolean,boolean,boolean,boolean)>(chart, 680, 420, 300, 200, 800, 600, useBuffer, 1, 1, 1, 1, 1);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.ChartPanel: void setRangeZoomable(boolean)> ----
+    {
+        boolean $stack5, $stack6, $stack7, flag;
+        org.jfree.chart.ChartPanel this;
+        org.jfree.chart.JFreeChart $stack4;
+        org.jfree.chart.plot.Plot plot;
+        org.jfree.chart.plot.Zoomable z;
+    
+    
+        this := @this: org.jfree.chart.ChartPanel;
+        flag := @parameter0: boolean;
+    
+        if flag == 0 goto label4;
+        $stack4 = this.<org.jfree.chart.ChartPanel: org.jfree.chart.JFreeChart chart>;
+        plot = virtualinvoke $stack4.<org.jfree.chart.JFreeChart: org.jfree.chart.plot.Plot getPlot()>();
+        $stack5 = plot instanceof org.jfree.chart.plot.Zoomable;
+    
+        if $stack5 == 0 goto label3;
+        z = (org.jfree.chart.plot.Zoomable) plot;
+    
+        if flag == 0 goto label1;
+        $stack6 = interfaceinvoke z.<org.jfree.chart.plot.Zoomable: boolean isRangeZoomable()>();
+    
+        if $stack6 == 0 goto label1;
+        $stack7 = 1;
+    
+        goto label2;
+    
+      label1:
+        $stack7 = 0;
+    
+      label2:
+        this.<org.jfree.chart.ChartPanel: boolean rangeZoomable> = $stack7;
+    
+      label3:
+        goto label5;
+    
+      label4:
+        this.<org.jfree.chart.ChartPanel: boolean rangeZoomable> = 0;
+    
+      label5:
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.ChartPanel: void mouseDragged(java.awt.event.MouseEvent)> ----
+    {
+        boolean $stack61, hZoom#0, hZoom#1, vZoom#0, vZoom#1;
+        double $stack16, $stack18, $stack22, $stack23, $stack26, $stack27, $stack28, $stack29, $stack30, $stack33, $stack34, $stack37, $stack38, $stack39, $stack40, $stack41, $stack44, $stack45, $stack47, $stack48, $stack52, $stack54, $stack55, $stack56, $stack57, $stack58, xmax#0, xmax#1, xmax#2, ymax;
+        int $stack19, $stack20, $stack21, $stack32, $stack43, $stack46;
+        java.awt.Graphics $stack12;
+        java.awt.Graphics2D g2;
+        java.awt.Point $stack11, $stack15, $stack17, $stack24, $stack25, $stack35, $stack36, $stack49, $stack50, $stack51, $stack53;
+        java.awt.event.MouseEvent e;
+        java.awt.geom.Rectangle2D scaledDataArea;
+        java.awt.geom.Rectangle2D$Double #l0, #l1, #l2;
+        java.lang.Object $stack31, $stack42, $stack59;
+        javax.swing.JPopupMenu $stack10, $stack60;
+        org.jfree.chart.ChartPanel this;
+        org.jfree.chart.plot.PlotOrientation $stack13, $stack14;
+    
+    
+        this := @this: org.jfree.chart.ChartPanel;
+        e := @parameter0: java.awt.event.MouseEvent;
+        $stack10 = this.<org.jfree.chart.ChartPanel: javax.swing.JPopupMenu popup>;
+    
+        if $stack10 == null goto label1;
+        $stack60 = this.<org.jfree.chart.ChartPanel: javax.swing.JPopupMenu popup>;
+        $stack61 = virtualinvoke $stack60.<javax.swing.JPopupMenu: boolean isShowing()>();
+    
+        if $stack61 == 0 goto label1;
+    
+        return;
+    
+      label1:
+        $stack11 = this.<org.jfree.chart.ChartPanel: java.awt.Point zoomPoint>;
+    
+        if $stack11 != null goto label2;
+    
+        return;
+    
+      label2:
+        $stack12 = virtualinvoke this.<org.jfree.chart.ChartPanel: java.awt.Graphics getGraphics()>();
+        g2 = (java.awt.Graphics2D) $stack12;
+        specialinvoke this.<org.jfree.chart.ChartPanel: void drawZoomRectangle(java.awt.Graphics2D)>(g2);
+        hZoom#0 = 0;
+        vZoom#0 = 0;
+        $stack14 = this.<org.jfree.chart.ChartPanel: org.jfree.chart.plot.PlotOrientation orientation>;
+        $stack13 = <org.jfree.chart.plot.PlotOrientation: org.jfree.chart.plot.PlotOrientation HORIZONTAL>;
+    
+        if $stack14 != $stack13 goto label3;
+        hZoom#1 = this.<org.jfree.chart.ChartPanel: boolean rangeZoomable>;
+        vZoom#1 = this.<org.jfree.chart.ChartPanel: boolean domainZoomable>;
+    
+        goto label4;
+    
+      label3:
+        hZoom#1 = this.<org.jfree.chart.ChartPanel: boolean domainZoomable>;
+        vZoom#1 = this.<org.jfree.chart.ChartPanel: boolean rangeZoomable>;
+    
+      label4:
+        $stack15 = this.<org.jfree.chart.ChartPanel: java.awt.Point zoomPoint>;
+        $stack16 = virtualinvoke $stack15.<java.awt.Point: double getX()>();
+        $stack20 = (int) $stack16;
+        $stack17 = this.<org.jfree.chart.ChartPanel: java.awt.Point zoomPoint>;
+        $stack18 = virtualinvoke $stack17.<java.awt.Point: double getY()>();
+        $stack19 = (int) $stack18;
+        scaledDataArea = virtualinvoke this.<org.jfree.chart.ChartPanel: java.awt.geom.Rectangle2D getScreenDataArea(int,int)>($stack20, $stack19);
+    
+        if hZoom#1 == 0 goto label5;
+    
+        if vZoom#1 == 0 goto label5;
+        $stack43 = virtualinvoke e.<java.awt.event.MouseEvent: int getX()>();
+        $stack45 = (double) $stack43;
+        $stack44 = virtualinvoke scaledDataArea.<java.awt.geom.Rectangle2D: double getMaxX()>();
+        xmax#0 = staticinvoke <java.lang.Math: double min(double,double)>($stack45, $stack44);
+        $stack46 = virtualinvoke e.<java.awt.event.MouseEvent: int getY()>();
+        $stack48 = (double) $stack46;
+        $stack47 = virtualinvoke scaledDataArea.<java.awt.geom.Rectangle2D: double getMaxY()>();
+        ymax = staticinvoke <java.lang.Math: double min(double,double)>($stack48, $stack47);
+        $stack59 = new java.awt.geom.Rectangle2D$Double;
+        $stack49 = this.<org.jfree.chart.ChartPanel: java.awt.Point zoomPoint>;
+        $stack58 = virtualinvoke $stack49.<java.awt.Point: double getX()>();
+        $stack50 = this.<org.jfree.chart.ChartPanel: java.awt.Point zoomPoint>;
+        $stack57 = virtualinvoke $stack50.<java.awt.Point: double getY()>();
+        $stack51 = this.<org.jfree.chart.ChartPanel: java.awt.Point zoomPoint>;
+        $stack52 = virtualinvoke $stack51.<java.awt.Point: double getX()>();
+        $stack56 = xmax#0 - $stack52;
+        $stack53 = this.<org.jfree.chart.ChartPanel: java.awt.Point zoomPoint>;
+        $stack54 = virtualinvoke $stack53.<java.awt.Point: double getY()>();
+        $stack55 = ymax - $stack54;
+        #l2 = (java.awt.geom.Rectangle2D$Double) $stack59;
+        specialinvoke #l2.<java.awt.geom.Rectangle2D$Double: void <init>(double,double,double,double)>($stack58, $stack57, $stack56, $stack55);
+        this.<org.jfree.chart.ChartPanel: java.awt.geom.Rectangle2D zoomRectangle> = (java.awt.geom.Rectangle2D) $stack59;
+    
+        goto label7;
+    
+      label5:
+        if hZoom#1 == 0 goto label6;
+        $stack32 = virtualinvoke e.<java.awt.event.MouseEvent: int getX()>();
+        $stack34 = (double) $stack32;
+        $stack33 = virtualinvoke scaledDataArea.<java.awt.geom.Rectangle2D: double getMaxX()>();
+        xmax#1 = staticinvoke <java.lang.Math: double min(double,double)>($stack34, $stack33);
+        $stack42 = new java.awt.geom.Rectangle2D$Double;
+        $stack35 = this.<org.jfree.chart.ChartPanel: java.awt.Point zoomPoint>;
+        $stack41 = virtualinvoke $stack35.<java.awt.Point: double getX()>();
+        $stack40 = virtualinvoke scaledDataArea.<java.awt.geom.Rectangle2D: double getMinY()>();
+        $stack36 = this.<org.jfree.chart.ChartPanel: java.awt.Point zoomPoint>;
+        $stack37 = virtualinvoke $stack36.<java.awt.Point: double getX()>();
+        $stack39 = xmax#1 - $stack37;
+        $stack38 = virtualinvoke scaledDataArea.<java.awt.geom.Rectangle2D: double getHeight()>();
+        #l0 = (java.awt.geom.Rectangle2D$Double) $stack42;
+        specialinvoke #l0.<java.awt.geom.Rectangle2D$Double: void <init>(double,double,double,double)>($stack41, $stack40, $stack39, $stack38);
+        this.<org.jfree.chart.ChartPanel: java.awt.geom.Rectangle2D zoomRectangle> = (java.awt.geom.Rectangle2D) $stack42;
+    
+        goto label7;
+    
+      label6:
+        if vZoom#1 == 0 goto label7;
+        $stack21 = virtualinvoke e.<java.awt.event.MouseEvent: int getY()>();
+        $stack23 = (double) $stack21;
+        $stack22 = virtualinvoke scaledDataArea.<java.awt.geom.Rectangle2D: double getMaxY()>();
+        xmax#2 = staticinvoke <java.lang.Math: double min(double,double)>($stack23, $stack22);
+        $stack31 = new java.awt.geom.Rectangle2D$Double;
+        $stack30 = virtualinvoke scaledDataArea.<java.awt.geom.Rectangle2D: double getMinX()>();
+        $stack24 = this.<org.jfree.chart.ChartPanel: java.awt.Point zoomPoint>;
+        $stack29 = virtualinvoke $stack24.<java.awt.Point: double getY()>();
+        $stack28 = virtualinvoke scaledDataArea.<java.awt.geom.Rectangle2D: double getWidth()>();
+        $stack25 = this.<org.jfree.chart.ChartPanel: java.awt.Point zoomPoint>;
+        $stack26 = virtualinvoke $stack25.<java.awt.Point: double getY()>();
+        $stack27 = xmax#2 - $stack26;
+        #l1 = (java.awt.geom.Rectangle2D$Double) $stack31;
+        specialinvoke #l1.<java.awt.geom.Rectangle2D$Double: void <init>(double,double,double,double)>($stack30, $stack29, $stack28, $stack27);
+        this.<org.jfree.chart.ChartPanel: java.awt.geom.Rectangle2D zoomRectangle> = (java.awt.geom.Rectangle2D) $stack31;
+    
+      label7:
+        specialinvoke this.<org.jfree.chart.ChartPanel: void drawZoomRectangle(java.awt.Graphics2D)>(g2);
+        virtualinvoke g2.<java.awt.Graphics2D: void dispose()>();
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.ChartPanel: java.lang.String getToolTipText(java.awt.event.MouseEvent)> ----
+    {
+        double $stack11, $stack12, $stack13, $stack18, $stack19, $stack20, $stack22, $stack23;
+        int $stack10, $stack14, $stack15, $stack16, $stack17, $stack21, $stack8, $stack9;
+        java.awt.Insets insets;
+        java.awt.event.MouseEvent e;
+        java.lang.String result;
+        org.jfree.chart.ChartPanel this;
+        org.jfree.chart.ChartRenderingInfo $stack6, $stack7;
+        org.jfree.chart.entity.ChartEntity entity;
+        org.jfree.chart.entity.EntityCollection entities;
+    
+    
+        this := @this: org.jfree.chart.ChartPanel;
+        e := @parameter0: java.awt.event.MouseEvent;
+        result = null;
+        $stack6 = this.<org.jfree.chart.ChartPanel: org.jfree.chart.ChartRenderingInfo info>;
+    
+        if $stack6 == null goto label1;
+        $stack7 = this.<org.jfree.chart.ChartPanel: org.jfree.chart.ChartRenderingInfo info>;
+        entities = virtualinvoke $stack7.<org.jfree.chart.ChartRenderingInfo: org.jfree.chart.entity.EntityCollection getEntityCollection()>();
+    
+        if entities == null goto label1;
+        insets = virtualinvoke this.<org.jfree.chart.ChartPanel: java.awt.Insets getInsets()>();
+        $stack8 = virtualinvoke e.<java.awt.event.MouseEvent: int getX()>();
+        $stack9 = insets.<java.awt.Insets: int left>;
+        $stack10 = $stack8 - $stack9;
+        $stack11 = (double) $stack10;
+        $stack12 = this.<org.jfree.chart.ChartPanel: double scaleX>;
+        $stack13 = $stack11 / $stack12;
+        $stack14 = (int) $stack13;
+        $stack23 = (double) $stack14;
+        $stack15 = virtualinvoke e.<java.awt.event.MouseEvent: int getY()>();
+        $stack16 = insets.<java.awt.Insets: int top>;
+        $stack17 = $stack15 - $stack16;
+        $stack18 = (double) $stack17;
+        $stack19 = this.<org.jfree.chart.ChartPanel: double scaleY>;
+        $stack20 = $stack18 / $stack19;
+        $stack21 = (int) $stack20;
+        $stack22 = (double) $stack21;
+        entity = interfaceinvoke entities.<org.jfree.chart.entity.EntityCollection: org.jfree.chart.entity.ChartEntity getEntity(double,double)>($stack23, $stack22);
+    
+        if entity == null goto label1;
+        result = virtualinvoke entity.<org.jfree.chart.entity.ChartEntity: java.lang.String getToolTipText()>();
+    
+      label1:
+        return result;
+    }
+
+    // ---- method: <org.jfree.chart.ChartPanel: boolean isRangeZoomable()> ----
+    {
+        boolean $stack1;
+        org.jfree.chart.ChartPanel this;
+    
+    
+        this := @this: org.jfree.chart.ChartPanel;
+        $stack1 = this.<org.jfree.chart.ChartPanel: boolean rangeZoomable>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.ChartPanel: void setZoomTriggerDistance(int)> ----
+    {
+        int distance;
+        org.jfree.chart.ChartPanel this;
+    
+    
+        this := @this: org.jfree.chart.ChartPanel;
+        distance := @parameter0: int;
+        this.<org.jfree.chart.ChartPanel: int zoomTriggerDistance> = distance;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.ChartPanel: javax.swing.JPopupMenu createPopupMenu(boolean,boolean,boolean,boolean)> ----
+    {
+        boolean print, properties, save, separator#0, separator#1, separator#2, separator#3, zoom;
+        java.lang.Object $stack13, $stack34, $stack55;
+        java.lang.String $stack12, $stack15, $stack21, $stack27, $stack33, $stack36, $stack42, $stack48, $stack54, $stack57, $stack63, $stack69, $stack75, $stack78, $stack81;
+        java.util.ResourceBundle $stack11, $stack14, $stack20, $stack26, $stack32, $stack35, $stack41, $stack47, $stack53, $stack56, $stack62, $stack68, $stack74, $stack77, $stack80;
+        javax.swing.JMenu #l0, #l1, #l11, #l12, #l13, #l14, #l16, #l17, #l2, #l3, #l4, #l5, #l7, #l8, #l9, autoRangeMenu, propertiesItem#3, zoomOutMenu;
+        javax.swing.JMenuItem #l10, #l15, #l6, $stack16, $stack17, $stack18, $stack19, $stack22, $stack23, $stack24, $stack25, $stack28, $stack29, $stack30, $stack31, $stack37, $stack38, $stack39, $stack40, $stack43, $stack44, $stack45, $stack46, $stack49, $stack50, $stack51, $stack52, $stack58, $stack59, $stack60, $stack61, $stack64, $stack65, $stack66, $stack67, $stack70, $stack71, $stack72, $stack73, $stack76, $stack79, $stack82, propertiesItem#0, propertiesItem#1, propertiesItem#2;
+        javax.swing.JPopupMenu $stack10, result;
+        org.jfree.chart.ChartPanel this;
+    
+    
+        this := @this: org.jfree.chart.ChartPanel;
+        properties := @parameter0: boolean;
+        save := @parameter1: boolean;
+        print := @parameter2: boolean;
+        zoom := @parameter3: boolean;
+        $stack10 = new javax.swing.JPopupMenu;
+        specialinvoke $stack10.<javax.swing.JPopupMenu: void <init>(java.lang.String)>("Chart:");
+        result = $stack10;
+        separator#0 = 0;
+    
+        if properties == 0 goto label1;
+        $stack82 = new javax.swing.JMenuItem;
+        $stack80 = <org.jfree.chart.ChartPanel: java.util.ResourceBundle localizationResources>;
+        $stack81 = virtualinvoke $stack80.<java.util.ResourceBundle: java.lang.String getString(java.lang.String)>("Properties...");
+        specialinvoke $stack82.<javax.swing.JMenuItem: void <init>(java.lang.String)>($stack81);
+        propertiesItem#0 = $stack82;
+        virtualinvoke $stack82.<javax.swing.JMenuItem: void setActionCommand(java.lang.String)>("PROPERTIES");
+        virtualinvoke $stack82.<javax.swing.JMenuItem: void addActionListener(java.awt.event.ActionListener)>(this);
+        virtualinvoke $stack10.<javax.swing.JPopupMenu: javax.swing.JMenuItem add(javax.swing.JMenuItem)>($stack82);
+        separator#0 = 1;
+    
+      label1:
+        if save == 0 goto label3;
+    
+        if separator#0 == 0 goto label2;
+        virtualinvoke $stack10.<javax.swing.JPopupMenu: void addSeparator()>();
+        separator#1 = 0;
+    
+      label2:
+        $stack79 = new javax.swing.JMenuItem;
+        $stack77 = <org.jfree.chart.ChartPanel: java.util.ResourceBundle localizationResources>;
+        $stack78 = virtualinvoke $stack77.<java.util.ResourceBundle: java.lang.String getString(java.lang.String)>("Save_as...");
+        specialinvoke $stack79.<javax.swing.JMenuItem: void <init>(java.lang.String)>($stack78);
+        propertiesItem#1 = $stack79;
+        virtualinvoke $stack79.<javax.swing.JMenuItem: void setActionCommand(java.lang.String)>("SAVE");
+        virtualinvoke $stack79.<javax.swing.JMenuItem: void addActionListener(java.awt.event.ActionListener)>(this);
+        virtualinvoke $stack10.<javax.swing.JPopupMenu: javax.swing.JMenuItem add(javax.swing.JMenuItem)>($stack79);
+        separator#0 = 1;
+    
+      label3:
+        if print == 0 goto label5;
+    
+        if separator#0 == 0 goto label4;
+        virtualinvoke $stack10.<javax.swing.JPopupMenu: void addSeparator()>();
+        separator#2 = 0;
+    
+      label4:
+        $stack76 = new javax.swing.JMenuItem;
+        $stack74 = <org.jfree.chart.ChartPanel: java.util.ResourceBundle localizationResources>;
+        $stack75 = virtualinvoke $stack74.<java.util.ResourceBundle: java.lang.String getString(java.lang.String)>("Print...");
+        specialinvoke $stack76.<javax.swing.JMenuItem: void <init>(java.lang.String)>($stack75);
+        propertiesItem#2 = $stack76;
+        virtualinvoke $stack76.<javax.swing.JMenuItem: void setActionCommand(java.lang.String)>("PRINT");
+        virtualinvoke $stack76.<javax.swing.JMenuItem: void addActionListener(java.awt.event.ActionListener)>(this);
+        virtualinvoke $stack10.<javax.swing.JPopupMenu: javax.swing.JMenuItem add(javax.swing.JMenuItem)>($stack76);
+        separator#0 = 1;
+    
+      label5:
+        if zoom == 0 goto label7;
+    
+        if separator#0 == 0 goto label6;
+        virtualinvoke $stack10.<javax.swing.JPopupMenu: void addSeparator()>();
+        separator#3 = 0;
+    
+      label6:
+        $stack13 = new javax.swing.JMenu;
+        $stack11 = <org.jfree.chart.ChartPanel: java.util.ResourceBundle localizationResources>;
+        $stack12 = virtualinvoke $stack11.<java.util.ResourceBundle: java.lang.String getString(java.lang.String)>("Zoom_In");
+        #l9 = (javax.swing.JMenu) $stack13;
+        specialinvoke #l9.<javax.swing.JMenu: void <init>(java.lang.String)>($stack12);
+        propertiesItem#3 = (javax.swing.JMenu) $stack13;
+        $stack16 = new javax.swing.JMenuItem;
+        $stack14 = <org.jfree.chart.ChartPanel: java.util.ResourceBundle localizationResources>;
+        $stack15 = virtualinvoke $stack14.<java.util.ResourceBundle: java.lang.String getString(java.lang.String)>("All_Axes");
+        specialinvoke $stack16.<javax.swing.JMenuItem: void <init>(java.lang.String)>($stack15);
+        this.<org.jfree.chart.ChartPanel: javax.swing.JMenuItem zoomInBothMenuItem> = $stack16;
+        $stack17 = this.<org.jfree.chart.ChartPanel: javax.swing.JMenuItem zoomInBothMenuItem>;
+        virtualinvoke $stack17.<javax.swing.JMenuItem: void setActionCommand(java.lang.String)>("ZOOM_IN_BOTH");
+        $stack18 = this.<org.jfree.chart.ChartPanel: javax.swing.JMenuItem zoomInBothMenuItem>;
+        virtualinvoke $stack18.<javax.swing.JMenuItem: void addActionListener(java.awt.event.ActionListener)>(this);
+        $stack19 = this.<org.jfree.chart.ChartPanel: javax.swing.JMenuItem zoomInBothMenuItem>;
+        #l14 = (javax.swing.JMenu) $stack13;
+        virtualinvoke #l14.<javax.swing.JMenu: javax.swing.JMenuItem add(javax.swing.JMenuItem)>($stack19);
+        #l1 = (javax.swing.JMenu) $stack13;
+        virtualinvoke #l1.<javax.swing.JMenu: void addSeparator()>();
+        $stack22 = new javax.swing.JMenuItem;
+        $stack20 = <org.jfree.chart.ChartPanel: java.util.ResourceBundle localizationResources>;
+        $stack21 = virtualinvoke $stack20.<java.util.ResourceBundle: java.lang.String getString(java.lang.String)>("Domain_Axis");
+        specialinvoke $stack22.<javax.swing.JMenuItem: void <init>(java.lang.String)>($stack21);
+        this.<org.jfree.chart.ChartPanel: javax.swing.JMenuItem zoomInDomainMenuItem> = $stack22;
+        $stack23 = this.<org.jfree.chart.ChartPanel: javax.swing.JMenuItem zoomInDomainMenuItem>;
+        virtualinvoke $stack23.<javax.swing.JMenuItem: void setActionCommand(java.lang.String)>("ZOOM_IN_DOMAIN");
+        $stack24 = this.<org.jfree.chart.ChartPanel: javax.swing.JMenuItem zoomInDomainMenuItem>;
+        virtualinvoke $stack24.<javax.swing.JMenuItem: void addActionListener(java.awt.event.ActionListener)>(this);
+        $stack25 = this.<org.jfree.chart.ChartPanel: javax.swing.JMenuItem zoomInDomainMenuItem>;
+        #l12 = (javax.swing.JMenu) $stack13;
+        virtualinvoke #l12.<javax.swing.JMenu: javax.swing.JMenuItem add(javax.swing.JMenuItem)>($stack25);
+        $stack28 = new javax.swing.JMenuItem;
+        $stack26 = <org.jfree.chart.ChartPanel: java.util.ResourceBundle localizationResources>;
+        $stack27 = virtualinvoke $stack26.<java.util.ResourceBundle: java.lang.String getString(java.lang.String)>("Range_Axis");
+        specialinvoke $stack28.<javax.swing.JMenuItem: void <init>(java.lang.String)>($stack27);
+        this.<org.jfree.chart.ChartPanel: javax.swing.JMenuItem zoomInRangeMenuItem> = $stack28;
+        $stack29 = this.<org.jfree.chart.ChartPanel: javax.swing.JMenuItem zoomInRangeMenuItem>;
+        virtualinvoke $stack29.<javax.swing.JMenuItem: void setActionCommand(java.lang.String)>("ZOOM_IN_RANGE");
+        $stack30 = this.<org.jfree.chart.ChartPanel: javax.swing.JMenuItem zoomInRangeMenuItem>;
+        virtualinvoke $stack30.<javax.swing.JMenuItem: void addActionListener(java.awt.event.ActionListener)>(this);
+        $stack31 = this.<org.jfree.chart.ChartPanel: javax.swing.JMenuItem zoomInRangeMenuItem>;
+        #l8 = (javax.swing.JMenu) $stack13;
+        virtualinvoke #l8.<javax.swing.JMenu: javax.swing.JMenuItem add(javax.swing.JMenuItem)>($stack31);
+        #l10 = (javax.swing.JMenuItem) $stack13;
+        virtualinvoke $stack10.<javax.swing.JPopupMenu: javax.swing.JMenuItem add(javax.swing.JMenuItem)>(#l10);
+        $stack34 = new javax.swing.JMenu;
+        $stack32 = <org.jfree.chart.ChartPanel: java.util.ResourceBundle localizationResources>;
+        $stack33 = virtualinvoke $stack32.<java.util.ResourceBundle: java.lang.String getString(java.lang.String)>("Zoom_Out");
+        #l5 = (javax.swing.JMenu) $stack34;
+        specialinvoke #l5.<javax.swing.JMenu: void <init>(java.lang.String)>($stack33);
+        zoomOutMenu = (javax.swing.JMenu) $stack34;
+        $stack37 = new javax.swing.JMenuItem;
+        $stack35 = <org.jfree.chart.ChartPanel: java.util.ResourceBundle localizationResources>;
+        $stack36 = virtualinvoke $stack35.<java.util.ResourceBundle: java.lang.String getString(java.lang.String)>("All_Axes");
+        specialinvoke $stack37.<javax.swing.JMenuItem: void <init>(java.lang.String)>($stack36);
+        this.<org.jfree.chart.ChartPanel: javax.swing.JMenuItem zoomOutBothMenuItem> = $stack37;
+        $stack38 = this.<org.jfree.chart.ChartPanel: javax.swing.JMenuItem zoomOutBothMenuItem>;
+        virtualinvoke $stack38.<javax.swing.JMenuItem: void setActionCommand(java.lang.String)>("ZOOM_OUT_BOTH");
+        $stack39 = this.<org.jfree.chart.ChartPanel: javax.swing.JMenuItem zoomOutBothMenuItem>;
+        virtualinvoke $stack39.<javax.swing.JMenuItem: void addActionListener(java.awt.event.ActionListener)>(this);
+        $stack40 = this.<org.jfree.chart.ChartPanel: javax.swing.JMenuItem zoomOutBothMenuItem>;
+        #l13 = (javax.swing.JMenu) $stack34;
+        virtualinvoke #l13.<javax.swing.JMenu: javax.swing.JMenuItem add(javax.swing.JMenuItem)>($stack40);
+        #l17 = (javax.swing.JMenu) $stack34;
+        virtualinvoke #l17.<javax.swing.JMenu: void addSeparator()>();
+        $stack43 = new javax.swing.JMenuItem;
+        $stack41 = <org.jfree.chart.ChartPanel: java.util.ResourceBundle localizationResources>;
+        $stack42 = virtualinvoke $stack41.<java.util.ResourceBundle: java.lang.String getString(java.lang.String)>("Domain_Axis");
+        specialinvoke $stack43.<javax.swing.JMenuItem: void <init>(java.lang.String)>($stack42);
+        this.<org.jfree.chart.ChartPanel: javax.swing.JMenuItem zoomOutDomainMenuItem> = $stack43;
+        $stack44 = this.<org.jfree.chart.ChartPanel: javax.swing.JMenuItem zoomOutDomainMenuItem>;
+        virtualinvoke $stack44.<javax.swing.JMenuItem: void setActionCommand(java.lang.String)>("ZOOM_DOMAIN_BOTH");
+        $stack45 = this.<org.jfree.chart.ChartPanel: javax.swing.JMenuItem zoomOutDomainMenuItem>;
+        virtualinvoke $stack45.<javax.swing.JMenuItem: void addActionListener(java.awt.event.ActionListener)>(this);
+        $stack46 = this.<org.jfree.chart.ChartPanel: javax.swing.JMenuItem zoomOutDomainMenuItem>;
+        #l16 = (javax.swing.JMenu) $stack34;
+        virtualinvoke #l16.<javax.swing.JMenu: javax.swing.JMenuItem add(javax.swing.JMenuItem)>($stack46);
+        $stack49 = new javax.swing.JMenuItem;
+        $stack47 = <org.jfree.chart.ChartPanel: java.util.ResourceBundle localizationResources>;
+        $stack48 = virtualinvoke $stack47.<java.util.ResourceBundle: java.lang.String getString(java.lang.String)>("Range_Axis");
+        specialinvoke $stack49.<javax.swing.JMenuItem: void <init>(java.lang.String)>($stack48);
+        this.<org.jfree.chart.ChartPanel: javax.swing.JMenuItem zoomOutRangeMenuItem> = $stack49;
+        $stack50 = this.<org.jfree.chart.ChartPanel: javax.swing.JMenuItem zoomOutRangeMenuItem>;
+        virtualinvoke $stack50.<javax.swing.JMenuItem: void setActionCommand(java.lang.String)>("ZOOM_RANGE_BOTH");
+        $stack51 = this.<org.jfree.chart.ChartPanel: javax.swing.JMenuItem zoomOutRangeMenuItem>;
+        virtualinvoke $stack51.<javax.swing.JMenuItem: void addActionListener(java.awt.event.ActionListener)>(this);
+        $stack52 = this.<org.jfree.chart.ChartPanel: javax.swing.JMenuItem zoomOutRangeMenuItem>;
+        #l3 = (javax.swing.JMenu) $stack34;
+        virtualinvoke #l3.<javax.swing.JMenu: javax.swing.JMenuItem add(javax.swing.JMenuItem)>($stack52);
+        #l6 = (javax.swing.JMenuItem) $stack34;
+        virtualinvoke $stack10.<javax.swing.JPopupMenu: javax.swing.JMenuItem add(javax.swing.JMenuItem)>(#l6);
+        $stack55 = new javax.swing.JMenu;
+        $stack53 = <org.jfree.chart.ChartPanel: java.util.ResourceBundle localizationResources>;
+        $stack54 = virtualinvoke $stack53.<java.util.ResourceBundle: java.lang.String getString(java.lang.String)>("Auto_Range");
+        #l11 = (javax.swing.JMenu) $stack55;
+        specialinvoke #l11.<javax.swing.JMenu: void <init>(java.lang.String)>($stack54);
+        autoRangeMenu = (javax.swing.JMenu) $stack55;
+        $stack58 = new javax.swing.JMenuItem;
+        $stack56 = <org.jfree.chart.ChartPanel: java.util.ResourceBundle localizationResources>;
+        $stack57 = virtualinvoke $stack56.<java.util.ResourceBundle: java.lang.String getString(java.lang.String)>("All_Axes");
+        specialinvoke $stack58.<javax.swing.JMenuItem: void <init>(java.lang.String)>($stack57);
+        this.<org.jfree.chart.ChartPanel: javax.swing.JMenuItem zoomResetBothMenuItem> = $stack58;
+        $stack59 = this.<org.jfree.chart.ChartPanel: javax.swing.JMenuItem zoomResetBothMenuItem>;
+        virtualinvoke $stack59.<javax.swing.JMenuItem: void setActionCommand(java.lang.String)>("ZOOM_RESET_BOTH");
+        $stack60 = this.<org.jfree.chart.ChartPanel: javax.swing.JMenuItem zoomResetBothMenuItem>;
+        virtualinvoke $stack60.<javax.swing.JMenuItem: void addActionListener(java.awt.event.ActionListener)>(this);
+        $stack61 = this.<org.jfree.chart.ChartPanel: javax.swing.JMenuItem zoomResetBothMenuItem>;
+        #l0 = (javax.swing.JMenu) $stack55;
+        virtualinvoke #l0.<javax.swing.JMenu: javax.swing.JMenuItem add(javax.swing.JMenuItem)>($stack61);
+        #l4 = (javax.swing.JMenu) $stack55;
+        virtualinvoke #l4.<javax.swing.JMenu: void addSeparator()>();
+        $stack64 = new javax.swing.JMenuItem;
+        $stack62 = <org.jfree.chart.ChartPanel: java.util.ResourceBundle localizationResources>;
+        $stack63 = virtualinvoke $stack62.<java.util.ResourceBundle: java.lang.String getString(java.lang.String)>("Domain_Axis");
+        specialinvoke $stack64.<javax.swing.JMenuItem: void <init>(java.lang.String)>($stack63);
+        this.<org.jfree.chart.ChartPanel: javax.swing.JMenuItem zoomResetDomainMenuItem> = $stack64;
+        $stack65 = this.<org.jfree.chart.ChartPanel: javax.swing.JMenuItem zoomResetDomainMenuItem>;
+        virtualinvoke $stack65.<javax.swing.JMenuItem: void setActionCommand(java.lang.String)>("ZOOM_RESET_DOMAIN");
+        $stack66 = this.<org.jfree.chart.ChartPanel: javax.swing.JMenuItem zoomResetDomainMenuItem>;
+        virtualinvoke $stack66.<javax.swing.JMenuItem: void addActionListener(java.awt.event.ActionListener)>(this);
+        $stack67 = this.<org.jfree.chart.ChartPanel: javax.swing.JMenuItem zoomResetDomainMenuItem>;
+        #l7 = (javax.swing.JMenu) $stack55;
+        virtualinvoke #l7.<javax.swing.JMenu: javax.swing.JMenuItem add(javax.swing.JMenuItem)>($stack67);
+        $stack70 = new javax.swing.JMenuItem;
+        $stack68 = <org.jfree.chart.ChartPanel: java.util.ResourceBundle localizationResources>;
+        $stack69 = virtualinvoke $stack68.<java.util.ResourceBundle: java.lang.String getString(java.lang.String)>("Range_Axis");
+        specialinvoke $stack70.<javax.swing.JMenuItem: void <init>(java.lang.String)>($stack69);
+        this.<org.jfree.chart.ChartPanel: javax.swing.JMenuItem zoomResetRangeMenuItem> = $stack70;
+        $stack71 = this.<org.jfree.chart.ChartPanel: javax.swing.JMenuItem zoomResetRangeMenuItem>;
+        virtualinvoke $stack71.<javax.swing.JMenuItem: void setActionCommand(java.lang.String)>("ZOOM_RESET_RANGE");
+        $stack72 = this.<org.jfree.chart.ChartPanel: javax.swing.JMenuItem zoomResetRangeMenuItem>;
+        virtualinvoke $stack72.<javax.swing.JMenuItem: void addActionListener(java.awt.event.ActionListener)>(this);
+        $stack73 = this.<org.jfree.chart.ChartPanel: javax.swing.JMenuItem zoomResetRangeMenuItem>;
+        #l2 = (javax.swing.JMenu) $stack55;
+        virtualinvoke #l2.<javax.swing.JMenu: javax.swing.JMenuItem add(javax.swing.JMenuItem)>($stack73);
+        virtualinvoke $stack10.<javax.swing.JPopupMenu: void addSeparator()>();
+        #l15 = (javax.swing.JMenuItem) $stack55;
+        virtualinvoke $stack10.<javax.swing.JPopupMenu: javax.swing.JMenuItem add(javax.swing.JMenuItem)>(#l15);
+    
+      label7:
+        return $stack10;
+    }
+
+    // ---- method: <org.jfree.chart.ChartPanel: void updateUI()> ----
+    {
+        java.awt.Component #l0;
+        java.lang.Object $stack2;
+        javax.swing.JPopupMenu $stack1;
+        org.jfree.chart.ChartPanel this;
+    
+    
+        this := @this: org.jfree.chart.ChartPanel;
+        $stack1 = this.<org.jfree.chart.ChartPanel: javax.swing.JPopupMenu popup>;
+    
+        if $stack1 == null goto label1;
+        $stack2 = this.<org.jfree.chart.ChartPanel: javax.swing.JPopupMenu popup>;
+        #l0 = (java.awt.Component) $stack2;
+        staticinvoke <javax.swing.SwingUtilities: void updateComponentTreeUI(java.awt.Component)>(#l0);
+    
+      label1:
+        specialinvoke this.<javax.swing.JPanel: void updateUI()>();
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.ChartPanel: void setMinimumDrawWidth(int)> ----
+    {
+        int width;
+        org.jfree.chart.ChartPanel this;
+    
+    
+        this := @this: org.jfree.chart.ChartPanel;
+        width := @parameter0: int;
+        this.<org.jfree.chart.ChartPanel: int minimumDrawWidth> = width;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.ChartPanel: void zoomOutBoth(double,double)> ----
+    {
+        double x, y;
+        org.jfree.chart.ChartPanel this;
+    
+    
+        this := @this: org.jfree.chart.ChartPanel;
+        x := @parameter0: double;
+        y := @parameter1: double;
+        virtualinvoke this.<org.jfree.chart.ChartPanel: void zoomOutDomain(double,double)>(x, y);
+        virtualinvoke this.<org.jfree.chart.ChartPanel: void zoomOutRange(double,double)>(x, y);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.ChartPanel: int getInitialDelay()> ----
+    {
+        int $stack1;
+        org.jfree.chart.ChartPanel this;
+    
+    
+        this := @this: org.jfree.chart.ChartPanel;
+        $stack1 = this.<org.jfree.chart.ChartPanel: int ownToolTipInitialDelay>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.ChartPanel: void mousePressed(java.awt.event.MouseEvent)> ----
+    {
+        boolean $stack6;
+        int $stack10, $stack11, $stack4, $stack5, $stack8, $stack9;
+        java.awt.Point $stack12;
+        java.awt.event.MouseEvent e;
+        java.awt.geom.Rectangle2D $stack3, screenDataArea;
+        javax.swing.JPopupMenu $stack7;
+        org.jfree.chart.ChartPanel this;
+    
+    
+        this := @this: org.jfree.chart.ChartPanel;
+        e := @parameter0: java.awt.event.MouseEvent;
+        $stack3 = this.<org.jfree.chart.ChartPanel: java.awt.geom.Rectangle2D zoomRectangle>;
+    
+        if $stack3 != null goto label3;
+        $stack5 = virtualinvoke e.<java.awt.event.MouseEvent: int getX()>();
+        $stack4 = virtualinvoke e.<java.awt.event.MouseEvent: int getY()>();
+        screenDataArea = virtualinvoke this.<org.jfree.chart.ChartPanel: java.awt.geom.Rectangle2D getScreenDataArea(int,int)>($stack5, $stack4);
+    
+        if screenDataArea == null goto label1;
+        $stack11 = virtualinvoke e.<java.awt.event.MouseEvent: int getX()>();
+        $stack10 = virtualinvoke e.<java.awt.event.MouseEvent: int getY()>();
+        $stack12 = specialinvoke this.<org.jfree.chart.ChartPanel: java.awt.Point getPointInRectangle(int,int,java.awt.geom.Rectangle2D)>($stack11, $stack10, screenDataArea);
+        this.<org.jfree.chart.ChartPanel: java.awt.Point zoomPoint> = $stack12;
+    
+        goto label2;
+    
+      label1:
+        this.<org.jfree.chart.ChartPanel: java.awt.Point zoomPoint> = null;
+    
+      label2:
+        $stack6 = virtualinvoke e.<java.awt.event.MouseEvent: boolean isPopupTrigger()>();
+    
+        if $stack6 == 0 goto label3;
+        $stack7 = this.<org.jfree.chart.ChartPanel: javax.swing.JPopupMenu popup>;
+    
+        if $stack7 == null goto label3;
+        $stack9 = virtualinvoke e.<java.awt.event.MouseEvent: int getX()>();
+        $stack8 = virtualinvoke e.<java.awt.event.MouseEvent: int getY()>();
+        virtualinvoke this.<org.jfree.chart.ChartPanel: void displayPopupMenu(int,int)>($stack9, $stack8);
+    
+      label3:
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.ChartPanel: int getReshowDelay()> ----
+    {
+        int $stack1;
+        org.jfree.chart.ChartPanel this;
+    
+    
+        this := @this: org.jfree.chart.ChartPanel;
+        $stack1 = this.<org.jfree.chart.ChartPanel: int ownToolTipReshowDelay>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.ChartPanel: void zoomInRange(double,double)> ----
+    {
+        boolean $stack14, $stack8;
+        double $stack10, x, y;
+        int $stack11, $stack12;
+        java.awt.Point $stack13;
+        java.awt.geom.Point2D $stack15;
+        org.jfree.chart.ChartPanel this;
+        org.jfree.chart.ChartRenderingInfo $stack9;
+        org.jfree.chart.JFreeChart $stack7;
+        org.jfree.chart.plot.Plot p;
+        org.jfree.chart.plot.PlotRenderingInfo $stack16;
+        org.jfree.chart.plot.Zoomable z;
+    
+    
+        this := @this: org.jfree.chart.ChartPanel;
+        x := @parameter0: double;
+        y := @parameter1: double;
+        $stack7 = this.<org.jfree.chart.ChartPanel: org.jfree.chart.JFreeChart chart>;
+        p = virtualinvoke $stack7.<org.jfree.chart.JFreeChart: org.jfree.chart.plot.Plot getPlot()>();
+        $stack8 = p instanceof org.jfree.chart.plot.Zoomable;
+    
+        if $stack8 == 0 goto label1;
+        z = (org.jfree.chart.plot.Zoomable) p;
+        $stack10 = this.<org.jfree.chart.ChartPanel: double zoomInFactor>;
+        $stack9 = this.<org.jfree.chart.ChartPanel: org.jfree.chart.ChartRenderingInfo info>;
+        $stack16 = virtualinvoke $stack9.<org.jfree.chart.ChartRenderingInfo: org.jfree.chart.plot.PlotRenderingInfo getPlotInfo()>();
+        $stack13 = new java.awt.Point;
+        $stack12 = (int) x;
+        $stack11 = (int) y;
+        specialinvoke $stack13.<java.awt.Point: void <init>(int,int)>($stack12, $stack11);
+        $stack15 = virtualinvoke this.<org.jfree.chart.ChartPanel: java.awt.geom.Point2D translateScreenToJava2D(java.awt.Point)>($stack13);
+        $stack14 = this.<org.jfree.chart.ChartPanel: boolean zoomAroundAnchor>;
+        interfaceinvoke z.<org.jfree.chart.plot.Zoomable: void zoomRangeAxes(double,org.jfree.chart.plot.PlotRenderingInfo,java.awt.geom.Point2D,boolean)>($stack10, $stack16, $stack15, $stack14);
+    
+      label1:
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.ChartPanel: boolean getZoomAroundAnchor()> ----
+    {
+        boolean $stack1;
+        org.jfree.chart.ChartPanel this;
+    
+    
+        this := @this: org.jfree.chart.ChartPanel;
+        $stack1 = this.<org.jfree.chart.ChartPanel: boolean zoomAroundAnchor>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.ChartPanel: int getMaximumDrawHeight()> ----
+    {
+        int $stack1;
+        org.jfree.chart.ChartPanel this;
+    
+    
+        this := @this: org.jfree.chart.ChartPanel;
+        $stack1 = this.<org.jfree.chart.ChartPanel: int maximumDrawHeight>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.ChartPanel: boolean getVerticalAxisTrace()> ----
+    {
+        boolean $stack1;
+        org.jfree.chart.ChartPanel this;
+    
+    
+        this := @this: org.jfree.chart.ChartPanel;
+        $stack1 = this.<org.jfree.chart.ChartPanel: boolean verticalAxisTrace>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.ChartPanel: void doSaveAs()> ----
+    {
+        boolean $stack10, $stack15;
+        int $stack13, $stack14, option;
+        java.awt.Component #l0;
+        java.io.File $stack11, $stack9;
+        java.lang.Object this;
+        java.lang.String $stack7, filename;
+        java.lang.StringBuffer $stack16, $stack17, $stack18;
+        java.util.ResourceBundle $stack6;
+        javax.swing.JFileChooser $stack5, fileChooser;
+        org.jfree.chart.ChartPanel #l1, #l2, #l3, #l4;
+        org.jfree.chart.JFreeChart $stack12;
+        org.jfree.chart.ui.ExtensionFileFilter $stack8, filter;
+    
+    
+        this := @this: org.jfree.chart.ChartPanel;
+        $stack5 = new javax.swing.JFileChooser;
+        specialinvoke $stack5.<javax.swing.JFileChooser: void <init>()>();
+        fileChooser = $stack5;
+        $stack8 = new org.jfree.chart.ui.ExtensionFileFilter;
+        $stack6 = <org.jfree.chart.ChartPanel: java.util.ResourceBundle localizationResources>;
+        $stack7 = virtualinvoke $stack6.<java.util.ResourceBundle: java.lang.String getString(java.lang.String)>("PNG_Image_Files");
+        specialinvoke $stack8.<org.jfree.chart.ui.ExtensionFileFilter: void <init>(java.lang.String,java.lang.String)>($stack7, ".png");
+        filter = $stack8;
+        virtualinvoke $stack5.<javax.swing.JFileChooser: void addChoosableFileFilter(javax.swing.filechooser.FileFilter)>($stack8);
+        #l0 = (java.awt.Component) this;
+        option = virtualinvoke $stack5.<javax.swing.JFileChooser: int showSaveDialog(java.awt.Component)>(#l0);
+    
+        if option != 0 goto label2;
+        $stack9 = virtualinvoke $stack5.<javax.swing.JFileChooser: java.io.File getSelectedFile()>();
+        filename = virtualinvoke $stack9.<java.io.File: java.lang.String getPath()>();
+        #l1 = (org.jfree.chart.ChartPanel) this;
+        $stack10 = virtualinvoke #l1.<org.jfree.chart.ChartPanel: boolean isEnforceFileExtensions()>();
+    
+        if $stack10 == 0 goto label1;
+        $stack15 = virtualinvoke filename.<java.lang.String: boolean endsWith(java.lang.String)>(".png");
+    
+        if $stack15 != 0 goto label1;
+        $stack16 = new java.lang.StringBuffer;
+        specialinvoke $stack16.<java.lang.StringBuffer: void <init>()>();
+        $stack17 = virtualinvoke $stack16.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>(filename);
+        $stack18 = virtualinvoke $stack17.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>(".png");
+        filename = virtualinvoke $stack18.<java.lang.StringBuffer: java.lang.String toString()>();
+    
+      label1:
+        $stack11 = new java.io.File;
+        specialinvoke $stack11.<java.io.File: void <init>(java.lang.String)>(filename);
+        #l3 = (org.jfree.chart.ChartPanel) this;
+        $stack12 = #l3.<org.jfree.chart.ChartPanel: org.jfree.chart.JFreeChart chart>;
+        #l2 = (org.jfree.chart.ChartPanel) this;
+        $stack14 = virtualinvoke #l2.<org.jfree.chart.ChartPanel: int getWidth()>();
+        #l4 = (org.jfree.chart.ChartPanel) this;
+        $stack13 = virtualinvoke #l4.<org.jfree.chart.ChartPanel: int getHeight()>();
+        staticinvoke <org.jfree.chart.ChartUtilities: void saveChartAsPNG(java.io.File,org.jfree.chart.JFreeChart,int,int)>($stack11, $stack12, $stack14, $stack13);
+    
+      label2:
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.ChartPanel: int print(java.awt.Graphics,java.awt.print.PageFormat,int)> ----
+    {
+        double h, w, x, y;
+        int pageIndex;
+        java.awt.Graphics g;
+        java.awt.Graphics2D g2;
+        java.awt.geom.Point2D $stack15;
+        java.awt.geom.Rectangle2D #l0;
+        java.awt.geom.Rectangle2D$Double #l1;
+        java.awt.print.PageFormat pf;
+        java.lang.Object $stack13;
+        org.jfree.chart.ChartPanel this;
+        org.jfree.chart.JFreeChart $stack14;
+    
+    
+        this := @this: org.jfree.chart.ChartPanel;
+        g := @parameter0: java.awt.Graphics;
+        pf := @parameter1: java.awt.print.PageFormat;
+        pageIndex := @parameter2: int;
+    
+        if pageIndex == 0 goto label1;
+    
+        return 1;
+    
+      label1:
+        g2 = (java.awt.Graphics2D) g;
+        x = virtualinvoke pf.<java.awt.print.PageFormat: double getImageableX()>();
+        y = virtualinvoke pf.<java.awt.print.PageFormat: double getImageableY()>();
+        w = virtualinvoke pf.<java.awt.print.PageFormat: double getImageableWidth()>();
+        h = virtualinvoke pf.<java.awt.print.PageFormat: double getImageableHeight()>();
+        $stack14 = this.<org.jfree.chart.ChartPanel: org.jfree.chart.JFreeChart chart>;
+        $stack13 = new java.awt.geom.Rectangle2D$Double;
+        #l1 = (java.awt.geom.Rectangle2D$Double) $stack13;
+        specialinvoke #l1.<java.awt.geom.Rectangle2D$Double: void <init>(double,double,double,double)>(x, y, w, h);
+        $stack15 = this.<org.jfree.chart.ChartPanel: java.awt.geom.Point2D anchor>;
+        #l0 = (java.awt.geom.Rectangle2D) $stack13;
+        virtualinvoke $stack14.<org.jfree.chart.JFreeChart: void draw(java.awt.Graphics2D,java.awt.geom.Rectangle2D,java.awt.geom.Point2D,org.jfree.chart.ChartRenderingInfo)>(g2, #l0, $stack15, null);
+    
+        return 0;
+    }
+
+    // ---- method: <org.jfree.chart.ChartPanel: void zoomInBoth(double,double)> ----
+    {
+        double x, y;
+        org.jfree.chart.ChartPanel this;
+    
+    
+        this := @this: org.jfree.chart.ChartPanel;
+        x := @parameter0: double;
+        y := @parameter1: double;
+        virtualinvoke this.<org.jfree.chart.ChartPanel: void zoomInDomain(double,double)>(x, y);
+        virtualinvoke this.<org.jfree.chart.ChartPanel: void zoomInRange(double,double)>(x, y);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.ChartPanel: void paintComponent(java.awt.Graphics)> ----
+    {
+        boolean $stack51, $stack67, clearBuffer#0, scale;
+        byte $stack40, $stack43, $stack46, $stack49, $stack91, $stack95;
+        double $stack101, $stack102, $stack105, $stack106, $stack109, $stack110, $stack22, $stack23, $stack25, $stack26, $stack28, $stack29, $stack31, $stack32, $stack33, $stack34, $stack35, $stack36, $stack39, $stack42, $stack45, $stack48, $stack57, $stack58, $stack60, $stack62, $stack73, $stack74, $stack81, $stack82, $stack89, $stack90, $stack93, $stack94, $stack97, $stack98, drawHeight, drawWidth;
+        int $stack100, $stack103, $stack104, $stack107, $stack108, $stack111, $stack19, $stack20, $stack21, $stack24, $stack27, $stack30, $stack38, $stack41, $stack44, $stack47, $stack52, $stack53, $stack61, $stack63, $stack64, $stack65, $stack68, $stack69, $stack71, $stack72, $stack86, $stack87, $stack88, $stack92, $stack96, $stack99;
+        java.awt.Dimension size;
+        java.awt.Graphics $stack18, $stack77, g;
+        java.awt.Graphics2D bufferG2, g2;
+        java.awt.Image $stack59, $stack66, $stack70, $stack76;
+        java.awt.Insets insets;
+        java.awt.geom.AffineTransform bufferArea#1, clearBuffer#1, saved, st;
+        java.awt.geom.Point2D $stack55, $stack79, $stack84;
+        java.awt.geom.Rectangle2D #l14, #l15, #l16, #l20, #l31, #l38, #l4, #l59, #l62;
+        java.awt.geom.Rectangle2D$Double #l0, #l46, #l8, available, bufferArea#0, chartArea;
+        java.awt.image.ImageObserver #l2;
+        java.lang.Object $stack37, $stack50, $stack75, this;
+        javax.swing.JPanel #l70;
+        org.jfree.chart.ChartPanel #l1, #l10, #l11, #l12, #l13, #l17, #l18, #l19, #l21, #l22, #l23, #l24, #l25, #l26, #l27, #l28, #l29, #l3, #l30, #l32, #l33, #l34, #l35, #l36, #l37, #l39, #l40, #l41, #l42, #l43, #l44, #l45, #l47, #l48, #l49, #l5, #l50, #l51, #l52, #l53, #l54, #l55, #l56, #l57, #l58, #l6, #l60, #l61, #l63, #l64, #l65, #l66, #l67, #l68, #l69, #l7, #l9;
+        org.jfree.chart.ChartRenderingInfo $stack54, $stack78, $stack83;
+        org.jfree.chart.JFreeChart $stack17, $stack56, $stack80, $stack85;
+    
+    
+        this := @this: org.jfree.chart.ChartPanel;
+        g := @parameter0: java.awt.Graphics;
+        #l70 = (javax.swing.JPanel) this;
+        specialinvoke #l70.<javax.swing.JPanel: void paintComponent(java.awt.Graphics)>(g);
+        #l63 = (org.jfree.chart.ChartPanel) this;
+        $stack17 = #l63.<org.jfree.chart.ChartPanel: org.jfree.chart.JFreeChart chart>;
+    
+        if $stack17 != null goto label01;
+    
+        return;
+    
+      label01:
+        $stack18 = virtualinvoke g.<java.awt.Graphics: java.awt.Graphics create()>();
+        g2 = (java.awt.Graphics2D) $stack18;
+        #l21 = (org.jfree.chart.ChartPanel) this;
+        size = virtualinvoke #l21.<org.jfree.chart.ChartPanel: java.awt.Dimension getSize()>();
+        #l52 = (org.jfree.chart.ChartPanel) this;
+        insets = virtualinvoke #l52.<org.jfree.chart.ChartPanel: java.awt.Insets getInsets()>();
+        $stack37 = new java.awt.geom.Rectangle2D$Double;
+        $stack19 = insets.<java.awt.Insets: int left>;
+        $stack36 = (double) $stack19;
+        $stack20 = insets.<java.awt.Insets: int top>;
+        $stack35 = (double) $stack20;
+        $stack22 = virtualinvoke size.<java.awt.Dimension: double getWidth()>();
+        $stack21 = insets.<java.awt.Insets: int left>;
+        $stack23 = (double) $stack21;
+        $stack25 = $stack22 - $stack23;
+        $stack24 = insets.<java.awt.Insets: int right>;
+        $stack26 = (double) $stack24;
+        $stack34 = $stack25 - $stack26;
+        $stack28 = virtualinvoke size.<java.awt.Dimension: double getHeight()>();
+        $stack27 = insets.<java.awt.Insets: int top>;
+        $stack29 = (double) $stack27;
+        $stack31 = $stack28 - $stack29;
+        $stack30 = insets.<java.awt.Insets: int bottom>;
+        $stack32 = (double) $stack30;
+        $stack33 = $stack31 - $stack32;
+        #l46 = (java.awt.geom.Rectangle2D$Double) $stack37;
+        specialinvoke #l46.<java.awt.geom.Rectangle2D$Double: void <init>(double,double,double,double)>($stack36, $stack35, $stack34, $stack33);
+        available = (java.awt.geom.Rectangle2D$Double) $stack37;
+        scale = 0;
+        #l14 = (java.awt.geom.Rectangle2D) $stack37;
+        drawWidth = virtualinvoke #l14.<java.awt.geom.Rectangle2D: double getWidth()>();
+        #l4 = (java.awt.geom.Rectangle2D) $stack37;
+        drawHeight = virtualinvoke #l4.<java.awt.geom.Rectangle2D: double getHeight()>();
+        #l32 = (org.jfree.chart.ChartPanel) this;
+        #l32.<org.jfree.chart.ChartPanel: double scaleX> = 1.0;
+        #l1 = (org.jfree.chart.ChartPanel) this;
+        #l1.<org.jfree.chart.ChartPanel: double scaleY> = 1.0;
+        #l28 = (org.jfree.chart.ChartPanel) this;
+        $stack38 = #l28.<org.jfree.chart.ChartPanel: int minimumDrawWidth>;
+        $stack39 = (double) $stack38;
+        $stack40 = drawWidth cmpg $stack39;
+    
+        if $stack40 >= 0 goto label02;
+        #l42 = (org.jfree.chart.ChartPanel) this;
+        $stack108 = #l42.<org.jfree.chart.ChartPanel: int minimumDrawWidth>;
+        $stack109 = (double) $stack108;
+        $stack110 = drawWidth / $stack109;
+        #l3 = (org.jfree.chart.ChartPanel) this;
+        #l3.<org.jfree.chart.ChartPanel: double scaleX> = $stack110;
+        #l29 = (org.jfree.chart.ChartPanel) this;
+        $stack111 = #l29.<org.jfree.chart.ChartPanel: int minimumDrawWidth>;
+        drawWidth = (double) $stack111;
+        scale = 1;
+    
+        goto label03;
+    
+      label02:
+        #l68 = (org.jfree.chart.ChartPanel) this;
+        $stack41 = #l68.<org.jfree.chart.ChartPanel: int maximumDrawWidth>;
+        $stack42 = (double) $stack41;
+        $stack43 = drawWidth cmpl $stack42;
+    
+        if $stack43 <= 0 goto label03;
+        #l11 = (org.jfree.chart.ChartPanel) this;
+        $stack104 = #l11.<org.jfree.chart.ChartPanel: int maximumDrawWidth>;
+        $stack105 = (double) $stack104;
+        $stack106 = drawWidth / $stack105;
+        #l48 = (org.jfree.chart.ChartPanel) this;
+        #l48.<org.jfree.chart.ChartPanel: double scaleX> = $stack106;
+        #l34 = (org.jfree.chart.ChartPanel) this;
+        $stack107 = #l34.<org.jfree.chart.ChartPanel: int maximumDrawWidth>;
+        drawWidth = (double) $stack107;
+        scale = 1;
+    
+      label03:
+        #l5 = (org.jfree.chart.ChartPanel) this;
+        $stack44 = #l5.<org.jfree.chart.ChartPanel: int minimumDrawHeight>;
+        $stack45 = (double) $stack44;
+        $stack46 = drawHeight cmpg $stack45;
+    
+        if $stack46 >= 0 goto label04;
+        #l41 = (org.jfree.chart.ChartPanel) this;
+        $stack100 = #l41.<org.jfree.chart.ChartPanel: int minimumDrawHeight>;
+        $stack101 = (double) $stack100;
+        $stack102 = drawHeight / $stack101;
+        #l9 = (org.jfree.chart.ChartPanel) this;
+        #l9.<org.jfree.chart.ChartPanel: double scaleY> = $stack102;
+        #l47 = (org.jfree.chart.ChartPanel) this;
+        $stack103 = #l47.<org.jfree.chart.ChartPanel: int minimumDrawHeight>;
+        drawHeight = (double) $stack103;
+        scale = 1;
+    
+        goto label05;
+    
+      label04:
+        #l27 = (org.jfree.chart.ChartPanel) this;
+        $stack47 = #l27.<org.jfree.chart.ChartPanel: int maximumDrawHeight>;
+        $stack48 = (double) $stack47;
+        $stack49 = drawHeight cmpl $stack48;
+    
+        if $stack49 <= 0 goto label05;
+        #l53 = (org.jfree.chart.ChartPanel) this;
+        $stack96 = #l53.<org.jfree.chart.ChartPanel: int maximumDrawHeight>;
+        $stack97 = (double) $stack96;
+        $stack98 = drawHeight / $stack97;
+        #l61 = (org.jfree.chart.ChartPanel) this;
+        #l61.<org.jfree.chart.ChartPanel: double scaleY> = $stack98;
+        #l44 = (org.jfree.chart.ChartPanel) this;
+        $stack99 = #l44.<org.jfree.chart.ChartPanel: int maximumDrawHeight>;
+        drawHeight = (double) $stack99;
+        scale = 1;
+    
+      label05:
+        $stack50 = new java.awt.geom.Rectangle2D$Double;
+        #l8 = (java.awt.geom.Rectangle2D$Double) $stack50;
+        specialinvoke #l8.<java.awt.geom.Rectangle2D$Double: void <init>(double,double,double,double)>(0.0, 0.0, drawWidth, drawHeight);
+        chartArea = (java.awt.geom.Rectangle2D$Double) $stack50;
+        #l50 = (org.jfree.chart.ChartPanel) this;
+        $stack51 = #l50.<org.jfree.chart.ChartPanel: boolean useBuffer>;
+    
+        if $stack51 == 0 goto label12;
+        clearBuffer#0 = 1;
+        #l19 = (org.jfree.chart.ChartPanel) this;
+        $stack59 = #l19.<org.jfree.chart.ChartPanel: java.awt.Image chartBuffer>;
+    
+        if $stack59 == null goto label06;
+        #l54 = (org.jfree.chart.ChartPanel) this;
+        $stack88 = #l54.<org.jfree.chart.ChartPanel: int chartBufferWidth>;
+        $stack89 = (double) $stack88;
+        #l62 = (java.awt.geom.Rectangle2D) $stack37;
+        $stack90 = virtualinvoke #l62.<java.awt.geom.Rectangle2D: double getWidth()>();
+        $stack91 = $stack89 cmpl $stack90;
+    
+        if $stack91 != 0 goto label06;
+        #l18 = (org.jfree.chart.ChartPanel) this;
+        $stack92 = #l18.<org.jfree.chart.ChartPanel: int chartBufferHeight>;
+        $stack93 = (double) $stack92;
+        #l59 = (java.awt.geom.Rectangle2D) $stack37;
+        $stack94 = virtualinvoke #l59.<java.awt.geom.Rectangle2D: double getHeight()>();
+        $stack95 = $stack93 cmpl $stack94;
+    
+        if $stack95 == 0 goto label07;
+    
+      label06:
+        #l31 = (java.awt.geom.Rectangle2D) $stack37;
+        $stack60 = virtualinvoke #l31.<java.awt.geom.Rectangle2D: double getWidth()>();
+        $stack61 = (int) $stack60;
+        #l40 = (org.jfree.chart.ChartPanel) this;
+        #l40.<org.jfree.chart.ChartPanel: int chartBufferWidth> = $stack61;
+        #l38 = (java.awt.geom.Rectangle2D) $stack37;
+        $stack62 = virtualinvoke #l38.<java.awt.geom.Rectangle2D: double getHeight()>();
+        $stack63 = (int) $stack62;
+        #l45 = (org.jfree.chart.ChartPanel) this;
+        #l45.<org.jfree.chart.ChartPanel: int chartBufferHeight> = $stack63;
+        #l13 = (org.jfree.chart.ChartPanel) this;
+        $stack65 = #l13.<org.jfree.chart.ChartPanel: int chartBufferWidth>;
+        #l55 = (org.jfree.chart.ChartPanel) this;
+        $stack64 = #l55.<org.jfree.chart.ChartPanel: int chartBufferHeight>;
+        #l26 = (org.jfree.chart.ChartPanel) this;
+        $stack66 = virtualinvoke #l26.<org.jfree.chart.ChartPanel: java.awt.Image createImage(int,int)>($stack65, $stack64);
+        #l39 = (org.jfree.chart.ChartPanel) this;
+        #l39.<org.jfree.chart.ChartPanel: java.awt.Image chartBuffer> = $stack66;
+        #l6 = (org.jfree.chart.ChartPanel) this;
+        #l6.<org.jfree.chart.ChartPanel: boolean refreshBuffer> = 1;
+        clearBuffer#0 = 0;
+    
+      label07:
+        #l56 = (org.jfree.chart.ChartPanel) this;
+        $stack67 = #l56.<org.jfree.chart.ChartPanel: boolean refreshBuffer>;
+    
+        if $stack67 == 0 goto label11;
+        $stack75 = new java.awt.geom.Rectangle2D$Double;
+        #l36 = (org.jfree.chart.ChartPanel) this;
+        $stack71 = #l36.<org.jfree.chart.ChartPanel: int chartBufferWidth>;
+        $stack74 = (double) $stack71;
+        #l17 = (org.jfree.chart.ChartPanel) this;
+        $stack72 = #l17.<org.jfree.chart.ChartPanel: int chartBufferHeight>;
+        $stack73 = (double) $stack72;
+        #l0 = (java.awt.geom.Rectangle2D$Double) $stack75;
+        specialinvoke #l0.<java.awt.geom.Rectangle2D$Double: void <init>(double,double,double,double)>(0.0, 0.0, $stack74, $stack73);
+        bufferArea#0 = (java.awt.geom.Rectangle2D$Double) $stack75;
+        #l67 = (org.jfree.chart.ChartPanel) this;
+        $stack76 = #l67.<org.jfree.chart.ChartPanel: java.awt.Image chartBuffer>;
+        $stack77 = virtualinvoke $stack76.<java.awt.Image: java.awt.Graphics getGraphics()>();
+        bufferG2 = (java.awt.Graphics2D) $stack77;
+    
+        if clearBuffer#0 == 0 goto label08;
+        #l43 = (org.jfree.chart.ChartPanel) this;
+        $stack87 = #l43.<org.jfree.chart.ChartPanel: int chartBufferWidth>;
+        #l12 = (org.jfree.chart.ChartPanel) this;
+        $stack86 = #l12.<org.jfree.chart.ChartPanel: int chartBufferHeight>;
+        virtualinvoke bufferG2.<java.awt.Graphics2D: void clearRect(int,int,int,int)>(0, 0, $stack87, $stack86);
+    
+      label08:
+        if scale == 0 goto label09;
+        saved = virtualinvoke bufferG2.<java.awt.Graphics2D: java.awt.geom.AffineTransform getTransform()>();
+        #l60 = (org.jfree.chart.ChartPanel) this;
+        $stack82 = #l60.<org.jfree.chart.ChartPanel: double scaleX>;
+        #l66 = (org.jfree.chart.ChartPanel) this;
+        $stack81 = #l66.<org.jfree.chart.ChartPanel: double scaleY>;
+        st = staticinvoke <java.awt.geom.AffineTransform: java.awt.geom.AffineTransform getScaleInstance(double,double)>($stack82, $stack81);
+        virtualinvoke bufferG2.<java.awt.Graphics2D: void transform(java.awt.geom.AffineTransform)>(st);
+        #l22 = (org.jfree.chart.ChartPanel) this;
+        $stack85 = #l22.<org.jfree.chart.ChartPanel: org.jfree.chart.JFreeChart chart>;
+        #l24 = (org.jfree.chart.ChartPanel) this;
+        $stack84 = #l24.<org.jfree.chart.ChartPanel: java.awt.geom.Point2D anchor>;
+        #l33 = (org.jfree.chart.ChartPanel) this;
+        $stack83 = #l33.<org.jfree.chart.ChartPanel: org.jfree.chart.ChartRenderingInfo info>;
+        #l16 = (java.awt.geom.Rectangle2D) $stack50;
+        virtualinvoke $stack85.<org.jfree.chart.JFreeChart: void draw(java.awt.Graphics2D,java.awt.geom.Rectangle2D,java.awt.geom.Point2D,org.jfree.chart.ChartRenderingInfo)>(bufferG2, #l16, $stack84, $stack83);
+        virtualinvoke bufferG2.<java.awt.Graphics2D: void setTransform(java.awt.geom.AffineTransform)>(saved);
+    
+        goto label10;
+    
+      label09:
+        #l49 = (org.jfree.chart.ChartPanel) this;
+        $stack80 = #l49.<org.jfree.chart.ChartPanel: org.jfree.chart.JFreeChart chart>;
+        #l7 = (org.jfree.chart.ChartPanel) this;
+        $stack79 = #l7.<org.jfree.chart.ChartPanel: java.awt.geom.Point2D anchor>;
+        #l64 = (org.jfree.chart.ChartPanel) this;
+        $stack78 = #l64.<org.jfree.chart.ChartPanel: org.jfree.chart.ChartRenderingInfo info>;
+        #l15 = (java.awt.geom.Rectangle2D) $stack75;
+        virtualinvoke $stack80.<org.jfree.chart.JFreeChart: void draw(java.awt.Graphics2D,java.awt.geom.Rectangle2D,java.awt.geom.Point2D,org.jfree.chart.ChartRenderingInfo)>(bufferG2, #l15, $stack79, $stack78);
+    
+      label10:
+        #l30 = (org.jfree.chart.ChartPanel) this;
+        #l30.<org.jfree.chart.ChartPanel: boolean refreshBuffer> = 0;
+    
+      label11:
+        #l23 = (org.jfree.chart.ChartPanel) this;
+        $stack70 = #l23.<org.jfree.chart.ChartPanel: java.awt.Image chartBuffer>;
+        $stack69 = insets.<java.awt.Insets: int left>;
+        $stack68 = insets.<java.awt.Insets: int top>;
+        #l2 = (java.awt.image.ImageObserver) this;
+        virtualinvoke g2.<java.awt.Graphics2D: boolean drawImage(java.awt.Image,int,int,java.awt.image.ImageObserver)>($stack70, $stack69, $stack68, #l2);
+    
+        goto label14;
+    
+      label12:
+        clearBuffer#1 = virtualinvoke g2.<java.awt.Graphics2D: java.awt.geom.AffineTransform getTransform()>();
+        $stack53 = insets.<java.awt.Insets: int left>;
+        $stack52 = insets.<java.awt.Insets: int top>;
+        virtualinvoke g2.<java.awt.Graphics2D: void translate(int,int)>($stack53, $stack52);
+    
+        if scale == 0 goto label13;
+        #l58 = (org.jfree.chart.ChartPanel) this;
+        $stack58 = #l58.<org.jfree.chart.ChartPanel: double scaleX>;
+        #l65 = (org.jfree.chart.ChartPanel) this;
+        $stack57 = #l65.<org.jfree.chart.ChartPanel: double scaleY>;
+        bufferArea#1 = staticinvoke <java.awt.geom.AffineTransform: java.awt.geom.AffineTransform getScaleInstance(double,double)>($stack58, $stack57);
+        virtualinvoke g2.<java.awt.Graphics2D: void transform(java.awt.geom.AffineTransform)>(bufferArea#1);
+    
+      label13:
+        #l57 = (org.jfree.chart.ChartPanel) this;
+        $stack56 = #l57.<org.jfree.chart.ChartPanel: org.jfree.chart.JFreeChart chart>;
+        #l37 = (org.jfree.chart.ChartPanel) this;
+        $stack55 = #l37.<org.jfree.chart.ChartPanel: java.awt.geom.Point2D anchor>;
+        #l51 = (org.jfree.chart.ChartPanel) this;
+        $stack54 = #l51.<org.jfree.chart.ChartPanel: org.jfree.chart.ChartRenderingInfo info>;
+        #l20 = (java.awt.geom.Rectangle2D) $stack50;
+        virtualinvoke $stack56.<org.jfree.chart.JFreeChart: void draw(java.awt.Graphics2D,java.awt.geom.Rectangle2D,java.awt.geom.Point2D,org.jfree.chart.ChartRenderingInfo)>(g2, #l20, $stack55, $stack54);
+        virtualinvoke g2.<java.awt.Graphics2D: void setTransform(java.awt.geom.AffineTransform)>(clearBuffer#1);
+    
+      label14:
+        #l25 = (org.jfree.chart.ChartPanel) this;
+        specialinvoke #l25.<org.jfree.chart.ChartPanel: void drawZoomRectangle(java.awt.Graphics2D)>(g2);
+        virtualinvoke g2.<java.awt.Graphics2D: void dispose()>();
+        #l35 = (org.jfree.chart.ChartPanel) this;
+        #l35.<org.jfree.chart.ChartPanel: java.awt.geom.Point2D anchor> = null;
+        #l10 = (org.jfree.chart.ChartPanel) this;
+        #l10.<org.jfree.chart.ChartPanel: java.awt.geom.Line2D verticalTraceLine> = null;
+        #l69 = (org.jfree.chart.ChartPanel) this;
+        #l69.<org.jfree.chart.ChartPanel: java.awt.geom.Line2D horizontalTraceLine> = null;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.ChartPanel: java.awt.geom.Point2D getAnchor()> ----
+    {
+        java.awt.geom.Point2D $stack1;
+        org.jfree.chart.ChartPanel this;
+    
+    
+        this := @this: org.jfree.chart.ChartPanel;
+        $stack1 = this.<org.jfree.chart.ChartPanel: java.awt.geom.Point2D anchor>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.ChartPanel: void mouseExited(java.awt.event.MouseEvent)> ----
+    {
+        boolean $stack3;
+        int $stack4, $stack5, $stack6;
+        java.awt.event.MouseEvent e;
+        javax.swing.ToolTipManager ttm;
+        org.jfree.chart.ChartPanel this;
+    
+    
+        this := @this: org.jfree.chart.ChartPanel;
+        e := @parameter0: java.awt.event.MouseEvent;
+        $stack3 = this.<org.jfree.chart.ChartPanel: boolean ownToolTipDelaysActive>;
+    
+        if $stack3 == 0 goto label1;
+        ttm = staticinvoke <javax.swing.ToolTipManager: javax.swing.ToolTipManager sharedInstance()>();
+        $stack4 = this.<org.jfree.chart.ChartPanel: int originalToolTipInitialDelay>;
+        virtualinvoke ttm.<javax.swing.ToolTipManager: void setInitialDelay(int)>($stack4);
+        $stack5 = this.<org.jfree.chart.ChartPanel: int originalToolTipReshowDelay>;
+        virtualinvoke ttm.<javax.swing.ToolTipManager: void setReshowDelay(int)>($stack5);
+        $stack6 = this.<org.jfree.chart.ChartPanel: int originalToolTipDismissDelay>;
+        virtualinvoke ttm.<javax.swing.ToolTipManager: void setDismissDelay(int)>($stack6);
+        this.<org.jfree.chart.ChartPanel: boolean ownToolTipDelaysActive> = 0;
+    
+      label1:
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.ChartPanel: int getMinimumDrawWidth()> ----
+    {
+        int $stack1;
+        org.jfree.chart.ChartPanel this;
+    
+    
+        this := @this: org.jfree.chart.ChartPanel;
+        $stack1 = this.<org.jfree.chart.ChartPanel: int minimumDrawWidth>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.ChartPanel: void setReshowDelay(int)> ----
+    {
+        int delay;
+        org.jfree.chart.ChartPanel this;
+    
+    
+        this := @this: org.jfree.chart.ChartPanel;
+        delay := @parameter0: int;
+        this.<org.jfree.chart.ChartPanel: int ownToolTipReshowDelay> = delay;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.ChartPanel: org.jfree.chart.entity.ChartEntity getEntityForPoint(int,int)> ----
+    {
+        double $stack13, $stack14, $stack17, $stack18, x, y;
+        int $stack11, $stack12, $stack15, $stack16, viewX, viewY;
+        java.awt.Insets insets;
+        org.jfree.chart.ChartPanel this;
+        org.jfree.chart.ChartRenderingInfo $stack10, $stack19;
+        org.jfree.chart.entity.ChartEntity result;
+        org.jfree.chart.entity.EntityCollection entities;
+    
+    
+        this := @this: org.jfree.chart.ChartPanel;
+        viewX := @parameter0: int;
+        viewY := @parameter1: int;
+        result = null;
+        $stack10 = this.<org.jfree.chart.ChartPanel: org.jfree.chart.ChartRenderingInfo info>;
+    
+        if $stack10 == null goto label2;
+        insets = virtualinvoke this.<org.jfree.chart.ChartPanel: java.awt.Insets getInsets()>();
+        $stack11 = insets.<java.awt.Insets: int left>;
+        $stack12 = viewX - $stack11;
+        $stack13 = (double) $stack12;
+        $stack14 = this.<org.jfree.chart.ChartPanel: double scaleX>;
+        x = $stack13 / $stack14;
+        $stack15 = insets.<java.awt.Insets: int top>;
+        $stack16 = viewY - $stack15;
+        $stack17 = (double) $stack16;
+        $stack18 = this.<org.jfree.chart.ChartPanel: double scaleY>;
+        y = $stack17 / $stack18;
+        $stack19 = this.<org.jfree.chart.ChartPanel: org.jfree.chart.ChartRenderingInfo info>;
+        entities = virtualinvoke $stack19.<org.jfree.chart.ChartRenderingInfo: org.jfree.chart.entity.EntityCollection getEntityCollection()>();
+    
+        if entities == null goto label1;
+        result = interfaceinvoke entities.<org.jfree.chart.entity.EntityCollection: org.jfree.chart.entity.ChartEntity getEntity(double,double)>(x, y);
+    
+        goto label2;
+    
+      label1:
+        result = null;
+    
+      label2:
+        return result;
+    }
+
+    // ---- method: <org.jfree.chart.ChartPanel: void zoomOutRange(double,double)> ----
+    {
+        boolean $stack14, $stack8;
+        double $stack10, x, y;
+        int $stack11, $stack12;
+        java.awt.Point $stack13;
+        java.awt.geom.Point2D $stack15;
+        org.jfree.chart.ChartPanel this;
+        org.jfree.chart.ChartRenderingInfo $stack9;
+        org.jfree.chart.JFreeChart $stack7;
+        org.jfree.chart.plot.Plot p;
+        org.jfree.chart.plot.PlotRenderingInfo $stack16;
+        org.jfree.chart.plot.Zoomable z;
+    
+    
+        this := @this: org.jfree.chart.ChartPanel;
+        x := @parameter0: double;
+        y := @parameter1: double;
+        $stack7 = this.<org.jfree.chart.ChartPanel: org.jfree.chart.JFreeChart chart>;
+        p = virtualinvoke $stack7.<org.jfree.chart.JFreeChart: org.jfree.chart.plot.Plot getPlot()>();
+        $stack8 = p instanceof org.jfree.chart.plot.Zoomable;
+    
+        if $stack8 == 0 goto label1;
+        z = (org.jfree.chart.plot.Zoomable) p;
+        $stack10 = this.<org.jfree.chart.ChartPanel: double zoomOutFactor>;
+        $stack9 = this.<org.jfree.chart.ChartPanel: org.jfree.chart.ChartRenderingInfo info>;
+        $stack16 = virtualinvoke $stack9.<org.jfree.chart.ChartRenderingInfo: org.jfree.chart.plot.PlotRenderingInfo getPlotInfo()>();
+        $stack13 = new java.awt.Point;
+        $stack12 = (int) x;
+        $stack11 = (int) y;
+        specialinvoke $stack13.<java.awt.Point: void <init>(int,int)>($stack12, $stack11);
+        $stack15 = virtualinvoke this.<org.jfree.chart.ChartPanel: java.awt.geom.Point2D translateScreenToJava2D(java.awt.Point)>($stack13);
+        $stack14 = this.<org.jfree.chart.ChartPanel: boolean zoomAroundAnchor>;
+        interfaceinvoke z.<org.jfree.chart.plot.Zoomable: void zoomRangeAxes(double,org.jfree.chart.plot.PlotRenderingInfo,java.awt.geom.Point2D,boolean)>($stack10, $stack16, $stack15, $stack14);
+    
+      label1:
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.ChartPanel: void chartProgress(org.jfree.chart.event.ChartProgressEvent)> ----
+    {
+        org.jfree.chart.ChartPanel this;
+        org.jfree.chart.event.ChartProgressEvent event;
+    
+    
+        this := @this: org.jfree.chart.ChartPanel;
+        event := @parameter0: org.jfree.chart.event.ChartProgressEvent;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.ChartPanel: void restoreAutoRangeBounds()> ----
+    {
+        boolean $stack5;
+        java.awt.Point #l0, $stack6, zp;
+        java.awt.geom.Point2D #l1;
+        java.lang.Object $stack7;
+        org.jfree.chart.ChartPanel this;
+        org.jfree.chart.ChartRenderingInfo $stack8;
+        org.jfree.chart.JFreeChart $stack4;
+        org.jfree.chart.plot.Plot p;
+        org.jfree.chart.plot.PlotRenderingInfo $stack9;
+        org.jfree.chart.plot.Zoomable z;
+    
+    
+        this := @this: org.jfree.chart.ChartPanel;
+        $stack4 = this.<org.jfree.chart.ChartPanel: org.jfree.chart.JFreeChart chart>;
+        p = virtualinvoke $stack4.<org.jfree.chart.JFreeChart: org.jfree.chart.plot.Plot getPlot()>();
+        $stack5 = p instanceof org.jfree.chart.plot.Zoomable;
+    
+        if $stack5 == 0 goto label3;
+        z = (org.jfree.chart.plot.Zoomable) p;
+        $stack6 = this.<org.jfree.chart.ChartPanel: java.awt.Point zoomPoint>;
+    
+        if $stack6 == null goto label1;
+        $stack7 = this.<org.jfree.chart.ChartPanel: java.awt.Point zoomPoint>;
+    
+        goto label2;
+    
+      label1:
+        $stack7 = new java.awt.Point;
+        #l0 = (java.awt.Point) $stack7;
+        specialinvoke #l0.<java.awt.Point: void <init>()>();
+    
+      label2:
+        zp = (java.awt.Point) $stack7;
+        $stack8 = this.<org.jfree.chart.ChartPanel: org.jfree.chart.ChartRenderingInfo info>;
+        $stack9 = virtualinvoke $stack8.<org.jfree.chart.ChartRenderingInfo: org.jfree.chart.plot.PlotRenderingInfo getPlotInfo()>();
+        #l1 = (java.awt.geom.Point2D) $stack7;
+        interfaceinvoke z.<org.jfree.chart.plot.Zoomable: void zoomRangeAxes(double,org.jfree.chart.plot.PlotRenderingInfo,java.awt.geom.Point2D)>(0.0, $stack9, #l1);
+    
+      label3:
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.ChartPanel: void zoom(java.awt.geom.Rectangle2D)> ----
+    {
+        boolean $stack48;
+        byte $stack28, $stack30;
+        double $stack15, $stack16, $stack17, $stack18, $stack23, $stack24, $stack27, $stack29, $stack31, $stack32, $stack33, $stack34, $stack35, $stack36, $stack37, $stack38, $stack39, $stack40, $stack41, $stack42, $stack43, $stack44, $stack45, $stack46, hLower, hUpper, vLower, vUpper;
+        int $stack19, $stack20, $stack25, $stack26;
+        java.awt.Point $stack21;
+        java.awt.geom.Point2D selectOrigin;
+        java.awt.geom.Rectangle2D scaledDataArea, selection;
+        org.jfree.chart.ChartPanel this;
+        org.jfree.chart.ChartRenderingInfo $stack22;
+        org.jfree.chart.JFreeChart $stack47;
+        org.jfree.chart.plot.Plot p;
+        org.jfree.chart.plot.PlotOrientation $stack49, $stack50;
+        org.jfree.chart.plot.PlotRenderingInfo plotInfo;
+        org.jfree.chart.plot.Zoomable z;
+    
+    
+        this := @this: org.jfree.chart.ChartPanel;
+        selection := @parameter0: java.awt.geom.Rectangle2D;
+        $stack21 = new java.awt.Point;
+        $stack15 = virtualinvoke selection.<java.awt.geom.Rectangle2D: double getX()>();
+        $stack16 = staticinvoke <java.lang.Math: double ceil(double)>($stack15);
+        $stack20 = (int) $stack16;
+        $stack17 = virtualinvoke selection.<java.awt.geom.Rectangle2D: double getY()>();
+        $stack18 = staticinvoke <java.lang.Math: double ceil(double)>($stack17);
+        $stack19 = (int) $stack18;
+        specialinvoke $stack21.<java.awt.Point: void <init>(int,int)>($stack20, $stack19);
+        selectOrigin = virtualinvoke this.<org.jfree.chart.ChartPanel: java.awt.geom.Point2D translateScreenToJava2D(java.awt.Point)>($stack21);
+        $stack22 = this.<org.jfree.chart.ChartPanel: org.jfree.chart.ChartRenderingInfo info>;
+        plotInfo = virtualinvoke $stack22.<org.jfree.chart.ChartRenderingInfo: org.jfree.chart.plot.PlotRenderingInfo getPlotInfo()>();
+        $stack23 = virtualinvoke selection.<java.awt.geom.Rectangle2D: double getCenterX()>();
+        $stack26 = (int) $stack23;
+        $stack24 = virtualinvoke selection.<java.awt.geom.Rectangle2D: double getCenterY()>();
+        $stack25 = (int) $stack24;
+        scaledDataArea = virtualinvoke this.<org.jfree.chart.ChartPanel: java.awt.geom.Rectangle2D getScreenDataArea(int,int)>($stack26, $stack25);
+        $stack27 = virtualinvoke selection.<java.awt.geom.Rectangle2D: double getHeight()>();
+        $stack28 = $stack27 cmpl 0.0;
+    
+        if $stack28 <= 0 goto label2;
+        $stack29 = virtualinvoke selection.<java.awt.geom.Rectangle2D: double getWidth()>();
+        $stack30 = $stack29 cmpl 0.0;
+    
+        if $stack30 <= 0 goto label2;
+        $stack31 = virtualinvoke selection.<java.awt.geom.Rectangle2D: double getMinX()>();
+        $stack32 = virtualinvoke scaledDataArea.<java.awt.geom.Rectangle2D: double getMinX()>();
+        $stack33 = $stack31 - $stack32;
+        $stack34 = virtualinvoke scaledDataArea.<java.awt.geom.Rectangle2D: double getWidth()>();
+        hLower = $stack33 / $stack34;
+        $stack35 = virtualinvoke selection.<java.awt.geom.Rectangle2D: double getMaxX()>();
+        $stack36 = virtualinvoke scaledDataArea.<java.awt.geom.Rectangle2D: double getMinX()>();
+        $stack37 = $stack35 - $stack36;
+        $stack38 = virtualinvoke scaledDataArea.<java.awt.geom.Rectangle2D: double getWidth()>();
+        hUpper = $stack37 / $stack38;
+        $stack39 = virtualinvoke scaledDataArea.<java.awt.geom.Rectangle2D: double getMaxY()>();
+        $stack40 = virtualinvoke selection.<java.awt.geom.Rectangle2D: double getMaxY()>();
+        $stack41 = $stack39 - $stack40;
+        $stack42 = virtualinvoke scaledDataArea.<java.awt.geom.Rectangle2D: double getHeight()>();
+        vLower = $stack41 / $stack42;
+        $stack43 = virtualinvoke scaledDataArea.<java.awt.geom.Rectangle2D: double getMaxY()>();
+        $stack44 = virtualinvoke selection.<java.awt.geom.Rectangle2D: double getMinY()>();
+        $stack45 = $stack43 - $stack44;
+        $stack46 = virtualinvoke scaledDataArea.<java.awt.geom.Rectangle2D: double getHeight()>();
+        vUpper = $stack45 / $stack46;
+        $stack47 = this.<org.jfree.chart.ChartPanel: org.jfree.chart.JFreeChart chart>;
+        p = virtualinvoke $stack47.<org.jfree.chart.JFreeChart: org.jfree.chart.plot.Plot getPlot()>();
+        $stack48 = p instanceof org.jfree.chart.plot.Zoomable;
+    
+        if $stack48 == 0 goto label2;
+        z = (org.jfree.chart.plot.Zoomable) p;
+        $stack50 = interfaceinvoke z.<org.jfree.chart.plot.Zoomable: org.jfree.chart.plot.PlotOrientation getOrientation()>();
+        $stack49 = <org.jfree.chart.plot.PlotOrientation: org.jfree.chart.plot.PlotOrientation HORIZONTAL>;
+    
+        if $stack50 != $stack49 goto label1;
+        interfaceinvoke z.<org.jfree.chart.plot.Zoomable: void zoomDomainAxes(double,double,org.jfree.chart.plot.PlotRenderingInfo,java.awt.geom.Point2D)>(vLower, vUpper, plotInfo, selectOrigin);
+        interfaceinvoke z.<org.jfree.chart.plot.Zoomable: void zoomRangeAxes(double,double,org.jfree.chart.plot.PlotRenderingInfo,java.awt.geom.Point2D)>(hLower, hUpper, plotInfo, selectOrigin);
+    
+        goto label2;
+    
+      label1:
+        interfaceinvoke z.<org.jfree.chart.plot.Zoomable: void zoomDomainAxes(double,double,org.jfree.chart.plot.PlotRenderingInfo,java.awt.geom.Point2D)>(hLower, hUpper, plotInfo, selectOrigin);
+        interfaceinvoke z.<org.jfree.chart.plot.Zoomable: void zoomRangeAxes(double,double,org.jfree.chart.plot.PlotRenderingInfo,java.awt.geom.Point2D)>(vLower, vUpper, plotInfo, selectOrigin);
+    
+      label2:
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.ChartPanel: void zoomInDomain(double,double)> ----
+    {
+        boolean $stack14, $stack8;
+        double $stack10, x, y;
+        int $stack11, $stack12;
+        java.awt.Point $stack13;
+        java.awt.geom.Point2D $stack15;
+        org.jfree.chart.ChartPanel this;
+        org.jfree.chart.ChartRenderingInfo $stack9;
+        org.jfree.chart.JFreeChart $stack7;
+        org.jfree.chart.plot.Plot p;
+        org.jfree.chart.plot.PlotRenderingInfo $stack16;
+        org.jfree.chart.plot.Zoomable plot;
+    
+    
+        this := @this: org.jfree.chart.ChartPanel;
+        x := @parameter0: double;
+        y := @parameter1: double;
+        $stack7 = this.<org.jfree.chart.ChartPanel: org.jfree.chart.JFreeChart chart>;
+        p = virtualinvoke $stack7.<org.jfree.chart.JFreeChart: org.jfree.chart.plot.Plot getPlot()>();
+        $stack8 = p instanceof org.jfree.chart.plot.Zoomable;
+    
+        if $stack8 == 0 goto label1;
+        plot = (org.jfree.chart.plot.Zoomable) p;
+        $stack10 = this.<org.jfree.chart.ChartPanel: double zoomInFactor>;
+        $stack9 = this.<org.jfree.chart.ChartPanel: org.jfree.chart.ChartRenderingInfo info>;
+        $stack16 = virtualinvoke $stack9.<org.jfree.chart.ChartRenderingInfo: org.jfree.chart.plot.PlotRenderingInfo getPlotInfo()>();
+        $stack13 = new java.awt.Point;
+        $stack12 = (int) x;
+        $stack11 = (int) y;
+        specialinvoke $stack13.<java.awt.Point: void <init>(int,int)>($stack12, $stack11);
+        $stack15 = virtualinvoke this.<org.jfree.chart.ChartPanel: java.awt.geom.Point2D translateScreenToJava2D(java.awt.Point)>($stack13);
+        $stack14 = this.<org.jfree.chart.ChartPanel: boolean zoomAroundAnchor>;
+        interfaceinvoke plot.<org.jfree.chart.plot.Zoomable: void zoomDomainAxes(double,org.jfree.chart.plot.PlotRenderingInfo,java.awt.geom.Point2D,boolean)>($stack10, $stack16, $stack15, $stack14);
+    
+      label1:
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.ChartPanel: void chartChanged(org.jfree.chart.event.ChartChangeEvent)> ----
+    {
+        boolean $stack5;
+        org.jfree.chart.ChartPanel this;
+        org.jfree.chart.JFreeChart $stack4;
+        org.jfree.chart.event.ChartChangeEvent event;
+        org.jfree.chart.plot.Plot plot;
+        org.jfree.chart.plot.PlotOrientation $stack6;
+        org.jfree.chart.plot.Zoomable z;
+    
+    
+        this := @this: org.jfree.chart.ChartPanel;
+        event := @parameter0: org.jfree.chart.event.ChartChangeEvent;
+        this.<org.jfree.chart.ChartPanel: boolean refreshBuffer> = 1;
+        $stack4 = this.<org.jfree.chart.ChartPanel: org.jfree.chart.JFreeChart chart>;
+        plot = virtualinvoke $stack4.<org.jfree.chart.JFreeChart: org.jfree.chart.plot.Plot getPlot()>();
+        $stack5 = plot instanceof org.jfree.chart.plot.Zoomable;
+    
+        if $stack5 == 0 goto label1;
+        z = (org.jfree.chart.plot.Zoomable) plot;
+        $stack6 = interfaceinvoke z.<org.jfree.chart.plot.Zoomable: org.jfree.chart.plot.PlotOrientation getOrientation()>();
+        this.<org.jfree.chart.ChartPanel: org.jfree.chart.plot.PlotOrientation orientation> = $stack6;
+    
+      label1:
+        virtualinvoke this.<org.jfree.chart.ChartPanel: void repaint()>();
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.ChartPanel: int getDismissDelay()> ----
+    {
+        int $stack1;
+        org.jfree.chart.ChartPanel this;
+    
+    
+        this := @this: org.jfree.chart.ChartPanel;
+        $stack1 = this.<org.jfree.chart.ChartPanel: int ownToolTipDismissDelay>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.ChartPanel: void setMaximumDrawHeight(int)> ----
+    {
+        int height;
+        org.jfree.chart.ChartPanel this;
+    
+    
+        this := @this: org.jfree.chart.ChartPanel;
+        height := @parameter0: int;
+        this.<org.jfree.chart.ChartPanel: int maximumDrawHeight> = height;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.ChartPanel: org.jfree.chart.JFreeChart getChart()> ----
+    {
+        org.jfree.chart.ChartPanel this;
+        org.jfree.chart.JFreeChart $stack1;
+    
+    
+        this := @this: org.jfree.chart.ChartPanel;
+        $stack1 = this.<org.jfree.chart.ChartPanel: org.jfree.chart.JFreeChart chart>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.ChartPanel: void setMouseZoomable(boolean)> ----
+    {
+        boolean flag;
+        org.jfree.chart.ChartPanel this;
+    
+    
+        this := @this: org.jfree.chart.ChartPanel;
+        flag := @parameter0: boolean;
+        virtualinvoke this.<org.jfree.chart.ChartPanel: void setMouseZoomable(boolean,boolean)>(flag, 1);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.ChartPanel: void setVerticalAxisTrace(boolean)> ----
+    {
+        boolean flag;
+        org.jfree.chart.ChartPanel this;
+    
+    
+        this := @this: org.jfree.chart.ChartPanel;
+        flag := @parameter0: boolean;
+        this.<org.jfree.chart.ChartPanel: boolean verticalAxisTrace> = flag;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.ChartPanel: void setZoomAroundAnchor(boolean)> ----
+    {
+        boolean zoomAroundAnchor;
+        org.jfree.chart.ChartPanel this;
+    
+    
+        this := @this: org.jfree.chart.ChartPanel;
+        zoomAroundAnchor := @parameter0: boolean;
+        this.<org.jfree.chart.ChartPanel: boolean zoomAroundAnchor> = zoomAroundAnchor;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.ChartPanel: int getMinimumDrawHeight()> ----
+    {
+        int $stack1;
+        org.jfree.chart.ChartPanel this;
+    
+    
+        this := @this: org.jfree.chart.ChartPanel;
+        $stack1 = this.<org.jfree.chart.ChartPanel: int minimumDrawHeight>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.ChartPanel: void setAnchor(java.awt.geom.Point2D)> ----
+    {
+        java.awt.geom.Point2D anchor;
+        org.jfree.chart.ChartPanel this;
+    
+    
+        this := @this: org.jfree.chart.ChartPanel;
+        anchor := @parameter0: java.awt.geom.Point2D;
+        this.<org.jfree.chart.ChartPanel: java.awt.geom.Point2D anchor> = anchor;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.ChartPanel: void setPopupMenu(javax.swing.JPopupMenu)> ----
+    {
+        javax.swing.JPopupMenu popup;
+        org.jfree.chart.ChartPanel this;
+    
+    
+        this := @this: org.jfree.chart.ChartPanel;
+        popup := @parameter0: javax.swing.JPopupMenu;
+        this.<org.jfree.chart.ChartPanel: javax.swing.JPopupMenu popup> = popup;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.ChartPanel: void mouseMoved(java.awt.event.MouseEvent)> ----
+    {
+        boolean $stack11, $stack12;
+        double $stack20, $stack21, $stack22, $stack26, $stack27, $stack28, $stack37, $stack38;
+        int $stack16, $stack17, $stack18, $stack19, $stack23, $stack24, $stack25, $stack33, $stack40, $stack41, i, x, y;
+        java.awt.Graphics $stack10;
+        java.awt.Graphics2D g2;
+        java.awt.Insets insets;
+        java.awt.event.MouseEvent e;
+        java.lang.Class $stack13, $stack14;
+        java.lang.Object $stack39;
+        java.util.EventListener $stack34;
+        java.util.EventListener[] listeners;
+        javax.swing.event.EventListenerList $stack15;
+        org.jfree.chart.ChartMouseEvent $stack32, entities#1;
+        org.jfree.chart.ChartMouseListener $stack35;
+        org.jfree.chart.ChartPanel this;
+        org.jfree.chart.ChartRenderingInfo $stack29, $stack36;
+        org.jfree.chart.JFreeChart $stack30, $stack31;
+        org.jfree.chart.entity.ChartEntity entity;
+        org.jfree.chart.entity.EntityCollection entities#0;
+    
+    
+        this := @this: org.jfree.chart.ChartPanel;
+        e := @parameter0: java.awt.event.MouseEvent;
+        $stack10 = virtualinvoke this.<org.jfree.chart.ChartPanel: java.awt.Graphics getGraphics()>();
+        g2 = (java.awt.Graphics2D) $stack10;
+        $stack11 = this.<org.jfree.chart.ChartPanel: boolean horizontalAxisTrace>;
+    
+        if $stack11 == 0 goto label1;
+        $stack41 = virtualinvoke e.<java.awt.event.MouseEvent: int getX()>();
+        specialinvoke this.<org.jfree.chart.ChartPanel: void drawHorizontalAxisTrace(java.awt.Graphics2D,int)>(g2, $stack41);
+    
+      label1:
+        $stack12 = this.<org.jfree.chart.ChartPanel: boolean verticalAxisTrace>;
+    
+        if $stack12 == 0 goto label2;
+        $stack40 = virtualinvoke e.<java.awt.event.MouseEvent: int getY()>();
+        specialinvoke this.<org.jfree.chart.ChartPanel: void drawVerticalAxisTrace(java.awt.Graphics2D,int)>(g2, $stack40);
+    
+      label2:
+        virtualinvoke g2.<java.awt.Graphics2D: void dispose()>();
+        $stack15 = this.<org.jfree.chart.ChartPanel: javax.swing.event.EventListenerList chartMouseListeners>;
+        $stack13 = <org.jfree.chart.ChartPanel: java.lang.Class class$org$jfree$chart$ChartMouseListener>;
+    
+        if $stack13 != null goto label3;
+        $stack14 = staticinvoke <org.jfree.chart.ChartPanel: java.lang.Class class$(java.lang.String)>("org.jfree.chart.ChartMouseListener");
+        <org.jfree.chart.ChartPanel: java.lang.Class class$org$jfree$chart$ChartMouseListener> = $stack14;
+    
+        goto label4;
+    
+      label3:
+        $stack14 = <org.jfree.chart.ChartPanel: java.lang.Class class$org$jfree$chart$ChartMouseListener>;
+    
+      label4:
+        listeners = virtualinvoke $stack15.<javax.swing.event.EventListenerList: java.util.EventListener[] getListeners(java.lang.Class)>($stack14);
+        $stack16 = lengthof listeners;
+    
+        if $stack16 != 0 goto label5;
+    
+        return;
+    
+      label5:
+        insets = virtualinvoke this.<org.jfree.chart.ChartPanel: java.awt.Insets getInsets()>();
+        $stack17 = virtualinvoke e.<java.awt.event.MouseEvent: int getX()>();
+        $stack18 = insets.<java.awt.Insets: int left>;
+        $stack19 = $stack17 - $stack18;
+        $stack20 = (double) $stack19;
+        $stack21 = this.<org.jfree.chart.ChartPanel: double scaleX>;
+        $stack22 = $stack20 / $stack21;
+        x = (int) $stack22;
+        $stack23 = virtualinvoke e.<java.awt.event.MouseEvent: int getY()>();
+        $stack24 = insets.<java.awt.Insets: int top>;
+        $stack25 = $stack23 - $stack24;
+        $stack26 = (double) $stack25;
+        $stack27 = this.<org.jfree.chart.ChartPanel: double scaleY>;
+        $stack28 = $stack26 / $stack27;
+        y = (int) $stack28;
+        entity = null;
+        $stack29 = this.<org.jfree.chart.ChartPanel: org.jfree.chart.ChartRenderingInfo info>;
+    
+        if $stack29 == null goto label6;
+        $stack36 = this.<org.jfree.chart.ChartPanel: org.jfree.chart.ChartRenderingInfo info>;
+        entities#0 = virtualinvoke $stack36.<org.jfree.chart.ChartRenderingInfo: org.jfree.chart.entity.EntityCollection getEntityCollection()>();
+    
+        if entities#0 == null goto label6;
+        $stack38 = (double) x;
+        $stack37 = (double) y;
+        entity = interfaceinvoke entities#0.<org.jfree.chart.entity.EntityCollection: org.jfree.chart.entity.ChartEntity getEntity(double,double)>($stack38, $stack37);
+    
+      label6:
+        $stack30 = this.<org.jfree.chart.ChartPanel: org.jfree.chart.JFreeChart chart>;
+    
+        if $stack30 == null goto label8;
+        $stack32 = new org.jfree.chart.ChartMouseEvent;
+        $stack31 = virtualinvoke this.<org.jfree.chart.ChartPanel: org.jfree.chart.JFreeChart getChart()>();
+        specialinvoke $stack32.<org.jfree.chart.ChartMouseEvent: void <init>(org.jfree.chart.JFreeChart,java.awt.event.MouseEvent,org.jfree.chart.entity.ChartEntity)>($stack31, e, entity);
+        entities#1 = $stack32;
+        $stack33 = lengthof listeners;
+        i = $stack33 - 1;
+    
+      label7:
+        if i < 0 goto label8;
+        $stack34 = listeners[i];
+        $stack35 = (org.jfree.chart.ChartMouseListener) $stack34;
+        interfaceinvoke $stack35.<org.jfree.chart.ChartMouseListener: void chartMouseMoved(org.jfree.chart.ChartMouseEvent)>($stack32);
+        i = i + -1;
+    
+        goto label7;
+    
+      label8:
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.ChartPanel: void actionPerformed(java.awt.event.ActionEvent)> ----
+    {
+        boolean $stack10, $stack11, $stack12, $stack13, $stack14, $stack15, $stack16, $stack17, $stack18, $stack19, $stack20, $stack9;
+        double screenX, screenY;
+        java.awt.Point $stack21, $stack22, $stack8;
+        java.awt.event.ActionEvent event;
+        java.io.IOException #l0;
+        java.lang.Object $stack23;
+        java.lang.String command;
+        java.lang.Throwable e;
+        org.jfree.chart.ChartPanel this;
+    
+    
+        this := @this: org.jfree.chart.ChartPanel;
+        event := @parameter0: java.awt.event.ActionEvent;
+        command = virtualinvoke event.<java.awt.event.ActionEvent: java.lang.String getActionCommand()>();
+        screenX = -1.0;
+        screenY = -1.0;
+        $stack8 = this.<org.jfree.chart.ChartPanel: java.awt.Point zoomPoint>;
+    
+        if $stack8 == null goto label01;
+        $stack21 = this.<org.jfree.chart.ChartPanel: java.awt.Point zoomPoint>;
+        screenX = virtualinvoke $stack21.<java.awt.Point: double getX()>();
+        $stack22 = this.<org.jfree.chart.ChartPanel: java.awt.Point zoomPoint>;
+        screenY = virtualinvoke $stack22.<java.awt.Point: double getY()>();
+    
+      label01:
+        $stack9 = virtualinvoke command.<java.lang.String: boolean equals(java.lang.Object)>("PROPERTIES");
+    
+        if $stack9 == 0 goto label02;
+        virtualinvoke this.<org.jfree.chart.ChartPanel: void doEditChartProperties()>();
+    
+        goto label16;
+    
+      label02:
+        $stack10 = virtualinvoke command.<java.lang.String: boolean equals(java.lang.Object)>("SAVE");
+    
+        if $stack10 == 0 goto label06;
+    
+      label03:
+        virtualinvoke this.<org.jfree.chart.ChartPanel: void doSaveAs()>();
+    
+      label04:
+        goto label16;
+    
+      label05:
+        $stack23 := @caughtexception;
+        e = (java.lang.Throwable) $stack23;
+        #l0 = (java.io.IOException) $stack23;
+        virtualinvoke #l0.<java.io.IOException: void printStackTrace()>();
+    
+        goto label16;
+    
+      label06:
+        $stack11 = virtualinvoke command.<java.lang.String: boolean equals(java.lang.Object)>("PRINT");
+    
+        if $stack11 == 0 goto label07;
+        virtualinvoke this.<org.jfree.chart.ChartPanel: void createChartPrintJob()>();
+    
+        goto label16;
+    
+      label07:
+        $stack12 = virtualinvoke command.<java.lang.String: boolean equals(java.lang.Object)>("ZOOM_IN_BOTH");
+    
+        if $stack12 == 0 goto label08;
+        virtualinvoke this.<org.jfree.chart.ChartPanel: void zoomInBoth(double,double)>(screenX, screenY);
+    
+        goto label16;
+    
+      label08:
+        $stack13 = virtualinvoke command.<java.lang.String: boolean equals(java.lang.Object)>("ZOOM_IN_DOMAIN");
+    
+        if $stack13 == 0 goto label09;
+        virtualinvoke this.<org.jfree.chart.ChartPanel: void zoomInDomain(double,double)>(screenX, screenY);
+    
+        goto label16;
+    
+      label09:
+        $stack14 = virtualinvoke command.<java.lang.String: boolean equals(java.lang.Object)>("ZOOM_IN_RANGE");
+    
+        if $stack14 == 0 goto label10;
+        virtualinvoke this.<org.jfree.chart.ChartPanel: void zoomInRange(double,double)>(screenX, screenY);
+    
+        goto label16;
+    
+      label10:
+        $stack15 = virtualinvoke command.<java.lang.String: boolean equals(java.lang.Object)>("ZOOM_OUT_BOTH");
+    
+        if $stack15 == 0 goto label11;
+        virtualinvoke this.<org.jfree.chart.ChartPanel: void zoomOutBoth(double,double)>(screenX, screenY);
+    
+        goto label16;
+    
+      label11:
+        $stack16 = virtualinvoke command.<java.lang.String: boolean equals(java.lang.Object)>("ZOOM_DOMAIN_BOTH");
+    
+        if $stack16 == 0 goto label12;
+        virtualinvoke this.<org.jfree.chart.ChartPanel: void zoomOutDomain(double,double)>(screenX, screenY);
+    
+        goto label16;
+    
+      label12:
+        $stack17 = virtualinvoke command.<java.lang.String: boolean equals(java.lang.Object)>("ZOOM_RANGE_BOTH");
+    
+        if $stack17 == 0 goto label13;
+        virtualinvoke this.<org.jfree.chart.ChartPanel: void zoomOutRange(double,double)>(screenX, screenY);
+    
+        goto label16;
+    
+      label13:
+        $stack18 = virtualinvoke command.<java.lang.String: boolean equals(java.lang.Object)>("ZOOM_RESET_BOTH");
+    
+        if $stack18 == 0 goto label14;
+        virtualinvoke this.<org.jfree.chart.ChartPanel: void restoreAutoBounds()>();
+    
+        goto label16;
+    
+      label14:
+        $stack19 = virtualinvoke command.<java.lang.String: boolean equals(java.lang.Object)>("ZOOM_RESET_DOMAIN");
+    
+        if $stack19 == 0 goto label15;
+        virtualinvoke this.<org.jfree.chart.ChartPanel: void restoreAutoDomainBounds()>();
+    
+        goto label16;
+    
+      label15:
+        $stack20 = virtualinvoke command.<java.lang.String: boolean equals(java.lang.Object)>("ZOOM_RESET_RANGE");
+    
+        if $stack20 == 0 goto label16;
+        virtualinvoke this.<org.jfree.chart.ChartPanel: void restoreAutoRangeBounds()>();
+    
+      label16:
+        return;
+    
+     catch java.io.IOException from label03 to label04 with label05;
+    }
+
+}

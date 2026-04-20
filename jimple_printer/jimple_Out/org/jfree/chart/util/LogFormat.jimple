@@ -1,0 +1,135 @@
+// ========================================================================
+// CLASS : org.jfree.chart.util.LogFormat
+// ========================================================================
+
+[PUBLIC, SUPER] class org.jfree.chart.util.LogFormat extends java.text.NumberFormat {
+
+    // ---- method: <org.jfree.chart.util.LogFormat: double calculateLog(double)> ----
+    {
+        double $stack3, $stack4, $stack5, value;
+        org.jfree.chart.util.LogFormat this;
+    
+    
+        this := @this: org.jfree.chart.util.LogFormat;
+        value := @parameter0: double;
+        $stack3 = staticinvoke <java.lang.Math: double log(double)>(value);
+        $stack4 = this.<org.jfree.chart.util.LogFormat: double baseLog>;
+        $stack5 = $stack3 / $stack4;
+    
+        return $stack5;
+    }
+
+    // ---- method: <org.jfree.chart.util.LogFormat: java.lang.Number parse(java.lang.String,java.text.ParsePosition)> ----
+    {
+        java.lang.String source;
+        java.text.ParsePosition parsePosition;
+        org.jfree.chart.util.LogFormat this;
+    
+    
+        this := @this: org.jfree.chart.util.LogFormat;
+        source := @parameter0: java.lang.String;
+        parsePosition := @parameter1: java.text.ParsePosition;
+    
+        return null;
+    }
+
+    // ---- method: <org.jfree.chart.util.LogFormat: void <init>(double,java.lang.String,boolean)> ----
+    {
+        boolean showBase;
+        double $stack6, $stack7, base;
+        java.lang.Object $stack5;
+        java.lang.String baseLabel;
+        java.text.DecimalFormat #l0;
+        org.jfree.chart.util.LogFormat this;
+    
+    
+        this := @this: org.jfree.chart.util.LogFormat;
+        base := @parameter0: double;
+        baseLabel := @parameter1: java.lang.String;
+        showBase := @parameter2: boolean;
+        specialinvoke this.<java.text.NumberFormat: void <init>()>();
+        $stack5 = new java.text.DecimalFormat;
+        #l0 = (java.text.DecimalFormat) $stack5;
+        specialinvoke #l0.<java.text.DecimalFormat: void <init>(java.lang.String)>("0.0");
+        this.<org.jfree.chart.util.LogFormat: java.text.NumberFormat formatter> = (java.text.NumberFormat) $stack5;
+        this.<org.jfree.chart.util.LogFormat: double base> = base;
+        $stack6 = this.<org.jfree.chart.util.LogFormat: double base>;
+        $stack7 = staticinvoke <java.lang.Math: double log(double)>($stack6);
+        this.<org.jfree.chart.util.LogFormat: double baseLog> = $stack7;
+        this.<org.jfree.chart.util.LogFormat: java.lang.String baseLabel> = baseLabel;
+        this.<org.jfree.chart.util.LogFormat: boolean showBase> = showBase;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.util.LogFormat: java.lang.StringBuffer format(long,java.lang.StringBuffer,java.text.FieldPosition)> ----
+    {
+        boolean $stack7;
+        double $stack10, $stack8;
+        java.lang.String $stack11, $stack12;
+        java.lang.StringBuffer $stack6, result, toAppendTo;
+        java.text.FieldPosition pos;
+        java.text.NumberFormat $stack9;
+        long number;
+        org.jfree.chart.util.LogFormat this;
+    
+    
+        this := @this: org.jfree.chart.util.LogFormat;
+        number := @parameter0: long;
+        toAppendTo := @parameter1: java.lang.StringBuffer;
+        pos := @parameter2: java.text.FieldPosition;
+        $stack6 = new java.lang.StringBuffer;
+        specialinvoke $stack6.<java.lang.StringBuffer: void <init>()>();
+        result = $stack6;
+        $stack7 = this.<org.jfree.chart.util.LogFormat: boolean showBase>;
+    
+        if $stack7 == 0 goto label1;
+        $stack12 = this.<org.jfree.chart.util.LogFormat: java.lang.String baseLabel>;
+        virtualinvoke $stack6.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>($stack12);
+        virtualinvoke $stack6.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>("^");
+    
+      label1:
+        $stack9 = this.<org.jfree.chart.util.LogFormat: java.text.NumberFormat formatter>;
+        $stack8 = (double) number;
+        $stack10 = specialinvoke this.<org.jfree.chart.util.LogFormat: double calculateLog(double)>($stack8);
+        $stack11 = virtualinvoke $stack9.<java.text.NumberFormat: java.lang.String format(double)>($stack10);
+        virtualinvoke $stack6.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>($stack11);
+    
+        return $stack6;
+    }
+
+    // ---- method: <org.jfree.chart.util.LogFormat: java.lang.StringBuffer format(double,java.lang.StringBuffer,java.text.FieldPosition)> ----
+    {
+        boolean $stack7;
+        double $stack9, number;
+        java.lang.String $stack10, $stack11;
+        java.lang.StringBuffer $stack6, result, toAppendTo;
+        java.text.FieldPosition pos;
+        java.text.NumberFormat $stack8;
+        org.jfree.chart.util.LogFormat this;
+    
+    
+        this := @this: org.jfree.chart.util.LogFormat;
+        number := @parameter0: double;
+        toAppendTo := @parameter1: java.lang.StringBuffer;
+        pos := @parameter2: java.text.FieldPosition;
+        $stack6 = new java.lang.StringBuffer;
+        specialinvoke $stack6.<java.lang.StringBuffer: void <init>()>();
+        result = $stack6;
+        $stack7 = this.<org.jfree.chart.util.LogFormat: boolean showBase>;
+    
+        if $stack7 == 0 goto label1;
+        $stack11 = this.<org.jfree.chart.util.LogFormat: java.lang.String baseLabel>;
+        virtualinvoke $stack6.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>($stack11);
+        virtualinvoke $stack6.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>("^");
+    
+      label1:
+        $stack8 = this.<org.jfree.chart.util.LogFormat: java.text.NumberFormat formatter>;
+        $stack9 = specialinvoke this.<org.jfree.chart.util.LogFormat: double calculateLog(double)>(number);
+        $stack10 = virtualinvoke $stack8.<java.text.NumberFormat: java.lang.String format(double)>($stack9);
+        virtualinvoke $stack6.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>($stack10);
+    
+        return $stack6;
+    }
+
+}

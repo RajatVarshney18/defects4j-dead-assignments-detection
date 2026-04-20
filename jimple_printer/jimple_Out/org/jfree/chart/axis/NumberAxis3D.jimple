@@ -1,0 +1,129 @@
+// ========================================================================
+// CLASS : org.jfree.chart.axis.NumberAxis3D
+// ========================================================================
+
+[PUBLIC, SUPER] class org.jfree.chart.axis.NumberAxis3D extends org.jfree.chart.axis.NumberAxis implements java.io.Serializable {
+
+    // ---- method: <org.jfree.chart.axis.NumberAxis3D: org.jfree.chart.axis.AxisState draw(java.awt.Graphics2D,double,java.awt.geom.Rectangle2D,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge,org.jfree.chart.plot.PlotRenderingInfo)> ----
+    {
+        boolean $stack23, $stack24, $stack33;
+        double $stack25, $stack26, adjustedH, adjustedW, cp#1, cursor, e3D#1, state#1, yOffset;
+        java.awt.Graphics2D g2;
+        java.awt.geom.Rectangle2D #l0, dataArea, plotArea;
+        java.awt.geom.Rectangle2D$Double #l1, adjustedDataArea;
+        java.lang.Object $stack28;
+        java.lang.String $stack29;
+        java.util.List ticks;
+        org.jfree.chart.Effect3D e3D#0;
+        org.jfree.chart.axis.AxisState $stack34, info#0, info#1, state#0;
+        org.jfree.chart.axis.NumberAxis3D this;
+        org.jfree.chart.plot.CategoryPlot cp#0;
+        org.jfree.chart.plot.Plot plot;
+        org.jfree.chart.plot.PlotRenderingInfo plotState;
+        org.jfree.chart.renderer.category.CategoryItemRenderer r;
+        org.jfree.chart.util.RectangleEdge $stack27, $stack30, $stack31, $stack32, edge;
+    
+    
+        this := @this: org.jfree.chart.axis.NumberAxis3D;
+        g2 := @parameter0: java.awt.Graphics2D;
+        cursor := @parameter1: double;
+        plotArea := @parameter2: java.awt.geom.Rectangle2D;
+        dataArea := @parameter3: java.awt.geom.Rectangle2D;
+        edge := @parameter4: org.jfree.chart.util.RectangleEdge;
+        plotState := @parameter5: org.jfree.chart.plot.PlotRenderingInfo;
+        $stack23 = virtualinvoke this.<org.jfree.chart.axis.NumberAxis3D: boolean isVisible()>();
+    
+        if $stack23 != 0 goto label1;
+        $stack34 = new org.jfree.chart.axis.AxisState;
+        specialinvoke $stack34.<org.jfree.chart.axis.AxisState: void <init>(double)>(cursor);
+        state#0 = $stack34;
+        ticks = virtualinvoke this.<org.jfree.chart.axis.NumberAxis3D: java.util.List refreshTicks(java.awt.Graphics2D,org.jfree.chart.axis.AxisState,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)>(g2, $stack34, dataArea, edge);
+        virtualinvoke $stack34.<org.jfree.chart.axis.AxisState: void setTicks(java.util.List)>(ticks);
+    
+        return $stack34;
+    
+      label1:
+        state#1 = 0.0;
+        yOffset = 0.0;
+        plot = virtualinvoke this.<org.jfree.chart.axis.NumberAxis3D: org.jfree.chart.plot.Plot getPlot()>();
+        $stack24 = plot instanceof org.jfree.chart.plot.CategoryPlot;
+    
+        if $stack24 == 0 goto label2;
+        cp#0 = (org.jfree.chart.plot.CategoryPlot) plot;
+        r = virtualinvoke cp#0.<org.jfree.chart.plot.CategoryPlot: org.jfree.chart.renderer.category.CategoryItemRenderer getRenderer()>();
+        $stack33 = r instanceof org.jfree.chart.Effect3D;
+    
+        if $stack33 == 0 goto label2;
+        e3D#0 = (org.jfree.chart.Effect3D) r;
+        state#1 = interfaceinvoke e3D#0.<org.jfree.chart.Effect3D: double getXOffset()>();
+        yOffset = interfaceinvoke e3D#0.<org.jfree.chart.Effect3D: double getYOffset()>();
+    
+      label2:
+        cp#1 = virtualinvoke dataArea.<java.awt.geom.Rectangle2D: double getMinX()>();
+        e3D#1 = virtualinvoke dataArea.<java.awt.geom.Rectangle2D: double getMinY()>();
+        $stack25 = virtualinvoke dataArea.<java.awt.geom.Rectangle2D: double getWidth()>();
+        adjustedW = $stack25 - state#1;
+        $stack26 = virtualinvoke dataArea.<java.awt.geom.Rectangle2D: double getHeight()>();
+        adjustedH = $stack26 - yOffset;
+        $stack27 = <org.jfree.chart.util.RectangleEdge: org.jfree.chart.util.RectangleEdge LEFT>;
+    
+        if edge == $stack27 goto label3;
+        $stack30 = <org.jfree.chart.util.RectangleEdge: org.jfree.chart.util.RectangleEdge BOTTOM>;
+    
+        if edge != $stack30 goto label4;
+    
+      label3:
+        e3D#1 = e3D#1 + yOffset;
+    
+        goto label6;
+    
+      label4:
+        $stack31 = <org.jfree.chart.util.RectangleEdge: org.jfree.chart.util.RectangleEdge RIGHT>;
+    
+        if edge == $stack31 goto label5;
+        $stack32 = <org.jfree.chart.util.RectangleEdge: org.jfree.chart.util.RectangleEdge TOP>;
+    
+        if edge != $stack32 goto label6;
+    
+      label5:
+        cp#1 = cp#1 + state#1;
+    
+      label6:
+        $stack28 = new java.awt.geom.Rectangle2D$Double;
+        #l1 = (java.awt.geom.Rectangle2D$Double) $stack28;
+        specialinvoke #l1.<java.awt.geom.Rectangle2D$Double: void <init>(double,double,double,double)>(cp#1, e3D#1, adjustedW, adjustedH);
+        adjustedDataArea = (java.awt.geom.Rectangle2D$Double) $stack28;
+        #l0 = (java.awt.geom.Rectangle2D) $stack28;
+        info#0 = virtualinvoke this.<org.jfree.chart.axis.NumberAxis3D: org.jfree.chart.axis.AxisState drawTickMarksAndLabels(java.awt.Graphics2D,double,java.awt.geom.Rectangle2D,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge,org.jfree.chart.plot.PlotRenderingInfo)>(g2, cursor, plotArea, #l0, edge, plotState);
+        $stack29 = virtualinvoke this.<org.jfree.chart.axis.NumberAxis3D: java.lang.String getLabel()>();
+        info#1 = virtualinvoke this.<org.jfree.chart.axis.NumberAxis3D: org.jfree.chart.axis.AxisState drawLabel(java.lang.String,java.awt.Graphics2D,java.awt.geom.Rectangle2D,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge,org.jfree.chart.axis.AxisState,org.jfree.chart.plot.PlotRenderingInfo)>($stack29, g2, plotArea, dataArea, edge, info#0, plotState);
+    
+        return info#1;
+    }
+
+    // ---- method: <org.jfree.chart.axis.NumberAxis3D: void <init>(java.lang.String)> ----
+    {
+        java.lang.String label;
+        org.jfree.chart.axis.NumberAxis3D this;
+    
+    
+        this := @this: org.jfree.chart.axis.NumberAxis3D;
+        label := @parameter0: java.lang.String;
+        specialinvoke this.<org.jfree.chart.axis.NumberAxis: void <init>(java.lang.String)>(label);
+        virtualinvoke this.<org.jfree.chart.axis.NumberAxis3D: void setAxisLineVisible(boolean)>(0);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.axis.NumberAxis3D: void <init>()> ----
+    {
+        org.jfree.chart.axis.NumberAxis3D this;
+    
+    
+        this := @this: org.jfree.chart.axis.NumberAxis3D;
+        specialinvoke this.<org.jfree.chart.axis.NumberAxis3D: void <init>(java.lang.String)>(null);
+    
+        return;
+    }
+
+}

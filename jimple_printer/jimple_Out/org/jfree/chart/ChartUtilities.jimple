@@ -1,0 +1,856 @@
+// ========================================================================
+// CLASS : org.jfree.chart.ChartUtilities
+// ========================================================================
+
+[PUBLIC, SUPER, ABSTRACT] class org.jfree.chart.ChartUtilities extends java.lang.Object {
+
+    // ---- method: <org.jfree.chart.ChartUtilities: void writeScaledChartAsPNG(java.io.OutputStream,org.jfree.chart.JFreeChart,int,int,int,int)> ----
+    {
+        boolean scale;
+        byte[] $stack28;
+        double defaultHeight, defaultWidth, desiredHeight, desiredWidth, scaleX, scaleY;
+        int $stack22, $stack23, $stack24, $stack25, height, heightScaleFactor, width, widthScaleFactor;
+        java.awt.Graphics2D g2;
+        java.awt.geom.AffineTransform $stack29, saved;
+        java.awt.geom.Rectangle2D #l1, #l2;
+        java.awt.geom.Rectangle2D$Double #l0, #l4;
+        java.awt.image.BufferedImage $stack26, image;
+        java.io.OutputStream out;
+        java.lang.IllegalArgumentException #l3, #l6;
+        java.lang.Object $stack27, $stack30, $stack31, $stack32;
+        java.lang.Throwable #l5, #l7;
+        org.jfree.chart.JFreeChart chart;
+    
+    
+        out := @parameter0: java.io.OutputStream;
+        chart := @parameter1: org.jfree.chart.JFreeChart;
+        width := @parameter2: int;
+        height := @parameter3: int;
+        widthScaleFactor := @parameter4: int;
+        heightScaleFactor := @parameter5: int;
+    
+        if out != null goto label1;
+        $stack32 = new java.lang.IllegalArgumentException;
+        #l6 = (java.lang.IllegalArgumentException) $stack32;
+        specialinvoke #l6.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'out\' argument.");
+        #l7 = (java.lang.Throwable) $stack32;
+    
+        throw #l7;
+    
+      label1:
+        if chart != null goto label2;
+        $stack31 = new java.lang.IllegalArgumentException;
+        #l3 = (java.lang.IllegalArgumentException) $stack31;
+        specialinvoke #l3.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'chart\' argument.");
+        #l5 = (java.lang.Throwable) $stack31;
+    
+        throw #l5;
+    
+      label2:
+        $stack22 = width * widthScaleFactor;
+        desiredWidth = (double) $stack22;
+        $stack23 = height * heightScaleFactor;
+        desiredHeight = (double) $stack23;
+        defaultWidth = (double) width;
+        defaultHeight = (double) height;
+        scale = 0;
+    
+        if widthScaleFactor != 1 goto label3;
+    
+        if heightScaleFactor == 1 goto label4;
+    
+      label3:
+        scale = 1;
+    
+      label4:
+        scaleX = desiredWidth / defaultWidth;
+        scaleY = desiredHeight / defaultHeight;
+        $stack26 = new java.awt.image.BufferedImage;
+        $stack25 = (int) desiredWidth;
+        $stack24 = (int) desiredHeight;
+        specialinvoke $stack26.<java.awt.image.BufferedImage: void <init>(int,int,int)>($stack25, $stack24, 2);
+        image = $stack26;
+        g2 = virtualinvoke $stack26.<java.awt.image.BufferedImage: java.awt.Graphics2D createGraphics()>();
+    
+        if scale == 0 goto label5;
+        saved = virtualinvoke g2.<java.awt.Graphics2D: java.awt.geom.AffineTransform getTransform()>();
+        $stack29 = staticinvoke <java.awt.geom.AffineTransform: java.awt.geom.AffineTransform getScaleInstance(double,double)>(scaleX, scaleY);
+        virtualinvoke g2.<java.awt.Graphics2D: void transform(java.awt.geom.AffineTransform)>($stack29);
+        $stack30 = new java.awt.geom.Rectangle2D$Double;
+        #l4 = (java.awt.geom.Rectangle2D$Double) $stack30;
+        specialinvoke #l4.<java.awt.geom.Rectangle2D$Double: void <init>(double,double,double,double)>(0.0, 0.0, defaultWidth, defaultHeight);
+        #l2 = (java.awt.geom.Rectangle2D) $stack30;
+        virtualinvoke chart.<org.jfree.chart.JFreeChart: void draw(java.awt.Graphics2D,java.awt.geom.Rectangle2D,java.awt.geom.Point2D,org.jfree.chart.ChartRenderingInfo)>(g2, #l2, null, null);
+        virtualinvoke g2.<java.awt.Graphics2D: void setTransform(java.awt.geom.AffineTransform)>(saved);
+        virtualinvoke g2.<java.awt.Graphics2D: void dispose()>();
+    
+        goto label6;
+    
+      label5:
+        $stack27 = new java.awt.geom.Rectangle2D$Double;
+        #l0 = (java.awt.geom.Rectangle2D$Double) $stack27;
+        specialinvoke #l0.<java.awt.geom.Rectangle2D$Double: void <init>(double,double,double,double)>(0.0, 0.0, defaultWidth, defaultHeight);
+        #l1 = (java.awt.geom.Rectangle2D) $stack27;
+        virtualinvoke chart.<org.jfree.chart.JFreeChart: void draw(java.awt.Graphics2D,java.awt.geom.Rectangle2D,java.awt.geom.Point2D,org.jfree.chart.ChartRenderingInfo)>(g2, #l1, null, null);
+    
+      label6:
+        $stack28 = staticinvoke <org.jfree.chart.ChartUtilities: byte[] encodeAsPNG(java.awt.image.BufferedImage)>($stack26);
+        virtualinvoke out.<java.io.OutputStream: void write(byte[])>($stack28);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.ChartUtilities: void saveChartAsPNG(java.io.File,org.jfree.chart.JFreeChart,int,int,org.jfree.chart.ChartRenderingInfo,boolean,int)> ----
+    {
+        boolean encodeAlpha;
+        int compression, height, width;
+        java.io.BufferedOutputStream #l7, out;
+        java.io.File file;
+        java.io.FileOutputStream #l3;
+        java.io.OutputStream #l4, #l5, #l6, #l8;
+        java.lang.IllegalArgumentException #l0, #l9;
+        java.lang.Object $stack10, $stack11, $stack12, $stack9;
+        java.lang.Throwable #l1, #l2, $stack13, l8;
+        org.jfree.chart.ChartRenderingInfo info;
+        org.jfree.chart.JFreeChart chart;
+    
+    
+        file := @parameter0: java.io.File;
+        chart := @parameter1: org.jfree.chart.JFreeChart;
+        width := @parameter2: int;
+        height := @parameter3: int;
+        info := @parameter4: org.jfree.chart.ChartRenderingInfo;
+        encodeAlpha := @parameter5: boolean;
+        compression := @parameter6: int;
+    
+        if file != null goto label1;
+        $stack12 = new java.lang.IllegalArgumentException;
+        #l0 = (java.lang.IllegalArgumentException) $stack12;
+        specialinvoke #l0.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'file\' argument.");
+        #l1 = (java.lang.Throwable) $stack12;
+    
+        throw #l1;
+    
+      label1:
+        if chart != null goto label2;
+        $stack11 = new java.lang.IllegalArgumentException;
+        #l9 = (java.lang.IllegalArgumentException) $stack11;
+        specialinvoke #l9.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'chart\' argument.");
+        #l2 = (java.lang.Throwable) $stack11;
+    
+        throw #l2;
+    
+      label2:
+        $stack10 = new java.io.BufferedOutputStream;
+        $stack9 = new java.io.FileOutputStream;
+        #l3 = (java.io.FileOutputStream) $stack9;
+        specialinvoke #l3.<java.io.FileOutputStream: void <init>(java.io.File)>(file);
+        #l8 = (java.io.OutputStream) $stack9;
+        #l7 = (java.io.BufferedOutputStream) $stack10;
+        specialinvoke #l7.<java.io.BufferedOutputStream: void <init>(java.io.OutputStream)>(#l8);
+        out = (java.io.BufferedOutputStream) $stack10;
+        #l4 = (java.io.OutputStream) $stack10;
+    
+      label3:
+        staticinvoke <org.jfree.chart.ChartUtilities: void writeChartAsPNG(java.io.OutputStream,org.jfree.chart.JFreeChart,int,int,org.jfree.chart.ChartRenderingInfo,boolean,int)>(#l4, chart, width, height, info, encodeAlpha, compression);
+    
+      label4:
+        #l6 = (java.io.OutputStream) $stack10;
+        virtualinvoke #l6.<java.io.OutputStream: void close()>();
+    
+        goto label7;
+    
+      label5:
+        $stack13 := @caughtexception;
+        l8 = $stack13;
+    
+      label6:
+        #l5 = (java.io.OutputStream) $stack10;
+        virtualinvoke #l5.<java.io.OutputStream: void close()>();
+    
+        throw $stack13;
+    
+      label7:
+        return;
+    
+     catch java.lang.Throwable from label3 to label4 with label5;
+     catch java.lang.Throwable from label5 to label6 with label5;
+    }
+
+    // ---- method: <org.jfree.chart.ChartUtilities: void saveChartAsPNG(java.io.File,org.jfree.chart.JFreeChart,int,int,org.jfree.chart.ChartRenderingInfo)> ----
+    {
+        int height, width;
+        java.io.BufferedOutputStream #l0, out;
+        java.io.File file;
+        java.io.FileOutputStream #l4;
+        java.io.OutputStream #l1, #l3, #l6, #l7;
+        java.lang.IllegalArgumentException #l2;
+        java.lang.Object $stack7, $stack8, $stack9;
+        java.lang.Throwable #l5, $stack10, l6;
+        org.jfree.chart.ChartRenderingInfo info;
+        org.jfree.chart.JFreeChart chart;
+    
+    
+        file := @parameter0: java.io.File;
+        chart := @parameter1: org.jfree.chart.JFreeChart;
+        width := @parameter2: int;
+        height := @parameter3: int;
+        info := @parameter4: org.jfree.chart.ChartRenderingInfo;
+    
+        if file != null goto label1;
+        $stack9 = new java.lang.IllegalArgumentException;
+        #l2 = (java.lang.IllegalArgumentException) $stack9;
+        specialinvoke #l2.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'file\' argument.");
+        #l5 = (java.lang.Throwable) $stack9;
+    
+        throw #l5;
+    
+      label1:
+        $stack8 = new java.io.BufferedOutputStream;
+        $stack7 = new java.io.FileOutputStream;
+        #l4 = (java.io.FileOutputStream) $stack7;
+        specialinvoke #l4.<java.io.FileOutputStream: void <init>(java.io.File)>(file);
+        #l1 = (java.io.OutputStream) $stack7;
+        #l0 = (java.io.BufferedOutputStream) $stack8;
+        specialinvoke #l0.<java.io.BufferedOutputStream: void <init>(java.io.OutputStream)>(#l1);
+        out = (java.io.BufferedOutputStream) $stack8;
+        #l6 = (java.io.OutputStream) $stack8;
+    
+      label2:
+        staticinvoke <org.jfree.chart.ChartUtilities: void writeChartAsPNG(java.io.OutputStream,org.jfree.chart.JFreeChart,int,int,org.jfree.chart.ChartRenderingInfo)>(#l6, chart, width, height, info);
+    
+      label3:
+        #l7 = (java.io.OutputStream) $stack8;
+        virtualinvoke #l7.<java.io.OutputStream: void close()>();
+    
+        goto label6;
+    
+      label4:
+        $stack10 := @caughtexception;
+        l6 = $stack10;
+    
+      label5:
+        #l3 = (java.io.OutputStream) $stack8;
+        virtualinvoke #l3.<java.io.OutputStream: void close()>();
+    
+        throw $stack10;
+    
+      label6:
+        return;
+    
+     catch java.lang.Throwable from label2 to label3 with label4;
+     catch java.lang.Throwable from label4 to label5 with label4;
+    }
+
+    // ---- method: <org.jfree.chart.ChartUtilities: void writeChartAsJPEG(java.io.OutputStream,float,org.jfree.chart.JFreeChart,int,int)> ----
+    {
+        float quality;
+        int height, width;
+        java.io.OutputStream out;
+        org.jfree.chart.JFreeChart chart;
+    
+    
+        out := @parameter0: java.io.OutputStream;
+        quality := @parameter1: float;
+        chart := @parameter2: org.jfree.chart.JFreeChart;
+        width := @parameter3: int;
+        height := @parameter4: int;
+        staticinvoke <org.jfree.chart.ChartUtilities: void writeChartAsJPEG(java.io.OutputStream,float,org.jfree.chart.JFreeChart,int,int,org.jfree.chart.ChartRenderingInfo)>(out, quality, chart, width, height, null);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.ChartUtilities: void saveChartAsJPEG(java.io.File,float,org.jfree.chart.JFreeChart,int,int,org.jfree.chart.ChartRenderingInfo)> ----
+    {
+        float quality;
+        int height, width;
+        java.io.BufferedOutputStream #l7, out;
+        java.io.File file;
+        java.io.FileOutputStream #l4;
+        java.io.OutputStream #l1, #l3, #l5, #l8;
+        java.lang.IllegalArgumentException #l0, #l9;
+        java.lang.Object $stack10, $stack11, $stack8, $stack9;
+        java.lang.Throwable #l2, #l6, $stack12, l7;
+        org.jfree.chart.ChartRenderingInfo info;
+        org.jfree.chart.JFreeChart chart;
+    
+    
+        file := @parameter0: java.io.File;
+        quality := @parameter1: float;
+        chart := @parameter2: org.jfree.chart.JFreeChart;
+        width := @parameter3: int;
+        height := @parameter4: int;
+        info := @parameter5: org.jfree.chart.ChartRenderingInfo;
+    
+        if file != null goto label1;
+        $stack11 = new java.lang.IllegalArgumentException;
+        #l9 = (java.lang.IllegalArgumentException) $stack11;
+        specialinvoke #l9.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'file\' argument.");
+        #l6 = (java.lang.Throwable) $stack11;
+    
+        throw #l6;
+    
+      label1:
+        if chart != null goto label2;
+        $stack10 = new java.lang.IllegalArgumentException;
+        #l0 = (java.lang.IllegalArgumentException) $stack10;
+        specialinvoke #l0.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'chart\' argument.");
+        #l2 = (java.lang.Throwable) $stack10;
+    
+        throw #l2;
+    
+      label2:
+        $stack9 = new java.io.BufferedOutputStream;
+        $stack8 = new java.io.FileOutputStream;
+        #l4 = (java.io.FileOutputStream) $stack8;
+        specialinvoke #l4.<java.io.FileOutputStream: void <init>(java.io.File)>(file);
+        #l7 = (java.io.BufferedOutputStream) $stack9;
+        #l8 = (java.io.OutputStream) $stack8;
+        specialinvoke #l7.<java.io.BufferedOutputStream: void <init>(java.io.OutputStream)>(#l8);
+        out = (java.io.BufferedOutputStream) $stack9;
+        #l5 = (java.io.OutputStream) $stack9;
+    
+      label3:
+        staticinvoke <org.jfree.chart.ChartUtilities: void writeChartAsJPEG(java.io.OutputStream,float,org.jfree.chart.JFreeChart,int,int,org.jfree.chart.ChartRenderingInfo)>(#l5, quality, chart, width, height, info);
+    
+      label4:
+        #l1 = (java.io.OutputStream) $stack9;
+        virtualinvoke #l1.<java.io.OutputStream: void close()>();
+    
+        goto label7;
+    
+      label5:
+        $stack12 := @caughtexception;
+        l7 = $stack12;
+    
+      label6:
+        #l3 = (java.io.OutputStream) $stack9;
+        virtualinvoke #l3.<java.io.OutputStream: void close()>();
+    
+        throw $stack12;
+    
+      label7:
+        return;
+    
+     catch java.lang.Throwable from label3 to label4 with label5;
+     catch java.lang.Throwable from label5 to label6 with label5;
+    }
+
+    // ---- method: <org.jfree.chart.ChartUtilities: void writeBufferedImageAsJPEG(java.io.OutputStream,float,java.awt.image.BufferedImage)> ----
+    {
+        float quality;
+        java.awt.image.BufferedImage image;
+        java.io.OutputStream out;
+    
+    
+        out := @parameter0: java.io.OutputStream;
+        quality := @parameter1: float;
+        image := @parameter2: java.awt.image.BufferedImage;
+        staticinvoke <org.jfree.chart.encoders.EncoderUtil: void writeBufferedImage(java.awt.image.BufferedImage,java.lang.String,java.io.OutputStream,float)>(image, "jpeg", out, quality);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.ChartUtilities: void writeChartAsPNG(java.io.OutputStream,org.jfree.chart.JFreeChart,int,int,org.jfree.chart.ChartRenderingInfo)> ----
+    {
+        int height, width;
+        java.awt.image.BufferedImage bufferedImage;
+        java.io.OutputStream out;
+        java.lang.IllegalArgumentException #l1;
+        java.lang.Object $stack6;
+        java.lang.Throwable #l0;
+        org.jfree.chart.ChartRenderingInfo info;
+        org.jfree.chart.JFreeChart chart;
+    
+    
+        out := @parameter0: java.io.OutputStream;
+        chart := @parameter1: org.jfree.chart.JFreeChart;
+        width := @parameter2: int;
+        height := @parameter3: int;
+        info := @parameter4: org.jfree.chart.ChartRenderingInfo;
+    
+        if chart != null goto label1;
+        $stack6 = new java.lang.IllegalArgumentException;
+        #l1 = (java.lang.IllegalArgumentException) $stack6;
+        specialinvoke #l1.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'chart\' argument.");
+        #l0 = (java.lang.Throwable) $stack6;
+    
+        throw #l0;
+    
+      label1:
+        bufferedImage = virtualinvoke chart.<org.jfree.chart.JFreeChart: java.awt.image.BufferedImage createBufferedImage(int,int,org.jfree.chart.ChartRenderingInfo)>(width, height, info);
+        staticinvoke <org.jfree.chart.encoders.EncoderUtil: void writeBufferedImage(java.awt.image.BufferedImage,java.lang.String,java.io.OutputStream)>(bufferedImage, "png", out);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.ChartUtilities: void writeBufferedImageAsPNG(java.io.OutputStream,java.awt.image.BufferedImage)> ----
+    {
+        java.awt.image.BufferedImage image;
+        java.io.OutputStream out;
+    
+    
+        out := @parameter0: java.io.OutputStream;
+        image := @parameter1: java.awt.image.BufferedImage;
+        staticinvoke <org.jfree.chart.encoders.EncoderUtil: void writeBufferedImage(java.awt.image.BufferedImage,java.lang.String,java.io.OutputStream)>(image, "png", out);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.ChartUtilities: void writeImageMap(java.io.PrintWriter,java.lang.String,org.jfree.chart.ChartRenderingInfo,org.jfree.chart.imagemap.ToolTipTagFragmentGenerator,org.jfree.chart.imagemap.URLTagFragmentGenerator)> ----
+    {
+        java.io.PrintWriter writer;
+        java.lang.String $stack5, name;
+        org.jfree.chart.ChartRenderingInfo info;
+        org.jfree.chart.imagemap.ToolTipTagFragmentGenerator toolTipTagFragmentGenerator;
+        org.jfree.chart.imagemap.URLTagFragmentGenerator urlTagFragmentGenerator;
+    
+    
+        writer := @parameter0: java.io.PrintWriter;
+        name := @parameter1: java.lang.String;
+        info := @parameter2: org.jfree.chart.ChartRenderingInfo;
+        toolTipTagFragmentGenerator := @parameter3: org.jfree.chart.imagemap.ToolTipTagFragmentGenerator;
+        urlTagFragmentGenerator := @parameter4: org.jfree.chart.imagemap.URLTagFragmentGenerator;
+        $stack5 = staticinvoke <org.jfree.chart.imagemap.ImageMapUtilities: java.lang.String getImageMap(java.lang.String,org.jfree.chart.ChartRenderingInfo,org.jfree.chart.imagemap.ToolTipTagFragmentGenerator,org.jfree.chart.imagemap.URLTagFragmentGenerator)>(name, info, toolTipTagFragmentGenerator, urlTagFragmentGenerator);
+        virtualinvoke writer.<java.io.PrintWriter: void println(java.lang.String)>($stack5);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.ChartUtilities: java.lang.String getImageMap(java.lang.String,org.jfree.chart.ChartRenderingInfo)> ----
+    {
+        java.lang.String $stack4, name;
+        org.jfree.chart.ChartRenderingInfo info;
+        org.jfree.chart.imagemap.StandardToolTipTagFragmentGenerator $stack2;
+        org.jfree.chart.imagemap.StandardURLTagFragmentGenerator $stack3;
+    
+    
+        name := @parameter0: java.lang.String;
+        info := @parameter1: org.jfree.chart.ChartRenderingInfo;
+        $stack2 = new org.jfree.chart.imagemap.StandardToolTipTagFragmentGenerator;
+        specialinvoke $stack2.<org.jfree.chart.imagemap.StandardToolTipTagFragmentGenerator: void <init>()>();
+        $stack3 = new org.jfree.chart.imagemap.StandardURLTagFragmentGenerator;
+        specialinvoke $stack3.<org.jfree.chart.imagemap.StandardURLTagFragmentGenerator: void <init>()>();
+        $stack4 = staticinvoke <org.jfree.chart.imagemap.ImageMapUtilities: java.lang.String getImageMap(java.lang.String,org.jfree.chart.ChartRenderingInfo,org.jfree.chart.imagemap.ToolTipTagFragmentGenerator,org.jfree.chart.imagemap.URLTagFragmentGenerator)>(name, info, $stack2, $stack3);
+    
+        return $stack4;
+    }
+
+    // ---- method: <org.jfree.chart.ChartUtilities: void saveChartAsJPEG(java.io.File,org.jfree.chart.JFreeChart,int,int,org.jfree.chart.ChartRenderingInfo)> ----
+    {
+        int height, width;
+        java.io.BufferedOutputStream #l0, out;
+        java.io.File file;
+        java.io.FileOutputStream #l6;
+        java.io.OutputStream #l1, #l2, #l7, #l9;
+        java.lang.IllegalArgumentException #l3, #l8;
+        java.lang.Object $stack10, $stack7, $stack8, $stack9;
+        java.lang.Throwable #l4, #l5, $stack11, l6;
+        org.jfree.chart.ChartRenderingInfo info;
+        org.jfree.chart.JFreeChart chart;
+    
+    
+        file := @parameter0: java.io.File;
+        chart := @parameter1: org.jfree.chart.JFreeChart;
+        width := @parameter2: int;
+        height := @parameter3: int;
+        info := @parameter4: org.jfree.chart.ChartRenderingInfo;
+    
+        if file != null goto label1;
+        $stack10 = new java.lang.IllegalArgumentException;
+        #l8 = (java.lang.IllegalArgumentException) $stack10;
+        specialinvoke #l8.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'file\' argument.");
+        #l5 = (java.lang.Throwable) $stack10;
+    
+        throw #l5;
+    
+      label1:
+        if chart != null goto label2;
+        $stack9 = new java.lang.IllegalArgumentException;
+        #l3 = (java.lang.IllegalArgumentException) $stack9;
+        specialinvoke #l3.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'chart\' argument.");
+        #l4 = (java.lang.Throwable) $stack9;
+    
+        throw #l4;
+    
+      label2:
+        $stack8 = new java.io.BufferedOutputStream;
+        $stack7 = new java.io.FileOutputStream;
+        #l6 = (java.io.FileOutputStream) $stack7;
+        specialinvoke #l6.<java.io.FileOutputStream: void <init>(java.io.File)>(file);
+        #l0 = (java.io.BufferedOutputStream) $stack8;
+        #l1 = (java.io.OutputStream) $stack7;
+        specialinvoke #l0.<java.io.BufferedOutputStream: void <init>(java.io.OutputStream)>(#l1);
+        out = (java.io.BufferedOutputStream) $stack8;
+        #l9 = (java.io.OutputStream) $stack8;
+    
+      label3:
+        staticinvoke <org.jfree.chart.ChartUtilities: void writeChartAsJPEG(java.io.OutputStream,org.jfree.chart.JFreeChart,int,int,org.jfree.chart.ChartRenderingInfo)>(#l9, chart, width, height, info);
+    
+      label4:
+        #l7 = (java.io.OutputStream) $stack8;
+        virtualinvoke #l7.<java.io.OutputStream: void close()>();
+    
+        goto label7;
+    
+      label5:
+        $stack11 := @caughtexception;
+        l6 = $stack11;
+    
+      label6:
+        #l2 = (java.io.OutputStream) $stack8;
+        virtualinvoke #l2.<java.io.OutputStream: void close()>();
+    
+        throw $stack11;
+    
+      label7:
+        return;
+    
+     catch java.lang.Throwable from label3 to label4 with label5;
+     catch java.lang.Throwable from label5 to label6 with label5;
+    }
+
+    // ---- method: <org.jfree.chart.ChartUtilities: void writeBufferedImageAsPNG(java.io.OutputStream,java.awt.image.BufferedImage,boolean,int)> ----
+    {
+        boolean encodeAlpha;
+        float $stack4;
+        int compression;
+        java.awt.image.BufferedImage image;
+        java.io.OutputStream out;
+    
+    
+        out := @parameter0: java.io.OutputStream;
+        image := @parameter1: java.awt.image.BufferedImage;
+        encodeAlpha := @parameter2: boolean;
+        compression := @parameter3: int;
+        $stack4 = (float) compression;
+        staticinvoke <org.jfree.chart.encoders.EncoderUtil: void writeBufferedImage(java.awt.image.BufferedImage,java.lang.String,java.io.OutputStream,float,boolean)>(image, "png", out, $stack4, encodeAlpha);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.ChartUtilities: void writeImageMap(java.io.PrintWriter,java.lang.String,org.jfree.chart.ChartRenderingInfo,boolean)> ----
+    {
+        boolean useOverLibForToolTips;
+        java.io.PrintWriter writer;
+        java.lang.Object toolTipTagFragmentGenerator#0;
+        java.lang.String name;
+        org.jfree.chart.ChartRenderingInfo info;
+        org.jfree.chart.imagemap.OverLIBToolTipTagFragmentGenerator $stack7;
+        org.jfree.chart.imagemap.StandardToolTipTagFragmentGenerator $stack5;
+        org.jfree.chart.imagemap.StandardURLTagFragmentGenerator $stack6;
+        org.jfree.chart.imagemap.ToolTipTagFragmentGenerator toolTipTagFragmentGenerator#1;
+    
+    
+        writer := @parameter0: java.io.PrintWriter;
+        name := @parameter1: java.lang.String;
+        info := @parameter2: org.jfree.chart.ChartRenderingInfo;
+        useOverLibForToolTips := @parameter3: boolean;
+        toolTipTagFragmentGenerator#0 = null;
+    
+        if useOverLibForToolTips == 0 goto label1;
+        $stack7 = new org.jfree.chart.imagemap.OverLIBToolTipTagFragmentGenerator;
+        specialinvoke $stack7.<org.jfree.chart.imagemap.OverLIBToolTipTagFragmentGenerator: void <init>()>();
+        toolTipTagFragmentGenerator#1 = $stack7;
+    
+        goto label2;
+    
+      label1:
+        $stack5 = new org.jfree.chart.imagemap.StandardToolTipTagFragmentGenerator;
+        specialinvoke $stack5.<org.jfree.chart.imagemap.StandardToolTipTagFragmentGenerator: void <init>()>();
+        toolTipTagFragmentGenerator#1 = $stack5;
+    
+      label2:
+        $stack6 = new org.jfree.chart.imagemap.StandardURLTagFragmentGenerator;
+        specialinvoke $stack6.<org.jfree.chart.imagemap.StandardURLTagFragmentGenerator: void <init>()>();
+        staticinvoke <org.jfree.chart.imagemap.ImageMapUtilities: void writeImageMap(java.io.PrintWriter,java.lang.String,org.jfree.chart.ChartRenderingInfo,org.jfree.chart.imagemap.ToolTipTagFragmentGenerator,org.jfree.chart.imagemap.URLTagFragmentGenerator)>(writer, name, info, toolTipTagFragmentGenerator#1, $stack6);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.ChartUtilities: java.lang.String getImageMap(java.lang.String,org.jfree.chart.ChartRenderingInfo,org.jfree.chart.imagemap.ToolTipTagFragmentGenerator,org.jfree.chart.imagemap.URLTagFragmentGenerator)> ----
+    {
+        java.lang.String $stack4, name;
+        org.jfree.chart.ChartRenderingInfo info;
+        org.jfree.chart.imagemap.ToolTipTagFragmentGenerator toolTipTagFragmentGenerator;
+        org.jfree.chart.imagemap.URLTagFragmentGenerator urlTagFragmentGenerator;
+    
+    
+        name := @parameter0: java.lang.String;
+        info := @parameter1: org.jfree.chart.ChartRenderingInfo;
+        toolTipTagFragmentGenerator := @parameter2: org.jfree.chart.imagemap.ToolTipTagFragmentGenerator;
+        urlTagFragmentGenerator := @parameter3: org.jfree.chart.imagemap.URLTagFragmentGenerator;
+        $stack4 = staticinvoke <org.jfree.chart.imagemap.ImageMapUtilities: java.lang.String getImageMap(java.lang.String,org.jfree.chart.ChartRenderingInfo,org.jfree.chart.imagemap.ToolTipTagFragmentGenerator,org.jfree.chart.imagemap.URLTagFragmentGenerator)>(name, info, toolTipTagFragmentGenerator, urlTagFragmentGenerator);
+    
+        return $stack4;
+    }
+
+    // ---- method: <org.jfree.chart.ChartUtilities: void writeChartAsPNG(java.io.OutputStream,org.jfree.chart.JFreeChart,int,int,org.jfree.chart.ChartRenderingInfo,boolean,int)> ----
+    {
+        boolean encodeAlpha;
+        int compression, height, width;
+        java.awt.image.BufferedImage chartImage;
+        java.io.OutputStream out;
+        java.lang.IllegalArgumentException #l1, #l3;
+        java.lang.Object $stack8, $stack9;
+        java.lang.Throwable #l0, #l2;
+        org.jfree.chart.ChartRenderingInfo info;
+        org.jfree.chart.JFreeChart chart;
+    
+    
+        out := @parameter0: java.io.OutputStream;
+        chart := @parameter1: org.jfree.chart.JFreeChart;
+        width := @parameter2: int;
+        height := @parameter3: int;
+        info := @parameter4: org.jfree.chart.ChartRenderingInfo;
+        encodeAlpha := @parameter5: boolean;
+        compression := @parameter6: int;
+    
+        if out != null goto label1;
+        $stack9 = new java.lang.IllegalArgumentException;
+        #l1 = (java.lang.IllegalArgumentException) $stack9;
+        specialinvoke #l1.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'out\' argument.");
+        #l0 = (java.lang.Throwable) $stack9;
+    
+        throw #l0;
+    
+      label1:
+        if chart != null goto label2;
+        $stack8 = new java.lang.IllegalArgumentException;
+        #l3 = (java.lang.IllegalArgumentException) $stack8;
+        specialinvoke #l3.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'chart\' argument.");
+        #l2 = (java.lang.Throwable) $stack8;
+    
+        throw #l2;
+    
+      label2:
+        chartImage = virtualinvoke chart.<org.jfree.chart.JFreeChart: java.awt.image.BufferedImage createBufferedImage(int,int,int,org.jfree.chart.ChartRenderingInfo)>(width, height, 2, info);
+        staticinvoke <org.jfree.chart.ChartUtilities: void writeBufferedImageAsPNG(java.io.OutputStream,java.awt.image.BufferedImage,boolean,int)>(out, chartImage, encodeAlpha, compression);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.ChartUtilities: byte[] encodeAsPNG(java.awt.image.BufferedImage,boolean,int)> ----
+    {
+        boolean encodeAlpha;
+        byte[] $stack4;
+        float $stack3;
+        int compression;
+        java.awt.image.BufferedImage image;
+    
+    
+        image := @parameter0: java.awt.image.BufferedImage;
+        encodeAlpha := @parameter1: boolean;
+        compression := @parameter2: int;
+        $stack3 = (float) compression;
+        $stack4 = staticinvoke <org.jfree.chart.encoders.EncoderUtil: byte[] encode(java.awt.image.BufferedImage,java.lang.String,float,boolean)>(image, "png", $stack3, encodeAlpha);
+    
+        return $stack4;
+    }
+
+    // ---- method: <org.jfree.chart.ChartUtilities: void saveChartAsJPEG(java.io.File,org.jfree.chart.JFreeChart,int,int)> ----
+    {
+        int height, width;
+        java.io.File file;
+        org.jfree.chart.JFreeChart chart;
+    
+    
+        file := @parameter0: java.io.File;
+        chart := @parameter1: org.jfree.chart.JFreeChart;
+        width := @parameter2: int;
+        height := @parameter3: int;
+        staticinvoke <org.jfree.chart.ChartUtilities: void saveChartAsJPEG(java.io.File,org.jfree.chart.JFreeChart,int,int,org.jfree.chart.ChartRenderingInfo)>(file, chart, width, height, null);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.ChartUtilities: void saveChartAsPNG(java.io.File,org.jfree.chart.JFreeChart,int,int)> ----
+    {
+        int height, width;
+        java.io.File file;
+        org.jfree.chart.JFreeChart chart;
+    
+    
+        file := @parameter0: java.io.File;
+        chart := @parameter1: org.jfree.chart.JFreeChart;
+        width := @parameter2: int;
+        height := @parameter3: int;
+        staticinvoke <org.jfree.chart.ChartUtilities: void saveChartAsPNG(java.io.File,org.jfree.chart.JFreeChart,int,int,org.jfree.chart.ChartRenderingInfo)>(file, chart, width, height, null);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.ChartUtilities: void writeBufferedImageAsJPEG(java.io.OutputStream,java.awt.image.BufferedImage)> ----
+    {
+        java.awt.image.BufferedImage image;
+        java.io.OutputStream out;
+    
+    
+        out := @parameter0: java.io.OutputStream;
+        image := @parameter1: java.awt.image.BufferedImage;
+        staticinvoke <org.jfree.chart.ChartUtilities: void writeBufferedImageAsJPEG(java.io.OutputStream,float,java.awt.image.BufferedImage)>(out, 0.75F, image);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.ChartUtilities: void writeChartAsPNG(java.io.OutputStream,org.jfree.chart.JFreeChart,int,int,boolean,int)> ----
+    {
+        boolean encodeAlpha;
+        int compression, height, width;
+        java.io.OutputStream out;
+        org.jfree.chart.JFreeChart chart;
+    
+    
+        out := @parameter0: java.io.OutputStream;
+        chart := @parameter1: org.jfree.chart.JFreeChart;
+        width := @parameter2: int;
+        height := @parameter3: int;
+        encodeAlpha := @parameter4: boolean;
+        compression := @parameter5: int;
+        staticinvoke <org.jfree.chart.ChartUtilities: void writeChartAsPNG(java.io.OutputStream,org.jfree.chart.JFreeChart,int,int,org.jfree.chart.ChartRenderingInfo,boolean,int)>(out, chart, width, height, null, encodeAlpha, compression);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.ChartUtilities: void saveChartAsJPEG(java.io.File,float,org.jfree.chart.JFreeChart,int,int)> ----
+    {
+        float quality;
+        int height, width;
+        java.io.File file;
+        org.jfree.chart.JFreeChart chart;
+    
+    
+        file := @parameter0: java.io.File;
+        quality := @parameter1: float;
+        chart := @parameter2: org.jfree.chart.JFreeChart;
+        width := @parameter3: int;
+        height := @parameter4: int;
+        staticinvoke <org.jfree.chart.ChartUtilities: void saveChartAsJPEG(java.io.File,float,org.jfree.chart.JFreeChart,int,int,org.jfree.chart.ChartRenderingInfo)>(file, quality, chart, width, height, null);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.ChartUtilities: void writeChartAsPNG(java.io.OutputStream,org.jfree.chart.JFreeChart,int,int)> ----
+    {
+        int height, width;
+        java.io.OutputStream out;
+        org.jfree.chart.JFreeChart chart;
+    
+    
+        out := @parameter0: java.io.OutputStream;
+        chart := @parameter1: org.jfree.chart.JFreeChart;
+        width := @parameter2: int;
+        height := @parameter3: int;
+        staticinvoke <org.jfree.chart.ChartUtilities: void writeChartAsPNG(java.io.OutputStream,org.jfree.chart.JFreeChart,int,int,org.jfree.chart.ChartRenderingInfo)>(out, chart, width, height, null);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.ChartUtilities: void writeChartAsJPEG(java.io.OutputStream,org.jfree.chart.JFreeChart,int,int)> ----
+    {
+        int height, width;
+        java.io.OutputStream out;
+        org.jfree.chart.JFreeChart chart;
+    
+    
+        out := @parameter0: java.io.OutputStream;
+        chart := @parameter1: org.jfree.chart.JFreeChart;
+        width := @parameter2: int;
+        height := @parameter3: int;
+        staticinvoke <org.jfree.chart.ChartUtilities: void writeChartAsJPEG(java.io.OutputStream,org.jfree.chart.JFreeChart,int,int,org.jfree.chart.ChartRenderingInfo)>(out, chart, width, height, null);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.ChartUtilities: void writeChartAsJPEG(java.io.OutputStream,org.jfree.chart.JFreeChart,int,int,org.jfree.chart.ChartRenderingInfo)> ----
+    {
+        int height, width;
+        java.awt.image.BufferedImage image;
+        java.io.OutputStream out;
+        java.lang.IllegalArgumentException #l0;
+        java.lang.Object $stack6;
+        java.lang.Throwable #l1;
+        org.jfree.chart.ChartRenderingInfo info;
+        org.jfree.chart.JFreeChart chart;
+    
+    
+        out := @parameter0: java.io.OutputStream;
+        chart := @parameter1: org.jfree.chart.JFreeChart;
+        width := @parameter2: int;
+        height := @parameter3: int;
+        info := @parameter4: org.jfree.chart.ChartRenderingInfo;
+    
+        if chart != null goto label1;
+        $stack6 = new java.lang.IllegalArgumentException;
+        #l0 = (java.lang.IllegalArgumentException) $stack6;
+        specialinvoke #l0.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'chart\' argument.");
+        #l1 = (java.lang.Throwable) $stack6;
+    
+        throw #l1;
+    
+      label1:
+        image = virtualinvoke chart.<org.jfree.chart.JFreeChart: java.awt.image.BufferedImage createBufferedImage(int,int,org.jfree.chart.ChartRenderingInfo)>(width, height, info);
+        staticinvoke <org.jfree.chart.encoders.EncoderUtil: void writeBufferedImage(java.awt.image.BufferedImage,java.lang.String,java.io.OutputStream)>(image, "jpeg", out);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.ChartUtilities: void <init>()> ----
+    {
+        org.jfree.chart.ChartUtilities this;
+    
+    
+        this := @this: org.jfree.chart.ChartUtilities;
+        specialinvoke this.<java.lang.Object: void <init>()>();
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.ChartUtilities: void writeChartAsJPEG(java.io.OutputStream,float,org.jfree.chart.JFreeChart,int,int,org.jfree.chart.ChartRenderingInfo)> ----
+    {
+        float quality;
+        int height, width;
+        java.awt.image.BufferedImage image;
+        java.io.OutputStream out;
+        java.lang.IllegalArgumentException #l1;
+        java.lang.Object $stack7;
+        java.lang.Throwable #l0;
+        org.jfree.chart.ChartRenderingInfo info;
+        org.jfree.chart.JFreeChart chart;
+    
+    
+        out := @parameter0: java.io.OutputStream;
+        quality := @parameter1: float;
+        chart := @parameter2: org.jfree.chart.JFreeChart;
+        width := @parameter3: int;
+        height := @parameter4: int;
+        info := @parameter5: org.jfree.chart.ChartRenderingInfo;
+    
+        if chart != null goto label1;
+        $stack7 = new java.lang.IllegalArgumentException;
+        #l1 = (java.lang.IllegalArgumentException) $stack7;
+        specialinvoke #l1.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'chart\' argument.");
+        #l0 = (java.lang.Throwable) $stack7;
+    
+        throw #l0;
+    
+      label1:
+        image = virtualinvoke chart.<org.jfree.chart.JFreeChart: java.awt.image.BufferedImage createBufferedImage(int,int,org.jfree.chart.ChartRenderingInfo)>(width, height, info);
+        staticinvoke <org.jfree.chart.encoders.EncoderUtil: void writeBufferedImage(java.awt.image.BufferedImage,java.lang.String,java.io.OutputStream,float)>(image, "jpeg", out, quality);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.ChartUtilities: byte[] encodeAsPNG(java.awt.image.BufferedImage)> ----
+    {
+        byte[] $stack1;
+        java.awt.image.BufferedImage image;
+    
+    
+        image := @parameter0: java.awt.image.BufferedImage;
+        $stack1 = staticinvoke <org.jfree.chart.encoders.EncoderUtil: byte[] encode(java.awt.image.BufferedImage,java.lang.String)>(image, "png");
+    
+        return $stack1;
+    }
+
+}

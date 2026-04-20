@@ -1,0 +1,329 @@
+// ========================================================================
+// CLASS : org.jfree.data.time.TimeSeriesTableModel
+// ========================================================================
+
+[PUBLIC, SUPER] class org.jfree.data.time.TimeSeriesTableModel extends javax.swing.table.AbstractTableModel implements org.jfree.data.general.SeriesChangeListener {
+
+    // ---- method: <org.jfree.data.time.TimeSeriesTableModel: java.lang.Class getColumnClass(int)> ----
+    {
+        int column;
+        java.lang.Class $stack2, $stack3, $stack5, $stack6;
+        java.lang.Object $stack4, $stack7;
+        org.jfree.data.time.TimeSeriesTableModel this;
+    
+    
+        this := @this: org.jfree.data.time.TimeSeriesTableModel;
+        column := @parameter0: int;
+    
+        if column != 0 goto label3;
+        $stack5 = <org.jfree.data.time.TimeSeriesTableModel: java.lang.Class class$java$lang$String>;
+    
+        if $stack5 != null goto label1;
+        $stack6 = staticinvoke <org.jfree.data.time.TimeSeriesTableModel: java.lang.Class class$(java.lang.String)>("java.lang.String");
+        <org.jfree.data.time.TimeSeriesTableModel: java.lang.Class class$java$lang$String> = $stack6;
+    
+        goto label2;
+    
+      label1:
+        $stack6 = <org.jfree.data.time.TimeSeriesTableModel: java.lang.Class class$java$lang$String>;
+    
+      label2:
+        return $stack6;
+    
+      label3:
+        if column != 1 goto label6;
+        $stack2 = <org.jfree.data.time.TimeSeriesTableModel: java.lang.Class class$java$lang$Double>;
+    
+        if $stack2 != null goto label4;
+        $stack3 = staticinvoke <org.jfree.data.time.TimeSeriesTableModel: java.lang.Class class$(java.lang.String)>("java.lang.Double");
+        <org.jfree.data.time.TimeSeriesTableModel: java.lang.Class class$java$lang$Double> = $stack3;
+    
+        goto label5;
+    
+      label4:
+        $stack3 = <org.jfree.data.time.TimeSeriesTableModel: java.lang.Class class$java$lang$Double>;
+    
+      label5:
+        return $stack3;
+    
+      label6:
+        return null;
+    }
+
+    // ---- method: <org.jfree.data.time.TimeSeriesTableModel: void <init>(org.jfree.data.time.TimeSeries)> ----
+    {
+        org.jfree.data.time.TimeSeries series;
+        org.jfree.data.time.TimeSeriesTableModel this;
+    
+    
+        this := @this: org.jfree.data.time.TimeSeriesTableModel;
+        series := @parameter0: org.jfree.data.time.TimeSeries;
+        specialinvoke this.<org.jfree.data.time.TimeSeriesTableModel: void <init>(org.jfree.data.time.TimeSeries,boolean)>(series, 0);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.time.TimeSeriesTableModel: boolean isCellEditable(int,int)> ----
+    {
+        boolean $stack3;
+        int column, row;
+        org.jfree.data.time.TimeSeriesTableModel this;
+    
+    
+        this := @this: org.jfree.data.time.TimeSeriesTableModel;
+        row := @parameter0: int;
+        column := @parameter1: int;
+        $stack3 = this.<org.jfree.data.time.TimeSeriesTableModel: boolean editable>;
+    
+        if $stack3 == 0 goto label2;
+    
+        if column == 0 goto label1;
+    
+        if column != 1 goto label3;
+    
+      label1:
+        return 1;
+    
+      label2:
+        return 0;
+    
+      label3:
+        return 0;
+    }
+
+    // ---- method: <org.jfree.data.time.TimeSeriesTableModel: void seriesChanged(org.jfree.data.general.SeriesChangeEvent)> ----
+    {
+        org.jfree.data.general.SeriesChangeEvent event;
+        org.jfree.data.time.TimeSeriesTableModel this;
+    
+    
+        this := @this: org.jfree.data.time.TimeSeriesTableModel;
+        event := @parameter0: org.jfree.data.general.SeriesChangeEvent;
+        virtualinvoke this.<org.jfree.data.time.TimeSeriesTableModel: void fireTableDataChanged()>();
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.time.TimeSeriesTableModel: int getColumnCount()> ----
+    {
+        org.jfree.data.time.TimeSeriesTableModel this;
+    
+    
+        this := @this: org.jfree.data.time.TimeSeriesTableModel;
+    
+        return 2;
+    }
+
+    // ---- method: <org.jfree.data.time.TimeSeriesTableModel: int getRowCount()> ----
+    {
+        int $stack2;
+        org.jfree.data.time.TimeSeries $stack1;
+        org.jfree.data.time.TimeSeriesTableModel this;
+    
+    
+        this := @this: org.jfree.data.time.TimeSeriesTableModel;
+        $stack1 = this.<org.jfree.data.time.TimeSeriesTableModel: org.jfree.data.time.TimeSeries series>;
+        $stack2 = virtualinvoke $stack1.<org.jfree.data.time.TimeSeries: int getItemCount()>();
+    
+        return $stack2;
+    }
+
+    // ---- method: <org.jfree.data.time.TimeSeriesTableModel: void <init>()> ----
+    {
+        java.lang.Comparable #l0;
+        org.jfree.data.time.TimeSeries $stack1;
+        org.jfree.data.time.TimeSeriesTableModel this;
+    
+    
+        this := @this: org.jfree.data.time.TimeSeriesTableModel;
+        $stack1 = new org.jfree.data.time.TimeSeries;
+        #l0 = (java.lang.Comparable) "Untitled";
+        specialinvoke $stack1.<org.jfree.data.time.TimeSeries: void <init>(java.lang.Comparable)>(#l0);
+        specialinvoke this.<org.jfree.data.time.TimeSeriesTableModel: void <init>(org.jfree.data.time.TimeSeries)>($stack1);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.time.TimeSeriesTableModel: java.lang.String getColumnName(int)> ----
+    {
+        int column;
+        org.jfree.data.time.TimeSeriesTableModel this;
+    
+    
+        this := @this: org.jfree.data.time.TimeSeriesTableModel;
+        column := @parameter0: int;
+    
+        if column != 0 goto label1;
+    
+        return "Period:";
+    
+      label1:
+        if column != 1 goto label2;
+    
+        return "Value:";
+    
+      label2:
+        return null;
+    }
+
+    // ---- method: <org.jfree.data.time.TimeSeriesTableModel: java.lang.Object getValueAt(int,int)> ----
+    {
+        int $stack4, column, row;
+        java.lang.Number $stack5, $stack8;
+        org.jfree.data.time.RegularTimePeriod $stack10, $stack6;
+        org.jfree.data.time.TimeSeries $stack3, $stack7, $stack9;
+        org.jfree.data.time.TimeSeriesTableModel this;
+    
+    
+        this := @this: org.jfree.data.time.TimeSeriesTableModel;
+        row := @parameter0: int;
+        column := @parameter1: int;
+        $stack3 = this.<org.jfree.data.time.TimeSeriesTableModel: org.jfree.data.time.TimeSeries series>;
+        $stack4 = virtualinvoke $stack3.<org.jfree.data.time.TimeSeries: int getItemCount()>();
+    
+        if row >= $stack4 goto label2;
+    
+        if column != 0 goto label1;
+        $stack9 = this.<org.jfree.data.time.TimeSeriesTableModel: org.jfree.data.time.TimeSeries series>;
+        $stack10 = virtualinvoke $stack9.<org.jfree.data.time.TimeSeries: org.jfree.data.time.RegularTimePeriod getTimePeriod(int)>(row);
+    
+        return $stack10;
+    
+      label1:
+        if column != 1 goto label4;
+        $stack7 = this.<org.jfree.data.time.TimeSeriesTableModel: org.jfree.data.time.TimeSeries series>;
+        $stack8 = virtualinvoke $stack7.<org.jfree.data.time.TimeSeries: java.lang.Number getValue(int)>(row);
+    
+        return $stack8;
+    
+      label2:
+        if column != 0 goto label3;
+        $stack6 = this.<org.jfree.data.time.TimeSeriesTableModel: org.jfree.data.time.RegularTimePeriod newTimePeriod>;
+    
+        return $stack6;
+    
+      label3:
+        if column != 1 goto label5;
+        $stack5 = this.<org.jfree.data.time.TimeSeriesTableModel: java.lang.Number newValue>;
+    
+        return $stack5;
+    
+      label4:
+        return null;
+    
+      label5:
+        return null;
+    }
+
+    // ---- method: <org.jfree.data.time.TimeSeriesTableModel: void setValueAt(java.lang.Object,int,int)> ----
+    {
+        int $stack6, column, row;
+        java.io.PrintStream $stack12;
+        java.lang.Number #l0;
+        java.lang.Object $stack8, v#0, value;
+        java.lang.String $stack7, $stack9;
+        java.lang.Throwable $stack11, v#1;
+        org.jfree.data.time.TimeSeries $stack10, $stack5;
+        org.jfree.data.time.TimeSeriesTableModel this;
+    
+    
+        this := @this: org.jfree.data.time.TimeSeriesTableModel;
+        value := @parameter0: java.lang.Object;
+        row := @parameter1: int;
+        column := @parameter2: int;
+        $stack5 = this.<org.jfree.data.time.TimeSeriesTableModel: org.jfree.data.time.TimeSeries series>;
+        $stack6 = virtualinvoke $stack5.<org.jfree.data.time.TimeSeries: int getItemCount()>();
+    
+        if row >= $stack6 goto label6;
+    
+        if column != 1 goto label8;
+    
+      label1:
+        $stack9 = virtualinvoke value.<java.lang.Object: java.lang.String toString()>();
+        v#0 = staticinvoke <java.lang.Double: java.lang.Double valueOf(java.lang.String)>($stack9);
+        $stack10 = this.<org.jfree.data.time.TimeSeriesTableModel: org.jfree.data.time.TimeSeries series>;
+    
+      label2:
+        #l0 = (java.lang.Number) v#0;
+    
+      label3:
+        virtualinvoke $stack10.<org.jfree.data.time.TimeSeries: void update(int,java.lang.Number)>(row, #l0);
+    
+      label4:
+        goto label8;
+    
+      label5:
+        $stack11 := @caughtexception;
+        v#1 = $stack11;
+        $stack12 = <java.lang.System: java.io.PrintStream err>;
+        virtualinvoke $stack12.<java.io.PrintStream: void println(java.lang.String)>("Number format exception");
+    
+        goto label8;
+    
+      label6:
+        if column != 0 goto label7;
+        this.<org.jfree.data.time.TimeSeriesTableModel: org.jfree.data.time.RegularTimePeriod newTimePeriod> = null;
+    
+        goto label8;
+    
+      label7:
+        if column != 1 goto label8;
+        $stack7 = virtualinvoke value.<java.lang.Object: java.lang.String toString()>();
+        $stack8 = staticinvoke <java.lang.Double: java.lang.Double valueOf(java.lang.String)>($stack7);
+        this.<org.jfree.data.time.TimeSeriesTableModel: java.lang.Number newValue> = (java.lang.Number) $stack8;
+    
+      label8:
+        return;
+    
+     catch java.lang.NumberFormatException from label1 to label2 with label5;
+     catch java.lang.NumberFormatException from label3 to label4 with label5;
+    }
+
+    // ---- method: <org.jfree.data.time.TimeSeriesTableModel: void <init>(org.jfree.data.time.TimeSeries,boolean)> ----
+    {
+        boolean editable;
+        org.jfree.data.time.TimeSeries $stack3, series;
+        org.jfree.data.time.TimeSeriesTableModel this;
+    
+    
+        this := @this: org.jfree.data.time.TimeSeriesTableModel;
+        series := @parameter0: org.jfree.data.time.TimeSeries;
+        editable := @parameter1: boolean;
+        specialinvoke this.<javax.swing.table.AbstractTableModel: void <init>()>();
+        this.<org.jfree.data.time.TimeSeriesTableModel: org.jfree.data.time.TimeSeries series> = series;
+        $stack3 = this.<org.jfree.data.time.TimeSeriesTableModel: org.jfree.data.time.TimeSeries series>;
+        virtualinvoke $stack3.<org.jfree.data.time.TimeSeries: void addChangeListener(org.jfree.data.general.SeriesChangeListener)>(this);
+        this.<org.jfree.data.time.TimeSeriesTableModel: boolean editable> = editable;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.time.TimeSeriesTableModel: java.lang.Class class$(java.lang.String)> ----
+    {
+        java.lang.Class $stack2;
+        java.lang.NoClassDefFoundError $stack4;
+        java.lang.String x0;
+        java.lang.Throwable $stack3, $stack5, x1;
+    
+    
+        x0 := @parameter0: java.lang.String;
+    
+      label1:
+        $stack2 = staticinvoke <java.lang.Class: java.lang.Class forName(java.lang.String)>(x0);
+    
+      label2:
+        return $stack2;
+    
+      label3:
+        $stack3 := @caughtexception;
+        x1 = $stack3;
+        $stack4 = new java.lang.NoClassDefFoundError;
+        specialinvoke $stack4.<java.lang.NoClassDefFoundError: void <init>()>();
+        $stack5 = virtualinvoke $stack4.<java.lang.NoClassDefFoundError: java.lang.Throwable initCause(java.lang.Throwable)>($stack3);
+    
+        throw $stack5;
+    
+     catch java.lang.ClassNotFoundException from label1 to label2 with label3;
+    }
+
+}

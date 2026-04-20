@@ -1,0 +1,760 @@
+// ========================================================================
+// CLASS : org.jfree.chart.plot.DefaultDrawingSupplier
+// ========================================================================
+
+[PUBLIC, SUPER] class org.jfree.chart.plot.DefaultDrawingSupplier extends java.lang.Object implements org.jfree.chart.util.PublicCloneable, org.jfree.chart.plot.DrawingSupplier, java.lang.Cloneable, java.io.Serializable {
+
+    // ---- method: <org.jfree.chart.plot.DefaultDrawingSupplier: void readObject(java.io.ObjectInputStream)> ----
+    {
+        int i#0, i#1, i_1#0, i_1#1, i_1_2#0, i_1_2#1, i_1_2_3#0, i_1_2_3#1, i_1_2_3_4, paintCount;
+        java.awt.Paint $stack20, $stack22;
+        java.awt.Paint[] $stack19, $stack21, $stack8, $stack9;
+        java.awt.Shape $stack14;
+        java.awt.Shape[] $stack12, $stack13;
+        java.awt.Stroke $stack16, $stack18;
+        java.awt.Stroke[] $stack10, $stack11, $stack15, $stack17;
+        java.io.ObjectInputStream stream;
+        org.jfree.chart.plot.DefaultDrawingSupplier this;
+    
+    
+        this := @this: org.jfree.chart.plot.DefaultDrawingSupplier;
+        stream := @parameter0: java.io.ObjectInputStream;
+        virtualinvoke stream.<java.io.ObjectInputStream: void defaultReadObject()>();
+        paintCount = virtualinvoke stream.<java.io.ObjectInputStream: int readInt()>();
+        $stack8 = newarray (java.awt.Paint)[paintCount];
+        this.<org.jfree.chart.plot.DefaultDrawingSupplier: java.awt.Paint[] paintSequence> = $stack8;
+        i#0 = 0;
+    
+      label01:
+        if i#0 >= paintCount goto label02;
+        $stack21 = this.<org.jfree.chart.plot.DefaultDrawingSupplier: java.awt.Paint[] paintSequence>;
+        $stack22 = staticinvoke <org.jfree.chart.util.SerialUtilities: java.awt.Paint readPaint(java.io.ObjectInputStream)>(stream);
+        $stack21[i#0] = $stack22;
+        i#0 = i#0 + 1;
+    
+        goto label01;
+    
+      label02:
+        i#1 = virtualinvoke stream.<java.io.ObjectInputStream: int readInt()>();
+        $stack9 = newarray (java.awt.Paint)[i#1];
+        this.<org.jfree.chart.plot.DefaultDrawingSupplier: java.awt.Paint[] outlinePaintSequence> = $stack9;
+        i_1#0 = 0;
+    
+      label03:
+        if i_1#0 >= i#1 goto label04;
+        $stack19 = this.<org.jfree.chart.plot.DefaultDrawingSupplier: java.awt.Paint[] outlinePaintSequence>;
+        $stack20 = staticinvoke <org.jfree.chart.util.SerialUtilities: java.awt.Paint readPaint(java.io.ObjectInputStream)>(stream);
+        $stack19[i_1#0] = $stack20;
+        i_1#0 = i_1#0 + 1;
+    
+        goto label03;
+    
+      label04:
+        i_1#1 = virtualinvoke stream.<java.io.ObjectInputStream: int readInt()>();
+        $stack10 = newarray (java.awt.Stroke)[i_1#1];
+        this.<org.jfree.chart.plot.DefaultDrawingSupplier: java.awt.Stroke[] strokeSequence> = $stack10;
+        i_1_2#0 = 0;
+    
+      label05:
+        if i_1_2#0 >= i_1#1 goto label06;
+        $stack17 = this.<org.jfree.chart.plot.DefaultDrawingSupplier: java.awt.Stroke[] strokeSequence>;
+        $stack18 = staticinvoke <org.jfree.chart.util.SerialUtilities: java.awt.Stroke readStroke(java.io.ObjectInputStream)>(stream);
+        $stack17[i_1_2#0] = $stack18;
+        i_1_2#0 = i_1_2#0 + 1;
+    
+        goto label05;
+    
+      label06:
+        i_1_2#1 = virtualinvoke stream.<java.io.ObjectInputStream: int readInt()>();
+        $stack11 = newarray (java.awt.Stroke)[i_1_2#1];
+        this.<org.jfree.chart.plot.DefaultDrawingSupplier: java.awt.Stroke[] outlineStrokeSequence> = $stack11;
+        i_1_2_3#0 = 0;
+    
+      label07:
+        if i_1_2_3#0 >= i_1_2#1 goto label08;
+        $stack15 = this.<org.jfree.chart.plot.DefaultDrawingSupplier: java.awt.Stroke[] outlineStrokeSequence>;
+        $stack16 = staticinvoke <org.jfree.chart.util.SerialUtilities: java.awt.Stroke readStroke(java.io.ObjectInputStream)>(stream);
+        $stack15[i_1_2_3#0] = $stack16;
+        i_1_2_3#0 = i_1_2_3#0 + 1;
+    
+        goto label07;
+    
+      label08:
+        i_1_2_3#1 = virtualinvoke stream.<java.io.ObjectInputStream: int readInt()>();
+        $stack12 = newarray (java.awt.Shape)[i_1_2_3#1];
+        this.<org.jfree.chart.plot.DefaultDrawingSupplier: java.awt.Shape[] shapeSequence> = $stack12;
+        i_1_2_3_4 = 0;
+    
+      label09:
+        if i_1_2_3_4 >= i_1_2_3#1 goto label10;
+        $stack13 = this.<org.jfree.chart.plot.DefaultDrawingSupplier: java.awt.Shape[] shapeSequence>;
+        $stack14 = staticinvoke <org.jfree.chart.util.SerialUtilities: java.awt.Shape readShape(java.io.ObjectInputStream)>(stream);
+        $stack13[i_1_2_3_4] = $stack14;
+        i_1_2_3_4 = i_1_2_3_4 + 1;
+    
+        goto label09;
+    
+      label10:
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.plot.DefaultDrawingSupplier: boolean equals(java.lang.Object)> ----
+    {
+        boolean $stack11, $stack16, $stack21, $stack26, $stack3, $stack6;
+        int $stack12, $stack13, $stack17, $stack18, $stack22, $stack23, $stack27, $stack28, $stack7, $stack8;
+        java.awt.Paint[] $stack10, $stack4, $stack5, $stack9;
+        java.awt.Shape[] $stack24, $stack25;
+        java.awt.Stroke[] $stack14, $stack15, $stack19, $stack20;
+        java.lang.Object obj;
+        org.jfree.chart.plot.DefaultDrawingSupplier that, this;
+    
+    
+        this := @this: org.jfree.chart.plot.DefaultDrawingSupplier;
+        obj := @parameter0: java.lang.Object;
+    
+        if obj != this goto label01;
+    
+        return 1;
+    
+      label01:
+        $stack3 = obj instanceof org.jfree.chart.plot.DefaultDrawingSupplier;
+    
+        if $stack3 != 0 goto label02;
+    
+        return 0;
+    
+      label02:
+        that = (org.jfree.chart.plot.DefaultDrawingSupplier) obj;
+        $stack5 = this.<org.jfree.chart.plot.DefaultDrawingSupplier: java.awt.Paint[] paintSequence>;
+        $stack4 = that.<org.jfree.chart.plot.DefaultDrawingSupplier: java.awt.Paint[] paintSequence>;
+        $stack6 = staticinvoke <java.util.Arrays: boolean equals(java.lang.Object[],java.lang.Object[])>($stack5, $stack4);
+    
+        if $stack6 != 0 goto label03;
+    
+        return 0;
+    
+      label03:
+        $stack8 = this.<org.jfree.chart.plot.DefaultDrawingSupplier: int paintIndex>;
+        $stack7 = that.<org.jfree.chart.plot.DefaultDrawingSupplier: int paintIndex>;
+    
+        if $stack8 == $stack7 goto label04;
+    
+        return 0;
+    
+      label04:
+        $stack10 = this.<org.jfree.chart.plot.DefaultDrawingSupplier: java.awt.Paint[] outlinePaintSequence>;
+        $stack9 = that.<org.jfree.chart.plot.DefaultDrawingSupplier: java.awt.Paint[] outlinePaintSequence>;
+        $stack11 = staticinvoke <java.util.Arrays: boolean equals(java.lang.Object[],java.lang.Object[])>($stack10, $stack9);
+    
+        if $stack11 != 0 goto label05;
+    
+        return 0;
+    
+      label05:
+        $stack13 = this.<org.jfree.chart.plot.DefaultDrawingSupplier: int outlinePaintIndex>;
+        $stack12 = that.<org.jfree.chart.plot.DefaultDrawingSupplier: int outlinePaintIndex>;
+    
+        if $stack13 == $stack12 goto label06;
+    
+        return 0;
+    
+      label06:
+        $stack15 = this.<org.jfree.chart.plot.DefaultDrawingSupplier: java.awt.Stroke[] strokeSequence>;
+        $stack14 = that.<org.jfree.chart.plot.DefaultDrawingSupplier: java.awt.Stroke[] strokeSequence>;
+        $stack16 = staticinvoke <java.util.Arrays: boolean equals(java.lang.Object[],java.lang.Object[])>($stack15, $stack14);
+    
+        if $stack16 != 0 goto label07;
+    
+        return 0;
+    
+      label07:
+        $stack18 = this.<org.jfree.chart.plot.DefaultDrawingSupplier: int strokeIndex>;
+        $stack17 = that.<org.jfree.chart.plot.DefaultDrawingSupplier: int strokeIndex>;
+    
+        if $stack18 == $stack17 goto label08;
+    
+        return 0;
+    
+      label08:
+        $stack20 = this.<org.jfree.chart.plot.DefaultDrawingSupplier: java.awt.Stroke[] outlineStrokeSequence>;
+        $stack19 = that.<org.jfree.chart.plot.DefaultDrawingSupplier: java.awt.Stroke[] outlineStrokeSequence>;
+        $stack21 = staticinvoke <java.util.Arrays: boolean equals(java.lang.Object[],java.lang.Object[])>($stack20, $stack19);
+    
+        if $stack21 != 0 goto label09;
+    
+        return 0;
+    
+      label09:
+        $stack23 = this.<org.jfree.chart.plot.DefaultDrawingSupplier: int outlineStrokeIndex>;
+        $stack22 = that.<org.jfree.chart.plot.DefaultDrawingSupplier: int outlineStrokeIndex>;
+    
+        if $stack23 == $stack22 goto label10;
+    
+        return 0;
+    
+      label10:
+        $stack25 = this.<org.jfree.chart.plot.DefaultDrawingSupplier: java.awt.Shape[] shapeSequence>;
+        $stack24 = that.<org.jfree.chart.plot.DefaultDrawingSupplier: java.awt.Shape[] shapeSequence>;
+        $stack26 = specialinvoke this.<org.jfree.chart.plot.DefaultDrawingSupplier: boolean equalShapes(java.awt.Shape[],java.awt.Shape[])>($stack25, $stack24);
+    
+        if $stack26 != 0 goto label11;
+    
+        return 0;
+    
+      label11:
+        $stack28 = this.<org.jfree.chart.plot.DefaultDrawingSupplier: int shapeIndex>;
+        $stack27 = that.<org.jfree.chart.plot.DefaultDrawingSupplier: int shapeIndex>;
+    
+        if $stack28 == $stack27 goto label12;
+    
+        return 0;
+    
+      label12:
+        return 1;
+    }
+
+    // ---- method: <org.jfree.chart.plot.DefaultDrawingSupplier: void <init>()> ----
+    {
+        java.awt.Paint[] $stack4, $stack5, $stack6;
+        java.awt.Shape[] $stack1;
+        java.awt.Stroke[] $stack2, $stack3;
+        org.jfree.chart.plot.DefaultDrawingSupplier this;
+    
+    
+        this := @this: org.jfree.chart.plot.DefaultDrawingSupplier;
+        $stack6 = <org.jfree.chart.plot.DefaultDrawingSupplier: java.awt.Paint[] DEFAULT_PAINT_SEQUENCE>;
+        $stack5 = <org.jfree.chart.plot.DefaultDrawingSupplier: java.awt.Paint[] DEFAULT_FILL_PAINT_SEQUENCE>;
+        $stack4 = <org.jfree.chart.plot.DefaultDrawingSupplier: java.awt.Paint[] DEFAULT_OUTLINE_PAINT_SEQUENCE>;
+        $stack3 = <org.jfree.chart.plot.DefaultDrawingSupplier: java.awt.Stroke[] DEFAULT_STROKE_SEQUENCE>;
+        $stack2 = <org.jfree.chart.plot.DefaultDrawingSupplier: java.awt.Stroke[] DEFAULT_OUTLINE_STROKE_SEQUENCE>;
+        $stack1 = <org.jfree.chart.plot.DefaultDrawingSupplier: java.awt.Shape[] DEFAULT_SHAPE_SEQUENCE>;
+        specialinvoke this.<org.jfree.chart.plot.DefaultDrawingSupplier: void <init>(java.awt.Paint[],java.awt.Paint[],java.awt.Paint[],java.awt.Stroke[],java.awt.Stroke[],java.awt.Shape[])>($stack6, $stack5, $stack4, $stack3, $stack2, $stack1);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.plot.DefaultDrawingSupplier: void <clinit>()> ----
+    {
+        java.awt.BasicStroke $stack5, $stack7;
+        java.awt.Color $stack2, $stack4;
+        java.awt.Paint[] $stack0;
+        java.awt.Shape[] $stack9;
+        java.lang.Object[] $stack1, $stack3, $stack6, $stack8;
+    
+    
+        $stack0 = staticinvoke <org.jfree.chart.ChartColor: java.awt.Paint[] createDefaultPaintArray()>();
+        <org.jfree.chart.plot.DefaultDrawingSupplier: java.awt.Paint[] DEFAULT_PAINT_SEQUENCE> = $stack0;
+        $stack1 = newarray (java.awt.Paint)[1];
+        $stack2 = <java.awt.Color: java.awt.Color lightGray>;
+        $stack1[0] = $stack2;
+        <org.jfree.chart.plot.DefaultDrawingSupplier: java.awt.Paint[] DEFAULT_OUTLINE_PAINT_SEQUENCE> = (java.awt.Paint[]) $stack1;
+        $stack3 = newarray (java.awt.Paint)[1];
+        $stack4 = <java.awt.Color: java.awt.Color white>;
+        $stack3[0] = $stack4;
+        <org.jfree.chart.plot.DefaultDrawingSupplier: java.awt.Paint[] DEFAULT_FILL_PAINT_SEQUENCE> = (java.awt.Paint[]) $stack3;
+        $stack6 = newarray (java.awt.Stroke)[1];
+        $stack5 = new java.awt.BasicStroke;
+        specialinvoke $stack5.<java.awt.BasicStroke: void <init>(float,int,int)>(1.0F, 2, 2);
+        $stack6[0] = $stack5;
+        <org.jfree.chart.plot.DefaultDrawingSupplier: java.awt.Stroke[] DEFAULT_STROKE_SEQUENCE> = (java.awt.Stroke[]) $stack6;
+        $stack8 = newarray (java.awt.Stroke)[1];
+        $stack7 = new java.awt.BasicStroke;
+        specialinvoke $stack7.<java.awt.BasicStroke: void <init>(float,int,int)>(1.0F, 2, 2);
+        $stack8[0] = $stack7;
+        <org.jfree.chart.plot.DefaultDrawingSupplier: java.awt.Stroke[] DEFAULT_OUTLINE_STROKE_SEQUENCE> = (java.awt.Stroke[]) $stack8;
+        $stack9 = staticinvoke <org.jfree.chart.plot.DefaultDrawingSupplier: java.awt.Shape[] createStandardSeriesShapes()>();
+        <org.jfree.chart.plot.DefaultDrawingSupplier: java.awt.Shape[] DEFAULT_SHAPE_SEQUENCE> = $stack9;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.plot.DefaultDrawingSupplier: java.lang.Object clone()> ----
+    {
+        java.lang.Object $stack2;
+        org.jfree.chart.plot.DefaultDrawingSupplier clone, this;
+    
+    
+        this := @this: org.jfree.chart.plot.DefaultDrawingSupplier;
+        $stack2 = specialinvoke this.<java.lang.Object: java.lang.Object clone()>();
+        clone = (org.jfree.chart.plot.DefaultDrawingSupplier) $stack2;
+    
+        return clone;
+    }
+
+    // ---- method: <org.jfree.chart.plot.DefaultDrawingSupplier: java.awt.Stroke getNextStroke()> ----
+    {
+        int $stack3, $stack4, $stack6, $stack7, $stack8;
+        java.awt.Stroke result;
+        java.awt.Stroke[] $stack2, $stack5;
+        org.jfree.chart.plot.DefaultDrawingSupplier this;
+    
+    
+        this := @this: org.jfree.chart.plot.DefaultDrawingSupplier;
+        $stack5 = this.<org.jfree.chart.plot.DefaultDrawingSupplier: java.awt.Stroke[] strokeSequence>;
+        $stack3 = this.<org.jfree.chart.plot.DefaultDrawingSupplier: int strokeIndex>;
+        $stack2 = this.<org.jfree.chart.plot.DefaultDrawingSupplier: java.awt.Stroke[] strokeSequence>;
+        $stack4 = lengthof $stack2;
+        $stack6 = $stack3 % $stack4;
+        result = $stack5[$stack6];
+        $stack7 = this.<org.jfree.chart.plot.DefaultDrawingSupplier: int strokeIndex>;
+        $stack8 = $stack7 + 1;
+        this.<org.jfree.chart.plot.DefaultDrawingSupplier: int strokeIndex> = $stack8;
+    
+        return result;
+    }
+
+    // ---- method: <org.jfree.chart.plot.DefaultDrawingSupplier: java.awt.Shape[] createStandardSeriesShapes()> ----
+    {
+        double $stack10, $stack11, $stack13, $stack14, $stack16, $stack17, $stack19, $stack20, $stack21, $stack22, $stack24, $stack25, $stack26, $stack28, $stack29, $stack30, $stack31, $stack33, $stack34, $stack35, $stack37, $stack38, $stack39, $stack40, $stack42, $stack43, $stack7, $stack8, delta, size;
+        int[] xpoints#1, xpoints#2, xpoints#3, xpoints#4, xpoints#5, ypoints#1, ypoints#2, ypoints#3, ypoints#4, ypoints#5;
+        java.awt.Polygon $stack15, $stack18, $stack27, $stack36, $stack44;
+        java.awt.Shape[] #l0;
+        java.awt.geom.Ellipse2D$Double $stack12, $stack32;
+        java.awt.geom.Rectangle2D$Double $stack23, $stack41, $stack9;
+        java.lang.Object xpoints#0, ypoints#0;
+        java.lang.Object[] result;
+    
+    
+        result = newarray (java.awt.Shape)[10];
+        size = 6.0;
+        delta = 3.0;
+        xpoints#0 = null;
+        ypoints#0 = null;
+        $stack9 = new java.awt.geom.Rectangle2D$Double;
+        $stack8 = neg delta;
+        $stack7 = neg delta;
+        specialinvoke $stack9.<java.awt.geom.Rectangle2D$Double: void <init>(double,double,double,double)>($stack8, $stack7, 6.0, 6.0);
+        result[0] = $stack9;
+        $stack12 = new java.awt.geom.Ellipse2D$Double;
+        $stack11 = neg delta;
+        $stack10 = neg delta;
+        specialinvoke $stack12.<java.awt.geom.Ellipse2D$Double: void <init>(double,double,double,double)>($stack11, $stack10, 6.0, 6.0);
+        result[1] = $stack12;
+        $stack13 = neg delta;
+        xpoints#1 = staticinvoke <org.jfree.chart.plot.DefaultDrawingSupplier: int[] intArray(double,double,double)>(0.0, delta, $stack13);
+        $stack14 = neg delta;
+        ypoints#1 = staticinvoke <org.jfree.chart.plot.DefaultDrawingSupplier: int[] intArray(double,double,double)>($stack14, delta, delta);
+        $stack15 = new java.awt.Polygon;
+        specialinvoke $stack15.<java.awt.Polygon: void <init>(int[],int[],int)>(xpoints#1, ypoints#1, 3);
+        result[2] = $stack15;
+        $stack16 = neg delta;
+        xpoints#2 = staticinvoke <org.jfree.chart.plot.DefaultDrawingSupplier: int[] intArray(double,double,double,double)>(0.0, delta, 0.0, $stack16);
+        $stack17 = neg delta;
+        ypoints#2 = staticinvoke <org.jfree.chart.plot.DefaultDrawingSupplier: int[] intArray(double,double,double,double)>($stack17, 0.0, delta, 0.0);
+        $stack18 = new java.awt.Polygon;
+        specialinvoke $stack18.<java.awt.Polygon: void <init>(int[],int[],int)>(xpoints#2, ypoints#2, 4);
+        result[3] = $stack18;
+        $stack23 = new java.awt.geom.Rectangle2D$Double;
+        $stack22 = neg delta;
+        $stack19 = neg delta;
+        $stack21 = $stack19 / 2.0;
+        $stack20 = 3.0;
+        specialinvoke $stack23.<java.awt.geom.Rectangle2D$Double: void <init>(double,double,double,double)>($stack22, $stack21, 6.0, $stack20);
+        result[4] = $stack23;
+        $stack24 = neg delta;
+        xpoints#3 = staticinvoke <org.jfree.chart.plot.DefaultDrawingSupplier: int[] intArray(double,double,double)>($stack24, delta, 0.0);
+        $stack26 = neg delta;
+        $stack25 = neg delta;
+        ypoints#3 = staticinvoke <org.jfree.chart.plot.DefaultDrawingSupplier: int[] intArray(double,double,double)>($stack26, $stack25, delta);
+        $stack27 = new java.awt.Polygon;
+        specialinvoke $stack27.<java.awt.Polygon: void <init>(int[],int[],int)>(xpoints#3, ypoints#3, 3);
+        result[5] = $stack27;
+        $stack32 = new java.awt.geom.Ellipse2D$Double;
+        $stack31 = neg delta;
+        $stack28 = neg delta;
+        $stack30 = $stack28 / 2.0;
+        $stack29 = 3.0;
+        specialinvoke $stack32.<java.awt.geom.Ellipse2D$Double: void <init>(double,double,double,double)>($stack31, $stack30, 6.0, $stack29);
+        result[6] = $stack32;
+        $stack34 = neg delta;
+        $stack33 = neg delta;
+        xpoints#4 = staticinvoke <org.jfree.chart.plot.DefaultDrawingSupplier: int[] intArray(double,double,double)>($stack34, delta, $stack33);
+        $stack35 = neg delta;
+        ypoints#4 = staticinvoke <org.jfree.chart.plot.DefaultDrawingSupplier: int[] intArray(double,double,double)>($stack35, 0.0, delta);
+        $stack36 = new java.awt.Polygon;
+        specialinvoke $stack36.<java.awt.Polygon: void <init>(int[],int[],int)>(xpoints#4, ypoints#4, 3);
+        result[7] = $stack36;
+        $stack41 = new java.awt.geom.Rectangle2D$Double;
+        $stack37 = neg delta;
+        $stack40 = $stack37 / 2.0;
+        $stack39 = neg delta;
+        $stack38 = 3.0;
+        specialinvoke $stack41.<java.awt.geom.Rectangle2D$Double: void <init>(double,double,double,double)>($stack40, $stack39, $stack38, 6.0);
+        result[8] = $stack41;
+        $stack42 = neg delta;
+        xpoints#5 = staticinvoke <org.jfree.chart.plot.DefaultDrawingSupplier: int[] intArray(double,double,double)>($stack42, delta, delta);
+        $stack43 = neg delta;
+        ypoints#5 = staticinvoke <org.jfree.chart.plot.DefaultDrawingSupplier: int[] intArray(double,double,double)>(0.0, $stack43, delta);
+        $stack44 = new java.awt.Polygon;
+        specialinvoke $stack44.<java.awt.Polygon: void <init>(int[],int[],int)>(xpoints#5, ypoints#5, 3);
+        result[9] = $stack44;
+        #l0 = (java.awt.Shape[]) result;
+    
+        return #l0;
+    }
+
+    // ---- method: <org.jfree.chart.plot.DefaultDrawingSupplier: void writeObject(java.io.ObjectOutputStream)> ----
+    {
+        int i#0, i#1, i_1#0, i_1#1, i_1_2#0, i_1_2#1, i_1_2_3#0, i_1_2_3#1, i_1_2_3_4, paintCount;
+        java.awt.Paint $stack20, $stack22;
+        java.awt.Paint[] $stack19, $stack21, $stack8, $stack9;
+        java.awt.Shape $stack14;
+        java.awt.Shape[] $stack12, $stack13;
+        java.awt.Stroke $stack16, $stack18;
+        java.awt.Stroke[] $stack10, $stack11, $stack15, $stack17;
+        java.io.ObjectOutputStream stream;
+        org.jfree.chart.plot.DefaultDrawingSupplier this;
+    
+    
+        this := @this: org.jfree.chart.plot.DefaultDrawingSupplier;
+        stream := @parameter0: java.io.ObjectOutputStream;
+        virtualinvoke stream.<java.io.ObjectOutputStream: void defaultWriteObject()>();
+        $stack8 = this.<org.jfree.chart.plot.DefaultDrawingSupplier: java.awt.Paint[] paintSequence>;
+        paintCount = lengthof $stack8;
+        virtualinvoke stream.<java.io.ObjectOutputStream: void writeInt(int)>(paintCount);
+        i#0 = 0;
+    
+      label01:
+        if i#0 >= paintCount goto label02;
+        $stack21 = this.<org.jfree.chart.plot.DefaultDrawingSupplier: java.awt.Paint[] paintSequence>;
+        $stack22 = $stack21[i#0];
+        staticinvoke <org.jfree.chart.util.SerialUtilities: void writePaint(java.awt.Paint,java.io.ObjectOutputStream)>($stack22, stream);
+        i#0 = i#0 + 1;
+    
+        goto label01;
+    
+      label02:
+        $stack9 = this.<org.jfree.chart.plot.DefaultDrawingSupplier: java.awt.Paint[] outlinePaintSequence>;
+        i#1 = lengthof $stack9;
+        virtualinvoke stream.<java.io.ObjectOutputStream: void writeInt(int)>(i#1);
+        i_1#0 = 0;
+    
+      label03:
+        if i_1#0 >= i#1 goto label04;
+        $stack19 = this.<org.jfree.chart.plot.DefaultDrawingSupplier: java.awt.Paint[] outlinePaintSequence>;
+        $stack20 = $stack19[i_1#0];
+        staticinvoke <org.jfree.chart.util.SerialUtilities: void writePaint(java.awt.Paint,java.io.ObjectOutputStream)>($stack20, stream);
+        i_1#0 = i_1#0 + 1;
+    
+        goto label03;
+    
+      label04:
+        $stack10 = this.<org.jfree.chart.plot.DefaultDrawingSupplier: java.awt.Stroke[] strokeSequence>;
+        i_1#1 = lengthof $stack10;
+        virtualinvoke stream.<java.io.ObjectOutputStream: void writeInt(int)>(i_1#1);
+        i_1_2#0 = 0;
+    
+      label05:
+        if i_1_2#0 >= i_1#1 goto label06;
+        $stack17 = this.<org.jfree.chart.plot.DefaultDrawingSupplier: java.awt.Stroke[] strokeSequence>;
+        $stack18 = $stack17[i_1_2#0];
+        staticinvoke <org.jfree.chart.util.SerialUtilities: void writeStroke(java.awt.Stroke,java.io.ObjectOutputStream)>($stack18, stream);
+        i_1_2#0 = i_1_2#0 + 1;
+    
+        goto label05;
+    
+      label06:
+        $stack11 = this.<org.jfree.chart.plot.DefaultDrawingSupplier: java.awt.Stroke[] outlineStrokeSequence>;
+        i_1_2#1 = lengthof $stack11;
+        virtualinvoke stream.<java.io.ObjectOutputStream: void writeInt(int)>(i_1_2#1);
+        i_1_2_3#0 = 0;
+    
+      label07:
+        if i_1_2_3#0 >= i_1_2#1 goto label08;
+        $stack15 = this.<org.jfree.chart.plot.DefaultDrawingSupplier: java.awt.Stroke[] outlineStrokeSequence>;
+        $stack16 = $stack15[i_1_2_3#0];
+        staticinvoke <org.jfree.chart.util.SerialUtilities: void writeStroke(java.awt.Stroke,java.io.ObjectOutputStream)>($stack16, stream);
+        i_1_2_3#0 = i_1_2_3#0 + 1;
+    
+        goto label07;
+    
+      label08:
+        $stack12 = this.<org.jfree.chart.plot.DefaultDrawingSupplier: java.awt.Shape[] shapeSequence>;
+        i_1_2_3#1 = lengthof $stack12;
+        virtualinvoke stream.<java.io.ObjectOutputStream: void writeInt(int)>(i_1_2_3#1);
+        i_1_2_3_4 = 0;
+    
+      label09:
+        if i_1_2_3_4 >= i_1_2_3#1 goto label10;
+        $stack13 = this.<org.jfree.chart.plot.DefaultDrawingSupplier: java.awt.Shape[] shapeSequence>;
+        $stack14 = $stack13[i_1_2_3_4];
+        staticinvoke <org.jfree.chart.util.SerialUtilities: void writeShape(java.awt.Shape,java.io.ObjectOutputStream)>($stack14, stream);
+        i_1_2_3_4 = i_1_2_3_4 + 1;
+    
+        goto label09;
+    
+      label10:
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.plot.DefaultDrawingSupplier: void <init>(java.awt.Paint[],java.awt.Paint[],java.awt.Stroke[],java.awt.Stroke[],java.awt.Shape[])> ----
+    {
+        java.awt.Paint[] $stack6, outlinePaintSequence, paintSequence;
+        java.awt.Shape[] shapeSequence;
+        java.awt.Stroke[] outlineStrokeSequence, strokeSequence;
+        org.jfree.chart.plot.DefaultDrawingSupplier this;
+    
+    
+        this := @this: org.jfree.chart.plot.DefaultDrawingSupplier;
+        paintSequence := @parameter0: java.awt.Paint[];
+        outlinePaintSequence := @parameter1: java.awt.Paint[];
+        strokeSequence := @parameter2: java.awt.Stroke[];
+        outlineStrokeSequence := @parameter3: java.awt.Stroke[];
+        shapeSequence := @parameter4: java.awt.Shape[];
+        specialinvoke this.<java.lang.Object: void <init>()>();
+        this.<org.jfree.chart.plot.DefaultDrawingSupplier: java.awt.Paint[] paintSequence> = paintSequence;
+        $stack6 = <org.jfree.chart.plot.DefaultDrawingSupplier: java.awt.Paint[] DEFAULT_FILL_PAINT_SEQUENCE>;
+        this.<org.jfree.chart.plot.DefaultDrawingSupplier: java.awt.Paint[] fillPaintSequence> = $stack6;
+        this.<org.jfree.chart.plot.DefaultDrawingSupplier: java.awt.Paint[] outlinePaintSequence> = outlinePaintSequence;
+        this.<org.jfree.chart.plot.DefaultDrawingSupplier: java.awt.Stroke[] strokeSequence> = strokeSequence;
+        this.<org.jfree.chart.plot.DefaultDrawingSupplier: java.awt.Stroke[] outlineStrokeSequence> = outlineStrokeSequence;
+        this.<org.jfree.chart.plot.DefaultDrawingSupplier: java.awt.Shape[] shapeSequence> = shapeSequence;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.plot.DefaultDrawingSupplier: void <init>(java.awt.Paint[],java.awt.Paint[],java.awt.Paint[],java.awt.Stroke[],java.awt.Stroke[],java.awt.Shape[])> ----
+    {
+        java.awt.Paint[] fillPaintSequence, outlinePaintSequence, paintSequence;
+        java.awt.Shape[] shapeSequence;
+        java.awt.Stroke[] outlineStrokeSequence, strokeSequence;
+        org.jfree.chart.plot.DefaultDrawingSupplier this;
+    
+    
+        this := @this: org.jfree.chart.plot.DefaultDrawingSupplier;
+        paintSequence := @parameter0: java.awt.Paint[];
+        fillPaintSequence := @parameter1: java.awt.Paint[];
+        outlinePaintSequence := @parameter2: java.awt.Paint[];
+        strokeSequence := @parameter3: java.awt.Stroke[];
+        outlineStrokeSequence := @parameter4: java.awt.Stroke[];
+        shapeSequence := @parameter5: java.awt.Shape[];
+        specialinvoke this.<java.lang.Object: void <init>()>();
+        this.<org.jfree.chart.plot.DefaultDrawingSupplier: java.awt.Paint[] paintSequence> = paintSequence;
+        this.<org.jfree.chart.plot.DefaultDrawingSupplier: java.awt.Paint[] fillPaintSequence> = fillPaintSequence;
+        this.<org.jfree.chart.plot.DefaultDrawingSupplier: java.awt.Paint[] outlinePaintSequence> = outlinePaintSequence;
+        this.<org.jfree.chart.plot.DefaultDrawingSupplier: java.awt.Stroke[] strokeSequence> = strokeSequence;
+        this.<org.jfree.chart.plot.DefaultDrawingSupplier: java.awt.Stroke[] outlineStrokeSequence> = outlineStrokeSequence;
+        this.<org.jfree.chart.plot.DefaultDrawingSupplier: java.awt.Shape[] shapeSequence> = shapeSequence;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.plot.DefaultDrawingSupplier: int[] intArray(double,double,double,double)> ----
+    {
+        double a, b, c, d;
+        int $stack10, $stack11, $stack12, $stack9;
+        int[] $stack8;
+    
+    
+        a := @parameter0: double;
+        b := @parameter1: double;
+        c := @parameter2: double;
+        d := @parameter3: double;
+        $stack8 = newarray (int)[4];
+        $stack9 = (int) a;
+        $stack8[0] = $stack9;
+        $stack10 = (int) b;
+        $stack8[1] = $stack10;
+        $stack11 = (int) c;
+        $stack8[2] = $stack11;
+        $stack12 = (int) d;
+        $stack8[3] = $stack12;
+    
+        return $stack8;
+    }
+
+    // ---- method: <org.jfree.chart.plot.DefaultDrawingSupplier: java.awt.Stroke getNextOutlineStroke()> ----
+    {
+        int $stack3, $stack4, $stack6, $stack7, $stack8;
+        java.awt.Stroke result;
+        java.awt.Stroke[] $stack2, $stack5;
+        org.jfree.chart.plot.DefaultDrawingSupplier this;
+    
+    
+        this := @this: org.jfree.chart.plot.DefaultDrawingSupplier;
+        $stack5 = this.<org.jfree.chart.plot.DefaultDrawingSupplier: java.awt.Stroke[] outlineStrokeSequence>;
+        $stack3 = this.<org.jfree.chart.plot.DefaultDrawingSupplier: int outlineStrokeIndex>;
+        $stack2 = this.<org.jfree.chart.plot.DefaultDrawingSupplier: java.awt.Stroke[] outlineStrokeSequence>;
+        $stack4 = lengthof $stack2;
+        $stack6 = $stack3 % $stack4;
+        result = $stack5[$stack6];
+        $stack7 = this.<org.jfree.chart.plot.DefaultDrawingSupplier: int outlineStrokeIndex>;
+        $stack8 = $stack7 + 1;
+        this.<org.jfree.chart.plot.DefaultDrawingSupplier: int outlineStrokeIndex> = $stack8;
+    
+        return result;
+    }
+
+    // ---- method: <org.jfree.chart.plot.DefaultDrawingSupplier: boolean equalShapes(java.awt.Shape[],java.awt.Shape[])> ----
+    {
+        boolean $stack10, $stack9;
+        int $stack4, $stack5, $stack6, i;
+        java.awt.Shape $stack7, $stack8;
+        java.awt.Shape[] s1, s2;
+        org.jfree.chart.plot.DefaultDrawingSupplier this;
+    
+    
+        this := @this: org.jfree.chart.plot.DefaultDrawingSupplier;
+        s1 := @parameter0: java.awt.Shape[];
+        s2 := @parameter1: java.awt.Shape[];
+    
+        if s1 != null goto label3;
+    
+        if s2 != null goto label1;
+        $stack10 = 1;
+    
+        goto label2;
+    
+      label1:
+        $stack10 = 0;
+    
+      label2:
+        return $stack10;
+    
+      label3:
+        if s2 != null goto label4;
+    
+        return 0;
+    
+      label4:
+        $stack5 = lengthof s1;
+        $stack4 = lengthof s2;
+    
+        if $stack5 == $stack4 goto label5;
+    
+        return 0;
+    
+      label5:
+        i = 0;
+    
+      label6:
+        $stack6 = lengthof s1;
+    
+        if i >= $stack6 goto label8;
+        $stack8 = s1[i];
+        $stack7 = s2[i];
+        $stack9 = staticinvoke <org.jfree.chart.util.ShapeUtilities: boolean equal(java.awt.Shape,java.awt.Shape)>($stack8, $stack7);
+    
+        if $stack9 != 0 goto label7;
+    
+        return 0;
+    
+      label7:
+        i = i + 1;
+    
+        goto label6;
+    
+      label8:
+        return 1;
+    }
+
+    // ---- method: <org.jfree.chart.plot.DefaultDrawingSupplier: java.awt.Paint getNextPaint()> ----
+    {
+        int $stack3, $stack4, $stack6, $stack7, $stack8;
+        java.awt.Paint result;
+        java.awt.Paint[] $stack2, $stack5;
+        org.jfree.chart.plot.DefaultDrawingSupplier this;
+    
+    
+        this := @this: org.jfree.chart.plot.DefaultDrawingSupplier;
+        $stack5 = this.<org.jfree.chart.plot.DefaultDrawingSupplier: java.awt.Paint[] paintSequence>;
+        $stack3 = this.<org.jfree.chart.plot.DefaultDrawingSupplier: int paintIndex>;
+        $stack2 = this.<org.jfree.chart.plot.DefaultDrawingSupplier: java.awt.Paint[] paintSequence>;
+        $stack4 = lengthof $stack2;
+        $stack6 = $stack3 % $stack4;
+        result = $stack5[$stack6];
+        $stack7 = this.<org.jfree.chart.plot.DefaultDrawingSupplier: int paintIndex>;
+        $stack8 = $stack7 + 1;
+        this.<org.jfree.chart.plot.DefaultDrawingSupplier: int paintIndex> = $stack8;
+    
+        return result;
+    }
+
+    // ---- method: <org.jfree.chart.plot.DefaultDrawingSupplier: java.awt.Shape getNextShape()> ----
+    {
+        int $stack3, $stack4, $stack6, $stack7, $stack8;
+        java.awt.Shape result;
+        java.awt.Shape[] $stack2, $stack5;
+        org.jfree.chart.plot.DefaultDrawingSupplier this;
+    
+    
+        this := @this: org.jfree.chart.plot.DefaultDrawingSupplier;
+        $stack5 = this.<org.jfree.chart.plot.DefaultDrawingSupplier: java.awt.Shape[] shapeSequence>;
+        $stack3 = this.<org.jfree.chart.plot.DefaultDrawingSupplier: int shapeIndex>;
+        $stack2 = this.<org.jfree.chart.plot.DefaultDrawingSupplier: java.awt.Shape[] shapeSequence>;
+        $stack4 = lengthof $stack2;
+        $stack6 = $stack3 % $stack4;
+        result = $stack5[$stack6];
+        $stack7 = this.<org.jfree.chart.plot.DefaultDrawingSupplier: int shapeIndex>;
+        $stack8 = $stack7 + 1;
+        this.<org.jfree.chart.plot.DefaultDrawingSupplier: int shapeIndex> = $stack8;
+    
+        return result;
+    }
+
+    // ---- method: <org.jfree.chart.plot.DefaultDrawingSupplier: int[] intArray(double,double,double)> ----
+    {
+        double a, b, c;
+        int $stack7, $stack8, $stack9;
+        int[] $stack6;
+    
+    
+        a := @parameter0: double;
+        b := @parameter1: double;
+        c := @parameter2: double;
+        $stack6 = newarray (int)[3];
+        $stack7 = (int) a;
+        $stack6[0] = $stack7;
+        $stack8 = (int) b;
+        $stack6[1] = $stack8;
+        $stack9 = (int) c;
+        $stack6[2] = $stack9;
+    
+        return $stack6;
+    }
+
+    // ---- method: <org.jfree.chart.plot.DefaultDrawingSupplier: java.awt.Paint getNextFillPaint()> ----
+    {
+        int $stack3, $stack4, $stack6, $stack7, $stack8;
+        java.awt.Paint result;
+        java.awt.Paint[] $stack2, $stack5;
+        org.jfree.chart.plot.DefaultDrawingSupplier this;
+    
+    
+        this := @this: org.jfree.chart.plot.DefaultDrawingSupplier;
+        $stack5 = this.<org.jfree.chart.plot.DefaultDrawingSupplier: java.awt.Paint[] fillPaintSequence>;
+        $stack3 = this.<org.jfree.chart.plot.DefaultDrawingSupplier: int fillPaintIndex>;
+        $stack2 = this.<org.jfree.chart.plot.DefaultDrawingSupplier: java.awt.Paint[] fillPaintSequence>;
+        $stack4 = lengthof $stack2;
+        $stack6 = $stack3 % $stack4;
+        result = $stack5[$stack6];
+        $stack7 = this.<org.jfree.chart.plot.DefaultDrawingSupplier: int fillPaintIndex>;
+        $stack8 = $stack7 + 1;
+        this.<org.jfree.chart.plot.DefaultDrawingSupplier: int fillPaintIndex> = $stack8;
+    
+        return result;
+    }
+
+    // ---- method: <org.jfree.chart.plot.DefaultDrawingSupplier: java.awt.Paint getNextOutlinePaint()> ----
+    {
+        int $stack3, $stack4, $stack6, $stack7, $stack8;
+        java.awt.Paint result;
+        java.awt.Paint[] $stack2, $stack5;
+        org.jfree.chart.plot.DefaultDrawingSupplier this;
+    
+    
+        this := @this: org.jfree.chart.plot.DefaultDrawingSupplier;
+        $stack5 = this.<org.jfree.chart.plot.DefaultDrawingSupplier: java.awt.Paint[] outlinePaintSequence>;
+        $stack3 = this.<org.jfree.chart.plot.DefaultDrawingSupplier: int outlinePaintIndex>;
+        $stack2 = this.<org.jfree.chart.plot.DefaultDrawingSupplier: java.awt.Paint[] outlinePaintSequence>;
+        $stack4 = lengthof $stack2;
+        $stack6 = $stack3 % $stack4;
+        result = $stack5[$stack6];
+        $stack7 = this.<org.jfree.chart.plot.DefaultDrawingSupplier: int outlinePaintIndex>;
+        $stack8 = $stack7 + 1;
+        this.<org.jfree.chart.plot.DefaultDrawingSupplier: int outlinePaintIndex> = $stack8;
+    
+        return result;
+    }
+
+}

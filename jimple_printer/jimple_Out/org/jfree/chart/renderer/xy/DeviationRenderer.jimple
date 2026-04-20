@@ -1,0 +1,436 @@
+// ========================================================================
+// CLASS : org.jfree.chart.renderer.xy.DeviationRenderer
+// ========================================================================
+
+[PUBLIC, SUPER] class org.jfree.chart.renderer.xy.DeviationRenderer extends org.jfree.chart.renderer.xy.XYLineAndShapeRenderer {
+
+    // ---- method: <org.jfree.chart.renderer.xy.DeviationRenderer: org.jfree.chart.renderer.xy.XYItemRendererState initialise(java.awt.Graphics2D,java.awt.geom.Rectangle2D,org.jfree.chart.plot.XYPlot,org.jfree.data.xy.XYDataset,org.jfree.chart.plot.PlotRenderingInfo)> ----
+    {
+        java.awt.Graphics2D g2;
+        java.awt.geom.GeneralPath $stack8;
+        java.awt.geom.Rectangle2D dataArea;
+        org.jfree.chart.plot.PlotRenderingInfo info;
+        org.jfree.chart.plot.XYPlot plot;
+        org.jfree.chart.renderer.xy.DeviationRenderer this;
+        org.jfree.chart.renderer.xy.DeviationRenderer$State $stack7, state;
+        org.jfree.data.xy.XYDataset dataset;
+    
+    
+        this := @this: org.jfree.chart.renderer.xy.DeviationRenderer;
+        g2 := @parameter0: java.awt.Graphics2D;
+        dataArea := @parameter1: java.awt.geom.Rectangle2D;
+        plot := @parameter2: org.jfree.chart.plot.XYPlot;
+        dataset := @parameter3: org.jfree.data.xy.XYDataset;
+        info := @parameter4: org.jfree.chart.plot.PlotRenderingInfo;
+        $stack7 = new org.jfree.chart.renderer.xy.DeviationRenderer$State;
+        specialinvoke $stack7.<org.jfree.chart.renderer.xy.DeviationRenderer$State: void <init>(org.jfree.chart.plot.PlotRenderingInfo)>(info);
+        state = $stack7;
+        $stack8 = new java.awt.geom.GeneralPath;
+        specialinvoke $stack8.<java.awt.geom.GeneralPath: void <init>()>();
+        $stack7.<org.jfree.chart.renderer.xy.DeviationRenderer$State: java.awt.geom.GeneralPath seriesPath> = $stack8;
+        virtualinvoke $stack7.<org.jfree.chart.renderer.xy.DeviationRenderer$State: void setProcessVisibleItemsOnly(boolean)>(0);
+    
+        return $stack7;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.xy.DeviationRenderer: void setDrawSeriesLineAsPath(boolean)> ----
+    {
+        boolean flag;
+        org.jfree.chart.renderer.xy.DeviationRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.xy.DeviationRenderer;
+        flag := @parameter0: boolean;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.xy.DeviationRenderer: void <init>()> ----
+    {
+        org.jfree.chart.renderer.xy.DeviationRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.xy.DeviationRenderer;
+        specialinvoke this.<org.jfree.chart.renderer.xy.DeviationRenderer: void <init>(boolean,boolean)>(1, 1);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.xy.DeviationRenderer: boolean isItemPass(int)> ----
+    {
+        boolean $stack2;
+        int pass;
+        org.jfree.chart.renderer.xy.DeviationRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.xy.DeviationRenderer;
+        pass := @parameter0: int;
+    
+        if pass != 2 goto label1;
+        $stack2 = 1;
+    
+        goto label2;
+    
+      label1:
+        $stack2 = 0;
+    
+      label2:
+        return $stack2;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.xy.DeviationRenderer: void drawItem(java.awt.Graphics2D,org.jfree.chart.renderer.xy.XYItemRendererState,java.awt.geom.Rectangle2D,org.jfree.chart.plot.PlotRenderingInfo,org.jfree.chart.plot.XYPlot,org.jfree.chart.axis.ValueAxis,org.jfree.chart.axis.ValueAxis,org.jfree.data.xy.XYDataset,int,int,org.jfree.chart.plot.CrosshairState,int)> ----
+    {
+        boolean $stack35, $stack36, $stack37, $stack39;
+        double $stack52, $stack53, $stack63, $stack64, $stack72, $stack73, $stack79, $stack80, x, xx, yHigh, yLow, yyHigh, yyLow;
+        double[] $stack51, $stack62, $stack71, $stack78, $stack83, $stack85, $stack87, $stack89, coords#0, coords#1, coords#2, coords#3;
+        float $stack45, $stack54, $stack55, $stack65, $stack66, $stack74, $stack75, $stack81, $stack82;
+        int $stack43, $stack44, $stack57, $stack59, i#0, i#1, i_1, item, pass, series;
+        java.awt.Composite #l4, originalComposite;
+        java.awt.Graphics2D g2;
+        java.awt.Paint $stack47;
+        java.awt.Shape #l3;
+        java.awt.geom.GeneralPath #l0, #l1, #l2, #l5, #l6, #l7, $stack40, area;
+        java.awt.geom.Rectangle2D dataArea;
+        java.lang.Object $stack46, $stack48, $stack50, $stack61, $stack70, $stack77;
+        java.util.List $stack49, $stack56, $stack58, $stack60, $stack67, $stack68, $stack69, $stack76, $stack84, $stack86, $stack88, $stack90;
+        org.jfree.chart.ChartRenderingInfo $stack38;
+        org.jfree.chart.axis.ValueAxis domainAxis, rangeAxis;
+        org.jfree.chart.entity.EntityCollection intervalDataset#2;
+        org.jfree.chart.plot.CrosshairState crosshairState;
+        org.jfree.chart.plot.PlotOrientation $stack41, $stack42, orientation;
+        org.jfree.chart.plot.PlotRenderingInfo info;
+        org.jfree.chart.plot.XYPlot plot;
+        org.jfree.chart.renderer.xy.DeviationRenderer this;
+        org.jfree.chart.renderer.xy.DeviationRenderer$State drState, intervalDataset#1;
+        org.jfree.chart.renderer.xy.XYItemRendererState state;
+        org.jfree.chart.util.RectangleEdge xAxisLocation, yAxisLocation;
+        org.jfree.data.xy.IntervalXYDataset intervalDataset#0;
+        org.jfree.data.xy.XYDataset dataset;
+    
+    
+        this := @this: org.jfree.chart.renderer.xy.DeviationRenderer;
+        g2 := @parameter0: java.awt.Graphics2D;
+        state := @parameter1: org.jfree.chart.renderer.xy.XYItemRendererState;
+        dataArea := @parameter2: java.awt.geom.Rectangle2D;
+        info := @parameter3: org.jfree.chart.plot.PlotRenderingInfo;
+        plot := @parameter4: org.jfree.chart.plot.XYPlot;
+        domainAxis := @parameter5: org.jfree.chart.axis.ValueAxis;
+        rangeAxis := @parameter6: org.jfree.chart.axis.ValueAxis;
+        dataset := @parameter7: org.jfree.data.xy.XYDataset;
+        series := @parameter8: int;
+        item := @parameter9: int;
+        crosshairState := @parameter10: org.jfree.chart.plot.CrosshairState;
+        pass := @parameter11: int;
+        $stack35 = virtualinvoke this.<org.jfree.chart.renderer.xy.DeviationRenderer: boolean getItemVisible(int,int)>(series, item);
+    
+        if $stack35 != 0 goto label01;
+    
+        return;
+    
+      label01:
+        if pass != 0 goto label08;
+        intervalDataset#0 = (org.jfree.data.xy.IntervalXYDataset) dataset;
+        drState = (org.jfree.chart.renderer.xy.DeviationRenderer$State) state;
+        x = interfaceinvoke intervalDataset#0.<org.jfree.data.xy.IntervalXYDataset: double getXValue(int,int)>(series, item);
+        yLow = interfaceinvoke intervalDataset#0.<org.jfree.data.xy.IntervalXYDataset: double getStartYValue(int,int)>(series, item);
+        yHigh = interfaceinvoke intervalDataset#0.<org.jfree.data.xy.IntervalXYDataset: double getEndYValue(int,int)>(series, item);
+        xAxisLocation = virtualinvoke plot.<org.jfree.chart.plot.XYPlot: org.jfree.chart.util.RectangleEdge getDomainAxisEdge()>();
+        yAxisLocation = virtualinvoke plot.<org.jfree.chart.plot.XYPlot: org.jfree.chart.util.RectangleEdge getRangeAxisEdge()>();
+        xx = virtualinvoke domainAxis.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)>(x, dataArea, xAxisLocation);
+        yyLow = virtualinvoke rangeAxis.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)>(yLow, dataArea, yAxisLocation);
+        yyHigh = virtualinvoke rangeAxis.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)>(yHigh, dataArea, yAxisLocation);
+        orientation = virtualinvoke plot.<org.jfree.chart.plot.XYPlot: org.jfree.chart.plot.PlotOrientation getOrientation()>();
+        $stack41 = <org.jfree.chart.plot.PlotOrientation: org.jfree.chart.plot.PlotOrientation HORIZONTAL>;
+    
+        if orientation != $stack41 goto label02;
+        $stack88 = drState.<org.jfree.chart.renderer.xy.DeviationRenderer$State: java.util.List lowerCoordinates>;
+        $stack87 = newarray (double)[2];
+        $stack87[0] = yyLow;
+        $stack87[1] = xx;
+        interfaceinvoke $stack88.<java.util.List: boolean add(java.lang.Object)>($stack87);
+        $stack90 = drState.<org.jfree.chart.renderer.xy.DeviationRenderer$State: java.util.List upperCoordinates>;
+        $stack89 = newarray (double)[2];
+        $stack89[0] = yyHigh;
+        $stack89[1] = xx;
+        interfaceinvoke $stack90.<java.util.List: boolean add(java.lang.Object)>($stack89);
+    
+        goto label03;
+    
+      label02:
+        $stack42 = <org.jfree.chart.plot.PlotOrientation: org.jfree.chart.plot.PlotOrientation VERTICAL>;
+    
+        if orientation != $stack42 goto label03;
+        $stack84 = drState.<org.jfree.chart.renderer.xy.DeviationRenderer$State: java.util.List lowerCoordinates>;
+        $stack83 = newarray (double)[2];
+        $stack83[0] = xx;
+        $stack83[1] = yyLow;
+        interfaceinvoke $stack84.<java.util.List: boolean add(java.lang.Object)>($stack83);
+        $stack86 = drState.<org.jfree.chart.renderer.xy.DeviationRenderer$State: java.util.List upperCoordinates>;
+        $stack85 = newarray (double)[2];
+        $stack85[0] = xx;
+        $stack85[1] = yyHigh;
+        interfaceinvoke $stack86.<java.util.List: boolean add(java.lang.Object)>($stack85);
+    
+      label03:
+        $stack43 = interfaceinvoke dataset.<org.jfree.data.xy.XYDataset: int getItemCount(int)>(series);
+        $stack44 = $stack43 - 1;
+    
+        if item != $stack44 goto label08;
+        originalComposite = virtualinvoke g2.<java.awt.Graphics2D: java.awt.Composite getComposite()>();
+        $stack45 = this.<org.jfree.chart.renderer.xy.DeviationRenderer: float alpha>;
+        $stack46 = staticinvoke <java.awt.AlphaComposite: java.awt.AlphaComposite getInstance(int,float)>(3, $stack45);
+        #l4 = (java.awt.Composite) $stack46;
+        virtualinvoke g2.<java.awt.Graphics2D: void setComposite(java.awt.Composite)>(#l4);
+        $stack47 = virtualinvoke this.<org.jfree.chart.renderer.xy.DeviationRenderer: java.awt.Paint getItemFillPaint(int,int)>(series, item);
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>($stack47);
+        $stack48 = new java.awt.geom.GeneralPath;
+        #l0 = (java.awt.geom.GeneralPath) $stack48;
+        specialinvoke #l0.<java.awt.geom.GeneralPath: void <init>()>();
+        area = (java.awt.geom.GeneralPath) $stack48;
+        $stack49 = drState.<org.jfree.chart.renderer.xy.DeviationRenderer$State: java.util.List lowerCoordinates>;
+        $stack50 = interfaceinvoke $stack49.<java.util.List: java.lang.Object get(int)>(0);
+        $stack51 = (double[]) $stack50;
+        coords#0 = (double[]) $stack51;
+        $stack52 = coords#0[0];
+        $stack55 = (float) $stack52;
+        $stack53 = coords#0[1];
+        $stack54 = (float) $stack53;
+        #l5 = (java.awt.geom.GeneralPath) $stack48;
+        virtualinvoke #l5.<java.awt.geom.GeneralPath: void moveTo(float,float)>($stack55, $stack54);
+        i#0 = 1;
+    
+      label04:
+        $stack56 = drState.<org.jfree.chart.renderer.xy.DeviationRenderer$State: java.util.List lowerCoordinates>;
+        $stack57 = interfaceinvoke $stack56.<java.util.List: int size()>();
+    
+        if i#0 >= $stack57 goto label05;
+        $stack76 = drState.<org.jfree.chart.renderer.xy.DeviationRenderer$State: java.util.List lowerCoordinates>;
+        $stack77 = interfaceinvoke $stack76.<java.util.List: java.lang.Object get(int)>(i#0);
+        $stack78 = (double[]) $stack77;
+        coords#1 = (double[]) $stack78;
+        $stack79 = coords#1[0];
+        $stack82 = (float) $stack79;
+        $stack80 = coords#1[1];
+        $stack81 = (float) $stack80;
+        #l6 = (java.awt.geom.GeneralPath) $stack48;
+        virtualinvoke #l6.<java.awt.geom.GeneralPath: void lineTo(float,float)>($stack82, $stack81);
+        i#0 = i#0 + 1;
+    
+        goto label04;
+    
+      label05:
+        $stack58 = drState.<org.jfree.chart.renderer.xy.DeviationRenderer$State: java.util.List upperCoordinates>;
+        i#1 = interfaceinvoke $stack58.<java.util.List: int size()>();
+        $stack60 = drState.<org.jfree.chart.renderer.xy.DeviationRenderer$State: java.util.List upperCoordinates>;
+        $stack59 = i#1 - 1;
+        $stack61 = interfaceinvoke $stack60.<java.util.List: java.lang.Object get(int)>($stack59);
+        $stack62 = (double[]) $stack61;
+        coords#2 = (double[]) $stack62;
+        $stack63 = coords#2[0];
+        $stack66 = (float) $stack63;
+        $stack64 = coords#2[1];
+        $stack65 = (float) $stack64;
+        #l7 = (java.awt.geom.GeneralPath) $stack48;
+        virtualinvoke #l7.<java.awt.geom.GeneralPath: void lineTo(float,float)>($stack66, $stack65);
+        i_1 = i#1 - 2;
+    
+      label06:
+        if i_1 < 0 goto label07;
+        $stack69 = drState.<org.jfree.chart.renderer.xy.DeviationRenderer$State: java.util.List upperCoordinates>;
+        $stack70 = interfaceinvoke $stack69.<java.util.List: java.lang.Object get(int)>(i_1);
+        $stack71 = (double[]) $stack70;
+        coords#3 = (double[]) $stack71;
+        $stack72 = coords#3[0];
+        $stack75 = (float) $stack72;
+        $stack73 = coords#3[1];
+        $stack74 = (float) $stack73;
+        #l1 = (java.awt.geom.GeneralPath) $stack48;
+        virtualinvoke #l1.<java.awt.geom.GeneralPath: void lineTo(float,float)>($stack75, $stack74);
+        i_1 = i_1 + -1;
+    
+        goto label06;
+    
+      label07:
+        #l2 = (java.awt.geom.GeneralPath) $stack48;
+        virtualinvoke #l2.<java.awt.geom.GeneralPath: void closePath()>();
+        #l3 = (java.awt.Shape) $stack48;
+        virtualinvoke g2.<java.awt.Graphics2D: void fill(java.awt.Shape)>(#l3);
+        virtualinvoke g2.<java.awt.Graphics2D: void setComposite(java.awt.Composite)>(originalComposite);
+        $stack67 = drState.<org.jfree.chart.renderer.xy.DeviationRenderer$State: java.util.List lowerCoordinates>;
+        interfaceinvoke $stack67.<java.util.List: void clear()>();
+        $stack68 = drState.<org.jfree.chart.renderer.xy.DeviationRenderer$State: java.util.List upperCoordinates>;
+        interfaceinvoke $stack68.<java.util.List: void clear()>();
+    
+      label08:
+        $stack36 = virtualinvoke this.<org.jfree.chart.renderer.xy.DeviationRenderer: boolean isLinePass(int)>(pass);
+    
+        if $stack36 == 0 goto label10;
+    
+        if item != 0 goto label09;
+        intervalDataset#1 = (org.jfree.chart.renderer.xy.DeviationRenderer$State) state;
+        $stack40 = intervalDataset#1.<org.jfree.chart.renderer.xy.DeviationRenderer$State: java.awt.geom.GeneralPath seriesPath>;
+        virtualinvoke $stack40.<java.awt.geom.GeneralPath: void reset()>();
+        virtualinvoke intervalDataset#1.<org.jfree.chart.renderer.xy.DeviationRenderer$State: void setLastPointGood(boolean)>(0);
+    
+      label09:
+        $stack39 = virtualinvoke this.<org.jfree.chart.renderer.xy.DeviationRenderer: boolean getItemLineVisible(int,int)>(series, item);
+    
+        if $stack39 == 0 goto label12;
+        virtualinvoke this.<org.jfree.chart.renderer.xy.DeviationRenderer: void drawPrimaryLineAsPath(org.jfree.chart.renderer.xy.XYItemRendererState,java.awt.Graphics2D,org.jfree.chart.plot.XYPlot,org.jfree.data.xy.XYDataset,int,int,int,org.jfree.chart.axis.ValueAxis,org.jfree.chart.axis.ValueAxis,java.awt.geom.Rectangle2D)>(state, g2, plot, dataset, pass, series, item, domainAxis, rangeAxis, dataArea);
+    
+        goto label12;
+    
+      label10:
+        $stack37 = virtualinvoke this.<org.jfree.chart.renderer.xy.DeviationRenderer: boolean isItemPass(int)>(pass);
+    
+        if $stack37 == 0 goto label12;
+        intervalDataset#2 = null;
+    
+        if info == null goto label11;
+        $stack38 = virtualinvoke info.<org.jfree.chart.plot.PlotRenderingInfo: org.jfree.chart.ChartRenderingInfo getOwner()>();
+        intervalDataset#2 = virtualinvoke $stack38.<org.jfree.chart.ChartRenderingInfo: org.jfree.chart.entity.EntityCollection getEntityCollection()>();
+    
+      label11:
+        virtualinvoke this.<org.jfree.chart.renderer.xy.DeviationRenderer: void drawSecondaryPass(java.awt.Graphics2D,org.jfree.chart.plot.XYPlot,org.jfree.data.xy.XYDataset,int,int,int,org.jfree.chart.axis.ValueAxis,java.awt.geom.Rectangle2D,org.jfree.chart.axis.ValueAxis,org.jfree.chart.plot.CrosshairState,org.jfree.chart.entity.EntityCollection)>(g2, plot, dataset, pass, series, item, domainAxis, dataArea, rangeAxis, crosshairState, intervalDataset#2);
+    
+      label12:
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.xy.DeviationRenderer: boolean equals(java.lang.Object)> ----
+    {
+        boolean $stack3, $stack7;
+        byte $stack6;
+        float $stack4, $stack5;
+        java.lang.Object obj;
+        org.jfree.chart.renderer.xy.DeviationRenderer that, this;
+    
+    
+        this := @this: org.jfree.chart.renderer.xy.DeviationRenderer;
+        obj := @parameter0: java.lang.Object;
+    
+        if obj != this goto label1;
+    
+        return 1;
+    
+      label1:
+        $stack3 = obj instanceof org.jfree.chart.renderer.xy.DeviationRenderer;
+    
+        if $stack3 != 0 goto label2;
+    
+        return 0;
+    
+      label2:
+        that = (org.jfree.chart.renderer.xy.DeviationRenderer) obj;
+        $stack4 = this.<org.jfree.chart.renderer.xy.DeviationRenderer: float alpha>;
+        $stack5 = that.<org.jfree.chart.renderer.xy.DeviationRenderer: float alpha>;
+        $stack6 = $stack4 cmpl $stack5;
+    
+        if $stack6 == 0 goto label3;
+    
+        return 0;
+    
+      label3:
+        $stack7 = specialinvoke this.<org.jfree.chart.renderer.xy.XYLineAndShapeRenderer: boolean equals(java.lang.Object)>(obj);
+    
+        return $stack7;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.xy.DeviationRenderer: float getAlpha()> ----
+    {
+        float $stack1;
+        org.jfree.chart.renderer.xy.DeviationRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.xy.DeviationRenderer;
+        $stack1 = this.<org.jfree.chart.renderer.xy.DeviationRenderer: float alpha>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.xy.DeviationRenderer: void setAlpha(float)> ----
+    {
+        byte $stack2, $stack4;
+        float alpha;
+        java.lang.IllegalArgumentException #l1;
+        java.lang.Object $stack3;
+        java.lang.Throwable #l0;
+        org.jfree.chart.event.RendererChangeEvent $stack5;
+        org.jfree.chart.renderer.xy.DeviationRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.xy.DeviationRenderer;
+        alpha := @parameter0: float;
+        $stack2 = alpha cmpg 0.0F;
+    
+        if $stack2 < 0 goto label1;
+        $stack4 = alpha cmpl 1.0F;
+    
+        if $stack4 <= 0 goto label2;
+    
+      label1:
+        $stack3 = new java.lang.IllegalArgumentException;
+        #l1 = (java.lang.IllegalArgumentException) $stack3;
+        specialinvoke #l1.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Requires \'alpha\' in the range 0.0 to 1.0.");
+        #l0 = (java.lang.Throwable) $stack3;
+    
+        throw #l0;
+    
+      label2:
+        this.<org.jfree.chart.renderer.xy.DeviationRenderer: float alpha> = alpha;
+        $stack5 = new org.jfree.chart.event.RendererChangeEvent;
+        specialinvoke $stack5.<org.jfree.chart.event.RendererChangeEvent: void <init>(java.lang.Object)>(this);
+        virtualinvoke this.<org.jfree.chart.renderer.xy.DeviationRenderer: void notifyListeners(org.jfree.chart.event.RendererChangeEvent)>($stack5);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.xy.DeviationRenderer: int getPassCount()> ----
+    {
+        org.jfree.chart.renderer.xy.DeviationRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.xy.DeviationRenderer;
+    
+        return 3;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.xy.DeviationRenderer: void <init>(boolean,boolean)> ----
+    {
+        boolean lines, shapes;
+        org.jfree.chart.renderer.xy.DeviationRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.xy.DeviationRenderer;
+        lines := @parameter0: boolean;
+        shapes := @parameter1: boolean;
+        specialinvoke this.<org.jfree.chart.renderer.xy.XYLineAndShapeRenderer: void <init>(boolean,boolean)>(lines, shapes);
+        specialinvoke this.<org.jfree.chart.renderer.xy.XYLineAndShapeRenderer: void setDrawSeriesLineAsPath(boolean)>(1);
+        this.<org.jfree.chart.renderer.xy.DeviationRenderer: float alpha> = 0.5F;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.xy.DeviationRenderer: boolean isLinePass(int)> ----
+    {
+        boolean $stack2;
+        int pass;
+        org.jfree.chart.renderer.xy.DeviationRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.xy.DeviationRenderer;
+        pass := @parameter0: int;
+    
+        if pass != 1 goto label1;
+        $stack2 = 1;
+    
+        goto label2;
+    
+      label1:
+        $stack2 = 0;
+    
+      label2:
+        return $stack2;
+    }
+
+}

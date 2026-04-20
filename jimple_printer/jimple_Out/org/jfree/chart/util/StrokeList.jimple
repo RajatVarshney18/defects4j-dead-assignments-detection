@@ -1,0 +1,172 @@
+// ========================================================================
+// CLASS : org.jfree.chart.util.StrokeList
+// ========================================================================
+
+[PUBLIC, SUPER] class org.jfree.chart.util.StrokeList extends org.jfree.chart.util.AbstractObjectList {
+
+    // ---- method: <org.jfree.chart.util.StrokeList: void <init>()> ----
+    {
+        org.jfree.chart.util.StrokeList this;
+    
+    
+        this := @this: org.jfree.chart.util.StrokeList;
+        specialinvoke this.<org.jfree.chart.util.AbstractObjectList: void <init>()>();
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.util.StrokeList: boolean equals(java.lang.Object)> ----
+    {
+        boolean $stack2, $stack3;
+        java.lang.Object obj;
+        org.jfree.chart.util.StrokeList this;
+    
+    
+        this := @this: org.jfree.chart.util.StrokeList;
+        obj := @parameter0: java.lang.Object;
+    
+        if obj != null goto label1;
+    
+        return 0;
+    
+      label1:
+        if obj != this goto label2;
+    
+        return 1;
+    
+      label2:
+        $stack2 = obj instanceof org.jfree.chart.util.StrokeList;
+    
+        if $stack2 == 0 goto label3;
+        $stack3 = specialinvoke this.<org.jfree.chart.util.AbstractObjectList: boolean equals(java.lang.Object)>(obj);
+    
+        return $stack3;
+    
+      label3:
+        return 0;
+    }
+
+    // ---- method: <org.jfree.chart.util.StrokeList: void writeObject(java.io.ObjectOutputStream)> ----
+    {
+        int count, i;
+        java.awt.Stroke stroke;
+        java.io.ObjectOutputStream stream;
+        org.jfree.chart.util.StrokeList this;
+    
+    
+        this := @this: org.jfree.chart.util.StrokeList;
+        stream := @parameter0: java.io.ObjectOutputStream;
+        virtualinvoke stream.<java.io.ObjectOutputStream: void defaultWriteObject()>();
+        count = virtualinvoke this.<org.jfree.chart.util.StrokeList: int size()>();
+        virtualinvoke stream.<java.io.ObjectOutputStream: void writeInt(int)>(count);
+        i = 0;
+    
+      label1:
+        if i >= count goto label4;
+        stroke = virtualinvoke this.<org.jfree.chart.util.StrokeList: java.awt.Stroke getStroke(int)>(i);
+    
+        if stroke == null goto label2;
+        virtualinvoke stream.<java.io.ObjectOutputStream: void writeInt(int)>(i);
+        staticinvoke <org.jfree.chart.util.SerialUtilities: void writeStroke(java.awt.Stroke,java.io.ObjectOutputStream)>(stroke, stream);
+    
+        goto label3;
+    
+      label2:
+        virtualinvoke stream.<java.io.ObjectOutputStream: void writeInt(int)>(-1);
+    
+      label3:
+        i = i + 1;
+    
+        goto label1;
+    
+      label4:
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.util.StrokeList: void readObject(java.io.ObjectInputStream)> ----
+    {
+        int count, i, index;
+        java.awt.Stroke $stack5;
+        java.io.ObjectInputStream stream;
+        org.jfree.chart.util.StrokeList this;
+    
+    
+        this := @this: org.jfree.chart.util.StrokeList;
+        stream := @parameter0: java.io.ObjectInputStream;
+        virtualinvoke stream.<java.io.ObjectInputStream: void defaultReadObject()>();
+        count = virtualinvoke stream.<java.io.ObjectInputStream: int readInt()>();
+        i = 0;
+    
+      label1:
+        if i >= count goto label3;
+        index = virtualinvoke stream.<java.io.ObjectInputStream: int readInt()>();
+    
+        if index == -1 goto label2;
+        $stack5 = staticinvoke <org.jfree.chart.util.SerialUtilities: java.awt.Stroke readStroke(java.io.ObjectInputStream)>(stream);
+        virtualinvoke this.<org.jfree.chart.util.StrokeList: void setStroke(int,java.awt.Stroke)>(index, $stack5);
+    
+      label2:
+        i = i + 1;
+    
+        goto label1;
+    
+      label3:
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.util.StrokeList: java.awt.Stroke getStroke(int)> ----
+    {
+        int index;
+        java.awt.Stroke $stack3;
+        java.lang.Object $stack2;
+        org.jfree.chart.util.StrokeList this;
+    
+    
+        this := @this: org.jfree.chart.util.StrokeList;
+        index := @parameter0: int;
+        $stack2 = virtualinvoke this.<org.jfree.chart.util.StrokeList: java.lang.Object get(int)>(index);
+        $stack3 = (java.awt.Stroke) $stack2;
+    
+        return $stack3;
+    }
+
+    // ---- method: <org.jfree.chart.util.StrokeList: void setStroke(int,java.awt.Stroke)> ----
+    {
+        int index;
+        java.awt.Stroke stroke;
+        org.jfree.chart.util.StrokeList this;
+    
+    
+        this := @this: org.jfree.chart.util.StrokeList;
+        index := @parameter0: int;
+        stroke := @parameter1: java.awt.Stroke;
+        virtualinvoke this.<org.jfree.chart.util.StrokeList: void set(int,java.lang.Object)>(index, stroke);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.util.StrokeList: int hashCode()> ----
+    {
+        int $stack1;
+        org.jfree.chart.util.StrokeList this;
+    
+    
+        this := @this: org.jfree.chart.util.StrokeList;
+        $stack1 = specialinvoke this.<org.jfree.chart.util.AbstractObjectList: int hashCode()>();
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.util.StrokeList: java.lang.Object clone()> ----
+    {
+        java.lang.Object $stack1;
+        org.jfree.chart.util.StrokeList this;
+    
+    
+        this := @this: org.jfree.chart.util.StrokeList;
+        $stack1 = specialinvoke this.<org.jfree.chart.util.AbstractObjectList: java.lang.Object clone()>();
+    
+        return $stack1;
+    }
+
+}

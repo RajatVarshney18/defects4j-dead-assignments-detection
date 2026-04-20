@@ -1,0 +1,2355 @@
+// ========================================================================
+// CLASS : org.jfree.data.general.DatasetUtilities
+// ========================================================================
+
+[PUBLIC, FINAL, SUPER] class org.jfree.data.general.DatasetUtilities extends java.lang.Object {
+
+    // ---- method: <org.jfree.data.general.DatasetUtilities: org.jfree.data.general.PieDataset createPieDatasetForColumn(org.jfree.data.category.CategoryDataset,int)> ----
+    {
+        int column, i, rowCount;
+        java.lang.Comparable rowKey;
+        java.lang.Number $stack7;
+        org.jfree.data.category.CategoryDataset dataset;
+        org.jfree.data.general.DefaultPieDataset $stack6, result;
+    
+    
+        dataset := @parameter0: org.jfree.data.category.CategoryDataset;
+        column := @parameter1: int;
+        $stack6 = new org.jfree.data.general.DefaultPieDataset;
+        specialinvoke $stack6.<org.jfree.data.general.DefaultPieDataset: void <init>()>();
+        result = $stack6;
+        rowCount = interfaceinvoke dataset.<org.jfree.data.category.CategoryDataset: int getRowCount()>();
+        i = 0;
+    
+      label1:
+        if i >= rowCount goto label2;
+        rowKey = interfaceinvoke dataset.<org.jfree.data.category.CategoryDataset: java.lang.Comparable getRowKey(int)>(i);
+        $stack7 = interfaceinvoke dataset.<org.jfree.data.category.CategoryDataset: java.lang.Number getValue(int,int)>(i, column);
+        virtualinvoke $stack6.<org.jfree.data.general.DefaultPieDataset: void setValue(java.lang.Comparable,java.lang.Number)>(rowKey, $stack7);
+        i = i + 1;
+    
+        goto label1;
+    
+      label2:
+        return $stack6;
+    }
+
+    // ---- method: <org.jfree.data.general.DatasetUtilities: java.lang.Number findMaximumRangeValue(org.jfree.data.xy.XYDataset)> ----
+    {
+        boolean $stack10, $stack13, $stack14, $stack15;
+        byte $stack11;
+        double $stack16, info#1, value;
+        int item, itemCount, series, seriesCount;
+        java.lang.Double #l1, #l3;
+        java.lang.IllegalArgumentException #l4;
+        java.lang.Number #l0, #l2;
+        java.lang.Object $stack12, $stack17, $stack18;
+        java.lang.Throwable #l5;
+        org.jfree.data.RangeInfo info#0;
+        org.jfree.data.xy.IntervalXYDataset intervalXYData#0;
+        org.jfree.data.xy.OHLCDataset intervalXYData#1;
+        org.jfree.data.xy.XYDataset dataset;
+    
+    
+        dataset := @parameter0: org.jfree.data.xy.XYDataset;
+    
+        if dataset != null goto label01;
+        $stack18 = new java.lang.IllegalArgumentException;
+        #l4 = (java.lang.IllegalArgumentException) $stack18;
+        specialinvoke #l4.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'dataset\' argument.");
+        #l5 = (java.lang.Throwable) $stack18;
+    
+        throw #l5;
+    
+      label01:
+        $stack10 = dataset instanceof org.jfree.data.RangeInfo;
+    
+        if $stack10 == 0 goto label02;
+        info#0 = (org.jfree.data.RangeInfo) dataset;
+        $stack17 = new java.lang.Double;
+        $stack16 = interfaceinvoke info#0.<org.jfree.data.RangeInfo: double getRangeUpperBound(boolean)>(1);
+        #l1 = (java.lang.Double) $stack17;
+        specialinvoke #l1.<java.lang.Double: void <init>(double)>($stack16);
+        #l2 = (java.lang.Number) $stack17;
+    
+        return #l2;
+    
+      label02:
+        info#1 = #-Infinity;
+        seriesCount = interfaceinvoke dataset.<org.jfree.data.xy.XYDataset: int getSeriesCount()>();
+        series = 0;
+    
+      label03:
+        if series >= seriesCount goto label10;
+        itemCount = interfaceinvoke dataset.<org.jfree.data.xy.XYDataset: int getItemCount(int)>(series);
+        item = 0;
+    
+      label04:
+        if item >= itemCount goto label09;
+        $stack13 = dataset instanceof org.jfree.data.xy.IntervalXYDataset;
+    
+        if $stack13 == 0 goto label05;
+        intervalXYData#0 = (org.jfree.data.xy.IntervalXYDataset) dataset;
+        value = interfaceinvoke intervalXYData#0.<org.jfree.data.xy.IntervalXYDataset: double getEndYValue(int,int)>(series, item);
+    
+        goto label07;
+    
+      label05:
+        $stack14 = dataset instanceof org.jfree.data.xy.OHLCDataset;
+    
+        if $stack14 == 0 goto label06;
+        intervalXYData#1 = (org.jfree.data.xy.OHLCDataset) dataset;
+        value = interfaceinvoke intervalXYData#1.<org.jfree.data.xy.OHLCDataset: double getHighValue(int,int)>(series, item);
+    
+        goto label07;
+    
+      label06:
+        value = interfaceinvoke dataset.<org.jfree.data.xy.XYDataset: double getYValue(int,int)>(series, item);
+    
+      label07:
+        $stack15 = staticinvoke <java.lang.Double: boolean isNaN(double)>(value);
+    
+        if $stack15 != 0 goto label08;
+        info#1 = staticinvoke <java.lang.Math: double max(double,double)>(info#1, value);
+    
+      label08:
+        item = item + 1;
+    
+        goto label04;
+    
+      label09:
+        series = series + 1;
+    
+        goto label03;
+    
+      label10:
+        $stack11 = info#1 cmpl #-Infinity;
+    
+        if $stack11 != 0 goto label11;
+    
+        return null;
+    
+      label11:
+        $stack12 = new java.lang.Double;
+        #l3 = (java.lang.Double) $stack12;
+        specialinvoke #l3.<java.lang.Double: void <init>(double)>(info#1);
+        #l0 = (java.lang.Number) $stack12;
+    
+        return #l0;
+    }
+
+    // ---- method: <org.jfree.data.general.DatasetUtilities: java.lang.Number findMinimumRangeValue(org.jfree.data.category.CategoryDataset)> ----
+    {
+        boolean $stack12, $stack9;
+        byte $stack10;
+        double $stack13, $stack14, info#1;
+        int item, itemCount, series, seriesCount;
+        java.lang.Double #l1, #l5;
+        java.lang.IllegalArgumentException #l2;
+        java.lang.Number #l3, #l4, value;
+        java.lang.Object $stack11, $stack15, $stack16;
+        java.lang.Throwable #l0;
+        org.jfree.data.RangeInfo info#0;
+        org.jfree.data.category.CategoryDataset dataset;
+        org.jfree.data.category.IntervalCategoryDataset icd;
+    
+    
+        dataset := @parameter0: org.jfree.data.category.CategoryDataset;
+    
+        if dataset != null goto label01;
+        $stack16 = new java.lang.IllegalArgumentException;
+        #l2 = (java.lang.IllegalArgumentException) $stack16;
+        specialinvoke #l2.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'dataset\' argument.");
+        #l0 = (java.lang.Throwable) $stack16;
+    
+        throw #l0;
+    
+      label01:
+        $stack9 = dataset instanceof org.jfree.data.RangeInfo;
+    
+        if $stack9 == 0 goto label02;
+        info#0 = (org.jfree.data.RangeInfo) dataset;
+        $stack15 = new java.lang.Double;
+        $stack14 = interfaceinvoke info#0.<org.jfree.data.RangeInfo: double getRangeLowerBound(boolean)>(1);
+        #l5 = (java.lang.Double) $stack15;
+        specialinvoke #l5.<java.lang.Double: void <init>(double)>($stack14);
+        #l4 = (java.lang.Number) $stack15;
+    
+        return #l4;
+    
+      label02:
+        info#1 = #Infinity;
+        seriesCount = interfaceinvoke dataset.<org.jfree.data.category.CategoryDataset: int getRowCount()>();
+        itemCount = interfaceinvoke dataset.<org.jfree.data.category.CategoryDataset: int getColumnCount()>();
+        series = 0;
+    
+      label03:
+        if series >= seriesCount goto label09;
+        item = 0;
+    
+      label04:
+        if item >= itemCount goto label08;
+        $stack12 = dataset instanceof org.jfree.data.category.IntervalCategoryDataset;
+    
+        if $stack12 == 0 goto label05;
+        icd = (org.jfree.data.category.IntervalCategoryDataset) dataset;
+        value = interfaceinvoke icd.<org.jfree.data.category.IntervalCategoryDataset: java.lang.Number getStartValue(int,int)>(series, item);
+    
+        goto label06;
+    
+      label05:
+        value = interfaceinvoke dataset.<org.jfree.data.category.CategoryDataset: java.lang.Number getValue(int,int)>(series, item);
+    
+      label06:
+        if value == null goto label07;
+        $stack13 = virtualinvoke value.<java.lang.Number: double doubleValue()>();
+        info#1 = staticinvoke <java.lang.Math: double min(double,double)>(info#1, $stack13);
+    
+      label07:
+        item = item + 1;
+    
+        goto label04;
+    
+      label08:
+        series = series + 1;
+    
+        goto label03;
+    
+      label09:
+        $stack10 = info#1 cmpl #Infinity;
+    
+        if $stack10 != 0 goto label10;
+    
+        return null;
+    
+      label10:
+        $stack11 = new java.lang.Double;
+        #l1 = (java.lang.Double) $stack11;
+        specialinvoke #l1.<java.lang.Double: void <init>(double)>(info#1);
+        #l3 = (java.lang.Number) $stack11;
+    
+        return #l3;
+    }
+
+    // ---- method: <org.jfree.data.general.DatasetUtilities: org.jfree.data.category.CategoryDataset createCategoryDataset(java.lang.String,java.lang.String,java.lang.Number[][])> ----
+    {
+        int $stack11, $stack15, $stack17, $stack9, c, r;
+        java.lang.Comparable #l0, #l1;
+        java.lang.Number $stack21;
+        java.lang.Number[] $stack14, $stack20;
+        java.lang.Number[][] data;
+        java.lang.Object columnKey, rowKey;
+        java.lang.String columnKeyPrefix, rowKeyPrefix;
+        java.lang.StringBuffer $stack10, $stack12, $stack13, $stack16, $stack18, $stack19;
+        org.jfree.data.category.DefaultCategoryDataset $stack8, result;
+    
+    
+        rowKeyPrefix := @parameter0: java.lang.String;
+        columnKeyPrefix := @parameter1: java.lang.String;
+        data := @parameter2: java.lang.Number[][];
+        $stack8 = new org.jfree.data.category.DefaultCategoryDataset;
+        specialinvoke $stack8.<org.jfree.data.category.DefaultCategoryDataset: void <init>()>();
+        result = $stack8;
+        r = 0;
+    
+      label1:
+        $stack9 = lengthof data;
+    
+        if r >= $stack9 goto label4;
+        $stack10 = new java.lang.StringBuffer;
+        specialinvoke $stack10.<java.lang.StringBuffer: void <init>()>();
+        $stack12 = virtualinvoke $stack10.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>(rowKeyPrefix);
+        $stack11 = r + 1;
+        $stack13 = virtualinvoke $stack12.<java.lang.StringBuffer: java.lang.StringBuffer append(int)>($stack11);
+        rowKey = virtualinvoke $stack13.<java.lang.StringBuffer: java.lang.String toString()>();
+        c = 0;
+    
+      label2:
+        $stack14 = data[r];
+        $stack15 = lengthof $stack14;
+    
+        if c >= $stack15 goto label3;
+        $stack16 = new java.lang.StringBuffer;
+        specialinvoke $stack16.<java.lang.StringBuffer: void <init>()>();
+        $stack18 = virtualinvoke $stack16.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>(columnKeyPrefix);
+        $stack17 = c + 1;
+        $stack19 = virtualinvoke $stack18.<java.lang.StringBuffer: java.lang.StringBuffer append(int)>($stack17);
+        columnKey = virtualinvoke $stack19.<java.lang.StringBuffer: java.lang.String toString()>();
+        $stack20 = data[r];
+        $stack21 = $stack20[c];
+        #l0 = (java.lang.Comparable) rowKey;
+        #l1 = (java.lang.Comparable) columnKey;
+        virtualinvoke $stack8.<org.jfree.data.category.DefaultCategoryDataset: void addValue(java.lang.Number,java.lang.Comparable,java.lang.Comparable)>($stack21, #l0, #l1);
+        c = c + 1;
+    
+        goto label2;
+    
+      label3:
+        r = r + 1;
+    
+        goto label1;
+    
+      label4:
+        return $stack8;
+    }
+
+    // ---- method: <org.jfree.data.general.DatasetUtilities: org.jfree.data.general.PieDataset createPieDatasetForRow(org.jfree.data.category.CategoryDataset,java.lang.Comparable)> ----
+    {
+        int row;
+        java.lang.Comparable rowKey;
+        org.jfree.data.category.CategoryDataset dataset;
+        org.jfree.data.general.PieDataset $stack3;
+    
+    
+        dataset := @parameter0: org.jfree.data.category.CategoryDataset;
+        rowKey := @parameter1: java.lang.Comparable;
+        row = interfaceinvoke dataset.<org.jfree.data.category.CategoryDataset: int getRowIndex(java.lang.Comparable)>(rowKey);
+        $stack3 = staticinvoke <org.jfree.data.general.DatasetUtilities: org.jfree.data.general.PieDataset createPieDatasetForRow(org.jfree.data.category.CategoryDataset,int)>(dataset, row);
+    
+        return $stack3;
+    }
+
+    // ---- method: <org.jfree.data.general.DatasetUtilities: org.jfree.data.general.PieDataset createConsolidatedPieDataset(org.jfree.data.general.PieDataset,java.lang.Comparable,double)> ----
+    {
+        double minimumPercent;
+        java.lang.Comparable key;
+        org.jfree.data.general.PieDataset $stack4, source;
+    
+    
+        source := @parameter0: org.jfree.data.general.PieDataset;
+        key := @parameter1: java.lang.Comparable;
+        minimumPercent := @parameter2: double;
+        $stack4 = staticinvoke <org.jfree.data.general.DatasetUtilities: org.jfree.data.general.PieDataset createConsolidatedPieDataset(org.jfree.data.general.PieDataset,java.lang.Comparable,double,int)>(source, key, minimumPercent, 2);
+    
+        return $stack4;
+    }
+
+    // ---- method: <org.jfree.data.general.DatasetUtilities: org.jfree.data.Range findStackedRangeBounds(org.jfree.data.xy.TableXYDataset)> ----
+    {
+        org.jfree.data.Range $stack1;
+        org.jfree.data.xy.TableXYDataset dataset;
+    
+    
+        dataset := @parameter0: org.jfree.data.xy.TableXYDataset;
+        $stack1 = staticinvoke <org.jfree.data.general.DatasetUtilities: org.jfree.data.Range findStackedRangeBounds(org.jfree.data.xy.TableXYDataset,double)>(dataset, 0.0);
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.data.general.DatasetUtilities: double calculateStackTotal(org.jfree.data.xy.TableXYDataset,int)> ----
+    {
+        boolean $stack8;
+        double total, value;
+        int item, s, seriesCount;
+        org.jfree.data.xy.TableXYDataset dataset;
+    
+    
+        dataset := @parameter0: org.jfree.data.xy.TableXYDataset;
+        item := @parameter1: int;
+        total = 0.0;
+        seriesCount = interfaceinvoke dataset.<org.jfree.data.xy.TableXYDataset: int getSeriesCount()>();
+        s = 0;
+    
+      label1:
+        if s >= seriesCount goto label3;
+        value = interfaceinvoke dataset.<org.jfree.data.xy.TableXYDataset: double getYValue(int,int)>(s, item);
+        $stack8 = staticinvoke <java.lang.Double: boolean isNaN(double)>(value);
+    
+        if $stack8 != 0 goto label2;
+        total = total + value;
+    
+      label2:
+        s = s + 1;
+    
+        goto label1;
+    
+      label3:
+        return total;
+    }
+
+    // ---- method: <org.jfree.data.general.DatasetUtilities: org.jfree.data.Range findStackedRangeBounds(org.jfree.data.category.CategoryDataset,org.jfree.data.KeyToGroupMap)> ----
+    {
+        byte $stack27, $stack28;
+        double $stack18, $stack19, $stack21, $stack22, $stack23, $stack24, $stack25, $stack26, $stack30, $stack32, $stack34, $stack36, value;
+        double[] maximum, minimum, negative, positive;
+        int $stack16, $stack17, $stack29, $stack31, $stack33, $stack35, $stack39, categoryCount, i#0, i#1, item#0, item#1, series#0, series#1, seriesCount;
+        int[] groupIndex;
+        java.lang.Comparable $stack37, $stack38;
+        java.lang.Number number;
+        org.jfree.data.KeyToGroupMap map;
+        org.jfree.data.Range $stack20, result;
+        org.jfree.data.category.CategoryDataset dataset;
+    
+    
+        dataset := @parameter0: org.jfree.data.category.CategoryDataset;
+        map := @parameter1: org.jfree.data.KeyToGroupMap;
+        result = null;
+    
+        if dataset == null goto label12;
+        $stack16 = interfaceinvoke dataset.<org.jfree.data.category.CategoryDataset: int getRowCount()>();
+        groupIndex = newarray (int)[$stack16];
+        i#0 = 0;
+    
+      label01:
+        $stack17 = interfaceinvoke dataset.<org.jfree.data.category.CategoryDataset: int getRowCount()>();
+    
+        if i#0 >= $stack17 goto label02;
+        $stack37 = interfaceinvoke dataset.<org.jfree.data.category.CategoryDataset: java.lang.Comparable getRowKey(int)>(i#0);
+        $stack38 = virtualinvoke map.<org.jfree.data.KeyToGroupMap: java.lang.Comparable getGroup(java.lang.Comparable)>($stack37);
+        $stack39 = virtualinvoke map.<org.jfree.data.KeyToGroupMap: int getGroupIndex(java.lang.Comparable)>($stack38);
+        groupIndex[i#0] = $stack39;
+        i#0 = i#0 + 1;
+    
+        goto label01;
+    
+      label02:
+        i#1 = virtualinvoke map.<org.jfree.data.KeyToGroupMap: int getGroupCount()>();
+        minimum = newarray (double)[i#1];
+        maximum = newarray (double)[i#1];
+        categoryCount = interfaceinvoke dataset.<org.jfree.data.category.CategoryDataset: int getColumnCount()>();
+        item#0 = 0;
+    
+      label03:
+        if item#0 >= categoryCount goto label10;
+        positive = newarray (double)[i#1];
+        negative = newarray (double)[i#1];
+        seriesCount = interfaceinvoke dataset.<org.jfree.data.category.CategoryDataset: int getRowCount()>();
+        series#0 = 0;
+    
+      label04:
+        if series#0 >= seriesCount goto label07;
+        number = interfaceinvoke dataset.<org.jfree.data.category.CategoryDataset: java.lang.Number getValue(int,int)>(series#0, item#0);
+    
+        if number == null goto label06;
+        value = virtualinvoke number.<java.lang.Number: double doubleValue()>();
+        $stack27 = value cmpl 0.0;
+    
+        if $stack27 <= 0 goto label05;
+        $stack35 = groupIndex[series#0];
+        $stack33 = groupIndex[series#0];
+        $stack34 = positive[$stack33];
+        $stack36 = $stack34 + value;
+        positive[$stack35] = $stack36;
+    
+      label05:
+        $stack28 = value cmpg 0.0;
+    
+        if $stack28 >= 0 goto label06;
+        $stack31 = groupIndex[series#0];
+        $stack29 = groupIndex[series#0];
+        $stack30 = negative[$stack29];
+        $stack32 = $stack30 + value;
+        negative[$stack31] = $stack32;
+    
+      label06:
+        series#0 = series#0 + 1;
+    
+        goto label04;
+    
+      label07:
+        series#1 = 0;
+    
+      label08:
+        if series#1 >= i#1 goto label09;
+        $stack22 = minimum[series#1];
+        $stack21 = negative[series#1];
+        $stack23 = staticinvoke <java.lang.Math: double min(double,double)>($stack22, $stack21);
+        minimum[series#1] = $stack23;
+        $stack25 = maximum[series#1];
+        $stack24 = positive[series#1];
+        $stack26 = staticinvoke <java.lang.Math: double max(double,double)>($stack25, $stack24);
+        maximum[series#1] = $stack26;
+        series#1 = series#1 + 1;
+    
+        goto label08;
+    
+      label09:
+        item#0 = item#0 + 1;
+    
+        goto label03;
+    
+      label10:
+        item#1 = 0;
+    
+      label11:
+        if item#1 >= i#1 goto label12;
+        $stack20 = new org.jfree.data.Range;
+        $stack19 = minimum[item#1];
+        $stack18 = maximum[item#1];
+        specialinvoke $stack20.<org.jfree.data.Range: void <init>(double,double)>($stack19, $stack18);
+        result = staticinvoke <org.jfree.data.Range: org.jfree.data.Range combine(org.jfree.data.Range,org.jfree.data.Range)>(result, $stack20);
+        item#1 = item#1 + 1;
+    
+        goto label11;
+    
+      label12:
+        return result;
+    }
+
+    // ---- method: <org.jfree.data.general.DatasetUtilities: java.lang.Number findMaximumStackedRangeValue(org.jfree.data.category.CategoryDataset)> ----
+    {
+        byte $stack14;
+        double maximum, total, value;
+        int categoryCount, item, series, seriesCount;
+        java.lang.Double $stack13;
+        java.lang.Number #l0, number;
+        java.lang.Object result;
+        org.jfree.data.category.CategoryDataset dataset;
+    
+    
+        dataset := @parameter0: org.jfree.data.category.CategoryDataset;
+        result = null;
+    
+        if dataset == null goto label6;
+        maximum = 0.0;
+        categoryCount = interfaceinvoke dataset.<org.jfree.data.category.CategoryDataset: int getColumnCount()>();
+        item = 0;
+    
+      label1:
+        if item >= categoryCount goto label5;
+        total = 0.0;
+        seriesCount = interfaceinvoke dataset.<org.jfree.data.category.CategoryDataset: int getRowCount()>();
+        series = 0;
+    
+      label2:
+        if series >= seriesCount goto label4;
+        number = interfaceinvoke dataset.<org.jfree.data.category.CategoryDataset: java.lang.Number getValue(int,int)>(series, item);
+    
+        if number == null goto label3;
+        value = virtualinvoke number.<java.lang.Number: double doubleValue()>();
+        $stack14 = value cmpl 0.0;
+    
+        if $stack14 <= 0 goto label3;
+        total = total + value;
+    
+      label3:
+        series = series + 1;
+    
+        goto label2;
+    
+      label4:
+        maximum = staticinvoke <java.lang.Math: double max(double,double)>(maximum, total);
+        item = item + 1;
+    
+        goto label1;
+    
+      label5:
+        $stack13 = new java.lang.Double;
+        specialinvoke $stack13.<java.lang.Double: void <init>(double)>(maximum);
+        result = $stack13;
+    
+      label6:
+        #l0 = (java.lang.Number) result;
+    
+        return #l0;
+    }
+
+    // ---- method: <org.jfree.data.general.DatasetUtilities: org.jfree.data.Range iterateDomainBounds(org.jfree.data.xy.XYDataset)> ----
+    {
+        org.jfree.data.Range $stack1;
+        org.jfree.data.xy.XYDataset dataset;
+    
+    
+        dataset := @parameter0: org.jfree.data.xy.XYDataset;
+        $stack1 = staticinvoke <org.jfree.data.general.DatasetUtilities: org.jfree.data.Range iterateDomainBounds(org.jfree.data.xy.XYDataset,boolean)>(dataset, 1);
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.data.general.DatasetUtilities: boolean isEmptyOrNull(org.jfree.data.xy.XYDataset)> ----
+    {
+        int $stack2, $stack3, s;
+        org.jfree.data.xy.XYDataset dataset;
+    
+    
+        dataset := @parameter0: org.jfree.data.xy.XYDataset;
+    
+        if dataset == null goto label3;
+        s = 0;
+    
+      label1:
+        $stack2 = interfaceinvoke dataset.<org.jfree.data.xy.XYDataset: int getSeriesCount()>();
+    
+        if s >= $stack2 goto label3;
+        $stack3 = interfaceinvoke dataset.<org.jfree.data.xy.XYDataset: int getItemCount(int)>(s);
+    
+        if $stack3 <= 0 goto label2;
+    
+        return 0;
+    
+      label2:
+        s = s + 1;
+    
+        goto label1;
+    
+      label3:
+        return 1;
+    }
+
+    // ---- method: <org.jfree.data.general.DatasetUtilities: org.jfree.data.general.PieDataset createPieDatasetForColumn(org.jfree.data.category.CategoryDataset,java.lang.Comparable)> ----
+    {
+        int column;
+        java.lang.Comparable columnKey;
+        org.jfree.data.category.CategoryDataset dataset;
+        org.jfree.data.general.PieDataset $stack3;
+    
+    
+        dataset := @parameter0: org.jfree.data.category.CategoryDataset;
+        columnKey := @parameter1: java.lang.Comparable;
+        column = interfaceinvoke dataset.<org.jfree.data.category.CategoryDataset: int getColumnIndex(java.lang.Comparable)>(columnKey);
+        $stack3 = staticinvoke <org.jfree.data.general.DatasetUtilities: org.jfree.data.general.PieDataset createPieDatasetForColumn(org.jfree.data.category.CategoryDataset,int)>(dataset, column);
+    
+        return $stack3;
+    }
+
+    // ---- method: <org.jfree.data.general.DatasetUtilities: org.jfree.data.category.CategoryDataset createCategoryDataset(java.lang.String,java.lang.String,double[][])> ----
+    {
+        double $stack21;
+        double[] $stack14, $stack20;
+        double[][] data;
+        int $stack11, $stack15, $stack17, $stack9, c, r;
+        java.lang.Comparable #l1, #l2;
+        java.lang.Double #l3;
+        java.lang.Number #l0;
+        java.lang.Object $stack22, columnKey, rowKey;
+        java.lang.String columnKeyPrefix, rowKeyPrefix;
+        java.lang.StringBuffer $stack10, $stack12, $stack13, $stack16, $stack18, $stack19;
+        org.jfree.data.category.DefaultCategoryDataset $stack8, result;
+    
+    
+        rowKeyPrefix := @parameter0: java.lang.String;
+        columnKeyPrefix := @parameter1: java.lang.String;
+        data := @parameter2: double[][];
+        $stack8 = new org.jfree.data.category.DefaultCategoryDataset;
+        specialinvoke $stack8.<org.jfree.data.category.DefaultCategoryDataset: void <init>()>();
+        result = $stack8;
+        r = 0;
+    
+      label1:
+        $stack9 = lengthof data;
+    
+        if r >= $stack9 goto label4;
+        $stack10 = new java.lang.StringBuffer;
+        specialinvoke $stack10.<java.lang.StringBuffer: void <init>()>();
+        $stack12 = virtualinvoke $stack10.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>(rowKeyPrefix);
+        $stack11 = r + 1;
+        $stack13 = virtualinvoke $stack12.<java.lang.StringBuffer: java.lang.StringBuffer append(int)>($stack11);
+        rowKey = virtualinvoke $stack13.<java.lang.StringBuffer: java.lang.String toString()>();
+        c = 0;
+    
+      label2:
+        $stack14 = data[r];
+        $stack15 = lengthof $stack14;
+    
+        if c >= $stack15 goto label3;
+        $stack16 = new java.lang.StringBuffer;
+        specialinvoke $stack16.<java.lang.StringBuffer: void <init>()>();
+        $stack18 = virtualinvoke $stack16.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>(columnKeyPrefix);
+        $stack17 = c + 1;
+        $stack19 = virtualinvoke $stack18.<java.lang.StringBuffer: java.lang.StringBuffer append(int)>($stack17);
+        columnKey = virtualinvoke $stack19.<java.lang.StringBuffer: java.lang.String toString()>();
+        $stack22 = new java.lang.Double;
+        $stack20 = data[r];
+        $stack21 = $stack20[c];
+        #l3 = (java.lang.Double) $stack22;
+        specialinvoke #l3.<java.lang.Double: void <init>(double)>($stack21);
+        #l0 = (java.lang.Number) $stack22;
+        #l2 = (java.lang.Comparable) columnKey;
+        #l1 = (java.lang.Comparable) rowKey;
+        virtualinvoke $stack8.<org.jfree.data.category.DefaultCategoryDataset: void addValue(java.lang.Number,java.lang.Comparable,java.lang.Comparable)>(#l0, #l1, #l2);
+        c = c + 1;
+    
+        goto label2;
+    
+      label3:
+        r = r + 1;
+    
+        goto label1;
+    
+      label4:
+        return $stack8;
+    }
+
+    // ---- method: <org.jfree.data.general.DatasetUtilities: java.lang.Number findMaximumDomainValue(org.jfree.data.xy.XYDataset)> ----
+    {
+        boolean $stack11, $stack14, $stack15;
+        byte $stack12;
+        double $stack16, info#1, value;
+        int item, itemCount, series, seriesCount;
+        java.lang.Double #l2, $stack13;
+        java.lang.IllegalArgumentException #l4;
+        java.lang.Number #l0, #l1;
+        java.lang.Object $stack17, $stack18, result#0, result#1;
+        java.lang.Throwable #l3;
+        org.jfree.data.DomainInfo info#0;
+        org.jfree.data.xy.IntervalXYDataset intervalXYData;
+        org.jfree.data.xy.XYDataset dataset;
+    
+    
+        dataset := @parameter0: org.jfree.data.xy.XYDataset;
+    
+        if dataset != null goto label01;
+        $stack18 = new java.lang.IllegalArgumentException;
+        #l4 = (java.lang.IllegalArgumentException) $stack18;
+        specialinvoke #l4.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'dataset\' argument.");
+        #l3 = (java.lang.Throwable) $stack18;
+    
+        throw #l3;
+    
+      label01:
+        result#0 = null;
+        $stack11 = dataset instanceof org.jfree.data.DomainInfo;
+    
+        if $stack11 == 0 goto label02;
+        info#0 = (org.jfree.data.DomainInfo) dataset;
+        $stack17 = new java.lang.Double;
+        $stack16 = interfaceinvoke info#0.<org.jfree.data.DomainInfo: double getDomainUpperBound(boolean)>(1);
+        #l2 = (java.lang.Double) $stack17;
+        specialinvoke #l2.<java.lang.Double: void <init>(double)>($stack16);
+        #l0 = (java.lang.Number) $stack17;
+    
+        return #l0;
+    
+      label02:
+        info#1 = #-Infinity;
+        seriesCount = interfaceinvoke dataset.<org.jfree.data.xy.XYDataset: int getSeriesCount()>();
+        series = 0;
+    
+      label03:
+        if series >= seriesCount goto label09;
+        itemCount = interfaceinvoke dataset.<org.jfree.data.xy.XYDataset: int getItemCount(int)>(series);
+        item = 0;
+    
+      label04:
+        if item >= itemCount goto label08;
+        $stack14 = dataset instanceof org.jfree.data.xy.IntervalXYDataset;
+    
+        if $stack14 == 0 goto label05;
+        intervalXYData = (org.jfree.data.xy.IntervalXYDataset) dataset;
+        value = interfaceinvoke intervalXYData.<org.jfree.data.xy.IntervalXYDataset: double getEndXValue(int,int)>(series, item);
+    
+        goto label06;
+    
+      label05:
+        value = interfaceinvoke dataset.<org.jfree.data.xy.XYDataset: double getXValue(int,int)>(series, item);
+    
+      label06:
+        $stack15 = staticinvoke <java.lang.Double: boolean isNaN(double)>(value);
+    
+        if $stack15 != 0 goto label07;
+        info#1 = staticinvoke <java.lang.Math: double max(double,double)>(info#1, value);
+    
+      label07:
+        item = item + 1;
+    
+        goto label04;
+    
+      label08:
+        series = series + 1;
+    
+        goto label03;
+    
+      label09:
+        $stack12 = info#1 cmpl #-Infinity;
+    
+        if $stack12 != 0 goto label10;
+        result#1 = null;
+    
+        goto label11;
+    
+      label10:
+        $stack13 = new java.lang.Double;
+        specialinvoke $stack13.<java.lang.Double: void <init>(double)>(info#1);
+        result#1 = $stack13;
+    
+      label11:
+        #l1 = (java.lang.Number) result#1;
+    
+        return #l1;
+    }
+
+    // ---- method: <org.jfree.data.general.DatasetUtilities: org.jfree.data.Range findStackedRangeBounds(org.jfree.data.category.CategoryDataset)> ----
+    {
+        org.jfree.data.Range $stack1;
+        org.jfree.data.category.CategoryDataset dataset;
+    
+    
+        dataset := @parameter0: org.jfree.data.category.CategoryDataset;
+        $stack1 = staticinvoke <org.jfree.data.general.DatasetUtilities: org.jfree.data.Range findStackedRangeBounds(org.jfree.data.category.CategoryDataset,double)>(dataset, 0.0);
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.data.general.DatasetUtilities: org.jfree.data.Range iterateDomainBounds(org.jfree.data.xy.XYDataset,boolean)> ----
+    {
+        boolean $stack17, includeInterval;
+        byte $stack15;
+        double lvalue#0, lvalue#1, maximum, minimum, uvalue#0, uvalue#1;
+        int intervalXYData#1, item, itemCount#0, itemCount#1, series#0, series#1, seriesCount;
+        java.lang.IllegalArgumentException #l1;
+        java.lang.Object $stack18;
+        java.lang.Throwable #l0;
+        org.jfree.data.Range $stack16;
+        org.jfree.data.xy.IntervalXYDataset intervalXYData#0;
+        org.jfree.data.xy.XYDataset dataset;
+    
+    
+        dataset := @parameter0: org.jfree.data.xy.XYDataset;
+        includeInterval := @parameter1: boolean;
+    
+        if dataset != null goto label01;
+        $stack18 = new java.lang.IllegalArgumentException;
+        #l1 = (java.lang.IllegalArgumentException) $stack18;
+        specialinvoke #l1.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'dataset\' argument.");
+        #l0 = (java.lang.Throwable) $stack18;
+    
+        throw #l0;
+    
+      label01:
+        minimum = #Infinity;
+        maximum = #-Infinity;
+        seriesCount = interfaceinvoke dataset.<org.jfree.data.xy.XYDataset: int getSeriesCount()>();
+    
+        if includeInterval == 0 goto label06;
+        $stack17 = dataset instanceof org.jfree.data.xy.IntervalXYDataset;
+    
+        if $stack17 == 0 goto label06;
+        intervalXYData#0 = (org.jfree.data.xy.IntervalXYDataset) dataset;
+        series#0 = 0;
+    
+      label02:
+        if series#0 >= seriesCount goto label05;
+        itemCount#0 = interfaceinvoke dataset.<org.jfree.data.xy.XYDataset: int getItemCount(int)>(series#0);
+        item = 0;
+    
+      label03:
+        if item >= itemCount#0 goto label04;
+        lvalue#0 = interfaceinvoke intervalXYData#0.<org.jfree.data.xy.IntervalXYDataset: double getStartXValue(int,int)>(series#0, item);
+        uvalue#0 = interfaceinvoke intervalXYData#0.<org.jfree.data.xy.IntervalXYDataset: double getEndXValue(int,int)>(series#0, item);
+        minimum = staticinvoke <java.lang.Math: double min(double,double)>(minimum, lvalue#0);
+        maximum = staticinvoke <java.lang.Math: double max(double,double)>(maximum, uvalue#0);
+        item = item + 1;
+    
+        goto label03;
+    
+      label04:
+        series#0 = series#0 + 1;
+    
+        goto label02;
+    
+      label05:
+        goto label10;
+    
+      label06:
+        intervalXYData#1 = 0;
+    
+      label07:
+        if intervalXYData#1 >= seriesCount goto label10;
+        series#1 = interfaceinvoke dataset.<org.jfree.data.xy.XYDataset: int getItemCount(int)>(intervalXYData#1);
+        itemCount#1 = 0;
+    
+      label08:
+        if itemCount#1 >= series#1 goto label09;
+        lvalue#1 = interfaceinvoke dataset.<org.jfree.data.xy.XYDataset: double getXValue(int,int)>(intervalXYData#1, itemCount#1);
+        uvalue#1 = lvalue#1;
+        minimum = staticinvoke <java.lang.Math: double min(double,double)>(minimum, lvalue#1);
+        maximum = staticinvoke <java.lang.Math: double max(double,double)>(maximum, lvalue#1);
+        itemCount#1 = itemCount#1 + 1;
+    
+        goto label08;
+    
+      label09:
+        intervalXYData#1 = intervalXYData#1 + 1;
+    
+        goto label07;
+    
+      label10:
+        $stack15 = minimum cmpl maximum;
+    
+        if $stack15 <= 0 goto label11;
+    
+        return null;
+    
+      label11:
+        $stack16 = new org.jfree.data.Range;
+        specialinvoke $stack16.<org.jfree.data.Range: void <init>(double,double)>(minimum, maximum);
+    
+        return $stack16;
+    }
+
+    // ---- method: <org.jfree.data.general.DatasetUtilities: org.jfree.data.category.CategoryDataset createCategoryDataset(java.lang.Comparable[],java.lang.Comparable[],double[][])> ----
+    {
+        boolean $stack10, $stack9;
+        double $stack20;
+        double[] $stack17, $stack19, $stack23;
+        double[][] data;
+        int $stack11, $stack12, $stack13, $stack14, $stack16, $stack18, $stack24, c, columnCount, r#0, r_1;
+        java.lang.Comparable columnKey, rowKey;
+        java.lang.Comparable[] columnKeys, rowKeys;
+        java.lang.Double #l8;
+        java.lang.IllegalArgumentException #l10, #l12, #l3, #l4, #l5, #l6;
+        java.lang.Number #l7;
+        java.lang.Object $stack21, $stack22, $stack25, $stack26, $stack27, $stack28, $stack29;
+        java.lang.Throwable #l0, #l1, #l11, #l13, #l2, #l9;
+        org.jfree.data.category.DefaultCategoryDataset $stack15, r#1;
+    
+    
+        rowKeys := @parameter0: java.lang.Comparable[];
+        columnKeys := @parameter1: java.lang.Comparable[];
+        data := @parameter2: double[][];
+    
+        if rowKeys != null goto label01;
+        $stack29 = new java.lang.IllegalArgumentException;
+        #l4 = (java.lang.IllegalArgumentException) $stack29;
+        specialinvoke #l4.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'rowKeys\' argument.");
+        #l2 = (java.lang.Throwable) $stack29;
+    
+        throw #l2;
+    
+      label01:
+        if columnKeys != null goto label02;
+        $stack28 = new java.lang.IllegalArgumentException;
+        #l5 = (java.lang.IllegalArgumentException) $stack28;
+        specialinvoke #l5.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'columnKeys\' argument.");
+        #l1 = (java.lang.Throwable) $stack28;
+    
+        throw #l1;
+    
+      label02:
+        $stack9 = staticinvoke <org.jfree.chart.util.ArrayUtilities: boolean hasDuplicateItems(java.lang.Object[])>(rowKeys);
+    
+        if $stack9 == 0 goto label03;
+        $stack27 = new java.lang.IllegalArgumentException;
+        #l6 = (java.lang.IllegalArgumentException) $stack27;
+        specialinvoke #l6.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Duplicate items in \'rowKeys\'.");
+        #l11 = (java.lang.Throwable) $stack27;
+    
+        throw #l11;
+    
+      label03:
+        $stack10 = staticinvoke <org.jfree.chart.util.ArrayUtilities: boolean hasDuplicateItems(java.lang.Object[])>(columnKeys);
+    
+        if $stack10 == 0 goto label04;
+        $stack26 = new java.lang.IllegalArgumentException;
+        #l10 = (java.lang.IllegalArgumentException) $stack26;
+        specialinvoke #l10.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Duplicate items in \'columnKeys\'.");
+        #l9 = (java.lang.Throwable) $stack26;
+    
+        throw #l9;
+    
+      label04:
+        $stack12 = lengthof rowKeys;
+        $stack11 = lengthof data;
+    
+        if $stack12 == $stack11 goto label05;
+        $stack25 = new java.lang.IllegalArgumentException;
+        #l3 = (java.lang.IllegalArgumentException) $stack25;
+        specialinvoke #l3.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("The number of row keys does not match the number of rows in the data array.");
+        #l0 = (java.lang.Throwable) $stack25;
+    
+        throw #l0;
+    
+      label05:
+        columnCount = 0;
+        r#0 = 0;
+    
+      label06:
+        $stack13 = lengthof data;
+    
+        if r#0 >= $stack13 goto label07;
+        $stack23 = data[r#0];
+        $stack24 = lengthof $stack23;
+        columnCount = staticinvoke <java.lang.Math: int max(int,int)>(columnCount, $stack24);
+        r#0 = r#0 + 1;
+    
+        goto label06;
+    
+      label07:
+        $stack14 = lengthof columnKeys;
+    
+        if $stack14 == columnCount goto label08;
+        $stack22 = new java.lang.IllegalArgumentException;
+        #l12 = (java.lang.IllegalArgumentException) $stack22;
+        specialinvoke #l12.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("The number of column keys does not match the number of columns in the data array.");
+        #l13 = (java.lang.Throwable) $stack22;
+    
+        throw #l13;
+    
+      label08:
+        $stack15 = new org.jfree.data.category.DefaultCategoryDataset;
+        specialinvoke $stack15.<org.jfree.data.category.DefaultCategoryDataset: void <init>()>();
+        r#1 = $stack15;
+        r_1 = 0;
+    
+      label09:
+        $stack16 = lengthof data;
+    
+        if r_1 >= $stack16 goto label12;
+        rowKey = rowKeys[r_1];
+        c = 0;
+    
+      label10:
+        $stack17 = data[r_1];
+        $stack18 = lengthof $stack17;
+    
+        if c >= $stack18 goto label11;
+        columnKey = columnKeys[c];
+        $stack21 = new java.lang.Double;
+        $stack19 = data[r_1];
+        $stack20 = $stack19[c];
+        #l8 = (java.lang.Double) $stack21;
+        specialinvoke #l8.<java.lang.Double: void <init>(double)>($stack20);
+        #l7 = (java.lang.Number) $stack21;
+        virtualinvoke $stack15.<org.jfree.data.category.DefaultCategoryDataset: void addValue(java.lang.Number,java.lang.Comparable,java.lang.Comparable)>(#l7, rowKey, columnKey);
+        c = c + 1;
+    
+        goto label10;
+    
+      label11:
+        r_1 = r_1 + 1;
+    
+        goto label09;
+    
+      label12:
+        return $stack15;
+    }
+
+    // ---- method: <org.jfree.data.general.DatasetUtilities: java.lang.Number findMinimumDomainValue(org.jfree.data.xy.XYDataset)> ----
+    {
+        boolean $stack11, $stack14, $stack15;
+        byte $stack12;
+        double $stack16, info#1, value;
+        int item, itemCount, series, seriesCount;
+        java.lang.Double #l2, $stack13;
+        java.lang.IllegalArgumentException #l1;
+        java.lang.Number #l3, #l4;
+        java.lang.Object $stack17, $stack18, result#0, result#1;
+        java.lang.Throwable #l0;
+        org.jfree.data.DomainInfo info#0;
+        org.jfree.data.xy.IntervalXYDataset intervalXYData;
+        org.jfree.data.xy.XYDataset dataset;
+    
+    
+        dataset := @parameter0: org.jfree.data.xy.XYDataset;
+    
+        if dataset != null goto label01;
+        $stack18 = new java.lang.IllegalArgumentException;
+        #l1 = (java.lang.IllegalArgumentException) $stack18;
+        specialinvoke #l1.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'dataset\' argument.");
+        #l0 = (java.lang.Throwable) $stack18;
+    
+        throw #l0;
+    
+      label01:
+        result#0 = null;
+        $stack11 = dataset instanceof org.jfree.data.DomainInfo;
+    
+        if $stack11 == 0 goto label02;
+        info#0 = (org.jfree.data.DomainInfo) dataset;
+        $stack17 = new java.lang.Double;
+        $stack16 = interfaceinvoke info#0.<org.jfree.data.DomainInfo: double getDomainLowerBound(boolean)>(1);
+        #l2 = (java.lang.Double) $stack17;
+        specialinvoke #l2.<java.lang.Double: void <init>(double)>($stack16);
+        #l4 = (java.lang.Number) $stack17;
+    
+        return #l4;
+    
+      label02:
+        info#1 = #Infinity;
+        seriesCount = interfaceinvoke dataset.<org.jfree.data.xy.XYDataset: int getSeriesCount()>();
+        series = 0;
+    
+      label03:
+        if series >= seriesCount goto label09;
+        itemCount = interfaceinvoke dataset.<org.jfree.data.xy.XYDataset: int getItemCount(int)>(series);
+        item = 0;
+    
+      label04:
+        if item >= itemCount goto label08;
+        $stack14 = dataset instanceof org.jfree.data.xy.IntervalXYDataset;
+    
+        if $stack14 == 0 goto label05;
+        intervalXYData = (org.jfree.data.xy.IntervalXYDataset) dataset;
+        value = interfaceinvoke intervalXYData.<org.jfree.data.xy.IntervalXYDataset: double getStartXValue(int,int)>(series, item);
+    
+        goto label06;
+    
+      label05:
+        value = interfaceinvoke dataset.<org.jfree.data.xy.XYDataset: double getXValue(int,int)>(series, item);
+    
+      label06:
+        $stack15 = staticinvoke <java.lang.Double: boolean isNaN(double)>(value);
+    
+        if $stack15 != 0 goto label07;
+        info#1 = staticinvoke <java.lang.Math: double min(double,double)>(info#1, value);
+    
+      label07:
+        item = item + 1;
+    
+        goto label04;
+    
+      label08:
+        series = series + 1;
+    
+        goto label03;
+    
+      label09:
+        $stack12 = info#1 cmpl #Infinity;
+    
+        if $stack12 != 0 goto label10;
+        result#1 = null;
+    
+        goto label11;
+    
+      label10:
+        $stack13 = new java.lang.Double;
+        specialinvoke $stack13.<java.lang.Double: void <init>(double)>(info#1);
+        result#1 = $stack13;
+    
+      label11:
+        #l3 = (java.lang.Number) result#1;
+    
+        return #l3;
+    }
+
+    // ---- method: <org.jfree.data.general.DatasetUtilities: org.jfree.data.Range findRangeBounds(org.jfree.data.xy.XYDataset)> ----
+    {
+        org.jfree.data.Range $stack1;
+        org.jfree.data.xy.XYDataset dataset;
+    
+    
+        dataset := @parameter0: org.jfree.data.xy.XYDataset;
+        $stack1 = staticinvoke <org.jfree.data.general.DatasetUtilities: org.jfree.data.Range findRangeBounds(org.jfree.data.xy.XYDataset,boolean)>(dataset, 1);
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.data.general.DatasetUtilities: org.jfree.data.Range findStackedRangeBounds(org.jfree.data.category.CategoryDataset,double)> ----
+    {
+        byte $stack19, $stack21, $stack22;
+        double base, maximum, minimum, negative, positive, value;
+        int categoryCount, item, series, seriesCount;
+        java.lang.IllegalArgumentException #l0;
+        java.lang.Number number;
+        java.lang.Object $stack23;
+        java.lang.Throwable #l1;
+        org.jfree.data.Range $stack20, result;
+        org.jfree.data.category.CategoryDataset dataset;
+    
+    
+        dataset := @parameter0: org.jfree.data.category.CategoryDataset;
+        base := @parameter1: double;
+    
+        if dataset != null goto label1;
+        $stack23 = new java.lang.IllegalArgumentException;
+        #l0 = (java.lang.IllegalArgumentException) $stack23;
+        specialinvoke #l0.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'dataset\' argument.");
+        #l1 = (java.lang.Throwable) $stack23;
+    
+        throw #l1;
+    
+      label1:
+        result = null;
+        minimum = #Infinity;
+        maximum = #-Infinity;
+        categoryCount = interfaceinvoke dataset.<org.jfree.data.category.CategoryDataset: int getColumnCount()>();
+        item = 0;
+    
+      label2:
+        if item >= categoryCount goto label7;
+        positive = base;
+        negative = base;
+        seriesCount = interfaceinvoke dataset.<org.jfree.data.category.CategoryDataset: int getRowCount()>();
+        series = 0;
+    
+      label3:
+        if series >= seriesCount goto label6;
+        number = interfaceinvoke dataset.<org.jfree.data.category.CategoryDataset: java.lang.Number getValue(int,int)>(series, item);
+    
+        if number == null goto label5;
+        value = virtualinvoke number.<java.lang.Number: double doubleValue()>();
+        $stack21 = value cmpl 0.0;
+    
+        if $stack21 <= 0 goto label4;
+        positive = positive + value;
+    
+      label4:
+        $stack22 = value cmpg 0.0;
+    
+        if $stack22 >= 0 goto label5;
+        negative = negative + value;
+    
+      label5:
+        series = series + 1;
+    
+        goto label3;
+    
+      label6:
+        minimum = staticinvoke <java.lang.Math: double min(double,double)>(minimum, negative);
+        maximum = staticinvoke <java.lang.Math: double max(double,double)>(maximum, positive);
+        item = item + 1;
+    
+        goto label2;
+    
+      label7:
+        $stack19 = minimum cmpg maximum;
+    
+        if $stack19 > 0 goto label8;
+        $stack20 = new org.jfree.data.Range;
+        specialinvoke $stack20.<org.jfree.data.Range: void <init>(double,double)>(minimum, maximum);
+        result = $stack20;
+    
+      label8:
+        return result;
+    }
+
+    // ---- method: <org.jfree.data.general.DatasetUtilities: org.jfree.data.category.CategoryDataset createCategoryDataset(java.lang.Comparable,org.jfree.data.KeyedValues)> ----
+    {
+        int $stack5, i;
+        java.lang.Comparable $stack6, rowKey;
+        java.lang.IllegalArgumentException #l0, #l1;
+        java.lang.Number $stack7;
+        java.lang.Object $stack8, $stack9;
+        java.lang.Throwable #l2, #l3;
+        org.jfree.data.KeyedValues rowData;
+        org.jfree.data.category.DefaultCategoryDataset $stack4, result;
+    
+    
+        rowKey := @parameter0: java.lang.Comparable;
+        rowData := @parameter1: org.jfree.data.KeyedValues;
+    
+        if rowKey != null goto label1;
+        $stack9 = new java.lang.IllegalArgumentException;
+        #l0 = (java.lang.IllegalArgumentException) $stack9;
+        specialinvoke #l0.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'rowKey\' argument.");
+        #l2 = (java.lang.Throwable) $stack9;
+    
+        throw #l2;
+    
+      label1:
+        if rowData != null goto label2;
+        $stack8 = new java.lang.IllegalArgumentException;
+        #l1 = (java.lang.IllegalArgumentException) $stack8;
+        specialinvoke #l1.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'rowData\' argument.");
+        #l3 = (java.lang.Throwable) $stack8;
+    
+        throw #l3;
+    
+      label2:
+        $stack4 = new org.jfree.data.category.DefaultCategoryDataset;
+        specialinvoke $stack4.<org.jfree.data.category.DefaultCategoryDataset: void <init>()>();
+        result = $stack4;
+        i = 0;
+    
+      label3:
+        $stack5 = interfaceinvoke rowData.<org.jfree.data.KeyedValues: int getItemCount()>();
+    
+        if i >= $stack5 goto label4;
+        $stack7 = interfaceinvoke rowData.<org.jfree.data.KeyedValues: java.lang.Number getValue(int)>(i);
+        $stack6 = interfaceinvoke rowData.<org.jfree.data.KeyedValues: java.lang.Comparable getKey(int)>(i);
+        virtualinvoke $stack4.<org.jfree.data.category.DefaultCategoryDataset: void addValue(java.lang.Number,java.lang.Comparable,java.lang.Comparable)>($stack7, rowKey, $stack6);
+        i = i + 1;
+    
+        goto label3;
+    
+      label4:
+        return $stack4;
+    }
+
+    // ---- method: <org.jfree.data.general.DatasetUtilities: org.jfree.data.Range findCumulativeRangeBounds(org.jfree.data.category.CategoryDataset)> ----
+    {
+        boolean allItemsNull;
+        double maximum, minimum, runningTotal, value;
+        int $stack13, $stack15, $stack16, column, row;
+        java.lang.IllegalArgumentException #l1;
+        java.lang.Number n;
+        java.lang.Object $stack17;
+        java.lang.Throwable #l0;
+        org.jfree.data.Range $stack14;
+        org.jfree.data.category.CategoryDataset dataset;
+    
+    
+        dataset := @parameter0: org.jfree.data.category.CategoryDataset;
+    
+        if dataset != null goto label1;
+        $stack17 = new java.lang.IllegalArgumentException;
+        #l1 = (java.lang.IllegalArgumentException) $stack17;
+        specialinvoke #l1.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'dataset\' argument.");
+        #l0 = (java.lang.Throwable) $stack17;
+    
+        throw #l0;
+    
+      label1:
+        allItemsNull = 1;
+        minimum = 0.0;
+        maximum = 0.0;
+        row = 0;
+    
+      label2:
+        $stack13 = interfaceinvoke dataset.<org.jfree.data.category.CategoryDataset: int getRowCount()>();
+    
+        if row >= $stack13 goto label6;
+        runningTotal = 0.0;
+        column = 0;
+    
+      label3:
+        $stack15 = interfaceinvoke dataset.<org.jfree.data.category.CategoryDataset: int getColumnCount()>();
+        $stack16 = $stack15 - 1;
+    
+        if column >= $stack16 goto label5;
+        n = interfaceinvoke dataset.<org.jfree.data.category.CategoryDataset: java.lang.Number getValue(int,int)>(row, column);
+    
+        if n == null goto label4;
+        allItemsNull = 0;
+        value = virtualinvoke n.<java.lang.Number: double doubleValue()>();
+        runningTotal = runningTotal + value;
+        minimum = staticinvoke <java.lang.Math: double min(double,double)>(minimum, runningTotal);
+        maximum = staticinvoke <java.lang.Math: double max(double,double)>(maximum, runningTotal);
+    
+      label4:
+        column = column + 1;
+    
+        goto label3;
+    
+      label5:
+        row = row + 1;
+    
+        goto label2;
+    
+      label6:
+        if allItemsNull != 0 goto label7;
+        $stack14 = new org.jfree.data.Range;
+        specialinvoke $stack14.<org.jfree.data.Range: void <init>(double,double)>(minimum, maximum);
+    
+        return $stack14;
+    
+      label7:
+        return null;
+    }
+
+    // ---- method: <org.jfree.data.general.DatasetUtilities: boolean isEmptyOrNull(org.jfree.data.category.CategoryDataset)> ----
+    {
+        int c, columnCount, r, rowCount;
+        java.lang.Number $stack5;
+        org.jfree.data.category.CategoryDataset dataset;
+    
+    
+        dataset := @parameter0: org.jfree.data.category.CategoryDataset;
+    
+        if dataset != null goto label1;
+    
+        return 1;
+    
+      label1:
+        rowCount = interfaceinvoke dataset.<org.jfree.data.category.CategoryDataset: int getRowCount()>();
+        columnCount = interfaceinvoke dataset.<org.jfree.data.category.CategoryDataset: int getColumnCount()>();
+    
+        if rowCount == 0 goto label2;
+    
+        if columnCount != 0 goto label3;
+    
+      label2:
+        return 1;
+    
+      label3:
+        r = 0;
+    
+      label4:
+        if r >= rowCount goto label8;
+        c = 0;
+    
+      label5:
+        if c >= columnCount goto label7;
+        $stack5 = interfaceinvoke dataset.<org.jfree.data.category.CategoryDataset: java.lang.Number getValue(int,int)>(r, c);
+    
+        if $stack5 == null goto label6;
+    
+        return 0;
+    
+      label6:
+        c = c + 1;
+    
+        goto label5;
+    
+      label7:
+        r = r + 1;
+    
+        goto label4;
+    
+      label8:
+        return 1;
+    }
+
+    // ---- method: <org.jfree.data.general.DatasetUtilities: org.jfree.data.xy.XYDataset sampleFunction2D(org.jfree.data.function.Function2D,double,double,int,java.lang.Comparable)> ----
+    {
+        byte $stack13;
+        double $stack15, $stack16, $stack18, $stack19, $stack20, end, start, step, x;
+        int i#0, samples;
+        java.lang.Comparable seriesKey;
+        java.lang.IllegalArgumentException #l0, #l1, #l4, #l7;
+        java.lang.Object $stack21, $stack22, $stack23, $stack24;
+        java.lang.Throwable #l2, #l3, #l5, #l6;
+        org.jfree.data.function.Function2D f;
+        org.jfree.data.xy.XYSeries $stack14, series;
+        org.jfree.data.xy.XYSeriesCollection $stack17, i#1;
+    
+    
+        f := @parameter0: org.jfree.data.function.Function2D;
+        start := @parameter1: double;
+        end := @parameter2: double;
+        samples := @parameter3: int;
+        seriesKey := @parameter4: java.lang.Comparable;
+    
+        if f != null goto label1;
+        $stack24 = new java.lang.IllegalArgumentException;
+        #l7 = (java.lang.IllegalArgumentException) $stack24;
+        specialinvoke #l7.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'f\' argument.");
+        #l2 = (java.lang.Throwable) $stack24;
+    
+        throw #l2;
+    
+      label1:
+        if seriesKey != null goto label2;
+        $stack23 = new java.lang.IllegalArgumentException;
+        #l4 = (java.lang.IllegalArgumentException) $stack23;
+        specialinvoke #l4.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'seriesKey\' argument.");
+        #l3 = (java.lang.Throwable) $stack23;
+    
+        throw #l3;
+    
+      label2:
+        $stack13 = start cmpl end;
+    
+        if $stack13 < 0 goto label3;
+        $stack22 = new java.lang.IllegalArgumentException;
+        #l1 = (java.lang.IllegalArgumentException) $stack22;
+        specialinvoke #l1.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Requires \'start\' < \'end\'.");
+        #l5 = (java.lang.Throwable) $stack22;
+    
+        throw #l5;
+    
+      label3:
+        if samples >= 2 goto label4;
+        $stack21 = new java.lang.IllegalArgumentException;
+        #l0 = (java.lang.IllegalArgumentException) $stack21;
+        specialinvoke #l0.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Requires \'samples\' > 1");
+        #l6 = (java.lang.Throwable) $stack21;
+    
+        throw #l6;
+    
+      label4:
+        $stack14 = new org.jfree.data.xy.XYSeries;
+        specialinvoke $stack14.<org.jfree.data.xy.XYSeries: void <init>(java.lang.Comparable)>(seriesKey);
+        series = $stack14;
+        $stack15 = end - start;
+        $stack16 = (double) samples;
+        step = $stack15 / $stack16;
+        i#0 = 0;
+    
+      label5:
+        if i#0 > samples goto label6;
+        $stack18 = (double) i#0;
+        $stack19 = step * $stack18;
+        x = start + $stack19;
+        $stack20 = interfaceinvoke f.<org.jfree.data.function.Function2D: double getValue(double)>(x);
+        virtualinvoke $stack14.<org.jfree.data.xy.XYSeries: void add(double,double)>(x, $stack20);
+        i#0 = i#0 + 1;
+    
+        goto label5;
+    
+      label6:
+        $stack17 = new org.jfree.data.xy.XYSeriesCollection;
+        specialinvoke $stack17.<org.jfree.data.xy.XYSeriesCollection: void <init>(org.jfree.data.xy.XYSeries)>($stack14);
+        i#1 = $stack17;
+    
+        return $stack17;
+    }
+
+    // ---- method: <org.jfree.data.general.DatasetUtilities: java.lang.Number findMinimumStackedRangeValue(org.jfree.data.category.CategoryDataset)> ----
+    {
+        byte $stack14;
+        double minimum, total, value;
+        int categoryCount, item, series, seriesCount;
+        java.lang.Double $stack13;
+        java.lang.Number #l0, number;
+        java.lang.Object result;
+        org.jfree.data.category.CategoryDataset dataset;
+    
+    
+        dataset := @parameter0: org.jfree.data.category.CategoryDataset;
+        result = null;
+    
+        if dataset == null goto label6;
+        minimum = 0.0;
+        categoryCount = interfaceinvoke dataset.<org.jfree.data.category.CategoryDataset: int getRowCount()>();
+        item = 0;
+    
+      label1:
+        if item >= categoryCount goto label5;
+        total = 0.0;
+        seriesCount = interfaceinvoke dataset.<org.jfree.data.category.CategoryDataset: int getColumnCount()>();
+        series = 0;
+    
+      label2:
+        if series >= seriesCount goto label4;
+        number = interfaceinvoke dataset.<org.jfree.data.category.CategoryDataset: java.lang.Number getValue(int,int)>(series, item);
+    
+        if number == null goto label3;
+        value = virtualinvoke number.<java.lang.Number: double doubleValue()>();
+        $stack14 = value cmpg 0.0;
+    
+        if $stack14 >= 0 goto label3;
+        total = total + value;
+    
+      label3:
+        series = series + 1;
+    
+        goto label2;
+    
+      label4:
+        minimum = staticinvoke <java.lang.Math: double min(double,double)>(minimum, total);
+        item = item + 1;
+    
+        goto label1;
+    
+      label5:
+        $stack13 = new java.lang.Double;
+        specialinvoke $stack13.<java.lang.Double: void <init>(double)>(minimum);
+        result = $stack13;
+    
+      label6:
+        #l0 = (java.lang.Number) result;
+    
+        return #l0;
+    }
+
+    // ---- method: <org.jfree.data.general.DatasetUtilities: org.jfree.data.general.PieDataset createConsolidatedPieDataset(org.jfree.data.general.PieDataset,java.lang.Comparable,double,int)> ----
+    {
+        boolean $stack17, $stack18, $stack21;
+        byte $stack26;
+        double $stack23, $stack25, currentKey#1, minimumPercent, total, value#0;
+        int $stack19, $stack22, minItems;
+        java.lang.Comparable currentKey#0, key, value#1;
+        java.lang.Number dataValue, dataValue_1;
+        java.lang.Object $stack20, $stack24;
+        java.util.ArrayList $stack16, otherKeys;
+        java.util.Iterator iterator#0, iterator#1;
+        java.util.List keys;
+        org.jfree.data.general.DefaultPieDataset $stack15, result;
+        org.jfree.data.general.PieDataset source;
+    
+    
+        source := @parameter0: org.jfree.data.general.PieDataset;
+        key := @parameter1: java.lang.Comparable;
+        minimumPercent := @parameter2: double;
+        minItems := @parameter3: int;
+        $stack15 = new org.jfree.data.general.DefaultPieDataset;
+        specialinvoke $stack15.<org.jfree.data.general.DefaultPieDataset: void <init>()>();
+        result = $stack15;
+        total = staticinvoke <org.jfree.data.general.DatasetUtilities: double calculatePieDatasetTotal(org.jfree.data.general.PieDataset)>(source);
+        keys = interfaceinvoke source.<org.jfree.data.general.PieDataset: java.util.List getKeys()>();
+        $stack16 = new java.util.ArrayList;
+        specialinvoke $stack16.<java.util.ArrayList: void <init>()>();
+        otherKeys = $stack16;
+        iterator#0 = interfaceinvoke keys.<java.util.List: java.util.Iterator iterator()>();
+    
+      label1:
+        $stack17 = interfaceinvoke iterator#0.<java.util.Iterator: boolean hasNext()>();
+    
+        if $stack17 == 0 goto label3;
+        $stack24 = interfaceinvoke iterator#0.<java.util.Iterator: java.lang.Object next()>();
+        currentKey#0 = (java.lang.Comparable) $stack24;
+        dataValue_1 = interfaceinvoke source.<org.jfree.data.general.PieDataset: java.lang.Number getValue(java.lang.Comparable)>(currentKey#0);
+    
+        if dataValue_1 == null goto label2;
+        value#0 = virtualinvoke dataValue_1.<java.lang.Number: double doubleValue()>();
+        $stack25 = value#0 / total;
+        $stack26 = $stack25 cmpg minimumPercent;
+    
+        if $stack26 >= 0 goto label2;
+        virtualinvoke $stack16.<java.util.ArrayList: boolean add(java.lang.Object)>(currentKey#0);
+    
+      label2:
+        goto label1;
+    
+      label3:
+        iterator#1 = interfaceinvoke keys.<java.util.List: java.util.Iterator iterator()>();
+        currentKey#1 = 0.0;
+    
+      label4:
+        $stack18 = interfaceinvoke iterator#1.<java.util.Iterator: boolean hasNext()>();
+    
+        if $stack18 == 0 goto label7;
+        $stack20 = interfaceinvoke iterator#1.<java.util.Iterator: java.lang.Object next()>();
+        value#1 = (java.lang.Comparable) $stack20;
+        dataValue = interfaceinvoke source.<org.jfree.data.general.PieDataset: java.lang.Number getValue(java.lang.Comparable)>(value#1);
+    
+        if dataValue == null goto label6;
+        $stack21 = virtualinvoke $stack16.<java.util.ArrayList: boolean contains(java.lang.Object)>(value#1);
+    
+        if $stack21 == 0 goto label5;
+        $stack22 = virtualinvoke $stack16.<java.util.ArrayList: int size()>();
+    
+        if $stack22 < minItems goto label5;
+        $stack23 = virtualinvoke dataValue.<java.lang.Number: double doubleValue()>();
+        currentKey#1 = currentKey#1 + $stack23;
+    
+        goto label6;
+    
+      label5:
+        virtualinvoke $stack15.<org.jfree.data.general.DefaultPieDataset: void setValue(java.lang.Comparable,java.lang.Number)>(value#1, dataValue);
+    
+      label6:
+        goto label4;
+    
+      label7:
+        $stack19 = virtualinvoke $stack16.<java.util.ArrayList: int size()>();
+    
+        if $stack19 < minItems goto label8;
+        virtualinvoke $stack15.<org.jfree.data.general.DefaultPieDataset: void setValue(java.lang.Comparable,double)>(key, currentKey#1);
+    
+      label8:
+        return $stack15;
+    }
+
+    // ---- method: <org.jfree.data.general.DatasetUtilities: org.jfree.data.Range iterateCategoryRangeBounds(org.jfree.data.category.CategoryDataset,boolean)> ----
+    {
+        boolean $stack18, includeInterval, interval;
+        byte $stack14;
+        double $stack16, $stack17, maximum, minimum;
+        int column, columnCount, row, rowCount;
+        java.lang.Number lvalue, uvalue;
+        org.jfree.data.Range $stack15;
+        org.jfree.data.category.CategoryDataset dataset;
+        org.jfree.data.category.IntervalCategoryDataset icd;
+    
+    
+        dataset := @parameter0: org.jfree.data.category.CategoryDataset;
+        includeInterval := @parameter1: boolean;
+        minimum = #Infinity;
+        maximum = #-Infinity;
+    
+        if includeInterval == 0 goto label01;
+        $stack18 = dataset instanceof org.jfree.data.category.IntervalCategoryDataset;
+    
+        if $stack18 == 0 goto label01;
+        interval = 1;
+    
+        goto label02;
+    
+      label01:
+        interval = 0;
+    
+      label02:
+        rowCount = interfaceinvoke dataset.<org.jfree.data.category.CategoryDataset: int getRowCount()>();
+        columnCount = interfaceinvoke dataset.<org.jfree.data.category.CategoryDataset: int getColumnCount()>();
+        row = 0;
+    
+      label03:
+        if row >= rowCount goto label10;
+        column = 0;
+    
+      label04:
+        if column >= columnCount goto label09;
+    
+        if interval == 0 goto label05;
+        icd = (org.jfree.data.category.IntervalCategoryDataset) dataset;
+        lvalue = interfaceinvoke icd.<org.jfree.data.category.IntervalCategoryDataset: java.lang.Number getStartValue(int,int)>(row, column);
+        uvalue = interfaceinvoke icd.<org.jfree.data.category.IntervalCategoryDataset: java.lang.Number getEndValue(int,int)>(row, column);
+    
+        goto label06;
+    
+      label05:
+        lvalue = interfaceinvoke dataset.<org.jfree.data.category.CategoryDataset: java.lang.Number getValue(int,int)>(row, column);
+        uvalue = lvalue;
+    
+      label06:
+        if lvalue == null goto label07;
+        $stack17 = virtualinvoke lvalue.<java.lang.Number: double doubleValue()>();
+        minimum = staticinvoke <java.lang.Math: double min(double,double)>(minimum, $stack17);
+    
+      label07:
+        if uvalue == null goto label08;
+        $stack16 = virtualinvoke uvalue.<java.lang.Number: double doubleValue()>();
+        maximum = staticinvoke <java.lang.Math: double max(double,double)>(maximum, $stack16);
+    
+      label08:
+        column = column + 1;
+    
+        goto label04;
+    
+      label09:
+        row = row + 1;
+    
+        goto label03;
+    
+      label10:
+        $stack14 = minimum cmpl #Infinity;
+    
+        if $stack14 != 0 goto label11;
+    
+        return null;
+    
+      label11:
+        $stack15 = new org.jfree.data.Range;
+        specialinvoke $stack15.<org.jfree.data.Range: void <init>(double,double)>(minimum, maximum);
+    
+        return $stack15;
+    }
+
+    // ---- method: <org.jfree.data.general.DatasetUtilities: java.lang.Number findMaximumRangeValue(org.jfree.data.category.CategoryDataset)> ----
+    {
+        boolean $stack12, $stack9;
+        byte $stack10;
+        double $stack13, $stack14, info#1;
+        int item, itemCount, series, seriesCount;
+        java.lang.Double #l0, #l5;
+        java.lang.IllegalArgumentException #l3;
+        java.lang.Number #l1, #l4, value;
+        java.lang.Object $stack11, $stack15, $stack16;
+        java.lang.Throwable #l2;
+        org.jfree.data.RangeInfo info#0;
+        org.jfree.data.category.CategoryDataset dataset;
+        org.jfree.data.category.IntervalCategoryDataset icd;
+    
+    
+        dataset := @parameter0: org.jfree.data.category.CategoryDataset;
+    
+        if dataset != null goto label01;
+        $stack16 = new java.lang.IllegalArgumentException;
+        #l3 = (java.lang.IllegalArgumentException) $stack16;
+        specialinvoke #l3.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'dataset\' argument.");
+        #l2 = (java.lang.Throwable) $stack16;
+    
+        throw #l2;
+    
+      label01:
+        $stack9 = dataset instanceof org.jfree.data.RangeInfo;
+    
+        if $stack9 == 0 goto label02;
+        info#0 = (org.jfree.data.RangeInfo) dataset;
+        $stack15 = new java.lang.Double;
+        $stack14 = interfaceinvoke info#0.<org.jfree.data.RangeInfo: double getRangeUpperBound(boolean)>(1);
+        #l0 = (java.lang.Double) $stack15;
+        specialinvoke #l0.<java.lang.Double: void <init>(double)>($stack14);
+        #l4 = (java.lang.Number) $stack15;
+    
+        return #l4;
+    
+      label02:
+        info#1 = #-Infinity;
+        seriesCount = interfaceinvoke dataset.<org.jfree.data.category.CategoryDataset: int getRowCount()>();
+        itemCount = interfaceinvoke dataset.<org.jfree.data.category.CategoryDataset: int getColumnCount()>();
+        series = 0;
+    
+      label03:
+        if series >= seriesCount goto label09;
+        item = 0;
+    
+      label04:
+        if item >= itemCount goto label08;
+        $stack12 = dataset instanceof org.jfree.data.category.IntervalCategoryDataset;
+    
+        if $stack12 == 0 goto label05;
+        icd = (org.jfree.data.category.IntervalCategoryDataset) dataset;
+        value = interfaceinvoke icd.<org.jfree.data.category.IntervalCategoryDataset: java.lang.Number getEndValue(int,int)>(series, item);
+    
+        goto label06;
+    
+      label05:
+        value = interfaceinvoke dataset.<org.jfree.data.category.CategoryDataset: java.lang.Number getValue(int,int)>(series, item);
+    
+      label06:
+        if value == null goto label07;
+        $stack13 = virtualinvoke value.<java.lang.Number: double doubleValue()>();
+        info#1 = staticinvoke <java.lang.Math: double max(double,double)>(info#1, $stack13);
+    
+      label07:
+        item = item + 1;
+    
+        goto label04;
+    
+      label08:
+        series = series + 1;
+    
+        goto label03;
+    
+      label09:
+        $stack10 = info#1 cmpl #-Infinity;
+    
+        if $stack10 != 0 goto label10;
+    
+        return null;
+    
+      label10:
+        $stack11 = new java.lang.Double;
+        #l5 = (java.lang.Double) $stack11;
+        specialinvoke #l5.<java.lang.Double: void <init>(double)>(info#1);
+        #l1 = (java.lang.Number) $stack11;
+    
+        return #l1;
+    }
+
+    // ---- method: <org.jfree.data.general.DatasetUtilities: boolean isEmptyOrNull(org.jfree.data.general.PieDataset)> ----
+    {
+        byte $stack6;
+        double yy;
+        int item, itemCount;
+        java.lang.Number y;
+        org.jfree.data.general.PieDataset dataset;
+    
+    
+        dataset := @parameter0: org.jfree.data.general.PieDataset;
+    
+        if dataset != null goto label1;
+    
+        return 1;
+    
+      label1:
+        itemCount = interfaceinvoke dataset.<org.jfree.data.general.PieDataset: int getItemCount()>();
+    
+        if itemCount != 0 goto label2;
+    
+        return 1;
+    
+      label2:
+        item = 0;
+    
+      label3:
+        if item >= itemCount goto label5;
+        y = interfaceinvoke dataset.<org.jfree.data.general.PieDataset: java.lang.Number getValue(int)>(item);
+    
+        if y == null goto label4;
+        yy = virtualinvoke y.<java.lang.Number: double doubleValue()>();
+        $stack6 = yy cmpl 0.0;
+    
+        if $stack6 <= 0 goto label4;
+    
+        return 0;
+    
+      label4:
+        item = item + 1;
+    
+        goto label3;
+    
+      label5:
+        return 1;
+    }
+
+    // ---- method: <org.jfree.data.general.DatasetUtilities: org.jfree.data.Range findRangeBounds(org.jfree.data.category.CategoryDataset,boolean)> ----
+    {
+        boolean $stack4, includeInterval;
+        java.lang.IllegalArgumentException #l1;
+        java.lang.Object $stack5, result#0;
+        java.lang.Throwable #l0;
+        org.jfree.data.Range result#1;
+        org.jfree.data.RangeInfo info;
+        org.jfree.data.category.CategoryDataset dataset;
+    
+    
+        dataset := @parameter0: org.jfree.data.category.CategoryDataset;
+        includeInterval := @parameter1: boolean;
+    
+        if dataset != null goto label1;
+        $stack5 = new java.lang.IllegalArgumentException;
+        #l1 = (java.lang.IllegalArgumentException) $stack5;
+        specialinvoke #l1.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'dataset\' argument.");
+        #l0 = (java.lang.Throwable) $stack5;
+    
+        throw #l0;
+    
+      label1:
+        result#0 = null;
+        $stack4 = dataset instanceof org.jfree.data.RangeInfo;
+    
+        if $stack4 == 0 goto label2;
+        info = (org.jfree.data.RangeInfo) dataset;
+        result#1 = interfaceinvoke info.<org.jfree.data.RangeInfo: org.jfree.data.Range getRangeBounds(boolean)>(includeInterval);
+    
+        goto label3;
+    
+      label2:
+        result#1 = staticinvoke <org.jfree.data.general.DatasetUtilities: org.jfree.data.Range iterateCategoryRangeBounds(org.jfree.data.category.CategoryDataset,boolean)>(dataset, includeInterval);
+    
+      label3:
+        return result#1;
+    }
+
+    // ---- method: <org.jfree.data.general.DatasetUtilities: org.jfree.data.Range findDomainBounds(org.jfree.data.xy.XYDataset)> ----
+    {
+        org.jfree.data.Range $stack1;
+        org.jfree.data.xy.XYDataset dataset;
+    
+    
+        dataset := @parameter0: org.jfree.data.xy.XYDataset;
+        $stack1 = staticinvoke <org.jfree.data.general.DatasetUtilities: org.jfree.data.Range findDomainBounds(org.jfree.data.xy.XYDataset,boolean)>(dataset, 1);
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.data.general.DatasetUtilities: org.jfree.data.Range findDomainBounds(org.jfree.data.xy.XYDataset,boolean)> ----
+    {
+        boolean $stack4, includeInterval;
+        java.lang.IllegalArgumentException #l1;
+        java.lang.Object $stack5, result#0;
+        java.lang.Throwable #l0;
+        org.jfree.data.DomainInfo info;
+        org.jfree.data.Range result#1;
+        org.jfree.data.xy.XYDataset dataset;
+    
+    
+        dataset := @parameter0: org.jfree.data.xy.XYDataset;
+        includeInterval := @parameter1: boolean;
+    
+        if dataset != null goto label1;
+        $stack5 = new java.lang.IllegalArgumentException;
+        #l1 = (java.lang.IllegalArgumentException) $stack5;
+        specialinvoke #l1.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'dataset\' argument.");
+        #l0 = (java.lang.Throwable) $stack5;
+    
+        throw #l0;
+    
+      label1:
+        result#0 = null;
+        $stack4 = dataset instanceof org.jfree.data.DomainInfo;
+    
+        if $stack4 == 0 goto label2;
+        info = (org.jfree.data.DomainInfo) dataset;
+        result#1 = interfaceinvoke info.<org.jfree.data.DomainInfo: org.jfree.data.Range getDomainBounds(boolean)>(includeInterval);
+    
+        goto label3;
+    
+      label2:
+        result#1 = staticinvoke <org.jfree.data.general.DatasetUtilities: org.jfree.data.Range iterateDomainBounds(org.jfree.data.xy.XYDataset,boolean)>(dataset, includeInterval);
+    
+      label3:
+        return result#1;
+    }
+
+    // ---- method: <org.jfree.data.general.DatasetUtilities: java.lang.Number findMinimumRangeValue(org.jfree.data.xy.XYDataset)> ----
+    {
+        boolean $stack10, $stack13, $stack14, $stack15;
+        byte $stack11;
+        double $stack16, info#1, value;
+        int item, itemCount, series, seriesCount;
+        java.lang.Double #l2, #l3;
+        java.lang.IllegalArgumentException #l0;
+        java.lang.Number #l1, #l4;
+        java.lang.Object $stack12, $stack17, $stack18;
+        java.lang.Throwable #l5;
+        org.jfree.data.RangeInfo info#0;
+        org.jfree.data.xy.IntervalXYDataset intervalXYData#0;
+        org.jfree.data.xy.OHLCDataset intervalXYData#1;
+        org.jfree.data.xy.XYDataset dataset;
+    
+    
+        dataset := @parameter0: org.jfree.data.xy.XYDataset;
+    
+        if dataset != null goto label01;
+        $stack18 = new java.lang.IllegalArgumentException;
+        #l0 = (java.lang.IllegalArgumentException) $stack18;
+        specialinvoke #l0.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'dataset\' argument.");
+        #l5 = (java.lang.Throwable) $stack18;
+    
+        throw #l5;
+    
+      label01:
+        $stack10 = dataset instanceof org.jfree.data.RangeInfo;
+    
+        if $stack10 == 0 goto label02;
+        info#0 = (org.jfree.data.RangeInfo) dataset;
+        $stack17 = new java.lang.Double;
+        $stack16 = interfaceinvoke info#0.<org.jfree.data.RangeInfo: double getRangeLowerBound(boolean)>(1);
+        #l3 = (java.lang.Double) $stack17;
+        specialinvoke #l3.<java.lang.Double: void <init>(double)>($stack16);
+        #l1 = (java.lang.Number) $stack17;
+    
+        return #l1;
+    
+      label02:
+        info#1 = #Infinity;
+        seriesCount = interfaceinvoke dataset.<org.jfree.data.xy.XYDataset: int getSeriesCount()>();
+        series = 0;
+    
+      label03:
+        if series >= seriesCount goto label10;
+        itemCount = interfaceinvoke dataset.<org.jfree.data.xy.XYDataset: int getItemCount(int)>(series);
+        item = 0;
+    
+      label04:
+        if item >= itemCount goto label09;
+        $stack13 = dataset instanceof org.jfree.data.xy.IntervalXYDataset;
+    
+        if $stack13 == 0 goto label05;
+        intervalXYData#0 = (org.jfree.data.xy.IntervalXYDataset) dataset;
+        value = interfaceinvoke intervalXYData#0.<org.jfree.data.xy.IntervalXYDataset: double getStartYValue(int,int)>(series, item);
+    
+        goto label07;
+    
+      label05:
+        $stack14 = dataset instanceof org.jfree.data.xy.OHLCDataset;
+    
+        if $stack14 == 0 goto label06;
+        intervalXYData#1 = (org.jfree.data.xy.OHLCDataset) dataset;
+        value = interfaceinvoke intervalXYData#1.<org.jfree.data.xy.OHLCDataset: double getLowValue(int,int)>(series, item);
+    
+        goto label07;
+    
+      label06:
+        value = interfaceinvoke dataset.<org.jfree.data.xy.XYDataset: double getYValue(int,int)>(series, item);
+    
+      label07:
+        $stack15 = staticinvoke <java.lang.Double: boolean isNaN(double)>(value);
+    
+        if $stack15 != 0 goto label08;
+        info#1 = staticinvoke <java.lang.Math: double min(double,double)>(info#1, value);
+    
+      label08:
+        item = item + 1;
+    
+        goto label04;
+    
+      label09:
+        series = series + 1;
+    
+        goto label03;
+    
+      label10:
+        $stack11 = info#1 cmpl #Infinity;
+    
+        if $stack11 != 0 goto label11;
+    
+        return null;
+    
+      label11:
+        $stack12 = new java.lang.Double;
+        #l2 = (java.lang.Double) $stack12;
+        specialinvoke #l2.<java.lang.Double: void <init>(double)>(info#1);
+        #l4 = (java.lang.Number) $stack12;
+    
+        return #l4;
+    }
+
+    // ---- method: <org.jfree.data.general.DatasetUtilities: org.jfree.data.general.PieDataset createPieDatasetForRow(org.jfree.data.category.CategoryDataset,int)> ----
+    {
+        int columnCount, current, row;
+        java.lang.Comparable columnKey;
+        java.lang.Number $stack7;
+        org.jfree.data.category.CategoryDataset dataset;
+        org.jfree.data.general.DefaultPieDataset $stack6, result;
+    
+    
+        dataset := @parameter0: org.jfree.data.category.CategoryDataset;
+        row := @parameter1: int;
+        $stack6 = new org.jfree.data.general.DefaultPieDataset;
+        specialinvoke $stack6.<org.jfree.data.general.DefaultPieDataset: void <init>()>();
+        result = $stack6;
+        columnCount = interfaceinvoke dataset.<org.jfree.data.category.CategoryDataset: int getColumnCount()>();
+        current = 0;
+    
+      label1:
+        if current >= columnCount goto label2;
+        columnKey = interfaceinvoke dataset.<org.jfree.data.category.CategoryDataset: java.lang.Comparable getColumnKey(int)>(current);
+        $stack7 = interfaceinvoke dataset.<org.jfree.data.category.CategoryDataset: java.lang.Number getValue(int,int)>(row, current);
+        virtualinvoke $stack6.<org.jfree.data.general.DefaultPieDataset: void setValue(java.lang.Comparable,java.lang.Number)>(columnKey, $stack7);
+        current = current + 1;
+    
+        goto label1;
+    
+      label2:
+        return $stack6;
+    }
+
+    // ---- method: <org.jfree.data.general.DatasetUtilities: org.jfree.data.Range iterateXYRangeBounds(org.jfree.data.xy.XYDataset)> ----
+    {
+        boolean $stack16, $stack17, $stack18, $stack19;
+        byte $stack14;
+        double lvalue, maximum, minimum, uvalue;
+        int item, itemCount, series, seriesCount;
+        org.jfree.data.Range $stack15;
+        org.jfree.data.xy.IntervalXYDataset intervalXYData#0;
+        org.jfree.data.xy.OHLCDataset intervalXYData#1;
+        org.jfree.data.xy.XYDataset dataset;
+    
+    
+        dataset := @parameter0: org.jfree.data.xy.XYDataset;
+        minimum = #Infinity;
+        maximum = #-Infinity;
+        seriesCount = interfaceinvoke dataset.<org.jfree.data.xy.XYDataset: int getSeriesCount()>();
+        series = 0;
+    
+      label01:
+        if series >= seriesCount goto label09;
+        itemCount = interfaceinvoke dataset.<org.jfree.data.xy.XYDataset: int getItemCount(int)>(series);
+        item = 0;
+    
+      label02:
+        if item >= itemCount goto label08;
+        $stack16 = dataset instanceof org.jfree.data.xy.IntervalXYDataset;
+    
+        if $stack16 == 0 goto label03;
+        intervalXYData#0 = (org.jfree.data.xy.IntervalXYDataset) dataset;
+        lvalue = interfaceinvoke intervalXYData#0.<org.jfree.data.xy.IntervalXYDataset: double getStartYValue(int,int)>(series, item);
+        uvalue = interfaceinvoke intervalXYData#0.<org.jfree.data.xy.IntervalXYDataset: double getEndYValue(int,int)>(series, item);
+    
+        goto label05;
+    
+      label03:
+        $stack17 = dataset instanceof org.jfree.data.xy.OHLCDataset;
+    
+        if $stack17 == 0 goto label04;
+        intervalXYData#1 = (org.jfree.data.xy.OHLCDataset) dataset;
+        lvalue = interfaceinvoke intervalXYData#1.<org.jfree.data.xy.OHLCDataset: double getLowValue(int,int)>(series, item);
+        uvalue = interfaceinvoke intervalXYData#1.<org.jfree.data.xy.OHLCDataset: double getHighValue(int,int)>(series, item);
+    
+        goto label05;
+    
+      label04:
+        lvalue = interfaceinvoke dataset.<org.jfree.data.xy.XYDataset: double getYValue(int,int)>(series, item);
+        uvalue = lvalue;
+    
+      label05:
+        $stack18 = staticinvoke <java.lang.Double: boolean isNaN(double)>(lvalue);
+    
+        if $stack18 != 0 goto label06;
+        minimum = staticinvoke <java.lang.Math: double min(double,double)>(minimum, lvalue);
+    
+      label06:
+        $stack19 = staticinvoke <java.lang.Double: boolean isNaN(double)>(uvalue);
+    
+        if $stack19 != 0 goto label07;
+        maximum = staticinvoke <java.lang.Math: double max(double,double)>(maximum, uvalue);
+    
+      label07:
+        item = item + 1;
+    
+        goto label02;
+    
+      label08:
+        series = series + 1;
+    
+        goto label01;
+    
+      label09:
+        $stack14 = minimum cmpl #Infinity;
+    
+        if $stack14 != 0 goto label10;
+    
+        return null;
+    
+      label10:
+        $stack15 = new org.jfree.data.Range;
+        specialinvoke $stack15.<org.jfree.data.Range: void <init>(double,double)>(minimum, maximum);
+    
+        return $stack15;
+    }
+
+    // ---- method: <org.jfree.data.general.DatasetUtilities: void <init>()> ----
+    {
+        org.jfree.data.general.DatasetUtilities this;
+    
+    
+        this := @this: org.jfree.data.general.DatasetUtilities;
+        specialinvoke this.<java.lang.Object: void <init>()>();
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.general.DatasetUtilities: double calculatePieDatasetTotal(org.jfree.data.general.PieDataset)> ----
+    {
+        boolean $stack9;
+        byte $stack11;
+        double totalValue, v;
+        java.lang.Comparable current;
+        java.lang.IllegalArgumentException #l0;
+        java.lang.Number value;
+        java.lang.Object $stack10, $stack12;
+        java.lang.Throwable #l1;
+        java.util.Iterator iterator;
+        java.util.List keys;
+        org.jfree.data.general.PieDataset dataset;
+    
+    
+        dataset := @parameter0: org.jfree.data.general.PieDataset;
+    
+        if dataset != null goto label1;
+        $stack12 = new java.lang.IllegalArgumentException;
+        #l0 = (java.lang.IllegalArgumentException) $stack12;
+        specialinvoke #l0.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'dataset\' argument.");
+        #l1 = (java.lang.Throwable) $stack12;
+    
+        throw #l1;
+    
+      label1:
+        keys = interfaceinvoke dataset.<org.jfree.data.general.PieDataset: java.util.List getKeys()>();
+        totalValue = 0.0;
+        iterator = interfaceinvoke keys.<java.util.List: java.util.Iterator iterator()>();
+    
+      label2:
+        $stack9 = interfaceinvoke iterator.<java.util.Iterator: boolean hasNext()>();
+    
+        if $stack9 == 0 goto label5;
+        $stack10 = interfaceinvoke iterator.<java.util.Iterator: java.lang.Object next()>();
+        current = (java.lang.Comparable) $stack10;
+    
+        if current == null goto label4;
+        value = interfaceinvoke dataset.<org.jfree.data.general.PieDataset: java.lang.Number getValue(java.lang.Comparable)>(current);
+        v = 0.0;
+    
+        if value == null goto label3;
+        v = virtualinvoke value.<java.lang.Number: double doubleValue()>();
+    
+      label3:
+        $stack11 = v cmpl 0.0;
+    
+        if $stack11 <= 0 goto label4;
+        totalValue = totalValue + v;
+    
+      label4:
+        goto label2;
+    
+      label5:
+        return totalValue;
+    }
+
+    // ---- method: <org.jfree.data.general.DatasetUtilities: org.jfree.data.Range findRangeBounds(org.jfree.data.category.CategoryDataset)> ----
+    {
+        org.jfree.data.Range $stack1;
+        org.jfree.data.category.CategoryDataset dataset;
+    
+    
+        dataset := @parameter0: org.jfree.data.category.CategoryDataset;
+        $stack1 = staticinvoke <org.jfree.data.general.DatasetUtilities: org.jfree.data.Range findRangeBounds(org.jfree.data.category.CategoryDataset,boolean)>(dataset, 1);
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.data.general.DatasetUtilities: org.jfree.data.Range findRangeBounds(org.jfree.data.xy.XYDataset,boolean)> ----
+    {
+        boolean $stack4, includeInterval;
+        java.lang.IllegalArgumentException #l1;
+        java.lang.Object $stack5, result#0;
+        java.lang.Throwable #l0;
+        org.jfree.data.Range result#1;
+        org.jfree.data.RangeInfo info;
+        org.jfree.data.xy.XYDataset dataset;
+    
+    
+        dataset := @parameter0: org.jfree.data.xy.XYDataset;
+        includeInterval := @parameter1: boolean;
+    
+        if dataset != null goto label1;
+        $stack5 = new java.lang.IllegalArgumentException;
+        #l1 = (java.lang.IllegalArgumentException) $stack5;
+        specialinvoke #l1.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'dataset\' argument.");
+        #l0 = (java.lang.Throwable) $stack5;
+    
+        throw #l0;
+    
+      label1:
+        result#0 = null;
+        $stack4 = dataset instanceof org.jfree.data.RangeInfo;
+    
+        if $stack4 == 0 goto label2;
+        info = (org.jfree.data.RangeInfo) dataset;
+        result#1 = interfaceinvoke info.<org.jfree.data.RangeInfo: org.jfree.data.Range getRangeBounds(boolean)>(includeInterval);
+    
+        goto label3;
+    
+      label2:
+        result#1 = staticinvoke <org.jfree.data.general.DatasetUtilities: org.jfree.data.Range iterateXYRangeBounds(org.jfree.data.xy.XYDataset)>(dataset);
+    
+      label3:
+        return result#1;
+    }
+
+    // ---- method: <org.jfree.data.general.DatasetUtilities: org.jfree.data.Range findStackedRangeBounds(org.jfree.data.xy.TableXYDataset,double)> ----
+    {
+        boolean $stack21;
+        byte $stack17, $stack19, $stack20, $stack22;
+        double base, maximum, minimum, negative, positive, y;
+        int $stack16, itemNo, seriesCount, seriesNo;
+        java.lang.IllegalArgumentException #l0;
+        java.lang.Object $stack23;
+        java.lang.Throwable #l1;
+        org.jfree.data.Range $stack18;
+        org.jfree.data.xy.TableXYDataset dataset;
+    
+    
+        dataset := @parameter0: org.jfree.data.xy.TableXYDataset;
+        base := @parameter1: double;
+    
+        if dataset != null goto label01;
+        $stack23 = new java.lang.IllegalArgumentException;
+        #l0 = (java.lang.IllegalArgumentException) $stack23;
+        specialinvoke #l0.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'dataset\' argument.");
+        #l1 = (java.lang.Throwable) $stack23;
+    
+        throw #l1;
+    
+      label01:
+        minimum = base;
+        maximum = base;
+        itemNo = 0;
+    
+      label02:
+        $stack16 = interfaceinvoke dataset.<org.jfree.data.xy.TableXYDataset: int getItemCount()>();
+    
+        if itemNo >= $stack16 goto label09;
+        positive = base;
+        negative = base;
+        seriesCount = interfaceinvoke dataset.<org.jfree.data.xy.TableXYDataset: int getSeriesCount()>();
+        seriesNo = 0;
+    
+      label03:
+        if seriesNo >= seriesCount goto label06;
+        y = interfaceinvoke dataset.<org.jfree.data.xy.TableXYDataset: double getYValue(int,int)>(seriesNo, itemNo);
+        $stack21 = staticinvoke <java.lang.Double: boolean isNaN(double)>(y);
+    
+        if $stack21 != 0 goto label05;
+        $stack22 = y cmpl 0.0;
+    
+        if $stack22 <= 0 goto label04;
+        positive = positive + y;
+    
+        goto label05;
+    
+      label04:
+        negative = negative + y;
+    
+      label05:
+        seriesNo = seriesNo + 1;
+    
+        goto label03;
+    
+      label06:
+        $stack19 = positive cmpl maximum;
+    
+        if $stack19 <= 0 goto label07;
+        maximum = positive;
+    
+      label07:
+        $stack20 = negative cmpg minimum;
+    
+        if $stack20 >= 0 goto label08;
+        minimum = negative;
+    
+      label08:
+        itemNo = itemNo + 1;
+    
+        goto label02;
+    
+      label09:
+        $stack17 = minimum cmpg maximum;
+    
+        if $stack17 > 0 goto label10;
+        $stack18 = new org.jfree.data.Range;
+        specialinvoke $stack18.<org.jfree.data.Range: void <init>(double,double)>(minimum, maximum);
+    
+        return $stack18;
+    
+      label10:
+        return null;
+    }
+
+}

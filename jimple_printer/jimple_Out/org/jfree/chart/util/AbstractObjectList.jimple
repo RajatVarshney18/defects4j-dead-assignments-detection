@@ -1,0 +1,346 @@
+// ========================================================================
+// CLASS : org.jfree.chart.util.AbstractObjectList
+// ========================================================================
+
+[PUBLIC, SUPER] class org.jfree.chart.util.AbstractObjectList extends java.lang.Object implements java.lang.Cloneable, java.io.Serializable {
+
+    // ---- method: <org.jfree.chart.util.AbstractObjectList: boolean equals(java.lang.Object)> ----
+    {
+        boolean $stack5, $stack8;
+        int i, listSize;
+        java.lang.Object $stack6, $stack7, obj;
+        org.jfree.chart.util.AbstractObjectList other, this;
+    
+    
+        this := @this: org.jfree.chart.util.AbstractObjectList;
+        obj := @parameter0: java.lang.Object;
+    
+        if obj != null goto label1;
+    
+        return 0;
+    
+      label1:
+        if obj != this goto label2;
+    
+        return 1;
+    
+      label2:
+        $stack5 = obj instanceof org.jfree.chart.util.AbstractObjectList;
+    
+        if $stack5 != 0 goto label3;
+    
+        return 0;
+    
+      label3:
+        other = (org.jfree.chart.util.AbstractObjectList) obj;
+        listSize = virtualinvoke this.<org.jfree.chart.util.AbstractObjectList: int size()>();
+        i = 0;
+    
+      label4:
+        if i >= listSize goto label6;
+        $stack7 = virtualinvoke this.<org.jfree.chart.util.AbstractObjectList: java.lang.Object get(int)>(i);
+        $stack6 = virtualinvoke other.<org.jfree.chart.util.AbstractObjectList: java.lang.Object get(int)>(i);
+        $stack8 = staticinvoke <org.jfree.chart.util.ObjectUtilities: boolean equal(java.lang.Object,java.lang.Object)>($stack7, $stack6);
+    
+        if $stack8 != 0 goto label5;
+    
+        return 0;
+    
+      label5:
+        i = i + 1;
+    
+        goto label4;
+    
+      label6:
+        return 1;
+    }
+
+    // ---- method: <org.jfree.chart.util.AbstractObjectList: void <init>()> ----
+    {
+        org.jfree.chart.util.AbstractObjectList this;
+    
+    
+        this := @this: org.jfree.chart.util.AbstractObjectList;
+        specialinvoke this.<org.jfree.chart.util.AbstractObjectList: void <init>(int)>(8);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.util.AbstractObjectList: void set(int,java.lang.Object)> ----
+    {
+        int $stack10, $stack11, $stack13, $stack5, $stack7, $stack8, $stack9, index;
+        java.lang.IllegalArgumentException #l1;
+        java.lang.Object $stack15, object;
+        java.lang.Object[] $stack12, $stack14, $stack4, $stack6, enlarged;
+        java.lang.Throwable #l0;
+        org.jfree.chart.util.AbstractObjectList this;
+    
+    
+        this := @this: org.jfree.chart.util.AbstractObjectList;
+        index := @parameter0: int;
+        object := @parameter1: java.lang.Object;
+    
+        if index >= 0 goto label1;
+        $stack15 = new java.lang.IllegalArgumentException;
+        #l1 = (java.lang.IllegalArgumentException) $stack15;
+        specialinvoke #l1.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Requires index >= 0.");
+        #l0 = (java.lang.Throwable) $stack15;
+    
+        throw #l0;
+    
+      label1:
+        $stack4 = this.<org.jfree.chart.util.AbstractObjectList: java.lang.Object[] objects>;
+        $stack5 = lengthof $stack4;
+    
+        if index < $stack5 goto label2;
+        $stack10 = this.<org.jfree.chart.util.AbstractObjectList: int increment>;
+        $stack11 = index + $stack10;
+        enlarged = newarray (java.lang.Object)[$stack11];
+        $stack14 = this.<org.jfree.chart.util.AbstractObjectList: java.lang.Object[] objects>;
+        $stack12 = this.<org.jfree.chart.util.AbstractObjectList: java.lang.Object[] objects>;
+        $stack13 = lengthof $stack12;
+        staticinvoke <java.lang.System: void arraycopy(java.lang.Object,int,java.lang.Object,int,int)>($stack14, 0, enlarged, 0, $stack13);
+        this.<org.jfree.chart.util.AbstractObjectList: java.lang.Object[] objects> = enlarged;
+    
+      label2:
+        $stack6 = this.<org.jfree.chart.util.AbstractObjectList: java.lang.Object[] objects>;
+        $stack6[index] = object;
+        $stack8 = this.<org.jfree.chart.util.AbstractObjectList: int size>;
+        $stack7 = index + 1;
+        $stack9 = staticinvoke <java.lang.Math: int max(int,int)>($stack8, $stack7);
+        this.<org.jfree.chart.util.AbstractObjectList: int size> = $stack9;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.util.AbstractObjectList: int size()> ----
+    {
+        int $stack1;
+        org.jfree.chart.util.AbstractObjectList this;
+    
+    
+        this := @this: org.jfree.chart.util.AbstractObjectList;
+        $stack1 = this.<org.jfree.chart.util.AbstractObjectList: int size>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.util.AbstractObjectList: java.lang.Object get(int)> ----
+    {
+        int $stack3, index;
+        java.lang.Object result;
+        java.lang.Object[] $stack4;
+        org.jfree.chart.util.AbstractObjectList this;
+    
+    
+        this := @this: org.jfree.chart.util.AbstractObjectList;
+        index := @parameter0: int;
+        result = null;
+    
+        if index < 0 goto label1;
+        $stack3 = this.<org.jfree.chart.util.AbstractObjectList: int size>;
+    
+        if index >= $stack3 goto label1;
+        $stack4 = this.<org.jfree.chart.util.AbstractObjectList: java.lang.Object[] objects>;
+        result = $stack4[index];
+    
+      label1:
+        return result;
+    }
+
+    // ---- method: <org.jfree.chart.util.AbstractObjectList: int hashCode()> ----
+    {
+        int $stack1;
+        org.jfree.chart.util.AbstractObjectList this;
+    
+    
+        this := @this: org.jfree.chart.util.AbstractObjectList;
+        $stack1 = specialinvoke this.<java.lang.Object: int hashCode()>();
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.util.AbstractObjectList: void readObject(java.io.ObjectInputStream)> ----
+    {
+        int $stack5, count, i, index;
+        java.io.ObjectInputStream stream;
+        java.lang.Object $stack7;
+        java.lang.Object[] $stack6;
+        org.jfree.chart.util.AbstractObjectList this;
+    
+    
+        this := @this: org.jfree.chart.util.AbstractObjectList;
+        stream := @parameter0: java.io.ObjectInputStream;
+        virtualinvoke stream.<java.io.ObjectInputStream: void defaultReadObject()>();
+        $stack5 = this.<org.jfree.chart.util.AbstractObjectList: int size>;
+        $stack6 = newarray (java.lang.Object)[$stack5];
+        this.<org.jfree.chart.util.AbstractObjectList: java.lang.Object[] objects> = $stack6;
+        count = virtualinvoke stream.<java.io.ObjectInputStream: int readInt()>();
+        i = 0;
+    
+      label1:
+        if i >= count goto label3;
+        index = virtualinvoke stream.<java.io.ObjectInputStream: int readInt()>();
+    
+        if index == -1 goto label2;
+        $stack7 = virtualinvoke stream.<java.io.ObjectInputStream: java.lang.Object readObject()>();
+        virtualinvoke this.<org.jfree.chart.util.AbstractObjectList: void set(int,java.lang.Object)>(index, $stack7);
+    
+      label2:
+        i = i + 1;
+    
+        goto label1;
+    
+      label3:
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.util.AbstractObjectList: void clear()> ----
+    {
+        java.lang.Object[] $stack1;
+        org.jfree.chart.util.AbstractObjectList this;
+    
+    
+        this := @this: org.jfree.chart.util.AbstractObjectList;
+        $stack1 = this.<org.jfree.chart.util.AbstractObjectList: java.lang.Object[] objects>;
+        staticinvoke <java.util.Arrays: void fill(java.lang.Object[],java.lang.Object)>($stack1, null);
+        this.<org.jfree.chart.util.AbstractObjectList: int size> = 0;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.util.AbstractObjectList: void writeObject(java.io.ObjectOutputStream)> ----
+    {
+        boolean $stack5;
+        int count, i;
+        java.io.ObjectOutputStream stream;
+        java.lang.Object object;
+        org.jfree.chart.util.AbstractObjectList this;
+    
+    
+        this := @this: org.jfree.chart.util.AbstractObjectList;
+        stream := @parameter0: java.io.ObjectOutputStream;
+        virtualinvoke stream.<java.io.ObjectOutputStream: void defaultWriteObject()>();
+        count = virtualinvoke this.<org.jfree.chart.util.AbstractObjectList: int size()>();
+        virtualinvoke stream.<java.io.ObjectOutputStream: void writeInt(int)>(count);
+        i = 0;
+    
+      label1:
+        if i >= count goto label4;
+        object = virtualinvoke this.<org.jfree.chart.util.AbstractObjectList: java.lang.Object get(int)>(i);
+    
+        if object == null goto label2;
+        $stack5 = object instanceof java.io.Serializable;
+    
+        if $stack5 == 0 goto label2;
+        virtualinvoke stream.<java.io.ObjectOutputStream: void writeInt(int)>(i);
+        virtualinvoke stream.<java.io.ObjectOutputStream: void writeObject(java.lang.Object)>(object);
+    
+        goto label3;
+    
+      label2:
+        virtualinvoke stream.<java.io.ObjectOutputStream: void writeInt(int)>(-1);
+    
+      label3:
+        i = i + 1;
+    
+        goto label1;
+    
+      label4:
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.util.AbstractObjectList: void <init>(int)> ----
+    {
+        int initialCapacity;
+        org.jfree.chart.util.AbstractObjectList this;
+    
+    
+        this := @this: org.jfree.chart.util.AbstractObjectList;
+        initialCapacity := @parameter0: int;
+        specialinvoke this.<org.jfree.chart.util.AbstractObjectList: void <init>(int,int)>(initialCapacity, initialCapacity);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.util.AbstractObjectList: java.lang.Object clone()> ----
+    {
+        int $stack5, $stack8;
+        java.lang.Object $stack2;
+        java.lang.Object[] $stack10, $stack3, $stack4, $stack6, $stack7, $stack9;
+        org.jfree.chart.util.AbstractObjectList clone, this;
+    
+    
+        this := @this: org.jfree.chart.util.AbstractObjectList;
+        $stack2 = specialinvoke this.<java.lang.Object: java.lang.Object clone()>();
+        clone = (org.jfree.chart.util.AbstractObjectList) $stack2;
+        $stack3 = this.<org.jfree.chart.util.AbstractObjectList: java.lang.Object[] objects>;
+    
+        if $stack3 == null goto label1;
+        $stack4 = this.<org.jfree.chart.util.AbstractObjectList: java.lang.Object[] objects>;
+        $stack5 = lengthof $stack4;
+        $stack6 = newarray (java.lang.Object)[$stack5];
+        clone.<org.jfree.chart.util.AbstractObjectList: java.lang.Object[] objects> = $stack6;
+        $stack10 = this.<org.jfree.chart.util.AbstractObjectList: java.lang.Object[] objects>;
+        $stack9 = clone.<org.jfree.chart.util.AbstractObjectList: java.lang.Object[] objects>;
+        $stack7 = this.<org.jfree.chart.util.AbstractObjectList: java.lang.Object[] objects>;
+        $stack8 = lengthof $stack7;
+        staticinvoke <java.lang.System: void arraycopy(java.lang.Object,int,java.lang.Object,int,int)>($stack10, 0, $stack9, 0, $stack8);
+    
+      label1:
+        return clone;
+    }
+
+    // ---- method: <org.jfree.chart.util.AbstractObjectList: int indexOf(java.lang.Object)> ----
+    {
+        int $stack3, index;
+        java.lang.Object $stack5, object;
+        java.lang.Object[] $stack4;
+        org.jfree.chart.util.AbstractObjectList this;
+    
+    
+        this := @this: org.jfree.chart.util.AbstractObjectList;
+        object := @parameter0: java.lang.Object;
+        index = 0;
+    
+      label1:
+        $stack3 = this.<org.jfree.chart.util.AbstractObjectList: int size>;
+    
+        if index >= $stack3 goto label3;
+        $stack4 = this.<org.jfree.chart.util.AbstractObjectList: java.lang.Object[] objects>;
+        $stack5 = $stack4[index];
+    
+        if $stack5 != object goto label2;
+    
+        return index;
+    
+      label2:
+        index = index + 1;
+    
+        goto label1;
+    
+      label3:
+        return -1;
+    }
+
+    // ---- method: <org.jfree.chart.util.AbstractObjectList: void <init>(int,int)> ----
+    {
+        int increment, initialCapacity;
+        java.lang.Object[] $stack3;
+        org.jfree.chart.util.AbstractObjectList this;
+    
+    
+        this := @this: org.jfree.chart.util.AbstractObjectList;
+        initialCapacity := @parameter0: int;
+        increment := @parameter1: int;
+        specialinvoke this.<java.lang.Object: void <init>()>();
+        this.<org.jfree.chart.util.AbstractObjectList: int size> = 0;
+        this.<org.jfree.chart.util.AbstractObjectList: int increment> = 8;
+        $stack3 = newarray (java.lang.Object)[initialCapacity];
+        this.<org.jfree.chart.util.AbstractObjectList: java.lang.Object[] objects> = $stack3;
+        this.<org.jfree.chart.util.AbstractObjectList: int increment> = increment;
+    
+        return;
+    }
+
+}

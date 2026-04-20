@@ -1,0 +1,1596 @@
+// ========================================================================
+// CLASS : org.jfree.chart.plot.PiePlot3D
+// ========================================================================
+
+[PUBLIC, SUPER] class org.jfree.chart.plot.PiePlot3D extends org.jfree.chart.plot.PiePlot implements java.io.Serializable {
+
+    // ---- method: <org.jfree.chart.plot.PiePlot3D: void <init>()> ----
+    {
+        org.jfree.chart.plot.PiePlot3D this;
+    
+    
+        this := @this: org.jfree.chart.plot.PiePlot3D;
+        specialinvoke this.<org.jfree.chart.plot.PiePlot3D: void <init>(org.jfree.data.general.PieDataset)>(null);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.plot.PiePlot3D: void <init>(org.jfree.data.general.PieDataset)> ----
+    {
+        org.jfree.chart.plot.PiePlot3D this;
+        org.jfree.data.general.PieDataset dataset;
+    
+    
+        this := @this: org.jfree.chart.plot.PiePlot3D;
+        dataset := @parameter0: org.jfree.data.general.PieDataset;
+        specialinvoke this.<org.jfree.chart.plot.PiePlot: void <init>(org.jfree.data.general.PieDataset)>(dataset);
+        this.<org.jfree.chart.plot.PiePlot3D: double depthFactor> = 0.2;
+        virtualinvoke this.<org.jfree.chart.plot.PiePlot3D: void setCircular(boolean,boolean)>(0, 0);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.plot.PiePlot3D: boolean equals(java.lang.Object)> ----
+    {
+        boolean $stack3, $stack7;
+        byte $stack6;
+        double $stack4, $stack5;
+        java.lang.Object obj;
+        org.jfree.chart.plot.PiePlot3D that, this;
+    
+    
+        this := @this: org.jfree.chart.plot.PiePlot3D;
+        obj := @parameter0: java.lang.Object;
+    
+        if obj != this goto label1;
+    
+        return 1;
+    
+      label1:
+        $stack3 = obj instanceof org.jfree.chart.plot.PiePlot3D;
+    
+        if $stack3 != 0 goto label2;
+    
+        return 0;
+    
+      label2:
+        that = (org.jfree.chart.plot.PiePlot3D) obj;
+        $stack4 = this.<org.jfree.chart.plot.PiePlot3D: double depthFactor>;
+        $stack5 = that.<org.jfree.chart.plot.PiePlot3D: double depthFactor>;
+        $stack6 = $stack4 cmpl $stack5;
+    
+        if $stack6 == 0 goto label3;
+    
+        return 0;
+    
+      label3:
+        $stack7 = specialinvoke this.<org.jfree.chart.plot.PiePlot: boolean equals(java.lang.Object)>(obj);
+    
+        return $stack7;
+    }
+
+    // ---- method: <org.jfree.chart.plot.PiePlot3D: boolean isAngleAtFront(double)> ----
+    {
+        boolean $stack6;
+        byte $stack5;
+        double $stack3, $stack4, angle;
+        org.jfree.chart.plot.PiePlot3D this;
+    
+    
+        this := @this: org.jfree.chart.plot.PiePlot3D;
+        angle := @parameter0: double;
+        $stack3 = staticinvoke <java.lang.Math: double toRadians(double)>(angle);
+        $stack4 = staticinvoke <java.lang.Math: double sin(double)>($stack3);
+        $stack5 = $stack4 cmpg 0.0;
+    
+        if $stack5 >= 0 goto label1;
+        $stack6 = 1;
+    
+        goto label2;
+    
+      label1:
+        $stack6 = 0;
+    
+      label2:
+        return $stack6;
+    }
+
+    // ---- method: <org.jfree.chart.plot.PiePlot3D: double getDepthFactor()> ----
+    {
+        double $stack1;
+        org.jfree.chart.plot.PiePlot3D this;
+    
+    
+        this := @this: org.jfree.chart.plot.PiePlot3D;
+        $stack1 = this.<org.jfree.chart.plot.PiePlot3D: double depthFactor>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.plot.PiePlot3D: void drawSide(java.awt.Graphics2D,java.awt.geom.Rectangle2D,java.awt.geom.Arc2D,java.awt.geom.Area,java.awt.geom.Area,java.awt.Paint,java.awt.Paint,java.awt.Stroke,boolean,boolean)> ----
+    {
+        boolean $stack125, $stack126, $stack178, $stack21, $stack22, $stack73, drawBack, drawFront;
+        byte $stack147, $stack19, $stack197, $stack20, $stack41, $stack94;
+        double $stack100, $stack101, $stack102, $stack106, $stack107, $stack108, $stack109, $stack110, $stack111, $stack117, $stack118, $stack119, $stack120, $stack121, $stack122, $stack129, $stack130, $stack131, $stack132, $stack133, $stack134, $stack139, $stack140, $stack141, $stack142, $stack143, $stack144, $stack150, $stack151, $stack152, $stack153, $stack154, $stack155, $stack159, $stack160, $stack161, $stack162, $stack163, $stack164, $stack170, $stack171, $stack172, $stack173, $stack174, $stack175, $stack180, $stack181, $stack182, $stack183, $stack184, $stack185, $stack189, $stack190, $stack191, $stack192, $stack193, $stack194, $stack199, $stack200, $stack201, $stack202, $stack203, $stack204, $stack209, $stack210, $stack211, $stack212, $stack213, $stack214, $stack220, $stack221, $stack222, $stack223, $stack224, $stack225, $stack24, $stack25, $stack26, $stack27, $stack28, $stack29, $stack33, $stack34, $stack35, $stack36, $stack37, $stack38, $stack44, $stack45, $stack46, $stack47, $stack48, $stack49, $stack54, $stack55, $stack56, $stack57, $stack58, $stack59, $stack65, $stack66, $stack67, $stack68, $stack69, $stack70, $stack76, $stack77, $stack78, $stack79, $stack80, $stack81, $stack86, $stack87, $stack88, $stack89, $stack90, $stack91, $stack97, $stack98, $stack99, end, extent, start;
+        java.awt.Graphics2D g2;
+        java.awt.Paint outlinePaint, paint;
+        java.awt.Shape #l10, #l101, #l102, #l103, #l104, #l105, #l106, #l107, #l109, #l11, #l117, #l119, #l121, #l122, #l123, #l124, #l125, #l129, #l130, #l132, #l135, #l136, #l137, #l138, #l14, #l145, #l147, #l15, #l16, #l20, #l22, #l24, #l27, #l30, #l31, #l34, #l35, #l36, #l37, #l38, #l39, #l41, #l43, #l46, #l47, #l48, #l50, #l51, #l53, #l54, #l56, #l60, #l61, #l62, #l64, #l66, #l70, #l78, #l79, #l84, #l85, #l87, #l88, #l89, #l90, #l93, #l95, #l99;
+        java.awt.Stroke outlineStroke;
+        java.awt.geom.Arc2D arc;
+        java.awt.geom.Area #l1, #l100, #l111, #l112, #l113, #l114, #l115, #l116, #l12, #l126, #l127, #l128, #l13, #l133, #l134, #l139, #l140, #l141, #l142, #l143, #l144, #l146, #l17, #l18, #l19, #l2, #l21, #l23, #l26, #l28, #l29, #l32, #l33, #l4, #l40, #l42, #l45, #l49, #l5, #l52, #l55, #l57, #l58, #l63, #l65, #l67, #l68, #l69, #l7, #l73, #l74, #l75, #l76, #l77, #l8, #l81, #l82, #l83, #l94, #l98, side#0, side#1, side#10, side#11, side#12, side#13, side#14, side#15, side#2, side#3, side#4, side#5, side#6, side#7, side#8, side#9, side2#0, side2#1, side2#2, side2#3;
+        java.awt.geom.Point2D $stack105, $stack114, $stack115, $stack116, $stack127, $stack128, $stack137, $stack138, $stack148, $stack149, $stack158, $stack167, $stack168, $stack169, $stack179, $stack188, $stack198, $stack207, $stack208, $stack217, $stack218, $stack219, $stack23, $stack32, $stack42, $stack43, $stack52, $stack53, $stack62, $stack63, $stack64, $stack74, $stack75, $stack84, $stack85, $stack95, $stack96;
+        java.awt.geom.Rectangle2D plotArea;
+        java.awt.geom.Rectangle2D$Double #l0, #l108, #l110, #l118, #l120, #l131, #l25, #l3, #l44, #l59, #l6, #l71, #l72, #l80, #l86, #l9, #l91, #l92, #l96, #l97;
+        java.lang.Object $stack103, $stack104, $stack112, $stack113, $stack123, $stack124, $stack135, $stack136, $stack145, $stack146, $stack156, $stack157, $stack165, $stack166, $stack176, $stack177, $stack186, $stack187, $stack195, $stack196, $stack205, $stack206, $stack215, $stack216, $stack226, $stack227, $stack30, $stack31, $stack39, $stack40, $stack50, $stack51, $stack60, $stack61, $stack71, $stack72, $stack82, $stack83, $stack92, $stack93, back, front;
+        org.jfree.chart.plot.PiePlot3D this;
+    
+    
+        this := @this: org.jfree.chart.plot.PiePlot3D;
+        g2 := @parameter0: java.awt.Graphics2D;
+        plotArea := @parameter1: java.awt.geom.Rectangle2D;
+        arc := @parameter2: java.awt.geom.Arc2D;
+        front := @parameter3: java.awt.geom.Area;
+        back := @parameter4: java.awt.geom.Area;
+        paint := @parameter5: java.awt.Paint;
+        outlinePaint := @parameter6: java.awt.Paint;
+        outlineStroke := @parameter7: java.awt.Stroke;
+        drawFront := @parameter8: boolean;
+        drawBack := @parameter9: boolean;
+        start = virtualinvoke arc.<java.awt.geom.Arc2D: double getAngleStart()>();
+        extent = virtualinvoke arc.<java.awt.geom.Arc2D: double getAngleExtent()>();
+        end = start + extent;
+        virtualinvoke g2.<java.awt.Graphics2D: void setStroke(java.awt.Stroke)>(outlineStroke);
+        $stack19 = extent cmpg 0.0;
+    
+        if $stack19 >= 0 goto label16;
+        $stack125 = specialinvoke this.<org.jfree.chart.plot.PiePlot3D: boolean isAngleAtFront(double)>(start);
+    
+        if $stack125 == 0 goto label08;
+        $stack178 = specialinvoke this.<org.jfree.chart.plot.PiePlot3D: boolean isAngleAtBack(double)>(end);
+    
+        if $stack178 != 0 goto label06;
+        $stack197 = extent cmpl -180.0;
+    
+        if $stack197 <= 0 goto label01;
+    
+        if drawFront == 0 goto label32;
+        $stack227 = new java.awt.geom.Area;
+        $stack226 = new java.awt.geom.Rectangle2D$Double;
+        $stack217 = virtualinvoke arc.<java.awt.geom.Arc2D: java.awt.geom.Point2D getEndPoint()>();
+        $stack225 = virtualinvoke $stack217.<java.awt.geom.Point2D: double getX()>();
+        $stack224 = virtualinvoke plotArea.<java.awt.geom.Rectangle2D: double getY()>();
+        $stack218 = virtualinvoke arc.<java.awt.geom.Arc2D: java.awt.geom.Point2D getStartPoint()>();
+        $stack220 = virtualinvoke $stack218.<java.awt.geom.Point2D: double getX()>();
+        $stack219 = virtualinvoke arc.<java.awt.geom.Arc2D: java.awt.geom.Point2D getEndPoint()>();
+        $stack221 = virtualinvoke $stack219.<java.awt.geom.Point2D: double getX()>();
+        $stack223 = $stack220 - $stack221;
+        $stack222 = virtualinvoke plotArea.<java.awt.geom.Rectangle2D: double getHeight()>();
+        #l9 = (java.awt.geom.Rectangle2D$Double) $stack226;
+        specialinvoke #l9.<java.awt.geom.Rectangle2D$Double: void <init>(double,double,double,double)>($stack225, $stack224, $stack223, $stack222);
+        #l77 = (java.awt.geom.Area) $stack227;
+        #l78 = (java.awt.Shape) $stack226;
+        specialinvoke #l77.<java.awt.geom.Area: void <init>(java.awt.Shape)>(#l78);
+        side#0 = (java.awt.geom.Area) $stack227;
+        #l112 = (java.awt.geom.Area) front;
+        #l111 = (java.awt.geom.Area) $stack227;
+        virtualinvoke #l111.<java.awt.geom.Area: void intersect(java.awt.geom.Area)>(#l112);
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>(paint);
+        #l16 = (java.awt.Shape) $stack227;
+        virtualinvoke g2.<java.awt.Graphics2D: void fill(java.awt.Shape)>(#l16);
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>(outlinePaint);
+        #l125 = (java.awt.Shape) $stack227;
+        virtualinvoke g2.<java.awt.Graphics2D: void draw(java.awt.Shape)>(#l125);
+    
+        goto label32;
+    
+      label01:
+        $stack206 = new java.awt.geom.Area;
+        $stack205 = new java.awt.geom.Rectangle2D$Double;
+        $stack204 = virtualinvoke plotArea.<java.awt.geom.Rectangle2D: double getX()>();
+        $stack203 = virtualinvoke plotArea.<java.awt.geom.Rectangle2D: double getY()>();
+        $stack198 = virtualinvoke arc.<java.awt.geom.Arc2D: java.awt.geom.Point2D getStartPoint()>();
+        $stack199 = virtualinvoke $stack198.<java.awt.geom.Point2D: double getX()>();
+        $stack200 = virtualinvoke plotArea.<java.awt.geom.Rectangle2D: double getX()>();
+        $stack202 = $stack199 - $stack200;
+        $stack201 = virtualinvoke plotArea.<java.awt.geom.Rectangle2D: double getHeight()>();
+        #l80 = (java.awt.geom.Rectangle2D$Double) $stack205;
+        specialinvoke #l80.<java.awt.geom.Rectangle2D$Double: void <init>(double,double,double,double)>($stack204, $stack203, $stack202, $stack201);
+        #l66 = (java.awt.Shape) $stack205;
+        #l65 = (java.awt.geom.Area) $stack206;
+        specialinvoke #l65.<java.awt.geom.Area: void <init>(java.awt.Shape)>(#l66);
+        side#1 = (java.awt.geom.Area) $stack206;
+        #l5 = (java.awt.geom.Area) front;
+        #l4 = (java.awt.geom.Area) $stack206;
+        virtualinvoke #l4.<java.awt.geom.Area: void intersect(java.awt.geom.Area)>(#l5);
+        $stack216 = new java.awt.geom.Area;
+        $stack215 = new java.awt.geom.Rectangle2D$Double;
+        $stack207 = virtualinvoke arc.<java.awt.geom.Arc2D: java.awt.geom.Point2D getEndPoint()>();
+        $stack214 = virtualinvoke $stack207.<java.awt.geom.Point2D: double getX()>();
+        $stack213 = virtualinvoke plotArea.<java.awt.geom.Rectangle2D: double getY()>();
+        $stack209 = virtualinvoke plotArea.<java.awt.geom.Rectangle2D: double getMaxX()>();
+        $stack208 = virtualinvoke arc.<java.awt.geom.Arc2D: java.awt.geom.Point2D getEndPoint()>();
+        $stack210 = virtualinvoke $stack208.<java.awt.geom.Point2D: double getX()>();
+        $stack212 = $stack209 - $stack210;
+        $stack211 = virtualinvoke plotArea.<java.awt.geom.Rectangle2D: double getHeight()>();
+        #l59 = (java.awt.geom.Rectangle2D$Double) $stack215;
+        specialinvoke #l59.<java.awt.geom.Rectangle2D$Double: void <init>(double,double,double,double)>($stack214, $stack213, $stack212, $stack211);
+        #l83 = (java.awt.geom.Area) $stack216;
+        #l84 = (java.awt.Shape) $stack215;
+        specialinvoke #l83.<java.awt.geom.Area: void <init>(java.awt.Shape)>(#l84);
+        side2#0 = (java.awt.geom.Area) $stack216;
+        #l2 = (java.awt.geom.Area) front;
+        #l1 = (java.awt.geom.Area) $stack216;
+        virtualinvoke #l1.<java.awt.geom.Area: void intersect(java.awt.geom.Area)>(#l2);
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>(paint);
+    
+        if drawFront == 0 goto label02;
+        #l61 = (java.awt.Shape) $stack206;
+        virtualinvoke g2.<java.awt.Graphics2D: void fill(java.awt.Shape)>(#l61);
+        #l135 = (java.awt.Shape) $stack216;
+        virtualinvoke g2.<java.awt.Graphics2D: void fill(java.awt.Shape)>(#l135);
+    
+      label02:
+        if drawBack == 0 goto label03;
+        #l51 = (java.awt.Shape) back;
+        virtualinvoke g2.<java.awt.Graphics2D: void fill(java.awt.Shape)>(#l51);
+    
+      label03:
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>(outlinePaint);
+    
+        if drawFront == 0 goto label04;
+        #l121 = (java.awt.Shape) $stack206;
+        virtualinvoke g2.<java.awt.Graphics2D: void draw(java.awt.Shape)>(#l121);
+        #l38 = (java.awt.Shape) $stack216;
+        virtualinvoke g2.<java.awt.Graphics2D: void draw(java.awt.Shape)>(#l38);
+    
+      label04:
+        if drawBack == 0 goto label05;
+        #l117 = (java.awt.Shape) back;
+        virtualinvoke g2.<java.awt.Graphics2D: void draw(java.awt.Shape)>(#l117);
+    
+      label05:
+        goto label32;
+    
+      label06:
+        if drawBack == 0 goto label07;
+        $stack196 = new java.awt.geom.Area;
+        $stack195 = new java.awt.geom.Rectangle2D$Double;
+        $stack194 = virtualinvoke plotArea.<java.awt.geom.Rectangle2D: double getX()>();
+        $stack193 = virtualinvoke plotArea.<java.awt.geom.Rectangle2D: double getY()>();
+        $stack188 = virtualinvoke arc.<java.awt.geom.Arc2D: java.awt.geom.Point2D getEndPoint()>();
+        $stack189 = virtualinvoke $stack188.<java.awt.geom.Point2D: double getX()>();
+        $stack190 = virtualinvoke plotArea.<java.awt.geom.Rectangle2D: double getX()>();
+        $stack192 = $stack189 - $stack190;
+        $stack191 = virtualinvoke plotArea.<java.awt.geom.Rectangle2D: double getHeight()>();
+        #l86 = (java.awt.geom.Rectangle2D$Double) $stack195;
+        specialinvoke #l86.<java.awt.geom.Rectangle2D$Double: void <init>(double,double,double,double)>($stack194, $stack193, $stack192, $stack191);
+        #l23 = (java.awt.geom.Area) $stack196;
+        #l24 = (java.awt.Shape) $stack195;
+        specialinvoke #l23.<java.awt.geom.Area: void <init>(java.awt.Shape)>(#l24);
+        side#2 = (java.awt.geom.Area) $stack196;
+        #l17 = (java.awt.geom.Area) $stack196;
+        #l18 = (java.awt.geom.Area) back;
+        virtualinvoke #l17.<java.awt.geom.Area: void intersect(java.awt.geom.Area)>(#l18);
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>(paint);
+        #l109 = (java.awt.Shape) $stack196;
+        virtualinvoke g2.<java.awt.Graphics2D: void fill(java.awt.Shape)>(#l109);
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>(outlinePaint);
+        #l122 = (java.awt.Shape) $stack196;
+        virtualinvoke g2.<java.awt.Graphics2D: void draw(java.awt.Shape)>(#l122);
+    
+      label07:
+        if drawFront == 0 goto label32;
+        $stack187 = new java.awt.geom.Area;
+        $stack186 = new java.awt.geom.Rectangle2D$Double;
+        $stack185 = virtualinvoke plotArea.<java.awt.geom.Rectangle2D: double getX()>();
+        $stack184 = virtualinvoke plotArea.<java.awt.geom.Rectangle2D: double getY()>();
+        $stack179 = virtualinvoke arc.<java.awt.geom.Arc2D: java.awt.geom.Point2D getStartPoint()>();
+        $stack180 = virtualinvoke $stack179.<java.awt.geom.Point2D: double getX()>();
+        $stack181 = virtualinvoke plotArea.<java.awt.geom.Rectangle2D: double getX()>();
+        $stack183 = $stack180 - $stack181;
+        $stack182 = virtualinvoke plotArea.<java.awt.geom.Rectangle2D: double getHeight()>();
+        #l97 = (java.awt.geom.Rectangle2D$Double) $stack186;
+        specialinvoke #l97.<java.awt.geom.Rectangle2D$Double: void <init>(double,double,double,double)>($stack185, $stack184, $stack183, $stack182);
+        #l53 = (java.awt.Shape) $stack186;
+        #l52 = (java.awt.geom.Area) $stack187;
+        specialinvoke #l52.<java.awt.geom.Area: void <init>(java.awt.Shape)>(#l53);
+        side#3 = (java.awt.geom.Area) $stack187;
+        #l32 = (java.awt.geom.Area) $stack187;
+        #l33 = (java.awt.geom.Area) front;
+        virtualinvoke #l32.<java.awt.geom.Area: void intersect(java.awt.geom.Area)>(#l33);
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>(paint);
+        #l30 = (java.awt.Shape) $stack187;
+        virtualinvoke g2.<java.awt.Graphics2D: void fill(java.awt.Shape)>(#l30);
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>(outlinePaint);
+        #l88 = (java.awt.Shape) $stack187;
+        virtualinvoke g2.<java.awt.Graphics2D: void draw(java.awt.Shape)>(#l88);
+    
+        goto label32;
+    
+      label08:
+        $stack126 = specialinvoke this.<org.jfree.chart.plot.PiePlot3D: boolean isAngleAtFront(double)>(end);
+    
+        if $stack126 != 0 goto label14;
+        $stack147 = extent cmpl -180.0;
+    
+        if $stack147 <= 0 goto label09;
+    
+        if drawBack == 0 goto label32;
+        $stack177 = new java.awt.geom.Area;
+        $stack176 = new java.awt.geom.Rectangle2D$Double;
+        $stack167 = virtualinvoke arc.<java.awt.geom.Arc2D: java.awt.geom.Point2D getStartPoint()>();
+        $stack175 = virtualinvoke $stack167.<java.awt.geom.Point2D: double getX()>();
+        $stack174 = virtualinvoke plotArea.<java.awt.geom.Rectangle2D: double getY()>();
+        $stack168 = virtualinvoke arc.<java.awt.geom.Arc2D: java.awt.geom.Point2D getEndPoint()>();
+        $stack170 = virtualinvoke $stack168.<java.awt.geom.Point2D: double getX()>();
+        $stack169 = virtualinvoke arc.<java.awt.geom.Arc2D: java.awt.geom.Point2D getStartPoint()>();
+        $stack171 = virtualinvoke $stack169.<java.awt.geom.Point2D: double getX()>();
+        $stack173 = $stack170 - $stack171;
+        $stack172 = virtualinvoke plotArea.<java.awt.geom.Rectangle2D: double getHeight()>();
+        #l118 = (java.awt.geom.Rectangle2D$Double) $stack176;
+        specialinvoke #l118.<java.awt.geom.Rectangle2D$Double: void <init>(double,double,double,double)>($stack175, $stack174, $stack173, $stack172);
+        #l146 = (java.awt.geom.Area) $stack177;
+        #l147 = (java.awt.Shape) $stack176;
+        specialinvoke #l146.<java.awt.geom.Area: void <init>(java.awt.Shape)>(#l147);
+        side#4 = (java.awt.geom.Area) $stack177;
+        #l7 = (java.awt.geom.Area) $stack177;
+        #l8 = (java.awt.geom.Area) back;
+        virtualinvoke #l7.<java.awt.geom.Area: void intersect(java.awt.geom.Area)>(#l8);
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>(paint);
+        #l37 = (java.awt.Shape) $stack177;
+        virtualinvoke g2.<java.awt.Graphics2D: void fill(java.awt.Shape)>(#l37);
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>(outlinePaint);
+        #l102 = (java.awt.Shape) $stack177;
+        virtualinvoke g2.<java.awt.Graphics2D: void draw(java.awt.Shape)>(#l102);
+    
+        goto label32;
+    
+      label09:
+        $stack157 = new java.awt.geom.Area;
+        $stack156 = new java.awt.geom.Rectangle2D$Double;
+        $stack148 = virtualinvoke arc.<java.awt.geom.Arc2D: java.awt.geom.Point2D getStartPoint()>();
+        $stack155 = virtualinvoke $stack148.<java.awt.geom.Point2D: double getX()>();
+        $stack154 = virtualinvoke plotArea.<java.awt.geom.Rectangle2D: double getY()>();
+        $stack150 = virtualinvoke plotArea.<java.awt.geom.Rectangle2D: double getMaxX()>();
+        $stack149 = virtualinvoke arc.<java.awt.geom.Arc2D: java.awt.geom.Point2D getStartPoint()>();
+        $stack151 = virtualinvoke $stack149.<java.awt.geom.Point2D: double getX()>();
+        $stack153 = $stack150 - $stack151;
+        $stack152 = virtualinvoke plotArea.<java.awt.geom.Rectangle2D: double getHeight()>();
+        #l44 = (java.awt.geom.Rectangle2D$Double) $stack156;
+        specialinvoke #l44.<java.awt.geom.Rectangle2D$Double: void <init>(double,double,double,double)>($stack155, $stack154, $stack153, $stack152);
+        #l41 = (java.awt.Shape) $stack156;
+        #l40 = (java.awt.geom.Area) $stack157;
+        specialinvoke #l40.<java.awt.geom.Area: void <init>(java.awt.Shape)>(#l41);
+        side#5 = (java.awt.geom.Area) $stack157;
+        #l144 = (java.awt.geom.Area) back;
+        #l143 = (java.awt.geom.Area) $stack157;
+        virtualinvoke #l143.<java.awt.geom.Area: void intersect(java.awt.geom.Area)>(#l144);
+        $stack166 = new java.awt.geom.Area;
+        $stack165 = new java.awt.geom.Rectangle2D$Double;
+        $stack164 = virtualinvoke plotArea.<java.awt.geom.Rectangle2D: double getX()>();
+        $stack163 = virtualinvoke plotArea.<java.awt.geom.Rectangle2D: double getY()>();
+        $stack158 = virtualinvoke arc.<java.awt.geom.Arc2D: java.awt.geom.Point2D getEndPoint()>();
+        $stack159 = virtualinvoke $stack158.<java.awt.geom.Point2D: double getX()>();
+        $stack160 = virtualinvoke plotArea.<java.awt.geom.Rectangle2D: double getX()>();
+        $stack162 = $stack159 - $stack160;
+        $stack161 = virtualinvoke plotArea.<java.awt.geom.Rectangle2D: double getHeight()>();
+        #l6 = (java.awt.geom.Rectangle2D$Double) $stack165;
+        specialinvoke #l6.<java.awt.geom.Rectangle2D$Double: void <init>(double,double,double,double)>($stack164, $stack163, $stack162, $stack161);
+        #l56 = (java.awt.Shape) $stack165;
+        #l55 = (java.awt.geom.Area) $stack166;
+        specialinvoke #l55.<java.awt.geom.Area: void <init>(java.awt.Shape)>(#l56);
+        side2#1 = (java.awt.geom.Area) $stack166;
+        #l81 = (java.awt.geom.Area) $stack166;
+        #l82 = (java.awt.geom.Area) back;
+        virtualinvoke #l81.<java.awt.geom.Area: void intersect(java.awt.geom.Area)>(#l82);
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>(paint);
+    
+        if drawBack == 0 goto label10;
+        #l132 = (java.awt.Shape) $stack157;
+        virtualinvoke g2.<java.awt.Graphics2D: void fill(java.awt.Shape)>(#l132);
+        #l104 = (java.awt.Shape) $stack166;
+        virtualinvoke g2.<java.awt.Graphics2D: void fill(java.awt.Shape)>(#l104);
+    
+      label10:
+        if drawFront == 0 goto label11;
+        #l87 = (java.awt.Shape) front;
+        virtualinvoke g2.<java.awt.Graphics2D: void fill(java.awt.Shape)>(#l87);
+    
+      label11:
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>(outlinePaint);
+    
+        if drawBack == 0 goto label12;
+        #l31 = (java.awt.Shape) $stack157;
+        virtualinvoke g2.<java.awt.Graphics2D: void draw(java.awt.Shape)>(#l31);
+        #l124 = (java.awt.Shape) $stack166;
+        virtualinvoke g2.<java.awt.Graphics2D: void draw(java.awt.Shape)>(#l124);
+    
+      label12:
+        if drawFront == 0 goto label13;
+        #l62 = (java.awt.Shape) front;
+        virtualinvoke g2.<java.awt.Graphics2D: void draw(java.awt.Shape)>(#l62);
+    
+      label13:
+        goto label32;
+    
+      label14:
+        if drawBack == 0 goto label15;
+        $stack146 = new java.awt.geom.Area;
+        $stack145 = new java.awt.geom.Rectangle2D$Double;
+        $stack137 = virtualinvoke arc.<java.awt.geom.Arc2D: java.awt.geom.Point2D getStartPoint()>();
+        $stack144 = virtualinvoke $stack137.<java.awt.geom.Point2D: double getX()>();
+        $stack143 = virtualinvoke plotArea.<java.awt.geom.Rectangle2D: double getY()>();
+        $stack139 = virtualinvoke plotArea.<java.awt.geom.Rectangle2D: double getMaxX()>();
+        $stack138 = virtualinvoke arc.<java.awt.geom.Arc2D: java.awt.geom.Point2D getStartPoint()>();
+        $stack140 = virtualinvoke $stack138.<java.awt.geom.Point2D: double getX()>();
+        $stack142 = $stack139 - $stack140;
+        $stack141 = virtualinvoke plotArea.<java.awt.geom.Rectangle2D: double getHeight()>();
+        #l108 = (java.awt.geom.Rectangle2D$Double) $stack145;
+        specialinvoke #l108.<java.awt.geom.Rectangle2D$Double: void <init>(double,double,double,double)>($stack144, $stack143, $stack142, $stack141);
+        #l69 = (java.awt.geom.Area) $stack146;
+        #l70 = (java.awt.Shape) $stack145;
+        specialinvoke #l69.<java.awt.geom.Area: void <init>(java.awt.Shape)>(#l70);
+        side#6 = (java.awt.geom.Area) $stack146;
+        #l12 = (java.awt.geom.Area) $stack146;
+        #l13 = (java.awt.geom.Area) back;
+        virtualinvoke #l12.<java.awt.geom.Area: void intersect(java.awt.geom.Area)>(#l13);
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>(paint);
+        #l119 = (java.awt.Shape) $stack146;
+        virtualinvoke g2.<java.awt.Graphics2D: void fill(java.awt.Shape)>(#l119);
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>(outlinePaint);
+        #l11 = (java.awt.Shape) $stack146;
+        virtualinvoke g2.<java.awt.Graphics2D: void draw(java.awt.Shape)>(#l11);
+    
+      label15:
+        if drawFront == 0 goto label32;
+        $stack136 = new java.awt.geom.Area;
+        $stack135 = new java.awt.geom.Rectangle2D$Double;
+        $stack127 = virtualinvoke arc.<java.awt.geom.Arc2D: java.awt.geom.Point2D getEndPoint()>();
+        $stack134 = virtualinvoke $stack127.<java.awt.geom.Point2D: double getX()>();
+        $stack133 = virtualinvoke plotArea.<java.awt.geom.Rectangle2D: double getY()>();
+        $stack129 = virtualinvoke plotArea.<java.awt.geom.Rectangle2D: double getMaxX()>();
+        $stack128 = virtualinvoke arc.<java.awt.geom.Arc2D: java.awt.geom.Point2D getEndPoint()>();
+        $stack130 = virtualinvoke $stack128.<java.awt.geom.Point2D: double getX()>();
+        $stack132 = $stack129 - $stack130;
+        $stack131 = virtualinvoke plotArea.<java.awt.geom.Rectangle2D: double getHeight()>();
+        #l92 = (java.awt.geom.Rectangle2D$Double) $stack135;
+        specialinvoke #l92.<java.awt.geom.Rectangle2D$Double: void <init>(double,double,double,double)>($stack134, $stack133, $stack132, $stack131);
+        #l27 = (java.awt.Shape) $stack135;
+        #l26 = (java.awt.geom.Area) $stack136;
+        specialinvoke #l26.<java.awt.geom.Area: void <init>(java.awt.Shape)>(#l27);
+        side#7 = (java.awt.geom.Area) $stack136;
+        #l113 = (java.awt.geom.Area) $stack136;
+        #l114 = (java.awt.geom.Area) front;
+        virtualinvoke #l113.<java.awt.geom.Area: void intersect(java.awt.geom.Area)>(#l114);
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>(paint);
+        #l54 = (java.awt.Shape) $stack136;
+        virtualinvoke g2.<java.awt.Graphics2D: void fill(java.awt.Shape)>(#l54);
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>(outlinePaint);
+        #l123 = (java.awt.Shape) $stack136;
+        virtualinvoke g2.<java.awt.Graphics2D: void draw(java.awt.Shape)>(#l123);
+    
+        goto label32;
+    
+      label16:
+        $stack20 = extent cmpl 0.0;
+    
+        if $stack20 <= 0 goto label32;
+        $stack21 = specialinvoke this.<org.jfree.chart.plot.PiePlot3D: boolean isAngleAtFront(double)>(start);
+    
+        if $stack21 == 0 goto label24;
+        $stack73 = specialinvoke this.<org.jfree.chart.plot.PiePlot3D: boolean isAngleAtBack(double)>(end);
+    
+        if $stack73 != 0 goto label22;
+        $stack94 = extent cmpg 180.0;
+    
+        if $stack94 >= 0 goto label17;
+    
+        if drawFront == 0 goto label32;
+        $stack124 = new java.awt.geom.Area;
+        $stack123 = new java.awt.geom.Rectangle2D$Double;
+        $stack114 = virtualinvoke arc.<java.awt.geom.Arc2D: java.awt.geom.Point2D getStartPoint()>();
+        $stack122 = virtualinvoke $stack114.<java.awt.geom.Point2D: double getX()>();
+        $stack121 = virtualinvoke plotArea.<java.awt.geom.Rectangle2D: double getY()>();
+        $stack115 = virtualinvoke arc.<java.awt.geom.Arc2D: java.awt.geom.Point2D getEndPoint()>();
+        $stack117 = virtualinvoke $stack115.<java.awt.geom.Point2D: double getX()>();
+        $stack116 = virtualinvoke arc.<java.awt.geom.Arc2D: java.awt.geom.Point2D getStartPoint()>();
+        $stack118 = virtualinvoke $stack116.<java.awt.geom.Point2D: double getX()>();
+        $stack120 = $stack117 - $stack118;
+        $stack119 = virtualinvoke plotArea.<java.awt.geom.Rectangle2D: double getHeight()>();
+        #l96 = (java.awt.geom.Rectangle2D$Double) $stack123;
+        specialinvoke #l96.<java.awt.geom.Rectangle2D$Double: void <init>(double,double,double,double)>($stack122, $stack121, $stack120, $stack119);
+        #l50 = (java.awt.Shape) $stack123;
+        #l49 = (java.awt.geom.Area) $stack124;
+        specialinvoke #l49.<java.awt.geom.Area: void <init>(java.awt.Shape)>(#l50);
+        side#8 = (java.awt.geom.Area) $stack124;
+        #l68 = (java.awt.geom.Area) front;
+        #l67 = (java.awt.geom.Area) $stack124;
+        virtualinvoke #l67.<java.awt.geom.Area: void intersect(java.awt.geom.Area)>(#l68);
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>(paint);
+        #l79 = (java.awt.Shape) $stack124;
+        virtualinvoke g2.<java.awt.Graphics2D: void fill(java.awt.Shape)>(#l79);
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>(outlinePaint);
+        #l106 = (java.awt.Shape) $stack124;
+        virtualinvoke g2.<java.awt.Graphics2D: void draw(java.awt.Shape)>(#l106);
+    
+        goto label32;
+    
+      label17:
+        $stack104 = new java.awt.geom.Area;
+        $stack103 = new java.awt.geom.Rectangle2D$Double;
+        $stack95 = virtualinvoke arc.<java.awt.geom.Arc2D: java.awt.geom.Point2D getStartPoint()>();
+        $stack102 = virtualinvoke $stack95.<java.awt.geom.Point2D: double getX()>();
+        $stack101 = virtualinvoke plotArea.<java.awt.geom.Rectangle2D: double getY()>();
+        $stack97 = virtualinvoke plotArea.<java.awt.geom.Rectangle2D: double getMaxX()>();
+        $stack96 = virtualinvoke arc.<java.awt.geom.Arc2D: java.awt.geom.Point2D getStartPoint()>();
+        $stack98 = virtualinvoke $stack96.<java.awt.geom.Point2D: double getX()>();
+        $stack100 = $stack97 - $stack98;
+        $stack99 = virtualinvoke plotArea.<java.awt.geom.Rectangle2D: double getHeight()>();
+        #l131 = (java.awt.geom.Rectangle2D$Double) $stack103;
+        specialinvoke #l131.<java.awt.geom.Rectangle2D$Double: void <init>(double,double,double,double)>($stack102, $stack101, $stack100, $stack99);
+        #l95 = (java.awt.Shape) $stack103;
+        #l94 = (java.awt.geom.Area) $stack104;
+        specialinvoke #l94.<java.awt.geom.Area: void <init>(java.awt.Shape)>(#l95);
+        side#9 = (java.awt.geom.Area) $stack104;
+        #l127 = (java.awt.geom.Area) front;
+        #l126 = (java.awt.geom.Area) $stack104;
+        virtualinvoke #l126.<java.awt.geom.Area: void intersect(java.awt.geom.Area)>(#l127);
+        $stack113 = new java.awt.geom.Area;
+        $stack112 = new java.awt.geom.Rectangle2D$Double;
+        $stack111 = virtualinvoke plotArea.<java.awt.geom.Rectangle2D: double getX()>();
+        $stack110 = virtualinvoke plotArea.<java.awt.geom.Rectangle2D: double getY()>();
+        $stack105 = virtualinvoke arc.<java.awt.geom.Arc2D: java.awt.geom.Point2D getEndPoint()>();
+        $stack106 = virtualinvoke $stack105.<java.awt.geom.Point2D: double getX()>();
+        $stack107 = virtualinvoke plotArea.<java.awt.geom.Rectangle2D: double getX()>();
+        $stack109 = $stack106 - $stack107;
+        $stack108 = virtualinvoke plotArea.<java.awt.geom.Rectangle2D: double getHeight()>();
+        #l91 = (java.awt.geom.Rectangle2D$Double) $stack112;
+        specialinvoke #l91.<java.awt.geom.Rectangle2D$Double: void <init>(double,double,double,double)>($stack111, $stack110, $stack109, $stack108);
+        #l129 = (java.awt.Shape) $stack112;
+        #l128 = (java.awt.geom.Area) $stack113;
+        specialinvoke #l128.<java.awt.geom.Area: void <init>(java.awt.Shape)>(#l129);
+        side2#2 = (java.awt.geom.Area) $stack113;
+        #l134 = (java.awt.geom.Area) front;
+        #l133 = (java.awt.geom.Area) $stack113;
+        virtualinvoke #l133.<java.awt.geom.Area: void intersect(java.awt.geom.Area)>(#l134);
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>(paint);
+    
+        if drawFront == 0 goto label18;
+        #l136 = (java.awt.Shape) $stack104;
+        virtualinvoke g2.<java.awt.Graphics2D: void fill(java.awt.Shape)>(#l136);
+        #l145 = (java.awt.Shape) $stack113;
+        virtualinvoke g2.<java.awt.Graphics2D: void fill(java.awt.Shape)>(#l145);
+    
+      label18:
+        if drawBack == 0 goto label19;
+        #l60 = (java.awt.Shape) back;
+        virtualinvoke g2.<java.awt.Graphics2D: void fill(java.awt.Shape)>(#l60);
+    
+      label19:
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>(outlinePaint);
+    
+        if drawFront == 0 goto label20;
+        #l105 = (java.awt.Shape) $stack104;
+        virtualinvoke g2.<java.awt.Graphics2D: void draw(java.awt.Shape)>(#l105);
+        #l35 = (java.awt.Shape) $stack113;
+        virtualinvoke g2.<java.awt.Graphics2D: void draw(java.awt.Shape)>(#l35);
+    
+      label20:
+        if drawBack == 0 goto label21;
+        #l93 = (java.awt.Shape) back;
+        virtualinvoke g2.<java.awt.Graphics2D: void draw(java.awt.Shape)>(#l93);
+    
+      label21:
+        goto label32;
+    
+      label22:
+        if drawBack == 0 goto label23;
+        $stack93 = new java.awt.geom.Area;
+        $stack92 = new java.awt.geom.Rectangle2D$Double;
+        $stack84 = virtualinvoke arc.<java.awt.geom.Arc2D: java.awt.geom.Point2D getEndPoint()>();
+        $stack91 = virtualinvoke $stack84.<java.awt.geom.Point2D: double getX()>();
+        $stack90 = virtualinvoke plotArea.<java.awt.geom.Rectangle2D: double getY()>();
+        $stack86 = virtualinvoke plotArea.<java.awt.geom.Rectangle2D: double getMaxX()>();
+        $stack85 = virtualinvoke arc.<java.awt.geom.Arc2D: java.awt.geom.Point2D getEndPoint()>();
+        $stack87 = virtualinvoke $stack85.<java.awt.geom.Point2D: double getX()>();
+        $stack89 = $stack86 - $stack87;
+        $stack88 = virtualinvoke plotArea.<java.awt.geom.Rectangle2D: double getHeight()>();
+        #l0 = (java.awt.geom.Rectangle2D$Double) $stack92;
+        specialinvoke #l0.<java.awt.geom.Rectangle2D$Double: void <init>(double,double,double,double)>($stack91, $stack90, $stack89, $stack88);
+        #l98 = (java.awt.geom.Area) $stack93;
+        #l99 = (java.awt.Shape) $stack92;
+        specialinvoke #l98.<java.awt.geom.Area: void <init>(java.awt.Shape)>(#l99);
+        side#10 = (java.awt.geom.Area) $stack93;
+        #l29 = (java.awt.geom.Area) back;
+        #l28 = (java.awt.geom.Area) $stack93;
+        virtualinvoke #l28.<java.awt.geom.Area: void intersect(java.awt.geom.Area)>(#l29);
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>(paint);
+        #l90 = (java.awt.Shape) $stack93;
+        virtualinvoke g2.<java.awt.Graphics2D: void fill(java.awt.Shape)>(#l90);
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>(outlinePaint);
+        #l34 = (java.awt.Shape) $stack93;
+        virtualinvoke g2.<java.awt.Graphics2D: void draw(java.awt.Shape)>(#l34);
+    
+      label23:
+        if drawFront == 0 goto label32;
+        $stack83 = new java.awt.geom.Area;
+        $stack82 = new java.awt.geom.Rectangle2D$Double;
+        $stack74 = virtualinvoke arc.<java.awt.geom.Arc2D: java.awt.geom.Point2D getStartPoint()>();
+        $stack81 = virtualinvoke $stack74.<java.awt.geom.Point2D: double getX()>();
+        $stack80 = virtualinvoke plotArea.<java.awt.geom.Rectangle2D: double getY()>();
+        $stack76 = virtualinvoke plotArea.<java.awt.geom.Rectangle2D: double getMaxX()>();
+        $stack75 = virtualinvoke arc.<java.awt.geom.Arc2D: java.awt.geom.Point2D getStartPoint()>();
+        $stack77 = virtualinvoke $stack75.<java.awt.geom.Point2D: double getX()>();
+        $stack79 = $stack76 - $stack77;
+        $stack78 = virtualinvoke plotArea.<java.awt.geom.Rectangle2D: double getHeight()>();
+        #l25 = (java.awt.geom.Rectangle2D$Double) $stack82;
+        specialinvoke #l25.<java.awt.geom.Rectangle2D$Double: void <init>(double,double,double,double)>($stack81, $stack80, $stack79, $stack78);
+        #l63 = (java.awt.geom.Area) $stack83;
+        #l64 = (java.awt.Shape) $stack82;
+        specialinvoke #l63.<java.awt.geom.Area: void <init>(java.awt.Shape)>(#l64);
+        side#11 = (java.awt.geom.Area) $stack83;
+        #l139 = (java.awt.geom.Area) $stack83;
+        #l140 = (java.awt.geom.Area) front;
+        virtualinvoke #l139.<java.awt.geom.Area: void intersect(java.awt.geom.Area)>(#l140);
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>(paint);
+        #l14 = (java.awt.Shape) $stack83;
+        virtualinvoke g2.<java.awt.Graphics2D: void fill(java.awt.Shape)>(#l14);
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>(outlinePaint);
+        #l130 = (java.awt.Shape) $stack83;
+        virtualinvoke g2.<java.awt.Graphics2D: void draw(java.awt.Shape)>(#l130);
+    
+        goto label32;
+    
+      label24:
+        $stack22 = specialinvoke this.<org.jfree.chart.plot.PiePlot3D: boolean isAngleAtFront(double)>(end);
+    
+        if $stack22 != 0 goto label30;
+        $stack41 = extent cmpg 180.0;
+    
+        if $stack41 >= 0 goto label25;
+    
+        if drawBack == 0 goto label32;
+        $stack72 = new java.awt.geom.Area;
+        $stack71 = new java.awt.geom.Rectangle2D$Double;
+        $stack62 = virtualinvoke arc.<java.awt.geom.Arc2D: java.awt.geom.Point2D getEndPoint()>();
+        $stack70 = virtualinvoke $stack62.<java.awt.geom.Point2D: double getX()>();
+        $stack69 = virtualinvoke plotArea.<java.awt.geom.Rectangle2D: double getY()>();
+        $stack63 = virtualinvoke arc.<java.awt.geom.Arc2D: java.awt.geom.Point2D getStartPoint()>();
+        $stack65 = virtualinvoke $stack63.<java.awt.geom.Point2D: double getX()>();
+        $stack64 = virtualinvoke arc.<java.awt.geom.Arc2D: java.awt.geom.Point2D getEndPoint()>();
+        $stack66 = virtualinvoke $stack64.<java.awt.geom.Point2D: double getX()>();
+        $stack68 = $stack65 - $stack66;
+        $stack67 = virtualinvoke plotArea.<java.awt.geom.Rectangle2D: double getHeight()>();
+        #l71 = (java.awt.geom.Rectangle2D$Double) $stack71;
+        specialinvoke #l71.<java.awt.geom.Rectangle2D$Double: void <init>(double,double,double,double)>($stack70, $stack69, $stack68, $stack67);
+        #l101 = (java.awt.Shape) $stack71;
+        #l100 = (java.awt.geom.Area) $stack72;
+        specialinvoke #l100.<java.awt.geom.Area: void <init>(java.awt.Shape)>(#l101);
+        side#12 = (java.awt.geom.Area) $stack72;
+        #l74 = (java.awt.geom.Area) back;
+        #l73 = (java.awt.geom.Area) $stack72;
+        virtualinvoke #l73.<java.awt.geom.Area: void intersect(java.awt.geom.Area)>(#l74);
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>(paint);
+        #l48 = (java.awt.Shape) $stack72;
+        virtualinvoke g2.<java.awt.Graphics2D: void fill(java.awt.Shape)>(#l48);
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>(outlinePaint);
+        #l103 = (java.awt.Shape) $stack72;
+        virtualinvoke g2.<java.awt.Graphics2D: void draw(java.awt.Shape)>(#l103);
+    
+        goto label32;
+    
+      label25:
+        $stack51 = new java.awt.geom.Area;
+        $stack50 = new java.awt.geom.Rectangle2D$Double;
+        $stack42 = virtualinvoke arc.<java.awt.geom.Arc2D: java.awt.geom.Point2D getStartPoint()>();
+        $stack49 = virtualinvoke $stack42.<java.awt.geom.Point2D: double getX()>();
+        $stack48 = virtualinvoke plotArea.<java.awt.geom.Rectangle2D: double getY()>();
+        $stack44 = virtualinvoke plotArea.<java.awt.geom.Rectangle2D: double getX()>();
+        $stack43 = virtualinvoke arc.<java.awt.geom.Arc2D: java.awt.geom.Point2D getStartPoint()>();
+        $stack45 = virtualinvoke $stack43.<java.awt.geom.Point2D: double getX()>();
+        $stack47 = $stack44 - $stack45;
+        $stack46 = virtualinvoke plotArea.<java.awt.geom.Rectangle2D: double getHeight()>();
+        #l72 = (java.awt.geom.Rectangle2D$Double) $stack50;
+        specialinvoke #l72.<java.awt.geom.Rectangle2D$Double: void <init>(double,double,double,double)>($stack49, $stack48, $stack47, $stack46);
+        #l22 = (java.awt.Shape) $stack50;
+        #l21 = (java.awt.geom.Area) $stack51;
+        specialinvoke #l21.<java.awt.geom.Area: void <init>(java.awt.Shape)>(#l22);
+        side#13 = (java.awt.geom.Area) $stack51;
+        #l76 = (java.awt.geom.Area) back;
+        #l75 = (java.awt.geom.Area) $stack51;
+        virtualinvoke #l75.<java.awt.geom.Area: void intersect(java.awt.geom.Area)>(#l76);
+        $stack61 = new java.awt.geom.Area;
+        $stack60 = new java.awt.geom.Rectangle2D$Double;
+        $stack52 = virtualinvoke arc.<java.awt.geom.Arc2D: java.awt.geom.Point2D getEndPoint()>();
+        $stack59 = virtualinvoke $stack52.<java.awt.geom.Point2D: double getX()>();
+        $stack58 = virtualinvoke plotArea.<java.awt.geom.Rectangle2D: double getY()>();
+        $stack54 = virtualinvoke plotArea.<java.awt.geom.Rectangle2D: double getMaxX()>();
+        $stack53 = virtualinvoke arc.<java.awt.geom.Arc2D: java.awt.geom.Point2D getEndPoint()>();
+        $stack55 = virtualinvoke $stack53.<java.awt.geom.Point2D: double getX()>();
+        $stack57 = $stack54 - $stack55;
+        $stack56 = virtualinvoke plotArea.<java.awt.geom.Rectangle2D: double getHeight()>();
+        #l120 = (java.awt.geom.Rectangle2D$Double) $stack60;
+        specialinvoke #l120.<java.awt.geom.Rectangle2D$Double: void <init>(double,double,double,double)>($stack59, $stack58, $stack57, $stack56);
+        #l45 = (java.awt.geom.Area) $stack61;
+        #l46 = (java.awt.Shape) $stack60;
+        specialinvoke #l45.<java.awt.geom.Area: void <init>(java.awt.Shape)>(#l46);
+        side2#3 = (java.awt.geom.Area) $stack61;
+        #l141 = (java.awt.geom.Area) $stack61;
+        #l142 = (java.awt.geom.Area) back;
+        virtualinvoke #l141.<java.awt.geom.Area: void intersect(java.awt.geom.Area)>(#l142);
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>(paint);
+    
+        if drawBack == 0 goto label26;
+        #l137 = (java.awt.Shape) $stack51;
+        virtualinvoke g2.<java.awt.Graphics2D: void fill(java.awt.Shape)>(#l137);
+        #l36 = (java.awt.Shape) $stack61;
+        virtualinvoke g2.<java.awt.Graphics2D: void fill(java.awt.Shape)>(#l36);
+    
+      label26:
+        if drawFront == 0 goto label27;
+        #l107 = (java.awt.Shape) front;
+        virtualinvoke g2.<java.awt.Graphics2D: void fill(java.awt.Shape)>(#l107);
+    
+      label27:
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>(outlinePaint);
+    
+        if drawBack == 0 goto label28;
+        #l10 = (java.awt.Shape) $stack51;
+        virtualinvoke g2.<java.awt.Graphics2D: void draw(java.awt.Shape)>(#l10);
+        #l138 = (java.awt.Shape) $stack61;
+        virtualinvoke g2.<java.awt.Graphics2D: void draw(java.awt.Shape)>(#l138);
+    
+      label28:
+        if drawFront == 0 goto label29;
+        #l47 = (java.awt.Shape) front;
+        virtualinvoke g2.<java.awt.Graphics2D: void draw(java.awt.Shape)>(#l47);
+    
+      label29:
+        goto label32;
+    
+      label30:
+        if drawBack == 0 goto label31;
+        $stack40 = new java.awt.geom.Area;
+        $stack39 = new java.awt.geom.Rectangle2D$Double;
+        $stack38 = virtualinvoke plotArea.<java.awt.geom.Rectangle2D: double getX()>();
+        $stack37 = virtualinvoke plotArea.<java.awt.geom.Rectangle2D: double getY()>();
+        $stack32 = virtualinvoke arc.<java.awt.geom.Arc2D: java.awt.geom.Point2D getStartPoint()>();
+        $stack33 = virtualinvoke $stack32.<java.awt.geom.Point2D: double getX()>();
+        $stack34 = virtualinvoke plotArea.<java.awt.geom.Rectangle2D: double getX()>();
+        $stack36 = $stack33 - $stack34;
+        $stack35 = virtualinvoke plotArea.<java.awt.geom.Rectangle2D: double getHeight()>();
+        #l110 = (java.awt.geom.Rectangle2D$Double) $stack39;
+        specialinvoke #l110.<java.awt.geom.Rectangle2D$Double: void <init>(double,double,double,double)>($stack38, $stack37, $stack36, $stack35);
+        #l43 = (java.awt.Shape) $stack39;
+        #l42 = (java.awt.geom.Area) $stack40;
+        specialinvoke #l42.<java.awt.geom.Area: void <init>(java.awt.Shape)>(#l43);
+        side#14 = (java.awt.geom.Area) $stack40;
+        #l115 = (java.awt.geom.Area) $stack40;
+        #l116 = (java.awt.geom.Area) back;
+        virtualinvoke #l115.<java.awt.geom.Area: void intersect(java.awt.geom.Area)>(#l116);
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>(paint);
+        #l15 = (java.awt.Shape) $stack40;
+        virtualinvoke g2.<java.awt.Graphics2D: void fill(java.awt.Shape)>(#l15);
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>(outlinePaint);
+        #l89 = (java.awt.Shape) $stack40;
+        virtualinvoke g2.<java.awt.Graphics2D: void draw(java.awt.Shape)>(#l89);
+    
+      label31:
+        if drawFront == 0 goto label32;
+        $stack31 = new java.awt.geom.Area;
+        $stack30 = new java.awt.geom.Rectangle2D$Double;
+        $stack29 = virtualinvoke plotArea.<java.awt.geom.Rectangle2D: double getX()>();
+        $stack28 = virtualinvoke plotArea.<java.awt.geom.Rectangle2D: double getY()>();
+        $stack23 = virtualinvoke arc.<java.awt.geom.Arc2D: java.awt.geom.Point2D getEndPoint()>();
+        $stack24 = virtualinvoke $stack23.<java.awt.geom.Point2D: double getX()>();
+        $stack25 = virtualinvoke plotArea.<java.awt.geom.Rectangle2D: double getX()>();
+        $stack27 = $stack24 - $stack25;
+        $stack26 = virtualinvoke plotArea.<java.awt.geom.Rectangle2D: double getHeight()>();
+        #l3 = (java.awt.geom.Rectangle2D$Double) $stack30;
+        specialinvoke #l3.<java.awt.geom.Rectangle2D$Double: void <init>(double,double,double,double)>($stack29, $stack28, $stack27, $stack26);
+        #l19 = (java.awt.geom.Area) $stack31;
+        #l20 = (java.awt.Shape) $stack30;
+        specialinvoke #l19.<java.awt.geom.Area: void <init>(java.awt.Shape)>(#l20);
+        side#15 = (java.awt.geom.Area) $stack31;
+        #l58 = (java.awt.geom.Area) front;
+        #l57 = (java.awt.geom.Area) $stack31;
+        virtualinvoke #l57.<java.awt.geom.Area: void intersect(java.awt.geom.Area)>(#l58);
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>(paint);
+        #l39 = (java.awt.Shape) $stack31;
+        virtualinvoke g2.<java.awt.Graphics2D: void fill(java.awt.Shape)>(#l39);
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>(outlinePaint);
+        #l85 = (java.awt.Shape) $stack31;
+        virtualinvoke g2.<java.awt.Graphics2D: void draw(java.awt.Shape)>(#l85);
+    
+      label32:
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.plot.PiePlot3D: boolean isAngleAtBack(double)> ----
+    {
+        boolean $stack6;
+        byte $stack5;
+        double $stack3, $stack4, angle;
+        org.jfree.chart.plot.PiePlot3D this;
+    
+    
+        this := @this: org.jfree.chart.plot.PiePlot3D;
+        angle := @parameter0: double;
+        $stack3 = staticinvoke <java.lang.Math: double toRadians(double)>(angle);
+        $stack4 = staticinvoke <java.lang.Math: double sin(double)>($stack3);
+        $stack5 = $stack4 cmpl 0.0;
+    
+        if $stack5 <= 0 goto label1;
+        $stack6 = 1;
+    
+        goto label2;
+    
+      label1:
+        $stack6 = 0;
+    
+      label2:
+        return $stack6;
+    }
+
+    // ---- method: <org.jfree.chart.plot.PiePlot3D: void setDepthFactor(double)> ----
+    {
+        double factor;
+        org.jfree.chart.event.PlotChangeEvent $stack3;
+        org.jfree.chart.plot.PiePlot3D this;
+    
+    
+        this := @this: org.jfree.chart.plot.PiePlot3D;
+        factor := @parameter0: double;
+        this.<org.jfree.chart.plot.PiePlot3D: double depthFactor> = factor;
+        $stack3 = new org.jfree.chart.event.PlotChangeEvent;
+        specialinvoke $stack3.<org.jfree.chart.event.PlotChangeEvent: void <init>(org.jfree.chart.plot.Plot)>(this);
+        virtualinvoke this.<org.jfree.chart.plot.PiePlot3D: void notifyListeners(org.jfree.chart.event.PlotChangeEvent)>($stack3);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.plot.PiePlot3D: void draw(java.awt.Graphics2D,java.awt.geom.Rectangle2D,java.awt.geom.Point2D,org.jfree.chart.plot.PlotState,org.jfree.chart.plot.PlotRenderingInfo)> ----
+    {
+        boolean $stack134, $stack140, $stack145, $stack193, $stack194, $stack211, $stack92;
+        byte $stack139, $stack244, $stack256;
+        double $stack100, $stack102, $stack103, $stack104, $stack105, $stack106, $stack107, $stack108, $stack109, $stack110, $stack111, $stack112, $stack113, $stack114, $stack116, $stack117, $stack118, $stack119, $stack120, $stack122, $stack123, $stack124, $stack125, $stack126, $stack127, $stack128, $stack129, $stack130, $stack131, $stack132, $stack137, $stack138, $stack146, $stack147, $stack148, $stack149, $stack150, $stack151, $stack153, $stack154, $stack155, $stack156, $stack157, $stack158, $stack159, $stack160, $stack162, $stack163, $stack164, $stack165, $stack166, $stack167, $stack169, $stack170, $stack171, $stack172, $stack173, $stack174, $stack185, $stack186, $stack187, $stack188, $stack189, $stack190, $stack196, $stack197, $stack198, $stack199, $stack200, $stack201, $stack204, $stack205, $stack206, $stack207, $stack208, $stack209, $stack221, $stack224, $stack226, $stack228, $stack230, $stack233, $stack236, $stack239, $stack246, $stack247, $stack248, $stack249, $stack250, $stack251, $stack252, $stack253, $stack254, $stack255, $stack257, $stack258, $stack259, $stack260, $stack261, $stack262, $stack263, $stack265, $stack266, $stack267, $stack268, $stack269, $stack270, $stack271, $stack272, $stack273, $stack276, $stack277, $stack278, $stack279, $stack280, $stack281, $stack282, $stack283, $stack284, $stack285, $stack288, $stack289, $stack290, $stack291, $stack292, $stack293, $stack294, $stack295, $stack296, $stack297, $stack298, $stack83, $stack84, $stack85, $stack86, $stack87, $stack88, $stack89, $stack90, $stack91, $stack93, $stack94, $stack95, $stack96, $stack97, $stack98, $stack99, angle1#0, angle2#0, direction#0, gapHorizontal, gapPercent, gapVertical, h1, hh, labelPercent, linkH, linkW, linkX, linkY, maximumExplodePercent, min#0, percent, runningTotal, sfont#1, startAngle#0, stringWidth#1, text#1, totalValue, v1, value#0, vv;
+        float $stack142;
+        int $stack136, $stack141, $stack214, $stack216, $stack223, $stack225, $stack227, $stack229, $stack232, $stack234, $stack235, $stack237, $stack238, $stack240, $stack286, $stack287, categoryCount, categoryIndex#0, categoryIndex#1, categoryIndex#2, depth, p1#3, stringWidth#0;
+        int[] $stack222, $stack231, angle2#1, ys;
+        java.awt.Composite #l102, originalComposite;
+        java.awt.Font $stack275, sfont#0;
+        java.awt.FontMetrics fm;
+        java.awt.Graphics2D g2;
+        java.awt.Paint #l104, #l19, outlinePaint#0, outlinePaint#1, outlinePaint#2, outlinePaint#3, paint#0, paint#1, paint#2, paint#3;
+        java.awt.Polygon #l48, polygon#0;
+        java.awt.Shape #l103, #l107, #l114, #l16, #l18, #l2, #l28, #l32, #l49, #l61, #l69, #l7, #l72, #l79, #l81, #l90, #l91, #l92, #l98, currentKey#1, savedClip;
+        java.awt.Stroke outlineStroke#0, outlineStroke#1, outlineStroke#2, outlineStroke#3;
+        java.awt.geom.Arc2D key#1, key#2;
+        java.awt.geom.Arc2D$Double #l24, #l29, #l60, #l8, #l89, #l9, $stack191, $stack264, arc#0, arc#2, key#3;
+        java.awt.geom.Area #l109, #l113, #l116, #l15, #l17, #l27, #l40, #l66, #l67, #l68, #l84, #l85, $stack177, $stack178, $stack179, $stack182, $stack184, a, angle1#1, back, direction#1, pie;
+        java.awt.geom.Ellipse2D #l21, #l34, #l39, #l50, #l51, #l59, #l97;
+        java.awt.geom.Ellipse2D$Double #l26, #l70, dataValue#1, value#1;
+        java.awt.geom.Point2D anchor, p1#0;
+        java.awt.geom.Rectangle2D #l0, #l1, #l10, #l100, #l101, #l105, #l106, #l108, #l11, #l110, #l111, #l112, #l115, #l117, #l12, #l13, #l14, #l20, #l22, #l23, #l25, #l3, #l30, #l33, #l35, #l36, #l37, #l4, #l41, #l42, #l43, #l44, #l45, #l46, #l47, #l5, #l52, #l53, #l54, #l55, #l56, #l57, #l6, #l62, #l63, #l64, #l65, #l71, #l74, #l75, #l77, #l78, #l80, #l82, #l83, #l86, #l87, #l88, #l94, #l95, #l96, #l99, originalPlotArea;
+        java.awt.geom.Rectangle2D$Double #l31, #l38, #l58, #l73, #l76, #l93, $stack274, explodeArea, linkArea, lower, pieArea, plotArea#1, startAngle#1, tip#1;
+        java.lang.Comparable currentKey#0, key#0, p1#1, p1#2, polygon#1;
+        java.lang.Number dataValue#0;
+        java.lang.Object $stack101, $stack115, $stack121, $stack143, $stack152, $stack161, $stack168, $stack175, $stack176, $stack180, $stack181, $stack183, $stack192, $stack195, $stack202, $stack203, $stack210, $stack218, $stack219, $stack220, $stack241, $stack242, $stack243, $stack81, arc#1, plotArea#0;
+        java.lang.String text#0, tip#0, url;
+        java.util.ArrayList $stack144, arcList;
+        java.util.Iterator iterator#0, iterator#1, iterator#2;
+        java.util.List $stack135, entities#1, text#2;
+        org.jfree.chart.ChartRenderingInfo $stack212;
+        org.jfree.chart.entity.EntityCollection entities#0;
+        org.jfree.chart.entity.PieSectionEntity $stack215, entity;
+        org.jfree.chart.labels.PieSectionLabelGenerator $stack82;
+        org.jfree.chart.labels.PieToolTipGenerator tipster;
+        org.jfree.chart.plot.PiePlot3D this;
+        org.jfree.chart.plot.PiePlotState min#1;
+        org.jfree.chart.plot.PlotRenderingInfo info;
+        org.jfree.chart.plot.PlotState parentState;
+        org.jfree.chart.urls.PieURLGenerator $stack213, $stack217;
+        org.jfree.chart.util.RectangleInsets insets;
+        org.jfree.chart.util.Rotation $stack245;
+        org.jfree.data.general.PieDataset $stack133, dataset;
+    
+    
+        this := @this: org.jfree.chart.plot.PiePlot3D;
+        g2 := @parameter0: java.awt.Graphics2D;
+        plotArea#0 := @parameter1: java.awt.geom.Rectangle2D;
+        anchor := @parameter2: java.awt.geom.Point2D;
+        parentState := @parameter3: org.jfree.chart.plot.PlotState;
+        info := @parameter4: org.jfree.chart.plot.PlotRenderingInfo;
+        insets = virtualinvoke this.<org.jfree.chart.plot.PiePlot3D: org.jfree.chart.util.RectangleInsets getInsets()>();
+        #l78 = (java.awt.geom.Rectangle2D) plotArea#0;
+        virtualinvoke insets.<org.jfree.chart.util.RectangleInsets: void trim(java.awt.geom.Rectangle2D)>(#l78);
+        #l25 = (java.awt.geom.Rectangle2D) plotArea#0;
+        $stack81 = virtualinvoke #l25.<java.awt.geom.Rectangle2D: java.lang.Object clone()>();
+        originalPlotArea = (java.awt.geom.Rectangle2D) $stack81;
+    
+        if info == null goto label01;
+        #l4 = (java.awt.geom.Rectangle2D) plotArea#0;
+        virtualinvoke info.<org.jfree.chart.plot.PlotRenderingInfo: void setPlotArea(java.awt.geom.Rectangle2D)>(#l4);
+        #l71 = (java.awt.geom.Rectangle2D) plotArea#0;
+        virtualinvoke info.<org.jfree.chart.plot.PlotRenderingInfo: void setDataArea(java.awt.geom.Rectangle2D)>(#l71);
+    
+      label01:
+        savedClip = virtualinvoke g2.<java.awt.Graphics2D: java.awt.Shape getClip()>();
+        #l98 = (java.awt.Shape) plotArea#0;
+        virtualinvoke g2.<java.awt.Graphics2D: void clip(java.awt.Shape)>(#l98);
+        gapPercent = virtualinvoke this.<org.jfree.chart.plot.PiePlot3D: double getInteriorGap()>();
+        labelPercent = 0.0;
+        $stack82 = virtualinvoke this.<org.jfree.chart.plot.PiePlot3D: org.jfree.chart.labels.PieSectionLabelGenerator getLabelGenerator()>();
+    
+        if $stack82 == null goto label02;
+        $stack295 = virtualinvoke this.<org.jfree.chart.plot.PiePlot3D: double getLabelGap()>();
+        $stack296 = virtualinvoke this.<org.jfree.chart.plot.PiePlot3D: double getMaximumLabelWidth()>();
+        $stack297 = $stack295 + $stack296;
+        $stack298 = virtualinvoke this.<org.jfree.chart.plot.PiePlot3D: double getLabelLinkMargin()>();
+        labelPercent = $stack297 + $stack298;
+    
+      label02:
+        #l94 = (java.awt.geom.Rectangle2D) plotArea#0;
+        $stack83 = virtualinvoke #l94.<java.awt.geom.Rectangle2D: double getWidth()>();
+        $stack84 = gapPercent + labelPercent;
+        gapHorizontal = $stack83 * $stack84;
+        #l108 = (java.awt.geom.Rectangle2D) plotArea#0;
+        $stack85 = virtualinvoke #l108.<java.awt.geom.Rectangle2D: double getHeight()>();
+        gapVertical = $stack85 * gapPercent;
+        #l10 = (java.awt.geom.Rectangle2D) plotArea#0;
+        $stack86 = virtualinvoke #l10.<java.awt.geom.Rectangle2D: double getX()>();
+        $stack87 = gapHorizontal / 2.0;
+        linkX = $stack86 + $stack87;
+        #l0 = (java.awt.geom.Rectangle2D) plotArea#0;
+        $stack88 = virtualinvoke #l0.<java.awt.geom.Rectangle2D: double getY()>();
+        $stack89 = gapVertical / 2.0;
+        linkY = $stack88 + $stack89;
+        #l106 = (java.awt.geom.Rectangle2D) plotArea#0;
+        $stack90 = virtualinvoke #l106.<java.awt.geom.Rectangle2D: double getWidth()>();
+        linkW = $stack90 - gapHorizontal;
+        #l22 = (java.awt.geom.Rectangle2D) plotArea#0;
+        $stack91 = virtualinvoke #l22.<java.awt.geom.Rectangle2D: double getHeight()>();
+        linkH = $stack91 - gapVertical;
+        $stack92 = virtualinvoke this.<org.jfree.chart.plot.PiePlot3D: boolean isCircular()>();
+    
+        if $stack92 == 0 goto label03;
+        $stack288 = staticinvoke <java.lang.Math: double min(double,double)>(linkW, linkH);
+        min#0 = $stack288 / 2.0;
+        $stack289 = linkX + linkX;
+        $stack290 = $stack289 + linkW;
+        $stack291 = $stack290 / 2.0;
+        linkX = $stack291 - min#0;
+        $stack292 = linkY + linkY;
+        $stack293 = $stack292 + linkH;
+        $stack294 = $stack293 / 2.0;
+        linkY = $stack294 - min#0;
+        linkW = 2.0 * min#0;
+        linkH = 2.0 * min#0;
+    
+      label03:
+        #l87 = (java.awt.geom.Rectangle2D) plotArea#0;
+        min#1 = virtualinvoke this.<org.jfree.chart.plot.PiePlot3D: org.jfree.chart.plot.PiePlotState initialise(java.awt.Graphics2D,java.awt.geom.Rectangle2D,org.jfree.chart.plot.PiePlot,java.lang.Integer,org.jfree.chart.plot.PlotRenderingInfo)>(g2, #l87, this, null, info);
+        $stack93 = virtualinvoke this.<org.jfree.chart.plot.PiePlot3D: double getLabelLinkMargin()>();
+        hh = linkW * $stack93;
+        $stack94 = virtualinvoke this.<org.jfree.chart.plot.PiePlot3D: double getLabelLinkMargin()>();
+        vv = linkH * $stack94;
+        $stack101 = new java.awt.geom.Rectangle2D$Double;
+        $stack95 = hh / 2.0;
+        $stack100 = linkX + $stack95;
+        $stack96 = vv / 2.0;
+        $stack99 = linkY + $stack96;
+        $stack98 = linkW - hh;
+        $stack97 = linkH - vv;
+        #l38 = (java.awt.geom.Rectangle2D$Double) $stack101;
+        specialinvoke #l38.<java.awt.geom.Rectangle2D$Double: void <init>(double,double,double,double)>($stack100, $stack99, $stack98, $stack97);
+        explodeArea = (java.awt.geom.Rectangle2D$Double) $stack101;
+        #l14 = (java.awt.geom.Rectangle2D) $stack101;
+        virtualinvoke min#1.<org.jfree.chart.plot.PiePlotState: void setExplodedPieArea(java.awt.geom.Rectangle2D)>(#l14);
+        maximumExplodePercent = virtualinvoke this.<org.jfree.chart.plot.PiePlot3D: double getMaximumExplodePercent()>();
+        $stack102 = 1.0 + maximumExplodePercent;
+        percent = maximumExplodePercent / $stack102;
+        #l115 = (java.awt.geom.Rectangle2D) $stack101;
+        $stack103 = virtualinvoke #l115.<java.awt.geom.Rectangle2D: double getWidth()>();
+        h1 = $stack103 * percent;
+        #l35 = (java.awt.geom.Rectangle2D) $stack101;
+        $stack104 = virtualinvoke #l35.<java.awt.geom.Rectangle2D: double getHeight()>();
+        v1 = $stack104 * percent;
+        $stack115 = new java.awt.geom.Rectangle2D$Double;
+        #l37 = (java.awt.geom.Rectangle2D) $stack101;
+        $stack105 = virtualinvoke #l37.<java.awt.geom.Rectangle2D: double getX()>();
+        $stack106 = h1 / 2.0;
+        $stack114 = $stack105 + $stack106;
+        #l55 = (java.awt.geom.Rectangle2D) $stack101;
+        $stack107 = virtualinvoke #l55.<java.awt.geom.Rectangle2D: double getY()>();
+        $stack108 = v1 / 2.0;
+        $stack113 = $stack107 + $stack108;
+        #l5 = (java.awt.geom.Rectangle2D) $stack101;
+        $stack109 = virtualinvoke #l5.<java.awt.geom.Rectangle2D: double getWidth()>();
+        $stack112 = $stack109 - h1;
+        #l117 = (java.awt.geom.Rectangle2D) $stack101;
+        $stack110 = virtualinvoke #l117.<java.awt.geom.Rectangle2D: double getHeight()>();
+        $stack111 = $stack110 - v1;
+        #l76 = (java.awt.geom.Rectangle2D$Double) $stack115;
+        specialinvoke #l76.<java.awt.geom.Rectangle2D$Double: void <init>(double,double,double,double)>($stack114, $stack113, $stack112, $stack111);
+        pieArea = (java.awt.geom.Rectangle2D$Double) $stack115;
+        #l88 = (java.awt.geom.Rectangle2D) $stack115;
+        $stack116 = virtualinvoke #l88.<java.awt.geom.Rectangle2D: double getHeight()>();
+        $stack117 = this.<org.jfree.chart.plot.PiePlot3D: double depthFactor>;
+        $stack118 = $stack116 * $stack117;
+        depth = (int) $stack118;
+        $stack121 = new java.awt.geom.Rectangle2D$Double;
+        $stack119 = (double) depth;
+        $stack120 = linkH - $stack119;
+        #l73 = (java.awt.geom.Rectangle2D$Double) $stack121;
+        specialinvoke #l73.<java.awt.geom.Rectangle2D$Double: void <init>(double,double,double,double)>(linkX, linkY, linkW, $stack120);
+        linkArea = (java.awt.geom.Rectangle2D$Double) $stack121;
+        #l13 = (java.awt.geom.Rectangle2D) $stack121;
+        virtualinvoke min#1.<org.jfree.chart.plot.PiePlotState: void setLinkArea(java.awt.geom.Rectangle2D)>(#l13);
+        #l99 = (java.awt.geom.Rectangle2D) $stack115;
+        virtualinvoke min#1.<org.jfree.chart.plot.PiePlotState: void setPieArea(java.awt.geom.Rectangle2D)>(#l99);
+        #l64 = (java.awt.geom.Rectangle2D) $stack115;
+        $stack122 = virtualinvoke #l64.<java.awt.geom.Rectangle2D: double getCenterX()>();
+        virtualinvoke min#1.<org.jfree.chart.plot.PiePlotState: void setPieCenterX(double)>($stack122);
+        #l80 = (java.awt.geom.Rectangle2D) $stack115;
+        $stack124 = virtualinvoke #l80.<java.awt.geom.Rectangle2D: double getCenterY()>();
+        $stack123 = (double) depth;
+        $stack125 = $stack123 / 2.0;
+        $stack126 = $stack124 - $stack125;
+        virtualinvoke min#1.<org.jfree.chart.plot.PiePlotState: void setPieCenterY(double)>($stack126);
+        #l56 = (java.awt.geom.Rectangle2D) $stack115;
+        $stack127 = virtualinvoke #l56.<java.awt.geom.Rectangle2D: double getWidth()>();
+        $stack128 = $stack127 / 2.0;
+        virtualinvoke min#1.<org.jfree.chart.plot.PiePlotState: void setPieWRadius(double)>($stack128);
+        #l36 = (java.awt.geom.Rectangle2D) $stack115;
+        $stack129 = virtualinvoke #l36.<java.awt.geom.Rectangle2D: double getHeight()>();
+        $stack130 = (double) depth;
+        $stack131 = $stack129 - $stack130;
+        $stack132 = $stack131 / 2.0;
+        virtualinvoke min#1.<org.jfree.chart.plot.PiePlotState: void setPieHRadius(double)>($stack132);
+        #l47 = (java.awt.geom.Rectangle2D) plotArea#0;
+        virtualinvoke this.<org.jfree.chart.plot.PiePlot3D: void drawBackground(java.awt.Graphics2D,java.awt.geom.Rectangle2D)>(g2, #l47);
+        dataset = virtualinvoke this.<org.jfree.chart.plot.PiePlot3D: org.jfree.data.general.PieDataset getDataset()>();
+        $stack133 = virtualinvoke this.<org.jfree.chart.plot.PiePlot3D: org.jfree.data.general.PieDataset getDataset()>();
+        $stack134 = staticinvoke <org.jfree.data.general.DatasetUtilities: boolean isEmptyOrNull(org.jfree.data.general.PieDataset)>($stack133);
+    
+        if $stack134 == 0 goto label04;
+        #l75 = (java.awt.geom.Rectangle2D) plotArea#0;
+        virtualinvoke this.<org.jfree.chart.plot.PiePlot3D: void drawNoDataMessage(java.awt.Graphics2D,java.awt.geom.Rectangle2D)>(g2, #l75);
+        virtualinvoke g2.<java.awt.Graphics2D: void setClip(java.awt.Shape)>(savedClip);
+        #l96 = (java.awt.geom.Rectangle2D) plotArea#0;
+        virtualinvoke this.<org.jfree.chart.plot.PiePlot3D: void drawOutline(java.awt.Graphics2D,java.awt.geom.Rectangle2D)>(g2, #l96);
+    
+        return;
+    
+      label04:
+        $stack135 = interfaceinvoke dataset.<org.jfree.data.general.PieDataset: java.util.List getKeys()>();
+        $stack136 = interfaceinvoke $stack135.<java.util.List: int size()>();
+        $stack137 = (double) $stack136;
+        #l20 = (java.awt.geom.Rectangle2D) plotArea#0;
+        $stack138 = virtualinvoke #l20.<java.awt.geom.Rectangle2D: double getWidth()>();
+        $stack139 = $stack137 cmpl $stack138;
+    
+        if $stack139 <= 0 goto label05;
+        text#0 = "Too many elements";
+        $stack275 = new java.awt.Font;
+        specialinvoke $stack275.<java.awt.Font: void <init>(java.lang.String,int,int)>("dialog", 1, 10);
+        sfont#0 = $stack275;
+        virtualinvoke g2.<java.awt.Graphics2D: void setFont(java.awt.Font)>($stack275);
+        fm = virtualinvoke g2.<java.awt.Graphics2D: java.awt.FontMetrics getFontMetrics(java.awt.Font)>($stack275);
+        stringWidth#0 = virtualinvoke fm.<java.awt.FontMetrics: int stringWidth(java.lang.String)>("Too many elements");
+        #l30 = (java.awt.geom.Rectangle2D) plotArea#0;
+        $stack279 = virtualinvoke #l30.<java.awt.geom.Rectangle2D: double getX()>();
+        #l1 = (java.awt.geom.Rectangle2D) plotArea#0;
+        $stack276 = virtualinvoke #l1.<java.awt.geom.Rectangle2D: double getWidth()>();
+        $stack277 = (double) stringWidth#0;
+        $stack278 = $stack276 - $stack277;
+        $stack280 = $stack278 / 2.0;
+        $stack281 = $stack279 + $stack280;
+        $stack287 = (int) $stack281;
+        #l3 = (java.awt.geom.Rectangle2D) plotArea#0;
+        $stack283 = virtualinvoke #l3.<java.awt.geom.Rectangle2D: double getY()>();
+        #l54 = (java.awt.geom.Rectangle2D) plotArea#0;
+        $stack282 = virtualinvoke #l54.<java.awt.geom.Rectangle2D: double getHeight()>();
+        $stack284 = $stack282 / 2.0;
+        $stack285 = $stack283 + $stack284;
+        $stack286 = (int) $stack285;
+        virtualinvoke g2.<java.awt.Graphics2D: void drawString(java.lang.String,int,int)>("Too many elements", $stack287, $stack286);
+    
+        return;
+    
+      label05:
+        $stack140 = virtualinvoke this.<org.jfree.chart.plot.PiePlot3D: boolean isCircular()>();
+    
+        if $stack140 == 0 goto label06;
+        #l23 = (java.awt.geom.Rectangle2D) plotArea#0;
+        $stack266 = virtualinvoke #l23.<java.awt.geom.Rectangle2D: double getWidth()>();
+        #l45 = (java.awt.geom.Rectangle2D) plotArea#0;
+        $stack265 = virtualinvoke #l45.<java.awt.geom.Rectangle2D: double getHeight()>();
+        $stack267 = staticinvoke <java.lang.Math: double min(double,double)>($stack266, $stack265);
+        text#1 = $stack267 / 2.0;
+        $stack274 = new java.awt.geom.Rectangle2D$Double;
+        #l52 = (java.awt.geom.Rectangle2D) plotArea#0;
+        $stack268 = virtualinvoke #l52.<java.awt.geom.Rectangle2D: double getCenterX()>();
+        $stack273 = $stack268 - text#1;
+        #l57 = (java.awt.geom.Rectangle2D) plotArea#0;
+        $stack269 = virtualinvoke #l57.<java.awt.geom.Rectangle2D: double getCenterY()>();
+        $stack272 = $stack269 - text#1;
+        $stack271 = 2.0 * text#1;
+        $stack270 = 2.0 * text#1;
+        specialinvoke $stack274.<java.awt.geom.Rectangle2D$Double: void <init>(double,double,double,double)>($stack273, $stack272, $stack271, $stack270);
+        plotArea#1 = $stack274;
+    
+      label06:
+        text#2 = interfaceinvoke dataset.<org.jfree.data.general.PieDataset: java.util.List getKeys()>();
+        $stack141 = interfaceinvoke text#2.<java.util.List: int size()>();
+    
+        if $stack141 != 0 goto label07;
+    
+        return;
+    
+      label07:
+        #l46 = (java.awt.geom.Rectangle2D) $stack115;
+        sfont#1 = virtualinvoke #l46.<java.awt.geom.Rectangle2D: double getX()>();
+        #l110 = (java.awt.geom.Rectangle2D) $stack115;
+        stringWidth#1 = virtualinvoke #l110.<java.awt.geom.Rectangle2D: double getY()>();
+        originalComposite = virtualinvoke g2.<java.awt.Graphics2D: java.awt.Composite getComposite()>();
+        $stack142 = virtualinvoke this.<org.jfree.chart.plot.PiePlot3D: float getForegroundAlpha()>();
+        $stack143 = staticinvoke <java.awt.AlphaComposite: java.awt.AlphaComposite getInstance(int,float)>(3, $stack142);
+        #l102 = (java.awt.Composite) $stack143;
+        virtualinvoke g2.<java.awt.Graphics2D: void setComposite(java.awt.Composite)>(#l102);
+        totalValue = staticinvoke <org.jfree.data.general.DatasetUtilities: double calculatePieDatasetTotal(org.jfree.data.general.PieDataset)>(dataset);
+        runningTotal = 0.0;
+    
+        if depth >= 0 goto label08;
+    
+        return;
+    
+      label08:
+        $stack144 = new java.util.ArrayList;
+        specialinvoke $stack144.<java.util.ArrayList: void <init>()>();
+        arcList = $stack144;
+        iterator#0 = interfaceinvoke text#2.<java.util.List: java.util.Iterator iterator()>();
+    
+      label09:
+        $stack145 = interfaceinvoke iterator#0.<java.util.Iterator: boolean hasNext()>();
+    
+        if $stack145 == 0 goto label14;
+        $stack243 = interfaceinvoke iterator#0.<java.util.Iterator: java.lang.Object next()>();
+        currentKey#0 = (java.lang.Comparable) $stack243;
+        dataValue#0 = interfaceinvoke dataset.<org.jfree.data.general.PieDataset: java.lang.Number getValue(java.lang.Comparable)>(currentKey#0);
+    
+        if dataValue#0 != null goto label10;
+        virtualinvoke $stack144.<java.util.ArrayList: boolean add(java.lang.Object)>(null);
+    
+        goto label09;
+    
+      label10:
+        value#0 = virtualinvoke dataValue#0.<java.lang.Number: double doubleValue()>();
+        $stack244 = value#0 cmpg 0.0;
+    
+        if $stack244 > 0 goto label11;
+        virtualinvoke $stack144.<java.util.ArrayList: boolean add(java.lang.Object)>(null);
+    
+        goto label09;
+    
+      label11:
+        startAngle#0 = virtualinvoke this.<org.jfree.chart.plot.PiePlot3D: double getStartAngle()>();
+        $stack245 = virtualinvoke this.<org.jfree.chart.plot.PiePlot3D: org.jfree.chart.util.Rotation getDirection()>();
+        direction#0 = virtualinvoke $stack245.<org.jfree.chart.util.Rotation: double getFactor()>();
+        $stack246 = runningTotal * 360.0;
+        $stack247 = direction#0 * $stack246;
+        $stack248 = $stack247 / totalValue;
+        angle1#0 = startAngle#0 + $stack248;
+        $stack249 = runningTotal + value#0;
+        $stack250 = direction#0 * $stack249;
+        $stack251 = $stack250 * 360.0;
+        $stack252 = $stack251 / totalValue;
+        angle2#0 = startAngle#0 + $stack252;
+        $stack253 = angle2#0 - angle1#0;
+        $stack254 = staticinvoke <java.lang.Math: double abs(double)>($stack253);
+        $stack255 = virtualinvoke this.<org.jfree.chart.plot.PiePlot3D: double getMinimumArcAngleToDraw()>();
+        $stack256 = $stack254 cmpl $stack255;
+    
+        if $stack256 <= 0 goto label12;
+        $stack264 = new java.awt.geom.Arc2D$Double;
+        $stack257 = (double) depth;
+        $stack263 = stringWidth#1 + $stack257;
+        #l112 = (java.awt.geom.Rectangle2D) $stack115;
+        $stack262 = virtualinvoke #l112.<java.awt.geom.Rectangle2D: double getWidth()>();
+        #l6 = (java.awt.geom.Rectangle2D) $stack115;
+        $stack258 = virtualinvoke #l6.<java.awt.geom.Rectangle2D: double getHeight()>();
+        $stack259 = (double) depth;
+        $stack261 = $stack258 - $stack259;
+        $stack260 = angle2#0 - angle1#0;
+        specialinvoke $stack264.<java.awt.geom.Arc2D$Double: void <init>(double,double,double,double,double,double,int)>(sfont#1, $stack263, $stack262, $stack261, angle1#0, $stack260, 2);
+        virtualinvoke $stack144.<java.util.ArrayList: boolean add(java.lang.Object)>($stack264);
+    
+        goto label13;
+    
+      label12:
+        virtualinvoke $stack144.<java.util.ArrayList: boolean add(java.lang.Object)>(null);
+    
+      label13:
+        runningTotal = runningTotal + value#0;
+    
+        goto label09;
+    
+      label14:
+        currentKey#1 = virtualinvoke g2.<java.awt.Graphics2D: java.awt.Shape getClip()>();
+        $stack152 = new java.awt.geom.Ellipse2D$Double;
+        #l82 = (java.awt.geom.Rectangle2D) $stack115;
+        $stack151 = virtualinvoke #l82.<java.awt.geom.Rectangle2D: double getX()>();
+        #l111 = (java.awt.geom.Rectangle2D) $stack115;
+        $stack150 = virtualinvoke #l111.<java.awt.geom.Rectangle2D: double getY()>();
+        #l12 = (java.awt.geom.Rectangle2D) $stack115;
+        $stack149 = virtualinvoke #l12.<java.awt.geom.Rectangle2D: double getWidth()>();
+        #l74 = (java.awt.geom.Rectangle2D) $stack115;
+        $stack146 = virtualinvoke #l74.<java.awt.geom.Rectangle2D: double getHeight()>();
+        $stack147 = (double) depth;
+        $stack148 = $stack146 - $stack147;
+        #l26 = (java.awt.geom.Ellipse2D$Double) $stack152;
+        specialinvoke #l26.<java.awt.geom.Ellipse2D$Double: void <init>(double,double,double,double)>($stack151, $stack150, $stack149, $stack148);
+        dataValue#1 = (java.awt.geom.Ellipse2D$Double) $stack152;
+        $stack161 = new java.awt.geom.Ellipse2D$Double;
+        #l105 = (java.awt.geom.Rectangle2D) $stack115;
+        $stack160 = virtualinvoke #l105.<java.awt.geom.Rectangle2D: double getX()>();
+        #l53 = (java.awt.geom.Rectangle2D) $stack115;
+        $stack153 = virtualinvoke #l53.<java.awt.geom.Rectangle2D: double getY()>();
+        $stack154 = (double) depth;
+        $stack159 = $stack153 + $stack154;
+        #l44 = (java.awt.geom.Rectangle2D) $stack115;
+        $stack158 = virtualinvoke #l44.<java.awt.geom.Rectangle2D: double getWidth()>();
+        #l11 = (java.awt.geom.Rectangle2D) $stack115;
+        $stack155 = virtualinvoke #l11.<java.awt.geom.Rectangle2D: double getHeight()>();
+        $stack156 = (double) depth;
+        $stack157 = $stack155 - $stack156;
+        #l70 = (java.awt.geom.Ellipse2D$Double) $stack161;
+        specialinvoke #l70.<java.awt.geom.Ellipse2D$Double: void <init>(double,double,double,double)>($stack160, $stack159, $stack158, $stack157);
+        value#1 = (java.awt.geom.Ellipse2D$Double) $stack161;
+        $stack168 = new java.awt.geom.Rectangle2D$Double;
+        #l34 = (java.awt.geom.Ellipse2D) $stack152;
+        $stack167 = virtualinvoke #l34.<java.awt.geom.Ellipse2D: double getX()>();
+        #l97 = (java.awt.geom.Ellipse2D) $stack152;
+        $stack166 = virtualinvoke #l97.<java.awt.geom.Ellipse2D: double getCenterY()>();
+        #l100 = (java.awt.geom.Rectangle2D) $stack115;
+        $stack165 = virtualinvoke #l100.<java.awt.geom.Rectangle2D: double getWidth()>();
+        #l50 = (java.awt.geom.Ellipse2D) $stack161;
+        $stack162 = virtualinvoke #l50.<java.awt.geom.Ellipse2D: double getMaxY()>();
+        #l51 = (java.awt.geom.Ellipse2D) $stack152;
+        $stack163 = virtualinvoke #l51.<java.awt.geom.Ellipse2D: double getCenterY()>();
+        $stack164 = $stack162 - $stack163;
+        #l58 = (java.awt.geom.Rectangle2D$Double) $stack168;
+        specialinvoke #l58.<java.awt.geom.Rectangle2D$Double: void <init>(double,double,double,double)>($stack167, $stack166, $stack165, $stack164);
+        lower = (java.awt.geom.Rectangle2D$Double) $stack168;
+        $stack175 = new java.awt.geom.Rectangle2D$Double;
+        #l33 = (java.awt.geom.Rectangle2D) $stack115;
+        $stack174 = virtualinvoke #l33.<java.awt.geom.Rectangle2D: double getX()>();
+        #l21 = (java.awt.geom.Ellipse2D) $stack152;
+        $stack173 = virtualinvoke #l21.<java.awt.geom.Ellipse2D: double getY()>();
+        #l101 = (java.awt.geom.Rectangle2D) $stack115;
+        $stack172 = virtualinvoke #l101.<java.awt.geom.Rectangle2D: double getWidth()>();
+        #l59 = (java.awt.geom.Ellipse2D) $stack161;
+        $stack169 = virtualinvoke #l59.<java.awt.geom.Ellipse2D: double getCenterY()>();
+        #l39 = (java.awt.geom.Ellipse2D) $stack152;
+        $stack170 = virtualinvoke #l39.<java.awt.geom.Ellipse2D: double getY()>();
+        $stack171 = $stack169 - $stack170;
+        #l93 = (java.awt.geom.Rectangle2D$Double) $stack175;
+        specialinvoke #l93.<java.awt.geom.Rectangle2D$Double: void <init>(double,double,double,double)>($stack174, $stack173, $stack172, $stack171);
+        startAngle#1 = (java.awt.geom.Rectangle2D$Double) $stack175;
+        $stack176 = new java.awt.geom.Area;
+        #l68 = (java.awt.geom.Area) $stack176;
+        #l69 = (java.awt.Shape) $stack152;
+        specialinvoke #l68.<java.awt.geom.Area: void <init>(java.awt.Shape)>(#l69);
+        a = (java.awt.geom.Area) $stack176;
+        $stack177 = new java.awt.geom.Area;
+        #l61 = (java.awt.Shape) $stack168;
+        specialinvoke $stack177.<java.awt.geom.Area: void <init>(java.awt.Shape)>(#l61);
+        #l40 = (java.awt.geom.Area) $stack176;
+        virtualinvoke #l40.<java.awt.geom.Area: void add(java.awt.geom.Area)>($stack177);
+        $stack178 = new java.awt.geom.Area;
+        #l7 = (java.awt.Shape) $stack161;
+        specialinvoke $stack178.<java.awt.geom.Area: void <init>(java.awt.Shape)>(#l7);
+        direction#1 = $stack178;
+        $stack179 = new java.awt.geom.Area;
+        #l103 = (java.awt.Shape) $stack175;
+        specialinvoke $stack179.<java.awt.geom.Area: void <init>(java.awt.Shape)>(#l103);
+        virtualinvoke $stack178.<java.awt.geom.Area: void add(java.awt.geom.Area)>($stack179);
+        $stack180 = new java.awt.geom.Area;
+        #l15 = (java.awt.geom.Area) $stack180;
+        #l16 = (java.awt.Shape) $stack176;
+        specialinvoke #l15.<java.awt.geom.Area: void <init>(java.awt.Shape)>(#l16);
+        pie = (java.awt.geom.Area) $stack180;
+        #l116 = (java.awt.geom.Area) $stack180;
+        virtualinvoke #l116.<java.awt.geom.Area: void intersect(java.awt.geom.Area)>($stack178);
+        $stack181 = new java.awt.geom.Area;
+        #l17 = (java.awt.geom.Area) $stack181;
+        #l18 = (java.awt.Shape) $stack180;
+        specialinvoke #l17.<java.awt.geom.Area: void <init>(java.awt.Shape)>(#l18);
+        angle1#1 = (java.awt.geom.Area) $stack181;
+        $stack182 = new java.awt.geom.Area;
+        #l49 = (java.awt.Shape) $stack152;
+        specialinvoke $stack182.<java.awt.geom.Area: void <init>(java.awt.Shape)>(#l49);
+        #l109 = (java.awt.geom.Area) $stack181;
+        virtualinvoke #l109.<java.awt.geom.Area: void subtract(java.awt.geom.Area)>($stack182);
+        $stack183 = new java.awt.geom.Area;
+        #l27 = (java.awt.geom.Area) $stack183;
+        #l28 = (java.awt.Shape) $stack180;
+        specialinvoke #l27.<java.awt.geom.Area: void <init>(java.awt.Shape)>(#l28);
+        back = (java.awt.geom.Area) $stack183;
+        $stack184 = new java.awt.geom.Area;
+        #l114 = (java.awt.Shape) $stack161;
+        specialinvoke $stack184.<java.awt.geom.Area: void <init>(java.awt.Shape)>(#l114);
+        #l113 = (java.awt.geom.Area) $stack183;
+        virtualinvoke #l113.<java.awt.geom.Area: void subtract(java.awt.geom.Area)>($stack184);
+        $stack191 = new java.awt.geom.Arc2D$Double;
+        $stack185 = (double) depth;
+        $stack190 = stringWidth#1 + $stack185;
+        #l77 = (java.awt.geom.Rectangle2D) $stack115;
+        $stack189 = virtualinvoke #l77.<java.awt.geom.Rectangle2D: double getWidth()>();
+        #l95 = (java.awt.geom.Rectangle2D) $stack115;
+        $stack186 = virtualinvoke #l95.<java.awt.geom.Rectangle2D: double getHeight()>();
+        $stack187 = (double) depth;
+        $stack188 = $stack186 - $stack187;
+        specialinvoke $stack191.<java.awt.geom.Arc2D$Double: void <init>(double,double,double,double,double,double,int)>(sfont#1, $stack190, $stack189, $stack188, 0.0, 360.0, 2);
+        arc#0 = $stack191;
+        categoryCount = virtualinvoke $stack144.<java.util.ArrayList: int size()>();
+        categoryIndex#0 = 0;
+    
+      label15:
+        if categoryIndex#0 >= categoryCount goto label18;
+        $stack220 = virtualinvoke $stack144.<java.util.ArrayList: java.lang.Object get(int)>(categoryIndex#0);
+        arc#1 = (java.awt.geom.Arc2D$Double) $stack220;
+    
+        if arc#1 != null goto label16;
+    
+        goto label17;
+    
+      label16:
+        key#0 = virtualinvoke this.<org.jfree.chart.plot.PiePlot3D: java.lang.Comparable getSectionKey(int)>(categoryIndex#0);
+        paint#0 = virtualinvoke this.<org.jfree.chart.plot.PiePlot3D: java.awt.Paint lookupSectionPaint(java.lang.Comparable,boolean)>(key#0, 1);
+        outlinePaint#0 = virtualinvoke this.<org.jfree.chart.plot.PiePlot3D: java.awt.Paint lookupSectionOutlinePaint(java.lang.Comparable)>(key#0);
+        outlineStroke#0 = virtualinvoke this.<org.jfree.chart.plot.PiePlot3D: java.awt.Stroke lookupSectionOutlineStroke(java.lang.Comparable)>(key#0);
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>(paint#0);
+        #l81 = (java.awt.Shape) arc#1;
+        virtualinvoke g2.<java.awt.Graphics2D: void fill(java.awt.Shape)>(#l81);
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>(outlinePaint#0);
+        virtualinvoke g2.<java.awt.Graphics2D: void setStroke(java.awt.Stroke)>(outlineStroke#0);
+        #l91 = (java.awt.Shape) arc#1;
+        virtualinvoke g2.<java.awt.Graphics2D: void draw(java.awt.Shape)>(#l91);
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>(paint#0);
+        #l24 = (java.awt.geom.Arc2D$Double) arc#1;
+        p1#0 = virtualinvoke #l24.<java.awt.geom.Arc2D$Double: java.awt.geom.Point2D getStartPoint()>();
+        $stack222 = newarray (int)[4];
+        #l9 = (java.awt.geom.Arc2D$Double) arc#1;
+        $stack221 = virtualinvoke #l9.<java.awt.geom.Arc2D$Double: double getCenterX()>();
+        $stack223 = (int) $stack221;
+        $stack222[0] = $stack223;
+        #l60 = (java.awt.geom.Arc2D$Double) arc#1;
+        $stack224 = virtualinvoke #l60.<java.awt.geom.Arc2D$Double: double getCenterX()>();
+        $stack225 = (int) $stack224;
+        $stack222[1] = $stack225;
+        $stack226 = virtualinvoke p1#0.<java.awt.geom.Point2D: double getX()>();
+        $stack227 = (int) $stack226;
+        $stack222[2] = $stack227;
+        $stack228 = virtualinvoke p1#0.<java.awt.geom.Point2D: double getX()>();
+        $stack229 = (int) $stack228;
+        $stack222[3] = $stack229;
+        angle2#1 = $stack222;
+        $stack231 = newarray (int)[4];
+        #l29 = (java.awt.geom.Arc2D$Double) arc#1;
+        $stack230 = virtualinvoke #l29.<java.awt.geom.Arc2D$Double: double getCenterY()>();
+        $stack232 = (int) $stack230;
+        $stack231[0] = $stack232;
+        #l8 = (java.awt.geom.Arc2D$Double) arc#1;
+        $stack233 = virtualinvoke #l8.<java.awt.geom.Arc2D$Double: double getCenterY()>();
+        $stack234 = (int) $stack233;
+        $stack235 = $stack234 - depth;
+        $stack231[1] = $stack235;
+        $stack236 = virtualinvoke p1#0.<java.awt.geom.Point2D: double getY()>();
+        $stack237 = (int) $stack236;
+        $stack238 = $stack237 - depth;
+        $stack231[2] = $stack238;
+        $stack239 = virtualinvoke p1#0.<java.awt.geom.Point2D: double getY()>();
+        $stack240 = (int) $stack239;
+        $stack231[3] = $stack240;
+        ys = $stack231;
+        $stack241 = new java.awt.Polygon;
+        #l48 = (java.awt.Polygon) $stack241;
+        specialinvoke #l48.<java.awt.Polygon: void <init>(int[],int[],int)>($stack222, $stack231, 4);
+        polygon#0 = (java.awt.Polygon) $stack241;
+        $stack242 = <java.awt.Color: java.awt.Color lightGray>;
+        #l104 = (java.awt.Paint) $stack242;
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>(#l104);
+        #l92 = (java.awt.Shape) $stack241;
+        virtualinvoke g2.<java.awt.Graphics2D: void fill(java.awt.Shape)>(#l92);
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>(outlinePaint#0);
+        virtualinvoke g2.<java.awt.Graphics2D: void setStroke(java.awt.Stroke)>(outlineStroke#0);
+        #l79 = (java.awt.Shape) $stack241;
+        virtualinvoke g2.<java.awt.Graphics2D: void draw(java.awt.Shape)>(#l79);
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>(paint#0);
+    
+      label17:
+        categoryIndex#0 = categoryIndex#0 + 1;
+    
+        goto label15;
+    
+      label18:
+        $stack192 = <java.awt.Color: java.awt.Color gray>;
+        #l19 = (java.awt.Paint) $stack192;
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>(#l19);
+        #l107 = (java.awt.Shape) $stack183;
+        virtualinvoke g2.<java.awt.Graphics2D: void fill(java.awt.Shape)>(#l107);
+        #l72 = (java.awt.Shape) $stack181;
+        virtualinvoke g2.<java.awt.Graphics2D: void fill(java.awt.Shape)>(#l72);
+        categoryIndex#1 = 0;
+        iterator#1 = virtualinvoke $stack144.<java.util.ArrayList: java.util.Iterator iterator()>();
+    
+      label19:
+        $stack193 = interfaceinvoke iterator#1.<java.util.Iterator: boolean hasNext()>();
+    
+        if $stack193 == 0 goto label21;
+        $stack219 = interfaceinvoke iterator#1.<java.util.Iterator: java.lang.Object next()>();
+        key#1 = (java.awt.geom.Arc2D) $stack219;
+    
+        if key#1 == null goto label20;
+        p1#1 = virtualinvoke this.<org.jfree.chart.plot.PiePlot3D: java.lang.Comparable getSectionKey(int)>(categoryIndex#1);
+        paint#1 = virtualinvoke this.<org.jfree.chart.plot.PiePlot3D: java.awt.Paint lookupSectionPaint(java.lang.Comparable,boolean)>(p1#1, 1);
+        outlinePaint#1 = virtualinvoke this.<org.jfree.chart.plot.PiePlot3D: java.awt.Paint lookupSectionOutlinePaint(java.lang.Comparable)>(p1#1);
+        outlineStroke#1 = virtualinvoke this.<org.jfree.chart.plot.PiePlot3D: java.awt.Stroke lookupSectionOutlineStroke(java.lang.Comparable)>(p1#1);
+        #l67 = (java.awt.geom.Area) $stack183;
+        #l65 = (java.awt.geom.Rectangle2D) $stack115;
+        #l66 = (java.awt.geom.Area) $stack181;
+        virtualinvoke this.<org.jfree.chart.plot.PiePlot3D: void drawSide(java.awt.Graphics2D,java.awt.geom.Rectangle2D,java.awt.geom.Arc2D,java.awt.geom.Area,java.awt.geom.Area,java.awt.Paint,java.awt.Paint,java.awt.Stroke,boolean,boolean)>(g2, #l65, key#1, #l66, #l67, paint#1, outlinePaint#1, outlineStroke#1, 0, 1);
+    
+      label20:
+        categoryIndex#1 = categoryIndex#1 + 1;
+    
+        goto label19;
+    
+      label21:
+        categoryIndex#2 = 0;
+        iterator#2 = virtualinvoke $stack144.<java.util.ArrayList: java.util.Iterator iterator()>();
+    
+      label22:
+        $stack194 = interfaceinvoke iterator#2.<java.util.Iterator: boolean hasNext()>();
+    
+        if $stack194 == 0 goto label24;
+        $stack218 = interfaceinvoke iterator#2.<java.util.Iterator: java.lang.Object next()>();
+        key#2 = (java.awt.geom.Arc2D) $stack218;
+    
+        if key#2 == null goto label23;
+        p1#2 = virtualinvoke this.<org.jfree.chart.plot.PiePlot3D: java.lang.Comparable getSectionKey(int)>(categoryIndex#2);
+        paint#2 = virtualinvoke this.<org.jfree.chart.plot.PiePlot3D: java.awt.Paint lookupSectionPaint(java.lang.Comparable)>(p1#2);
+        outlinePaint#2 = virtualinvoke this.<org.jfree.chart.plot.PiePlot3D: java.awt.Paint lookupSectionOutlinePaint(java.lang.Comparable)>(p1#2);
+        outlineStroke#2 = virtualinvoke this.<org.jfree.chart.plot.PiePlot3D: java.awt.Stroke lookupSectionOutlineStroke(java.lang.Comparable)>(p1#2);
+        #l83 = (java.awt.geom.Rectangle2D) $stack115;
+        #l85 = (java.awt.geom.Area) $stack183;
+        #l84 = (java.awt.geom.Area) $stack181;
+        virtualinvoke this.<org.jfree.chart.plot.PiePlot3D: void drawSide(java.awt.Graphics2D,java.awt.geom.Rectangle2D,java.awt.geom.Arc2D,java.awt.geom.Area,java.awt.geom.Area,java.awt.Paint,java.awt.Paint,java.awt.Stroke,boolean,boolean)>(g2, #l83, key#2, #l84, #l85, paint#2, outlinePaint#2, outlineStroke#2, 1, 0);
+    
+      label23:
+        categoryIndex#2 = categoryIndex#2 + 1;
+    
+        goto label22;
+    
+      label24:
+        virtualinvoke g2.<java.awt.Graphics2D: void setClip(java.awt.Shape)>(currentKey#1);
+        p1#3 = 0;
+    
+      label25:
+        if p1#3 >= categoryCount goto label32;
+        $stack195 = virtualinvoke $stack144.<java.util.ArrayList: java.lang.Object get(int)>(p1#3);
+        arc#2 = (java.awt.geom.Arc2D$Double) $stack195;
+    
+        if arc#2 != null goto label26;
+    
+        goto label31;
+    
+      label26:
+        $stack202 = new java.awt.geom.Arc2D$Double;
+        #l41 = (java.awt.geom.Rectangle2D) $stack115;
+        $stack201 = virtualinvoke #l41.<java.awt.geom.Rectangle2D: double getWidth()>();
+        #l86 = (java.awt.geom.Rectangle2D) $stack115;
+        $stack196 = virtualinvoke #l86.<java.awt.geom.Rectangle2D: double getHeight()>();
+        $stack197 = (double) depth;
+        $stack200 = $stack196 - $stack197;
+        $stack199 = virtualinvoke arc#2.<java.awt.geom.Arc2D$Double: double getAngleStart()>();
+        $stack198 = virtualinvoke arc#2.<java.awt.geom.Arc2D$Double: double getAngleExtent()>();
+        #l89 = (java.awt.geom.Arc2D$Double) $stack202;
+        specialinvoke #l89.<java.awt.geom.Arc2D$Double: void <init>(double,double,double,double,double,double,int)>(sfont#1, stringWidth#1, $stack201, $stack200, $stack199, $stack198, 2);
+        key#3 = (java.awt.geom.Arc2D$Double) $stack202;
+        $stack203 = interfaceinvoke text#2.<java.util.List: java.lang.Object get(int)>(p1#3);
+        polygon#1 = (java.lang.Comparable) $stack203;
+        paint#3 = virtualinvoke this.<org.jfree.chart.plot.PiePlot3D: java.awt.Paint lookupSectionPaint(java.lang.Comparable,boolean)>(polygon#1, 1);
+        outlinePaint#3 = virtualinvoke this.<org.jfree.chart.plot.PiePlot3D: java.awt.Paint lookupSectionOutlinePaint(java.lang.Comparable)>(polygon#1);
+        outlineStroke#3 = virtualinvoke this.<org.jfree.chart.plot.PiePlot3D: java.awt.Stroke lookupSectionOutlineStroke(java.lang.Comparable)>(polygon#1);
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>(paint#3);
+        #l90 = (java.awt.Shape) $stack202;
+        virtualinvoke g2.<java.awt.Graphics2D: void fill(java.awt.Shape)>(#l90);
+        virtualinvoke g2.<java.awt.Graphics2D: void setStroke(java.awt.Stroke)>(outlineStroke#3);
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>(outlinePaint#3);
+        #l32 = (java.awt.Shape) $stack202;
+        virtualinvoke g2.<java.awt.Graphics2D: void draw(java.awt.Shape)>(#l32);
+    
+        if info == null goto label29;
+        $stack212 = virtualinvoke info.<org.jfree.chart.plot.PlotRenderingInfo: org.jfree.chart.ChartRenderingInfo getOwner()>();
+        entities#0 = virtualinvoke $stack212.<org.jfree.chart.ChartRenderingInfo: org.jfree.chart.entity.EntityCollection getEntityCollection()>();
+    
+        if entities#0 == null goto label29;
+        tip#0 = null;
+        tipster = virtualinvoke this.<org.jfree.chart.plot.PiePlot3D: org.jfree.chart.labels.PieToolTipGenerator getToolTipGenerator()>();
+    
+        if tipster == null goto label27;
+        tip#0 = interfaceinvoke tipster.<org.jfree.chart.labels.PieToolTipGenerator: java.lang.String generateToolTip(org.jfree.data.general.PieDataset,java.lang.Comparable)>(dataset, polygon#1);
+    
+      label27:
+        url = null;
+        $stack213 = virtualinvoke this.<org.jfree.chart.plot.PiePlot3D: org.jfree.chart.urls.PieURLGenerator getURLGenerator()>();
+    
+        if $stack213 == null goto label28;
+        $stack217 = virtualinvoke this.<org.jfree.chart.plot.PiePlot3D: org.jfree.chart.urls.PieURLGenerator getURLGenerator()>();
+        $stack216 = virtualinvoke this.<org.jfree.chart.plot.PiePlot3D: int getPieIndex()>();
+        url = interfaceinvoke $stack217.<org.jfree.chart.urls.PieURLGenerator: java.lang.String generateURL(org.jfree.data.general.PieDataset,java.lang.Comparable,int)>(dataset, polygon#1, $stack216);
+    
+      label28:
+        $stack215 = new org.jfree.chart.entity.PieSectionEntity;
+        $stack214 = virtualinvoke this.<org.jfree.chart.plot.PiePlot3D: int getPieIndex()>();
+        #l2 = (java.awt.Shape) $stack202;
+        specialinvoke $stack215.<org.jfree.chart.entity.PieSectionEntity: void <init>(java.awt.Shape,org.jfree.data.general.PieDataset,int,int,java.lang.Comparable,java.lang.String,java.lang.String)>(#l2, dataset, $stack214, p1#3, polygon#1, tip#0, url);
+        entity = $stack215;
+        interfaceinvoke entities#0.<org.jfree.chart.entity.EntityCollection: void add(org.jfree.chart.entity.ChartEntity)>($stack215);
+    
+      label29:
+        entities#1 = interfaceinvoke dataset.<org.jfree.data.general.PieDataset: java.util.List getKeys()>();
+        $stack210 = new java.awt.geom.Rectangle2D$Double;
+        $stack209 = virtualinvoke originalPlotArea.<java.awt.geom.Rectangle2D: double getX()>();
+        $stack208 = virtualinvoke originalPlotArea.<java.awt.geom.Rectangle2D: double getY()>();
+        $stack207 = virtualinvoke originalPlotArea.<java.awt.geom.Rectangle2D: double getWidth()>();
+        $stack204 = virtualinvoke originalPlotArea.<java.awt.geom.Rectangle2D: double getHeight()>();
+        $stack205 = (double) depth;
+        $stack206 = $stack204 - $stack205;
+        #l31 = (java.awt.geom.Rectangle2D$Double) $stack210;
+        specialinvoke #l31.<java.awt.geom.Rectangle2D$Double: void <init>(double,double,double,double)>($stack209, $stack208, $stack207, $stack206);
+        tip#1 = (java.awt.geom.Rectangle2D$Double) $stack210;
+        $stack211 = virtualinvoke this.<org.jfree.chart.plot.PiePlot3D: boolean getSimpleLabels()>();
+    
+        if $stack211 == 0 goto label30;
+        #l63 = (java.awt.geom.Rectangle2D) $stack121;
+        #l62 = (java.awt.geom.Rectangle2D) $stack210;
+        virtualinvoke this.<org.jfree.chart.plot.PiePlot3D: void drawSimpleLabels(java.awt.Graphics2D,java.util.List,double,java.awt.geom.Rectangle2D,java.awt.geom.Rectangle2D,org.jfree.chart.plot.PiePlotState)>(g2, entities#1, totalValue, #l62, #l63, min#1);
+    
+        goto label31;
+    
+      label30:
+        #l43 = (java.awt.geom.Rectangle2D) $stack121;
+        #l42 = (java.awt.geom.Rectangle2D) $stack210;
+        virtualinvoke this.<org.jfree.chart.plot.PiePlot3D: void drawLabels(java.awt.Graphics2D,java.util.List,double,java.awt.geom.Rectangle2D,java.awt.geom.Rectangle2D,org.jfree.chart.plot.PiePlotState)>(g2, entities#1, totalValue, #l42, #l43, min#1);
+    
+      label31:
+        p1#3 = p1#3 + 1;
+    
+        goto label25;
+    
+      label32:
+        virtualinvoke g2.<java.awt.Graphics2D: void setClip(java.awt.Shape)>(savedClip);
+        virtualinvoke g2.<java.awt.Graphics2D: void setComposite(java.awt.Composite)>(originalComposite);
+        virtualinvoke this.<org.jfree.chart.plot.PiePlot3D: void drawOutline(java.awt.Graphics2D,java.awt.geom.Rectangle2D)>(g2, originalPlotArea);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.plot.PiePlot3D: java.lang.String getPlotType()> ----
+    {
+        java.lang.String $stack2;
+        java.util.ResourceBundle $stack1;
+        org.jfree.chart.plot.PiePlot3D this;
+    
+    
+        this := @this: org.jfree.chart.plot.PiePlot3D;
+        $stack1 = <org.jfree.chart.plot.PiePlot3D: java.util.ResourceBundle localizationResources>;
+        $stack2 = virtualinvoke $stack1.<java.util.ResourceBundle: java.lang.String getString(java.lang.String)>("Pie_3D_Plot");
+    
+        return $stack2;
+    }
+
+}

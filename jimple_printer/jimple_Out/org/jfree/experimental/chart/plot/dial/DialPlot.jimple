@@ -1,0 +1,857 @@
+// ========================================================================
+// CLASS : org.jfree.experimental.chart.plot.dial.DialPlot
+// ========================================================================
+
+[PUBLIC, SUPER] class org.jfree.experimental.chart.plot.dial.DialPlot extends org.jfree.chart.plot.Plot implements org.jfree.experimental.chart.plot.dial.DialLayerChangeListener {
+
+    // ---- method: <org.jfree.experimental.chart.plot.dial.DialPlot: void setView(double,double,double,double)> ----
+    {
+        double h, w, x, y;
+        org.jfree.chart.event.PlotChangeEvent $stack9;
+        org.jfree.experimental.chart.plot.dial.DialPlot this;
+    
+    
+        this := @this: org.jfree.experimental.chart.plot.dial.DialPlot;
+        x := @parameter0: double;
+        y := @parameter1: double;
+        w := @parameter2: double;
+        h := @parameter3: double;
+        this.<org.jfree.experimental.chart.plot.dial.DialPlot: double viewX> = x;
+        this.<org.jfree.experimental.chart.plot.dial.DialPlot: double viewY> = y;
+        this.<org.jfree.experimental.chart.plot.dial.DialPlot: double viewW> = w;
+        this.<org.jfree.experimental.chart.plot.dial.DialPlot: double viewH> = h;
+        $stack9 = new org.jfree.chart.event.PlotChangeEvent;
+        specialinvoke $stack9.<org.jfree.chart.event.PlotChangeEvent: void <init>(org.jfree.chart.plot.Plot)>(this);
+        virtualinvoke this.<org.jfree.experimental.chart.plot.dial.DialPlot: void notifyListeners(org.jfree.chart.event.PlotChangeEvent)>($stack9);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.experimental.chart.plot.dial.DialPlot: void mapDatasetToScale(int,int)> ----
+    {
+        int index, scaleIndex;
+        java.lang.Integer $stack3;
+        org.jfree.chart.event.PlotChangeEvent $stack5;
+        org.jfree.chart.util.ObjectList $stack4;
+        org.jfree.experimental.chart.plot.dial.DialPlot this;
+    
+    
+        this := @this: org.jfree.experimental.chart.plot.dial.DialPlot;
+        index := @parameter0: int;
+        scaleIndex := @parameter1: int;
+        $stack4 = this.<org.jfree.experimental.chart.plot.dial.DialPlot: org.jfree.chart.util.ObjectList datasetToScaleMap>;
+        $stack3 = new java.lang.Integer;
+        specialinvoke $stack3.<java.lang.Integer: void <init>(int)>(scaleIndex);
+        virtualinvoke $stack4.<org.jfree.chart.util.ObjectList: void set(int,java.lang.Object)>(index, $stack3);
+        $stack5 = new org.jfree.chart.event.PlotChangeEvent;
+        specialinvoke $stack5.<org.jfree.chart.event.PlotChangeEvent: void <init>(org.jfree.chart.plot.Plot)>(this);
+        virtualinvoke this.<org.jfree.experimental.chart.plot.dial.DialPlot: void notifyListeners(org.jfree.chart.event.PlotChangeEvent)>($stack5);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.experimental.chart.plot.dial.DialPlot: org.jfree.experimental.chart.plot.dial.DialScale getScale(int)> ----
+    {
+        int $stack4, index;
+        java.lang.Object $stack6;
+        org.jfree.chart.util.ObjectList $stack3, $stack5;
+        org.jfree.experimental.chart.plot.dial.DialPlot this;
+        org.jfree.experimental.chart.plot.dial.DialScale result;
+    
+    
+        this := @this: org.jfree.experimental.chart.plot.dial.DialPlot;
+        index := @parameter0: int;
+        result = null;
+        $stack3 = this.<org.jfree.experimental.chart.plot.dial.DialPlot: org.jfree.chart.util.ObjectList scales>;
+        $stack4 = virtualinvoke $stack3.<org.jfree.chart.util.ObjectList: int size()>();
+    
+        if $stack4 <= index goto label1;
+        $stack5 = this.<org.jfree.experimental.chart.plot.dial.DialPlot: org.jfree.chart.util.ObjectList scales>;
+        $stack6 = virtualinvoke $stack5.<org.jfree.chart.util.ObjectList: java.lang.Object get(int)>(index);
+        result = (org.jfree.experimental.chart.plot.dial.DialScale) $stack6;
+    
+      label1:
+        return result;
+    }
+
+    // ---- method: <org.jfree.experimental.chart.plot.dial.DialPlot: void writeObject(java.io.ObjectOutputStream)> ----
+    {
+        java.io.ObjectOutputStream stream;
+        org.jfree.experimental.chart.plot.dial.DialPlot this;
+    
+    
+        this := @this: org.jfree.experimental.chart.plot.dial.DialPlot;
+        stream := @parameter0: java.io.ObjectOutputStream;
+        virtualinvoke stream.<java.io.ObjectOutputStream: void defaultWriteObject()>();
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.experimental.chart.plot.dial.DialPlot: void setCap(org.jfree.experimental.chart.plot.dial.DialLayer)> ----
+    {
+        org.jfree.chart.event.PlotChangeEvent $stack2;
+        org.jfree.experimental.chart.plot.dial.DialLayer cap;
+        org.jfree.experimental.chart.plot.dial.DialPlot this;
+    
+    
+        this := @this: org.jfree.experimental.chart.plot.dial.DialPlot;
+        cap := @parameter0: org.jfree.experimental.chart.plot.dial.DialLayer;
+        this.<org.jfree.experimental.chart.plot.dial.DialPlot: org.jfree.experimental.chart.plot.dial.DialLayer cap> = cap;
+        $stack2 = new org.jfree.chart.event.PlotChangeEvent;
+        specialinvoke $stack2.<org.jfree.chart.event.PlotChangeEvent: void <init>(org.jfree.chart.plot.Plot)>(this);
+        virtualinvoke this.<org.jfree.experimental.chart.plot.dial.DialPlot: void notifyListeners(org.jfree.chart.event.PlotChangeEvent)>($stack2);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.experimental.chart.plot.dial.DialPlot: java.awt.geom.Rectangle2D viewToFrame(java.awt.geom.Rectangle2D)> ----
+    {
+        double $stack10, $stack11, $stack12, $stack13, $stack14, $stack15, $stack16, $stack17, $stack18, $stack19, height, width, x, y;
+        java.awt.geom.Rectangle2D #l1, view;
+        java.awt.geom.Rectangle2D$Double #l0;
+        java.lang.Object $stack20;
+        org.jfree.experimental.chart.plot.dial.DialPlot this;
+    
+    
+        this := @this: org.jfree.experimental.chart.plot.dial.DialPlot;
+        view := @parameter0: java.awt.geom.Rectangle2D;
+        $stack10 = virtualinvoke view.<java.awt.geom.Rectangle2D: double getWidth()>();
+        $stack11 = this.<org.jfree.experimental.chart.plot.dial.DialPlot: double viewW>;
+        width = $stack10 / $stack11;
+        $stack12 = virtualinvoke view.<java.awt.geom.Rectangle2D: double getHeight()>();
+        $stack13 = this.<org.jfree.experimental.chart.plot.dial.DialPlot: double viewH>;
+        height = $stack12 / $stack13;
+        $stack15 = virtualinvoke view.<java.awt.geom.Rectangle2D: double getX()>();
+        $stack14 = this.<org.jfree.experimental.chart.plot.dial.DialPlot: double viewX>;
+        $stack16 = width * $stack14;
+        x = $stack15 - $stack16;
+        $stack18 = virtualinvoke view.<java.awt.geom.Rectangle2D: double getY()>();
+        $stack17 = this.<org.jfree.experimental.chart.plot.dial.DialPlot: double viewY>;
+        $stack19 = height * $stack17;
+        y = $stack18 - $stack19;
+        $stack20 = new java.awt.geom.Rectangle2D$Double;
+        #l0 = (java.awt.geom.Rectangle2D$Double) $stack20;
+        specialinvoke #l0.<java.awt.geom.Rectangle2D$Double: void <init>(double,double,double,double)>(x, y, width, height);
+        #l1 = (java.awt.geom.Rectangle2D) $stack20;
+    
+        return #l1;
+    }
+
+    // ---- method: <org.jfree.experimental.chart.plot.dial.DialPlot: double getValue(int)> ----
+    {
+        double result;
+        int datasetIndex;
+        java.lang.Number n;
+        org.jfree.data.general.ValueDataset dataset;
+        org.jfree.experimental.chart.plot.dial.DialPlot this;
+    
+    
+        this := @this: org.jfree.experimental.chart.plot.dial.DialPlot;
+        datasetIndex := @parameter0: int;
+        result = #NaN;
+        dataset = virtualinvoke this.<org.jfree.experimental.chart.plot.dial.DialPlot: org.jfree.data.general.ValueDataset getDataset(int)>(datasetIndex);
+    
+        if dataset == null goto label1;
+        n = interfaceinvoke dataset.<org.jfree.data.general.ValueDataset: java.lang.Number getValue()>();
+    
+        if n == null goto label1;
+        result = virtualinvoke n.<java.lang.Number: double doubleValue()>();
+    
+      label1:
+        return result;
+    }
+
+    // ---- method: <org.jfree.experimental.chart.plot.dial.DialPlot: void dialLayerChanged(org.jfree.experimental.chart.plot.dial.DialLayerChangeEvent)> ----
+    {
+        org.jfree.chart.event.PlotChangeEvent $stack2;
+        org.jfree.experimental.chart.plot.dial.DialLayerChangeEvent event;
+        org.jfree.experimental.chart.plot.dial.DialPlot this;
+    
+    
+        this := @this: org.jfree.experimental.chart.plot.dial.DialPlot;
+        event := @parameter0: org.jfree.experimental.chart.plot.dial.DialLayerChangeEvent;
+        $stack2 = new org.jfree.chart.event.PlotChangeEvent;
+        specialinvoke $stack2.<org.jfree.chart.event.PlotChangeEvent: void <init>(org.jfree.chart.plot.Plot)>(this);
+        virtualinvoke this.<org.jfree.experimental.chart.plot.dial.DialPlot: void notifyListeners(org.jfree.chart.event.PlotChangeEvent)>($stack2);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.experimental.chart.plot.dial.DialPlot: double getViewX()> ----
+    {
+        double $stack1;
+        org.jfree.experimental.chart.plot.dial.DialPlot this;
+    
+    
+        this := @this: org.jfree.experimental.chart.plot.dial.DialPlot;
+        $stack1 = this.<org.jfree.experimental.chart.plot.dial.DialPlot: double viewX>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.experimental.chart.plot.dial.DialPlot: java.lang.String getPlotType()> ----
+    {
+        org.jfree.experimental.chart.plot.dial.DialPlot this;
+    
+    
+        this := @this: org.jfree.experimental.chart.plot.dial.DialPlot;
+    
+        return "DialPlot";
+    }
+
+    // ---- method: <org.jfree.experimental.chart.plot.dial.DialPlot: org.jfree.data.general.ValueDataset getDataset(int)> ----
+    {
+        int $stack4, index;
+        java.lang.Object $stack6;
+        org.jfree.chart.util.ObjectList $stack3, $stack5;
+        org.jfree.data.general.ValueDataset result;
+        org.jfree.experimental.chart.plot.dial.DialPlot this;
+    
+    
+        this := @this: org.jfree.experimental.chart.plot.dial.DialPlot;
+        index := @parameter0: int;
+        result = null;
+        $stack3 = this.<org.jfree.experimental.chart.plot.dial.DialPlot: org.jfree.chart.util.ObjectList datasets>;
+        $stack4 = virtualinvoke $stack3.<org.jfree.chart.util.ObjectList: int size()>();
+    
+        if $stack4 <= index goto label1;
+        $stack5 = this.<org.jfree.experimental.chart.plot.dial.DialPlot: org.jfree.chart.util.ObjectList datasets>;
+        $stack6 = virtualinvoke $stack5.<org.jfree.chart.util.ObjectList: java.lang.Object get(int)>(index);
+        result = (org.jfree.data.general.ValueDataset) $stack6;
+    
+      label1:
+        return result;
+    }
+
+    // ---- method: <org.jfree.experimental.chart.plot.dial.DialPlot: boolean equals(java.lang.Object)> ----
+    {
+        boolean $stack12, $stack27, $stack28, $stack3, $stack6, $stack9;
+        byte $stack15, $stack18, $stack21, $stack24;
+        double $stack13, $stack14, $stack16, $stack17, $stack19, $stack20, $stack22, $stack23;
+        java.lang.Object obj;
+        java.util.List $stack25, $stack26;
+        org.jfree.experimental.chart.plot.dial.DialFrame $stack10, $stack11;
+        org.jfree.experimental.chart.plot.dial.DialLayer $stack4, $stack5, $stack7, $stack8;
+        org.jfree.experimental.chart.plot.dial.DialPlot that, this;
+    
+    
+        this := @this: org.jfree.experimental.chart.plot.dial.DialPlot;
+        obj := @parameter0: java.lang.Object;
+    
+        if obj != this goto label01;
+    
+        return 1;
+    
+      label01:
+        $stack3 = obj instanceof org.jfree.experimental.chart.plot.dial.DialPlot;
+    
+        if $stack3 != 0 goto label02;
+    
+        return 0;
+    
+      label02:
+        that = (org.jfree.experimental.chart.plot.dial.DialPlot) obj;
+        $stack5 = this.<org.jfree.experimental.chart.plot.dial.DialPlot: org.jfree.experimental.chart.plot.dial.DialLayer background>;
+        $stack4 = that.<org.jfree.experimental.chart.plot.dial.DialPlot: org.jfree.experimental.chart.plot.dial.DialLayer background>;
+        $stack6 = staticinvoke <org.jfree.chart.util.ObjectUtilities: boolean equal(java.lang.Object,java.lang.Object)>($stack5, $stack4);
+    
+        if $stack6 != 0 goto label03;
+    
+        return 0;
+    
+      label03:
+        $stack8 = this.<org.jfree.experimental.chart.plot.dial.DialPlot: org.jfree.experimental.chart.plot.dial.DialLayer cap>;
+        $stack7 = that.<org.jfree.experimental.chart.plot.dial.DialPlot: org.jfree.experimental.chart.plot.dial.DialLayer cap>;
+        $stack9 = staticinvoke <org.jfree.chart.util.ObjectUtilities: boolean equal(java.lang.Object,java.lang.Object)>($stack8, $stack7);
+    
+        if $stack9 != 0 goto label04;
+    
+        return 0;
+    
+      label04:
+        $stack11 = this.<org.jfree.experimental.chart.plot.dial.DialPlot: org.jfree.experimental.chart.plot.dial.DialFrame dialFrame>;
+        $stack10 = that.<org.jfree.experimental.chart.plot.dial.DialPlot: org.jfree.experimental.chart.plot.dial.DialFrame dialFrame>;
+        $stack12 = virtualinvoke $stack11.<java.lang.Object: boolean equals(java.lang.Object)>($stack10);
+    
+        if $stack12 != 0 goto label05;
+    
+        return 0;
+    
+      label05:
+        $stack13 = this.<org.jfree.experimental.chart.plot.dial.DialPlot: double viewX>;
+        $stack14 = that.<org.jfree.experimental.chart.plot.dial.DialPlot: double viewX>;
+        $stack15 = $stack13 cmpl $stack14;
+    
+        if $stack15 == 0 goto label06;
+    
+        return 0;
+    
+      label06:
+        $stack16 = this.<org.jfree.experimental.chart.plot.dial.DialPlot: double viewY>;
+        $stack17 = that.<org.jfree.experimental.chart.plot.dial.DialPlot: double viewY>;
+        $stack18 = $stack16 cmpl $stack17;
+    
+        if $stack18 == 0 goto label07;
+    
+        return 0;
+    
+      label07:
+        $stack19 = this.<org.jfree.experimental.chart.plot.dial.DialPlot: double viewW>;
+        $stack20 = that.<org.jfree.experimental.chart.plot.dial.DialPlot: double viewW>;
+        $stack21 = $stack19 cmpl $stack20;
+    
+        if $stack21 == 0 goto label08;
+    
+        return 0;
+    
+      label08:
+        $stack22 = this.<org.jfree.experimental.chart.plot.dial.DialPlot: double viewH>;
+        $stack23 = that.<org.jfree.experimental.chart.plot.dial.DialPlot: double viewH>;
+        $stack24 = $stack22 cmpl $stack23;
+    
+        if $stack24 == 0 goto label09;
+    
+        return 0;
+    
+      label09:
+        $stack26 = this.<org.jfree.experimental.chart.plot.dial.DialPlot: java.util.List layers>;
+        $stack25 = that.<org.jfree.experimental.chart.plot.dial.DialPlot: java.util.List layers>;
+        $stack27 = interfaceinvoke $stack26.<java.util.List: boolean equals(java.lang.Object)>($stack25);
+    
+        if $stack27 != 0 goto label10;
+    
+        return 0;
+    
+      label10:
+        $stack28 = specialinvoke this.<org.jfree.chart.plot.Plot: boolean equals(java.lang.Object)>(obj);
+    
+        return $stack28;
+    }
+
+    // ---- method: <org.jfree.experimental.chart.plot.dial.DialPlot: void setBackground(org.jfree.experimental.chart.plot.dial.DialLayer)> ----
+    {
+        org.jfree.chart.event.PlotChangeEvent $stack2;
+        org.jfree.experimental.chart.plot.dial.DialLayer background;
+        org.jfree.experimental.chart.plot.dial.DialPlot this;
+    
+    
+        this := @this: org.jfree.experimental.chart.plot.dial.DialPlot;
+        background := @parameter0: org.jfree.experimental.chart.plot.dial.DialLayer;
+        this.<org.jfree.experimental.chart.plot.dial.DialPlot: org.jfree.experimental.chart.plot.dial.DialLayer background> = background;
+        $stack2 = new org.jfree.chart.event.PlotChangeEvent;
+        specialinvoke $stack2.<org.jfree.chart.event.PlotChangeEvent: void <init>(org.jfree.chart.plot.Plot)>(this);
+        virtualinvoke this.<org.jfree.experimental.chart.plot.dial.DialPlot: void notifyListeners(org.jfree.chart.event.PlotChangeEvent)>($stack2);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.experimental.chart.plot.dial.DialPlot: java.awt.geom.Rectangle2D rectangleByRadius(java.awt.geom.Rectangle2D,double,double)> ----
+    {
+        double $stack13, $stack14, $stack15, $stack16, $stack17, $stack18, h, radiusH, radiusW, w, x, y;
+        java.awt.geom.Rectangle2D #l1, rect;
+        java.awt.geom.Rectangle2D$Double #l0;
+        java.lang.Object $stack19;
+    
+    
+        rect := @parameter0: java.awt.geom.Rectangle2D;
+        radiusW := @parameter1: double;
+        radiusH := @parameter2: double;
+        x = virtualinvoke rect.<java.awt.geom.Rectangle2D: double getCenterX()>();
+        y = virtualinvoke rect.<java.awt.geom.Rectangle2D: double getCenterY()>();
+        $stack13 = virtualinvoke rect.<java.awt.geom.Rectangle2D: double getWidth()>();
+        w = $stack13 * radiusW;
+        $stack14 = virtualinvoke rect.<java.awt.geom.Rectangle2D: double getHeight()>();
+        h = $stack14 * radiusH;
+        $stack19 = new java.awt.geom.Rectangle2D$Double;
+        $stack15 = w / 2.0;
+        $stack18 = x - $stack15;
+        $stack16 = h / 2.0;
+        $stack17 = y - $stack16;
+        #l0 = (java.awt.geom.Rectangle2D$Double) $stack19;
+        specialinvoke #l0.<java.awt.geom.Rectangle2D$Double: void <init>(double,double,double,double)>($stack18, $stack17, w, h);
+        #l1 = (java.awt.geom.Rectangle2D) $stack19;
+    
+        return #l1;
+    }
+
+    // ---- method: <org.jfree.experimental.chart.plot.dial.DialPlot: void setDialFrame(org.jfree.experimental.chart.plot.dial.DialFrame)> ----
+    {
+        java.lang.IllegalArgumentException #l0;
+        java.lang.Object $stack3;
+        java.lang.Throwable #l1;
+        org.jfree.chart.event.PlotChangeEvent $stack2;
+        org.jfree.experimental.chart.plot.dial.DialFrame frame;
+        org.jfree.experimental.chart.plot.dial.DialPlot this;
+    
+    
+        this := @this: org.jfree.experimental.chart.plot.dial.DialPlot;
+        frame := @parameter0: org.jfree.experimental.chart.plot.dial.DialFrame;
+    
+        if frame != null goto label1;
+        $stack3 = new java.lang.IllegalArgumentException;
+        #l0 = (java.lang.IllegalArgumentException) $stack3;
+        specialinvoke #l0.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'frame\' argument.");
+        #l1 = (java.lang.Throwable) $stack3;
+    
+        throw #l1;
+    
+      label1:
+        this.<org.jfree.experimental.chart.plot.dial.DialPlot: org.jfree.experimental.chart.plot.dial.DialFrame dialFrame> = frame;
+        $stack2 = new org.jfree.chart.event.PlotChangeEvent;
+        specialinvoke $stack2.<org.jfree.chart.event.PlotChangeEvent: void <init>(org.jfree.chart.plot.Plot)>(this);
+        virtualinvoke this.<org.jfree.experimental.chart.plot.dial.DialPlot: void notifyListeners(org.jfree.chart.event.PlotChangeEvent)>($stack2);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.experimental.chart.plot.dial.DialPlot: void readObject(java.io.ObjectInputStream)> ----
+    {
+        java.io.ObjectInputStream stream;
+        org.jfree.experimental.chart.plot.dial.DialPlot this;
+    
+    
+        this := @this: org.jfree.experimental.chart.plot.dial.DialPlot;
+        stream := @parameter0: java.io.ObjectInputStream;
+        virtualinvoke stream.<java.io.ObjectInputStream: void defaultReadObject()>();
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.experimental.chart.plot.dial.DialPlot: void setDataset(int,org.jfree.data.general.ValueDataset)> ----
+    {
+        int index;
+        java.lang.Object $stack6;
+        org.jfree.chart.util.ObjectList $stack5, $stack7;
+        org.jfree.data.general.DatasetChangeEvent $stack8, event;
+        org.jfree.data.general.ValueDataset dataset, existing;
+        org.jfree.experimental.chart.plot.dial.DialPlot this;
+    
+    
+        this := @this: org.jfree.experimental.chart.plot.dial.DialPlot;
+        index := @parameter0: int;
+        dataset := @parameter1: org.jfree.data.general.ValueDataset;
+        $stack5 = this.<org.jfree.experimental.chart.plot.dial.DialPlot: org.jfree.chart.util.ObjectList datasets>;
+        $stack6 = virtualinvoke $stack5.<org.jfree.chart.util.ObjectList: java.lang.Object get(int)>(index);
+        existing = (org.jfree.data.general.ValueDataset) $stack6;
+    
+        if existing == null goto label1;
+        interfaceinvoke existing.<org.jfree.data.general.ValueDataset: void removeChangeListener(org.jfree.data.general.DatasetChangeListener)>(this);
+    
+      label1:
+        $stack7 = this.<org.jfree.experimental.chart.plot.dial.DialPlot: org.jfree.chart.util.ObjectList datasets>;
+        virtualinvoke $stack7.<org.jfree.chart.util.ObjectList: void set(int,java.lang.Object)>(index, dataset);
+    
+        if dataset == null goto label2;
+        interfaceinvoke dataset.<org.jfree.data.general.ValueDataset: void addChangeListener(org.jfree.data.general.DatasetChangeListener)>(this);
+    
+      label2:
+        $stack8 = new org.jfree.data.general.DatasetChangeEvent;
+        specialinvoke $stack8.<org.jfree.data.general.DatasetChangeEvent: void <init>(java.lang.Object,org.jfree.data.general.Dataset)>(this, dataset);
+        event = $stack8;
+        virtualinvoke this.<org.jfree.experimental.chart.plot.dial.DialPlot: void datasetChanged(org.jfree.data.general.DatasetChangeEvent)>($stack8);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.experimental.chart.plot.dial.DialPlot: org.jfree.experimental.chart.plot.dial.DialLayer getBackground()> ----
+    {
+        org.jfree.experimental.chart.plot.dial.DialLayer $stack1;
+        org.jfree.experimental.chart.plot.dial.DialPlot this;
+    
+    
+        this := @this: org.jfree.experimental.chart.plot.dial.DialPlot;
+        $stack1 = this.<org.jfree.experimental.chart.plot.dial.DialPlot: org.jfree.experimental.chart.plot.dial.DialLayer background>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.experimental.chart.plot.dial.DialPlot: int hashCode()> ----
+    {
+        double $stack13, $stack18, $stack23, $stack28;
+        int $stack11, $stack12, $stack16, $stack17, $stack21, $stack22, $stack26, $stack27, $stack31, $stack32, $stack6, $stack8, $stack9, result#1, result#2, result#3, result#4, result#5, result#6, result#7;
+        long $stack14, $stack15, $stack19, $stack20, $stack24, $stack25, $stack29, $stack30, temp#0, temp#1, temp#2, temp#3;
+        org.jfree.experimental.chart.plot.dial.DialFrame $stack10;
+        org.jfree.experimental.chart.plot.dial.DialLayer $stack4, $stack7;
+        org.jfree.experimental.chart.plot.dial.DialPlot this;
+        short $stack5;
+    
+    
+        this := @this: org.jfree.experimental.chart.plot.dial.DialPlot;
+        $stack5 = 7141;
+        $stack4 = this.<org.jfree.experimental.chart.plot.dial.DialPlot: org.jfree.experimental.chart.plot.dial.DialLayer background>;
+        $stack6 = staticinvoke <org.jfree.chart.util.ObjectUtilities: int hashCode(java.lang.Object)>($stack4);
+        result#1 = $stack5 + $stack6;
+        $stack8 = 37 * result#1;
+        $stack7 = this.<org.jfree.experimental.chart.plot.dial.DialPlot: org.jfree.experimental.chart.plot.dial.DialLayer cap>;
+        $stack9 = staticinvoke <org.jfree.chart.util.ObjectUtilities: int hashCode(java.lang.Object)>($stack7);
+        result#2 = $stack8 + $stack9;
+        $stack11 = 37 * result#2;
+        $stack10 = this.<org.jfree.experimental.chart.plot.dial.DialPlot: org.jfree.experimental.chart.plot.dial.DialFrame dialFrame>;
+        $stack12 = virtualinvoke $stack10.<java.lang.Object: int hashCode()>();
+        result#3 = $stack11 + $stack12;
+        $stack13 = this.<org.jfree.experimental.chart.plot.dial.DialPlot: double viewX>;
+        temp#0 = staticinvoke <java.lang.Double: long doubleToLongBits(double)>($stack13);
+        $stack16 = 37 * result#3;
+        $stack14 = temp#0 >>> 32;
+        $stack15 = temp#0 ^ $stack14;
+        $stack17 = (int) $stack15;
+        result#4 = $stack16 + $stack17;
+        $stack18 = this.<org.jfree.experimental.chart.plot.dial.DialPlot: double viewY>;
+        temp#1 = staticinvoke <java.lang.Double: long doubleToLongBits(double)>($stack18);
+        $stack21 = 37 * result#4;
+        $stack19 = temp#1 >>> 32;
+        $stack20 = temp#1 ^ $stack19;
+        $stack22 = (int) $stack20;
+        result#5 = $stack21 + $stack22;
+        $stack23 = this.<org.jfree.experimental.chart.plot.dial.DialPlot: double viewW>;
+        temp#2 = staticinvoke <java.lang.Double: long doubleToLongBits(double)>($stack23);
+        $stack26 = 37 * result#5;
+        $stack24 = temp#2 >>> 32;
+        $stack25 = temp#2 ^ $stack24;
+        $stack27 = (int) $stack25;
+        result#6 = $stack26 + $stack27;
+        $stack28 = this.<org.jfree.experimental.chart.plot.dial.DialPlot: double viewH>;
+        temp#3 = staticinvoke <java.lang.Double: long doubleToLongBits(double)>($stack28);
+        $stack31 = 37 * result#6;
+        $stack29 = temp#3 >>> 32;
+        $stack30 = temp#3 ^ $stack29;
+        $stack32 = (int) $stack30;
+        result#7 = $stack31 + $stack32;
+    
+        return result#7;
+    }
+
+    // ---- method: <org.jfree.experimental.chart.plot.dial.DialPlot: org.jfree.experimental.chart.plot.dial.DialScale getScaleForDataset(int)> ----
+    {
+        int $stack8, datasetIndex;
+        java.lang.Integer scaleIndex;
+        java.lang.Object $stack5, $stack7;
+        org.jfree.chart.util.ObjectList $stack4, $stack6;
+        org.jfree.experimental.chart.plot.dial.DialPlot this;
+        org.jfree.experimental.chart.plot.dial.DialScale result;
+    
+    
+        this := @this: org.jfree.experimental.chart.plot.dial.DialPlot;
+        datasetIndex := @parameter0: int;
+        $stack4 = this.<org.jfree.experimental.chart.plot.dial.DialPlot: org.jfree.chart.util.ObjectList scales>;
+        $stack5 = virtualinvoke $stack4.<org.jfree.chart.util.ObjectList: java.lang.Object get(int)>(0);
+        result = (org.jfree.experimental.chart.plot.dial.DialScale) $stack5;
+        $stack6 = this.<org.jfree.experimental.chart.plot.dial.DialPlot: org.jfree.chart.util.ObjectList datasetToScaleMap>;
+        $stack7 = virtualinvoke $stack6.<org.jfree.chart.util.ObjectList: java.lang.Object get(int)>(datasetIndex);
+        scaleIndex = (java.lang.Integer) $stack7;
+    
+        if scaleIndex == null goto label1;
+        $stack8 = virtualinvoke scaleIndex.<java.lang.Integer: int intValue()>();
+        result = virtualinvoke this.<org.jfree.experimental.chart.plot.dial.DialPlot: org.jfree.experimental.chart.plot.dial.DialScale getScale(int)>($stack8);
+    
+      label1:
+        return result;
+    }
+
+    // ---- method: <org.jfree.experimental.chart.plot.dial.DialPlot: org.jfree.experimental.chart.plot.dial.DialFrame getDialFrame()> ----
+    {
+        org.jfree.experimental.chart.plot.dial.DialFrame $stack1;
+        org.jfree.experimental.chart.plot.dial.DialPlot this;
+    
+    
+        this := @this: org.jfree.experimental.chart.plot.dial.DialPlot;
+        $stack1 = this.<org.jfree.experimental.chart.plot.dial.DialPlot: org.jfree.experimental.chart.plot.dial.DialFrame dialFrame>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.experimental.chart.plot.dial.DialPlot: org.jfree.experimental.chart.plot.dial.DialLayer getCap()> ----
+    {
+        org.jfree.experimental.chart.plot.dial.DialLayer $stack1;
+        org.jfree.experimental.chart.plot.dial.DialPlot this;
+    
+    
+        this := @this: org.jfree.experimental.chart.plot.dial.DialPlot;
+        $stack1 = this.<org.jfree.experimental.chart.plot.dial.DialPlot: org.jfree.experimental.chart.plot.dial.DialLayer cap>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.experimental.chart.plot.dial.DialPlot: void addLayer(org.jfree.experimental.chart.plot.dial.DialLayer)> ----
+    {
+        java.lang.IllegalArgumentException #l1;
+        java.lang.Object $stack4;
+        java.lang.Throwable #l0;
+        java.util.List $stack2;
+        org.jfree.chart.event.PlotChangeEvent $stack3;
+        org.jfree.experimental.chart.plot.dial.DialLayer layer;
+        org.jfree.experimental.chart.plot.dial.DialPlot this;
+    
+    
+        this := @this: org.jfree.experimental.chart.plot.dial.DialPlot;
+        layer := @parameter0: org.jfree.experimental.chart.plot.dial.DialLayer;
+    
+        if layer != null goto label1;
+        $stack4 = new java.lang.IllegalArgumentException;
+        #l1 = (java.lang.IllegalArgumentException) $stack4;
+        specialinvoke #l1.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'layer\' argument.");
+        #l0 = (java.lang.Throwable) $stack4;
+    
+        throw #l0;
+    
+      label1:
+        $stack2 = this.<org.jfree.experimental.chart.plot.dial.DialPlot: java.util.List layers>;
+        interfaceinvoke $stack2.<java.util.List: boolean add(java.lang.Object)>(layer);
+        $stack3 = new org.jfree.chart.event.PlotChangeEvent;
+        specialinvoke $stack3.<org.jfree.chart.event.PlotChangeEvent: void <init>(org.jfree.chart.plot.Plot)>(this);
+        virtualinvoke this.<org.jfree.experimental.chart.plot.dial.DialPlot: void notifyListeners(org.jfree.chart.event.PlotChangeEvent)>($stack3);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.experimental.chart.plot.dial.DialPlot: void draw(java.awt.Graphics2D,java.awt.geom.Rectangle2D,java.awt.geom.Point2D,org.jfree.chart.plot.PlotState,org.jfree.chart.plot.PlotRenderingInfo)> ----
+    {
+        boolean $stack12, $stack15, $stack18, $stack20, $stack26, $stack27, $stack31, $stack33;
+        java.awt.Graphics2D g2;
+        java.awt.Shape $stack23, $stack29, $stack36, current#1, savedClip#0, savedClip_1;
+        java.awt.geom.Point2D anchor;
+        java.awt.geom.Rectangle2D area, frame;
+        java.lang.Object $stack25;
+        java.util.Iterator savedClip#1;
+        java.util.List $stack11;
+        org.jfree.chart.plot.PlotRenderingInfo info;
+        org.jfree.chart.plot.PlotState parentState;
+        org.jfree.experimental.chart.plot.dial.DialFrame $stack14, $stack16, $stack22, $stack28, $stack35;
+        org.jfree.experimental.chart.plot.dial.DialLayer $stack10, $stack13, $stack17, $stack19, $stack21, $stack24, $stack30, $stack32, $stack34, $stack37, current#0;
+        org.jfree.experimental.chart.plot.dial.DialPlot this;
+    
+    
+        this := @this: org.jfree.experimental.chart.plot.dial.DialPlot;
+        g2 := @parameter0: java.awt.Graphics2D;
+        area := @parameter1: java.awt.geom.Rectangle2D;
+        anchor := @parameter2: java.awt.geom.Point2D;
+        parentState := @parameter3: org.jfree.chart.plot.PlotState;
+        info := @parameter4: org.jfree.chart.plot.PlotRenderingInfo;
+        frame = specialinvoke this.<org.jfree.experimental.chart.plot.dial.DialPlot: java.awt.geom.Rectangle2D viewToFrame(java.awt.geom.Rectangle2D)>(area);
+        $stack10 = this.<org.jfree.experimental.chart.plot.dial.DialPlot: org.jfree.experimental.chart.plot.dial.DialLayer background>;
+    
+        if $stack10 == null goto label2;
+        $stack30 = this.<org.jfree.experimental.chart.plot.dial.DialPlot: org.jfree.experimental.chart.plot.dial.DialLayer background>;
+        $stack31 = interfaceinvoke $stack30.<org.jfree.experimental.chart.plot.dial.DialLayer: boolean isVisible()>();
+    
+        if $stack31 == 0 goto label2;
+        $stack32 = this.<org.jfree.experimental.chart.plot.dial.DialPlot: org.jfree.experimental.chart.plot.dial.DialLayer background>;
+        $stack33 = interfaceinvoke $stack32.<org.jfree.experimental.chart.plot.dial.DialLayer: boolean isClippedToWindow()>();
+    
+        if $stack33 == 0 goto label1;
+        savedClip#0 = virtualinvoke g2.<java.awt.Graphics2D: java.awt.Shape getClip()>();
+        $stack35 = this.<org.jfree.experimental.chart.plot.dial.DialPlot: org.jfree.experimental.chart.plot.dial.DialFrame dialFrame>;
+        $stack36 = interfaceinvoke $stack35.<org.jfree.experimental.chart.plot.dial.DialFrame: java.awt.Shape getWindow(java.awt.geom.Rectangle2D)>(frame);
+        virtualinvoke g2.<java.awt.Graphics2D: void setClip(java.awt.Shape)>($stack36);
+        $stack37 = this.<org.jfree.experimental.chart.plot.dial.DialPlot: org.jfree.experimental.chart.plot.dial.DialLayer background>;
+        interfaceinvoke $stack37.<org.jfree.experimental.chart.plot.dial.DialLayer: void draw(java.awt.Graphics2D,org.jfree.experimental.chart.plot.dial.DialPlot,java.awt.geom.Rectangle2D,java.awt.geom.Rectangle2D)>(g2, this, frame, area);
+        virtualinvoke g2.<java.awt.Graphics2D: void setClip(java.awt.Shape)>(savedClip#0);
+    
+        goto label2;
+    
+      label1:
+        $stack34 = this.<org.jfree.experimental.chart.plot.dial.DialPlot: org.jfree.experimental.chart.plot.dial.DialLayer background>;
+        interfaceinvoke $stack34.<org.jfree.experimental.chart.plot.dial.DialLayer: void draw(java.awt.Graphics2D,org.jfree.experimental.chart.plot.dial.DialPlot,java.awt.geom.Rectangle2D,java.awt.geom.Rectangle2D)>(g2, this, frame, area);
+    
+      label2:
+        $stack11 = this.<org.jfree.experimental.chart.plot.dial.DialPlot: java.util.List layers>;
+        savedClip#1 = interfaceinvoke $stack11.<java.util.List: java.util.Iterator iterator()>();
+    
+      label3:
+        $stack12 = interfaceinvoke savedClip#1.<java.util.Iterator: boolean hasNext()>();
+    
+        if $stack12 == 0 goto label6;
+        $stack25 = interfaceinvoke savedClip#1.<java.util.Iterator: java.lang.Object next()>();
+        current#0 = (org.jfree.experimental.chart.plot.dial.DialLayer) $stack25;
+        $stack26 = interfaceinvoke current#0.<org.jfree.experimental.chart.plot.dial.DialLayer: boolean isVisible()>();
+    
+        if $stack26 == 0 goto label5;
+        $stack27 = interfaceinvoke current#0.<org.jfree.experimental.chart.plot.dial.DialLayer: boolean isClippedToWindow()>();
+    
+        if $stack27 == 0 goto label4;
+        savedClip_1 = virtualinvoke g2.<java.awt.Graphics2D: java.awt.Shape getClip()>();
+        $stack28 = this.<org.jfree.experimental.chart.plot.dial.DialPlot: org.jfree.experimental.chart.plot.dial.DialFrame dialFrame>;
+        $stack29 = interfaceinvoke $stack28.<org.jfree.experimental.chart.plot.dial.DialFrame: java.awt.Shape getWindow(java.awt.geom.Rectangle2D)>(frame);
+        virtualinvoke g2.<java.awt.Graphics2D: void setClip(java.awt.Shape)>($stack29);
+        interfaceinvoke current#0.<org.jfree.experimental.chart.plot.dial.DialLayer: void draw(java.awt.Graphics2D,org.jfree.experimental.chart.plot.dial.DialPlot,java.awt.geom.Rectangle2D,java.awt.geom.Rectangle2D)>(g2, this, frame, area);
+        virtualinvoke g2.<java.awt.Graphics2D: void setClip(java.awt.Shape)>(savedClip_1);
+    
+        goto label5;
+    
+      label4:
+        interfaceinvoke current#0.<org.jfree.experimental.chart.plot.dial.DialLayer: void draw(java.awt.Graphics2D,org.jfree.experimental.chart.plot.dial.DialPlot,java.awt.geom.Rectangle2D,java.awt.geom.Rectangle2D)>(g2, this, frame, area);
+    
+      label5:
+        goto label3;
+    
+      label6:
+        $stack13 = this.<org.jfree.experimental.chart.plot.dial.DialPlot: org.jfree.experimental.chart.plot.dial.DialLayer cap>;
+    
+        if $stack13 == null goto label8;
+        $stack17 = this.<org.jfree.experimental.chart.plot.dial.DialPlot: org.jfree.experimental.chart.plot.dial.DialLayer cap>;
+        $stack18 = interfaceinvoke $stack17.<org.jfree.experimental.chart.plot.dial.DialLayer: boolean isVisible()>();
+    
+        if $stack18 == 0 goto label8;
+        $stack19 = this.<org.jfree.experimental.chart.plot.dial.DialPlot: org.jfree.experimental.chart.plot.dial.DialLayer cap>;
+        $stack20 = interfaceinvoke $stack19.<org.jfree.experimental.chart.plot.dial.DialLayer: boolean isClippedToWindow()>();
+    
+        if $stack20 == 0 goto label7;
+        current#1 = virtualinvoke g2.<java.awt.Graphics2D: java.awt.Shape getClip()>();
+        $stack22 = this.<org.jfree.experimental.chart.plot.dial.DialPlot: org.jfree.experimental.chart.plot.dial.DialFrame dialFrame>;
+        $stack23 = interfaceinvoke $stack22.<org.jfree.experimental.chart.plot.dial.DialFrame: java.awt.Shape getWindow(java.awt.geom.Rectangle2D)>(frame);
+        virtualinvoke g2.<java.awt.Graphics2D: void setClip(java.awt.Shape)>($stack23);
+        $stack24 = this.<org.jfree.experimental.chart.plot.dial.DialPlot: org.jfree.experimental.chart.plot.dial.DialLayer cap>;
+        interfaceinvoke $stack24.<org.jfree.experimental.chart.plot.dial.DialLayer: void draw(java.awt.Graphics2D,org.jfree.experimental.chart.plot.dial.DialPlot,java.awt.geom.Rectangle2D,java.awt.geom.Rectangle2D)>(g2, this, frame, area);
+        virtualinvoke g2.<java.awt.Graphics2D: void setClip(java.awt.Shape)>(current#1);
+    
+        goto label8;
+    
+      label7:
+        $stack21 = this.<org.jfree.experimental.chart.plot.dial.DialPlot: org.jfree.experimental.chart.plot.dial.DialLayer cap>;
+        interfaceinvoke $stack21.<org.jfree.experimental.chart.plot.dial.DialLayer: void draw(java.awt.Graphics2D,org.jfree.experimental.chart.plot.dial.DialPlot,java.awt.geom.Rectangle2D,java.awt.geom.Rectangle2D)>(g2, this, frame, area);
+    
+      label8:
+        $stack14 = this.<org.jfree.experimental.chart.plot.dial.DialPlot: org.jfree.experimental.chart.plot.dial.DialFrame dialFrame>;
+        $stack15 = interfaceinvoke $stack14.<org.jfree.experimental.chart.plot.dial.DialFrame: boolean isVisible()>();
+    
+        if $stack15 == 0 goto label9;
+        $stack16 = this.<org.jfree.experimental.chart.plot.dial.DialPlot: org.jfree.experimental.chart.plot.dial.DialFrame dialFrame>;
+        interfaceinvoke $stack16.<org.jfree.experimental.chart.plot.dial.DialFrame: void draw(java.awt.Graphics2D,org.jfree.experimental.chart.plot.dial.DialPlot,java.awt.geom.Rectangle2D,java.awt.geom.Rectangle2D)>(g2, this, frame, area);
+    
+      label9:
+        return;
+    }
+
+    // ---- method: <org.jfree.experimental.chart.plot.dial.DialPlot: void addScale(int,org.jfree.experimental.chart.plot.dial.DialScale)> ----
+    {
+        int index;
+        java.util.List $stack3;
+        org.jfree.chart.util.ObjectList $stack4;
+        org.jfree.experimental.chart.plot.dial.DialPlot this;
+        org.jfree.experimental.chart.plot.dial.DialScale scale;
+    
+    
+        this := @this: org.jfree.experimental.chart.plot.dial.DialPlot;
+        index := @parameter0: int;
+        scale := @parameter1: org.jfree.experimental.chart.plot.dial.DialScale;
+        $stack3 = this.<org.jfree.experimental.chart.plot.dial.DialPlot: java.util.List layers>;
+        interfaceinvoke $stack3.<java.util.List: boolean add(java.lang.Object)>(scale);
+        $stack4 = this.<org.jfree.experimental.chart.plot.dial.DialPlot: org.jfree.chart.util.ObjectList scales>;
+        virtualinvoke $stack4.<org.jfree.chart.util.ObjectList: void set(int,java.lang.Object)>(index, scale);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.experimental.chart.plot.dial.DialPlot: void <init>()> ----
+    {
+        java.lang.Object $stack5;
+        java.util.ArrayList #l0;
+        org.jfree.chart.util.ObjectList $stack2, $stack3, $stack4;
+        org.jfree.experimental.chart.plot.dial.DialPlot this;
+        org.jfree.experimental.chart.plot.dial.StandardDialFrame $stack1;
+    
+    
+        this := @this: org.jfree.experimental.chart.plot.dial.DialPlot;
+        specialinvoke this.<org.jfree.chart.plot.Plot: void <init>()>();
+        this.<org.jfree.experimental.chart.plot.dial.DialPlot: org.jfree.experimental.chart.plot.dial.DialLayer background> = null;
+        this.<org.jfree.experimental.chart.plot.dial.DialPlot: org.jfree.experimental.chart.plot.dial.DialLayer cap> = null;
+        $stack1 = new org.jfree.experimental.chart.plot.dial.StandardDialFrame;
+        specialinvoke $stack1.<org.jfree.experimental.chart.plot.dial.StandardDialFrame: void <init>()>();
+        this.<org.jfree.experimental.chart.plot.dial.DialPlot: org.jfree.experimental.chart.plot.dial.DialFrame dialFrame> = $stack1;
+        $stack2 = new org.jfree.chart.util.ObjectList;
+        specialinvoke $stack2.<org.jfree.chart.util.ObjectList: void <init>()>();
+        this.<org.jfree.experimental.chart.plot.dial.DialPlot: org.jfree.chart.util.ObjectList datasets> = $stack2;
+        $stack3 = new org.jfree.chart.util.ObjectList;
+        specialinvoke $stack3.<org.jfree.chart.util.ObjectList: void <init>()>();
+        this.<org.jfree.experimental.chart.plot.dial.DialPlot: org.jfree.chart.util.ObjectList scales> = $stack3;
+        $stack4 = new org.jfree.chart.util.ObjectList;
+        specialinvoke $stack4.<org.jfree.chart.util.ObjectList: void <init>()>();
+        this.<org.jfree.experimental.chart.plot.dial.DialPlot: org.jfree.chart.util.ObjectList datasetToScaleMap> = $stack4;
+        $stack5 = new java.util.ArrayList;
+        #l0 = (java.util.ArrayList) $stack5;
+        specialinvoke #l0.<java.util.ArrayList: void <init>()>();
+        this.<org.jfree.experimental.chart.plot.dial.DialPlot: java.util.List layers> = (java.util.List) $stack5;
+        this.<org.jfree.experimental.chart.plot.dial.DialPlot: double viewX> = 0.0;
+        this.<org.jfree.experimental.chart.plot.dial.DialPlot: double viewY> = 0.0;
+        this.<org.jfree.experimental.chart.plot.dial.DialPlot: double viewW> = 1.0;
+        this.<org.jfree.experimental.chart.plot.dial.DialPlot: double viewH> = 1.0;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.experimental.chart.plot.dial.DialPlot: org.jfree.data.general.ValueDataset getDataset()> ----
+    {
+        org.jfree.data.general.ValueDataset $stack1;
+        org.jfree.experimental.chart.plot.dial.DialPlot this;
+    
+    
+        this := @this: org.jfree.experimental.chart.plot.dial.DialPlot;
+        $stack1 = virtualinvoke this.<org.jfree.experimental.chart.plot.dial.DialPlot: org.jfree.data.general.ValueDataset getDataset(int)>(0);
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.experimental.chart.plot.dial.DialPlot: void setDataset(org.jfree.data.general.ValueDataset)> ----
+    {
+        org.jfree.data.general.ValueDataset dataset;
+        org.jfree.experimental.chart.plot.dial.DialPlot this;
+    
+    
+        this := @this: org.jfree.experimental.chart.plot.dial.DialPlot;
+        dataset := @parameter0: org.jfree.data.general.ValueDataset;
+        virtualinvoke this.<org.jfree.experimental.chart.plot.dial.DialPlot: void setDataset(int,org.jfree.data.general.ValueDataset)>(0, dataset);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.experimental.chart.plot.dial.DialPlot: int getDatasetCount()> ----
+    {
+        int $stack2;
+        org.jfree.chart.util.ObjectList $stack1;
+        org.jfree.experimental.chart.plot.dial.DialPlot this;
+    
+    
+        this := @this: org.jfree.experimental.chart.plot.dial.DialPlot;
+        $stack1 = this.<org.jfree.experimental.chart.plot.dial.DialPlot: org.jfree.chart.util.ObjectList datasets>;
+        $stack2 = virtualinvoke $stack1.<org.jfree.chart.util.ObjectList: int size()>();
+    
+        return $stack2;
+    }
+
+    // ---- method: <org.jfree.experimental.chart.plot.dial.DialPlot: double getViewHeight()> ----
+    {
+        double $stack1;
+        org.jfree.experimental.chart.plot.dial.DialPlot this;
+    
+    
+        this := @this: org.jfree.experimental.chart.plot.dial.DialPlot;
+        $stack1 = this.<org.jfree.experimental.chart.plot.dial.DialPlot: double viewH>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.experimental.chart.plot.dial.DialPlot: double getViewY()> ----
+    {
+        double $stack1;
+        org.jfree.experimental.chart.plot.dial.DialPlot this;
+    
+    
+        this := @this: org.jfree.experimental.chart.plot.dial.DialPlot;
+        $stack1 = this.<org.jfree.experimental.chart.plot.dial.DialPlot: double viewY>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.experimental.chart.plot.dial.DialPlot: double getViewWidth()> ----
+    {
+        double $stack1;
+        org.jfree.experimental.chart.plot.dial.DialPlot this;
+    
+    
+        this := @this: org.jfree.experimental.chart.plot.dial.DialPlot;
+        $stack1 = this.<org.jfree.experimental.chart.plot.dial.DialPlot: double viewW>;
+    
+        return $stack1;
+    }
+
+}

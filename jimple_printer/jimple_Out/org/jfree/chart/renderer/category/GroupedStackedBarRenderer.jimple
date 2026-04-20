@@ -1,0 +1,455 @@
+// ========================================================================
+// CLASS : org.jfree.chart.renderer.category.GroupedStackedBarRenderer
+// ========================================================================
+
+[PUBLIC, SUPER] class org.jfree.chart.renderer.category.GroupedStackedBarRenderer extends org.jfree.chart.renderer.category.StackedBarRenderer implements org.jfree.chart.util.PublicCloneable, java.lang.Cloneable, java.io.Serializable {
+
+    // ---- method: <org.jfree.chart.renderer.category.GroupedStackedBarRenderer: void setSeriesToGroupMap(org.jfree.data.KeyToGroupMap)> ----
+    {
+        java.lang.IllegalArgumentException #l0;
+        java.lang.Object $stack3;
+        java.lang.Throwable #l1;
+        org.jfree.chart.event.RendererChangeEvent $stack2;
+        org.jfree.chart.renderer.category.GroupedStackedBarRenderer this;
+        org.jfree.data.KeyToGroupMap map;
+    
+    
+        this := @this: org.jfree.chart.renderer.category.GroupedStackedBarRenderer;
+        map := @parameter0: org.jfree.data.KeyToGroupMap;
+    
+        if map != null goto label1;
+        $stack3 = new java.lang.IllegalArgumentException;
+        #l0 = (java.lang.IllegalArgumentException) $stack3;
+        specialinvoke #l0.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'map\' argument.");
+        #l1 = (java.lang.Throwable) $stack3;
+    
+        throw #l1;
+    
+      label1:
+        this.<org.jfree.chart.renderer.category.GroupedStackedBarRenderer: org.jfree.data.KeyToGroupMap seriesToGroupMap> = map;
+        $stack2 = new org.jfree.chart.event.RendererChangeEvent;
+        specialinvoke $stack2.<org.jfree.chart.event.RendererChangeEvent: void <init>(java.lang.Object)>(this);
+        virtualinvoke this.<org.jfree.chart.renderer.category.GroupedStackedBarRenderer: void notifyListeners(org.jfree.chart.event.RendererChangeEvent)>($stack2);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.category.GroupedStackedBarRenderer: boolean equals(java.lang.Object)> ----
+    {
+        boolean $stack3, $stack4, $stack7;
+        java.lang.Object obj;
+        org.jfree.chart.renderer.category.GroupedStackedBarRenderer r, this;
+        org.jfree.data.KeyToGroupMap $stack5, $stack6;
+    
+    
+        this := @this: org.jfree.chart.renderer.category.GroupedStackedBarRenderer;
+        obj := @parameter0: java.lang.Object;
+    
+        if obj != this goto label1;
+    
+        return 1;
+    
+      label1:
+        $stack3 = obj instanceof org.jfree.chart.renderer.category.GroupedStackedBarRenderer;
+    
+        if $stack3 == 0 goto label2;
+        $stack4 = specialinvoke this.<org.jfree.chart.renderer.category.StackedBarRenderer: boolean equals(java.lang.Object)>(obj);
+    
+        if $stack4 == 0 goto label2;
+        r = (org.jfree.chart.renderer.category.GroupedStackedBarRenderer) obj;
+        $stack6 = r.<org.jfree.chart.renderer.category.GroupedStackedBarRenderer: org.jfree.data.KeyToGroupMap seriesToGroupMap>;
+        $stack5 = this.<org.jfree.chart.renderer.category.GroupedStackedBarRenderer: org.jfree.data.KeyToGroupMap seriesToGroupMap>;
+        $stack7 = virtualinvoke $stack6.<org.jfree.data.KeyToGroupMap: boolean equals(java.lang.Object)>($stack5);
+    
+        if $stack7 != 0 goto label3;
+    
+        return 0;
+    
+      label2:
+        return 0;
+    
+      label3:
+        return 1;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.category.GroupedStackedBarRenderer: double calculateBarW0(org.jfree.chart.plot.CategoryPlot,org.jfree.chart.plot.PlotOrientation,java.awt.geom.Rectangle2D,org.jfree.chart.axis.CategoryAxis,org.jfree.chart.renderer.category.CategoryItemRendererState,int,int)> ----
+    {
+        double $stack30, $stack31, $stack32, $stack33, $stack36, $stack37, $stack38, $stack39, $stack40, $stack41, $stack42, $stack43, $stack44, $stack45, barW0#0, barW0#1, groupGap, groupW, space#0, space#1;
+        int $stack21, $stack29, $stack34, $stack35, categoryCount, column, groupCount, groupIndex, row;
+        java.awt.geom.Rectangle2D dataArea;
+        java.lang.Comparable $stack26, $stack27;
+        org.jfree.chart.axis.CategoryAxis domainAxis;
+        org.jfree.chart.plot.CategoryPlot plot;
+        org.jfree.chart.plot.PlotOrientation $stack19, orientation;
+        org.jfree.chart.renderer.category.CategoryItemRendererState state;
+        org.jfree.chart.renderer.category.GroupedStackedBarRenderer this;
+        org.jfree.chart.util.RectangleEdge $stack20, $stack28;
+        org.jfree.data.KeyToGroupMap $stack22, $stack23, $stack24;
+        org.jfree.data.category.CategoryDataset $stack25;
+    
+    
+        this := @this: org.jfree.chart.renderer.category.GroupedStackedBarRenderer;
+        plot := @parameter0: org.jfree.chart.plot.CategoryPlot;
+        orientation := @parameter1: org.jfree.chart.plot.PlotOrientation;
+        dataArea := @parameter2: java.awt.geom.Rectangle2D;
+        domainAxis := @parameter3: org.jfree.chart.axis.CategoryAxis;
+        state := @parameter4: org.jfree.chart.renderer.category.CategoryItemRendererState;
+        row := @parameter5: int;
+        column := @parameter6: int;
+        space#0 = 0.0;
+        $stack19 = <org.jfree.chart.plot.PlotOrientation: org.jfree.chart.plot.PlotOrientation HORIZONTAL>;
+    
+        if orientation != $stack19 goto label1;
+        space#1 = virtualinvoke dataArea.<java.awt.geom.Rectangle2D: double getHeight()>();
+    
+        goto label2;
+    
+      label1:
+        space#1 = virtualinvoke dataArea.<java.awt.geom.Rectangle2D: double getWidth()>();
+    
+      label2:
+        $stack21 = virtualinvoke this.<org.jfree.chart.renderer.category.GroupedStackedBarRenderer: int getColumnCount()>();
+        $stack20 = virtualinvoke plot.<org.jfree.chart.plot.CategoryPlot: org.jfree.chart.util.RectangleEdge getDomainAxisEdge()>();
+        barW0#0 = virtualinvoke domainAxis.<org.jfree.chart.axis.CategoryAxis: double getCategoryStart(int,int,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)>(column, $stack21, dataArea, $stack20);
+        $stack22 = this.<org.jfree.chart.renderer.category.GroupedStackedBarRenderer: org.jfree.data.KeyToGroupMap seriesToGroupMap>;
+        groupCount = virtualinvoke $stack22.<org.jfree.data.KeyToGroupMap: int getGroupCount()>();
+        $stack23 = this.<org.jfree.chart.renderer.category.GroupedStackedBarRenderer: org.jfree.data.KeyToGroupMap seriesToGroupMap>;
+        $stack24 = this.<org.jfree.chart.renderer.category.GroupedStackedBarRenderer: org.jfree.data.KeyToGroupMap seriesToGroupMap>;
+        $stack25 = virtualinvoke plot.<org.jfree.chart.plot.CategoryPlot: org.jfree.data.category.CategoryDataset getDataset()>();
+        $stack26 = interfaceinvoke $stack25.<org.jfree.data.category.CategoryDataset: java.lang.Comparable getRowKey(int)>(row);
+        $stack27 = virtualinvoke $stack24.<org.jfree.data.KeyToGroupMap: java.lang.Comparable getGroup(java.lang.Comparable)>($stack26);
+        groupIndex = virtualinvoke $stack23.<org.jfree.data.KeyToGroupMap: int getGroupIndex(java.lang.Comparable)>($stack27);
+        categoryCount = virtualinvoke this.<org.jfree.chart.renderer.category.GroupedStackedBarRenderer: int getColumnCount()>();
+    
+        if groupCount <= 1 goto label3;
+        $stack33 = virtualinvoke this.<org.jfree.chart.renderer.category.GroupedStackedBarRenderer: double getItemMargin()>();
+        $stack36 = space#1 * $stack33;
+        $stack34 = groupCount - 1;
+        $stack35 = categoryCount * $stack34;
+        $stack37 = (double) $stack35;
+        groupGap = $stack36 / $stack37;
+        groupW = virtualinvoke this.<org.jfree.chart.renderer.category.GroupedStackedBarRenderer: double calculateSeriesWidth(double,org.jfree.chart.axis.CategoryAxis,int,int)>(space#1, domainAxis, categoryCount, groupCount);
+        $stack38 = (double) groupIndex;
+        $stack39 = groupW + groupGap;
+        $stack40 = $stack38 * $stack39;
+        $stack41 = barW0#0 + $stack40;
+        $stack42 = groupW / 2.0;
+        $stack44 = $stack41 + $stack42;
+        $stack43 = virtualinvoke state.<org.jfree.chart.renderer.category.CategoryItemRendererState: double getBarWidth()>();
+        $stack45 = $stack43 / 2.0;
+        barW0#1 = $stack44 - $stack45;
+    
+        goto label4;
+    
+      label3:
+        $stack29 = virtualinvoke this.<org.jfree.chart.renderer.category.GroupedStackedBarRenderer: int getColumnCount()>();
+        $stack28 = virtualinvoke plot.<org.jfree.chart.plot.CategoryPlot: org.jfree.chart.util.RectangleEdge getDomainAxisEdge()>();
+        $stack31 = virtualinvoke domainAxis.<org.jfree.chart.axis.CategoryAxis: double getCategoryMiddle(int,int,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)>(column, $stack29, dataArea, $stack28);
+        $stack30 = virtualinvoke state.<org.jfree.chart.renderer.category.CategoryItemRendererState: double getBarWidth()>();
+        $stack32 = $stack30 / 2.0;
+        barW0#1 = $stack31 - $stack32;
+    
+      label4:
+        return barW0#1;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.category.GroupedStackedBarRenderer: void drawItem(java.awt.Graphics2D,org.jfree.chart.renderer.category.CategoryItemRendererState,java.awt.geom.Rectangle2D,org.jfree.chart.plot.CategoryPlot,org.jfree.chart.axis.CategoryAxis,org.jfree.chart.axis.ValueAxis,org.jfree.data.category.CategoryDataset,int,int,int)> ----
+    {
+        boolean $stack46, $stack47, $stack49, $stack54, $stack62;
+        byte $stack37, $stack48, $stack51, $stack63;
+        double $stack38, $stack39, $stack40, $stack41, $stack43, $stack50, $stack56, $stack58, barL0, barLength, barW0, d#0, d#1, i#1, negativeBase, positiveBase, value;
+        int column, i#0, pass, row;
+        java.awt.GradientPaint gp#0;
+        java.awt.Graphics2D g2;
+        java.awt.Paint #l3, $stack53;
+        java.awt.Shape #l0, #l1, #l4, #l5;
+        java.awt.Stroke $stack52;
+        java.awt.geom.Rectangle2D #l2, dataArea;
+        java.awt.geom.Rectangle2D$Double $stack44, $stack57;
+        java.lang.Comparable $stack36, $stack60, $stack61, group;
+        java.lang.Number dataValue, v;
+        java.lang.Object bar#0, bar#1, itemPaint;
+        org.jfree.chart.axis.CategoryAxis domainAxis;
+        org.jfree.chart.axis.ValueAxis rangeAxis;
+        org.jfree.chart.entity.EntityCollection entities;
+        org.jfree.chart.labels.CategoryItemLabelGenerator gp#1;
+        org.jfree.chart.plot.CategoryPlot plot;
+        org.jfree.chart.plot.PlotOrientation $stack42, orientation;
+        org.jfree.chart.renderer.category.CategoryItemRendererState state;
+        org.jfree.chart.renderer.category.GroupedStackedBarRenderer this;
+        org.jfree.chart.util.GradientPaintTransformer $stack45, $stack55;
+        org.jfree.chart.util.RectangleEdge location;
+        org.jfree.data.KeyToGroupMap $stack35, $stack59;
+        org.jfree.data.category.CategoryDataset dataset;
+    
+    
+        this := @this: org.jfree.chart.renderer.category.GroupedStackedBarRenderer;
+        g2 := @parameter0: java.awt.Graphics2D;
+        state := @parameter1: org.jfree.chart.renderer.category.CategoryItemRendererState;
+        dataArea := @parameter2: java.awt.geom.Rectangle2D;
+        plot := @parameter3: org.jfree.chart.plot.CategoryPlot;
+        domainAxis := @parameter4: org.jfree.chart.axis.CategoryAxis;
+        rangeAxis := @parameter5: org.jfree.chart.axis.ValueAxis;
+        dataset := @parameter6: org.jfree.data.category.CategoryDataset;
+        row := @parameter7: int;
+        column := @parameter8: int;
+        pass := @parameter9: int;
+        dataValue = interfaceinvoke dataset.<org.jfree.data.category.CategoryDataset: java.lang.Number getValue(int,int)>(row, column);
+    
+        if dataValue != null goto label01;
+    
+        return;
+    
+      label01:
+        value = virtualinvoke dataValue.<java.lang.Number: double doubleValue()>();
+        $stack35 = this.<org.jfree.chart.renderer.category.GroupedStackedBarRenderer: org.jfree.data.KeyToGroupMap seriesToGroupMap>;
+        $stack36 = interfaceinvoke dataset.<org.jfree.data.category.CategoryDataset: java.lang.Comparable getRowKey(int)>(row);
+        group = virtualinvoke $stack35.<org.jfree.data.KeyToGroupMap: java.lang.Comparable getGroup(java.lang.Comparable)>($stack36);
+        orientation = virtualinvoke plot.<org.jfree.chart.plot.CategoryPlot: org.jfree.chart.plot.PlotOrientation getOrientation()>();
+        barW0 = virtualinvoke this.<org.jfree.chart.renderer.category.GroupedStackedBarRenderer: double calculateBarW0(org.jfree.chart.plot.CategoryPlot,org.jfree.chart.plot.PlotOrientation,java.awt.geom.Rectangle2D,org.jfree.chart.axis.CategoryAxis,org.jfree.chart.renderer.category.CategoryItemRendererState,int,int)>(plot, orientation, dataArea, domainAxis, state, row, column);
+        positiveBase = 0.0;
+        negativeBase = 0.0;
+        i#0 = 0;
+    
+      label02:
+        if i#0 >= row goto label05;
+        $stack59 = this.<org.jfree.chart.renderer.category.GroupedStackedBarRenderer: org.jfree.data.KeyToGroupMap seriesToGroupMap>;
+        $stack60 = interfaceinvoke dataset.<org.jfree.data.category.CategoryDataset: java.lang.Comparable getRowKey(int)>(i#0);
+        $stack61 = virtualinvoke $stack59.<org.jfree.data.KeyToGroupMap: java.lang.Comparable getGroup(java.lang.Comparable)>($stack60);
+        $stack62 = virtualinvoke group.<java.lang.Object: boolean equals(java.lang.Object)>($stack61);
+    
+        if $stack62 == 0 goto label04;
+        v = interfaceinvoke dataset.<org.jfree.data.category.CategoryDataset: java.lang.Number getValue(int,int)>(i#0, column);
+    
+        if v == null goto label04;
+        d#0 = virtualinvoke v.<java.lang.Number: double doubleValue()>();
+        $stack63 = d#0 cmpl 0.0;
+    
+        if $stack63 <= 0 goto label03;
+        positiveBase = positiveBase + d#0;
+    
+        goto label04;
+    
+      label03:
+        negativeBase = negativeBase + d#0;
+    
+      label04:
+        i#0 = i#0 + 1;
+    
+        goto label02;
+    
+      label05:
+        location = virtualinvoke plot.<org.jfree.chart.plot.CategoryPlot: org.jfree.chart.util.RectangleEdge getRangeAxisEdge()>();
+        $stack37 = value cmpl 0.0;
+    
+        if $stack37 <= 0 goto label06;
+        i#1 = virtualinvoke rangeAxis.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)>(positiveBase, dataArea, location);
+        $stack58 = positiveBase + value;
+        d#1 = virtualinvoke rangeAxis.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)>($stack58, dataArea, location);
+    
+        goto label07;
+    
+      label06:
+        i#1 = virtualinvoke rangeAxis.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)>(negativeBase, dataArea, location);
+        $stack38 = negativeBase + value;
+        d#1 = virtualinvoke rangeAxis.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)>($stack38, dataArea, location);
+    
+      label07:
+        barL0 = staticinvoke <java.lang.Math: double min(double,double)>(i#1, d#1);
+        $stack39 = d#1 - i#1;
+        $stack41 = staticinvoke <java.lang.Math: double abs(double)>($stack39);
+        $stack40 = virtualinvoke this.<org.jfree.chart.renderer.category.GroupedStackedBarRenderer: double getMinimumBarLength()>();
+        barLength = staticinvoke <java.lang.Math: double max(double,double)>($stack41, $stack40);
+        bar#0 = null;
+        $stack42 = <org.jfree.chart.plot.PlotOrientation: org.jfree.chart.plot.PlotOrientation HORIZONTAL>;
+    
+        if orientation != $stack42 goto label08;
+        $stack57 = new java.awt.geom.Rectangle2D$Double;
+        $stack56 = virtualinvoke state.<org.jfree.chart.renderer.category.CategoryItemRendererState: double getBarWidth()>();
+        specialinvoke $stack57.<java.awt.geom.Rectangle2D$Double: void <init>(double,double,double,double)>(barL0, barW0, barLength, $stack56);
+        bar#1 = $stack57;
+    
+        goto label09;
+    
+      label08:
+        $stack44 = new java.awt.geom.Rectangle2D$Double;
+        $stack43 = virtualinvoke state.<org.jfree.chart.renderer.category.CategoryItemRendererState: double getBarWidth()>();
+        specialinvoke $stack44.<java.awt.geom.Rectangle2D$Double: void <init>(double,double,double,double)>(barW0, barL0, $stack43, barLength);
+        bar#1 = $stack44;
+    
+      label09:
+        itemPaint = virtualinvoke this.<org.jfree.chart.renderer.category.GroupedStackedBarRenderer: java.awt.Paint getItemPaint(int,int)>(row, column);
+        $stack45 = virtualinvoke this.<org.jfree.chart.renderer.category.GroupedStackedBarRenderer: org.jfree.chart.util.GradientPaintTransformer getGradientPaintTransformer()>();
+    
+        if $stack45 == null goto label10;
+        $stack54 = itemPaint instanceof java.awt.GradientPaint;
+    
+        if $stack54 == 0 goto label10;
+        gp#0 = (java.awt.GradientPaint) itemPaint;
+        $stack55 = virtualinvoke this.<org.jfree.chart.renderer.category.GroupedStackedBarRenderer: org.jfree.chart.util.GradientPaintTransformer getGradientPaintTransformer()>();
+        #l4 = (java.awt.Shape) bar#1;
+        itemPaint = interfaceinvoke $stack55.<org.jfree.chart.util.GradientPaintTransformer: java.awt.GradientPaint transform(java.awt.GradientPaint,java.awt.Shape)>(gp#0, #l4);
+    
+      label10:
+        #l3 = (java.awt.Paint) itemPaint;
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>(#l3);
+        #l1 = (java.awt.Shape) bar#1;
+        virtualinvoke g2.<java.awt.Graphics2D: void fill(java.awt.Shape)>(#l1);
+        $stack46 = virtualinvoke this.<org.jfree.chart.renderer.category.GroupedStackedBarRenderer: boolean isDrawBarOutline()>();
+    
+        if $stack46 == 0 goto label11;
+        $stack50 = virtualinvoke state.<org.jfree.chart.renderer.category.CategoryItemRendererState: double getBarWidth()>();
+        $stack51 = $stack50 cmpl 3.0;
+    
+        if $stack51 <= 0 goto label11;
+        $stack52 = virtualinvoke this.<org.jfree.chart.renderer.category.GroupedStackedBarRenderer: java.awt.Stroke getItemStroke(int,int)>(row, column);
+        virtualinvoke g2.<java.awt.Graphics2D: void setStroke(java.awt.Stroke)>($stack52);
+        $stack53 = virtualinvoke this.<org.jfree.chart.renderer.category.GroupedStackedBarRenderer: java.awt.Paint getItemOutlinePaint(int,int)>(row, column);
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>($stack53);
+        #l0 = (java.awt.Shape) bar#1;
+        virtualinvoke g2.<java.awt.Graphics2D: void draw(java.awt.Shape)>(#l0);
+    
+      label11:
+        gp#1 = virtualinvoke this.<org.jfree.chart.renderer.category.GroupedStackedBarRenderer: org.jfree.chart.labels.CategoryItemLabelGenerator getItemLabelGenerator(int,int)>(row, column);
+    
+        if gp#1 == null goto label14;
+        $stack47 = virtualinvoke this.<org.jfree.chart.renderer.category.GroupedStackedBarRenderer: boolean isItemLabelVisible(int,int)>(row, column);
+    
+        if $stack47 == 0 goto label14;
+        $stack48 = value cmpg 0.0;
+    
+        if $stack48 >= 0 goto label12;
+        $stack49 = 1;
+    
+        goto label13;
+    
+      label12:
+        $stack49 = 0;
+    
+      label13:
+        #l2 = (java.awt.geom.Rectangle2D) bar#1;
+        virtualinvoke this.<org.jfree.chart.renderer.category.GroupedStackedBarRenderer: void drawItemLabel(java.awt.Graphics2D,org.jfree.data.category.CategoryDataset,int,int,org.jfree.chart.plot.CategoryPlot,org.jfree.chart.labels.CategoryItemLabelGenerator,java.awt.geom.Rectangle2D,boolean)>(g2, dataset, row, column, plot, gp#1, #l2, $stack49);
+    
+      label14:
+        entities = virtualinvoke state.<org.jfree.chart.renderer.category.CategoryItemRendererState: org.jfree.chart.entity.EntityCollection getEntityCollection()>();
+    
+        if entities == null goto label15;
+        #l5 = (java.awt.Shape) bar#1;
+        virtualinvoke this.<org.jfree.chart.renderer.category.GroupedStackedBarRenderer: void addItemEntity(org.jfree.chart.entity.EntityCollection,org.jfree.data.category.CategoryDataset,int,int,java.awt.Shape)>(entities, dataset, row, column, #l5);
+    
+      label15:
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.category.GroupedStackedBarRenderer: void <init>()> ----
+    {
+        org.jfree.chart.renderer.category.GroupedStackedBarRenderer this;
+        org.jfree.data.KeyToGroupMap $stack1;
+    
+    
+        this := @this: org.jfree.chart.renderer.category.GroupedStackedBarRenderer;
+        specialinvoke this.<org.jfree.chart.renderer.category.StackedBarRenderer: void <init>()>();
+        $stack1 = new org.jfree.data.KeyToGroupMap;
+        specialinvoke $stack1.<org.jfree.data.KeyToGroupMap: void <init>()>();
+        this.<org.jfree.chart.renderer.category.GroupedStackedBarRenderer: org.jfree.data.KeyToGroupMap seriesToGroupMap> = $stack1;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.category.GroupedStackedBarRenderer: org.jfree.data.Range findRangeBounds(org.jfree.data.category.CategoryDataset)> ----
+    {
+        org.jfree.chart.renderer.category.GroupedStackedBarRenderer this;
+        org.jfree.data.KeyToGroupMap $stack3;
+        org.jfree.data.Range r;
+        org.jfree.data.category.CategoryDataset dataset;
+    
+    
+        this := @this: org.jfree.chart.renderer.category.GroupedStackedBarRenderer;
+        dataset := @parameter0: org.jfree.data.category.CategoryDataset;
+        $stack3 = this.<org.jfree.chart.renderer.category.GroupedStackedBarRenderer: org.jfree.data.KeyToGroupMap seriesToGroupMap>;
+        r = staticinvoke <org.jfree.data.general.DatasetUtilities: org.jfree.data.Range findStackedRangeBounds(org.jfree.data.category.CategoryDataset,org.jfree.data.KeyToGroupMap)>(dataset, $stack3);
+    
+        return r;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.category.GroupedStackedBarRenderer: void calculateBarWidth(org.jfree.chart.plot.CategoryPlot,java.awt.geom.Rectangle2D,int,org.jfree.chart.renderer.category.CategoryItemRendererState)> ----
+    {
+        double $stack23, $stack25, $stack26, $stack27, $stack28, $stack29, $stack30, $stack31, $stack32, $stack33, $stack34, categoryMargin, itemMargin, maxWidth, space, used;
+        int categories, columns, groups, rendererIndex;
+        java.awt.geom.Rectangle2D dataArea;
+        org.jfree.chart.axis.CategoryAxis xAxis;
+        org.jfree.chart.plot.CategoryPlot plot;
+        org.jfree.chart.plot.PlotOrientation $stack21, $stack22, orientation;
+        org.jfree.chart.renderer.category.CategoryItemRendererState state;
+        org.jfree.chart.renderer.category.GroupedStackedBarRenderer this;
+        org.jfree.data.KeyToGroupMap $stack24;
+        org.jfree.data.category.CategoryDataset data;
+    
+    
+        this := @this: org.jfree.chart.renderer.category.GroupedStackedBarRenderer;
+        plot := @parameter0: org.jfree.chart.plot.CategoryPlot;
+        dataArea := @parameter1: java.awt.geom.Rectangle2D;
+        rendererIndex := @parameter2: int;
+        state := @parameter3: org.jfree.chart.renderer.category.CategoryItemRendererState;
+        xAxis = virtualinvoke plot.<org.jfree.chart.plot.CategoryPlot: org.jfree.chart.axis.CategoryAxis getDomainAxisForDataset(int)>(rendererIndex);
+        data = virtualinvoke plot.<org.jfree.chart.plot.CategoryPlot: org.jfree.data.category.CategoryDataset getDataset(int)>(rendererIndex);
+    
+        if data == null goto label6;
+        orientation = virtualinvoke plot.<org.jfree.chart.plot.CategoryPlot: org.jfree.chart.plot.PlotOrientation getOrientation()>();
+        space = 0.0;
+        $stack21 = <org.jfree.chart.plot.PlotOrientation: org.jfree.chart.plot.PlotOrientation HORIZONTAL>;
+    
+        if orientation != $stack21 goto label1;
+        space = virtualinvoke dataArea.<java.awt.geom.Rectangle2D: double getHeight()>();
+    
+        goto label2;
+    
+      label1:
+        $stack22 = <org.jfree.chart.plot.PlotOrientation: org.jfree.chart.plot.PlotOrientation VERTICAL>;
+    
+        if orientation != $stack22 goto label2;
+        space = virtualinvoke dataArea.<java.awt.geom.Rectangle2D: double getWidth()>();
+    
+      label2:
+        $stack23 = virtualinvoke this.<org.jfree.chart.renderer.category.GroupedStackedBarRenderer: double getMaximumBarWidth()>();
+        maxWidth = space * $stack23;
+        $stack24 = this.<org.jfree.chart.renderer.category.GroupedStackedBarRenderer: org.jfree.data.KeyToGroupMap seriesToGroupMap>;
+        groups = virtualinvoke $stack24.<org.jfree.data.KeyToGroupMap: int getGroupCount()>();
+        categories = interfaceinvoke data.<org.jfree.data.category.CategoryDataset: int getColumnCount()>();
+        columns = groups * categories;
+        categoryMargin = 0.0;
+        itemMargin = 0.0;
+    
+        if categories <= 1 goto label3;
+        categoryMargin = virtualinvoke xAxis.<org.jfree.chart.axis.CategoryAxis: double getCategoryMargin()>();
+    
+      label3:
+        if groups <= 1 goto label4;
+        itemMargin = virtualinvoke this.<org.jfree.chart.renderer.category.GroupedStackedBarRenderer: double getItemMargin()>();
+    
+      label4:
+        $stack25 = virtualinvoke xAxis.<org.jfree.chart.axis.CategoryAxis: double getLowerMargin()>();
+        $stack26 = 1.0 - $stack25;
+        $stack27 = virtualinvoke xAxis.<org.jfree.chart.axis.CategoryAxis: double getUpperMargin()>();
+        $stack28 = $stack26 - $stack27;
+        $stack29 = $stack28 - categoryMargin;
+        $stack30 = $stack29 - itemMargin;
+        used = space * $stack30;
+    
+        if columns <= 0 goto label5;
+        $stack32 = (double) columns;
+        $stack33 = used / $stack32;
+        $stack34 = staticinvoke <java.lang.Math: double min(double,double)>($stack33, maxWidth);
+        virtualinvoke state.<org.jfree.chart.renderer.category.CategoryItemRendererState: void setBarWidth(double)>($stack34);
+    
+        goto label6;
+    
+      label5:
+        $stack31 = staticinvoke <java.lang.Math: double min(double,double)>(used, maxWidth);
+        virtualinvoke state.<org.jfree.chart.renderer.category.CategoryItemRendererState: void setBarWidth(double)>($stack31);
+    
+      label6:
+        return;
+    }
+
+}

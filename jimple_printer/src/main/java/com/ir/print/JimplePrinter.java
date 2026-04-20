@@ -15,6 +15,14 @@ import java.util.Collection;
 import java.util.stream.Collectors;
 
 public class JimplePrinter {
+    private static String repeatChar(char ch, int count) {
+        StringBuilder sb = new StringBuilder(count);
+        for (int i = 0; i < count; i++) {
+            sb.append(ch);
+        }
+        return sb.toString();
+    }
+
    public static void main(String[] args) throws Exception {
  
         // ── 1. Parse arguments ─────────────────────────────────────────────
@@ -75,9 +83,9 @@ public class JimplePrinter {
             StringBuilder sb = new StringBuilder();
  
             // ── Class header ──────────────────────────────────────────────
-            sb.append("// ").append("=".repeat(72)).append("\n");
+            sb.append("// ").append(repeatChar('=', 72)).append("\n");
             sb.append("// CLASS : ").append(className).append("\n");
-            sb.append("// ").append("=".repeat(72)).append("\n\n");
+            sb.append("// ").append(repeatChar('=', 72)).append("\n\n");
  
             // Modifiers + class declaration line
             sb.append(clazz.getModifiers()).append(" class ").append(className);

@@ -1,0 +1,384 @@
+// ========================================================================
+// CLASS : org.jfree.data.xy.DefaultOHLCDataset
+// ========================================================================
+
+[PUBLIC, SUPER] class org.jfree.data.xy.DefaultOHLCDataset extends org.jfree.data.xy.AbstractXYDataset implements org.jfree.data.xy.OHLCDataset {
+
+    // ---- method: <org.jfree.data.xy.DefaultOHLCDataset: java.lang.Number getLow(int,int)> ----
+    {
+        int item, series;
+        java.lang.Number $stack5;
+        org.jfree.data.xy.DefaultOHLCDataset this;
+        org.jfree.data.xy.OHLCDataItem $stack4;
+        org.jfree.data.xy.OHLCDataItem[] $stack3;
+    
+    
+        this := @this: org.jfree.data.xy.DefaultOHLCDataset;
+        series := @parameter0: int;
+        item := @parameter1: int;
+        $stack3 = this.<org.jfree.data.xy.DefaultOHLCDataset: org.jfree.data.xy.OHLCDataItem[] data>;
+        $stack4 = $stack3[item];
+        $stack5 = virtualinvoke $stack4.<org.jfree.data.xy.OHLCDataItem: java.lang.Number getLow()>();
+    
+        return $stack5;
+    }
+
+    // ---- method: <org.jfree.data.xy.DefaultOHLCDataset: java.lang.Number getX(int,int)> ----
+    {
+        int item, series;
+        java.lang.Long #l0;
+        java.lang.Number #l1;
+        java.lang.Object $stack7;
+        java.util.Date $stack5;
+        long $stack6;
+        org.jfree.data.xy.DefaultOHLCDataset this;
+        org.jfree.data.xy.OHLCDataItem $stack4;
+        org.jfree.data.xy.OHLCDataItem[] $stack3;
+    
+    
+        this := @this: org.jfree.data.xy.DefaultOHLCDataset;
+        series := @parameter0: int;
+        item := @parameter1: int;
+        $stack7 = new java.lang.Long;
+        $stack3 = this.<org.jfree.data.xy.DefaultOHLCDataset: org.jfree.data.xy.OHLCDataItem[] data>;
+        $stack4 = $stack3[item];
+        $stack5 = virtualinvoke $stack4.<org.jfree.data.xy.OHLCDataItem: java.util.Date getDate()>();
+        $stack6 = virtualinvoke $stack5.<java.util.Date: long getTime()>();
+        #l0 = (java.lang.Long) $stack7;
+        specialinvoke #l0.<java.lang.Long: void <init>(long)>($stack6);
+        #l1 = (java.lang.Number) $stack7;
+    
+        return #l1;
+    }
+
+    // ---- method: <org.jfree.data.xy.DefaultOHLCDataset: java.lang.Number getClose(int,int)> ----
+    {
+        int item, series;
+        java.lang.Number $stack5;
+        org.jfree.data.xy.DefaultOHLCDataset this;
+        org.jfree.data.xy.OHLCDataItem $stack4;
+        org.jfree.data.xy.OHLCDataItem[] $stack3;
+    
+    
+        this := @this: org.jfree.data.xy.DefaultOHLCDataset;
+        series := @parameter0: int;
+        item := @parameter1: int;
+        $stack3 = this.<org.jfree.data.xy.DefaultOHLCDataset: org.jfree.data.xy.OHLCDataItem[] data>;
+        $stack4 = $stack3[item];
+        $stack5 = virtualinvoke $stack4.<org.jfree.data.xy.OHLCDataItem: java.lang.Number getClose()>();
+    
+        return $stack5;
+    }
+
+    // ---- method: <org.jfree.data.xy.DefaultOHLCDataset: double getVolumeValue(int,int)> ----
+    {
+        double result;
+        int item, series;
+        java.lang.Number volume;
+        org.jfree.data.xy.DefaultOHLCDataset this;
+    
+    
+        this := @this: org.jfree.data.xy.DefaultOHLCDataset;
+        series := @parameter0: int;
+        item := @parameter1: int;
+        result = #NaN;
+        volume = virtualinvoke this.<org.jfree.data.xy.DefaultOHLCDataset: java.lang.Number getVolume(int,int)>(series, item);
+    
+        if volume == null goto label1;
+        result = virtualinvoke volume.<java.lang.Number: double doubleValue()>();
+    
+      label1:
+        return result;
+    }
+
+    // ---- method: <org.jfree.data.xy.DefaultOHLCDataset: int getItemCount(int)> ----
+    {
+        int $stack3, series;
+        org.jfree.data.xy.DefaultOHLCDataset this;
+        org.jfree.data.xy.OHLCDataItem[] $stack2;
+    
+    
+        this := @this: org.jfree.data.xy.DefaultOHLCDataset;
+        series := @parameter0: int;
+        $stack2 = this.<org.jfree.data.xy.DefaultOHLCDataset: org.jfree.data.xy.OHLCDataItem[] data>;
+        $stack3 = lengthof $stack2;
+    
+        return $stack3;
+    }
+
+    // ---- method: <org.jfree.data.xy.DefaultOHLCDataset: double getCloseValue(int,int)> ----
+    {
+        double result;
+        int item, series;
+        java.lang.Number close;
+        org.jfree.data.xy.DefaultOHLCDataset this;
+    
+    
+        this := @this: org.jfree.data.xy.DefaultOHLCDataset;
+        series := @parameter0: int;
+        item := @parameter1: int;
+        result = #NaN;
+        close = virtualinvoke this.<org.jfree.data.xy.DefaultOHLCDataset: java.lang.Number getClose(int,int)>(series, item);
+    
+        if close == null goto label1;
+        result = virtualinvoke close.<java.lang.Number: double doubleValue()>();
+    
+      label1:
+        return result;
+    }
+
+    // ---- method: <org.jfree.data.xy.DefaultOHLCDataset: void sortDataByDate()> ----
+    {
+        org.jfree.data.xy.DefaultOHLCDataset this;
+        org.jfree.data.xy.OHLCDataItem[] $stack1;
+    
+    
+        this := @this: org.jfree.data.xy.DefaultOHLCDataset;
+        $stack1 = this.<org.jfree.data.xy.DefaultOHLCDataset: org.jfree.data.xy.OHLCDataItem[] data>;
+        staticinvoke <java.util.Arrays: void sort(java.lang.Object[])>($stack1);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.xy.DefaultOHLCDataset: boolean equals(java.lang.Object)> ----
+    {
+        boolean $stack3, $stack6, $stack9;
+        java.lang.Comparable $stack4, $stack5;
+        java.lang.Object obj;
+        org.jfree.data.xy.DefaultOHLCDataset that, this;
+        org.jfree.data.xy.OHLCDataItem[] $stack7, $stack8;
+    
+    
+        this := @this: org.jfree.data.xy.DefaultOHLCDataset;
+        obj := @parameter0: java.lang.Object;
+    
+        if this != obj goto label1;
+    
+        return 1;
+    
+      label1:
+        $stack3 = obj instanceof org.jfree.data.xy.DefaultOHLCDataset;
+    
+        if $stack3 != 0 goto label2;
+    
+        return 0;
+    
+      label2:
+        that = (org.jfree.data.xy.DefaultOHLCDataset) obj;
+        $stack5 = this.<org.jfree.data.xy.DefaultOHLCDataset: java.lang.Comparable key>;
+        $stack4 = that.<org.jfree.data.xy.DefaultOHLCDataset: java.lang.Comparable key>;
+        $stack6 = virtualinvoke $stack5.<java.lang.Object: boolean equals(java.lang.Object)>($stack4);
+    
+        if $stack6 != 0 goto label3;
+    
+        return 0;
+    
+      label3:
+        $stack8 = this.<org.jfree.data.xy.DefaultOHLCDataset: org.jfree.data.xy.OHLCDataItem[] data>;
+        $stack7 = that.<org.jfree.data.xy.DefaultOHLCDataset: org.jfree.data.xy.OHLCDataItem[] data>;
+        $stack9 = staticinvoke <java.util.Arrays: boolean equals(java.lang.Object[],java.lang.Object[])>($stack8, $stack7);
+    
+        if $stack9 != 0 goto label4;
+    
+        return 0;
+    
+      label4:
+        return 1;
+    }
+
+    // ---- method: <org.jfree.data.xy.DefaultOHLCDataset: double getHighValue(int,int)> ----
+    {
+        double result;
+        int item, series;
+        java.lang.Number high;
+        org.jfree.data.xy.DefaultOHLCDataset this;
+    
+    
+        this := @this: org.jfree.data.xy.DefaultOHLCDataset;
+        series := @parameter0: int;
+        item := @parameter1: int;
+        result = #NaN;
+        high = virtualinvoke this.<org.jfree.data.xy.DefaultOHLCDataset: java.lang.Number getHigh(int,int)>(series, item);
+    
+        if high == null goto label1;
+        result = virtualinvoke high.<java.lang.Number: double doubleValue()>();
+    
+      label1:
+        return result;
+    }
+
+    // ---- method: <org.jfree.data.xy.DefaultOHLCDataset: java.lang.Comparable getSeriesKey(int)> ----
+    {
+        int series;
+        java.lang.Comparable $stack2;
+        org.jfree.data.xy.DefaultOHLCDataset this;
+    
+    
+        this := @this: org.jfree.data.xy.DefaultOHLCDataset;
+        series := @parameter0: int;
+        $stack2 = this.<org.jfree.data.xy.DefaultOHLCDataset: java.lang.Comparable key>;
+    
+        return $stack2;
+    }
+
+    // ---- method: <org.jfree.data.xy.DefaultOHLCDataset: double getLowValue(int,int)> ----
+    {
+        double result;
+        int item, series;
+        java.lang.Number low;
+        org.jfree.data.xy.DefaultOHLCDataset this;
+    
+    
+        this := @this: org.jfree.data.xy.DefaultOHLCDataset;
+        series := @parameter0: int;
+        item := @parameter1: int;
+        result = #NaN;
+        low = virtualinvoke this.<org.jfree.data.xy.DefaultOHLCDataset: java.lang.Number getLow(int,int)>(series, item);
+    
+        if low == null goto label1;
+        result = virtualinvoke low.<java.lang.Number: double doubleValue()>();
+    
+      label1:
+        return result;
+    }
+
+    // ---- method: <org.jfree.data.xy.DefaultOHLCDataset: java.lang.Number getOpen(int,int)> ----
+    {
+        int item, series;
+        java.lang.Number $stack5;
+        org.jfree.data.xy.DefaultOHLCDataset this;
+        org.jfree.data.xy.OHLCDataItem $stack4;
+        org.jfree.data.xy.OHLCDataItem[] $stack3;
+    
+    
+        this := @this: org.jfree.data.xy.DefaultOHLCDataset;
+        series := @parameter0: int;
+        item := @parameter1: int;
+        $stack3 = this.<org.jfree.data.xy.DefaultOHLCDataset: org.jfree.data.xy.OHLCDataItem[] data>;
+        $stack4 = $stack3[item];
+        $stack5 = virtualinvoke $stack4.<org.jfree.data.xy.OHLCDataItem: java.lang.Number getOpen()>();
+    
+        return $stack5;
+    }
+
+    // ---- method: <org.jfree.data.xy.DefaultOHLCDataset: java.util.Date getXDate(int,int)> ----
+    {
+        int item, series;
+        java.util.Date $stack5;
+        org.jfree.data.xy.DefaultOHLCDataset this;
+        org.jfree.data.xy.OHLCDataItem $stack4;
+        org.jfree.data.xy.OHLCDataItem[] $stack3;
+    
+    
+        this := @this: org.jfree.data.xy.DefaultOHLCDataset;
+        series := @parameter0: int;
+        item := @parameter1: int;
+        $stack3 = this.<org.jfree.data.xy.DefaultOHLCDataset: org.jfree.data.xy.OHLCDataItem[] data>;
+        $stack4 = $stack3[item];
+        $stack5 = virtualinvoke $stack4.<org.jfree.data.xy.OHLCDataItem: java.util.Date getDate()>();
+    
+        return $stack5;
+    }
+
+    // ---- method: <org.jfree.data.xy.DefaultOHLCDataset: java.lang.Number getVolume(int,int)> ----
+    {
+        int item, series;
+        java.lang.Number $stack5;
+        org.jfree.data.xy.DefaultOHLCDataset this;
+        org.jfree.data.xy.OHLCDataItem $stack4;
+        org.jfree.data.xy.OHLCDataItem[] $stack3;
+    
+    
+        this := @this: org.jfree.data.xy.DefaultOHLCDataset;
+        series := @parameter0: int;
+        item := @parameter1: int;
+        $stack3 = this.<org.jfree.data.xy.DefaultOHLCDataset: org.jfree.data.xy.OHLCDataItem[] data>;
+        $stack4 = $stack3[item];
+        $stack5 = virtualinvoke $stack4.<org.jfree.data.xy.OHLCDataItem: java.lang.Number getVolume()>();
+    
+        return $stack5;
+    }
+
+    // ---- method: <org.jfree.data.xy.DefaultOHLCDataset: double getOpenValue(int,int)> ----
+    {
+        double result;
+        int item, series;
+        java.lang.Number open;
+        org.jfree.data.xy.DefaultOHLCDataset this;
+    
+    
+        this := @this: org.jfree.data.xy.DefaultOHLCDataset;
+        series := @parameter0: int;
+        item := @parameter1: int;
+        result = #NaN;
+        open = virtualinvoke this.<org.jfree.data.xy.DefaultOHLCDataset: java.lang.Number getOpen(int,int)>(series, item);
+    
+        if open == null goto label1;
+        result = virtualinvoke open.<java.lang.Number: double doubleValue()>();
+    
+      label1:
+        return result;
+    }
+
+    // ---- method: <org.jfree.data.xy.DefaultOHLCDataset: int getSeriesCount()> ----
+    {
+        org.jfree.data.xy.DefaultOHLCDataset this;
+    
+    
+        this := @this: org.jfree.data.xy.DefaultOHLCDataset;
+    
+        return 1;
+    }
+
+    // ---- method: <org.jfree.data.xy.DefaultOHLCDataset: void <init>(java.lang.Comparable,org.jfree.data.xy.OHLCDataItem[])> ----
+    {
+        java.lang.Comparable key;
+        org.jfree.data.xy.DefaultOHLCDataset this;
+        org.jfree.data.xy.OHLCDataItem[] data;
+    
+    
+        this := @this: org.jfree.data.xy.DefaultOHLCDataset;
+        key := @parameter0: java.lang.Comparable;
+        data := @parameter1: org.jfree.data.xy.OHLCDataItem[];
+        specialinvoke this.<org.jfree.data.xy.AbstractXYDataset: void <init>()>();
+        this.<org.jfree.data.xy.DefaultOHLCDataset: java.lang.Comparable key> = key;
+        this.<org.jfree.data.xy.DefaultOHLCDataset: org.jfree.data.xy.OHLCDataItem[] data> = data;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.xy.DefaultOHLCDataset: java.lang.Number getY(int,int)> ----
+    {
+        int item, series;
+        java.lang.Number $stack3;
+        org.jfree.data.xy.DefaultOHLCDataset this;
+    
+    
+        this := @this: org.jfree.data.xy.DefaultOHLCDataset;
+        series := @parameter0: int;
+        item := @parameter1: int;
+        $stack3 = virtualinvoke this.<org.jfree.data.xy.DefaultOHLCDataset: java.lang.Number getClose(int,int)>(series, item);
+    
+        return $stack3;
+    }
+
+    // ---- method: <org.jfree.data.xy.DefaultOHLCDataset: java.lang.Number getHigh(int,int)> ----
+    {
+        int item, series;
+        java.lang.Number $stack5;
+        org.jfree.data.xy.DefaultOHLCDataset this;
+        org.jfree.data.xy.OHLCDataItem $stack4;
+        org.jfree.data.xy.OHLCDataItem[] $stack3;
+    
+    
+        this := @this: org.jfree.data.xy.DefaultOHLCDataset;
+        series := @parameter0: int;
+        item := @parameter1: int;
+        $stack3 = this.<org.jfree.data.xy.DefaultOHLCDataset: org.jfree.data.xy.OHLCDataItem[] data>;
+        $stack4 = $stack3[item];
+        $stack5 = virtualinvoke $stack4.<org.jfree.data.xy.OHLCDataItem: java.lang.Number getHigh()>();
+    
+        return $stack5;
+    }
+
+}

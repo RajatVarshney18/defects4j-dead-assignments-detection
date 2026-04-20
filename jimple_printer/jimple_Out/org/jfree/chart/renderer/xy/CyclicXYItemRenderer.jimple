@@ -1,0 +1,608 @@
+// ========================================================================
+// CLASS : org.jfree.chart.renderer.xy.CyclicXYItemRenderer
+// ========================================================================
+
+[PUBLIC, SUPER] class org.jfree.chart.renderer.xy.CyclicXYItemRenderer extends org.jfree.chart.renderer.xy.StandardXYItemRenderer implements java.io.Serializable {
+
+    // ---- method: <org.jfree.chart.renderer.xy.CyclicXYItemRenderer: void <init>(int,org.jfree.chart.labels.XYToolTipGenerator)> ----
+    {
+        int type;
+        org.jfree.chart.labels.XYToolTipGenerator labelGenerator;
+        org.jfree.chart.renderer.xy.CyclicXYItemRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.xy.CyclicXYItemRenderer;
+        type := @parameter0: int;
+        labelGenerator := @parameter1: org.jfree.chart.labels.XYToolTipGenerator;
+        specialinvoke this.<org.jfree.chart.renderer.xy.StandardXYItemRenderer: void <init>(int,org.jfree.chart.labels.XYToolTipGenerator)>(type, labelGenerator);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.xy.CyclicXYItemRenderer: void drawItem(java.awt.Graphics2D,org.jfree.chart.renderer.xy.XYItemRendererState,java.awt.geom.Rectangle2D,org.jfree.chart.plot.PlotRenderingInfo,org.jfree.chart.plot.XYPlot,org.jfree.chart.axis.ValueAxis,org.jfree.chart.axis.ValueAxis,org.jfree.data.xy.XYDataset,int,int,org.jfree.chart.plot.CrosshairState,int)> ----
+    {
+        boolean $stack191, $stack29, $stack30, $stack33, $stack34, $stack35, $stack36, $stack46, $stack49, $stack56, $stack59, $stack66, $stack69, $stack76, $stack79, $stack86, $stack89, $stack96, $stack99, xBoundMapping, yBoundMapping;
+        byte $stack102, $stack106, $stack108, $stack110, $stack112, $stack132, $stack134, $stack136, $stack138, $stack163, $stack166, $stack168, $stack170, $stack172, $stack190, $stack41, $stack43, $stack45, $stack48, $stack51, $stack53, $stack55, $stack58, $stack61, $stack63, $stack65, $stack68, $stack71, $stack73, $stack75, $stack78, $stack81, $stack83, $stack85, $stack88, $stack91, $stack93, $stack95, $stack98;
+        double $stack100, $stack101, $stack104, $stack105, $stack107, $stack109, $stack111, $stack113, $stack114, $stack115, $stack116, $stack117, $stack118, $stack119, $stack120, $stack121, $stack122, $stack123, $stack124, $stack125, $stack126, $stack127, $stack128, $stack129, $stack130, $stack131, $stack133, $stack135, $stack137, $stack143, $stack144, $stack145, $stack146, $stack147, $stack148, $stack149, $stack150, $stack151, $stack152, $stack153, $stack154, $stack155, $stack156, $stack157, $stack158, $stack160, $stack161, $stack162, $stack164, $stack165, $stack167, $stack169, $stack171, $stack173, $stack174, $stack175, $stack176, $stack177, $stack178, $stack179, $stack180, $stack181, $stack182, $stack183, $stack184, $stack185, $stack186, $stack187, $stack188, $stack189, $stack40, $stack42, $stack44, $stack47, $stack50, $stack52, $stack54, $stack57, $stack60, $stack62, $stack64, $stack67, $stack70, $stack72, $stack74, $stack77, $stack80, $stack82, $stack84, $stack87, $stack90, $stack92, $stack94, $stack97, xcycleBound, xn#0, xn#1, ycycleBound, yn#0, yn#1;
+        double[] nx#0, nx#1, nx#2, ny#0, ny#1, ny#2, x, y;
+        int $stack103, $stack139, $stack140, $stack141, $stack142, $stack159, $stack31, $stack32, $stack37, $stack39, item, pass, series;
+        java.awt.Graphics2D g2;
+        java.awt.geom.Rectangle2D dataArea;
+        org.jfree.chart.axis.CyclicNumberAxis cnax, cnay;
+        org.jfree.chart.axis.ValueAxis domainAxis, rangeAxis;
+        org.jfree.chart.plot.CrosshairState crosshairState;
+        org.jfree.chart.plot.PlotRenderingInfo info;
+        org.jfree.chart.plot.XYPlot plot;
+        org.jfree.chart.renderer.xy.CyclicXYItemRenderer this;
+        org.jfree.chart.renderer.xy.CyclicXYItemRenderer$OverwriteDataSet $stack38, nx#3;
+        org.jfree.chart.renderer.xy.XYItemRendererState state;
+        org.jfree.data.xy.XYDataset dataset;
+    
+    
+        this := @this: org.jfree.chart.renderer.xy.CyclicXYItemRenderer;
+        g2 := @parameter0: java.awt.Graphics2D;
+        state := @parameter1: org.jfree.chart.renderer.xy.XYItemRendererState;
+        dataArea := @parameter2: java.awt.geom.Rectangle2D;
+        info := @parameter3: org.jfree.chart.plot.PlotRenderingInfo;
+        plot := @parameter4: org.jfree.chart.plot.XYPlot;
+        domainAxis := @parameter5: org.jfree.chart.axis.ValueAxis;
+        rangeAxis := @parameter6: org.jfree.chart.axis.ValueAxis;
+        dataset := @parameter7: org.jfree.data.xy.XYDataset;
+        series := @parameter8: int;
+        item := @parameter9: int;
+        crosshairState := @parameter10: org.jfree.chart.plot.CrosshairState;
+        pass := @parameter11: int;
+        $stack29 = virtualinvoke this.<org.jfree.chart.renderer.xy.CyclicXYItemRenderer: boolean getPlotLines()>();
+    
+        if $stack29 == 0 goto label02;
+        $stack30 = domainAxis instanceof org.jfree.chart.axis.CyclicNumberAxis;
+    
+        if $stack30 != 0 goto label01;
+        $stack191 = rangeAxis instanceof org.jfree.chart.axis.CyclicNumberAxis;
+    
+        if $stack191 == 0 goto label02;
+    
+      label01:
+        if item > 0 goto label03;
+    
+      label02:
+        specialinvoke this.<org.jfree.chart.renderer.xy.StandardXYItemRenderer: void drawItem(java.awt.Graphics2D,org.jfree.chart.renderer.xy.XYItemRendererState,java.awt.geom.Rectangle2D,org.jfree.chart.plot.PlotRenderingInfo,org.jfree.chart.plot.XYPlot,org.jfree.chart.axis.ValueAxis,org.jfree.chart.axis.ValueAxis,org.jfree.data.xy.XYDataset,int,int,org.jfree.chart.plot.CrosshairState,int)>(g2, state, dataArea, info, plot, domainAxis, rangeAxis, dataset, series, item, crosshairState, pass);
+    
+        return;
+    
+      label03:
+        $stack31 = item - 1;
+        xn#0 = interfaceinvoke dataset.<org.jfree.data.xy.XYDataset: double getXValue(int,int)>(series, $stack31);
+        $stack32 = item - 1;
+        yn#0 = interfaceinvoke dataset.<org.jfree.data.xy.XYDataset: double getYValue(int,int)>(series, $stack32);
+        $stack33 = staticinvoke <java.lang.Double: boolean isNaN(double)>(yn#0);
+    
+        if $stack33 == 0 goto label04;
+        specialinvoke this.<org.jfree.chart.renderer.xy.StandardXYItemRenderer: void drawItem(java.awt.Graphics2D,org.jfree.chart.renderer.xy.XYItemRendererState,java.awt.geom.Rectangle2D,org.jfree.chart.plot.PlotRenderingInfo,org.jfree.chart.plot.XYPlot,org.jfree.chart.axis.ValueAxis,org.jfree.chart.axis.ValueAxis,org.jfree.data.xy.XYDataset,int,int,org.jfree.chart.plot.CrosshairState,int)>(g2, state, dataArea, info, plot, domainAxis, rangeAxis, dataset, series, item, crosshairState, pass);
+    
+        return;
+    
+      label04:
+        x = newarray (double)[2];
+        y = newarray (double)[2];
+        x[0] = xn#0;
+        y[0] = yn#0;
+        xn#1 = interfaceinvoke dataset.<org.jfree.data.xy.XYDataset: double getXValue(int,int)>(series, item);
+        yn#1 = interfaceinvoke dataset.<org.jfree.data.xy.XYDataset: double getYValue(int,int)>(series, item);
+        $stack34 = staticinvoke <java.lang.Double: boolean isNaN(double)>(yn#1);
+    
+        if $stack34 == 0 goto label05;
+    
+        return;
+    
+      label05:
+        x[1] = xn#1;
+        y[1] = yn#1;
+        xcycleBound = #NaN;
+        ycycleBound = #NaN;
+        xBoundMapping = 0;
+        yBoundMapping = 0;
+        cnax = null;
+        cnay = null;
+        $stack35 = domainAxis instanceof org.jfree.chart.axis.CyclicNumberAxis;
+    
+        if $stack35 == 0 goto label08;
+        cnax = (org.jfree.chart.axis.CyclicNumberAxis) domainAxis;
+        xcycleBound = virtualinvoke cnax.<org.jfree.chart.axis.CyclicNumberAxis: double getCycleBound()>();
+        xBoundMapping = virtualinvoke cnax.<org.jfree.chart.axis.CyclicNumberAxis: boolean isBoundMappedToLastCycle()>();
+        $stack164 = x[0];
+        $stack165 = x[1];
+        $stack166 = $stack164 cmpl $stack165;
+    
+        if $stack166 == 0 goto label08;
+        $stack167 = x[0];
+        $stack168 = xcycleBound cmpl $stack167;
+    
+        if $stack168 < 0 goto label06;
+        $stack189 = x[1];
+        $stack190 = xcycleBound cmpg $stack189;
+    
+        if $stack190 <= 0 goto label07;
+    
+      label06:
+        $stack169 = x[1];
+        $stack170 = xcycleBound cmpl $stack169;
+    
+        if $stack170 < 0 goto label08;
+        $stack171 = x[0];
+        $stack172 = xcycleBound cmpg $stack171;
+    
+        if $stack172 > 0 goto label08;
+    
+      label07:
+        nx#0 = newarray (double)[3];
+        ny#0 = newarray (double)[3];
+        $stack173 = x[0];
+        nx#0[0] = $stack173;
+        $stack174 = x[1];
+        nx#0[2] = $stack174;
+        $stack175 = y[0];
+        ny#0[0] = $stack175;
+        $stack176 = y[1];
+        ny#0[2] = $stack176;
+        nx#0[1] = xcycleBound;
+        $stack177 = y[1];
+        $stack178 = y[0];
+        $stack180 = $stack177 - $stack178;
+        $stack179 = x[0];
+        $stack181 = xcycleBound - $stack179;
+        $stack184 = $stack180 * $stack181;
+        $stack182 = x[1];
+        $stack183 = x[0];
+        $stack185 = $stack182 - $stack183;
+        $stack186 = $stack184 / $stack185;
+        $stack187 = y[0];
+        $stack188 = $stack186 + $stack187;
+        ny#0[1] = $stack188;
+        x = nx#0;
+        y = ny#0;
+    
+      label08:
+        $stack36 = rangeAxis instanceof org.jfree.chart.axis.CyclicNumberAxis;
+    
+        if $stack36 == 0 goto label15;
+        cnay = (org.jfree.chart.axis.CyclicNumberAxis) rangeAxis;
+        ycycleBound = virtualinvoke cnay.<org.jfree.chart.axis.CyclicNumberAxis: double getCycleBound()>();
+        yBoundMapping = virtualinvoke cnay.<org.jfree.chart.axis.CyclicNumberAxis: boolean isBoundMappedToLastCycle()>();
+        $stack100 = y[0];
+        $stack101 = y[1];
+        $stack102 = $stack100 cmpl $stack101;
+    
+        if $stack102 == 0 goto label12;
+        $stack133 = y[0];
+        $stack134 = ycycleBound cmpl $stack133;
+    
+        if $stack134 < 0 goto label09;
+        $stack162 = y[1];
+        $stack163 = ycycleBound cmpg $stack162;
+    
+        if $stack163 <= 0 goto label10;
+    
+      label09:
+        $stack135 = y[1];
+        $stack136 = ycycleBound cmpl $stack135;
+    
+        if $stack136 < 0 goto label12;
+        $stack137 = y[0];
+        $stack138 = ycycleBound cmpg $stack137;
+    
+        if $stack138 > 0 goto label12;
+    
+      label10:
+        $stack139 = lengthof x;
+        $stack140 = $stack139 + 1;
+        nx#1 = newarray (double)[$stack140];
+        $stack141 = lengthof y;
+        $stack142 = $stack141 + 1;
+        ny#1 = newarray (double)[$stack142];
+        $stack143 = x[0];
+        nx#1[0] = $stack143;
+        $stack144 = x[1];
+        nx#1[2] = $stack144;
+        $stack145 = y[0];
+        ny#1[0] = $stack145;
+        $stack146 = y[1];
+        ny#1[2] = $stack146;
+        ny#1[1] = ycycleBound;
+        $stack147 = x[1];
+        $stack148 = x[0];
+        $stack150 = $stack147 - $stack148;
+        $stack149 = y[0];
+        $stack151 = ycycleBound - $stack149;
+        $stack154 = $stack150 * $stack151;
+        $stack152 = y[1];
+        $stack153 = y[0];
+        $stack155 = $stack152 - $stack153;
+        $stack156 = $stack154 / $stack155;
+        $stack157 = x[0];
+        $stack158 = $stack156 + $stack157;
+        nx#1[1] = $stack158;
+        $stack159 = lengthof x;
+    
+        if $stack159 != 3 goto label11;
+        $stack160 = x[2];
+        nx#1[3] = $stack160;
+        $stack161 = y[2];
+        ny#1[3] = $stack161;
+    
+      label11:
+        x = nx#1;
+        y = ny#1;
+    
+        goto label15;
+    
+      label12:
+        $stack103 = lengthof x;
+    
+        if $stack103 != 3 goto label15;
+        $stack104 = y[1];
+        $stack105 = y[2];
+        $stack106 = $stack104 cmpl $stack105;
+    
+        if $stack106 == 0 goto label15;
+        $stack107 = y[1];
+        $stack108 = ycycleBound cmpl $stack107;
+    
+        if $stack108 < 0 goto label13;
+        $stack131 = y[2];
+        $stack132 = ycycleBound cmpg $stack131;
+    
+        if $stack132 <= 0 goto label14;
+    
+      label13:
+        $stack109 = y[2];
+        $stack110 = ycycleBound cmpl $stack109;
+    
+        if $stack110 < 0 goto label15;
+        $stack111 = y[1];
+        $stack112 = ycycleBound cmpg $stack111;
+    
+        if $stack112 > 0 goto label15;
+    
+      label14:
+        nx#2 = newarray (double)[4];
+        ny#2 = newarray (double)[4];
+        $stack113 = x[0];
+        nx#2[0] = $stack113;
+        $stack114 = x[1];
+        nx#2[1] = $stack114;
+        $stack115 = x[2];
+        nx#2[3] = $stack115;
+        $stack116 = y[0];
+        ny#2[0] = $stack116;
+        $stack117 = y[1];
+        ny#2[1] = $stack117;
+        $stack118 = y[2];
+        ny#2[3] = $stack118;
+        ny#2[2] = ycycleBound;
+        $stack119 = x[2];
+        $stack120 = x[1];
+        $stack122 = $stack119 - $stack120;
+        $stack121 = y[1];
+        $stack123 = ycycleBound - $stack121;
+        $stack126 = $stack122 * $stack123;
+        $stack124 = y[2];
+        $stack125 = y[1];
+        $stack127 = $stack124 - $stack125;
+        $stack128 = $stack126 / $stack127;
+        $stack129 = x[1];
+        $stack130 = $stack128 + $stack129;
+        nx#2[2] = $stack130;
+        x = nx#2;
+        y = ny#2;
+    
+      label15:
+        $stack37 = lengthof x;
+    
+        if $stack37 != 2 goto label16;
+        specialinvoke this.<org.jfree.chart.renderer.xy.StandardXYItemRenderer: void drawItem(java.awt.Graphics2D,org.jfree.chart.renderer.xy.XYItemRendererState,java.awt.geom.Rectangle2D,org.jfree.chart.plot.PlotRenderingInfo,org.jfree.chart.plot.XYPlot,org.jfree.chart.axis.ValueAxis,org.jfree.chart.axis.ValueAxis,org.jfree.data.xy.XYDataset,int,int,org.jfree.chart.plot.CrosshairState,int)>(g2, state, dataArea, info, plot, domainAxis, rangeAxis, dataset, series, item, crosshairState, pass);
+    
+        return;
+    
+      label16:
+        $stack38 = new org.jfree.chart.renderer.xy.CyclicXYItemRenderer$OverwriteDataSet;
+        specialinvoke $stack38.<org.jfree.chart.renderer.xy.CyclicXYItemRenderer$OverwriteDataSet: void <init>(double[],double[],org.jfree.data.xy.XYDataset)>(x, y, dataset);
+        nx#3 = $stack38;
+    
+        if cnax == null goto label22;
+        $stack90 = x[0];
+        $stack91 = xcycleBound cmpl $stack90;
+    
+        if $stack91 != 0 goto label19;
+        $stack97 = x[1];
+        $stack98 = $stack97 cmpg xcycleBound;
+    
+        if $stack98 > 0 goto label17;
+        $stack99 = 1;
+    
+        goto label18;
+    
+      label17:
+        $stack99 = 0;
+    
+      label18:
+        virtualinvoke cnax.<org.jfree.chart.axis.CyclicNumberAxis: void setBoundMappedToLastCycle(boolean)>($stack99);
+    
+      label19:
+        $stack92 = x[1];
+        $stack93 = xcycleBound cmpl $stack92;
+    
+        if $stack93 != 0 goto label22;
+        $stack94 = x[0];
+        $stack95 = $stack94 cmpg xcycleBound;
+    
+        if $stack95 > 0 goto label20;
+        $stack96 = 1;
+    
+        goto label21;
+    
+      label20:
+        $stack96 = 0;
+    
+      label21:
+        virtualinvoke cnax.<org.jfree.chart.axis.CyclicNumberAxis: void setBoundMappedToLastCycle(boolean)>($stack96);
+    
+      label22:
+        if cnay == null goto label28;
+        $stack80 = y[0];
+        $stack81 = ycycleBound cmpl $stack80;
+    
+        if $stack81 != 0 goto label25;
+        $stack87 = y[1];
+        $stack88 = $stack87 cmpg ycycleBound;
+    
+        if $stack88 > 0 goto label23;
+        $stack89 = 1;
+    
+        goto label24;
+    
+      label23:
+        $stack89 = 0;
+    
+      label24:
+        virtualinvoke cnay.<org.jfree.chart.axis.CyclicNumberAxis: void setBoundMappedToLastCycle(boolean)>($stack89);
+    
+      label25:
+        $stack82 = y[1];
+        $stack83 = ycycleBound cmpl $stack82;
+    
+        if $stack83 != 0 goto label28;
+        $stack84 = y[0];
+        $stack85 = $stack84 cmpg ycycleBound;
+    
+        if $stack85 > 0 goto label26;
+        $stack86 = 1;
+    
+        goto label27;
+    
+      label26:
+        $stack86 = 0;
+    
+      label27:
+        virtualinvoke cnay.<org.jfree.chart.axis.CyclicNumberAxis: void setBoundMappedToLastCycle(boolean)>($stack86);
+    
+      label28:
+        specialinvoke this.<org.jfree.chart.renderer.xy.StandardXYItemRenderer: void drawItem(java.awt.Graphics2D,org.jfree.chart.renderer.xy.XYItemRendererState,java.awt.geom.Rectangle2D,org.jfree.chart.plot.PlotRenderingInfo,org.jfree.chart.plot.XYPlot,org.jfree.chart.axis.ValueAxis,org.jfree.chart.axis.ValueAxis,org.jfree.data.xy.XYDataset,int,int,org.jfree.chart.plot.CrosshairState,int)>(g2, state, dataArea, info, plot, domainAxis, rangeAxis, $stack38, series, 1, crosshairState, pass);
+    
+        if cnax == null goto label34;
+        $stack70 = x[1];
+        $stack71 = xcycleBound cmpl $stack70;
+    
+        if $stack71 != 0 goto label31;
+        $stack77 = x[2];
+        $stack78 = $stack77 cmpg xcycleBound;
+    
+        if $stack78 > 0 goto label29;
+        $stack79 = 1;
+    
+        goto label30;
+    
+      label29:
+        $stack79 = 0;
+    
+      label30:
+        virtualinvoke cnax.<org.jfree.chart.axis.CyclicNumberAxis: void setBoundMappedToLastCycle(boolean)>($stack79);
+    
+      label31:
+        $stack72 = x[2];
+        $stack73 = xcycleBound cmpl $stack72;
+    
+        if $stack73 != 0 goto label34;
+        $stack74 = x[1];
+        $stack75 = $stack74 cmpg xcycleBound;
+    
+        if $stack75 > 0 goto label32;
+        $stack76 = 1;
+    
+        goto label33;
+    
+      label32:
+        $stack76 = 0;
+    
+      label33:
+        virtualinvoke cnax.<org.jfree.chart.axis.CyclicNumberAxis: void setBoundMappedToLastCycle(boolean)>($stack76);
+    
+      label34:
+        if cnay == null goto label40;
+        $stack60 = y[1];
+        $stack61 = ycycleBound cmpl $stack60;
+    
+        if $stack61 != 0 goto label37;
+        $stack67 = y[2];
+        $stack68 = $stack67 cmpg ycycleBound;
+    
+        if $stack68 > 0 goto label35;
+        $stack69 = 1;
+    
+        goto label36;
+    
+      label35:
+        $stack69 = 0;
+    
+      label36:
+        virtualinvoke cnay.<org.jfree.chart.axis.CyclicNumberAxis: void setBoundMappedToLastCycle(boolean)>($stack69);
+    
+      label37:
+        $stack62 = y[2];
+        $stack63 = ycycleBound cmpl $stack62;
+    
+        if $stack63 != 0 goto label40;
+        $stack64 = y[1];
+        $stack65 = $stack64 cmpg ycycleBound;
+    
+        if $stack65 > 0 goto label38;
+        $stack66 = 1;
+    
+        goto label39;
+    
+      label38:
+        $stack66 = 0;
+    
+      label39:
+        virtualinvoke cnay.<org.jfree.chart.axis.CyclicNumberAxis: void setBoundMappedToLastCycle(boolean)>($stack66);
+    
+      label40:
+        specialinvoke this.<org.jfree.chart.renderer.xy.StandardXYItemRenderer: void drawItem(java.awt.Graphics2D,org.jfree.chart.renderer.xy.XYItemRendererState,java.awt.geom.Rectangle2D,org.jfree.chart.plot.PlotRenderingInfo,org.jfree.chart.plot.XYPlot,org.jfree.chart.axis.ValueAxis,org.jfree.chart.axis.ValueAxis,org.jfree.data.xy.XYDataset,int,int,org.jfree.chart.plot.CrosshairState,int)>(g2, state, dataArea, info, plot, domainAxis, rangeAxis, $stack38, series, 2, crosshairState, pass);
+        $stack39 = lengthof x;
+    
+        if $stack39 != 4 goto label53;
+    
+        if cnax == null goto label46;
+        $stack50 = x[2];
+        $stack51 = xcycleBound cmpl $stack50;
+    
+        if $stack51 != 0 goto label43;
+        $stack57 = x[3];
+        $stack58 = $stack57 cmpg xcycleBound;
+    
+        if $stack58 > 0 goto label41;
+        $stack59 = 1;
+    
+        goto label42;
+    
+      label41:
+        $stack59 = 0;
+    
+      label42:
+        virtualinvoke cnax.<org.jfree.chart.axis.CyclicNumberAxis: void setBoundMappedToLastCycle(boolean)>($stack59);
+    
+      label43:
+        $stack52 = x[3];
+        $stack53 = xcycleBound cmpl $stack52;
+    
+        if $stack53 != 0 goto label46;
+        $stack54 = x[2];
+        $stack55 = $stack54 cmpg xcycleBound;
+    
+        if $stack55 > 0 goto label44;
+        $stack56 = 1;
+    
+        goto label45;
+    
+      label44:
+        $stack56 = 0;
+    
+      label45:
+        virtualinvoke cnax.<org.jfree.chart.axis.CyclicNumberAxis: void setBoundMappedToLastCycle(boolean)>($stack56);
+    
+      label46:
+        if cnay == null goto label52;
+        $stack40 = y[2];
+        $stack41 = ycycleBound cmpl $stack40;
+    
+        if $stack41 != 0 goto label49;
+        $stack47 = y[3];
+        $stack48 = $stack47 cmpg ycycleBound;
+    
+        if $stack48 > 0 goto label47;
+        $stack49 = 1;
+    
+        goto label48;
+    
+      label47:
+        $stack49 = 0;
+    
+      label48:
+        virtualinvoke cnay.<org.jfree.chart.axis.CyclicNumberAxis: void setBoundMappedToLastCycle(boolean)>($stack49);
+    
+      label49:
+        $stack42 = y[3];
+        $stack43 = ycycleBound cmpl $stack42;
+    
+        if $stack43 != 0 goto label52;
+        $stack44 = y[2];
+        $stack45 = $stack44 cmpg ycycleBound;
+    
+        if $stack45 > 0 goto label50;
+        $stack46 = 1;
+    
+        goto label51;
+    
+      label50:
+        $stack46 = 0;
+    
+      label51:
+        virtualinvoke cnay.<org.jfree.chart.axis.CyclicNumberAxis: void setBoundMappedToLastCycle(boolean)>($stack46);
+    
+      label52:
+        specialinvoke this.<org.jfree.chart.renderer.xy.StandardXYItemRenderer: void drawItem(java.awt.Graphics2D,org.jfree.chart.renderer.xy.XYItemRendererState,java.awt.geom.Rectangle2D,org.jfree.chart.plot.PlotRenderingInfo,org.jfree.chart.plot.XYPlot,org.jfree.chart.axis.ValueAxis,org.jfree.chart.axis.ValueAxis,org.jfree.data.xy.XYDataset,int,int,org.jfree.chart.plot.CrosshairState,int)>(g2, state, dataArea, info, plot, domainAxis, rangeAxis, $stack38, series, 3, crosshairState, pass);
+    
+      label53:
+        if cnax == null goto label54;
+        virtualinvoke cnax.<org.jfree.chart.axis.CyclicNumberAxis: void setBoundMappedToLastCycle(boolean)>(xBoundMapping);
+    
+      label54:
+        if cnay == null goto label55;
+        virtualinvoke cnay.<org.jfree.chart.axis.CyclicNumberAxis: void setBoundMappedToLastCycle(boolean)>(yBoundMapping);
+    
+      label55:
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.xy.CyclicXYItemRenderer: void <init>(int)> ----
+    {
+        int type;
+        org.jfree.chart.renderer.xy.CyclicXYItemRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.xy.CyclicXYItemRenderer;
+        type := @parameter0: int;
+        specialinvoke this.<org.jfree.chart.renderer.xy.StandardXYItemRenderer: void <init>(int)>(type);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.xy.CyclicXYItemRenderer: void <init>()> ----
+    {
+        org.jfree.chart.renderer.xy.CyclicXYItemRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.xy.CyclicXYItemRenderer;
+        specialinvoke this.<org.jfree.chart.renderer.xy.StandardXYItemRenderer: void <init>()>();
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.xy.CyclicXYItemRenderer: void <init>(int,org.jfree.chart.labels.XYToolTipGenerator,org.jfree.chart.urls.XYURLGenerator)> ----
+    {
+        int type;
+        org.jfree.chart.labels.XYToolTipGenerator labelGenerator;
+        org.jfree.chart.renderer.xy.CyclicXYItemRenderer this;
+        org.jfree.chart.urls.XYURLGenerator urlGenerator;
+    
+    
+        this := @this: org.jfree.chart.renderer.xy.CyclicXYItemRenderer;
+        type := @parameter0: int;
+        labelGenerator := @parameter1: org.jfree.chart.labels.XYToolTipGenerator;
+        urlGenerator := @parameter2: org.jfree.chart.urls.XYURLGenerator;
+        specialinvoke this.<org.jfree.chart.renderer.xy.StandardXYItemRenderer: void <init>(int,org.jfree.chart.labels.XYToolTipGenerator,org.jfree.chart.urls.XYURLGenerator)>(type, labelGenerator, urlGenerator);
+    
+        return;
+    }
+
+}

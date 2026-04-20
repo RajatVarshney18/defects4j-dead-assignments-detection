@@ -1,0 +1,595 @@
+// ========================================================================
+// CLASS : org.jfree.data.time.Quarter
+// ========================================================================
+
+[PUBLIC, SUPER] class org.jfree.data.time.Quarter extends org.jfree.data.time.RegularTimePeriod implements java.io.Serializable {
+
+    // ---- method: <org.jfree.data.time.Quarter: int hashCode()> ----
+    {
+        byte $stack3;
+        int $stack4, result#1, result#2;
+        org.jfree.data.time.Quarter this;
+        short $stack2, $stack5;
+    
+    
+        this := @this: org.jfree.data.time.Quarter;
+        $stack2 = 629;
+        $stack3 = this.<org.jfree.data.time.Quarter: byte quarter>;
+        result#1 = $stack2 + $stack3;
+        $stack4 = 37 * result#1;
+        $stack5 = this.<org.jfree.data.time.Quarter: short year>;
+        result#2 = $stack4 + $stack5;
+    
+        return result#2;
+    }
+
+    // ---- method: <org.jfree.data.time.Quarter: int compareTo(java.lang.Object)> ----
+    {
+        boolean $stack4, $stack5;
+        byte $stack8;
+        int $stack7, $stack9, result;
+        java.lang.Object o1;
+        org.jfree.data.time.Quarter q, this;
+        short $stack6;
+    
+    
+        this := @this: org.jfree.data.time.Quarter;
+        o1 := @parameter0: java.lang.Object;
+        $stack4 = o1 instanceof org.jfree.data.time.Quarter;
+    
+        if $stack4 == 0 goto label2;
+        q = (org.jfree.data.time.Quarter) o1;
+        $stack6 = this.<org.jfree.data.time.Quarter: short year>;
+        $stack7 = virtualinvoke q.<org.jfree.data.time.Quarter: int getYearValue()>();
+        result = $stack6 - $stack7;
+    
+        if result != 0 goto label1;
+        $stack8 = this.<org.jfree.data.time.Quarter: byte quarter>;
+        $stack9 = virtualinvoke q.<org.jfree.data.time.Quarter: int getQuarter()>();
+        result = $stack8 - $stack9;
+    
+      label1:
+        goto label4;
+    
+      label2:
+        $stack5 = o1 instanceof org.jfree.data.time.RegularTimePeriod;
+    
+        if $stack5 == 0 goto label3;
+        result = 0;
+    
+        goto label4;
+    
+      label3:
+        result = 1;
+    
+      label4:
+        return result;
+    }
+
+    // ---- method: <org.jfree.data.time.Quarter: org.jfree.data.time.RegularTimePeriod previous()> ----
+    {
+        byte $stack2, $stack7;
+        int $stack5, $stack9;
+        org.jfree.data.time.Quarter $stack10, $stack6, result, this;
+        short $stack3, $stack4, $stack8;
+    
+    
+        this := @this: org.jfree.data.time.Quarter;
+        $stack2 = this.<org.jfree.data.time.Quarter: byte quarter>;
+    
+        if $stack2 <= 1 goto label1;
+        $stack10 = new org.jfree.data.time.Quarter;
+        $stack7 = this.<org.jfree.data.time.Quarter: byte quarter>;
+        $stack9 = $stack7 - 1;
+        $stack8 = this.<org.jfree.data.time.Quarter: short year>;
+        specialinvoke $stack10.<org.jfree.data.time.Quarter: void <init>(int,int)>($stack9, $stack8);
+        result = $stack10;
+    
+        goto label3;
+    
+      label1:
+        $stack3 = this.<org.jfree.data.time.Quarter: short year>;
+    
+        if $stack3 <= 1900 goto label2;
+        $stack6 = new org.jfree.data.time.Quarter;
+        $stack4 = this.<org.jfree.data.time.Quarter: short year>;
+        $stack5 = $stack4 - 1;
+        specialinvoke $stack6.<org.jfree.data.time.Quarter: void <init>(int,int)>(4, $stack5);
+        result = $stack6;
+    
+        goto label3;
+    
+      label2:
+        result = null;
+    
+      label3:
+        return result;
+    }
+
+    // ---- method: <org.jfree.data.time.Quarter: void <clinit>()> ----
+    {
+        int[] $stack0, $stack1;
+    
+    
+        $stack0 = newarray (int)[5];
+        $stack0[0] = 0;
+        $stack0[1] = 1;
+        $stack0[2] = 4;
+        $stack0[3] = 7;
+        $stack0[4] = 10;
+        <org.jfree.data.time.Quarter: int[] FIRST_MONTH_IN_QUARTER> = $stack0;
+        $stack1 = newarray (int)[5];
+        $stack1[0] = 0;
+        $stack1[1] = 3;
+        $stack1[2] = 6;
+        $stack1[3] = 9;
+        $stack1[4] = 12;
+        <org.jfree.data.time.Quarter: int[] LAST_MONTH_IN_QUARTER> = $stack1;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.time.Quarter: org.jfree.data.time.Quarter parseQuarter(java.lang.String)> ----
+    {
+        int $stack10, $stack13, $stack14, $stack7, $stack8, $stack9, i, quarter;
+        java.lang.Object $stack20, $stack21;
+        java.lang.String $stack12, $stack15, $stack18, qstr, remaining#0, remaining#1, remaining#2, remaining#3, s;
+        java.lang.StringBuffer $stack11, $stack16, $stack17;
+        java.lang.Throwable #l1, #l2;
+        org.jfree.data.time.Quarter $stack19, result;
+        org.jfree.data.time.TimePeriodFormatException #l0, #l3;
+        org.jfree.data.time.Year year;
+    
+    
+        s := @parameter0: java.lang.String;
+        i = virtualinvoke s.<java.lang.String: int indexOf(java.lang.String)>("Q");
+    
+        if i != -1 goto label1;
+        $stack21 = new org.jfree.data.time.TimePeriodFormatException;
+        #l3 = (org.jfree.data.time.TimePeriodFormatException) $stack21;
+        specialinvoke #l3.<org.jfree.data.time.TimePeriodFormatException: void <init>(java.lang.String)>("Missing Q.");
+        #l1 = (java.lang.Throwable) $stack21;
+    
+        throw #l1;
+    
+      label1:
+        $stack7 = virtualinvoke s.<java.lang.String: int length()>();
+        $stack8 = $stack7 - 1;
+    
+        if i != $stack8 goto label2;
+        $stack20 = new org.jfree.data.time.TimePeriodFormatException;
+        #l0 = (org.jfree.data.time.TimePeriodFormatException) $stack20;
+        specialinvoke #l0.<org.jfree.data.time.TimePeriodFormatException: void <init>(java.lang.String)>("Q found at end of string.");
+        #l2 = (java.lang.Throwable) $stack20;
+    
+        throw #l2;
+    
+      label2:
+        $stack10 = i + 1;
+        $stack9 = i + 2;
+        qstr = virtualinvoke s.<java.lang.String: java.lang.String substring(int,int)>($stack10, $stack9);
+        quarter = staticinvoke <java.lang.Integer: int parseInt(java.lang.String)>(qstr);
+        $stack11 = new java.lang.StringBuffer;
+        specialinvoke $stack11.<java.lang.StringBuffer: void <init>()>();
+        $stack12 = virtualinvoke s.<java.lang.String: java.lang.String substring(int,int)>(0, i);
+        $stack16 = virtualinvoke $stack11.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>($stack12);
+        $stack14 = i + 2;
+        $stack13 = virtualinvoke s.<java.lang.String: int length()>();
+        $stack15 = virtualinvoke s.<java.lang.String: java.lang.String substring(int,int)>($stack14, $stack13);
+        $stack17 = virtualinvoke $stack16.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>($stack15);
+        remaining#0 = virtualinvoke $stack17.<java.lang.StringBuffer: java.lang.String toString()>();
+        remaining#1 = virtualinvoke remaining#0.<java.lang.String: java.lang.String replace(char,char)>(47, 32);
+        remaining#2 = virtualinvoke remaining#1.<java.lang.String: java.lang.String replace(char,char)>(44, 32);
+        remaining#3 = virtualinvoke remaining#2.<java.lang.String: java.lang.String replace(char,char)>(45, 32);
+        $stack18 = virtualinvoke remaining#3.<java.lang.String: java.lang.String trim()>();
+        year = staticinvoke <org.jfree.data.time.Year: org.jfree.data.time.Year parseYear(java.lang.String)>($stack18);
+        $stack19 = new org.jfree.data.time.Quarter;
+        specialinvoke $stack19.<org.jfree.data.time.Quarter: void <init>(int,org.jfree.data.time.Year)>(quarter, year);
+        result = $stack19;
+    
+        return $stack19;
+    }
+
+    // ---- method: <org.jfree.data.time.Quarter: void peg(java.util.Calendar)> ----
+    {
+        java.util.Calendar calendar;
+        long $stack2, $stack3;
+        org.jfree.data.time.Quarter this;
+    
+    
+        this := @this: org.jfree.data.time.Quarter;
+        calendar := @parameter0: java.util.Calendar;
+        $stack2 = virtualinvoke this.<org.jfree.data.time.Quarter: long getFirstMillisecond(java.util.Calendar)>(calendar);
+        this.<org.jfree.data.time.Quarter: long firstMillisecond> = $stack2;
+        $stack3 = virtualinvoke this.<org.jfree.data.time.Quarter: long getLastMillisecond(java.util.Calendar)>(calendar);
+        this.<org.jfree.data.time.Quarter: long lastMillisecond> = $stack3;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.time.Quarter: void <init>(java.util.Date)> ----
+    {
+        java.util.Date time;
+        java.util.TimeZone $stack2;
+        org.jfree.data.time.Quarter this;
+    
+    
+        this := @this: org.jfree.data.time.Quarter;
+        time := @parameter0: java.util.Date;
+        $stack2 = <org.jfree.data.time.RegularTimePeriod: java.util.TimeZone DEFAULT_TIME_ZONE>;
+        specialinvoke this.<org.jfree.data.time.Quarter: void <init>(java.util.Date,java.util.TimeZone)>(time, $stack2);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.time.Quarter: int getQuarter()> ----
+    {
+        byte $stack1;
+        org.jfree.data.time.Quarter this;
+    
+    
+        this := @this: org.jfree.data.time.Quarter;
+        $stack1 = this.<org.jfree.data.time.Quarter: byte quarter>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.data.time.Quarter: int getYearValue()> ----
+    {
+        org.jfree.data.time.Quarter this;
+        short $stack1;
+    
+    
+        this := @this: org.jfree.data.time.Quarter;
+        $stack1 = this.<org.jfree.data.time.Quarter: short year>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.data.time.Quarter: org.jfree.data.time.RegularTimePeriod next()> ----
+    {
+        byte $stack2, $stack7;
+        int $stack5, $stack9;
+        org.jfree.data.time.Quarter $stack10, $stack6, result, this;
+        short $stack3, $stack4, $stack8;
+    
+    
+        this := @this: org.jfree.data.time.Quarter;
+        $stack2 = this.<org.jfree.data.time.Quarter: byte quarter>;
+    
+        if $stack2 >= 4 goto label1;
+        $stack10 = new org.jfree.data.time.Quarter;
+        $stack7 = this.<org.jfree.data.time.Quarter: byte quarter>;
+        $stack9 = $stack7 + 1;
+        $stack8 = this.<org.jfree.data.time.Quarter: short year>;
+        specialinvoke $stack10.<org.jfree.data.time.Quarter: void <init>(int,int)>($stack9, $stack8);
+        result = $stack10;
+    
+        goto label3;
+    
+      label1:
+        $stack3 = this.<org.jfree.data.time.Quarter: short year>;
+    
+        if $stack3 >= 9999 goto label2;
+        $stack6 = new org.jfree.data.time.Quarter;
+        $stack4 = this.<org.jfree.data.time.Quarter: short year>;
+        $stack5 = $stack4 + 1;
+        specialinvoke $stack6.<org.jfree.data.time.Quarter: void <init>(int,int)>(1, $stack5);
+        result = $stack6;
+    
+        goto label3;
+    
+      label2:
+        result = null;
+    
+      label3:
+        return result;
+    }
+
+    // ---- method: <org.jfree.data.time.Quarter: long getLastMillisecond(java.util.Calendar)> ----
+    {
+        byte $stack5;
+        int $stack7, eom, month;
+        int[] $stack4;
+        java.util.Calendar calendar;
+        java.util.Date $stack9;
+        long $stack10;
+        org.jfree.data.time.Quarter this;
+        short $stack6, $stack8;
+    
+    
+        this := @this: org.jfree.data.time.Quarter;
+        calendar := @parameter0: java.util.Calendar;
+        $stack4 = <org.jfree.data.time.Quarter: int[] LAST_MONTH_IN_QUARTER>;
+        $stack5 = this.<org.jfree.data.time.Quarter: byte quarter>;
+        month = $stack4[$stack5];
+        $stack6 = this.<org.jfree.data.time.Quarter: short year>;
+        eom = staticinvoke <org.jfree.data.time.SerialDate: int lastDayOfMonth(int,int)>(month, $stack6);
+        $stack8 = this.<org.jfree.data.time.Quarter: short year>;
+        $stack7 = month - 1;
+        virtualinvoke calendar.<java.util.Calendar: void set(int,int,int,int,int,int)>($stack8, $stack7, eom, 23, 59, 59);
+        virtualinvoke calendar.<java.util.Calendar: void set(int,int)>(14, 999);
+        $stack9 = virtualinvoke calendar.<java.util.Calendar: java.util.Date getTime()>();
+        $stack10 = virtualinvoke $stack9.<java.util.Date: long getTime()>();
+    
+        return $stack10;
+    }
+
+    // ---- method: <org.jfree.data.time.Quarter: org.jfree.data.time.Year getYear()> ----
+    {
+        org.jfree.data.time.Quarter this;
+        org.jfree.data.time.Year $stack2;
+        short $stack1;
+    
+    
+        this := @this: org.jfree.data.time.Quarter;
+        $stack2 = new org.jfree.data.time.Year;
+        $stack1 = this.<org.jfree.data.time.Quarter: short year>;
+        specialinvoke $stack2.<org.jfree.data.time.Year: void <init>(int)>($stack1);
+    
+        return $stack2;
+    }
+
+    // ---- method: <org.jfree.data.time.Quarter: void <init>()> ----
+    {
+        java.util.Date $stack1;
+        org.jfree.data.time.Quarter this;
+    
+    
+        this := @this: org.jfree.data.time.Quarter;
+        $stack1 = new java.util.Date;
+        specialinvoke $stack1.<java.util.Date: void <init>()>();
+        specialinvoke this.<org.jfree.data.time.Quarter: void <init>(java.util.Date)>($stack1);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.time.Quarter: boolean equals(java.lang.Object)> ----
+    {
+        boolean $stack3, $stack8;
+        byte $stack4;
+        int $stack5, $stack7;
+        java.lang.Object obj;
+        org.jfree.data.time.Quarter target, this;
+        short $stack6;
+    
+    
+        this := @this: org.jfree.data.time.Quarter;
+        obj := @parameter0: java.lang.Object;
+    
+        if obj == null goto label3;
+        $stack3 = obj instanceof org.jfree.data.time.Quarter;
+    
+        if $stack3 == 0 goto label4;
+        target = (org.jfree.data.time.Quarter) obj;
+        $stack4 = this.<org.jfree.data.time.Quarter: byte quarter>;
+        $stack5 = virtualinvoke target.<org.jfree.data.time.Quarter: int getQuarter()>();
+    
+        if $stack4 != $stack5 goto label1;
+        $stack6 = this.<org.jfree.data.time.Quarter: short year>;
+        $stack7 = virtualinvoke target.<org.jfree.data.time.Quarter: int getYearValue()>();
+    
+        if $stack6 != $stack7 goto label1;
+        $stack8 = 1;
+    
+        goto label2;
+    
+      label1:
+        $stack8 = 0;
+    
+      label2:
+        return $stack8;
+    
+      label3:
+        return 0;
+    
+      label4:
+        return 0;
+    }
+
+    // ---- method: <org.jfree.data.time.Quarter: void <init>(java.util.Date,java.util.TimeZone)> ----
+    {
+        byte $stack7;
+        int $stack5, $stack6, $stack8, month;
+        java.util.Calendar calendar;
+        java.util.Date time;
+        java.util.TimeZone zone;
+        org.jfree.data.time.Quarter this;
+        short $stack9;
+    
+    
+        this := @this: org.jfree.data.time.Quarter;
+        time := @parameter0: java.util.Date;
+        zone := @parameter1: java.util.TimeZone;
+        specialinvoke this.<org.jfree.data.time.RegularTimePeriod: void <init>()>();
+        calendar = staticinvoke <java.util.Calendar: java.util.Calendar getInstance(java.util.TimeZone)>(zone);
+        virtualinvoke calendar.<java.util.Calendar: void setTime(java.util.Date)>(time);
+        $stack5 = virtualinvoke calendar.<java.util.Calendar: int get(int)>(2);
+        month = $stack5 + 1;
+        $stack6 = staticinvoke <org.jfree.data.time.SerialDate: int monthCodeToQuarter(int)>(month);
+        $stack7 = (byte) $stack6;
+        this.<org.jfree.data.time.Quarter: byte quarter> = $stack7;
+        $stack8 = virtualinvoke calendar.<java.util.Calendar: int get(int)>(1);
+        $stack9 = (short) $stack8;
+        this.<org.jfree.data.time.Quarter: short year> = $stack9;
+        virtualinvoke this.<org.jfree.data.time.Quarter: void peg(java.util.Calendar)>(calendar);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.time.Quarter: long getLastMillisecond()> ----
+    {
+        long $stack1;
+        org.jfree.data.time.Quarter this;
+    
+    
+        this := @this: org.jfree.data.time.Quarter;
+        $stack1 = this.<org.jfree.data.time.Quarter: long lastMillisecond>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.data.time.Quarter: void <init>(int,int)> ----
+    {
+        byte $stack5;
+        int quarter, year;
+        java.lang.IllegalArgumentException #l1;
+        java.lang.Object $stack3;
+        java.lang.Throwable #l0;
+        java.util.Calendar $stack6;
+        org.jfree.data.time.Quarter this;
+        short $stack4;
+    
+    
+        this := @this: org.jfree.data.time.Quarter;
+        quarter := @parameter0: int;
+        year := @parameter1: int;
+        specialinvoke this.<org.jfree.data.time.RegularTimePeriod: void <init>()>();
+    
+        if quarter < 1 goto label1;
+    
+        if quarter <= 4 goto label2;
+    
+      label1:
+        $stack3 = new java.lang.IllegalArgumentException;
+        #l1 = (java.lang.IllegalArgumentException) $stack3;
+        specialinvoke #l1.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Quarter outside valid range.");
+        #l0 = (java.lang.Throwable) $stack3;
+    
+        throw #l0;
+    
+      label2:
+        $stack4 = (short) year;
+        this.<org.jfree.data.time.Quarter: short year> = $stack4;
+        $stack5 = (byte) quarter;
+        this.<org.jfree.data.time.Quarter: byte quarter> = $stack5;
+        $stack6 = staticinvoke <java.util.Calendar: java.util.Calendar getInstance()>();
+        virtualinvoke this.<org.jfree.data.time.Quarter: void peg(java.util.Calendar)>($stack6);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.time.Quarter: long getFirstMillisecond()> ----
+    {
+        long $stack1;
+        org.jfree.data.time.Quarter this;
+    
+    
+        this := @this: org.jfree.data.time.Quarter;
+        $stack1 = this.<org.jfree.data.time.Quarter: long firstMillisecond>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.data.time.Quarter: void <init>(int,org.jfree.data.time.Year)> ----
+    {
+        byte $stack6;
+        int $stack4, quarter;
+        java.lang.IllegalArgumentException #l0;
+        java.lang.Object $stack3;
+        java.lang.Throwable #l1;
+        java.util.Calendar $stack7;
+        org.jfree.data.time.Quarter this;
+        org.jfree.data.time.Year year;
+        short $stack5;
+    
+    
+        this := @this: org.jfree.data.time.Quarter;
+        quarter := @parameter0: int;
+        year := @parameter1: org.jfree.data.time.Year;
+        specialinvoke this.<org.jfree.data.time.RegularTimePeriod: void <init>()>();
+    
+        if quarter < 1 goto label1;
+    
+        if quarter <= 4 goto label2;
+    
+      label1:
+        $stack3 = new java.lang.IllegalArgumentException;
+        #l0 = (java.lang.IllegalArgumentException) $stack3;
+        specialinvoke #l0.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Quarter outside valid range.");
+        #l1 = (java.lang.Throwable) $stack3;
+    
+        throw #l1;
+    
+      label2:
+        $stack4 = virtualinvoke year.<org.jfree.data.time.Year: int getYear()>();
+        $stack5 = (short) $stack4;
+        this.<org.jfree.data.time.Quarter: short year> = $stack5;
+        $stack6 = (byte) quarter;
+        this.<org.jfree.data.time.Quarter: byte quarter> = $stack6;
+        $stack7 = staticinvoke <java.util.Calendar: java.util.Calendar getInstance()>();
+        virtualinvoke this.<org.jfree.data.time.Quarter: void peg(java.util.Calendar)>($stack7);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.time.Quarter: java.lang.String toString()> ----
+    {
+        byte $stack2;
+        java.lang.String $stack8;
+        java.lang.StringBuffer $stack1, $stack3, $stack4, $stack6, $stack7;
+        org.jfree.data.time.Quarter this;
+        short $stack5;
+    
+    
+        this := @this: org.jfree.data.time.Quarter;
+        $stack1 = new java.lang.StringBuffer;
+        specialinvoke $stack1.<java.lang.StringBuffer: void <init>()>();
+        $stack3 = virtualinvoke $stack1.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>("Q");
+        $stack2 = this.<org.jfree.data.time.Quarter: byte quarter>;
+        $stack4 = virtualinvoke $stack3.<java.lang.StringBuffer: java.lang.StringBuffer append(int)>($stack2);
+        $stack6 = virtualinvoke $stack4.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>("/");
+        $stack5 = this.<org.jfree.data.time.Quarter: short year>;
+        $stack7 = virtualinvoke $stack6.<java.lang.StringBuffer: java.lang.StringBuffer append(int)>($stack5);
+        $stack8 = virtualinvoke $stack7.<java.lang.StringBuffer: java.lang.String toString()>();
+    
+        return $stack8;
+    }
+
+    // ---- method: <org.jfree.data.time.Quarter: long getSerialIndex()> ----
+    {
+        byte $stack3;
+        long $stack2, $stack4, $stack5, $stack6;
+        org.jfree.data.time.Quarter this;
+        short $stack1;
+    
+    
+        this := @this: org.jfree.data.time.Quarter;
+        $stack1 = this.<org.jfree.data.time.Quarter: short year>;
+        $stack2 = (long) $stack1;
+        $stack4 = $stack2 * 4L;
+        $stack3 = this.<org.jfree.data.time.Quarter: byte quarter>;
+        $stack5 = (long) $stack3;
+        $stack6 = $stack4 + $stack5;
+    
+        return $stack6;
+    }
+
+    // ---- method: <org.jfree.data.time.Quarter: long getFirstMillisecond(java.util.Calendar)> ----
+    {
+        byte $stack4;
+        int $stack5, month;
+        int[] $stack3;
+        java.util.Calendar calendar;
+        java.util.Date $stack7;
+        long $stack8;
+        org.jfree.data.time.Quarter this;
+        short $stack6;
+    
+    
+        this := @this: org.jfree.data.time.Quarter;
+        calendar := @parameter0: java.util.Calendar;
+        $stack3 = <org.jfree.data.time.Quarter: int[] FIRST_MONTH_IN_QUARTER>;
+        $stack4 = this.<org.jfree.data.time.Quarter: byte quarter>;
+        month = $stack3[$stack4];
+        $stack6 = this.<org.jfree.data.time.Quarter: short year>;
+        $stack5 = month - 1;
+        virtualinvoke calendar.<java.util.Calendar: void set(int,int,int,int,int,int)>($stack6, $stack5, 1, 0, 0, 0);
+        virtualinvoke calendar.<java.util.Calendar: void set(int,int)>(14, 0);
+        $stack7 = virtualinvoke calendar.<java.util.Calendar: java.util.Date getTime()>();
+        $stack8 = virtualinvoke $stack7.<java.util.Date: long getTime()>();
+    
+        return $stack8;
+    }
+
+}

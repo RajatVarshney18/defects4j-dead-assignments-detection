@@ -1,0 +1,492 @@
+// ========================================================================
+// CLASS : org.jfree.data.time.MovingAverage
+// ========================================================================
+
+[PUBLIC, SUPER] class org.jfree.data.time.MovingAverage extends java.lang.Object {
+
+    // ---- method: <org.jfree.data.time.MovingAverage: org.jfree.data.xy.XYDataset createMovingAverage(org.jfree.data.xy.XYDataset,java.lang.String,long,long)> ----
+    {
+        double $stack6, $stack7;
+        java.lang.String suffix;
+        long period, skip;
+        org.jfree.data.xy.XYDataset $stack8, source;
+    
+    
+        source := @parameter0: org.jfree.data.xy.XYDataset;
+        suffix := @parameter1: java.lang.String;
+        period := @parameter2: long;
+        skip := @parameter3: long;
+        $stack7 = (double) period;
+        $stack6 = (double) skip;
+        $stack8 = staticinvoke <org.jfree.data.time.MovingAverage: org.jfree.data.xy.XYDataset createMovingAverage(org.jfree.data.xy.XYDataset,java.lang.String,double,double)>(source, suffix, $stack7, $stack6);
+    
+        return $stack8;
+    }
+
+    // ---- method: <org.jfree.data.time.MovingAverage: org.jfree.data.xy.XYSeries createMovingAverage(org.jfree.data.xy.XYDataset,int,java.lang.String,double,double)> ----
+    {
+        boolean finished;
+        byte $stack23, $stack24, $stack29, $stack35;
+        double $stack27, $stack30, $stack31, $stack36, first, limit, period, skip, sum, x, xx;
+        int $stack26, $stack28, $stack32, $stack33, $stack34, i, n, offset, series;
+        java.lang.Comparable #l6;
+        java.lang.IllegalArgumentException #l3, #l4, #l5;
+        java.lang.Number yy;
+        java.lang.Object $stack37, $stack38, $stack39, name;
+        java.lang.Throwable #l0, #l1, #l2;
+        org.jfree.data.xy.XYDataset source;
+        org.jfree.data.xy.XYSeries $stack25, result;
+    
+    
+        source := @parameter0: org.jfree.data.xy.XYDataset;
+        series := @parameter1: int;
+        name := @parameter2: java.lang.String;
+        period := @parameter3: double;
+        skip := @parameter4: double;
+    
+        if source != null goto label01;
+        $stack39 = new java.lang.IllegalArgumentException;
+        #l3 = (java.lang.IllegalArgumentException) $stack39;
+        specialinvoke #l3.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null source (XYDataset).");
+        #l0 = (java.lang.Throwable) $stack39;
+    
+        throw #l0;
+    
+      label01:
+        $stack23 = period cmpg 4.9E-324;
+    
+        if $stack23 >= 0 goto label02;
+        $stack38 = new java.lang.IllegalArgumentException;
+        #l5 = (java.lang.IllegalArgumentException) $stack38;
+        specialinvoke #l5.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("period must be positive.");
+        #l1 = (java.lang.Throwable) $stack38;
+    
+        throw #l1;
+    
+      label02:
+        $stack24 = skip cmpg 0.0;
+    
+        if $stack24 >= 0 goto label03;
+        $stack37 = new java.lang.IllegalArgumentException;
+        #l4 = (java.lang.IllegalArgumentException) $stack37;
+        specialinvoke #l4.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("skip must be >= 0.0.");
+        #l2 = (java.lang.Throwable) $stack37;
+    
+        throw #l2;
+    
+      label03:
+        $stack25 = new org.jfree.data.xy.XYSeries;
+        #l6 = (java.lang.Comparable) name;
+        specialinvoke $stack25.<org.jfree.data.xy.XYSeries: void <init>(java.lang.Comparable)>(#l6);
+        result = $stack25;
+        $stack26 = interfaceinvoke source.<org.jfree.data.xy.XYDataset: int getItemCount(int)>(series);
+    
+        if $stack26 <= 0 goto label13;
+        $stack27 = interfaceinvoke source.<org.jfree.data.xy.XYDataset: double getXValue(int,int)>(series, 0);
+        first = $stack27 + skip;
+        $stack28 = interfaceinvoke source.<org.jfree.data.xy.XYDataset: int getItemCount(int)>(series);
+        i = $stack28 - 1;
+    
+      label04:
+        if i < 0 goto label13;
+        x = interfaceinvoke source.<org.jfree.data.xy.XYDataset: double getXValue(int,int)>(series, i);
+        $stack29 = x cmpl first;
+    
+        if $stack29 < 0 goto label12;
+        n = 0;
+        sum = 0.0;
+        limit = x - period;
+        offset = 0;
+        finished = 0;
+    
+      label05:
+        if finished != 0 goto label10;
+        $stack32 = i - offset;
+    
+        if $stack32 < 0 goto label08;
+        $stack33 = i - offset;
+        xx = interfaceinvoke source.<org.jfree.data.xy.XYDataset: double getXValue(int,int)>(series, $stack33);
+        $stack34 = i - offset;
+        yy = interfaceinvoke source.<org.jfree.data.xy.XYDataset: java.lang.Number getY(int,int)>(series, $stack34);
+        $stack35 = xx cmpl limit;
+    
+        if $stack35 <= 0 goto label06;
+    
+        if yy == null goto label07;
+        $stack36 = virtualinvoke yy.<java.lang.Number: double doubleValue()>();
+        sum = sum + $stack36;
+        n = n + 1;
+    
+        goto label07;
+    
+      label06:
+        finished = 1;
+    
+      label07:
+        goto label09;
+    
+      label08:
+        finished = 1;
+    
+      label09:
+        offset = offset + 1;
+    
+        goto label05;
+    
+      label10:
+        if n <= 0 goto label11;
+        $stack30 = (double) n;
+        $stack31 = sum / $stack30;
+        virtualinvoke $stack25.<org.jfree.data.xy.XYSeries: void add(double,double)>(x, $stack31);
+    
+        goto label12;
+    
+      label11:
+        virtualinvoke $stack25.<org.jfree.data.xy.XYSeries: void add(double,java.lang.Number)>(x, null);
+    
+      label12:
+        i = i + -1;
+    
+        goto label04;
+    
+      label13:
+        return $stack25;
+    }
+
+    // ---- method: <org.jfree.data.time.MovingAverage: void <init>()> ----
+    {
+        org.jfree.data.time.MovingAverage this;
+    
+    
+        this := @this: org.jfree.data.time.MovingAverage;
+        specialinvoke this.<java.lang.Object: void <init>()>();
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.time.MovingAverage: org.jfree.data.time.TimeSeries createPointMovingAverage(org.jfree.data.time.TimeSeries,java.lang.String,int)> ----
+    {
+        double $stack14, $stack17, $stack18, $stack21, $stack22, $stack23, rollingSumForPeriod;
+        int $stack12, $stack15, $stack16, $stack19, i, pointCount;
+        java.lang.Class $stack10;
+        java.lang.Comparable #l4;
+        java.lang.IllegalArgumentException #l0, #l1;
+        java.lang.Number $stack13, $stack20;
+        java.lang.Object $stack24, $stack25, name;
+        java.lang.Throwable #l2, #l3;
+        org.jfree.data.time.RegularTimePeriod period;
+        org.jfree.data.time.TimeSeries $stack11, result, source;
+        org.jfree.data.time.TimeSeriesDataItem current, startOfMovingAvg;
+    
+    
+        source := @parameter0: org.jfree.data.time.TimeSeries;
+        name := @parameter1: java.lang.String;
+        pointCount := @parameter2: int;
+    
+        if source != null goto label1;
+        $stack25 = new java.lang.IllegalArgumentException;
+        #l0 = (java.lang.IllegalArgumentException) $stack25;
+        specialinvoke #l0.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'source\'.");
+        #l2 = (java.lang.Throwable) $stack25;
+    
+        throw #l2;
+    
+      label1:
+        if pointCount >= 2 goto label2;
+        $stack24 = new java.lang.IllegalArgumentException;
+        #l1 = (java.lang.IllegalArgumentException) $stack24;
+        specialinvoke #l1.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("periodCount must be greater than or equal to 2.");
+        #l3 = (java.lang.Throwable) $stack24;
+    
+        throw #l3;
+    
+      label2:
+        $stack11 = new org.jfree.data.time.TimeSeries;
+        $stack10 = virtualinvoke source.<org.jfree.data.time.TimeSeries: java.lang.Class getTimePeriodClass()>();
+        #l4 = (java.lang.Comparable) name;
+        specialinvoke $stack11.<org.jfree.data.time.TimeSeries: void <init>(java.lang.Comparable,java.lang.Class)>(#l4, $stack10);
+        result = $stack11;
+        rollingSumForPeriod = 0.0;
+        i = 0;
+    
+      label3:
+        $stack12 = virtualinvoke source.<org.jfree.data.time.TimeSeries: int getItemCount()>();
+    
+        if i >= $stack12 goto label6;
+        current = virtualinvoke source.<org.jfree.data.time.TimeSeries: org.jfree.data.time.TimeSeriesDataItem getDataItem(int)>(i);
+        period = virtualinvoke current.<org.jfree.data.time.TimeSeriesDataItem: org.jfree.data.time.RegularTimePeriod getPeriod()>();
+        $stack13 = virtualinvoke current.<org.jfree.data.time.TimeSeriesDataItem: java.lang.Number getValue()>();
+        $stack14 = virtualinvoke $stack13.<java.lang.Number: double doubleValue()>();
+        rollingSumForPeriod = rollingSumForPeriod + $stack14;
+        $stack15 = pointCount - 1;
+    
+        if i <= $stack15 goto label4;
+        $stack19 = i - pointCount;
+        startOfMovingAvg = virtualinvoke source.<org.jfree.data.time.TimeSeries: org.jfree.data.time.TimeSeriesDataItem getDataItem(int)>($stack19);
+        $stack20 = virtualinvoke startOfMovingAvg.<org.jfree.data.time.TimeSeriesDataItem: java.lang.Number getValue()>();
+        $stack21 = virtualinvoke $stack20.<java.lang.Number: double doubleValue()>();
+        rollingSumForPeriod = rollingSumForPeriod - $stack21;
+        $stack22 = (double) pointCount;
+        $stack23 = rollingSumForPeriod / $stack22;
+        virtualinvoke $stack11.<org.jfree.data.time.TimeSeries: void add(org.jfree.data.time.RegularTimePeriod,double)>(period, $stack23);
+    
+        goto label5;
+    
+      label4:
+        $stack16 = pointCount - 1;
+    
+        if i != $stack16 goto label5;
+        $stack17 = (double) pointCount;
+        $stack18 = rollingSumForPeriod / $stack17;
+        virtualinvoke $stack11.<org.jfree.data.time.TimeSeries: void add(org.jfree.data.time.RegularTimePeriod,double)>(period, $stack18);
+    
+      label5:
+        i = i + 1;
+    
+        goto label3;
+    
+      label6:
+        return $stack11;
+    }
+
+    // ---- method: <org.jfree.data.time.MovingAverage: org.jfree.data.time.TimeSeriesCollection createMovingAverage(org.jfree.data.time.TimeSeriesCollection,java.lang.String,int,int)> ----
+    {
+        int $stack9, i, periodCount, skip;
+        java.lang.Comparable $stack11;
+        java.lang.IllegalArgumentException #l0, #l1;
+        java.lang.Object $stack15, $stack16;
+        java.lang.String $stack14, suffix;
+        java.lang.StringBuffer $stack10, $stack12, $stack13;
+        java.lang.Throwable #l2, #l3;
+        org.jfree.data.time.TimeSeries maSeries, sourceSeries;
+        org.jfree.data.time.TimeSeriesCollection $stack8, result, source;
+    
+    
+        source := @parameter0: org.jfree.data.time.TimeSeriesCollection;
+        suffix := @parameter1: java.lang.String;
+        periodCount := @parameter2: int;
+        skip := @parameter3: int;
+    
+        if source != null goto label1;
+        $stack16 = new java.lang.IllegalArgumentException;
+        #l0 = (java.lang.IllegalArgumentException) $stack16;
+        specialinvoke #l0.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'source\' argument.");
+        #l2 = (java.lang.Throwable) $stack16;
+    
+        throw #l2;
+    
+      label1:
+        if periodCount >= 1 goto label2;
+        $stack15 = new java.lang.IllegalArgumentException;
+        #l1 = (java.lang.IllegalArgumentException) $stack15;
+        specialinvoke #l1.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("periodCount must be greater than or equal to 1.");
+        #l3 = (java.lang.Throwable) $stack15;
+    
+        throw #l3;
+    
+      label2:
+        $stack8 = new org.jfree.data.time.TimeSeriesCollection;
+        specialinvoke $stack8.<org.jfree.data.time.TimeSeriesCollection: void <init>()>();
+        result = $stack8;
+        i = 0;
+    
+      label3:
+        $stack9 = virtualinvoke source.<org.jfree.data.time.TimeSeriesCollection: int getSeriesCount()>();
+    
+        if i >= $stack9 goto label4;
+        sourceSeries = virtualinvoke source.<org.jfree.data.time.TimeSeriesCollection: org.jfree.data.time.TimeSeries getSeries(int)>(i);
+        $stack10 = new java.lang.StringBuffer;
+        specialinvoke $stack10.<java.lang.StringBuffer: void <init>()>();
+        $stack11 = virtualinvoke sourceSeries.<org.jfree.data.time.TimeSeries: java.lang.Comparable getKey()>();
+        $stack12 = virtualinvoke $stack10.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.Object)>($stack11);
+        $stack13 = virtualinvoke $stack12.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>(suffix);
+        $stack14 = virtualinvoke $stack13.<java.lang.StringBuffer: java.lang.String toString()>();
+        maSeries = staticinvoke <org.jfree.data.time.MovingAverage: org.jfree.data.time.TimeSeries createMovingAverage(org.jfree.data.time.TimeSeries,java.lang.String,int,int)>(sourceSeries, $stack14, periodCount, skip);
+        virtualinvoke $stack8.<org.jfree.data.time.TimeSeriesCollection: void addSeries(org.jfree.data.time.TimeSeries)>(maSeries);
+        i = i + 1;
+    
+        goto label3;
+    
+      label4:
+        return $stack8;
+    }
+
+    // ---- method: <org.jfree.data.time.MovingAverage: org.jfree.data.time.TimeSeries createMovingAverage(org.jfree.data.time.TimeSeries,java.lang.String,int,int)> ----
+    {
+        boolean finished;
+        byte $stack32, $stack39;
+        double $stack35, $stack36, $stack40, sum;
+        int $stack26, $stack31, $stack37, $stack38, i, n, offset, periodCount, skip;
+        java.lang.Class $stack24;
+        java.lang.Comparable #l2;
+        java.lang.IllegalArgumentException #l0, #l1;
+        java.lang.Number v;
+        java.lang.Object $stack41, $stack42, name;
+        java.lang.Throwable #l3, #l4;
+        long $stack29, $stack30, $stack33, $stack34, currentIndex, firstSerial, serial, serialLimit;
+        org.jfree.data.time.RegularTimePeriod $stack28, p, period;
+        org.jfree.data.time.TimeSeries $stack25, result, source;
+        org.jfree.data.time.TimeSeriesDataItem $stack27, current, item;
+    
+    
+        source := @parameter0: org.jfree.data.time.TimeSeries;
+        name := @parameter1: java.lang.String;
+        periodCount := @parameter2: int;
+        skip := @parameter3: int;
+    
+        if source != null goto label01;
+        $stack42 = new java.lang.IllegalArgumentException;
+        #l0 = (java.lang.IllegalArgumentException) $stack42;
+        specialinvoke #l0.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null source.");
+        #l3 = (java.lang.Throwable) $stack42;
+    
+        throw #l3;
+    
+      label01:
+        if periodCount >= 1 goto label02;
+        $stack41 = new java.lang.IllegalArgumentException;
+        #l1 = (java.lang.IllegalArgumentException) $stack41;
+        specialinvoke #l1.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("periodCount must be greater than or equal to 1.");
+        #l4 = (java.lang.Throwable) $stack41;
+    
+        throw #l4;
+    
+      label02:
+        $stack25 = new org.jfree.data.time.TimeSeries;
+        $stack24 = virtualinvoke source.<org.jfree.data.time.TimeSeries: java.lang.Class getTimePeriodClass()>();
+        #l2 = (java.lang.Comparable) name;
+        specialinvoke $stack25.<org.jfree.data.time.TimeSeries: void <init>(java.lang.Comparable,java.lang.Class)>(#l2, $stack24);
+        result = $stack25;
+        $stack26 = virtualinvoke source.<org.jfree.data.time.TimeSeries: int getItemCount()>();
+    
+        if $stack26 <= 0 goto label10;
+        $stack27 = virtualinvoke source.<org.jfree.data.time.TimeSeries: org.jfree.data.time.TimeSeriesDataItem getDataItem(int)>(0);
+        $stack28 = virtualinvoke $stack27.<org.jfree.data.time.TimeSeriesDataItem: org.jfree.data.time.RegularTimePeriod getPeriod()>();
+        $stack29 = virtualinvoke $stack28.<org.jfree.data.time.RegularTimePeriod: long getSerialIndex()>();
+        $stack30 = (long) skip;
+        firstSerial = $stack29 + $stack30;
+        $stack31 = virtualinvoke source.<org.jfree.data.time.TimeSeries: int getItemCount()>();
+        i = $stack31 - 1;
+    
+      label03:
+        if i < 0 goto label10;
+        current = virtualinvoke source.<org.jfree.data.time.TimeSeries: org.jfree.data.time.TimeSeriesDataItem getDataItem(int)>(i);
+        period = virtualinvoke current.<org.jfree.data.time.TimeSeriesDataItem: org.jfree.data.time.RegularTimePeriod getPeriod()>();
+        serial = virtualinvoke period.<org.jfree.data.time.RegularTimePeriod: long getSerialIndex()>();
+        $stack32 = serial cmp firstSerial;
+    
+        if $stack32 < 0 goto label09;
+        n = 0;
+        sum = 0.0;
+        $stack33 = virtualinvoke period.<org.jfree.data.time.RegularTimePeriod: long getSerialIndex()>();
+        $stack34 = (long) periodCount;
+        serialLimit = $stack33 - $stack34;
+        offset = 0;
+        finished = 0;
+    
+      label04:
+        if offset >= periodCount goto label07;
+    
+        if finished != 0 goto label07;
+        $stack37 = i - offset;
+    
+        if $stack37 < 0 goto label06;
+        $stack38 = i - offset;
+        item = virtualinvoke source.<org.jfree.data.time.TimeSeries: org.jfree.data.time.TimeSeriesDataItem getDataItem(int)>($stack38);
+        p = virtualinvoke item.<org.jfree.data.time.TimeSeriesDataItem: org.jfree.data.time.RegularTimePeriod getPeriod()>();
+        v = virtualinvoke item.<org.jfree.data.time.TimeSeriesDataItem: java.lang.Number getValue()>();
+        currentIndex = virtualinvoke p.<org.jfree.data.time.RegularTimePeriod: long getSerialIndex()>();
+        $stack39 = currentIndex cmp serialLimit;
+    
+        if $stack39 <= 0 goto label05;
+    
+        if v == null goto label06;
+        $stack40 = virtualinvoke v.<java.lang.Number: double doubleValue()>();
+        sum = sum + $stack40;
+        n = n + 1;
+    
+        goto label06;
+    
+      label05:
+        finished = 1;
+    
+      label06:
+        offset = offset + 1;
+    
+        goto label04;
+    
+      label07:
+        if n <= 0 goto label08;
+        $stack35 = (double) n;
+        $stack36 = sum / $stack35;
+        virtualinvoke $stack25.<org.jfree.data.time.TimeSeries: void add(org.jfree.data.time.RegularTimePeriod,double)>(period, $stack36);
+    
+        goto label09;
+    
+      label08:
+        virtualinvoke $stack25.<org.jfree.data.time.TimeSeries: void add(org.jfree.data.time.RegularTimePeriod,java.lang.Number)>(period, null);
+    
+      label09:
+        i = i + -1;
+    
+        goto label03;
+    
+      label10:
+        return $stack25;
+    }
+
+    // ---- method: <org.jfree.data.time.MovingAverage: org.jfree.data.xy.XYDataset createMovingAverage(org.jfree.data.xy.XYDataset,java.lang.String,double,double)> ----
+    {
+        double period, skip;
+        int $stack10, i;
+        java.lang.Comparable $stack12;
+        java.lang.IllegalArgumentException #l1;
+        java.lang.Object $stack16;
+        java.lang.String $stack15, suffix;
+        java.lang.StringBuffer $stack11, $stack13, $stack14;
+        java.lang.Throwable #l0;
+        org.jfree.data.xy.XYDataset source;
+        org.jfree.data.xy.XYSeries s;
+        org.jfree.data.xy.XYSeriesCollection $stack9, result;
+    
+    
+        source := @parameter0: org.jfree.data.xy.XYDataset;
+        suffix := @parameter1: java.lang.String;
+        period := @parameter2: double;
+        skip := @parameter3: double;
+    
+        if source != null goto label1;
+        $stack16 = new java.lang.IllegalArgumentException;
+        #l1 = (java.lang.IllegalArgumentException) $stack16;
+        specialinvoke #l1.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null source (XYDataset).");
+        #l0 = (java.lang.Throwable) $stack16;
+    
+        throw #l0;
+    
+      label1:
+        $stack9 = new org.jfree.data.xy.XYSeriesCollection;
+        specialinvoke $stack9.<org.jfree.data.xy.XYSeriesCollection: void <init>()>();
+        result = $stack9;
+        i = 0;
+    
+      label2:
+        $stack10 = interfaceinvoke source.<org.jfree.data.xy.XYDataset: int getSeriesCount()>();
+    
+        if i >= $stack10 goto label3;
+        $stack11 = new java.lang.StringBuffer;
+        specialinvoke $stack11.<java.lang.StringBuffer: void <init>()>();
+        $stack12 = interfaceinvoke source.<org.jfree.data.xy.XYDataset: java.lang.Comparable getSeriesKey(int)>(i);
+        $stack13 = virtualinvoke $stack11.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.Object)>($stack12);
+        $stack14 = virtualinvoke $stack13.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>(suffix);
+        $stack15 = virtualinvoke $stack14.<java.lang.StringBuffer: java.lang.String toString()>();
+        s = staticinvoke <org.jfree.data.time.MovingAverage: org.jfree.data.xy.XYSeries createMovingAverage(org.jfree.data.xy.XYDataset,int,java.lang.String,double,double)>(source, i, $stack15, period, skip);
+        virtualinvoke $stack9.<org.jfree.data.xy.XYSeriesCollection: void addSeries(org.jfree.data.xy.XYSeries)>(s);
+        i = i + 1;
+    
+        goto label2;
+    
+      label3:
+        return $stack9;
+    }
+
+}

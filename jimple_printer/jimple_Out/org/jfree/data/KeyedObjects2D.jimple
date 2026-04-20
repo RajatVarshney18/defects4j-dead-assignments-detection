@@ -1,0 +1,503 @@
+// ========================================================================
+// CLASS : org.jfree.data.KeyedObjects2D
+// ========================================================================
+
+[PUBLIC, SUPER] class org.jfree.data.KeyedObjects2D extends java.lang.Object implements java.lang.Cloneable, java.io.Serializable {
+
+    // ---- method: <org.jfree.data.KeyedObjects2D: int getColumnIndex(java.lang.Comparable)> ----
+    {
+        int $stack3;
+        java.lang.Comparable key;
+        java.util.List $stack2;
+        org.jfree.data.KeyedObjects2D this;
+    
+    
+        this := @this: org.jfree.data.KeyedObjects2D;
+        key := @parameter0: java.lang.Comparable;
+        $stack2 = this.<org.jfree.data.KeyedObjects2D: java.util.List columnKeys>;
+        $stack3 = interfaceinvoke $stack2.<java.util.List: int indexOf(java.lang.Object)>(key);
+    
+        return $stack3;
+    }
+
+    // ---- method: <org.jfree.data.KeyedObjects2D: void removeObject(java.lang.Comparable,java.lang.Comparable)> ----
+    {
+        java.lang.Comparable columnKey, rowKey;
+        org.jfree.data.KeyedObjects2D this;
+    
+    
+        this := @this: org.jfree.data.KeyedObjects2D;
+        rowKey := @parameter0: java.lang.Comparable;
+        columnKey := @parameter1: java.lang.Comparable;
+        virtualinvoke this.<org.jfree.data.KeyedObjects2D: void setObject(java.lang.Object,java.lang.Comparable,java.lang.Comparable)>(null, rowKey, columnKey);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.KeyedObjects2D: java.lang.Comparable getColumnKey(int)> ----
+    {
+        int column;
+        java.lang.Comparable $stack4;
+        java.lang.Object $stack3;
+        java.util.List $stack2;
+        org.jfree.data.KeyedObjects2D this;
+    
+    
+        this := @this: org.jfree.data.KeyedObjects2D;
+        column := @parameter0: int;
+        $stack2 = this.<org.jfree.data.KeyedObjects2D: java.util.List columnKeys>;
+        $stack3 = interfaceinvoke $stack2.<java.util.List: java.lang.Object get(int)>(column);
+        $stack4 = (java.lang.Comparable) $stack3;
+    
+        return $stack4;
+    }
+
+    // ---- method: <org.jfree.data.KeyedObjects2D: java.util.List getColumnKeys()> ----
+    {
+        java.util.List $stack1, $stack2;
+        org.jfree.data.KeyedObjects2D this;
+    
+    
+        this := @this: org.jfree.data.KeyedObjects2D;
+        $stack1 = this.<org.jfree.data.KeyedObjects2D: java.util.List columnKeys>;
+        $stack2 = staticinvoke <java.util.Collections: java.util.List unmodifiableList(java.util.List)>($stack1);
+    
+        return $stack2;
+    }
+
+    // ---- method: <org.jfree.data.KeyedObjects2D: void removeRow(int)> ----
+    {
+        int rowIndex;
+        java.util.List $stack2, $stack3;
+        org.jfree.data.KeyedObjects2D this;
+    
+    
+        this := @this: org.jfree.data.KeyedObjects2D;
+        rowIndex := @parameter0: int;
+        $stack2 = this.<org.jfree.data.KeyedObjects2D: java.util.List rowKeys>;
+        interfaceinvoke $stack2.<java.util.List: java.lang.Object remove(int)>(rowIndex);
+        $stack3 = this.<org.jfree.data.KeyedObjects2D: java.util.List rows>;
+        interfaceinvoke $stack3.<java.util.List: java.lang.Object remove(int)>(rowIndex);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.KeyedObjects2D: void setObject(java.lang.Object,java.lang.Comparable,java.lang.Comparable)> ----
+    {
+        int columnIndex, rowIndex;
+        java.lang.Comparable columnKey, rowKey;
+        java.lang.Object $stack14, object;
+        java.util.List $stack10, $stack11, $stack12, $stack13, $stack7, $stack8;
+        org.jfree.data.KeyedObjects $stack9, row;
+        org.jfree.data.KeyedObjects2D this;
+    
+    
+        this := @this: org.jfree.data.KeyedObjects2D;
+        object := @parameter0: java.lang.Object;
+        rowKey := @parameter1: java.lang.Comparable;
+        columnKey := @parameter2: java.lang.Comparable;
+        $stack7 = this.<org.jfree.data.KeyedObjects2D: java.util.List rowKeys>;
+        rowIndex = interfaceinvoke $stack7.<java.util.List: int indexOf(java.lang.Object)>(rowKey);
+    
+        if rowIndex < 0 goto label1;
+        $stack13 = this.<org.jfree.data.KeyedObjects2D: java.util.List rows>;
+        $stack14 = interfaceinvoke $stack13.<java.util.List: java.lang.Object get(int)>(rowIndex);
+        row = (org.jfree.data.KeyedObjects) $stack14;
+    
+        goto label2;
+    
+      label1:
+        $stack8 = this.<org.jfree.data.KeyedObjects2D: java.util.List rowKeys>;
+        interfaceinvoke $stack8.<java.util.List: boolean add(java.lang.Object)>(rowKey);
+        $stack9 = new org.jfree.data.KeyedObjects;
+        specialinvoke $stack9.<org.jfree.data.KeyedObjects: void <init>()>();
+        row = $stack9;
+        $stack10 = this.<org.jfree.data.KeyedObjects2D: java.util.List rows>;
+        interfaceinvoke $stack10.<java.util.List: boolean add(java.lang.Object)>($stack9);
+    
+      label2:
+        virtualinvoke row.<org.jfree.data.KeyedObjects: void setObject(java.lang.Comparable,java.lang.Object)>(columnKey, object);
+        $stack11 = this.<org.jfree.data.KeyedObjects2D: java.util.List columnKeys>;
+        columnIndex = interfaceinvoke $stack11.<java.util.List: int indexOf(java.lang.Object)>(columnKey);
+    
+        if columnIndex >= 0 goto label3;
+        $stack12 = this.<org.jfree.data.KeyedObjects2D: java.util.List columnKeys>;
+        interfaceinvoke $stack12.<java.util.List: boolean add(java.lang.Object)>(columnKey);
+    
+      label3:
+        return;
+    }
+
+    // ---- method: <org.jfree.data.KeyedObjects2D: void removeRow(java.lang.Comparable)> ----
+    {
+        int $stack2;
+        java.lang.Comparable rowKey;
+        org.jfree.data.KeyedObjects2D this;
+    
+    
+        this := @this: org.jfree.data.KeyedObjects2D;
+        rowKey := @parameter0: java.lang.Comparable;
+        $stack2 = virtualinvoke this.<org.jfree.data.KeyedObjects2D: int getRowIndex(java.lang.Comparable)>(rowKey);
+        virtualinvoke this.<org.jfree.data.KeyedObjects2D: void removeRow(int)>($stack2);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.KeyedObjects2D: int hashCode()> ----
+    {
+        int $stack4, $stack5, $stack7, $stack8, result#0, result#1, result#2;
+        java.util.List $stack2, $stack3, $stack6;
+        org.jfree.data.KeyedObjects2D this;
+    
+    
+        this := @this: org.jfree.data.KeyedObjects2D;
+        $stack2 = this.<org.jfree.data.KeyedObjects2D: java.util.List rowKeys>;
+        result#0 = interfaceinvoke $stack2.<java.util.List: int hashCode()>();
+        $stack4 = 29 * result#0;
+        $stack3 = this.<org.jfree.data.KeyedObjects2D: java.util.List columnKeys>;
+        $stack5 = interfaceinvoke $stack3.<java.util.List: int hashCode()>();
+        result#1 = $stack4 + $stack5;
+        $stack7 = 29 * result#1;
+        $stack6 = this.<org.jfree.data.KeyedObjects2D: java.util.List rows>;
+        $stack8 = interfaceinvoke $stack6.<java.util.List: int hashCode()>();
+        result#2 = $stack7 + $stack8;
+    
+        return result#2;
+    }
+
+    // ---- method: <org.jfree.data.KeyedObjects2D: java.lang.Object clone()> ----
+    {
+        java.lang.Object $stack1;
+        org.jfree.data.KeyedObjects2D this;
+    
+    
+        this := @this: org.jfree.data.KeyedObjects2D;
+        $stack1 = specialinvoke this.<java.lang.Object: java.lang.Object clone()>();
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.data.KeyedObjects2D: java.lang.Object getObject(int,int)> ----
+    {
+        int column, row;
+        java.lang.Comparable columnKey;
+        java.lang.Object $stack7, $stack9, result;
+        java.util.List $stack6, $stack8;
+        org.jfree.data.KeyedObjects rowData;
+        org.jfree.data.KeyedObjects2D this;
+    
+    
+        this := @this: org.jfree.data.KeyedObjects2D;
+        row := @parameter0: int;
+        column := @parameter1: int;
+        result = null;
+        $stack6 = this.<org.jfree.data.KeyedObjects2D: java.util.List rows>;
+        $stack7 = interfaceinvoke $stack6.<java.util.List: java.lang.Object get(int)>(row);
+        rowData = (org.jfree.data.KeyedObjects) $stack7;
+    
+        if rowData == null goto label1;
+        $stack8 = this.<org.jfree.data.KeyedObjects2D: java.util.List columnKeys>;
+        $stack9 = interfaceinvoke $stack8.<java.util.List: java.lang.Object get(int)>(column);
+        columnKey = (java.lang.Comparable) $stack9;
+    
+        if columnKey == null goto label1;
+        result = virtualinvoke rowData.<org.jfree.data.KeyedObjects: java.lang.Object getObject(java.lang.Comparable)>(columnKey);
+    
+      label1:
+        return result;
+    }
+
+    // ---- method: <org.jfree.data.KeyedObjects2D: java.util.List getRowKeys()> ----
+    {
+        java.util.List $stack1, $stack2;
+        org.jfree.data.KeyedObjects2D this;
+    
+    
+        this := @this: org.jfree.data.KeyedObjects2D;
+        $stack1 = this.<org.jfree.data.KeyedObjects2D: java.util.List rowKeys>;
+        $stack2 = staticinvoke <java.util.Collections: java.util.List unmodifiableList(java.util.List)>($stack1);
+    
+        return $stack2;
+    }
+
+    // ---- method: <org.jfree.data.KeyedObjects2D: void removeColumn(int)> ----
+    {
+        int columnIndex;
+        java.lang.Comparable columnKey;
+        org.jfree.data.KeyedObjects2D this;
+    
+    
+        this := @this: org.jfree.data.KeyedObjects2D;
+        columnIndex := @parameter0: int;
+        columnKey = virtualinvoke this.<org.jfree.data.KeyedObjects2D: java.lang.Comparable getColumnKey(int)>(columnIndex);
+        virtualinvoke this.<org.jfree.data.KeyedObjects2D: void removeColumn(java.lang.Comparable)>(columnKey);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.KeyedObjects2D: java.lang.Object getObject(java.lang.Comparable,java.lang.Comparable)> ----
+    {
+        int row;
+        java.lang.Comparable columnKey, rowKey;
+        java.lang.Object $stack8, result;
+        java.util.List $stack6, $stack7;
+        org.jfree.data.KeyedObjects rowData;
+        org.jfree.data.KeyedObjects2D this;
+    
+    
+        this := @this: org.jfree.data.KeyedObjects2D;
+        rowKey := @parameter0: java.lang.Comparable;
+        columnKey := @parameter1: java.lang.Comparable;
+        result = null;
+        $stack6 = this.<org.jfree.data.KeyedObjects2D: java.util.List rowKeys>;
+        row = interfaceinvoke $stack6.<java.util.List: int indexOf(java.lang.Object)>(rowKey);
+    
+        if row < 0 goto label1;
+        $stack7 = this.<org.jfree.data.KeyedObjects2D: java.util.List rows>;
+        $stack8 = interfaceinvoke $stack7.<java.util.List: java.lang.Object get(int)>(row);
+        rowData = (org.jfree.data.KeyedObjects) $stack8;
+        result = virtualinvoke rowData.<org.jfree.data.KeyedObjects: java.lang.Object getObject(java.lang.Comparable)>(columnKey);
+    
+      label1:
+        return result;
+    }
+
+    // ---- method: <org.jfree.data.KeyedObjects2D: void <init>()> ----
+    {
+        java.lang.Object $stack1, $stack2, $stack3;
+        java.util.ArrayList #l0, #l1, #l2;
+        org.jfree.data.KeyedObjects2D this;
+    
+    
+        this := @this: org.jfree.data.KeyedObjects2D;
+        specialinvoke this.<java.lang.Object: void <init>()>();
+        $stack1 = new java.util.ArrayList;
+        #l2 = (java.util.ArrayList) $stack1;
+        specialinvoke #l2.<java.util.ArrayList: void <init>()>();
+        this.<org.jfree.data.KeyedObjects2D: java.util.List rowKeys> = (java.util.List) $stack1;
+        $stack2 = new java.util.ArrayList;
+        #l1 = (java.util.ArrayList) $stack2;
+        specialinvoke #l1.<java.util.ArrayList: void <init>()>();
+        this.<org.jfree.data.KeyedObjects2D: java.util.List columnKeys> = (java.util.List) $stack2;
+        $stack3 = new java.util.ArrayList;
+        #l0 = (java.util.ArrayList) $stack3;
+        specialinvoke #l0.<java.util.ArrayList: void <init>()>();
+        this.<org.jfree.data.KeyedObjects2D: java.util.List rows> = (java.util.List) $stack3;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.KeyedObjects2D: int getColumnCount()> ----
+    {
+        int $stack2;
+        java.util.List $stack1;
+        org.jfree.data.KeyedObjects2D this;
+    
+    
+        this := @this: org.jfree.data.KeyedObjects2D;
+        $stack1 = this.<org.jfree.data.KeyedObjects2D: java.util.List columnKeys>;
+        $stack2 = interfaceinvoke $stack1.<java.util.List: int size()>();
+    
+        return $stack2;
+    }
+
+    // ---- method: <org.jfree.data.KeyedObjects2D: java.lang.Comparable getRowKey(int)> ----
+    {
+        int row;
+        java.lang.Comparable $stack4;
+        java.lang.Object $stack3;
+        java.util.List $stack2;
+        org.jfree.data.KeyedObjects2D this;
+    
+    
+        this := @this: org.jfree.data.KeyedObjects2D;
+        row := @parameter0: int;
+        $stack2 = this.<org.jfree.data.KeyedObjects2D: java.util.List rowKeys>;
+        $stack3 = interfaceinvoke $stack2.<java.util.List: java.lang.Object get(int)>(row);
+        $stack4 = (java.lang.Comparable) $stack3;
+    
+        return $stack4;
+    }
+
+    // ---- method: <org.jfree.data.KeyedObjects2D: int getRowCount()> ----
+    {
+        int $stack2;
+        java.util.List $stack1;
+        org.jfree.data.KeyedObjects2D this;
+    
+    
+        this := @this: org.jfree.data.KeyedObjects2D;
+        $stack1 = this.<org.jfree.data.KeyedObjects2D: java.util.List rowKeys>;
+        $stack2 = interfaceinvoke $stack1.<java.util.List: int size()>();
+    
+        return $stack2;
+    }
+
+    // ---- method: <org.jfree.data.KeyedObjects2D: void removeColumn(java.lang.Comparable)> ----
+    {
+        boolean $stack5;
+        java.lang.Comparable columnKey;
+        java.lang.Object $stack7;
+        java.util.Iterator iterator;
+        java.util.List $stack4, $stack6;
+        org.jfree.data.KeyedObjects rowData;
+        org.jfree.data.KeyedObjects2D this;
+    
+    
+        this := @this: org.jfree.data.KeyedObjects2D;
+        columnKey := @parameter0: java.lang.Comparable;
+        $stack4 = this.<org.jfree.data.KeyedObjects2D: java.util.List rows>;
+        iterator = interfaceinvoke $stack4.<java.util.List: java.util.Iterator iterator()>();
+    
+      label1:
+        $stack5 = interfaceinvoke iterator.<java.util.Iterator: boolean hasNext()>();
+    
+        if $stack5 == 0 goto label2;
+        $stack7 = interfaceinvoke iterator.<java.util.Iterator: java.lang.Object next()>();
+        rowData = (org.jfree.data.KeyedObjects) $stack7;
+        virtualinvoke rowData.<org.jfree.data.KeyedObjects: void removeValue(java.lang.Comparable)>(columnKey);
+    
+        goto label1;
+    
+      label2:
+        $stack6 = this.<org.jfree.data.KeyedObjects2D: java.util.List columnKeys>;
+        interfaceinvoke $stack6.<java.util.List: boolean remove(java.lang.Object)>(columnKey);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.KeyedObjects2D: int getRowIndex(java.lang.Comparable)> ----
+    {
+        int $stack3;
+        java.lang.Comparable key;
+        java.util.List $stack2;
+        org.jfree.data.KeyedObjects2D this;
+    
+    
+        this := @this: org.jfree.data.KeyedObjects2D;
+        key := @parameter0: java.lang.Comparable;
+        $stack2 = this.<org.jfree.data.KeyedObjects2D: java.util.List rowKeys>;
+        $stack3 = interfaceinvoke $stack2.<java.util.List: int indexOf(java.lang.Object)>(key);
+    
+        return $stack3;
+    }
+
+    // ---- method: <org.jfree.data.KeyedObjects2D: void addObject(java.lang.Object,java.lang.Comparable,java.lang.Comparable)> ----
+    {
+        java.lang.Comparable columnKey, rowKey;
+        java.lang.Object object;
+        org.jfree.data.KeyedObjects2D this;
+    
+    
+        this := @this: org.jfree.data.KeyedObjects2D;
+        object := @parameter0: java.lang.Object;
+        rowKey := @parameter1: java.lang.Comparable;
+        columnKey := @parameter2: java.lang.Comparable;
+        virtualinvoke this.<org.jfree.data.KeyedObjects2D: void setObject(java.lang.Object,java.lang.Comparable,java.lang.Comparable)>(object, rowKey, columnKey);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.KeyedObjects2D: boolean equals(java.lang.Object)> ----
+    {
+        boolean $stack12, $stack15, $stack18, $stack9;
+        int $stack16, $stack17, c, colCount, r, rowCount;
+        java.lang.Object obj, v1, v2;
+        java.util.List $stack10, $stack11, $stack13, $stack14;
+        org.jfree.data.KeyedObjects2D ko2D, this;
+    
+    
+        this := @this: org.jfree.data.KeyedObjects2D;
+        obj := @parameter0: java.lang.Object;
+    
+        if obj != null goto label01;
+    
+        return 0;
+    
+      label01:
+        if obj != this goto label02;
+    
+        return 1;
+    
+      label02:
+        $stack9 = obj instanceof org.jfree.data.KeyedObjects2D;
+    
+        if $stack9 != 0 goto label03;
+    
+        return 0;
+    
+      label03:
+        ko2D = (org.jfree.data.KeyedObjects2D) obj;
+        $stack11 = virtualinvoke this.<org.jfree.data.KeyedObjects2D: java.util.List getRowKeys()>();
+        $stack10 = virtualinvoke ko2D.<org.jfree.data.KeyedObjects2D: java.util.List getRowKeys()>();
+        $stack12 = interfaceinvoke $stack11.<java.util.List: boolean equals(java.lang.Object)>($stack10);
+    
+        if $stack12 != 0 goto label04;
+    
+        return 0;
+    
+      label04:
+        $stack14 = virtualinvoke this.<org.jfree.data.KeyedObjects2D: java.util.List getColumnKeys()>();
+        $stack13 = virtualinvoke ko2D.<org.jfree.data.KeyedObjects2D: java.util.List getColumnKeys()>();
+        $stack15 = interfaceinvoke $stack14.<java.util.List: boolean equals(java.lang.Object)>($stack13);
+    
+        if $stack15 != 0 goto label05;
+    
+        return 0;
+    
+      label05:
+        rowCount = virtualinvoke this.<org.jfree.data.KeyedObjects2D: int getRowCount()>();
+        $stack16 = virtualinvoke ko2D.<org.jfree.data.KeyedObjects2D: int getRowCount()>();
+    
+        if rowCount == $stack16 goto label06;
+    
+        return 0;
+    
+      label06:
+        colCount = virtualinvoke this.<org.jfree.data.KeyedObjects2D: int getColumnCount()>();
+        $stack17 = virtualinvoke ko2D.<org.jfree.data.KeyedObjects2D: int getColumnCount()>();
+    
+        if colCount == $stack17 goto label07;
+    
+        return 0;
+    
+      label07:
+        r = 0;
+    
+      label08:
+        if r >= rowCount goto label13;
+        c = 0;
+    
+      label09:
+        if c >= colCount goto label12;
+        v1 = virtualinvoke this.<org.jfree.data.KeyedObjects2D: java.lang.Object getObject(int,int)>(r, c);
+        v2 = virtualinvoke ko2D.<org.jfree.data.KeyedObjects2D: java.lang.Object getObject(int,int)>(r, c);
+    
+        if v1 != null goto label11;
+    
+        if v2 == null goto label10;
+    
+        return 0;
+    
+      label10:
+        c = c + 1;
+    
+        goto label09;
+    
+      label11:
+        $stack18 = virtualinvoke v1.<java.lang.Object: boolean equals(java.lang.Object)>(v2);
+    
+        if $stack18 != 0 goto label10;
+    
+        return 0;
+    
+      label12:
+        r = r + 1;
+    
+        goto label08;
+    
+      label13:
+        return 1;
+    }
+
+}

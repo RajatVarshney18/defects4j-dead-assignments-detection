@@ -1,0 +1,958 @@
+// ========================================================================
+// CLASS : org.jfree.chart.renderer.xy.CandlestickRenderer
+// ========================================================================
+
+[PUBLIC, SUPER] class org.jfree.chart.renderer.xy.CandlestickRenderer extends org.jfree.chart.renderer.xy.AbstractXYItemRenderer implements org.jfree.chart.util.PublicCloneable, java.lang.Cloneable, java.io.Serializable, org.jfree.chart.renderer.xy.XYItemRenderer {
+
+    // ---- method: <org.jfree.chart.renderer.xy.CandlestickRenderer: double getAutoWidthFactor()> ----
+    {
+        double $stack1;
+        org.jfree.chart.renderer.xy.CandlestickRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.xy.CandlestickRenderer;
+        $stack1 = this.<org.jfree.chart.renderer.xy.CandlestickRenderer: double autoWidthFactor>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.xy.CandlestickRenderer: void setAutoWidthMethod(int)> ----
+    {
+        int $stack2, autoWidthMethod;
+        org.jfree.chart.event.RendererChangeEvent $stack3;
+        org.jfree.chart.renderer.xy.CandlestickRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.xy.CandlestickRenderer;
+        autoWidthMethod := @parameter0: int;
+        $stack2 = this.<org.jfree.chart.renderer.xy.CandlestickRenderer: int autoWidthMethod>;
+    
+        if $stack2 == autoWidthMethod goto label1;
+        this.<org.jfree.chart.renderer.xy.CandlestickRenderer: int autoWidthMethod> = autoWidthMethod;
+        $stack3 = new org.jfree.chart.event.RendererChangeEvent;
+        specialinvoke $stack3.<org.jfree.chart.event.RendererChangeEvent: void <init>(java.lang.Object)>(this);
+        virtualinvoke this.<org.jfree.chart.renderer.xy.CandlestickRenderer: void notifyListeners(org.jfree.chart.event.RendererChangeEvent)>($stack3);
+    
+      label1:
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.xy.CandlestickRenderer: java.awt.Paint getDownPaint()> ----
+    {
+        java.awt.Paint $stack1;
+        org.jfree.chart.renderer.xy.CandlestickRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.xy.CandlestickRenderer;
+        $stack1 = this.<org.jfree.chart.renderer.xy.CandlestickRenderer: java.awt.Paint downPaint>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.xy.CandlestickRenderer: boolean getDrawVolume()> ----
+    {
+        boolean $stack1;
+        org.jfree.chart.renderer.xy.CandlestickRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.xy.CandlestickRenderer;
+        $stack1 = this.<org.jfree.chart.renderer.xy.CandlestickRenderer: boolean drawVolume>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.xy.CandlestickRenderer: void <init>(double)> ----
+    {
+        double candleWidth;
+        org.jfree.chart.labels.HighLowItemLabelGenerator $stack3;
+        org.jfree.chart.renderer.xy.CandlestickRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.xy.CandlestickRenderer;
+        candleWidth := @parameter0: double;
+        $stack3 = new org.jfree.chart.labels.HighLowItemLabelGenerator;
+        specialinvoke $stack3.<org.jfree.chart.labels.HighLowItemLabelGenerator: void <init>()>();
+        specialinvoke this.<org.jfree.chart.renderer.xy.CandlestickRenderer: void <init>(double,boolean,org.jfree.chart.labels.XYToolTipGenerator)>(candleWidth, 1, $stack3);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.xy.CandlestickRenderer: void setAutoWidthGap(double)> ----
+    {
+        byte $stack4;
+        double $stack3, autoWidthGap;
+        org.jfree.chart.event.RendererChangeEvent $stack5;
+        org.jfree.chart.renderer.xy.CandlestickRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.xy.CandlestickRenderer;
+        autoWidthGap := @parameter0: double;
+        $stack3 = this.<org.jfree.chart.renderer.xy.CandlestickRenderer: double autoWidthGap>;
+        $stack4 = $stack3 cmpl autoWidthGap;
+    
+        if $stack4 == 0 goto label1;
+        this.<org.jfree.chart.renderer.xy.CandlestickRenderer: double autoWidthGap> = autoWidthGap;
+        $stack5 = new org.jfree.chart.event.RendererChangeEvent;
+        specialinvoke $stack5.<org.jfree.chart.event.RendererChangeEvent: void <init>(java.lang.Object)>(this);
+        virtualinvoke this.<org.jfree.chart.renderer.xy.CandlestickRenderer: void notifyListeners(org.jfree.chart.event.RendererChangeEvent)>($stack5);
+    
+      label1:
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.xy.CandlestickRenderer: double getMaxCandleWidthInMilliseconds()> ----
+    {
+        double $stack1;
+        org.jfree.chart.renderer.xy.CandlestickRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.xy.CandlestickRenderer;
+        $stack1 = this.<org.jfree.chart.renderer.xy.CandlestickRenderer: double maxCandleWidthInMilliseconds>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.xy.CandlestickRenderer: org.jfree.chart.renderer.xy.XYItemRendererState initialise(java.awt.Graphics2D,java.awt.geom.Rectangle2D,org.jfree.chart.plot.XYPlot,org.jfree.data.xy.XYDataset,org.jfree.chart.plot.PlotRenderingInfo)> ----
+    {
+        boolean $stack24;
+        byte $stack29;
+        double $stack21, $stack22, $stack23, $stack28, volume, x1, x2, xx1, xx2;
+        int $stack26, $stack27, item, series;
+        java.awt.Graphics2D g2;
+        java.awt.geom.Rectangle2D dataArea;
+        org.jfree.chart.axis.ValueAxis axis;
+        org.jfree.chart.plot.PlotRenderingInfo info;
+        org.jfree.chart.plot.XYPlot plot;
+        org.jfree.chart.renderer.xy.CandlestickRenderer this;
+        org.jfree.chart.renderer.xy.XYItemRendererState $stack25;
+        org.jfree.chart.util.RectangleEdge edge;
+        org.jfree.data.xy.OHLCDataset highLowDataset;
+        org.jfree.data.xy.XYDataset dataset;
+    
+    
+        this := @this: org.jfree.chart.renderer.xy.CandlestickRenderer;
+        g2 := @parameter0: java.awt.Graphics2D;
+        dataArea := @parameter1: java.awt.geom.Rectangle2D;
+        plot := @parameter2: org.jfree.chart.plot.XYPlot;
+        dataset := @parameter3: org.jfree.data.xy.XYDataset;
+        info := @parameter4: org.jfree.chart.plot.PlotRenderingInfo;
+        axis = virtualinvoke plot.<org.jfree.chart.plot.XYPlot: org.jfree.chart.axis.ValueAxis getDomainAxis()>();
+        x1 = virtualinvoke axis.<org.jfree.chart.axis.ValueAxis: double getLowerBound()>();
+        $stack21 = this.<org.jfree.chart.renderer.xy.CandlestickRenderer: double maxCandleWidthInMilliseconds>;
+        x2 = x1 + $stack21;
+        edge = virtualinvoke plot.<org.jfree.chart.plot.XYPlot: org.jfree.chart.util.RectangleEdge getDomainAxisEdge()>();
+        xx1 = virtualinvoke axis.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)>(x1, dataArea, edge);
+        xx2 = virtualinvoke axis.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)>(x2, dataArea, edge);
+        $stack22 = xx2 - xx1;
+        $stack23 = staticinvoke <java.lang.Math: double abs(double)>($stack22);
+        this.<org.jfree.chart.renderer.xy.CandlestickRenderer: double maxCandleWidth> = $stack23;
+        $stack24 = this.<org.jfree.chart.renderer.xy.CandlestickRenderer: boolean drawVolume>;
+    
+        if $stack24 == 0 goto label5;
+        highLowDataset = (org.jfree.data.xy.OHLCDataset) dataset;
+        this.<org.jfree.chart.renderer.xy.CandlestickRenderer: double maxVolume> = 0.0;
+        series = 0;
+    
+      label1:
+        $stack26 = interfaceinvoke highLowDataset.<org.jfree.data.xy.OHLCDataset: int getSeriesCount()>();
+    
+        if series >= $stack26 goto label5;
+        item = 0;
+    
+      label2:
+        $stack27 = interfaceinvoke highLowDataset.<org.jfree.data.xy.OHLCDataset: int getItemCount(int)>(series);
+    
+        if item >= $stack27 goto label4;
+        volume = interfaceinvoke highLowDataset.<org.jfree.data.xy.OHLCDataset: double getVolumeValue(int,int)>(series, item);
+        $stack28 = this.<org.jfree.chart.renderer.xy.CandlestickRenderer: double maxVolume>;
+        $stack29 = volume cmpl $stack28;
+    
+        if $stack29 <= 0 goto label3;
+        this.<org.jfree.chart.renderer.xy.CandlestickRenderer: double maxVolume> = volume;
+    
+      label3:
+        item = item + 1;
+    
+        goto label2;
+    
+      label4:
+        series = series + 1;
+    
+        goto label1;
+    
+      label5:
+        $stack25 = new org.jfree.chart.renderer.xy.XYItemRendererState;
+        specialinvoke $stack25.<org.jfree.chart.renderer.xy.XYItemRendererState: void <init>(org.jfree.chart.plot.PlotRenderingInfo)>(info);
+    
+        return $stack25;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.xy.CandlestickRenderer: void setAutoWidthFactor(double)> ----
+    {
+        byte $stack4;
+        double $stack3, autoWidthFactor;
+        org.jfree.chart.event.RendererChangeEvent $stack5;
+        org.jfree.chart.renderer.xy.CandlestickRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.xy.CandlestickRenderer;
+        autoWidthFactor := @parameter0: double;
+        $stack3 = this.<org.jfree.chart.renderer.xy.CandlestickRenderer: double autoWidthFactor>;
+        $stack4 = $stack3 cmpl autoWidthFactor;
+    
+        if $stack4 == 0 goto label1;
+        this.<org.jfree.chart.renderer.xy.CandlestickRenderer: double autoWidthFactor> = autoWidthFactor;
+        $stack5 = new org.jfree.chart.event.RendererChangeEvent;
+        specialinvoke $stack5.<org.jfree.chart.event.RendererChangeEvent: void <init>(java.lang.Object)>(this);
+        virtualinvoke this.<org.jfree.chart.renderer.xy.CandlestickRenderer: void notifyListeners(org.jfree.chart.event.RendererChangeEvent)>($stack5);
+    
+      label1:
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.xy.CandlestickRenderer: boolean equals(java.lang.Object)> ----
+    {
+        boolean $stack12, $stack13, $stack14, $stack26, $stack27, $stack28, $stack3, $stack9;
+        byte $stack17, $stack22, $stack25, $stack6;
+        double $stack15, $stack16, $stack20, $stack21, $stack23, $stack24, $stack4, $stack5;
+        int $stack18, $stack19;
+        java.awt.Paint $stack10, $stack11, $stack7, $stack8;
+        java.lang.Object obj;
+        org.jfree.chart.renderer.xy.CandlestickRenderer that, this;
+    
+    
+        this := @this: org.jfree.chart.renderer.xy.CandlestickRenderer;
+        obj := @parameter0: java.lang.Object;
+    
+        if obj != this goto label01;
+    
+        return 1;
+    
+      label01:
+        $stack3 = obj instanceof org.jfree.chart.renderer.xy.CandlestickRenderer;
+    
+        if $stack3 != 0 goto label02;
+    
+        return 0;
+    
+      label02:
+        that = (org.jfree.chart.renderer.xy.CandlestickRenderer) obj;
+        $stack4 = this.<org.jfree.chart.renderer.xy.CandlestickRenderer: double candleWidth>;
+        $stack5 = that.<org.jfree.chart.renderer.xy.CandlestickRenderer: double candleWidth>;
+        $stack6 = $stack4 cmpl $stack5;
+    
+        if $stack6 == 0 goto label03;
+    
+        return 0;
+    
+      label03:
+        $stack8 = this.<org.jfree.chart.renderer.xy.CandlestickRenderer: java.awt.Paint upPaint>;
+        $stack7 = that.<org.jfree.chart.renderer.xy.CandlestickRenderer: java.awt.Paint upPaint>;
+        $stack9 = staticinvoke <org.jfree.chart.util.PaintUtilities: boolean equal(java.awt.Paint,java.awt.Paint)>($stack8, $stack7);
+    
+        if $stack9 != 0 goto label04;
+    
+        return 0;
+    
+      label04:
+        $stack11 = this.<org.jfree.chart.renderer.xy.CandlestickRenderer: java.awt.Paint downPaint>;
+        $stack10 = that.<org.jfree.chart.renderer.xy.CandlestickRenderer: java.awt.Paint downPaint>;
+        $stack12 = staticinvoke <org.jfree.chart.util.PaintUtilities: boolean equal(java.awt.Paint,java.awt.Paint)>($stack11, $stack10);
+    
+        if $stack12 != 0 goto label05;
+    
+        return 0;
+    
+      label05:
+        $stack14 = this.<org.jfree.chart.renderer.xy.CandlestickRenderer: boolean drawVolume>;
+        $stack13 = that.<org.jfree.chart.renderer.xy.CandlestickRenderer: boolean drawVolume>;
+    
+        if $stack14 == $stack13 goto label06;
+    
+        return 0;
+    
+      label06:
+        $stack15 = this.<org.jfree.chart.renderer.xy.CandlestickRenderer: double maxCandleWidthInMilliseconds>;
+        $stack16 = that.<org.jfree.chart.renderer.xy.CandlestickRenderer: double maxCandleWidthInMilliseconds>;
+        $stack17 = $stack15 cmpl $stack16;
+    
+        if $stack17 == 0 goto label07;
+    
+        return 0;
+    
+      label07:
+        $stack19 = this.<org.jfree.chart.renderer.xy.CandlestickRenderer: int autoWidthMethod>;
+        $stack18 = that.<org.jfree.chart.renderer.xy.CandlestickRenderer: int autoWidthMethod>;
+    
+        if $stack19 == $stack18 goto label08;
+    
+        return 0;
+    
+      label08:
+        $stack20 = this.<org.jfree.chart.renderer.xy.CandlestickRenderer: double autoWidthFactor>;
+        $stack21 = that.<org.jfree.chart.renderer.xy.CandlestickRenderer: double autoWidthFactor>;
+        $stack22 = $stack20 cmpl $stack21;
+    
+        if $stack22 == 0 goto label09;
+    
+        return 0;
+    
+      label09:
+        $stack23 = this.<org.jfree.chart.renderer.xy.CandlestickRenderer: double autoWidthGap>;
+        $stack24 = that.<org.jfree.chart.renderer.xy.CandlestickRenderer: double autoWidthGap>;
+        $stack25 = $stack23 cmpl $stack24;
+    
+        if $stack25 == 0 goto label10;
+    
+        return 0;
+    
+      label10:
+        $stack27 = this.<org.jfree.chart.renderer.xy.CandlestickRenderer: boolean useOutlinePaint>;
+        $stack26 = that.<org.jfree.chart.renderer.xy.CandlestickRenderer: boolean useOutlinePaint>;
+    
+        if $stack27 == $stack26 goto label11;
+    
+        return 0;
+    
+      label11:
+        $stack28 = specialinvoke this.<org.jfree.chart.renderer.xy.AbstractXYItemRenderer: boolean equals(java.lang.Object)>(obj);
+    
+        return $stack28;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.xy.CandlestickRenderer: void setUseOutlinePaint(boolean)> ----
+    {
+        boolean $stack2, use;
+        org.jfree.chart.renderer.xy.CandlestickRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.xy.CandlestickRenderer;
+        use := @parameter0: boolean;
+        $stack2 = this.<org.jfree.chart.renderer.xy.CandlestickRenderer: boolean useOutlinePaint>;
+    
+        if $stack2 == use goto label1;
+        this.<org.jfree.chart.renderer.xy.CandlestickRenderer: boolean useOutlinePaint> = use;
+        virtualinvoke this.<org.jfree.chart.renderer.xy.CandlestickRenderer: void fireChangeEvent()>();
+    
+      label1:
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.xy.CandlestickRenderer: void writeObject(java.io.ObjectOutputStream)> ----
+    {
+        java.awt.Paint $stack2, $stack3;
+        java.io.ObjectOutputStream stream;
+        org.jfree.chart.renderer.xy.CandlestickRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.xy.CandlestickRenderer;
+        stream := @parameter0: java.io.ObjectOutputStream;
+        virtualinvoke stream.<java.io.ObjectOutputStream: void defaultWriteObject()>();
+        $stack2 = this.<org.jfree.chart.renderer.xy.CandlestickRenderer: java.awt.Paint upPaint>;
+        staticinvoke <org.jfree.chart.util.SerialUtilities: void writePaint(java.awt.Paint,java.io.ObjectOutputStream)>($stack2, stream);
+        $stack3 = this.<org.jfree.chart.renderer.xy.CandlestickRenderer: java.awt.Paint downPaint>;
+        staticinvoke <org.jfree.chart.util.SerialUtilities: void writePaint(java.awt.Paint,java.io.ObjectOutputStream)>($stack3, stream);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.xy.CandlestickRenderer: double getAutoWidthGap()> ----
+    {
+        double $stack1;
+        org.jfree.chart.renderer.xy.CandlestickRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.xy.CandlestickRenderer;
+        $stack1 = this.<org.jfree.chart.renderer.xy.CandlestickRenderer: double autoWidthGap>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.xy.CandlestickRenderer: void setMaxCandleWidthInMilliseconds(double)> ----
+    {
+        double millis;
+        org.jfree.chart.event.RendererChangeEvent $stack3;
+        org.jfree.chart.renderer.xy.CandlestickRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.xy.CandlestickRenderer;
+        millis := @parameter0: double;
+        this.<org.jfree.chart.renderer.xy.CandlestickRenderer: double maxCandleWidthInMilliseconds> = millis;
+        $stack3 = new org.jfree.chart.event.RendererChangeEvent;
+        specialinvoke $stack3.<org.jfree.chart.event.RendererChangeEvent: void <init>(java.lang.Object)>(this);
+        virtualinvoke this.<org.jfree.chart.renderer.xy.CandlestickRenderer: void notifyListeners(org.jfree.chart.event.RendererChangeEvent)>($stack3);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.xy.CandlestickRenderer: void drawItem(java.awt.Graphics2D,org.jfree.chart.renderer.xy.XYItemRendererState,java.awt.geom.Rectangle2D,org.jfree.chart.plot.PlotRenderingInfo,org.jfree.chart.plot.XYPlot,org.jfree.chart.axis.ValueAxis,org.jfree.chart.axis.ValueAxis,org.jfree.data.xy.XYDataset,int,int,org.jfree.chart.plot.CrosshairState,int)> ----
+    {
+        boolean $stack74, $stack75, $stack76, $stack85, horiz;
+        byte $stack111, $stack59, $stack77, $stack78, $stack83;
+        double $stack100, $stack103, $stack104, $stack105, $stack107, $stack108, $stack110, $stack112, $stack113, $stack114, $stack115, $stack116, $stack117, $stack58, $stack62, $stack64, $stack65, $stack66, $stack67, $stack68, $stack69, $stack70, $stack71, $stack72, $stack73, $stack79, $stack80, $stack81, $stack89, $stack90, $stack91, $stack97, $stack98, $stack99, endPos#0, endPos#1, i#2, lastPos#0, lastPos#2, maxOpenClose, minOpenClose, pos#0, pos#1, pos#2, stickWidth, volumeHeight, volumeWidth, x, xx, xxWidth#0, xxWidth#1, xxWidth#2, xxWidth#3, yClose, yHigh, yLow, yOpen, yyClose, yyHigh, yyLow, yyOpen, zzVolume;
+        int $stack60, i#0, item, itemCount#0, itemCount#1, lastPos#1, pass, series;
+        java.awt.Composite #l1, originalComposite;
+        java.awt.Graphics2D g2;
+        java.awt.Paint #l12, $stack84, $stack86, $stack87, $stack88, outlinePaint, xxWidth#4;
+        java.awt.Shape #l0, #l10, #l13, #l15, #l17, #l3, #l5, #l7, #l8, #l9;
+        java.awt.Stroke itemCount#2;
+        java.awt.geom.Line2D$Double #l14, #l16, #l2, #l4;
+        java.awt.geom.Rectangle2D dataArea;
+        java.awt.geom.Rectangle2D$Double #l11, #l6, $stack82, $stack92;
+        java.lang.Object $stack101, $stack102, $stack106, $stack109, $stack93, $stack94, $stack95, $stack96, body#0, body#1;
+        org.jfree.chart.ChartRenderingInfo $stack118;
+        org.jfree.chart.axis.ValueAxis domainAxis, rangeAxis;
+        org.jfree.chart.entity.EntityCollection entities;
+        org.jfree.chart.plot.CrosshairState crosshairState;
+        org.jfree.chart.plot.PlotOrientation $stack56, $stack57, orientation;
+        org.jfree.chart.plot.PlotRenderingInfo info;
+        org.jfree.chart.plot.XYPlot plot;
+        org.jfree.chart.renderer.xy.CandlestickRenderer this;
+        org.jfree.chart.renderer.xy.XYItemRendererState state;
+        org.jfree.chart.util.RectangleEdge $stack61, $stack63, domainEdge, edge;
+        org.jfree.data.xy.IntervalXYDataset i#1;
+        org.jfree.data.xy.OHLCDataset highLowData;
+        org.jfree.data.xy.XYDataset dataset;
+    
+    
+        this := @this: org.jfree.chart.renderer.xy.CandlestickRenderer;
+        g2 := @parameter0: java.awt.Graphics2D;
+        state := @parameter1: org.jfree.chart.renderer.xy.XYItemRendererState;
+        dataArea := @parameter2: java.awt.geom.Rectangle2D;
+        info := @parameter3: org.jfree.chart.plot.PlotRenderingInfo;
+        plot := @parameter4: org.jfree.chart.plot.XYPlot;
+        domainAxis := @parameter5: org.jfree.chart.axis.ValueAxis;
+        rangeAxis := @parameter6: org.jfree.chart.axis.ValueAxis;
+        dataset := @parameter7: org.jfree.data.xy.XYDataset;
+        series := @parameter8: int;
+        item := @parameter9: int;
+        crosshairState := @parameter10: org.jfree.chart.plot.CrosshairState;
+        pass := @parameter11: int;
+        orientation = virtualinvoke plot.<org.jfree.chart.plot.XYPlot: org.jfree.chart.plot.PlotOrientation getOrientation()>();
+        $stack56 = <org.jfree.chart.plot.PlotOrientation: org.jfree.chart.plot.PlotOrientation HORIZONTAL>;
+    
+        if orientation != $stack56 goto label01;
+        horiz = 1;
+    
+        goto label03;
+    
+      label01:
+        $stack57 = <org.jfree.chart.plot.PlotOrientation: org.jfree.chart.plot.PlotOrientation VERTICAL>;
+    
+        if orientation != $stack57 goto label02;
+        horiz = 0;
+    
+        goto label03;
+    
+      label02:
+        return;
+    
+      label03:
+        entities = null;
+    
+        if info == null goto label04;
+        $stack118 = virtualinvoke info.<org.jfree.chart.plot.PlotRenderingInfo: org.jfree.chart.ChartRenderingInfo getOwner()>();
+        entities = virtualinvoke $stack118.<org.jfree.chart.ChartRenderingInfo: org.jfree.chart.entity.EntityCollection getEntityCollection()>();
+    
+      label04:
+        highLowData = (org.jfree.data.xy.OHLCDataset) dataset;
+        x = interfaceinvoke highLowData.<org.jfree.data.xy.OHLCDataset: double getXValue(int,int)>(series, item);
+        yHigh = interfaceinvoke highLowData.<org.jfree.data.xy.OHLCDataset: double getHighValue(int,int)>(series, item);
+        yLow = interfaceinvoke highLowData.<org.jfree.data.xy.OHLCDataset: double getLowValue(int,int)>(series, item);
+        yOpen = interfaceinvoke highLowData.<org.jfree.data.xy.OHLCDataset: double getOpenValue(int,int)>(series, item);
+        yClose = interfaceinvoke highLowData.<org.jfree.data.xy.OHLCDataset: double getCloseValue(int,int)>(series, item);
+        domainEdge = virtualinvoke plot.<org.jfree.chart.plot.XYPlot: org.jfree.chart.util.RectangleEdge getDomainAxisEdge()>();
+        xx = virtualinvoke domainAxis.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)>(x, dataArea, domainEdge);
+        edge = virtualinvoke plot.<org.jfree.chart.plot.XYPlot: org.jfree.chart.util.RectangleEdge getRangeAxisEdge()>();
+        yyHigh = virtualinvoke rangeAxis.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)>(yHigh, dataArea, edge);
+        yyLow = virtualinvoke rangeAxis.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)>(yLow, dataArea, edge);
+        yyOpen = virtualinvoke rangeAxis.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)>(yOpen, dataArea, edge);
+        yyClose = virtualinvoke rangeAxis.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)>(yClose, dataArea, edge);
+        $stack58 = this.<org.jfree.chart.renderer.xy.CandlestickRenderer: double candleWidth>;
+        $stack59 = $stack58 cmpl 0.0;
+    
+        if $stack59 <= 0 goto label05;
+        volumeWidth = this.<org.jfree.chart.renderer.xy.CandlestickRenderer: double candleWidth>;
+        stickWidth = this.<org.jfree.chart.renderer.xy.CandlestickRenderer: double candleWidth>;
+    
+        goto label14;
+    
+      label05:
+        xxWidth#0 = 0.0;
+        $stack60 = this.<org.jfree.chart.renderer.xy.CandlestickRenderer: int autoWidthMethod>;
+    
+        switch($stack60)
+            {
+            case 0: goto label06;
+            case 1: goto label08;
+            case 2: goto label12;
+            default: goto label13;
+        };
+    
+      label06:
+        itemCount#0 = interfaceinvoke highLowData.<org.jfree.data.xy.OHLCDataset: int getItemCount(int)>(series);
+    
+        if horiz == 0 goto label07;
+        $stack116 = virtualinvoke dataArea.<java.awt.geom.Rectangle2D: double getHeight()>();
+        $stack117 = (double) itemCount#0;
+        xxWidth#0 = $stack116 / $stack117;
+    
+        goto label13;
+    
+      label07:
+        $stack114 = virtualinvoke dataArea.<java.awt.geom.Rectangle2D: double getWidth()>();
+        $stack115 = (double) itemCount#0;
+        xxWidth#0 = $stack114 / $stack115;
+    
+        goto label13;
+    
+      label08:
+        itemCount#1 = interfaceinvoke highLowData.<org.jfree.data.xy.OHLCDataset: int getItemCount(int)>(series);
+        lastPos#0 = -1.0;
+        xxWidth#0 = virtualinvoke dataArea.<java.awt.geom.Rectangle2D: double getWidth()>();
+        i#0 = 0;
+    
+      label09:
+        if i#0 >= itemCount#1 goto label11;
+        $stack110 = interfaceinvoke highLowData.<org.jfree.data.xy.OHLCDataset: double getXValue(int,int)>(series, i#0);
+        pos#0 = virtualinvoke domainAxis.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)>($stack110, dataArea, domainEdge);
+        $stack111 = lastPos#0 cmpl -1.0;
+    
+        if $stack111 == 0 goto label10;
+        $stack112 = pos#0 - lastPos#0;
+        $stack113 = staticinvoke <java.lang.Math: double abs(double)>($stack112);
+        xxWidth#0 = staticinvoke <java.lang.Math: double min(double,double)>(xxWidth#0, $stack113);
+    
+      label10:
+        lastPos#0 = pos#0;
+        i#0 = i#0 + 1;
+    
+        goto label09;
+    
+      label11:
+        goto label13;
+    
+      label12:
+        i#1 = (org.jfree.data.xy.IntervalXYDataset) dataset;
+        $stack62 = interfaceinvoke i#1.<org.jfree.data.xy.IntervalXYDataset: double getStartXValue(int,int)>(series, item);
+        $stack61 = virtualinvoke plot.<org.jfree.chart.plot.XYPlot: org.jfree.chart.util.RectangleEdge getDomainAxisEdge()>();
+        pos#1 = virtualinvoke domainAxis.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)>($stack62, dataArea, $stack61);
+        $stack64 = interfaceinvoke i#1.<org.jfree.data.xy.IntervalXYDataset: double getEndXValue(int,int)>(series, item);
+        $stack63 = virtualinvoke plot.<org.jfree.chart.plot.XYPlot: org.jfree.chart.util.RectangleEdge getDomainAxisEdge()>();
+        endPos#0 = virtualinvoke domainAxis.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)>($stack64, dataArea, $stack63);
+        $stack65 = endPos#0 - pos#1;
+        xxWidth#0 = staticinvoke <java.lang.Math: double abs(double)>($stack65);
+    
+      label13:
+        $stack66 = this.<org.jfree.chart.renderer.xy.CandlestickRenderer: double autoWidthGap>;
+        $stack67 = 2.0 * $stack66;
+        xxWidth#1 = xxWidth#0 - $stack67;
+        $stack68 = this.<org.jfree.chart.renderer.xy.CandlestickRenderer: double autoWidthFactor>;
+        xxWidth#2 = xxWidth#1 * $stack68;
+        $stack69 = this.<org.jfree.chart.renderer.xy.CandlestickRenderer: double maxCandleWidth>;
+        xxWidth#3 = staticinvoke <java.lang.Math: double min(double,double)>(xxWidth#2, $stack69);
+        $stack70 = this.<org.jfree.chart.renderer.xy.CandlestickRenderer: double maxCandleWidth>;
+        $stack71 = staticinvoke <java.lang.Math: double min(double,double)>(1.0, $stack70);
+        volumeWidth = staticinvoke <java.lang.Math: double max(double,double)>($stack71, xxWidth#3);
+        $stack72 = this.<org.jfree.chart.renderer.xy.CandlestickRenderer: double maxCandleWidth>;
+        $stack73 = staticinvoke <java.lang.Math: double min(double,double)>(3.0, $stack72);
+        stickWidth = staticinvoke <java.lang.Math: double max(double,double)>($stack73, xxWidth#3);
+    
+      label14:
+        xxWidth#4 = virtualinvoke this.<org.jfree.chart.renderer.xy.CandlestickRenderer: java.awt.Paint getItemPaint(int,int)>(series, item);
+        outlinePaint = null;
+        $stack74 = this.<org.jfree.chart.renderer.xy.CandlestickRenderer: boolean useOutlinePaint>;
+    
+        if $stack74 == 0 goto label15;
+        outlinePaint = virtualinvoke this.<org.jfree.chart.renderer.xy.CandlestickRenderer: java.awt.Paint getItemOutlinePaint(int,int)>(series, item);
+    
+      label15:
+        itemCount#2 = virtualinvoke this.<org.jfree.chart.renderer.xy.CandlestickRenderer: java.awt.Stroke getItemStroke(int,int)>(series, item);
+        virtualinvoke g2.<java.awt.Graphics2D: void setStroke(java.awt.Stroke)>(itemCount#2);
+        $stack75 = this.<org.jfree.chart.renderer.xy.CandlestickRenderer: boolean drawVolume>;
+    
+        if $stack75 == 0 goto label20;
+        $stack97 = interfaceinvoke highLowData.<org.jfree.data.xy.OHLCDataset: double getVolumeValue(int,int)>(series, item);
+        lastPos#1 = (int) $stack97;
+        $stack98 = (double) lastPos#1;
+        $stack99 = this.<org.jfree.chart.renderer.xy.CandlestickRenderer: double maxVolume>;
+        volumeHeight = $stack98 / $stack99;
+    
+        if horiz == 0 goto label16;
+        pos#2 = virtualinvoke dataArea.<java.awt.geom.Rectangle2D: double getMinX()>();
+        endPos#1 = virtualinvoke dataArea.<java.awt.geom.Rectangle2D: double getMaxX()>();
+    
+        goto label17;
+    
+      label16:
+        pos#2 = virtualinvoke dataArea.<java.awt.geom.Rectangle2D: double getMinY()>();
+        endPos#1 = virtualinvoke dataArea.<java.awt.geom.Rectangle2D: double getMaxY()>();
+    
+      label17:
+        $stack100 = endPos#1 - pos#2;
+        zzVolume = volumeHeight * $stack100;
+        $stack101 = <java.awt.Color: java.awt.Color gray>;
+        #l12 = (java.awt.Paint) $stack101;
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>(#l12);
+        originalComposite = virtualinvoke g2.<java.awt.Graphics2D: java.awt.Composite getComposite()>();
+        $stack102 = staticinvoke <java.awt.AlphaComposite: java.awt.AlphaComposite getInstance(int,float)>(3, 0.3F);
+        #l1 = (java.awt.Composite) $stack102;
+        virtualinvoke g2.<java.awt.Graphics2D: void setComposite(java.awt.Composite)>(#l1);
+    
+        if horiz == 0 goto label18;
+        $stack109 = new java.awt.geom.Rectangle2D$Double;
+        $stack107 = volumeWidth / 2.0;
+        $stack108 = xx - $stack107;
+        #l6 = (java.awt.geom.Rectangle2D$Double) $stack109;
+        specialinvoke #l6.<java.awt.geom.Rectangle2D$Double: void <init>(double,double,double,double)>(pos#2, $stack108, zzVolume, volumeWidth);
+        #l13 = (java.awt.Shape) $stack109;
+        virtualinvoke g2.<java.awt.Graphics2D: void fill(java.awt.Shape)>(#l13);
+    
+        goto label19;
+    
+      label18:
+        $stack106 = new java.awt.geom.Rectangle2D$Double;
+        $stack103 = volumeWidth / 2.0;
+        $stack105 = xx - $stack103;
+        $stack104 = endPos#1 - zzVolume;
+        #l11 = (java.awt.geom.Rectangle2D$Double) $stack106;
+        specialinvoke #l11.<java.awt.geom.Rectangle2D$Double: void <init>(double,double,double,double)>($stack105, $stack104, volumeWidth, zzVolume);
+        #l5 = (java.awt.Shape) $stack106;
+        virtualinvoke g2.<java.awt.Graphics2D: void fill(java.awt.Shape)>(#l5);
+    
+      label19:
+        virtualinvoke g2.<java.awt.Graphics2D: void setComposite(java.awt.Composite)>(originalComposite);
+    
+      label20:
+        $stack76 = this.<org.jfree.chart.renderer.xy.CandlestickRenderer: boolean useOutlinePaint>;
+    
+        if $stack76 == 0 goto label21;
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>(outlinePaint);
+    
+        goto label22;
+    
+      label21:
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>(xxWidth#4);
+    
+      label22:
+        lastPos#2 = staticinvoke <java.lang.Math: double max(double,double)>(yyOpen, yyClose);
+        i#2 = staticinvoke <java.lang.Math: double min(double,double)>(yyOpen, yyClose);
+        maxOpenClose = staticinvoke <java.lang.Math: double max(double,double)>(yOpen, yClose);
+        minOpenClose = staticinvoke <java.lang.Math: double min(double,double)>(yOpen, yClose);
+        $stack77 = yHigh cmpl maxOpenClose;
+    
+        if $stack77 <= 0 goto label24;
+    
+        if horiz == 0 goto label23;
+        $stack96 = new java.awt.geom.Line2D$Double;
+        #l14 = (java.awt.geom.Line2D$Double) $stack96;
+        specialinvoke #l14.<java.awt.geom.Line2D$Double: void <init>(double,double,double,double)>(yyHigh, xx, lastPos#2, xx);
+        #l3 = (java.awt.Shape) $stack96;
+        virtualinvoke g2.<java.awt.Graphics2D: void draw(java.awt.Shape)>(#l3);
+    
+        goto label24;
+    
+      label23:
+        $stack95 = new java.awt.geom.Line2D$Double;
+        #l4 = (java.awt.geom.Line2D$Double) $stack95;
+        specialinvoke #l4.<java.awt.geom.Line2D$Double: void <init>(double,double,double,double)>(xx, yyHigh, xx, lastPos#2);
+        #l17 = (java.awt.Shape) $stack95;
+        virtualinvoke g2.<java.awt.Graphics2D: void draw(java.awt.Shape)>(#l17);
+    
+      label24:
+        $stack78 = yLow cmpg minOpenClose;
+    
+        if $stack78 >= 0 goto label26;
+    
+        if horiz == 0 goto label25;
+        $stack94 = new java.awt.geom.Line2D$Double;
+        #l16 = (java.awt.geom.Line2D$Double) $stack94;
+        specialinvoke #l16.<java.awt.geom.Line2D$Double: void <init>(double,double,double,double)>(yyLow, xx, i#2, xx);
+        #l10 = (java.awt.Shape) $stack94;
+        virtualinvoke g2.<java.awt.Graphics2D: void draw(java.awt.Shape)>(#l10);
+    
+        goto label26;
+    
+      label25:
+        $stack93 = new java.awt.geom.Line2D$Double;
+        #l2 = (java.awt.geom.Line2D$Double) $stack93;
+        specialinvoke #l2.<java.awt.geom.Line2D$Double: void <init>(double,double,double,double)>(xx, yyLow, xx, i#2);
+        #l8 = (java.awt.Shape) $stack93;
+        virtualinvoke g2.<java.awt.Graphics2D: void draw(java.awt.Shape)>(#l8);
+    
+      label26:
+        body#0 = null;
+    
+        if horiz == 0 goto label27;
+        $stack92 = new java.awt.geom.Rectangle2D$Double;
+        $stack89 = stickWidth / 2.0;
+        $stack91 = xx - $stack89;
+        $stack90 = lastPos#2 - i#2;
+        specialinvoke $stack92.<java.awt.geom.Rectangle2D$Double: void <init>(double,double,double,double)>(i#2, $stack91, $stack90, stickWidth);
+        body#1 = $stack92;
+    
+        goto label28;
+    
+      label27:
+        $stack82 = new java.awt.geom.Rectangle2D$Double;
+        $stack79 = stickWidth / 2.0;
+        $stack81 = xx - $stack79;
+        $stack80 = lastPos#2 - i#2;
+        specialinvoke $stack82.<java.awt.geom.Rectangle2D$Double: void <init>(double,double,double,double)>($stack81, i#2, stickWidth, $stack80);
+        body#1 = $stack82;
+    
+      label28:
+        $stack83 = yClose cmpl yOpen;
+    
+        if $stack83 <= 0 goto label31;
+        $stack87 = this.<org.jfree.chart.renderer.xy.CandlestickRenderer: java.awt.Paint upPaint>;
+    
+        if $stack87 == null goto label29;
+        $stack88 = this.<org.jfree.chart.renderer.xy.CandlestickRenderer: java.awt.Paint upPaint>;
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>($stack88);
+    
+        goto label30;
+    
+      label29:
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>(xxWidth#4);
+    
+      label30:
+        #l7 = (java.awt.Shape) body#1;
+        virtualinvoke g2.<java.awt.Graphics2D: void fill(java.awt.Shape)>(#l7);
+    
+        goto label34;
+    
+      label31:
+        $stack84 = this.<org.jfree.chart.renderer.xy.CandlestickRenderer: java.awt.Paint downPaint>;
+    
+        if $stack84 == null goto label32;
+        $stack86 = this.<org.jfree.chart.renderer.xy.CandlestickRenderer: java.awt.Paint downPaint>;
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>($stack86);
+    
+        goto label33;
+    
+      label32:
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>(xxWidth#4);
+    
+      label33:
+        #l9 = (java.awt.Shape) body#1;
+        virtualinvoke g2.<java.awt.Graphics2D: void fill(java.awt.Shape)>(#l9);
+    
+      label34:
+        $stack85 = this.<org.jfree.chart.renderer.xy.CandlestickRenderer: boolean useOutlinePaint>;
+    
+        if $stack85 == 0 goto label35;
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>(outlinePaint);
+    
+        goto label36;
+    
+      label35:
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>(xxWidth#4);
+    
+      label36:
+        #l15 = (java.awt.Shape) body#1;
+        virtualinvoke g2.<java.awt.Graphics2D: void draw(java.awt.Shape)>(#l15);
+        #l0 = (java.awt.Shape) body#1;
+        virtualinvoke this.<org.jfree.chart.renderer.xy.CandlestickRenderer: void addEntity(org.jfree.chart.entity.EntityCollection,java.awt.Shape,org.jfree.data.xy.XYDataset,int,int,double,double)>(entities, #l0, dataset, series, item, 0.0, 0.0);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.xy.CandlestickRenderer: double getCandleWidth()> ----
+    {
+        double $stack1;
+        org.jfree.chart.renderer.xy.CandlestickRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.xy.CandlestickRenderer;
+        $stack1 = this.<org.jfree.chart.renderer.xy.CandlestickRenderer: double candleWidth>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.xy.CandlestickRenderer: void setDownPaint(java.awt.Paint)> ----
+    {
+        java.awt.Paint paint;
+        org.jfree.chart.event.RendererChangeEvent $stack2;
+        org.jfree.chart.renderer.xy.CandlestickRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.xy.CandlestickRenderer;
+        paint := @parameter0: java.awt.Paint;
+        this.<org.jfree.chart.renderer.xy.CandlestickRenderer: java.awt.Paint downPaint> = paint;
+        $stack2 = new org.jfree.chart.event.RendererChangeEvent;
+        specialinvoke $stack2.<org.jfree.chart.event.RendererChangeEvent: void <init>(java.lang.Object)>(this);
+        virtualinvoke this.<org.jfree.chart.renderer.xy.CandlestickRenderer: void notifyListeners(org.jfree.chart.event.RendererChangeEvent)>($stack2);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.xy.CandlestickRenderer: void readObject(java.io.ObjectInputStream)> ----
+    {
+        java.awt.Paint $stack2, $stack3;
+        java.io.ObjectInputStream stream;
+        org.jfree.chart.renderer.xy.CandlestickRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.xy.CandlestickRenderer;
+        stream := @parameter0: java.io.ObjectInputStream;
+        virtualinvoke stream.<java.io.ObjectInputStream: void defaultReadObject()>();
+        $stack2 = staticinvoke <org.jfree.chart.util.SerialUtilities: java.awt.Paint readPaint(java.io.ObjectInputStream)>(stream);
+        this.<org.jfree.chart.renderer.xy.CandlestickRenderer: java.awt.Paint upPaint> = $stack2;
+        $stack3 = staticinvoke <org.jfree.chart.util.SerialUtilities: java.awt.Paint readPaint(java.io.ObjectInputStream)>(stream);
+        this.<org.jfree.chart.renderer.xy.CandlestickRenderer: java.awt.Paint downPaint> = $stack3;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.xy.CandlestickRenderer: java.lang.Object clone()> ----
+    {
+        java.lang.Object $stack1;
+        org.jfree.chart.renderer.xy.CandlestickRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.xy.CandlestickRenderer;
+        $stack1 = specialinvoke this.<org.jfree.chart.renderer.xy.AbstractXYItemRenderer: java.lang.Object clone()>();
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.xy.CandlestickRenderer: boolean getUseOutlinePaint()> ----
+    {
+        boolean $stack1;
+        org.jfree.chart.renderer.xy.CandlestickRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.xy.CandlestickRenderer;
+        $stack1 = this.<org.jfree.chart.renderer.xy.CandlestickRenderer: boolean useOutlinePaint>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.xy.CandlestickRenderer: void <init>(double,boolean,org.jfree.chart.labels.XYToolTipGenerator)> ----
+    {
+        boolean drawVolume;
+        double candleWidth;
+        java.lang.Object $stack5, $stack6;
+        org.jfree.chart.labels.XYToolTipGenerator toolTipGenerator;
+        org.jfree.chart.renderer.xy.CandlestickRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.xy.CandlestickRenderer;
+        candleWidth := @parameter0: double;
+        drawVolume := @parameter1: boolean;
+        toolTipGenerator := @parameter2: org.jfree.chart.labels.XYToolTipGenerator;
+        specialinvoke this.<org.jfree.chart.renderer.xy.AbstractXYItemRenderer: void <init>()>();
+        this.<org.jfree.chart.renderer.xy.CandlestickRenderer: int autoWidthMethod> = 0;
+        this.<org.jfree.chart.renderer.xy.CandlestickRenderer: double autoWidthFactor> = 0.6428571428571429;
+        this.<org.jfree.chart.renderer.xy.CandlestickRenderer: double autoWidthGap> = 0.0;
+        this.<org.jfree.chart.renderer.xy.CandlestickRenderer: double maxCandleWidthInMilliseconds> = 7.2E7;
+        virtualinvoke this.<org.jfree.chart.renderer.xy.CandlestickRenderer: void setBaseToolTipGenerator(org.jfree.chart.labels.XYToolTipGenerator)>(toolTipGenerator);
+        this.<org.jfree.chart.renderer.xy.CandlestickRenderer: double candleWidth> = candleWidth;
+        this.<org.jfree.chart.renderer.xy.CandlestickRenderer: boolean drawVolume> = drawVolume;
+        $stack5 = <java.awt.Color: java.awt.Color green>;
+        this.<org.jfree.chart.renderer.xy.CandlestickRenderer: java.awt.Paint upPaint> = (java.awt.Paint) $stack5;
+        $stack6 = <java.awt.Color: java.awt.Color red>;
+        this.<org.jfree.chart.renderer.xy.CandlestickRenderer: java.awt.Paint downPaint> = (java.awt.Paint) $stack6;
+        this.<org.jfree.chart.renderer.xy.CandlestickRenderer: boolean useOutlinePaint> = 0;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.xy.CandlestickRenderer: void setUpPaint(java.awt.Paint)> ----
+    {
+        java.awt.Paint paint;
+        org.jfree.chart.event.RendererChangeEvent $stack2;
+        org.jfree.chart.renderer.xy.CandlestickRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.xy.CandlestickRenderer;
+        paint := @parameter0: java.awt.Paint;
+        this.<org.jfree.chart.renderer.xy.CandlestickRenderer: java.awt.Paint upPaint> = paint;
+        $stack2 = new org.jfree.chart.event.RendererChangeEvent;
+        specialinvoke $stack2.<org.jfree.chart.event.RendererChangeEvent: void <init>(java.lang.Object)>(this);
+        virtualinvoke this.<org.jfree.chart.renderer.xy.CandlestickRenderer: void notifyListeners(org.jfree.chart.event.RendererChangeEvent)>($stack2);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.xy.CandlestickRenderer: java.awt.Paint getUpPaint()> ----
+    {
+        java.awt.Paint $stack1;
+        org.jfree.chart.renderer.xy.CandlestickRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.xy.CandlestickRenderer;
+        $stack1 = this.<org.jfree.chart.renderer.xy.CandlestickRenderer: java.awt.Paint upPaint>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.xy.CandlestickRenderer: void setDrawVolume(boolean)> ----
+    {
+        boolean $stack2, flag;
+        org.jfree.chart.event.RendererChangeEvent $stack3;
+        org.jfree.chart.renderer.xy.CandlestickRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.xy.CandlestickRenderer;
+        flag := @parameter0: boolean;
+        $stack2 = this.<org.jfree.chart.renderer.xy.CandlestickRenderer: boolean drawVolume>;
+    
+        if $stack2 == flag goto label1;
+        this.<org.jfree.chart.renderer.xy.CandlestickRenderer: boolean drawVolume> = flag;
+        $stack3 = new org.jfree.chart.event.RendererChangeEvent;
+        specialinvoke $stack3.<org.jfree.chart.event.RendererChangeEvent: void <init>(java.lang.Object)>(this);
+        virtualinvoke this.<org.jfree.chart.renderer.xy.CandlestickRenderer: void notifyListeners(org.jfree.chart.event.RendererChangeEvent)>($stack3);
+    
+      label1:
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.xy.CandlestickRenderer: void setCandleWidth(double)> ----
+    {
+        byte $stack4;
+        double $stack3, width;
+        org.jfree.chart.event.RendererChangeEvent $stack5;
+        org.jfree.chart.renderer.xy.CandlestickRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.xy.CandlestickRenderer;
+        width := @parameter0: double;
+        $stack3 = this.<org.jfree.chart.renderer.xy.CandlestickRenderer: double candleWidth>;
+        $stack4 = width cmpl $stack3;
+    
+        if $stack4 == 0 goto label1;
+        this.<org.jfree.chart.renderer.xy.CandlestickRenderer: double candleWidth> = width;
+        $stack5 = new org.jfree.chart.event.RendererChangeEvent;
+        specialinvoke $stack5.<org.jfree.chart.event.RendererChangeEvent: void <init>(java.lang.Object)>(this);
+        virtualinvoke this.<org.jfree.chart.renderer.xy.CandlestickRenderer: void notifyListeners(org.jfree.chart.event.RendererChangeEvent)>($stack5);
+    
+      label1:
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.xy.CandlestickRenderer: void <init>()> ----
+    {
+        org.jfree.chart.renderer.xy.CandlestickRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.xy.CandlestickRenderer;
+        specialinvoke this.<org.jfree.chart.renderer.xy.CandlestickRenderer: void <init>(double)>(-1.0);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.xy.CandlestickRenderer: int getAutoWidthMethod()> ----
+    {
+        int $stack1;
+        org.jfree.chart.renderer.xy.CandlestickRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.xy.CandlestickRenderer;
+        $stack1 = this.<org.jfree.chart.renderer.xy.CandlestickRenderer: int autoWidthMethod>;
+    
+        return $stack1;
+    }
+
+}

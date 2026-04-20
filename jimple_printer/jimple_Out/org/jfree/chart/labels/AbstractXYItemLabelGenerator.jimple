@@ -1,0 +1,428 @@
+// ========================================================================
+// CLASS : org.jfree.chart.labels.AbstractXYItemLabelGenerator
+// ========================================================================
+
+[PUBLIC, SUPER] class org.jfree.chart.labels.AbstractXYItemLabelGenerator extends java.lang.Object implements java.lang.Cloneable, java.io.Serializable {
+
+    // ---- method: <org.jfree.chart.labels.AbstractXYItemLabelGenerator: java.text.DateFormat getXDateFormat()> ----
+    {
+        java.text.DateFormat $stack1;
+        org.jfree.chart.labels.AbstractXYItemLabelGenerator this;
+    
+    
+        this := @this: org.jfree.chart.labels.AbstractXYItemLabelGenerator;
+        $stack1 = this.<org.jfree.chart.labels.AbstractXYItemLabelGenerator: java.text.DateFormat xDateFormat>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.labels.AbstractXYItemLabelGenerator: java.lang.Object[] createItemArray(org.jfree.data.xy.XYDataset,int,int)> ----
+    {
+        boolean $stack11, $stack15;
+        double x, y;
+        int item, series;
+        java.lang.Comparable $stack9;
+        java.lang.Number $stack23, $stack29;
+        java.lang.Object[] result;
+        java.lang.String $stack10, $stack14, $stack18, $stack22, $stack24, $stack28, $stack30;
+        java.text.DateFormat $stack12, $stack16, $stack21, $stack27;
+        java.text.NumberFormat $stack13, $stack17;
+        java.util.Date $stack20, $stack26;
+        long $stack19, $stack25;
+        org.jfree.chart.labels.AbstractXYItemLabelGenerator this;
+        org.jfree.data.xy.XYDataset dataset;
+    
+    
+        this := @this: org.jfree.chart.labels.AbstractXYItemLabelGenerator;
+        dataset := @parameter0: org.jfree.data.xy.XYDataset;
+        series := @parameter1: int;
+        item := @parameter2: int;
+        result = newarray (java.lang.Object)[3];
+        $stack9 = interfaceinvoke dataset.<org.jfree.data.xy.XYDataset: java.lang.Comparable getSeriesKey(int)>(series);
+        $stack10 = virtualinvoke $stack9.<java.lang.Object: java.lang.String toString()>();
+        result[0] = $stack10;
+        x = interfaceinvoke dataset.<org.jfree.data.xy.XYDataset: double getXValue(int,int)>(series, item);
+        $stack11 = staticinvoke <java.lang.Double: boolean isNaN(double)>(x);
+    
+        if $stack11 == 0 goto label1;
+        $stack29 = interfaceinvoke dataset.<org.jfree.data.xy.XYDataset: java.lang.Number getX(int,int)>(series, item);
+    
+        if $stack29 != null goto label1;
+        $stack30 = this.<org.jfree.chart.labels.AbstractXYItemLabelGenerator: java.lang.String nullXString>;
+        result[1] = $stack30;
+    
+        goto label3;
+    
+      label1:
+        $stack12 = this.<org.jfree.chart.labels.AbstractXYItemLabelGenerator: java.text.DateFormat xDateFormat>;
+    
+        if $stack12 == null goto label2;
+        $stack27 = this.<org.jfree.chart.labels.AbstractXYItemLabelGenerator: java.text.DateFormat xDateFormat>;
+        $stack26 = new java.util.Date;
+        $stack25 = (long) x;
+        specialinvoke $stack26.<java.util.Date: void <init>(long)>($stack25);
+        $stack28 = virtualinvoke $stack27.<java.text.DateFormat: java.lang.String format(java.util.Date)>($stack26);
+        result[1] = $stack28;
+    
+        goto label3;
+    
+      label2:
+        $stack13 = this.<org.jfree.chart.labels.AbstractXYItemLabelGenerator: java.text.NumberFormat xFormat>;
+        $stack14 = virtualinvoke $stack13.<java.text.NumberFormat: java.lang.String format(double)>(x);
+        result[1] = $stack14;
+    
+      label3:
+        y = interfaceinvoke dataset.<org.jfree.data.xy.XYDataset: double getYValue(int,int)>(series, item);
+        $stack15 = staticinvoke <java.lang.Double: boolean isNaN(double)>(y);
+    
+        if $stack15 == 0 goto label4;
+        $stack23 = interfaceinvoke dataset.<org.jfree.data.xy.XYDataset: java.lang.Number getY(int,int)>(series, item);
+    
+        if $stack23 != null goto label4;
+        $stack24 = this.<org.jfree.chart.labels.AbstractXYItemLabelGenerator: java.lang.String nullYString>;
+        result[2] = $stack24;
+    
+        goto label6;
+    
+      label4:
+        $stack16 = this.<org.jfree.chart.labels.AbstractXYItemLabelGenerator: java.text.DateFormat yDateFormat>;
+    
+        if $stack16 == null goto label5;
+        $stack21 = this.<org.jfree.chart.labels.AbstractXYItemLabelGenerator: java.text.DateFormat yDateFormat>;
+        $stack20 = new java.util.Date;
+        $stack19 = (long) y;
+        specialinvoke $stack20.<java.util.Date: void <init>(long)>($stack19);
+        $stack22 = virtualinvoke $stack21.<java.text.DateFormat: java.lang.String format(java.util.Date)>($stack20);
+        result[2] = $stack22;
+    
+        goto label6;
+    
+      label5:
+        $stack17 = this.<org.jfree.chart.labels.AbstractXYItemLabelGenerator: java.text.NumberFormat yFormat>;
+        $stack18 = virtualinvoke $stack17.<java.text.NumberFormat: java.lang.String format(double)>(y);
+        result[2] = $stack18;
+    
+      label6:
+        return result;
+    }
+
+    // ---- method: <org.jfree.chart.labels.AbstractXYItemLabelGenerator: java.text.DateFormat getYDateFormat()> ----
+    {
+        java.text.DateFormat $stack1;
+        org.jfree.chart.labels.AbstractXYItemLabelGenerator this;
+    
+    
+        this := @this: org.jfree.chart.labels.AbstractXYItemLabelGenerator;
+        $stack1 = this.<org.jfree.chart.labels.AbstractXYItemLabelGenerator: java.text.DateFormat yDateFormat>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.labels.AbstractXYItemLabelGenerator: java.text.NumberFormat getXFormat()> ----
+    {
+        java.text.NumberFormat $stack1;
+        org.jfree.chart.labels.AbstractXYItemLabelGenerator this;
+    
+    
+        this := @this: org.jfree.chart.labels.AbstractXYItemLabelGenerator;
+        $stack1 = this.<org.jfree.chart.labels.AbstractXYItemLabelGenerator: java.text.NumberFormat xFormat>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.labels.AbstractXYItemLabelGenerator: void <init>(java.lang.String,java.text.NumberFormat,java.text.DateFormat)> ----
+    {
+        java.lang.String formatString;
+        java.text.DateFormat yFormat;
+        java.text.NumberFormat $stack4, xFormat;
+        org.jfree.chart.labels.AbstractXYItemLabelGenerator this;
+    
+    
+        this := @this: org.jfree.chart.labels.AbstractXYItemLabelGenerator;
+        formatString := @parameter0: java.lang.String;
+        xFormat := @parameter1: java.text.NumberFormat;
+        yFormat := @parameter2: java.text.DateFormat;
+        $stack4 = staticinvoke <java.text.NumberFormat: java.text.NumberFormat getInstance()>();
+        specialinvoke this.<org.jfree.chart.labels.AbstractXYItemLabelGenerator: void <init>(java.lang.String,java.text.NumberFormat,java.text.NumberFormat)>(formatString, xFormat, $stack4);
+        this.<org.jfree.chart.labels.AbstractXYItemLabelGenerator: java.text.DateFormat yDateFormat> = yFormat;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.labels.AbstractXYItemLabelGenerator: java.lang.String generateLabelString(org.jfree.data.xy.XYDataset,int,int)> ----
+    {
+        int item, series;
+        java.lang.Object result#0;
+        java.lang.Object[] items;
+        java.lang.String $stack6, result#1;
+        org.jfree.chart.labels.AbstractXYItemLabelGenerator this;
+        org.jfree.data.xy.XYDataset dataset;
+    
+    
+        this := @this: org.jfree.chart.labels.AbstractXYItemLabelGenerator;
+        dataset := @parameter0: org.jfree.data.xy.XYDataset;
+        series := @parameter1: int;
+        item := @parameter2: int;
+        result#0 = null;
+        items = virtualinvoke this.<org.jfree.chart.labels.AbstractXYItemLabelGenerator: java.lang.Object[] createItemArray(org.jfree.data.xy.XYDataset,int,int)>(dataset, series, item);
+        $stack6 = this.<org.jfree.chart.labels.AbstractXYItemLabelGenerator: java.lang.String formatString>;
+        result#1 = staticinvoke <java.text.MessageFormat: java.lang.String format(java.lang.String,java.lang.Object[])>($stack6, items);
+    
+        return result#1;
+    }
+
+    // ---- method: <org.jfree.chart.labels.AbstractXYItemLabelGenerator: java.lang.Object clone()> ----
+    {
+        java.lang.Object $stack11, $stack14, $stack17, $stack2, $stack8;
+        java.text.DateFormat $stack10, $stack12, $stack5, $stack6, $stack7, $stack9;
+        java.text.NumberFormat $stack13, $stack15, $stack16, $stack18, $stack3, $stack4;
+        org.jfree.chart.labels.AbstractXYItemLabelGenerator clone, this;
+    
+    
+        this := @this: org.jfree.chart.labels.AbstractXYItemLabelGenerator;
+        $stack2 = specialinvoke this.<java.lang.Object: java.lang.Object clone()>();
+        clone = (org.jfree.chart.labels.AbstractXYItemLabelGenerator) $stack2;
+        $stack3 = this.<org.jfree.chart.labels.AbstractXYItemLabelGenerator: java.text.NumberFormat xFormat>;
+    
+        if $stack3 == null goto label1;
+        $stack16 = this.<org.jfree.chart.labels.AbstractXYItemLabelGenerator: java.text.NumberFormat xFormat>;
+        $stack17 = virtualinvoke $stack16.<java.text.NumberFormat: java.lang.Object clone()>();
+        $stack18 = (java.text.NumberFormat) $stack17;
+        clone.<org.jfree.chart.labels.AbstractXYItemLabelGenerator: java.text.NumberFormat xFormat> = $stack18;
+    
+      label1:
+        $stack4 = this.<org.jfree.chart.labels.AbstractXYItemLabelGenerator: java.text.NumberFormat yFormat>;
+    
+        if $stack4 == null goto label2;
+        $stack13 = this.<org.jfree.chart.labels.AbstractXYItemLabelGenerator: java.text.NumberFormat yFormat>;
+        $stack14 = virtualinvoke $stack13.<java.text.NumberFormat: java.lang.Object clone()>();
+        $stack15 = (java.text.NumberFormat) $stack14;
+        clone.<org.jfree.chart.labels.AbstractXYItemLabelGenerator: java.text.NumberFormat yFormat> = $stack15;
+    
+      label2:
+        $stack5 = this.<org.jfree.chart.labels.AbstractXYItemLabelGenerator: java.text.DateFormat xDateFormat>;
+    
+        if $stack5 == null goto label3;
+        $stack10 = this.<org.jfree.chart.labels.AbstractXYItemLabelGenerator: java.text.DateFormat xDateFormat>;
+        $stack11 = virtualinvoke $stack10.<java.text.DateFormat: java.lang.Object clone()>();
+        $stack12 = (java.text.DateFormat) $stack11;
+        clone.<org.jfree.chart.labels.AbstractXYItemLabelGenerator: java.text.DateFormat xDateFormat> = $stack12;
+    
+      label3:
+        $stack6 = this.<org.jfree.chart.labels.AbstractXYItemLabelGenerator: java.text.DateFormat yDateFormat>;
+    
+        if $stack6 == null goto label4;
+        $stack7 = this.<org.jfree.chart.labels.AbstractXYItemLabelGenerator: java.text.DateFormat yDateFormat>;
+        $stack8 = virtualinvoke $stack7.<java.text.DateFormat: java.lang.Object clone()>();
+        $stack9 = (java.text.DateFormat) $stack8;
+        clone.<org.jfree.chart.labels.AbstractXYItemLabelGenerator: java.text.DateFormat yDateFormat> = $stack9;
+    
+      label4:
+        return clone;
+    }
+
+    // ---- method: <org.jfree.chart.labels.AbstractXYItemLabelGenerator: void <init>(java.lang.String,java.text.DateFormat,java.text.DateFormat)> ----
+    {
+        java.lang.String formatString;
+        java.text.DateFormat xFormat, yFormat;
+        java.text.NumberFormat $stack4, $stack5;
+        org.jfree.chart.labels.AbstractXYItemLabelGenerator this;
+    
+    
+        this := @this: org.jfree.chart.labels.AbstractXYItemLabelGenerator;
+        formatString := @parameter0: java.lang.String;
+        xFormat := @parameter1: java.text.DateFormat;
+        yFormat := @parameter2: java.text.DateFormat;
+        $stack5 = staticinvoke <java.text.NumberFormat: java.text.NumberFormat getInstance()>();
+        $stack4 = staticinvoke <java.text.NumberFormat: java.text.NumberFormat getInstance()>();
+        specialinvoke this.<org.jfree.chart.labels.AbstractXYItemLabelGenerator: void <init>(java.lang.String,java.text.NumberFormat,java.text.NumberFormat)>(formatString, $stack5, $stack4);
+        this.<org.jfree.chart.labels.AbstractXYItemLabelGenerator: java.text.DateFormat xDateFormat> = xFormat;
+        this.<org.jfree.chart.labels.AbstractXYItemLabelGenerator: java.text.DateFormat yDateFormat> = yFormat;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.labels.AbstractXYItemLabelGenerator: java.lang.String getFormatString()> ----
+    {
+        java.lang.String $stack1;
+        org.jfree.chart.labels.AbstractXYItemLabelGenerator this;
+    
+    
+        this := @this: org.jfree.chart.labels.AbstractXYItemLabelGenerator;
+        $stack1 = this.<org.jfree.chart.labels.AbstractXYItemLabelGenerator: java.lang.String formatString>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.labels.AbstractXYItemLabelGenerator: boolean equals(java.lang.Object)> ----
+    {
+        boolean $stack12, $stack15, $stack18, $stack3, $stack6, $stack9;
+        java.lang.Object obj;
+        java.lang.String $stack4, $stack5;
+        java.text.DateFormat $stack10, $stack11, $stack16, $stack17;
+        java.text.NumberFormat $stack13, $stack14, $stack7, $stack8;
+        org.jfree.chart.labels.AbstractXYItemLabelGenerator that, this;
+    
+    
+        this := @this: org.jfree.chart.labels.AbstractXYItemLabelGenerator;
+        obj := @parameter0: java.lang.Object;
+    
+        if obj != this goto label1;
+    
+        return 1;
+    
+      label1:
+        $stack3 = obj instanceof org.jfree.chart.labels.AbstractXYItemLabelGenerator;
+    
+        if $stack3 != 0 goto label2;
+    
+        return 0;
+    
+      label2:
+        that = (org.jfree.chart.labels.AbstractXYItemLabelGenerator) obj;
+        $stack5 = this.<org.jfree.chart.labels.AbstractXYItemLabelGenerator: java.lang.String formatString>;
+        $stack4 = that.<org.jfree.chart.labels.AbstractXYItemLabelGenerator: java.lang.String formatString>;
+        $stack6 = virtualinvoke $stack5.<java.lang.String: boolean equals(java.lang.Object)>($stack4);
+    
+        if $stack6 != 0 goto label3;
+    
+        return 0;
+    
+      label3:
+        $stack8 = this.<org.jfree.chart.labels.AbstractXYItemLabelGenerator: java.text.NumberFormat xFormat>;
+        $stack7 = that.<org.jfree.chart.labels.AbstractXYItemLabelGenerator: java.text.NumberFormat xFormat>;
+        $stack9 = staticinvoke <org.jfree.chart.util.ObjectUtilities: boolean equal(java.lang.Object,java.lang.Object)>($stack8, $stack7);
+    
+        if $stack9 != 0 goto label4;
+    
+        return 0;
+    
+      label4:
+        $stack11 = this.<org.jfree.chart.labels.AbstractXYItemLabelGenerator: java.text.DateFormat xDateFormat>;
+        $stack10 = that.<org.jfree.chart.labels.AbstractXYItemLabelGenerator: java.text.DateFormat xDateFormat>;
+        $stack12 = staticinvoke <org.jfree.chart.util.ObjectUtilities: boolean equal(java.lang.Object,java.lang.Object)>($stack11, $stack10);
+    
+        if $stack12 != 0 goto label5;
+    
+        return 0;
+    
+      label5:
+        $stack14 = this.<org.jfree.chart.labels.AbstractXYItemLabelGenerator: java.text.NumberFormat yFormat>;
+        $stack13 = that.<org.jfree.chart.labels.AbstractXYItemLabelGenerator: java.text.NumberFormat yFormat>;
+        $stack15 = staticinvoke <org.jfree.chart.util.ObjectUtilities: boolean equal(java.lang.Object,java.lang.Object)>($stack14, $stack13);
+    
+        if $stack15 != 0 goto label6;
+    
+        return 0;
+    
+      label6:
+        $stack17 = this.<org.jfree.chart.labels.AbstractXYItemLabelGenerator: java.text.DateFormat yDateFormat>;
+        $stack16 = that.<org.jfree.chart.labels.AbstractXYItemLabelGenerator: java.text.DateFormat yDateFormat>;
+        $stack18 = staticinvoke <org.jfree.chart.util.ObjectUtilities: boolean equal(java.lang.Object,java.lang.Object)>($stack17, $stack16);
+    
+        if $stack18 != 0 goto label7;
+    
+        return 0;
+    
+      label7:
+        return 1;
+    }
+
+    // ---- method: <org.jfree.chart.labels.AbstractXYItemLabelGenerator: void <init>(java.lang.String,java.text.DateFormat,java.text.NumberFormat)> ----
+    {
+        java.lang.String formatString;
+        java.text.DateFormat xFormat;
+        java.text.NumberFormat $stack4, yFormat;
+        org.jfree.chart.labels.AbstractXYItemLabelGenerator this;
+    
+    
+        this := @this: org.jfree.chart.labels.AbstractXYItemLabelGenerator;
+        formatString := @parameter0: java.lang.String;
+        xFormat := @parameter1: java.text.DateFormat;
+        yFormat := @parameter2: java.text.NumberFormat;
+        $stack4 = staticinvoke <java.text.NumberFormat: java.text.NumberFormat getInstance()>();
+        specialinvoke this.<org.jfree.chart.labels.AbstractXYItemLabelGenerator: void <init>(java.lang.String,java.text.NumberFormat,java.text.NumberFormat)>(formatString, $stack4, yFormat);
+        this.<org.jfree.chart.labels.AbstractXYItemLabelGenerator: java.text.DateFormat xDateFormat> = xFormat;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.labels.AbstractXYItemLabelGenerator: void <init>()> ----
+    {
+        java.text.NumberFormat $stack1, $stack2;
+        org.jfree.chart.labels.AbstractXYItemLabelGenerator this;
+    
+    
+        this := @this: org.jfree.chart.labels.AbstractXYItemLabelGenerator;
+        $stack2 = staticinvoke <java.text.NumberFormat: java.text.NumberFormat getNumberInstance()>();
+        $stack1 = staticinvoke <java.text.NumberFormat: java.text.NumberFormat getNumberInstance()>();
+        specialinvoke this.<org.jfree.chart.labels.AbstractXYItemLabelGenerator: void <init>(java.lang.String,java.text.NumberFormat,java.text.NumberFormat)>("{2}", $stack2, $stack1);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.labels.AbstractXYItemLabelGenerator: java.text.NumberFormat getYFormat()> ----
+    {
+        java.text.NumberFormat $stack1;
+        org.jfree.chart.labels.AbstractXYItemLabelGenerator this;
+    
+    
+        this := @this: org.jfree.chart.labels.AbstractXYItemLabelGenerator;
+        $stack1 = this.<org.jfree.chart.labels.AbstractXYItemLabelGenerator: java.text.NumberFormat yFormat>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.labels.AbstractXYItemLabelGenerator: void <init>(java.lang.String,java.text.NumberFormat,java.text.NumberFormat)> ----
+    {
+        java.lang.IllegalArgumentException #l1, #l4, #l5;
+        java.lang.Object $stack4, $stack5, $stack6;
+        java.lang.String formatString;
+        java.lang.Throwable #l0, #l2, #l3;
+        java.text.NumberFormat xFormat, yFormat;
+        org.jfree.chart.labels.AbstractXYItemLabelGenerator this;
+    
+    
+        this := @this: org.jfree.chart.labels.AbstractXYItemLabelGenerator;
+        formatString := @parameter0: java.lang.String;
+        xFormat := @parameter1: java.text.NumberFormat;
+        yFormat := @parameter2: java.text.NumberFormat;
+        specialinvoke this.<java.lang.Object: void <init>()>();
+        this.<org.jfree.chart.labels.AbstractXYItemLabelGenerator: java.lang.String nullXString> = "null";
+        this.<org.jfree.chart.labels.AbstractXYItemLabelGenerator: java.lang.String nullYString> = "null";
+    
+        if formatString != null goto label1;
+        $stack6 = new java.lang.IllegalArgumentException;
+        #l4 = (java.lang.IllegalArgumentException) $stack6;
+        specialinvoke #l4.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'formatString\' argument.");
+        #l3 = (java.lang.Throwable) $stack6;
+    
+        throw #l3;
+    
+      label1:
+        if xFormat != null goto label2;
+        $stack5 = new java.lang.IllegalArgumentException;
+        #l5 = (java.lang.IllegalArgumentException) $stack5;
+        specialinvoke #l5.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'xFormat\' argument.");
+        #l2 = (java.lang.Throwable) $stack5;
+    
+        throw #l2;
+    
+      label2:
+        if yFormat != null goto label3;
+        $stack4 = new java.lang.IllegalArgumentException;
+        #l1 = (java.lang.IllegalArgumentException) $stack4;
+        specialinvoke #l1.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'yFormat\' argument.");
+        #l0 = (java.lang.Throwable) $stack4;
+    
+        throw #l0;
+    
+      label3:
+        this.<org.jfree.chart.labels.AbstractXYItemLabelGenerator: java.lang.String formatString> = formatString;
+        this.<org.jfree.chart.labels.AbstractXYItemLabelGenerator: java.text.NumberFormat xFormat> = xFormat;
+        this.<org.jfree.chart.labels.AbstractXYItemLabelGenerator: java.text.NumberFormat yFormat> = yFormat;
+    
+        return;
+    }
+
+}

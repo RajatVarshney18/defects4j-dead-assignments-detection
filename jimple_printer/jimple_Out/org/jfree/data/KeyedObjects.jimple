@@ -1,0 +1,383 @@
+// ========================================================================
+// CLASS : org.jfree.data.KeyedObjects
+// ========================================================================
+
+[PUBLIC, SUPER] class org.jfree.data.KeyedObjects extends java.lang.Object implements org.jfree.chart.util.PublicCloneable, java.lang.Cloneable, java.io.Serializable {
+
+    // ---- method: <org.jfree.data.KeyedObjects: void removeValue(java.lang.Comparable)> ----
+    {
+        int $stack2;
+        java.lang.Comparable key;
+        org.jfree.data.KeyedObjects this;
+    
+    
+        this := @this: org.jfree.data.KeyedObjects;
+        key := @parameter0: java.lang.Comparable;
+        $stack2 = virtualinvoke this.<org.jfree.data.KeyedObjects: int getIndex(java.lang.Comparable)>(key);
+        virtualinvoke this.<org.jfree.data.KeyedObjects: void removeValue(int)>($stack2);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.KeyedObjects: void removeValue(int)> ----
+    {
+        int index;
+        java.util.List $stack2;
+        org.jfree.data.KeyedObjects this;
+    
+    
+        this := @this: org.jfree.data.KeyedObjects;
+        index := @parameter0: int;
+        $stack2 = this.<org.jfree.data.KeyedObjects: java.util.List data>;
+        interfaceinvoke $stack2.<java.util.List: java.lang.Object remove(int)>(index);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.KeyedObjects: void addObject(java.lang.Comparable,java.lang.Object)> ----
+    {
+        java.lang.Comparable key;
+        java.lang.Object object;
+        org.jfree.data.KeyedObjects this;
+    
+    
+        this := @this: org.jfree.data.KeyedObjects;
+        key := @parameter0: java.lang.Comparable;
+        object := @parameter1: java.lang.Object;
+        virtualinvoke this.<org.jfree.data.KeyedObjects: void setObject(java.lang.Comparable,java.lang.Object)>(key, object);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.KeyedObjects: void setObject(java.lang.Comparable,java.lang.Object)> ----
+    {
+        int keyIndex;
+        java.lang.Comparable key;
+        java.lang.Object $stack8, object;
+        java.util.List $stack6, $stack7;
+        org.jfree.data.KeyedObject $stack5, ko#0, ko#1;
+        org.jfree.data.KeyedObjects this;
+    
+    
+        this := @this: org.jfree.data.KeyedObjects;
+        key := @parameter0: java.lang.Comparable;
+        object := @parameter1: java.lang.Object;
+        keyIndex = virtualinvoke this.<org.jfree.data.KeyedObjects: int getIndex(java.lang.Comparable)>(key);
+    
+        if keyIndex < 0 goto label1;
+        $stack7 = this.<org.jfree.data.KeyedObjects: java.util.List data>;
+        $stack8 = interfaceinvoke $stack7.<java.util.List: java.lang.Object get(int)>(keyIndex);
+        ko#0 = (org.jfree.data.KeyedObject) $stack8;
+        virtualinvoke ko#0.<org.jfree.data.KeyedObject: void setObject(java.lang.Object)>(object);
+    
+        goto label2;
+    
+      label1:
+        $stack5 = new org.jfree.data.KeyedObject;
+        specialinvoke $stack5.<org.jfree.data.KeyedObject: void <init>(java.lang.Comparable,java.lang.Object)>(key, object);
+        ko#1 = $stack5;
+        $stack6 = this.<org.jfree.data.KeyedObjects: java.util.List data>;
+        interfaceinvoke $stack6.<java.util.List: boolean add(java.lang.Object)>($stack5);
+    
+      label2:
+        return;
+    }
+
+    // ---- method: <org.jfree.data.KeyedObjects: java.lang.Comparable getKey(int)> ----
+    {
+        int $stack5, index;
+        java.lang.Comparable result;
+        java.lang.Object $stack7;
+        java.util.List $stack4, $stack6;
+        org.jfree.data.KeyedObject item;
+        org.jfree.data.KeyedObjects this;
+    
+    
+        this := @this: org.jfree.data.KeyedObjects;
+        index := @parameter0: int;
+        result = null;
+    
+        if index < 0 goto label1;
+        $stack4 = this.<org.jfree.data.KeyedObjects: java.util.List data>;
+        $stack5 = interfaceinvoke $stack4.<java.util.List: int size()>();
+    
+        if index >= $stack5 goto label1;
+        $stack6 = this.<org.jfree.data.KeyedObjects: java.util.List data>;
+        $stack7 = interfaceinvoke $stack6.<java.util.List: java.lang.Object get(int)>(index);
+        item = (org.jfree.data.KeyedObject) $stack7;
+    
+        if item == null goto label1;
+        result = virtualinvoke item.<org.jfree.data.KeyedObject: java.lang.Comparable getKey()>();
+    
+      label1:
+        return result;
+    }
+
+    // ---- method: <org.jfree.data.KeyedObjects: java.lang.Object getObject(java.lang.Comparable)> ----
+    {
+        int $stack2;
+        java.lang.Comparable key;
+        java.lang.Object $stack3;
+        org.jfree.data.KeyedObjects this;
+    
+    
+        this := @this: org.jfree.data.KeyedObjects;
+        key := @parameter0: java.lang.Comparable;
+        $stack2 = virtualinvoke this.<org.jfree.data.KeyedObjects: int getIndex(java.lang.Comparable)>(key);
+        $stack3 = virtualinvoke this.<org.jfree.data.KeyedObjects: java.lang.Object getObject(int)>($stack2);
+    
+        return $stack3;
+    }
+
+    // ---- method: <org.jfree.data.KeyedObjects: int getIndex(java.lang.Comparable)> ----
+    {
+        boolean $stack10, $stack7;
+        int i, result;
+        java.lang.Comparable $stack9, key;
+        java.lang.Object $stack8;
+        java.util.Iterator iterator;
+        java.util.List $stack6;
+        org.jfree.data.KeyedObject ko;
+        org.jfree.data.KeyedObjects this;
+    
+    
+        this := @this: org.jfree.data.KeyedObjects;
+        key := @parameter0: java.lang.Comparable;
+        result = -1;
+        i = 0;
+        $stack6 = this.<org.jfree.data.KeyedObjects: java.util.List data>;
+        iterator = interfaceinvoke $stack6.<java.util.List: java.util.Iterator iterator()>();
+    
+      label1:
+        $stack7 = interfaceinvoke iterator.<java.util.Iterator: boolean hasNext()>();
+    
+        if $stack7 == 0 goto label3;
+        $stack8 = interfaceinvoke iterator.<java.util.Iterator: java.lang.Object next()>();
+        ko = (org.jfree.data.KeyedObject) $stack8;
+        $stack9 = virtualinvoke ko.<org.jfree.data.KeyedObject: java.lang.Comparable getKey()>();
+        $stack10 = virtualinvoke $stack9.<java.lang.Object: boolean equals(java.lang.Object)>(key);
+    
+        if $stack10 == 0 goto label2;
+        result = i;
+    
+      label2:
+        i = i + 1;
+    
+        goto label1;
+    
+      label3:
+        return result;
+    }
+
+    // ---- method: <org.jfree.data.KeyedObjects: java.lang.Object clone()> ----
+    {
+        boolean $stack7;
+        java.lang.Object $stack10, $stack4, $stack5, $stack8;
+        java.util.ArrayList #l0;
+        java.util.Iterator iterator;
+        java.util.List $stack6, $stack9;
+        org.jfree.data.KeyedObject ko;
+        org.jfree.data.KeyedObjects clone, this;
+    
+    
+        this := @this: org.jfree.data.KeyedObjects;
+        $stack4 = specialinvoke this.<java.lang.Object: java.lang.Object clone()>();
+        clone = (org.jfree.data.KeyedObjects) $stack4;
+        $stack5 = new java.util.ArrayList;
+        #l0 = (java.util.ArrayList) $stack5;
+        specialinvoke #l0.<java.util.ArrayList: void <init>()>();
+        clone.<org.jfree.data.KeyedObjects: java.util.List data> = (java.util.List) $stack5;
+        $stack6 = this.<org.jfree.data.KeyedObjects: java.util.List data>;
+        iterator = interfaceinvoke $stack6.<java.util.List: java.util.Iterator iterator()>();
+    
+      label1:
+        $stack7 = interfaceinvoke iterator.<java.util.Iterator: boolean hasNext()>();
+    
+        if $stack7 == 0 goto label2;
+        $stack8 = interfaceinvoke iterator.<java.util.Iterator: java.lang.Object next()>();
+        ko = (org.jfree.data.KeyedObject) $stack8;
+        $stack9 = clone.<org.jfree.data.KeyedObjects: java.util.List data>;
+        $stack10 = virtualinvoke ko.<org.jfree.data.KeyedObject: java.lang.Object clone()>();
+        interfaceinvoke $stack9.<java.util.List: boolean add(java.lang.Object)>($stack10);
+    
+        goto label1;
+    
+      label2:
+        return clone;
+    }
+
+    // ---- method: <org.jfree.data.KeyedObjects: java.util.List getKeys()> ----
+    {
+        boolean $stack6;
+        java.lang.Comparable $stack8;
+        java.lang.Object $stack4, $stack7;
+        java.util.ArrayList #l0, result;
+        java.util.Iterator iterator;
+        java.util.List #l1, #l2, $stack5;
+        org.jfree.data.KeyedObject ko;
+        org.jfree.data.KeyedObjects this;
+    
+    
+        this := @this: org.jfree.data.KeyedObjects;
+        $stack4 = new java.util.ArrayList;
+        #l0 = (java.util.ArrayList) $stack4;
+        specialinvoke #l0.<java.util.ArrayList: void <init>()>();
+        result = (java.util.ArrayList) $stack4;
+        $stack5 = this.<org.jfree.data.KeyedObjects: java.util.List data>;
+        iterator = interfaceinvoke $stack5.<java.util.List: java.util.Iterator iterator()>();
+    
+      label1:
+        $stack6 = interfaceinvoke iterator.<java.util.Iterator: boolean hasNext()>();
+    
+        if $stack6 == 0 goto label2;
+        $stack7 = interfaceinvoke iterator.<java.util.Iterator: java.lang.Object next()>();
+        ko = (org.jfree.data.KeyedObject) $stack7;
+        $stack8 = virtualinvoke ko.<org.jfree.data.KeyedObject: java.lang.Comparable getKey()>();
+        #l1 = (java.util.List) $stack4;
+        interfaceinvoke #l1.<java.util.List: boolean add(java.lang.Object)>($stack8);
+    
+        goto label1;
+    
+      label2:
+        #l2 = (java.util.List) $stack4;
+    
+        return #l2;
+    }
+
+    // ---- method: <org.jfree.data.KeyedObjects: java.lang.Object getObject(int)> ----
+    {
+        int $stack5, item;
+        java.lang.Object $stack7, result;
+        java.util.List $stack4, $stack6;
+        org.jfree.data.KeyedObject kobj;
+        org.jfree.data.KeyedObjects this;
+    
+    
+        this := @this: org.jfree.data.KeyedObjects;
+        item := @parameter0: int;
+        result = null;
+    
+        if item < 0 goto label1;
+        $stack4 = this.<org.jfree.data.KeyedObjects: java.util.List data>;
+        $stack5 = interfaceinvoke $stack4.<java.util.List: int size()>();
+    
+        if item >= $stack5 goto label1;
+        $stack6 = this.<org.jfree.data.KeyedObjects: java.util.List data>;
+        $stack7 = interfaceinvoke $stack6.<java.util.List: java.lang.Object get(int)>(item);
+        kobj = (org.jfree.data.KeyedObject) $stack7;
+    
+        if kobj == null goto label1;
+        result = virtualinvoke kobj.<org.jfree.data.KeyedObject: java.lang.Object getObject()>();
+    
+      label1:
+        return result;
+    }
+
+    // ---- method: <org.jfree.data.KeyedObjects: boolean equals(java.lang.Object)> ----
+    {
+        boolean $stack11, $stack12, $stack9;
+        int $stack10, count, i;
+        java.lang.Comparable k1, k2;
+        java.lang.Object o, o1, o2;
+        org.jfree.data.KeyedObjects kos, this;
+    
+    
+        this := @this: org.jfree.data.KeyedObjects;
+        o := @parameter0: java.lang.Object;
+    
+        if o != null goto label1;
+    
+        return 0;
+    
+      label1:
+        if o != this goto label2;
+    
+        return 1;
+    
+      label2:
+        $stack9 = o instanceof org.jfree.data.KeyedObjects;
+    
+        if $stack9 != 0 goto label3;
+    
+        return 0;
+    
+      label3:
+        kos = (org.jfree.data.KeyedObjects) o;
+        count = virtualinvoke this.<org.jfree.data.KeyedObjects: int getItemCount()>();
+        $stack10 = virtualinvoke kos.<org.jfree.data.KeyedObjects: int getItemCount()>();
+    
+        if count == $stack10 goto label4;
+    
+        return 0;
+    
+      label4:
+        i = 0;
+    
+      label5:
+        if i >= count goto label9;
+        k1 = virtualinvoke this.<org.jfree.data.KeyedObjects: java.lang.Comparable getKey(int)>(i);
+        k2 = virtualinvoke kos.<org.jfree.data.KeyedObjects: java.lang.Comparable getKey(int)>(i);
+        $stack11 = virtualinvoke k1.<java.lang.Object: boolean equals(java.lang.Object)>(k2);
+    
+        if $stack11 != 0 goto label6;
+    
+        return 0;
+    
+      label6:
+        o1 = virtualinvoke this.<org.jfree.data.KeyedObjects: java.lang.Object getObject(int)>(i);
+        o2 = virtualinvoke kos.<org.jfree.data.KeyedObjects: java.lang.Object getObject(int)>(i);
+    
+        if o1 != null goto label8;
+    
+        if o2 == null goto label7;
+    
+        return 0;
+    
+      label7:
+        i = i + 1;
+    
+        goto label5;
+    
+      label8:
+        $stack12 = virtualinvoke o1.<java.lang.Object: boolean equals(java.lang.Object)>(o2);
+    
+        if $stack12 != 0 goto label7;
+    
+        return 0;
+    
+      label9:
+        return 1;
+    }
+
+    // ---- method: <org.jfree.data.KeyedObjects: void <init>()> ----
+    {
+        java.lang.Object $stack1;
+        java.util.ArrayList #l0;
+        org.jfree.data.KeyedObjects this;
+    
+    
+        this := @this: org.jfree.data.KeyedObjects;
+        specialinvoke this.<java.lang.Object: void <init>()>();
+        $stack1 = new java.util.ArrayList;
+        #l0 = (java.util.ArrayList) $stack1;
+        specialinvoke #l0.<java.util.ArrayList: void <init>()>();
+        this.<org.jfree.data.KeyedObjects: java.util.List data> = (java.util.List) $stack1;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.KeyedObjects: int getItemCount()> ----
+    {
+        int $stack2;
+        java.util.List $stack1;
+        org.jfree.data.KeyedObjects this;
+    
+    
+        this := @this: org.jfree.data.KeyedObjects;
+        $stack1 = this.<org.jfree.data.KeyedObjects: java.util.List data>;
+        $stack2 = interfaceinvoke $stack1.<java.util.List: int size()>();
+    
+        return $stack2;
+    }
+
+}

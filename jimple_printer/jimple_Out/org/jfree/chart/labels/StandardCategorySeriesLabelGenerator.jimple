@@ -1,0 +1,146 @@
+// ========================================================================
+// CLASS : org.jfree.chart.labels.StandardCategorySeriesLabelGenerator
+// ========================================================================
+
+[PUBLIC, SUPER] class org.jfree.chart.labels.StandardCategorySeriesLabelGenerator extends java.lang.Object implements org.jfree.chart.labels.CategorySeriesLabelGenerator, org.jfree.chart.util.PublicCloneable, java.lang.Cloneable, java.io.Serializable {
+
+    // ---- method: <org.jfree.chart.labels.StandardCategorySeriesLabelGenerator: java.lang.Object[] createItemArray(org.jfree.data.category.CategoryDataset,int)> ----
+    {
+        int series;
+        java.lang.Comparable $stack4;
+        java.lang.Object[] result;
+        java.lang.String $stack5;
+        org.jfree.chart.labels.StandardCategorySeriesLabelGenerator this;
+        org.jfree.data.category.CategoryDataset dataset;
+    
+    
+        this := @this: org.jfree.chart.labels.StandardCategorySeriesLabelGenerator;
+        dataset := @parameter0: org.jfree.data.category.CategoryDataset;
+        series := @parameter1: int;
+        result = newarray (java.lang.Object)[1];
+        $stack4 = interfaceinvoke dataset.<org.jfree.data.category.CategoryDataset: java.lang.Comparable getRowKey(int)>(series);
+        $stack5 = virtualinvoke $stack4.<java.lang.Object: java.lang.String toString()>();
+        result[0] = $stack5;
+    
+        return result;
+    }
+
+    // ---- method: <org.jfree.chart.labels.StandardCategorySeriesLabelGenerator: boolean equals(java.lang.Object)> ----
+    {
+        boolean $stack3, $stack6;
+        java.lang.Object obj;
+        java.lang.String $stack4, $stack5;
+        org.jfree.chart.labels.StandardCategorySeriesLabelGenerator that, this;
+    
+    
+        this := @this: org.jfree.chart.labels.StandardCategorySeriesLabelGenerator;
+        obj := @parameter0: java.lang.Object;
+    
+        if obj != this goto label1;
+    
+        return 1;
+    
+      label1:
+        $stack3 = obj instanceof org.jfree.chart.labels.StandardCategorySeriesLabelGenerator;
+    
+        if $stack3 != 0 goto label2;
+    
+        return 0;
+    
+      label2:
+        that = (org.jfree.chart.labels.StandardCategorySeriesLabelGenerator) obj;
+        $stack5 = this.<org.jfree.chart.labels.StandardCategorySeriesLabelGenerator: java.lang.String formatPattern>;
+        $stack4 = that.<org.jfree.chart.labels.StandardCategorySeriesLabelGenerator: java.lang.String formatPattern>;
+        $stack6 = virtualinvoke $stack5.<java.lang.String: boolean equals(java.lang.Object)>($stack4);
+    
+        if $stack6 != 0 goto label3;
+    
+        return 0;
+    
+      label3:
+        return 1;
+    }
+
+    // ---- method: <org.jfree.chart.labels.StandardCategorySeriesLabelGenerator: java.lang.String generateLabel(org.jfree.data.category.CategoryDataset,int)> ----
+    {
+        int series;
+        java.lang.IllegalArgumentException #l0;
+        java.lang.Object $stack6;
+        java.lang.Object[] $stack5;
+        java.lang.String $stack4, label;
+        java.lang.Throwable #l1;
+        org.jfree.chart.labels.StandardCategorySeriesLabelGenerator this;
+        org.jfree.data.category.CategoryDataset dataset;
+    
+    
+        this := @this: org.jfree.chart.labels.StandardCategorySeriesLabelGenerator;
+        dataset := @parameter0: org.jfree.data.category.CategoryDataset;
+        series := @parameter1: int;
+    
+        if dataset != null goto label1;
+        $stack6 = new java.lang.IllegalArgumentException;
+        #l0 = (java.lang.IllegalArgumentException) $stack6;
+        specialinvoke #l0.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'dataset\' argument.");
+        #l1 = (java.lang.Throwable) $stack6;
+    
+        throw #l1;
+    
+      label1:
+        $stack4 = this.<org.jfree.chart.labels.StandardCategorySeriesLabelGenerator: java.lang.String formatPattern>;
+        $stack5 = virtualinvoke this.<org.jfree.chart.labels.StandardCategorySeriesLabelGenerator: java.lang.Object[] createItemArray(org.jfree.data.category.CategoryDataset,int)>(dataset, series);
+        label = staticinvoke <java.text.MessageFormat: java.lang.String format(java.lang.String,java.lang.Object[])>($stack4, $stack5);
+    
+        return label;
+    }
+
+    // ---- method: <org.jfree.chart.labels.StandardCategorySeriesLabelGenerator: void <init>()> ----
+    {
+        org.jfree.chart.labels.StandardCategorySeriesLabelGenerator this;
+    
+    
+        this := @this: org.jfree.chart.labels.StandardCategorySeriesLabelGenerator;
+        specialinvoke this.<org.jfree.chart.labels.StandardCategorySeriesLabelGenerator: void <init>(java.lang.String)>("{0}");
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.labels.StandardCategorySeriesLabelGenerator: void <init>(java.lang.String)> ----
+    {
+        java.lang.IllegalArgumentException #l1;
+        java.lang.Object $stack2;
+        java.lang.String format;
+        java.lang.Throwable #l0;
+        org.jfree.chart.labels.StandardCategorySeriesLabelGenerator this;
+    
+    
+        this := @this: org.jfree.chart.labels.StandardCategorySeriesLabelGenerator;
+        format := @parameter0: java.lang.String;
+        specialinvoke this.<java.lang.Object: void <init>()>();
+    
+        if format != null goto label1;
+        $stack2 = new java.lang.IllegalArgumentException;
+        #l1 = (java.lang.IllegalArgumentException) $stack2;
+        specialinvoke #l1.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'format\' argument.");
+        #l0 = (java.lang.Throwable) $stack2;
+    
+        throw #l0;
+    
+      label1:
+        this.<org.jfree.chart.labels.StandardCategorySeriesLabelGenerator: java.lang.String formatPattern> = format;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.labels.StandardCategorySeriesLabelGenerator: java.lang.Object clone()> ----
+    {
+        java.lang.Object $stack1;
+        org.jfree.chart.labels.StandardCategorySeriesLabelGenerator this;
+    
+    
+        this := @this: org.jfree.chart.labels.StandardCategorySeriesLabelGenerator;
+        $stack1 = specialinvoke this.<java.lang.Object: java.lang.Object clone()>();
+    
+        return $stack1;
+    }
+
+}

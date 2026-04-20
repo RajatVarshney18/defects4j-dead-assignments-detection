@@ -1,0 +1,596 @@
+// ========================================================================
+// CLASS : org.jfree.chart.axis.SubCategoryAxis
+// ========================================================================
+
+[PUBLIC, SUPER] class org.jfree.chart.axis.SubCategoryAxis extends org.jfree.chart.axis.CategoryAxis implements java.lang.Cloneable, java.io.Serializable {
+
+    // ---- method: <org.jfree.chart.axis.SubCategoryAxis: void setSubLabelPaint(java.awt.Paint)> ----
+    {
+        java.awt.Paint paint;
+        java.lang.IllegalArgumentException #l0;
+        java.lang.Object $stack3;
+        java.lang.Throwable #l1;
+        org.jfree.chart.axis.SubCategoryAxis this;
+        org.jfree.chart.event.AxisChangeEvent $stack2;
+    
+    
+        this := @this: org.jfree.chart.axis.SubCategoryAxis;
+        paint := @parameter0: java.awt.Paint;
+    
+        if paint != null goto label1;
+        $stack3 = new java.lang.IllegalArgumentException;
+        #l0 = (java.lang.IllegalArgumentException) $stack3;
+        specialinvoke #l0.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'paint\' argument.");
+        #l1 = (java.lang.Throwable) $stack3;
+    
+        throw #l1;
+    
+      label1:
+        this.<org.jfree.chart.axis.SubCategoryAxis: java.awt.Paint subLabelPaint> = paint;
+        $stack2 = new org.jfree.chart.event.AxisChangeEvent;
+        specialinvoke $stack2.<org.jfree.chart.event.AxisChangeEvent: void <init>(org.jfree.chart.axis.Axis)>(this);
+        virtualinvoke this.<org.jfree.chart.axis.SubCategoryAxis: void notifyListeners(org.jfree.chart.event.AxisChangeEvent)>($stack2);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.axis.SubCategoryAxis: void addSubCategory(java.lang.Comparable)> ----
+    {
+        java.lang.Comparable subCategory;
+        java.lang.IllegalArgumentException #l1;
+        java.lang.Object $stack4;
+        java.lang.Throwable #l0;
+        java.util.List $stack2;
+        org.jfree.chart.axis.SubCategoryAxis this;
+        org.jfree.chart.event.AxisChangeEvent $stack3;
+    
+    
+        this := @this: org.jfree.chart.axis.SubCategoryAxis;
+        subCategory := @parameter0: java.lang.Comparable;
+    
+        if subCategory != null goto label1;
+        $stack4 = new java.lang.IllegalArgumentException;
+        #l1 = (java.lang.IllegalArgumentException) $stack4;
+        specialinvoke #l1.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'subcategory\' axis.");
+        #l0 = (java.lang.Throwable) $stack4;
+    
+        throw #l0;
+    
+      label1:
+        $stack2 = this.<org.jfree.chart.axis.SubCategoryAxis: java.util.List subCategories>;
+        interfaceinvoke $stack2.<java.util.List: boolean add(java.lang.Object)>(subCategory);
+        $stack3 = new org.jfree.chart.event.AxisChangeEvent;
+        specialinvoke $stack3.<org.jfree.chart.event.AxisChangeEvent: void <init>(org.jfree.chart.axis.Axis)>(this);
+        virtualinvoke this.<org.jfree.chart.axis.SubCategoryAxis: void notifyListeners(org.jfree.chart.event.AxisChangeEvent)>($stack3);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.axis.SubCategoryAxis: org.jfree.chart.axis.AxisState drawSubCategoryLabels(java.awt.Graphics2D,java.awt.geom.Rectangle2D,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge,org.jfree.chart.axis.AxisState,org.jfree.chart.plot.PlotRenderingInfo)> ----
+    {
+        boolean $stack33, $stack35, $stack52;
+        double $stack42, $stack43, $stack46, $stack47, $stack48, $stack49, $stack50, $stack51, $stack53, $stack54, $stack55, $stack56, $stack57, $stack58, $stack63, $stack64, $stack65, $stack66, $stack67, $stack68, categoryIndex#1, categoryIndex#2, categoryIndex#3, categoryIndex#4, maxdim, x0, x1, y0, y1;
+        float height, width, xx#0, xx#1, yy#0, yy#1;
+        int categoryCount, categoryIndex#0, i, subCategoryCount;
+        java.awt.Font $stack29;
+        java.awt.Graphics2D g2;
+        java.awt.Paint $stack30;
+        java.awt.geom.Rectangle2D #l2, #l3, dataArea, plotArea;
+        java.awt.geom.Rectangle2D$Double #l0, area;
+        java.lang.IllegalArgumentException #l4;
+        java.lang.Object $stack44, $stack60, $stack69;
+        java.lang.String label;
+        java.lang.Throwable #l1;
+        java.util.List $stack45, $stack59;
+        org.jfree.chart.axis.AxisState state;
+        org.jfree.chart.axis.SubCategoryAxis this;
+        org.jfree.chart.plot.CategoryPlot plot;
+        org.jfree.chart.plot.Plot $stack31;
+        org.jfree.chart.plot.PlotRenderingInfo plotState;
+        org.jfree.chart.text.TextAnchor $stack61, $stack62;
+        org.jfree.chart.util.RectangleEdge $stack32, $stack34, $stack36, $stack37, $stack38, $stack39, $stack40, $stack41, edge;
+        org.jfree.data.category.CategoryDataset dataset;
+    
+    
+        this := @this: org.jfree.chart.axis.SubCategoryAxis;
+        g2 := @parameter0: java.awt.Graphics2D;
+        plotArea := @parameter1: java.awt.geom.Rectangle2D;
+        dataArea := @parameter2: java.awt.geom.Rectangle2D;
+        edge := @parameter3: org.jfree.chart.util.RectangleEdge;
+        state := @parameter4: org.jfree.chart.axis.AxisState;
+        plotState := @parameter5: org.jfree.chart.plot.PlotRenderingInfo;
+    
+        if state != null goto label01;
+        $stack69 = new java.lang.IllegalArgumentException;
+        #l4 = (java.lang.IllegalArgumentException) $stack69;
+        specialinvoke #l4.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'state\' argument.");
+        #l1 = (java.lang.Throwable) $stack69;
+    
+        throw #l1;
+    
+      label01:
+        $stack29 = this.<org.jfree.chart.axis.SubCategoryAxis: java.awt.Font subLabelFont>;
+        virtualinvoke g2.<java.awt.Graphics2D: void setFont(java.awt.Font)>($stack29);
+        $stack30 = this.<org.jfree.chart.axis.SubCategoryAxis: java.awt.Paint subLabelPaint>;
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>($stack30);
+        $stack31 = virtualinvoke this.<org.jfree.chart.axis.SubCategoryAxis: org.jfree.chart.plot.Plot getPlot()>();
+        plot = (org.jfree.chart.plot.CategoryPlot) $stack31;
+        dataset = virtualinvoke plot.<org.jfree.chart.plot.CategoryPlot: org.jfree.data.category.CategoryDataset getDataset()>();
+        categoryCount = interfaceinvoke dataset.<org.jfree.data.category.CategoryDataset: int getColumnCount()>();
+        maxdim = specialinvoke this.<org.jfree.chart.axis.SubCategoryAxis: double getMaxDim(java.awt.Graphics2D,org.jfree.chart.util.RectangleEdge)>(g2, edge);
+        categoryIndex#0 = 0;
+    
+      label02:
+        if categoryIndex#0 >= categoryCount goto label11;
+        x0 = 0.0;
+        x1 = 0.0;
+        y0 = 0.0;
+        y1 = 0.0;
+        $stack38 = <org.jfree.chart.util.RectangleEdge: org.jfree.chart.util.RectangleEdge TOP>;
+    
+        if edge != $stack38 goto label03;
+        x0 = virtualinvoke this.<org.jfree.chart.axis.SubCategoryAxis: double getCategoryStart(int,int,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)>(categoryIndex#0, categoryCount, dataArea, edge);
+        x1 = virtualinvoke this.<org.jfree.chart.axis.SubCategoryAxis: double getCategoryEnd(int,int,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)>(categoryIndex#0, categoryCount, dataArea, edge);
+        y1 = virtualinvoke state.<org.jfree.chart.axis.AxisState: double getCursor()>();
+        y0 = y1 - maxdim;
+    
+        goto label06;
+    
+      label03:
+        $stack39 = <org.jfree.chart.util.RectangleEdge: org.jfree.chart.util.RectangleEdge BOTTOM>;
+    
+        if edge != $stack39 goto label04;
+        x0 = virtualinvoke this.<org.jfree.chart.axis.SubCategoryAxis: double getCategoryStart(int,int,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)>(categoryIndex#0, categoryCount, dataArea, edge);
+        x1 = virtualinvoke this.<org.jfree.chart.axis.SubCategoryAxis: double getCategoryEnd(int,int,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)>(categoryIndex#0, categoryCount, dataArea, edge);
+        y0 = virtualinvoke state.<org.jfree.chart.axis.AxisState: double getCursor()>();
+        y1 = y0 + maxdim;
+    
+        goto label06;
+    
+      label04:
+        $stack40 = <org.jfree.chart.util.RectangleEdge: org.jfree.chart.util.RectangleEdge LEFT>;
+    
+        if edge != $stack40 goto label05;
+        y0 = virtualinvoke this.<org.jfree.chart.axis.SubCategoryAxis: double getCategoryStart(int,int,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)>(categoryIndex#0, categoryCount, dataArea, edge);
+        y1 = virtualinvoke this.<org.jfree.chart.axis.SubCategoryAxis: double getCategoryEnd(int,int,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)>(categoryIndex#0, categoryCount, dataArea, edge);
+        x1 = virtualinvoke state.<org.jfree.chart.axis.AxisState: double getCursor()>();
+        x0 = x1 - maxdim;
+    
+        goto label06;
+    
+      label05:
+        $stack41 = <org.jfree.chart.util.RectangleEdge: org.jfree.chart.util.RectangleEdge RIGHT>;
+    
+        if edge != $stack41 goto label06;
+        y0 = virtualinvoke this.<org.jfree.chart.axis.SubCategoryAxis: double getCategoryStart(int,int,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)>(categoryIndex#0, categoryCount, dataArea, edge);
+        y1 = virtualinvoke this.<org.jfree.chart.axis.SubCategoryAxis: double getCategoryEnd(int,int,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)>(categoryIndex#0, categoryCount, dataArea, edge);
+        x0 = virtualinvoke state.<org.jfree.chart.axis.AxisState: double getCursor()>();
+        x1 = x0 + maxdim;
+    
+      label06:
+        $stack44 = new java.awt.geom.Rectangle2D$Double;
+        $stack43 = x1 - x0;
+        $stack42 = y1 - y0;
+        #l0 = (java.awt.geom.Rectangle2D$Double) $stack44;
+        specialinvoke #l0.<java.awt.geom.Rectangle2D$Double: void <init>(double,double,double,double)>(x0, y0, $stack43, $stack42);
+        area = (java.awt.geom.Rectangle2D$Double) $stack44;
+        $stack45 = this.<org.jfree.chart.axis.SubCategoryAxis: java.util.List subCategories>;
+        subCategoryCount = interfaceinvoke $stack45.<java.util.List: int size()>();
+        $stack46 = x1 - x0;
+        $stack47 = (double) subCategoryCount;
+        $stack48 = $stack46 / $stack47;
+        width = (float) $stack48;
+        $stack49 = y1 - y0;
+        $stack50 = (double) subCategoryCount;
+        $stack51 = $stack49 / $stack50;
+        height = (float) $stack51;
+        xx#0 = 0.0F;
+        yy#0 = 0.0F;
+        i = 0;
+    
+      label07:
+        if i >= subCategoryCount goto label10;
+        $stack52 = staticinvoke <org.jfree.chart.util.RectangleEdge: boolean isTopOrBottom(org.jfree.chart.util.RectangleEdge)>(edge);
+    
+        if $stack52 == 0 goto label08;
+        $stack63 = (double) i;
+        $stack64 = $stack63 + 0.5;
+        $stack65 = (double) width;
+        $stack66 = $stack64 * $stack65;
+        $stack67 = x0 + $stack66;
+        xx#1 = (float) $stack67;
+        #l3 = (java.awt.geom.Rectangle2D) $stack44;
+        $stack68 = virtualinvoke #l3.<java.awt.geom.Rectangle2D: double getCenterY()>();
+        yy#1 = (float) $stack68;
+    
+        goto label09;
+    
+      label08:
+        #l2 = (java.awt.geom.Rectangle2D) $stack44;
+        $stack53 = virtualinvoke #l2.<java.awt.geom.Rectangle2D: double getCenterX()>();
+        xx#1 = (float) $stack53;
+        $stack54 = (double) i;
+        $stack55 = $stack54 + 0.5;
+        $stack56 = (double) height;
+        $stack57 = $stack55 * $stack56;
+        $stack58 = y0 + $stack57;
+        yy#1 = (float) $stack58;
+    
+      label09:
+        $stack59 = this.<org.jfree.chart.axis.SubCategoryAxis: java.util.List subCategories>;
+        $stack60 = interfaceinvoke $stack59.<java.util.List: java.lang.Object get(int)>(i);
+        label = virtualinvoke $stack60.<java.lang.Object: java.lang.String toString()>();
+        $stack62 = <org.jfree.chart.text.TextAnchor: org.jfree.chart.text.TextAnchor CENTER>;
+        $stack61 = <org.jfree.chart.text.TextAnchor: org.jfree.chart.text.TextAnchor CENTER>;
+        staticinvoke <org.jfree.chart.text.TextUtilities: void drawRotatedString(java.lang.String,java.awt.Graphics2D,float,float,org.jfree.chart.text.TextAnchor,double,org.jfree.chart.text.TextAnchor)>(label, g2, xx#1, yy#1, $stack62, 0.0, $stack61);
+        i = i + 1;
+    
+        goto label07;
+    
+      label10:
+        categoryIndex#0 = categoryIndex#0 + 1;
+    
+        goto label02;
+    
+      label11:
+        $stack32 = <org.jfree.chart.util.RectangleEdge: org.jfree.chart.util.RectangleEdge TOP>;
+        $stack33 = virtualinvoke edge.<org.jfree.chart.util.RectangleEdge: boolean equals(java.lang.Object)>($stack32);
+    
+        if $stack33 == 0 goto label12;
+        categoryIndex#1 = maxdim;
+        virtualinvoke state.<org.jfree.chart.axis.AxisState: void cursorUp(double)>(maxdim);
+    
+        goto label15;
+    
+      label12:
+        $stack34 = <org.jfree.chart.util.RectangleEdge: org.jfree.chart.util.RectangleEdge BOTTOM>;
+        $stack35 = virtualinvoke edge.<org.jfree.chart.util.RectangleEdge: boolean equals(java.lang.Object)>($stack34);
+    
+        if $stack35 == 0 goto label13;
+        categoryIndex#2 = maxdim;
+        virtualinvoke state.<org.jfree.chart.axis.AxisState: void cursorDown(double)>(maxdim);
+    
+        goto label15;
+    
+      label13:
+        $stack36 = <org.jfree.chart.util.RectangleEdge: org.jfree.chart.util.RectangleEdge LEFT>;
+    
+        if edge != $stack36 goto label14;
+        categoryIndex#3 = maxdim;
+        virtualinvoke state.<org.jfree.chart.axis.AxisState: void cursorLeft(double)>(maxdim);
+    
+        goto label15;
+    
+      label14:
+        $stack37 = <org.jfree.chart.util.RectangleEdge: org.jfree.chart.util.RectangleEdge RIGHT>;
+    
+        if edge != $stack37 goto label15;
+        categoryIndex#4 = maxdim;
+        virtualinvoke state.<org.jfree.chart.axis.AxisState: void cursorRight(double)>(maxdim);
+    
+      label15:
+        return state;
+    }
+
+    // ---- method: <org.jfree.chart.axis.SubCategoryAxis: org.jfree.chart.axis.AxisSpace reserveSpace(java.awt.Graphics2D,org.jfree.chart.plot.Plot,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge,org.jfree.chart.axis.AxisSpace)> ----
+    {
+        boolean $stack10, $stack8, $stack9;
+        double maxdim;
+        java.awt.Graphics2D g2;
+        java.awt.geom.Rectangle2D plotArea;
+        org.jfree.chart.axis.AxisSpace $stack11, space#0, space#1;
+        org.jfree.chart.axis.SubCategoryAxis this;
+        org.jfree.chart.plot.Plot plot;
+        org.jfree.chart.util.RectangleEdge edge;
+    
+    
+        this := @this: org.jfree.chart.axis.SubCategoryAxis;
+        g2 := @parameter0: java.awt.Graphics2D;
+        plot := @parameter1: org.jfree.chart.plot.Plot;
+        plotArea := @parameter2: java.awt.geom.Rectangle2D;
+        edge := @parameter3: org.jfree.chart.util.RectangleEdge;
+        space#0 := @parameter4: org.jfree.chart.axis.AxisSpace;
+    
+        if space#0 != null goto label1;
+        $stack11 = new org.jfree.chart.axis.AxisSpace;
+        specialinvoke $stack11.<org.jfree.chart.axis.AxisSpace: void <init>()>();
+        space#0 = $stack11;
+    
+      label1:
+        $stack8 = virtualinvoke this.<org.jfree.chart.axis.SubCategoryAxis: boolean isVisible()>();
+    
+        if $stack8 != 0 goto label2;
+    
+        return space#0;
+    
+      label2:
+        space#1 = specialinvoke this.<org.jfree.chart.axis.CategoryAxis: org.jfree.chart.axis.AxisSpace reserveSpace(java.awt.Graphics2D,org.jfree.chart.plot.Plot,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge,org.jfree.chart.axis.AxisSpace)>(g2, plot, plotArea, edge, space#0);
+        maxdim = specialinvoke this.<org.jfree.chart.axis.SubCategoryAxis: double getMaxDim(java.awt.Graphics2D,org.jfree.chart.util.RectangleEdge)>(g2, edge);
+        $stack9 = staticinvoke <org.jfree.chart.util.RectangleEdge: boolean isTopOrBottom(org.jfree.chart.util.RectangleEdge)>(edge);
+    
+        if $stack9 == 0 goto label3;
+        virtualinvoke space#1.<org.jfree.chart.axis.AxisSpace: void add(double,org.jfree.chart.util.RectangleEdge)>(maxdim, edge);
+    
+        goto label4;
+    
+      label3:
+        $stack10 = staticinvoke <org.jfree.chart.util.RectangleEdge: boolean isLeftOrRight(org.jfree.chart.util.RectangleEdge)>(edge);
+    
+        if $stack10 == 0 goto label4;
+        virtualinvoke space#1.<org.jfree.chart.axis.AxisSpace: void add(double,org.jfree.chart.util.RectangleEdge)>(maxdim, edge);
+    
+      label4:
+        return space#1;
+    }
+
+    // ---- method: <org.jfree.chart.axis.SubCategoryAxis: void writeObject(java.io.ObjectOutputStream)> ----
+    {
+        java.awt.Paint $stack2;
+        java.io.ObjectOutputStream stream;
+        org.jfree.chart.axis.SubCategoryAxis this;
+    
+    
+        this := @this: org.jfree.chart.axis.SubCategoryAxis;
+        stream := @parameter0: java.io.ObjectOutputStream;
+        virtualinvoke stream.<java.io.ObjectOutputStream: void defaultWriteObject()>();
+        $stack2 = this.<org.jfree.chart.axis.SubCategoryAxis: java.awt.Paint subLabelPaint>;
+        staticinvoke <org.jfree.chart.util.SerialUtilities: void writePaint(java.awt.Paint,java.io.ObjectOutputStream)>($stack2, stream);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.axis.SubCategoryAxis: org.jfree.chart.axis.AxisState draw(java.awt.Graphics2D,double,java.awt.geom.Rectangle2D,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge,org.jfree.chart.plot.PlotRenderingInfo)> ----
+    {
+        boolean $stack10, $stack9;
+        double cursor;
+        java.awt.Graphics2D g2;
+        java.awt.geom.Rectangle2D dataArea, plotArea;
+        java.lang.String $stack12;
+        org.jfree.chart.axis.AxisState $stack11, $stack13, state#0, state#1, state#2, state#3;
+        org.jfree.chart.axis.SubCategoryAxis this;
+        org.jfree.chart.plot.PlotRenderingInfo plotState;
+        org.jfree.chart.util.RectangleEdge edge;
+    
+    
+        this := @this: org.jfree.chart.axis.SubCategoryAxis;
+        g2 := @parameter0: java.awt.Graphics2D;
+        cursor := @parameter1: double;
+        plotArea := @parameter2: java.awt.geom.Rectangle2D;
+        dataArea := @parameter3: java.awt.geom.Rectangle2D;
+        edge := @parameter4: org.jfree.chart.util.RectangleEdge;
+        plotState := @parameter5: org.jfree.chart.plot.PlotRenderingInfo;
+        $stack9 = virtualinvoke this.<org.jfree.chart.axis.SubCategoryAxis: boolean isVisible()>();
+    
+        if $stack9 != 0 goto label1;
+        $stack13 = new org.jfree.chart.axis.AxisState;
+        specialinvoke $stack13.<org.jfree.chart.axis.AxisState: void <init>(double)>(cursor);
+    
+        return $stack13;
+    
+      label1:
+        $stack10 = virtualinvoke this.<org.jfree.chart.axis.SubCategoryAxis: boolean isAxisLineVisible()>();
+    
+        if $stack10 == 0 goto label2;
+        virtualinvoke this.<org.jfree.chart.axis.SubCategoryAxis: void drawAxisLine(java.awt.Graphics2D,double,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)>(g2, cursor, dataArea, edge);
+    
+      label2:
+        $stack11 = new org.jfree.chart.axis.AxisState;
+        specialinvoke $stack11.<org.jfree.chart.axis.AxisState: void <init>(double)>(cursor);
+        state#0 = $stack11;
+        state#1 = virtualinvoke this.<org.jfree.chart.axis.SubCategoryAxis: org.jfree.chart.axis.AxisState drawSubCategoryLabels(java.awt.Graphics2D,java.awt.geom.Rectangle2D,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge,org.jfree.chart.axis.AxisState,org.jfree.chart.plot.PlotRenderingInfo)>(g2, plotArea, dataArea, edge, $stack11, plotState);
+        state#2 = virtualinvoke this.<org.jfree.chart.axis.SubCategoryAxis: org.jfree.chart.axis.AxisState drawCategoryLabels(java.awt.Graphics2D,java.awt.geom.Rectangle2D,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge,org.jfree.chart.axis.AxisState,org.jfree.chart.plot.PlotRenderingInfo)>(g2, plotArea, dataArea, edge, state#1, plotState);
+        $stack12 = virtualinvoke this.<org.jfree.chart.axis.SubCategoryAxis: java.lang.String getLabel()>();
+        state#3 = virtualinvoke this.<org.jfree.chart.axis.SubCategoryAxis: org.jfree.chart.axis.AxisState drawLabel(java.lang.String,java.awt.Graphics2D,java.awt.geom.Rectangle2D,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge,org.jfree.chart.axis.AxisState,org.jfree.chart.plot.PlotRenderingInfo)>($stack12, g2, plotArea, dataArea, edge, state#2, plotState);
+    
+        return state#3;
+    }
+
+    // ---- method: <org.jfree.chart.axis.SubCategoryAxis: void readObject(java.io.ObjectInputStream)> ----
+    {
+        java.awt.Paint $stack2;
+        java.io.ObjectInputStream stream;
+        org.jfree.chart.axis.SubCategoryAxis this;
+    
+    
+        this := @this: org.jfree.chart.axis.SubCategoryAxis;
+        stream := @parameter0: java.io.ObjectInputStream;
+        virtualinvoke stream.<java.io.ObjectInputStream: void defaultReadObject()>();
+        $stack2 = staticinvoke <org.jfree.chart.util.SerialUtilities: java.awt.Paint readPaint(java.io.ObjectInputStream)>(stream);
+        this.<org.jfree.chart.axis.SubCategoryAxis: java.awt.Paint subLabelPaint> = $stack2;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.axis.SubCategoryAxis: void setSubLabelFont(java.awt.Font)> ----
+    {
+        java.awt.Font font;
+        java.lang.IllegalArgumentException #l1;
+        java.lang.Object $stack3;
+        java.lang.Throwable #l0;
+        org.jfree.chart.axis.SubCategoryAxis this;
+        org.jfree.chart.event.AxisChangeEvent $stack2;
+    
+    
+        this := @this: org.jfree.chart.axis.SubCategoryAxis;
+        font := @parameter0: java.awt.Font;
+    
+        if font != null goto label1;
+        $stack3 = new java.lang.IllegalArgumentException;
+        #l1 = (java.lang.IllegalArgumentException) $stack3;
+        specialinvoke #l1.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'font\' argument.");
+        #l0 = (java.lang.Throwable) $stack3;
+    
+        throw #l0;
+    
+      label1:
+        this.<org.jfree.chart.axis.SubCategoryAxis: java.awt.Font subLabelFont> = font;
+        $stack2 = new org.jfree.chart.event.AxisChangeEvent;
+        specialinvoke $stack2.<org.jfree.chart.event.AxisChangeEvent: void <init>(org.jfree.chart.axis.Axis)>(this);
+        virtualinvoke this.<org.jfree.chart.axis.SubCategoryAxis: void notifyListeners(org.jfree.chart.event.AxisChangeEvent)>($stack2);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.axis.SubCategoryAxis: double getMaxDim(java.awt.Graphics2D,org.jfree.chart.util.RectangleEdge)> ----
+    {
+        boolean $stack14, $stack16;
+        double dim#0, dim#1, result;
+        java.awt.Font $stack12;
+        java.awt.FontMetrics fm;
+        java.awt.Graphics2D g2;
+        java.awt.geom.Rectangle2D bounds;
+        java.lang.Comparable subcategory;
+        java.lang.Object $stack15;
+        java.lang.String label;
+        java.util.Iterator iterator;
+        java.util.List $stack13;
+        org.jfree.chart.axis.SubCategoryAxis this;
+        org.jfree.chart.util.RectangleEdge edge;
+    
+    
+        this := @this: org.jfree.chart.axis.SubCategoryAxis;
+        g2 := @parameter0: java.awt.Graphics2D;
+        edge := @parameter1: org.jfree.chart.util.RectangleEdge;
+        result = 0.0;
+        $stack12 = this.<org.jfree.chart.axis.SubCategoryAxis: java.awt.Font subLabelFont>;
+        virtualinvoke g2.<java.awt.Graphics2D: void setFont(java.awt.Font)>($stack12);
+        fm = virtualinvoke g2.<java.awt.Graphics2D: java.awt.FontMetrics getFontMetrics()>();
+        $stack13 = this.<org.jfree.chart.axis.SubCategoryAxis: java.util.List subCategories>;
+        iterator = interfaceinvoke $stack13.<java.util.List: java.util.Iterator iterator()>();
+    
+      label1:
+        $stack14 = interfaceinvoke iterator.<java.util.Iterator: boolean hasNext()>();
+    
+        if $stack14 == 0 goto label4;
+        $stack15 = interfaceinvoke iterator.<java.util.Iterator: java.lang.Object next()>();
+        subcategory = (java.lang.Comparable) $stack15;
+        label = virtualinvoke subcategory.<java.lang.Object: java.lang.String toString()>();
+        bounds = staticinvoke <org.jfree.chart.text.TextUtilities: java.awt.geom.Rectangle2D getTextBounds(java.lang.String,java.awt.Graphics2D,java.awt.FontMetrics)>(label, g2, fm);
+        dim#0 = 0.0;
+        $stack16 = staticinvoke <org.jfree.chart.util.RectangleEdge: boolean isLeftOrRight(org.jfree.chart.util.RectangleEdge)>(edge);
+    
+        if $stack16 == 0 goto label2;
+        dim#1 = virtualinvoke bounds.<java.awt.geom.Rectangle2D: double getWidth()>();
+    
+        goto label3;
+    
+      label2:
+        dim#1 = virtualinvoke bounds.<java.awt.geom.Rectangle2D: double getHeight()>();
+    
+      label3:
+        result = staticinvoke <java.lang.Math: double max(double,double)>(result, dim#1);
+    
+        goto label1;
+    
+      label4:
+        return result;
+    }
+
+    // ---- method: <org.jfree.chart.axis.SubCategoryAxis: java.awt.Font getSubLabelFont()> ----
+    {
+        java.awt.Font $stack1;
+        org.jfree.chart.axis.SubCategoryAxis this;
+    
+    
+        this := @this: org.jfree.chart.axis.SubCategoryAxis;
+        $stack1 = this.<org.jfree.chart.axis.SubCategoryAxis: java.awt.Font subLabelFont>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.axis.SubCategoryAxis: boolean equals(java.lang.Object)> ----
+    {
+        boolean $stack10, $stack13, $stack3, $stack4, $stack7;
+        java.awt.Font $stack8, $stack9;
+        java.awt.Paint $stack11, $stack12;
+        java.lang.Object obj;
+        java.util.List $stack5, $stack6;
+        org.jfree.chart.axis.SubCategoryAxis axis, this;
+    
+    
+        this := @this: org.jfree.chart.axis.SubCategoryAxis;
+        obj := @parameter0: java.lang.Object;
+    
+        if obj != this goto label1;
+    
+        return 1;
+    
+      label1:
+        $stack3 = obj instanceof org.jfree.chart.axis.SubCategoryAxis;
+    
+        if $stack3 == 0 goto label4;
+        $stack4 = specialinvoke this.<org.jfree.chart.axis.CategoryAxis: boolean equals(java.lang.Object)>(obj);
+    
+        if $stack4 == 0 goto label4;
+        axis = (org.jfree.chart.axis.SubCategoryAxis) obj;
+        $stack6 = this.<org.jfree.chart.axis.SubCategoryAxis: java.util.List subCategories>;
+        $stack5 = axis.<org.jfree.chart.axis.SubCategoryAxis: java.util.List subCategories>;
+        $stack7 = interfaceinvoke $stack6.<java.util.List: boolean equals(java.lang.Object)>($stack5);
+    
+        if $stack7 != 0 goto label2;
+    
+        return 0;
+    
+      label2:
+        $stack9 = this.<org.jfree.chart.axis.SubCategoryAxis: java.awt.Font subLabelFont>;
+        $stack8 = axis.<org.jfree.chart.axis.SubCategoryAxis: java.awt.Font subLabelFont>;
+        $stack10 = virtualinvoke $stack9.<java.awt.Font: boolean equals(java.lang.Object)>($stack8);
+    
+        if $stack10 != 0 goto label3;
+    
+        return 0;
+    
+      label3:
+        $stack12 = this.<org.jfree.chart.axis.SubCategoryAxis: java.awt.Paint subLabelPaint>;
+        $stack11 = axis.<org.jfree.chart.axis.SubCategoryAxis: java.awt.Paint subLabelPaint>;
+        $stack13 = virtualinvoke $stack12.<java.lang.Object: boolean equals(java.lang.Object)>($stack11);
+    
+        if $stack13 != 0 goto label5;
+    
+        return 0;
+    
+      label4:
+        return 0;
+    
+      label5:
+        return 1;
+    }
+
+    // ---- method: <org.jfree.chart.axis.SubCategoryAxis: java.awt.Paint getSubLabelPaint()> ----
+    {
+        java.awt.Paint $stack1;
+        org.jfree.chart.axis.SubCategoryAxis this;
+    
+    
+        this := @this: org.jfree.chart.axis.SubCategoryAxis;
+        $stack1 = this.<org.jfree.chart.axis.SubCategoryAxis: java.awt.Paint subLabelPaint>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.axis.SubCategoryAxis: void <init>(java.lang.String)> ----
+    {
+        java.awt.Font $stack2;
+        java.lang.Object $stack3, $stack4;
+        java.lang.String label;
+        java.util.ArrayList #l0;
+        org.jfree.chart.axis.SubCategoryAxis this;
+    
+    
+        this := @this: org.jfree.chart.axis.SubCategoryAxis;
+        label := @parameter0: java.lang.String;
+        specialinvoke this.<org.jfree.chart.axis.CategoryAxis: void <init>(java.lang.String)>(label);
+        $stack2 = new java.awt.Font;
+        specialinvoke $stack2.<java.awt.Font: void <init>(java.lang.String,int,int)>("SansSerif", 0, 10);
+        this.<org.jfree.chart.axis.SubCategoryAxis: java.awt.Font subLabelFont> = $stack2;
+        $stack3 = <java.awt.Color: java.awt.Color black>;
+        this.<org.jfree.chart.axis.SubCategoryAxis: java.awt.Paint subLabelPaint> = (java.awt.Paint) $stack3;
+        $stack4 = new java.util.ArrayList;
+        #l0 = (java.util.ArrayList) $stack4;
+        specialinvoke #l0.<java.util.ArrayList: void <init>()>();
+        this.<org.jfree.chart.axis.SubCategoryAxis: java.util.List subCategories> = (java.util.List) $stack4;
+    
+        return;
+    }
+
+}

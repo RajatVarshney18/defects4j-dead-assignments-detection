@@ -1,0 +1,300 @@
+// ========================================================================
+// CLASS : org.jfree.data.statistics.Regression
+// ========================================================================
+
+[PUBLIC, SUPER, ABSTRACT] class org.jfree.data.statistics.Regression extends java.lang.Object {
+
+    // ---- method: <org.jfree.data.statistics.Regression: double[] getPowerRegression(org.jfree.data.xy.XYDataset,int)> ----
+    {
+        double $stack20, $stack21, $stack22, $stack23, $stack24, $stack25, $stack26, $stack27, $stack28, $stack29, $stack30, $stack31, $stack32, $stack33, $stack34, $stack35, i#1, sumX, sumXX, sumXY, sumY, sxy, x, xbar, xx, xy, y, ybar;
+        double[] result;
+        int i#0, n, series;
+        java.lang.IllegalArgumentException #l1;
+        java.lang.Object $stack36;
+        java.lang.Throwable #l0;
+        org.jfree.data.xy.XYDataset data;
+    
+    
+        data := @parameter0: org.jfree.data.xy.XYDataset;
+        series := @parameter1: int;
+        n = interfaceinvoke data.<org.jfree.data.xy.XYDataset: int getItemCount(int)>(series);
+    
+        if n >= 2 goto label1;
+        $stack36 = new java.lang.IllegalArgumentException;
+        #l1 = (java.lang.IllegalArgumentException) $stack36;
+        specialinvoke #l1.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Not enough data.");
+        #l0 = (java.lang.Throwable) $stack36;
+    
+        throw #l0;
+    
+      label1:
+        sumX = 0.0;
+        sumY = 0.0;
+        sumXX = 0.0;
+        sumXY = 0.0;
+        i#0 = 0;
+    
+      label2:
+        if i#0 >= n goto label3;
+        $stack34 = interfaceinvoke data.<org.jfree.data.xy.XYDataset: double getXValue(int,int)>(series, i#0);
+        x = staticinvoke <java.lang.Math: double log(double)>($stack34);
+        $stack35 = interfaceinvoke data.<org.jfree.data.xy.XYDataset: double getYValue(int,int)>(series, i#0);
+        y = staticinvoke <java.lang.Math: double log(double)>($stack35);
+        sumX = sumX + x;
+        sumY = sumY + y;
+        xx = x * x;
+        sumXX = sumXX + xx;
+        xy = x * y;
+        sumXY = sumXY + xy;
+        i#0 = i#0 + 1;
+    
+        goto label2;
+    
+      label3:
+        $stack20 = sumX * sumX;
+        $stack21 = (double) n;
+        $stack22 = $stack20 / $stack21;
+        i#1 = sumXX - $stack22;
+        $stack23 = sumX * sumY;
+        $stack24 = (double) n;
+        $stack25 = $stack23 / $stack24;
+        sxy = sumXY - $stack25;
+        $stack26 = (double) n;
+        xbar = sumX / $stack26;
+        $stack27 = (double) n;
+        ybar = sumY / $stack27;
+        result = newarray (double)[2];
+        $stack28 = sxy / i#1;
+        result[1] = $stack28;
+        $stack32 = staticinvoke <java.lang.Math: double exp(double)>(1.0);
+        $stack29 = result[1];
+        $stack30 = $stack29 * xbar;
+        $stack31 = ybar - $stack30;
+        $stack33 = staticinvoke <java.lang.Math: double pow(double,double)>($stack32, $stack31);
+        result[0] = $stack33;
+    
+        return result;
+    }
+
+    // ---- method: <org.jfree.data.statistics.Regression: double[] getOLSRegression(double[][])> ----
+    {
+        double $stack19, $stack20, $stack21, $stack22, $stack23, $stack24, $stack25, $stack26, $stack27, $stack28, $stack29, $stack30, i#1, sumX, sumXX, sumXY, sumY, sxy, x, xbar, xx, xy, y, ybar;
+        double[] $stack31, $stack32, result;
+        double[][] data;
+        int i#0, n;
+        java.lang.IllegalArgumentException #l1;
+        java.lang.Object $stack33;
+        java.lang.Throwable #l0;
+    
+    
+        data := @parameter0: double[][];
+        n = lengthof data;
+    
+        if n >= 2 goto label1;
+        $stack33 = new java.lang.IllegalArgumentException;
+        #l1 = (java.lang.IllegalArgumentException) $stack33;
+        specialinvoke #l1.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Not enough data.");
+        #l0 = (java.lang.Throwable) $stack33;
+    
+        throw #l0;
+    
+      label1:
+        sumX = 0.0;
+        sumY = 0.0;
+        sumXX = 0.0;
+        sumXY = 0.0;
+        i#0 = 0;
+    
+      label2:
+        if i#0 >= n goto label3;
+        $stack31 = data[i#0];
+        x = $stack31[0];
+        $stack32 = data[i#0];
+        y = $stack32[1];
+        sumX = sumX + x;
+        sumY = sumY + y;
+        xx = x * x;
+        sumXX = sumXX + xx;
+        xy = x * y;
+        sumXY = sumXY + xy;
+        i#0 = i#0 + 1;
+    
+        goto label2;
+    
+      label3:
+        $stack19 = sumX * sumX;
+        $stack20 = (double) n;
+        $stack21 = $stack19 / $stack20;
+        i#1 = sumXX - $stack21;
+        $stack22 = sumX * sumY;
+        $stack23 = (double) n;
+        $stack24 = $stack22 / $stack23;
+        sxy = sumXY - $stack24;
+        $stack25 = (double) n;
+        xbar = sumX / $stack25;
+        $stack26 = (double) n;
+        ybar = sumY / $stack26;
+        result = newarray (double)[2];
+        $stack27 = sxy / i#1;
+        result[1] = $stack27;
+        $stack28 = result[1];
+        $stack29 = $stack28 * xbar;
+        $stack30 = ybar - $stack29;
+        result[0] = $stack30;
+    
+        return result;
+    }
+
+    // ---- method: <org.jfree.data.statistics.Regression: void <init>()> ----
+    {
+        org.jfree.data.statistics.Regression this;
+    
+    
+        this := @this: org.jfree.data.statistics.Regression;
+        specialinvoke this.<java.lang.Object: void <init>()>();
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.statistics.Regression: double[] getOLSRegression(org.jfree.data.xy.XYDataset,int)> ----
+    {
+        double $stack20, $stack21, $stack22, $stack23, $stack24, $stack25, $stack26, $stack27, $stack28, $stack29, $stack30, $stack31, i#1, sumX, sumXX, sumXY, sumY, sxy, x, xbar, xx, xy, y, ybar;
+        double[] result;
+        int i#0, n, series;
+        java.lang.IllegalArgumentException #l1;
+        java.lang.Object $stack32;
+        java.lang.Throwable #l0;
+        org.jfree.data.xy.XYDataset data;
+    
+    
+        data := @parameter0: org.jfree.data.xy.XYDataset;
+        series := @parameter1: int;
+        n = interfaceinvoke data.<org.jfree.data.xy.XYDataset: int getItemCount(int)>(series);
+    
+        if n >= 2 goto label1;
+        $stack32 = new java.lang.IllegalArgumentException;
+        #l1 = (java.lang.IllegalArgumentException) $stack32;
+        specialinvoke #l1.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Not enough data.");
+        #l0 = (java.lang.Throwable) $stack32;
+    
+        throw #l0;
+    
+      label1:
+        sumX = 0.0;
+        sumY = 0.0;
+        sumXX = 0.0;
+        sumXY = 0.0;
+        i#0 = 0;
+    
+      label2:
+        if i#0 >= n goto label3;
+        x = interfaceinvoke data.<org.jfree.data.xy.XYDataset: double getXValue(int,int)>(series, i#0);
+        y = interfaceinvoke data.<org.jfree.data.xy.XYDataset: double getYValue(int,int)>(series, i#0);
+        sumX = sumX + x;
+        sumY = sumY + y;
+        xx = x * x;
+        sumXX = sumXX + xx;
+        xy = x * y;
+        sumXY = sumXY + xy;
+        i#0 = i#0 + 1;
+    
+        goto label2;
+    
+      label3:
+        $stack20 = sumX * sumX;
+        $stack21 = (double) n;
+        $stack22 = $stack20 / $stack21;
+        i#1 = sumXX - $stack22;
+        $stack23 = sumX * sumY;
+        $stack24 = (double) n;
+        $stack25 = $stack23 / $stack24;
+        sxy = sumXY - $stack25;
+        $stack26 = (double) n;
+        xbar = sumX / $stack26;
+        $stack27 = (double) n;
+        ybar = sumY / $stack27;
+        result = newarray (double)[2];
+        $stack28 = sxy / i#1;
+        result[1] = $stack28;
+        $stack29 = result[1];
+        $stack30 = $stack29 * xbar;
+        $stack31 = ybar - $stack30;
+        result[0] = $stack31;
+    
+        return result;
+    }
+
+    // ---- method: <org.jfree.data.statistics.Regression: double[] getPowerRegression(double[][])> ----
+    {
+        double $stack19, $stack20, $stack21, $stack22, $stack23, $stack24, $stack25, $stack26, $stack27, $stack28, $stack29, $stack30, $stack31, $stack32, $stack34, $stack36, i#1, sumX, sumXX, sumXY, sumY, sxy, x, xbar, xx, xy, y, ybar;
+        double[] $stack33, $stack35, result;
+        double[][] data;
+        int i#0, n;
+        java.lang.IllegalArgumentException #l1;
+        java.lang.Object $stack37;
+        java.lang.Throwable #l0;
+    
+    
+        data := @parameter0: double[][];
+        n = lengthof data;
+    
+        if n >= 2 goto label1;
+        $stack37 = new java.lang.IllegalArgumentException;
+        #l1 = (java.lang.IllegalArgumentException) $stack37;
+        specialinvoke #l1.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Not enough data.");
+        #l0 = (java.lang.Throwable) $stack37;
+    
+        throw #l0;
+    
+      label1:
+        sumX = 0.0;
+        sumY = 0.0;
+        sumXX = 0.0;
+        sumXY = 0.0;
+        i#0 = 0;
+    
+      label2:
+        if i#0 >= n goto label3;
+        $stack33 = data[i#0];
+        $stack34 = $stack33[0];
+        x = staticinvoke <java.lang.Math: double log(double)>($stack34);
+        $stack35 = data[i#0];
+        $stack36 = $stack35[1];
+        y = staticinvoke <java.lang.Math: double log(double)>($stack36);
+        sumX = sumX + x;
+        sumY = sumY + y;
+        xx = x * x;
+        sumXX = sumXX + xx;
+        xy = x * y;
+        sumXY = sumXY + xy;
+        i#0 = i#0 + 1;
+    
+        goto label2;
+    
+      label3:
+        $stack19 = sumX * sumX;
+        $stack20 = (double) n;
+        $stack21 = $stack19 / $stack20;
+        i#1 = sumXX - $stack21;
+        $stack22 = sumX * sumY;
+        $stack23 = (double) n;
+        $stack24 = $stack22 / $stack23;
+        sxy = sumXY - $stack24;
+        $stack25 = (double) n;
+        xbar = sumX / $stack25;
+        $stack26 = (double) n;
+        ybar = sumY / $stack26;
+        result = newarray (double)[2];
+        $stack27 = sxy / i#1;
+        result[1] = $stack27;
+        $stack31 = staticinvoke <java.lang.Math: double exp(double)>(1.0);
+        $stack28 = result[1];
+        $stack29 = $stack28 * xbar;
+        $stack30 = ybar - $stack29;
+        $stack32 = staticinvoke <java.lang.Math: double pow(double,double)>($stack31, $stack30);
+        result[0] = $stack32;
+    
+        return result;
+    }
+
+}

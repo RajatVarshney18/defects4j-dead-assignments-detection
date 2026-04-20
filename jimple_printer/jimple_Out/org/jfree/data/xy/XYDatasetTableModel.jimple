@@ -1,0 +1,204 @@
+// ========================================================================
+// CLASS : org.jfree.data.xy.XYDatasetTableModel
+// ========================================================================
+
+[PUBLIC, SUPER] class org.jfree.data.xy.XYDatasetTableModel extends javax.swing.table.AbstractTableModel implements org.jfree.data.general.DatasetChangeListener, javax.swing.table.TableModel {
+
+    // ---- method: <org.jfree.data.xy.XYDatasetTableModel: boolean isCellEditable(int,int)> ----
+    {
+        int column, row;
+        org.jfree.data.xy.XYDatasetTableModel this;
+    
+    
+        this := @this: org.jfree.data.xy.XYDatasetTableModel;
+        row := @parameter0: int;
+        column := @parameter1: int;
+    
+        return 0;
+    }
+
+    // ---- method: <org.jfree.data.xy.XYDatasetTableModel: void setValueAt(java.lang.Object,int,int)> ----
+    {
+        boolean $stack4;
+        int column, row;
+        java.lang.Object value;
+        org.jfree.data.xy.XYDatasetTableModel this;
+    
+    
+        this := @this: org.jfree.data.xy.XYDatasetTableModel;
+        value := @parameter0: java.lang.Object;
+        row := @parameter1: int;
+        column := @parameter2: int;
+        $stack4 = virtualinvoke this.<org.jfree.data.xy.XYDatasetTableModel: boolean isCellEditable(int,int)>(row, column);
+    
+        if $stack4 == 0 goto label1;
+    
+      label1:
+        return;
+    }
+
+    // ---- method: <org.jfree.data.xy.XYDatasetTableModel: void <init>(org.jfree.data.xy.TableXYDataset)> ----
+    {
+        org.jfree.data.xy.TableXYDataset $stack2, dataset;
+        org.jfree.data.xy.XYDatasetTableModel this;
+    
+    
+        this := @this: org.jfree.data.xy.XYDatasetTableModel;
+        dataset := @parameter0: org.jfree.data.xy.TableXYDataset;
+        specialinvoke this.<org.jfree.data.xy.XYDatasetTableModel: void <init>()>();
+        this.<org.jfree.data.xy.XYDatasetTableModel: org.jfree.data.xy.TableXYDataset model> = dataset;
+        $stack2 = this.<org.jfree.data.xy.XYDatasetTableModel: org.jfree.data.xy.TableXYDataset model>;
+        interfaceinvoke $stack2.<org.jfree.data.xy.TableXYDataset: void addChangeListener(org.jfree.data.general.DatasetChangeListener)>(this);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.xy.XYDatasetTableModel: int getColumnCount()> ----
+    {
+        int $stack3, $stack4;
+        org.jfree.data.xy.TableXYDataset $stack1, $stack2;
+        org.jfree.data.xy.XYDatasetTableModel this;
+    
+    
+        this := @this: org.jfree.data.xy.XYDatasetTableModel;
+        $stack1 = this.<org.jfree.data.xy.XYDatasetTableModel: org.jfree.data.xy.TableXYDataset model>;
+    
+        if $stack1 != null goto label1;
+    
+        return 0;
+    
+      label1:
+        $stack2 = this.<org.jfree.data.xy.XYDatasetTableModel: org.jfree.data.xy.TableXYDataset model>;
+        $stack3 = interfaceinvoke $stack2.<org.jfree.data.xy.TableXYDataset: int getSeriesCount()>();
+        $stack4 = $stack3 + 1;
+    
+        return $stack4;
+    }
+
+    // ---- method: <org.jfree.data.xy.XYDatasetTableModel: java.lang.Object getValueAt(int,int)> ----
+    {
+        int $stack4, column, row;
+        java.lang.Number $stack6, $stack8;
+        org.jfree.data.xy.TableXYDataset $stack3, $stack5, $stack7;
+        org.jfree.data.xy.XYDatasetTableModel this;
+    
+    
+        this := @this: org.jfree.data.xy.XYDatasetTableModel;
+        row := @parameter0: int;
+        column := @parameter1: int;
+        $stack3 = this.<org.jfree.data.xy.XYDatasetTableModel: org.jfree.data.xy.TableXYDataset model>;
+    
+        if $stack3 != null goto label1;
+    
+        return null;
+    
+      label1:
+        if column >= 1 goto label2;
+        $stack7 = this.<org.jfree.data.xy.XYDatasetTableModel: org.jfree.data.xy.TableXYDataset model>;
+        $stack8 = interfaceinvoke $stack7.<org.jfree.data.xy.TableXYDataset: java.lang.Number getX(int,int)>(0, row);
+    
+        return $stack8;
+    
+      label2:
+        $stack5 = this.<org.jfree.data.xy.XYDatasetTableModel: org.jfree.data.xy.TableXYDataset model>;
+        $stack4 = column - 1;
+        $stack6 = interfaceinvoke $stack5.<org.jfree.data.xy.TableXYDataset: java.lang.Number getY(int,int)>($stack4, row);
+    
+        return $stack6;
+    }
+
+    // ---- method: <org.jfree.data.xy.XYDatasetTableModel: java.lang.String getColumnName(int)> ----
+    {
+        int $stack3, column;
+        java.lang.Comparable $stack5;
+        java.lang.String $stack6, $stack7;
+        org.jfree.data.xy.TableXYDataset $stack2, $stack4;
+        org.jfree.data.xy.XYDatasetTableModel this;
+    
+    
+        this := @this: org.jfree.data.xy.XYDatasetTableModel;
+        column := @parameter0: int;
+        $stack2 = this.<org.jfree.data.xy.XYDatasetTableModel: org.jfree.data.xy.TableXYDataset model>;
+    
+        if $stack2 != null goto label1;
+        $stack7 = specialinvoke this.<javax.swing.table.AbstractTableModel: java.lang.String getColumnName(int)>(column);
+    
+        return $stack7;
+    
+      label1:
+        if column >= 1 goto label2;
+    
+        return "X Value";
+    
+      label2:
+        $stack4 = this.<org.jfree.data.xy.XYDatasetTableModel: org.jfree.data.xy.TableXYDataset model>;
+        $stack3 = column - 1;
+        $stack5 = interfaceinvoke $stack4.<org.jfree.data.xy.TableXYDataset: java.lang.Comparable getSeriesKey(int)>($stack3);
+        $stack6 = virtualinvoke $stack5.<java.lang.Object: java.lang.String toString()>();
+    
+        return $stack6;
+    }
+
+    // ---- method: <org.jfree.data.xy.XYDatasetTableModel: int getRowCount()> ----
+    {
+        int $stack3;
+        org.jfree.data.xy.TableXYDataset $stack1, $stack2;
+        org.jfree.data.xy.XYDatasetTableModel this;
+    
+    
+        this := @this: org.jfree.data.xy.XYDatasetTableModel;
+        $stack1 = this.<org.jfree.data.xy.XYDatasetTableModel: org.jfree.data.xy.TableXYDataset model>;
+    
+        if $stack1 != null goto label1;
+    
+        return 0;
+    
+      label1:
+        $stack2 = this.<org.jfree.data.xy.XYDatasetTableModel: org.jfree.data.xy.TableXYDataset model>;
+        $stack3 = interfaceinvoke $stack2.<org.jfree.data.xy.TableXYDataset: int getItemCount()>();
+    
+        return $stack3;
+    }
+
+    // ---- method: <org.jfree.data.xy.XYDatasetTableModel: void datasetChanged(org.jfree.data.general.DatasetChangeEvent)> ----
+    {
+        org.jfree.data.general.DatasetChangeEvent event;
+        org.jfree.data.xy.XYDatasetTableModel this;
+    
+    
+        this := @this: org.jfree.data.xy.XYDatasetTableModel;
+        event := @parameter0: org.jfree.data.general.DatasetChangeEvent;
+        virtualinvoke this.<org.jfree.data.xy.XYDatasetTableModel: void fireTableDataChanged()>();
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.xy.XYDatasetTableModel: void <init>()> ----
+    {
+        org.jfree.data.xy.XYDatasetTableModel this;
+    
+    
+        this := @this: org.jfree.data.xy.XYDatasetTableModel;
+        specialinvoke this.<javax.swing.table.AbstractTableModel: void <init>()>();
+        this.<org.jfree.data.xy.XYDatasetTableModel: org.jfree.data.xy.TableXYDataset model> = null;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.xy.XYDatasetTableModel: void setModel(org.jfree.data.xy.TableXYDataset)> ----
+    {
+        org.jfree.data.xy.TableXYDataset $stack2, dataset;
+        org.jfree.data.xy.XYDatasetTableModel this;
+    
+    
+        this := @this: org.jfree.data.xy.XYDatasetTableModel;
+        dataset := @parameter0: org.jfree.data.xy.TableXYDataset;
+        this.<org.jfree.data.xy.XYDatasetTableModel: org.jfree.data.xy.TableXYDataset model> = dataset;
+        $stack2 = this.<org.jfree.data.xy.XYDatasetTableModel: org.jfree.data.xy.TableXYDataset model>;
+        interfaceinvoke $stack2.<org.jfree.data.xy.TableXYDataset: void addChangeListener(org.jfree.data.general.DatasetChangeListener)>(this);
+        virtualinvoke this.<org.jfree.data.xy.XYDatasetTableModel: void fireTableDataChanged()>();
+    
+        return;
+    }
+
+}

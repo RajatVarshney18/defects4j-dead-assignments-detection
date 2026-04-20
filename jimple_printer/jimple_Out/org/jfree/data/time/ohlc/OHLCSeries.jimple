@@ -1,0 +1,99 @@
+// ========================================================================
+// CLASS : org.jfree.data.time.ohlc.OHLCSeries
+// ========================================================================
+
+[PUBLIC, SUPER] class org.jfree.data.time.ohlc.OHLCSeries extends org.jfree.data.ComparableObjectSeries {
+
+    // ---- method: <org.jfree.data.time.ohlc.OHLCSeries: org.jfree.data.ComparableObjectItem getDataItem(int)> ----
+    {
+        int index;
+        org.jfree.data.ComparableObjectItem $stack2;
+        org.jfree.data.time.ohlc.OHLCSeries this;
+    
+    
+        this := @this: org.jfree.data.time.ohlc.OHLCSeries;
+        index := @parameter0: int;
+        $stack2 = specialinvoke this.<org.jfree.data.ComparableObjectSeries: org.jfree.data.ComparableObjectItem getDataItem(int)>(index);
+    
+        return $stack2;
+    }
+
+    // ---- method: <org.jfree.data.time.ohlc.OHLCSeries: void <init>(java.lang.Comparable)> ----
+    {
+        java.lang.Comparable key;
+        org.jfree.data.time.ohlc.OHLCSeries this;
+    
+    
+        this := @this: org.jfree.data.time.ohlc.OHLCSeries;
+        key := @parameter0: java.lang.Comparable;
+        specialinvoke this.<org.jfree.data.ComparableObjectSeries: void <init>(java.lang.Comparable,boolean,boolean)>(key, 1, 0);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.time.ohlc.OHLCSeries: org.jfree.data.time.RegularTimePeriod getPeriod(int)> ----
+    {
+        int index;
+        org.jfree.data.ComparableObjectItem $stack3;
+        org.jfree.data.time.RegularTimePeriod $stack4;
+        org.jfree.data.time.ohlc.OHLCItem item;
+        org.jfree.data.time.ohlc.OHLCSeries this;
+    
+    
+        this := @this: org.jfree.data.time.ohlc.OHLCSeries;
+        index := @parameter0: int;
+        $stack3 = virtualinvoke this.<org.jfree.data.time.ohlc.OHLCSeries: org.jfree.data.ComparableObjectItem getDataItem(int)>(index);
+        item = (org.jfree.data.time.ohlc.OHLCItem) $stack3;
+        $stack4 = virtualinvoke item.<org.jfree.data.time.ohlc.OHLCItem: org.jfree.data.time.RegularTimePeriod getPeriod()>();
+    
+        return $stack4;
+    }
+
+    // ---- method: <org.jfree.data.time.ohlc.OHLCSeries: void add(org.jfree.data.time.RegularTimePeriod,double,double,double,double)> ----
+    {
+        boolean $stack17;
+        double close, high, low, open;
+        int $stack11;
+        java.lang.Class $stack15, $stack16;
+        java.lang.IllegalArgumentException #l1;
+        java.lang.Object $stack18;
+        java.lang.Throwable #l0;
+        org.jfree.data.ComparableObjectItem $stack13;
+        org.jfree.data.time.RegularTimePeriod $stack14, period;
+        org.jfree.data.time.ohlc.OHLCItem $stack12, item0;
+        org.jfree.data.time.ohlc.OHLCSeries this;
+    
+    
+        this := @this: org.jfree.data.time.ohlc.OHLCSeries;
+        period := @parameter0: org.jfree.data.time.RegularTimePeriod;
+        open := @parameter1: double;
+        high := @parameter2: double;
+        low := @parameter3: double;
+        close := @parameter4: double;
+        $stack11 = virtualinvoke this.<org.jfree.data.time.ohlc.OHLCSeries: int getItemCount()>();
+    
+        if $stack11 <= 0 goto label1;
+        $stack13 = virtualinvoke this.<org.jfree.data.time.ohlc.OHLCSeries: org.jfree.data.ComparableObjectItem getDataItem(int)>(0);
+        item0 = (org.jfree.data.time.ohlc.OHLCItem) $stack13;
+        $stack16 = virtualinvoke period.<java.lang.Object: java.lang.Class getClass()>();
+        $stack14 = virtualinvoke item0.<org.jfree.data.time.ohlc.OHLCItem: org.jfree.data.time.RegularTimePeriod getPeriod()>();
+        $stack15 = virtualinvoke $stack14.<java.lang.Object: java.lang.Class getClass()>();
+        $stack17 = virtualinvoke $stack16.<java.lang.Object: boolean equals(java.lang.Object)>($stack15);
+    
+        if $stack17 != 0 goto label1;
+        $stack18 = new java.lang.IllegalArgumentException;
+        #l1 = (java.lang.IllegalArgumentException) $stack18;
+        specialinvoke #l1.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Can\'t mix RegularTimePeriod class types.");
+        #l0 = (java.lang.Throwable) $stack18;
+    
+        throw #l0;
+    
+      label1:
+        $stack12 = new org.jfree.data.time.ohlc.OHLCItem;
+        specialinvoke $stack12.<org.jfree.data.time.ohlc.OHLCItem: void <init>(org.jfree.data.time.RegularTimePeriod,double,double,double,double)>(period, open, high, low, close);
+        specialinvoke this.<org.jfree.data.ComparableObjectSeries: void add(org.jfree.data.ComparableObjectItem,boolean)>($stack12, 1);
+    
+        return;
+    }
+
+}

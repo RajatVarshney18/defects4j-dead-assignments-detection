@@ -1,0 +1,1169 @@
+// ========================================================================
+// CLASS : org.jfree.chart.renderer.category.BoxAndWhiskerRenderer
+// ========================================================================
+
+[PUBLIC, SUPER] class org.jfree.chart.renderer.category.BoxAndWhiskerRenderer extends org.jfree.chart.renderer.category.AbstractCategoryItemRenderer implements org.jfree.chart.util.PublicCloneable, java.lang.Cloneable, java.io.Serializable {
+
+    // ---- method: <org.jfree.chart.renderer.category.BoxAndWhiskerRenderer: void drawItem(java.awt.Graphics2D,org.jfree.chart.renderer.category.CategoryItemRendererState,java.awt.geom.Rectangle2D,org.jfree.chart.plot.CategoryPlot,org.jfree.chart.axis.CategoryAxis,org.jfree.chart.axis.ValueAxis,org.jfree.data.category.CategoryDataset,int,int,int)> ----
+    {
+        boolean $stack12;
+        int column, pass, row;
+        java.awt.Graphics2D g2;
+        java.awt.geom.Rectangle2D dataArea;
+        java.lang.IllegalArgumentException #l1;
+        java.lang.Object $stack15;
+        java.lang.Throwable #l0;
+        org.jfree.chart.axis.CategoryAxis domainAxis;
+        org.jfree.chart.axis.ValueAxis rangeAxis;
+        org.jfree.chart.plot.CategoryPlot plot;
+        org.jfree.chart.plot.PlotOrientation $stack13, $stack14, orientation;
+        org.jfree.chart.renderer.category.BoxAndWhiskerRenderer this;
+        org.jfree.chart.renderer.category.CategoryItemRendererState state;
+        org.jfree.data.category.CategoryDataset dataset;
+    
+    
+        this := @this: org.jfree.chart.renderer.category.BoxAndWhiskerRenderer;
+        g2 := @parameter0: java.awt.Graphics2D;
+        state := @parameter1: org.jfree.chart.renderer.category.CategoryItemRendererState;
+        dataArea := @parameter2: java.awt.geom.Rectangle2D;
+        plot := @parameter3: org.jfree.chart.plot.CategoryPlot;
+        domainAxis := @parameter4: org.jfree.chart.axis.CategoryAxis;
+        rangeAxis := @parameter5: org.jfree.chart.axis.ValueAxis;
+        dataset := @parameter6: org.jfree.data.category.CategoryDataset;
+        row := @parameter7: int;
+        column := @parameter8: int;
+        pass := @parameter9: int;
+        $stack12 = dataset instanceof org.jfree.data.statistics.BoxAndWhiskerCategoryDataset;
+    
+        if $stack12 != 0 goto label1;
+        $stack15 = new java.lang.IllegalArgumentException;
+        #l1 = (java.lang.IllegalArgumentException) $stack15;
+        specialinvoke #l1.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("BoxAndWhiskerRenderer.drawItem() : the data should be of type BoxAndWhiskerCategoryDataset only.");
+        #l0 = (java.lang.Throwable) $stack15;
+    
+        throw #l0;
+    
+      label1:
+        orientation = virtualinvoke plot.<org.jfree.chart.plot.CategoryPlot: org.jfree.chart.plot.PlotOrientation getOrientation()>();
+        $stack13 = <org.jfree.chart.plot.PlotOrientation: org.jfree.chart.plot.PlotOrientation HORIZONTAL>;
+    
+        if orientation != $stack13 goto label2;
+        virtualinvoke this.<org.jfree.chart.renderer.category.BoxAndWhiskerRenderer: void drawHorizontalItem(java.awt.Graphics2D,org.jfree.chart.renderer.category.CategoryItemRendererState,java.awt.geom.Rectangle2D,org.jfree.chart.plot.CategoryPlot,org.jfree.chart.axis.CategoryAxis,org.jfree.chart.axis.ValueAxis,org.jfree.data.category.CategoryDataset,int,int)>(g2, state, dataArea, plot, domainAxis, rangeAxis, dataset, row, column);
+    
+        goto label3;
+    
+      label2:
+        $stack14 = <org.jfree.chart.plot.PlotOrientation: org.jfree.chart.plot.PlotOrientation VERTICAL>;
+    
+        if orientation != $stack14 goto label3;
+        virtualinvoke this.<org.jfree.chart.renderer.category.BoxAndWhiskerRenderer: void drawVerticalItem(java.awt.Graphics2D,org.jfree.chart.renderer.category.CategoryItemRendererState,java.awt.geom.Rectangle2D,org.jfree.chart.plot.CategoryPlot,org.jfree.chart.axis.CategoryAxis,org.jfree.chart.axis.ValueAxis,org.jfree.data.category.CategoryDataset,int,int)>(g2, state, dataArea, plot, domainAxis, rangeAxis, dataset, row, column);
+    
+      label3:
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.category.BoxAndWhiskerRenderer: void <init>()> ----
+    {
+        java.lang.Object $stack1;
+        org.jfree.chart.renderer.category.BoxAndWhiskerRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.category.BoxAndWhiskerRenderer;
+        specialinvoke this.<org.jfree.chart.renderer.category.AbstractCategoryItemRenderer: void <init>()>();
+        $stack1 = <java.awt.Color: java.awt.Color black>;
+        this.<org.jfree.chart.renderer.category.BoxAndWhiskerRenderer: java.awt.Paint artifactPaint> = (java.awt.Paint) $stack1;
+        this.<org.jfree.chart.renderer.category.BoxAndWhiskerRenderer: boolean fillBox> = 1;
+        this.<org.jfree.chart.renderer.category.BoxAndWhiskerRenderer: double itemMargin> = 0.2;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.category.BoxAndWhiskerRenderer: void setFillBox(boolean)> ----
+    {
+        boolean flag;
+        org.jfree.chart.event.RendererChangeEvent $stack2;
+        org.jfree.chart.renderer.category.BoxAndWhiskerRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.category.BoxAndWhiskerRenderer;
+        flag := @parameter0: boolean;
+        this.<org.jfree.chart.renderer.category.BoxAndWhiskerRenderer: boolean fillBox> = flag;
+        $stack2 = new org.jfree.chart.event.RendererChangeEvent;
+        specialinvoke $stack2.<org.jfree.chart.event.RendererChangeEvent: void <init>(java.lang.Object)>(this);
+        virtualinvoke this.<org.jfree.chart.renderer.category.BoxAndWhiskerRenderer: void notifyListeners(org.jfree.chart.event.RendererChangeEvent)>($stack2);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.category.BoxAndWhiskerRenderer: org.jfree.chart.LegendItem getLegendItem(int,int)> ----
+    {
+        boolean $stack14, $stack15;
+        int datasetIndex, series;
+        java.awt.Paint outlinePaint, paint;
+        java.awt.Shape #l1;
+        java.awt.Stroke outlineStroke;
+        java.awt.geom.Rectangle2D$Double #l0, shape;
+        java.lang.Comparable $stack21;
+        java.lang.Object $stack19;
+        java.lang.String description, label, toolTipText, urlText;
+        org.jfree.chart.LegendItem $stack20, result;
+        org.jfree.chart.labels.CategorySeriesLabelGenerator $stack16, $stack17, $stack18, $stack22, $stack23;
+        org.jfree.chart.plot.CategoryPlot cp;
+        org.jfree.chart.renderer.category.BoxAndWhiskerRenderer this;
+        org.jfree.data.category.CategoryDataset dataset;
+    
+    
+        this := @this: org.jfree.chart.renderer.category.BoxAndWhiskerRenderer;
+        datasetIndex := @parameter0: int;
+        series := @parameter1: int;
+        cp = virtualinvoke this.<org.jfree.chart.renderer.category.BoxAndWhiskerRenderer: org.jfree.chart.plot.CategoryPlot getPlot()>();
+    
+        if cp != null goto label1;
+    
+        return null;
+    
+      label1:
+        $stack14 = virtualinvoke this.<org.jfree.chart.renderer.category.BoxAndWhiskerRenderer: boolean isSeriesVisible(int)>(series);
+    
+        if $stack14 == 0 goto label2;
+        $stack15 = virtualinvoke this.<org.jfree.chart.renderer.category.BoxAndWhiskerRenderer: boolean isSeriesVisibleInLegend(int)>(series);
+    
+        if $stack15 != 0 goto label3;
+    
+      label2:
+        return null;
+    
+      label3:
+        dataset = virtualinvoke cp.<org.jfree.chart.plot.CategoryPlot: org.jfree.data.category.CategoryDataset getDataset(int)>(datasetIndex);
+        $stack16 = virtualinvoke this.<org.jfree.chart.renderer.category.BoxAndWhiskerRenderer: org.jfree.chart.labels.CategorySeriesLabelGenerator getLegendItemLabelGenerator()>();
+        label = interfaceinvoke $stack16.<org.jfree.chart.labels.CategorySeriesLabelGenerator: java.lang.String generateLabel(org.jfree.data.category.CategoryDataset,int)>(dataset, series);
+        description = label;
+        toolTipText = null;
+        $stack17 = virtualinvoke this.<org.jfree.chart.renderer.category.BoxAndWhiskerRenderer: org.jfree.chart.labels.CategorySeriesLabelGenerator getLegendItemToolTipGenerator()>();
+    
+        if $stack17 == null goto label4;
+        $stack23 = virtualinvoke this.<org.jfree.chart.renderer.category.BoxAndWhiskerRenderer: org.jfree.chart.labels.CategorySeriesLabelGenerator getLegendItemToolTipGenerator()>();
+        toolTipText = interfaceinvoke $stack23.<org.jfree.chart.labels.CategorySeriesLabelGenerator: java.lang.String generateLabel(org.jfree.data.category.CategoryDataset,int)>(dataset, series);
+    
+      label4:
+        urlText = null;
+        $stack18 = virtualinvoke this.<org.jfree.chart.renderer.category.BoxAndWhiskerRenderer: org.jfree.chart.labels.CategorySeriesLabelGenerator getLegendItemURLGenerator()>();
+    
+        if $stack18 == null goto label5;
+        $stack22 = virtualinvoke this.<org.jfree.chart.renderer.category.BoxAndWhiskerRenderer: org.jfree.chart.labels.CategorySeriesLabelGenerator getLegendItemURLGenerator()>();
+        urlText = interfaceinvoke $stack22.<org.jfree.chart.labels.CategorySeriesLabelGenerator: java.lang.String generateLabel(org.jfree.data.category.CategoryDataset,int)>(dataset, series);
+    
+      label5:
+        $stack19 = new java.awt.geom.Rectangle2D$Double;
+        #l0 = (java.awt.geom.Rectangle2D$Double) $stack19;
+        specialinvoke #l0.<java.awt.geom.Rectangle2D$Double: void <init>(double,double,double,double)>(-4.0, -4.0, 8.0, 8.0);
+        shape = (java.awt.geom.Rectangle2D$Double) $stack19;
+        paint = virtualinvoke this.<org.jfree.chart.renderer.category.BoxAndWhiskerRenderer: java.awt.Paint lookupSeriesPaint(int)>(series);
+        outlinePaint = virtualinvoke this.<org.jfree.chart.renderer.category.BoxAndWhiskerRenderer: java.awt.Paint lookupSeriesOutlinePaint(int)>(series);
+        outlineStroke = virtualinvoke this.<org.jfree.chart.renderer.category.BoxAndWhiskerRenderer: java.awt.Stroke lookupSeriesOutlineStroke(int)>(series);
+        $stack20 = new org.jfree.chart.LegendItem;
+        #l1 = (java.awt.Shape) $stack19;
+        specialinvoke $stack20.<org.jfree.chart.LegendItem: void <init>(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.awt.Shape,java.awt.Paint,java.awt.Stroke,java.awt.Paint)>(label, label, toolTipText, urlText, #l1, paint, outlineStroke, outlinePaint);
+        result = $stack20;
+        virtualinvoke $stack20.<org.jfree.chart.LegendItem: void setDataset(org.jfree.data.general.Dataset)>(dataset);
+        virtualinvoke $stack20.<org.jfree.chart.LegendItem: void setDatasetIndex(int)>(datasetIndex);
+        $stack21 = interfaceinvoke dataset.<org.jfree.data.category.CategoryDataset: java.lang.Comparable getRowKey(int)>(series);
+        virtualinvoke $stack20.<org.jfree.chart.LegendItem: void setSeriesKey(java.lang.Comparable)>($stack21);
+        virtualinvoke $stack20.<org.jfree.chart.LegendItem: void setSeriesIndex(int)>(series);
+    
+        return $stack20;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.category.BoxAndWhiskerRenderer: void drawHorizontalItem(java.awt.Graphics2D,org.jfree.chart.renderer.category.CategoryItemRendererState,java.awt.geom.Rectangle2D,org.jfree.chart.plot.CategoryPlot,org.jfree.chart.axis.CategoryAxis,org.jfree.chart.axis.ValueAxis,org.jfree.data.category.CategoryDataset,int,int)> ----
+    {
+        boolean $stack78;
+        double $stack43, $stack44, $stack45, $stack48, $stack49, $stack50, $stack52, $stack53, $stack54, $stack55, $stack56, $stack57, $stack59, $stack60, $stack61, $stack62, $stack63, $stack64, $stack66, $stack67, $stack70, $stack71, $stack73, $stack74, $stack75, $stack76, $stack79, $stack80, $stack83, $stack84, $stack85, $stack86, $stack88, $stack89, $stack90, $stack91, $stack92, $stack93, $stack94, $stack95, $stack96, categoryEnd, categoryStart, categoryWidth, offset#0, seriesGap#0, seriesGap#1, usedWidth#0, xxMax#0, xxMax#1, xxMean#0, xxMin, xxQ1#0, xxQ1#1, xxQ1#2, xxQ3#0, yy#0, yy#1, yymid;
+        int $stack40, $stack42, $stack81, $stack82, $stack87, categoryCount, column, row, seriesCount;
+        java.awt.Graphics2D g2;
+        java.awt.Paint $stack46, seriesGap#2;
+        java.awt.Shape #l0, #l1, #l13, #l14, #l15, #l2, #l3, #l5, #l6, #l8;
+        java.awt.Stroke s;
+        java.awt.geom.Ellipse2D$Double #l12, avgEllipse;
+        java.awt.geom.Line2D$Double #l10, #l11, #l16, #l4, #l7;
+        java.awt.geom.Rectangle2D dataArea;
+        java.awt.geom.Rectangle2D$Double #l9;
+        java.lang.Number offset#1, xMax, xMin, xQ1, xxMean#1, xxQ3#1;
+        java.lang.Object $stack51, $stack58, $stack65, $stack68, $stack69, $stack72, $stack77, box;
+        org.jfree.chart.axis.CategoryAxis domainAxis;
+        org.jfree.chart.axis.ValueAxis rangeAxis;
+        org.jfree.chart.entity.EntityCollection xxMax#2;
+        org.jfree.chart.plot.CategoryPlot plot;
+        org.jfree.chart.plot.PlotRenderingInfo $stack47;
+        org.jfree.chart.renderer.category.BoxAndWhiskerRenderer this;
+        org.jfree.chart.renderer.category.CategoryItemRendererState state;
+        org.jfree.chart.util.RectangleEdge $stack39, $stack41, usedWidth#1;
+        org.jfree.data.category.CategoryDataset dataset;
+        org.jfree.data.statistics.BoxAndWhiskerCategoryDataset bawDataset;
+    
+    
+        this := @this: org.jfree.chart.renderer.category.BoxAndWhiskerRenderer;
+        g2 := @parameter0: java.awt.Graphics2D;
+        state := @parameter1: org.jfree.chart.renderer.category.CategoryItemRendererState;
+        dataArea := @parameter2: java.awt.geom.Rectangle2D;
+        plot := @parameter3: org.jfree.chart.plot.CategoryPlot;
+        domainAxis := @parameter4: org.jfree.chart.axis.CategoryAxis;
+        rangeAxis := @parameter5: org.jfree.chart.axis.ValueAxis;
+        dataset := @parameter6: org.jfree.data.category.CategoryDataset;
+        row := @parameter7: int;
+        column := @parameter8: int;
+        bawDataset = (org.jfree.data.statistics.BoxAndWhiskerCategoryDataset) dataset;
+        $stack40 = virtualinvoke this.<org.jfree.chart.renderer.category.BoxAndWhiskerRenderer: int getColumnCount()>();
+        $stack39 = virtualinvoke plot.<org.jfree.chart.plot.CategoryPlot: org.jfree.chart.util.RectangleEdge getDomainAxisEdge()>();
+        categoryEnd = virtualinvoke domainAxis.<org.jfree.chart.axis.CategoryAxis: double getCategoryEnd(int,int,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)>(column, $stack40, dataArea, $stack39);
+        $stack42 = virtualinvoke this.<org.jfree.chart.renderer.category.BoxAndWhiskerRenderer: int getColumnCount()>();
+        $stack41 = virtualinvoke plot.<org.jfree.chart.plot.CategoryPlot: org.jfree.chart.util.RectangleEdge getDomainAxisEdge()>();
+        categoryStart = virtualinvoke domainAxis.<org.jfree.chart.axis.CategoryAxis: double getCategoryStart(int,int,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)>(column, $stack42, dataArea, $stack41);
+        $stack43 = categoryEnd - categoryStart;
+        categoryWidth = staticinvoke <java.lang.Math: double abs(double)>($stack43);
+        yy#0 = categoryStart;
+        seriesCount = virtualinvoke this.<org.jfree.chart.renderer.category.BoxAndWhiskerRenderer: int getRowCount()>();
+        categoryCount = virtualinvoke this.<org.jfree.chart.renderer.category.BoxAndWhiskerRenderer: int getColumnCount()>();
+    
+        if seriesCount <= 1 goto label1;
+        $stack79 = virtualinvoke dataArea.<java.awt.geom.Rectangle2D: double getWidth()>();
+        $stack80 = virtualinvoke this.<org.jfree.chart.renderer.category.BoxAndWhiskerRenderer: double getItemMargin()>();
+        $stack83 = $stack79 * $stack80;
+        $stack81 = seriesCount - 1;
+        $stack82 = categoryCount * $stack81;
+        $stack84 = (double) $stack82;
+        seriesGap#0 = $stack83 / $stack84;
+        $stack85 = virtualinvoke state.<org.jfree.chart.renderer.category.CategoryItemRendererState: double getBarWidth()>();
+        $stack86 = (double) seriesCount;
+        $stack89 = $stack85 * $stack86;
+        $stack87 = seriesCount - 1;
+        $stack88 = (double) $stack87;
+        $stack90 = seriesGap#0 * $stack88;
+        usedWidth#0 = $stack89 + $stack90;
+        $stack91 = categoryWidth - usedWidth#0;
+        offset#0 = $stack91 / 2.0;
+        $stack95 = categoryStart + offset#0;
+        $stack93 = (double) row;
+        $stack92 = virtualinvoke state.<org.jfree.chart.renderer.category.CategoryItemRendererState: double getBarWidth()>();
+        $stack94 = $stack92 + seriesGap#0;
+        $stack96 = $stack93 * $stack94;
+        yy#1 = $stack95 + $stack96;
+    
+        goto label2;
+    
+      label1:
+        $stack44 = virtualinvoke state.<org.jfree.chart.renderer.category.CategoryItemRendererState: double getBarWidth()>();
+        $stack45 = categoryWidth - $stack44;
+        seriesGap#1 = $stack45 / 2.0;
+        yy#1 = categoryStart + seriesGap#1;
+    
+      label2:
+        seriesGap#2 = virtualinvoke this.<org.jfree.chart.renderer.category.BoxAndWhiskerRenderer: java.awt.Paint getItemPaint(int,int)>(row, column);
+    
+        if seriesGap#2 == null goto label3;
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>(seriesGap#2);
+    
+      label3:
+        s = virtualinvoke this.<org.jfree.chart.renderer.category.BoxAndWhiskerRenderer: java.awt.Stroke getItemStroke(int,int)>(row, column);
+        virtualinvoke g2.<java.awt.Graphics2D: void setStroke(java.awt.Stroke)>(s);
+        usedWidth#1 = virtualinvoke plot.<org.jfree.chart.plot.CategoryPlot: org.jfree.chart.util.RectangleEdge getRangeAxisEdge()>();
+        xQ1 = interfaceinvoke bawDataset.<org.jfree.data.statistics.BoxAndWhiskerCategoryDataset: java.lang.Number getQ1Value(int,int)>(row, column);
+        offset#1 = interfaceinvoke bawDataset.<org.jfree.data.statistics.BoxAndWhiskerCategoryDataset: java.lang.Number getQ3Value(int,int)>(row, column);
+        xMax = interfaceinvoke bawDataset.<org.jfree.data.statistics.BoxAndWhiskerCategoryDataset: java.lang.Number getMaxRegularValue(int,int)>(row, column);
+        xMin = interfaceinvoke bawDataset.<org.jfree.data.statistics.BoxAndWhiskerCategoryDataset: java.lang.Number getMinRegularValue(int,int)>(row, column);
+        box = null;
+    
+        if xQ1 == null goto label5;
+    
+        if offset#1 == null goto label5;
+    
+        if xMax == null goto label5;
+    
+        if xMin == null goto label5;
+        $stack59 = virtualinvoke xQ1.<java.lang.Number: double doubleValue()>();
+        xxQ1#0 = virtualinvoke rangeAxis.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)>($stack59, dataArea, usedWidth#1);
+        $stack60 = virtualinvoke offset#1.<java.lang.Number: double doubleValue()>();
+        xxQ3#0 = virtualinvoke rangeAxis.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)>($stack60, dataArea, usedWidth#1);
+        $stack61 = virtualinvoke xMax.<java.lang.Number: double doubleValue()>();
+        xxMax#0 = virtualinvoke rangeAxis.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)>($stack61, dataArea, usedWidth#1);
+        $stack62 = virtualinvoke xMin.<java.lang.Number: double doubleValue()>();
+        xxMin = virtualinvoke rangeAxis.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)>($stack62, dataArea, usedWidth#1);
+        $stack63 = virtualinvoke state.<org.jfree.chart.renderer.category.CategoryItemRendererState: double getBarWidth()>();
+        $stack64 = $stack63 / 2.0;
+        yymid = yy#1 + $stack64;
+        $stack65 = new java.awt.geom.Line2D$Double;
+        #l7 = (java.awt.geom.Line2D$Double) $stack65;
+        specialinvoke #l7.<java.awt.geom.Line2D$Double: void <init>(double,double,double,double)>(xxMax#0, yymid, xxQ3#0, yymid);
+        #l5 = (java.awt.Shape) $stack65;
+        virtualinvoke g2.<java.awt.Graphics2D: void draw(java.awt.Shape)>(#l5);
+        $stack68 = new java.awt.geom.Line2D$Double;
+        $stack66 = virtualinvoke state.<org.jfree.chart.renderer.category.CategoryItemRendererState: double getBarWidth()>();
+        $stack67 = yy#1 + $stack66;
+        #l11 = (java.awt.geom.Line2D$Double) $stack68;
+        specialinvoke #l11.<java.awt.geom.Line2D$Double: void <init>(double,double,double,double)>(xxMax#0, yy#1, xxMax#0, $stack67);
+        #l0 = (java.awt.Shape) $stack68;
+        virtualinvoke g2.<java.awt.Graphics2D: void draw(java.awt.Shape)>(#l0);
+        $stack69 = new java.awt.geom.Line2D$Double;
+        #l10 = (java.awt.geom.Line2D$Double) $stack69;
+        specialinvoke #l10.<java.awt.geom.Line2D$Double: void <init>(double,double,double,double)>(xxMin, yymid, xxQ1#0, yymid);
+        #l15 = (java.awt.Shape) $stack69;
+        virtualinvoke g2.<java.awt.Graphics2D: void draw(java.awt.Shape)>(#l15);
+        $stack72 = new java.awt.geom.Line2D$Double;
+        $stack70 = virtualinvoke state.<org.jfree.chart.renderer.category.CategoryItemRendererState: double getBarWidth()>();
+        $stack71 = yy#1 + $stack70;
+        #l4 = (java.awt.geom.Line2D$Double) $stack72;
+        specialinvoke #l4.<java.awt.geom.Line2D$Double: void <init>(double,double,double,double)>(xxMin, yy#1, xxMin, $stack71);
+        #l1 = (java.awt.Shape) $stack72;
+        virtualinvoke g2.<java.awt.Graphics2D: void draw(java.awt.Shape)>(#l1);
+        $stack77 = new java.awt.geom.Rectangle2D$Double;
+        $stack76 = staticinvoke <java.lang.Math: double min(double,double)>(xxQ1#0, xxQ3#0);
+        $stack73 = xxQ1#0 - xxQ3#0;
+        $stack75 = staticinvoke <java.lang.Math: double abs(double)>($stack73);
+        $stack74 = virtualinvoke state.<org.jfree.chart.renderer.category.CategoryItemRendererState: double getBarWidth()>();
+        #l9 = (java.awt.geom.Rectangle2D$Double) $stack77;
+        specialinvoke #l9.<java.awt.geom.Rectangle2D$Double: void <init>(double,double,double,double)>($stack76, yy#1, $stack75, $stack74);
+        box = $stack77;
+        $stack78 = this.<org.jfree.chart.renderer.category.BoxAndWhiskerRenderer: boolean fillBox>;
+    
+        if $stack78 == 0 goto label4;
+        #l13 = (java.awt.Shape) $stack77;
+        virtualinvoke g2.<java.awt.Graphics2D: void fill(java.awt.Shape)>(#l13);
+    
+      label4:
+        #l8 = (java.awt.Shape) $stack77;
+        virtualinvoke g2.<java.awt.Graphics2D: void draw(java.awt.Shape)>(#l8);
+    
+      label5:
+        $stack46 = this.<org.jfree.chart.renderer.category.BoxAndWhiskerRenderer: java.awt.Paint artifactPaint>;
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>($stack46);
+        xxQ1#1 = 0.0;
+        xxQ3#1 = interfaceinvoke bawDataset.<org.jfree.data.statistics.BoxAndWhiskerCategoryDataset: java.lang.Number getMeanValue(int,int)>(row, column);
+    
+        if xxQ3#1 == null goto label6;
+        $stack52 = virtualinvoke xxQ3#1.<java.lang.Number: double doubleValue()>();
+        xxMean#0 = virtualinvoke rangeAxis.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)>($stack52, dataArea, usedWidth#1);
+        $stack53 = virtualinvoke state.<org.jfree.chart.renderer.category.CategoryItemRendererState: double getBarWidth()>();
+        xxQ1#2 = $stack53 / 4.0;
+        $stack58 = new java.awt.geom.Ellipse2D$Double;
+        $stack57 = xxMean#0 - xxQ1#2;
+        $stack56 = yy#1 + xxQ1#2;
+        $stack55 = xxQ1#2 * 2.0;
+        $stack54 = xxQ1#2 * 2.0;
+        #l12 = (java.awt.geom.Ellipse2D$Double) $stack58;
+        specialinvoke #l12.<java.awt.geom.Ellipse2D$Double: void <init>(double,double,double,double)>($stack57, $stack56, $stack55, $stack54);
+        avgEllipse = (java.awt.geom.Ellipse2D$Double) $stack58;
+        #l14 = (java.awt.Shape) $stack58;
+        virtualinvoke g2.<java.awt.Graphics2D: void fill(java.awt.Shape)>(#l14);
+        #l3 = (java.awt.Shape) $stack58;
+        virtualinvoke g2.<java.awt.Graphics2D: void draw(java.awt.Shape)>(#l3);
+    
+      label6:
+        xxMean#1 = interfaceinvoke bawDataset.<org.jfree.data.statistics.BoxAndWhiskerCategoryDataset: java.lang.Number getMedianValue(int,int)>(row, column);
+    
+        if xxMean#1 == null goto label7;
+        $stack48 = virtualinvoke xxMean#1.<java.lang.Number: double doubleValue()>();
+        xxMax#1 = virtualinvoke rangeAxis.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)>($stack48, dataArea, usedWidth#1);
+        $stack51 = new java.awt.geom.Line2D$Double;
+        $stack49 = virtualinvoke state.<org.jfree.chart.renderer.category.CategoryItemRendererState: double getBarWidth()>();
+        $stack50 = yy#1 + $stack49;
+        #l16 = (java.awt.geom.Line2D$Double) $stack51;
+        specialinvoke #l16.<java.awt.geom.Line2D$Double: void <init>(double,double,double,double)>(xxMax#1, yy#1, xxMax#1, $stack50);
+        #l2 = (java.awt.Shape) $stack51;
+        virtualinvoke g2.<java.awt.Graphics2D: void draw(java.awt.Shape)>(#l2);
+    
+      label7:
+        $stack47 = virtualinvoke state.<org.jfree.chart.renderer.category.CategoryItemRendererState: org.jfree.chart.plot.PlotRenderingInfo getInfo()>();
+    
+        if $stack47 == null goto label8;
+    
+        if box == null goto label8;
+        xxMax#2 = virtualinvoke state.<org.jfree.chart.renderer.category.CategoryItemRendererState: org.jfree.chart.entity.EntityCollection getEntityCollection()>();
+    
+        if xxMax#2 == null goto label8;
+        #l6 = (java.awt.Shape) box;
+        virtualinvoke this.<org.jfree.chart.renderer.category.BoxAndWhiskerRenderer: void addItemEntity(org.jfree.chart.entity.EntityCollection,org.jfree.data.category.CategoryDataset,int,int,java.awt.Shape)>(xxMax#2, dataset, row, column, #l6);
+    
+      label8:
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.category.BoxAndWhiskerRenderer: void drawHighFarOut(double,java.awt.Graphics2D,double,double)> ----
+    {
+        double $stack10, $stack11, $stack12, $stack13, $stack15, $stack16, $stack18, $stack19, aRadius, m, side, xx;
+        java.awt.Graphics2D g2;
+        java.awt.Shape #l0, #l3, #l4;
+        java.awt.geom.Line2D$Double #l1, #l2, #l5;
+        java.lang.Object $stack14, $stack17, $stack20;
+        org.jfree.chart.renderer.category.BoxAndWhiskerRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.category.BoxAndWhiskerRenderer;
+        aRadius := @parameter0: double;
+        g2 := @parameter1: java.awt.Graphics2D;
+        xx := @parameter2: double;
+        m := @parameter3: double;
+        side = aRadius * 2.0;
+        $stack14 = new java.awt.geom.Line2D$Double;
+        $stack13 = xx - side;
+        $stack12 = m + side;
+        $stack11 = xx + side;
+        $stack10 = m + side;
+        #l1 = (java.awt.geom.Line2D$Double) $stack14;
+        specialinvoke #l1.<java.awt.geom.Line2D$Double: void <init>(double,double,double,double)>($stack13, $stack12, $stack11, $stack10);
+        #l4 = (java.awt.Shape) $stack14;
+        virtualinvoke g2.<java.awt.Graphics2D: void draw(java.awt.Shape)>(#l4);
+        $stack17 = new java.awt.geom.Line2D$Double;
+        $stack16 = xx - side;
+        $stack15 = m + side;
+        #l2 = (java.awt.geom.Line2D$Double) $stack17;
+        specialinvoke #l2.<java.awt.geom.Line2D$Double: void <init>(double,double,double,double)>($stack16, $stack15, xx, m);
+        #l3 = (java.awt.Shape) $stack17;
+        virtualinvoke g2.<java.awt.Graphics2D: void draw(java.awt.Shape)>(#l3);
+        $stack20 = new java.awt.geom.Line2D$Double;
+        $stack19 = xx + side;
+        $stack18 = m + side;
+        #l5 = (java.awt.geom.Line2D$Double) $stack20;
+        specialinvoke #l5.<java.awt.geom.Line2D$Double: void <init>(double,double,double,double)>($stack19, $stack18, xx, m);
+        #l0 = (java.awt.Shape) $stack20;
+        virtualinvoke g2.<java.awt.Graphics2D: void draw(java.awt.Shape)>(#l0);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.category.BoxAndWhiskerRenderer: boolean equals(java.lang.Object)> ----
+    {
+        boolean $stack3, $stack4, $stack7, $stack8, $stack9;
+        byte $stack12;
+        double $stack10, $stack11;
+        java.awt.Paint $stack5, $stack6;
+        java.lang.Object obj;
+        org.jfree.chart.renderer.category.BoxAndWhiskerRenderer that, this;
+    
+    
+        this := @this: org.jfree.chart.renderer.category.BoxAndWhiskerRenderer;
+        obj := @parameter0: java.lang.Object;
+    
+        if obj != this goto label1;
+    
+        return 1;
+    
+      label1:
+        $stack3 = obj instanceof org.jfree.chart.renderer.category.BoxAndWhiskerRenderer;
+    
+        if $stack3 != 0 goto label2;
+    
+        return 0;
+    
+      label2:
+        $stack4 = specialinvoke this.<org.jfree.chart.renderer.category.AbstractCategoryItemRenderer: boolean equals(java.lang.Object)>(obj);
+    
+        if $stack4 != 0 goto label3;
+    
+        return 0;
+    
+      label3:
+        that = (org.jfree.chart.renderer.category.BoxAndWhiskerRenderer) obj;
+        $stack6 = this.<org.jfree.chart.renderer.category.BoxAndWhiskerRenderer: java.awt.Paint artifactPaint>;
+        $stack5 = that.<org.jfree.chart.renderer.category.BoxAndWhiskerRenderer: java.awt.Paint artifactPaint>;
+        $stack7 = staticinvoke <org.jfree.chart.util.PaintUtilities: boolean equal(java.awt.Paint,java.awt.Paint)>($stack6, $stack5);
+    
+        if $stack7 != 0 goto label4;
+    
+        return 0;
+    
+      label4:
+        $stack9 = this.<org.jfree.chart.renderer.category.BoxAndWhiskerRenderer: boolean fillBox>;
+        $stack8 = that.<org.jfree.chart.renderer.category.BoxAndWhiskerRenderer: boolean fillBox>;
+    
+        if $stack9 == $stack8 goto label5;
+    
+        return 0;
+    
+      label5:
+        $stack10 = this.<org.jfree.chart.renderer.category.BoxAndWhiskerRenderer: double itemMargin>;
+        $stack11 = that.<org.jfree.chart.renderer.category.BoxAndWhiskerRenderer: double itemMargin>;
+        $stack12 = $stack10 cmpl $stack11;
+    
+        if $stack12 == 0 goto label6;
+    
+        return 0;
+    
+      label6:
+        return 1;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.category.BoxAndWhiskerRenderer: void drawVerticalItem(java.awt.Graphics2D,org.jfree.chart.renderer.category.CategoryItemRendererState,java.awt.geom.Rectangle2D,org.jfree.chart.plot.CategoryPlot,org.jfree.chart.axis.CategoryAxis,org.jfree.chart.axis.ValueAxis,org.jfree.data.category.CategoryDataset,int,int)> ----
+    {
+        boolean $stack133, $stack69, $stack70, $stack71, $stack72, $stack82;
+        byte $stack88, $stack90, $stack92, $stack94;
+        double $stack100, $stack101, $stack103, $stack104, $stack105, $stack107, $stack108, $stack109, $stack110, $stack111, $stack112, $stack114, $stack115, $stack116, $stack117, $stack118, $stack119, $stack121, $stack122, $stack125, $stack126, $stack128, $stack129, $stack130, $stack131, $stack134, $stack135, $stack138, $stack139, $stack140, $stack141, $stack143, $stack144, $stack145, $stack146, $stack147, $stack148, $stack149, $stack150, $stack151, $stack57, $stack58, $stack60, $stack61, $stack62, $stack63, $stack64, $stack73, $stack74, $stack75, $stack76, $stack77, $stack78, $stack79, $stack80, $stack83, $stack87, $stack89, $stack91, $stack93, $stack95, $stack96, $stack97, $stack99, aRadius, categoryEnd, categoryStart, categoryWidth, offset#0, outlier#0, seriesGap#0, seriesGap#1, seriesGap#2, seriesGap#3, usedWidth#0, usedWidth#1, usedWidth#2, xx#0, xx#1, xxmid#0, yyMax#0, yyMax#1, yyMin#0, yyMin#1, yyQ1#0, yyQ3#0, yyQ3#1, yyQ3#2;
+        int $stack136, $stack137, $stack142, $stack54, $stack56, $stack68, categoryCount, column, i#0, row, seriesCount;
+        java.awt.Graphics2D g2;
+        java.awt.Paint $stack59, offset#1;
+        java.awt.Shape #l0, #l1, #l12, #l16, #l17, #l2, #l20, #l6, #l8, #l9;
+        java.awt.Stroke s;
+        java.awt.geom.Ellipse2D$Double #l14, avgEllipse#0;
+        java.awt.geom.Line2D$Double #l10, #l13, #l3, #l4, #l7;
+        java.awt.geom.Point2D minOutlier#1;
+        java.awt.geom.Rectangle2D dataArea;
+        java.awt.geom.Rectangle2D$Double #l21;
+        java.lang.Number $stack86, avgEllipse#1, maxOutlier, maxRegular, minOutlier#0, minRegular, yMax, yMin, yQ1, yQ3, yyQ1#1;
+        java.lang.Object $stack106, $stack113, $stack120, $stack123, $stack124, $stack127, $stack132, $stack65, $stack81, $stack84, $stack85, box;
+        java.util.ArrayList #l18, xxmid#1;
+        java.util.Iterator i#1, i#2;
+        java.util.List #l11, #l15, #l19, #l5, yOutliers;
+        org.jfree.chart.axis.CategoryAxis domainAxis;
+        org.jfree.chart.axis.ValueAxis rangeAxis;
+        org.jfree.chart.entity.EntityCollection i#3;
+        org.jfree.chart.plot.CategoryPlot plot;
+        org.jfree.chart.plot.PlotRenderingInfo $stack67;
+        org.jfree.chart.renderer.Outlier $stack102, $stack98, outlier#1, outlier_1;
+        org.jfree.chart.renderer.OutlierList outlier#2;
+        org.jfree.chart.renderer.OutlierListCollection $stack66, outlierListCollection;
+        org.jfree.chart.renderer.category.BoxAndWhiskerRenderer this;
+        org.jfree.chart.renderer.category.CategoryItemRendererState state;
+        org.jfree.chart.util.RectangleEdge $stack53, $stack55, location;
+        org.jfree.data.category.CategoryDataset dataset;
+        org.jfree.data.statistics.BoxAndWhiskerCategoryDataset bawDataset;
+    
+    
+        this := @this: org.jfree.chart.renderer.category.BoxAndWhiskerRenderer;
+        g2 := @parameter0: java.awt.Graphics2D;
+        state := @parameter1: org.jfree.chart.renderer.category.CategoryItemRendererState;
+        dataArea := @parameter2: java.awt.geom.Rectangle2D;
+        plot := @parameter3: org.jfree.chart.plot.CategoryPlot;
+        domainAxis := @parameter4: org.jfree.chart.axis.CategoryAxis;
+        rangeAxis := @parameter5: org.jfree.chart.axis.ValueAxis;
+        dataset := @parameter6: org.jfree.data.category.CategoryDataset;
+        row := @parameter7: int;
+        column := @parameter8: int;
+        bawDataset = (org.jfree.data.statistics.BoxAndWhiskerCategoryDataset) dataset;
+        $stack54 = virtualinvoke this.<org.jfree.chart.renderer.category.BoxAndWhiskerRenderer: int getColumnCount()>();
+        $stack53 = virtualinvoke plot.<org.jfree.chart.plot.CategoryPlot: org.jfree.chart.util.RectangleEdge getDomainAxisEdge()>();
+        categoryEnd = virtualinvoke domainAxis.<org.jfree.chart.axis.CategoryAxis: double getCategoryEnd(int,int,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)>(column, $stack54, dataArea, $stack53);
+        $stack56 = virtualinvoke this.<org.jfree.chart.renderer.category.BoxAndWhiskerRenderer: int getColumnCount()>();
+        $stack55 = virtualinvoke plot.<org.jfree.chart.plot.CategoryPlot: org.jfree.chart.util.RectangleEdge getDomainAxisEdge()>();
+        categoryStart = virtualinvoke domainAxis.<org.jfree.chart.axis.CategoryAxis: double getCategoryStart(int,int,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)>(column, $stack56, dataArea, $stack55);
+        categoryWidth = categoryEnd - categoryStart;
+        xx#0 = categoryStart;
+        seriesCount = virtualinvoke this.<org.jfree.chart.renderer.category.BoxAndWhiskerRenderer: int getRowCount()>();
+        categoryCount = virtualinvoke this.<org.jfree.chart.renderer.category.BoxAndWhiskerRenderer: int getColumnCount()>();
+    
+        if seriesCount <= 1 goto label01;
+        $stack134 = virtualinvoke dataArea.<java.awt.geom.Rectangle2D: double getWidth()>();
+        $stack135 = virtualinvoke this.<org.jfree.chart.renderer.category.BoxAndWhiskerRenderer: double getItemMargin()>();
+        $stack138 = $stack134 * $stack135;
+        $stack136 = seriesCount - 1;
+        $stack137 = categoryCount * $stack136;
+        $stack139 = (double) $stack137;
+        seriesGap#0 = $stack138 / $stack139;
+        $stack140 = virtualinvoke state.<org.jfree.chart.renderer.category.CategoryItemRendererState: double getBarWidth()>();
+        $stack141 = (double) seriesCount;
+        $stack144 = $stack140 * $stack141;
+        $stack142 = seriesCount - 1;
+        $stack143 = (double) $stack142;
+        $stack145 = seriesGap#0 * $stack143;
+        usedWidth#0 = $stack144 + $stack145;
+        $stack146 = categoryWidth - usedWidth#0;
+        offset#0 = $stack146 / 2.0;
+        $stack150 = categoryStart + offset#0;
+        $stack148 = (double) row;
+        $stack147 = virtualinvoke state.<org.jfree.chart.renderer.category.CategoryItemRendererState: double getBarWidth()>();
+        $stack149 = $stack147 + seriesGap#0;
+        $stack151 = $stack148 * $stack149;
+        xx#1 = $stack150 + $stack151;
+    
+        goto label02;
+    
+      label01:
+        $stack57 = virtualinvoke state.<org.jfree.chart.renderer.category.CategoryItemRendererState: double getBarWidth()>();
+        $stack58 = categoryWidth - $stack57;
+        seriesGap#1 = $stack58 / 2.0;
+        xx#1 = categoryStart + seriesGap#1;
+    
+      label02:
+        seriesGap#2 = 0.0;
+        offset#1 = virtualinvoke this.<org.jfree.chart.renderer.category.BoxAndWhiskerRenderer: java.awt.Paint getItemPaint(int,int)>(row, column);
+    
+        if offset#1 == null goto label03;
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>(offset#1);
+    
+      label03:
+        s = virtualinvoke this.<org.jfree.chart.renderer.category.BoxAndWhiskerRenderer: java.awt.Stroke getItemStroke(int,int)>(row, column);
+        virtualinvoke g2.<java.awt.Graphics2D: void setStroke(java.awt.Stroke)>(s);
+        aRadius = 0.0;
+        location = virtualinvoke plot.<org.jfree.chart.plot.CategoryPlot: org.jfree.chart.util.RectangleEdge getRangeAxisEdge()>();
+        yQ1 = interfaceinvoke bawDataset.<org.jfree.data.statistics.BoxAndWhiskerCategoryDataset: java.lang.Number getQ1Value(int,int)>(row, column);
+        yQ3 = interfaceinvoke bawDataset.<org.jfree.data.statistics.BoxAndWhiskerCategoryDataset: java.lang.Number getQ3Value(int,int)>(row, column);
+        yMax = interfaceinvoke bawDataset.<org.jfree.data.statistics.BoxAndWhiskerCategoryDataset: java.lang.Number getMaxRegularValue(int,int)>(row, column);
+        yMin = interfaceinvoke bawDataset.<org.jfree.data.statistics.BoxAndWhiskerCategoryDataset: java.lang.Number getMinRegularValue(int,int)>(row, column);
+        box = null;
+    
+        if yQ1 == null goto label05;
+    
+        if yQ3 == null goto label05;
+    
+        if yMax == null goto label05;
+    
+        if yMin == null goto label05;
+        $stack114 = virtualinvoke yQ1.<java.lang.Number: double doubleValue()>();
+        yyQ1#0 = virtualinvoke rangeAxis.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)>($stack114, dataArea, location);
+        $stack115 = virtualinvoke yQ3.<java.lang.Number: double doubleValue()>();
+        yyQ3#0 = virtualinvoke rangeAxis.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)>($stack115, dataArea, location);
+        $stack116 = virtualinvoke yMax.<java.lang.Number: double doubleValue()>();
+        yyMax#0 = virtualinvoke rangeAxis.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)>($stack116, dataArea, location);
+        $stack117 = virtualinvoke yMin.<java.lang.Number: double doubleValue()>();
+        yyMin#0 = virtualinvoke rangeAxis.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)>($stack117, dataArea, location);
+        $stack118 = virtualinvoke state.<org.jfree.chart.renderer.category.CategoryItemRendererState: double getBarWidth()>();
+        $stack119 = $stack118 / 2.0;
+        xxmid#0 = xx#1 + $stack119;
+        $stack120 = new java.awt.geom.Line2D$Double;
+        #l3 = (java.awt.geom.Line2D$Double) $stack120;
+        specialinvoke #l3.<java.awt.geom.Line2D$Double: void <init>(double,double,double,double)>(xxmid#0, yyMax#0, xxmid#0, yyQ3#0);
+        #l0 = (java.awt.Shape) $stack120;
+        virtualinvoke g2.<java.awt.Graphics2D: void draw(java.awt.Shape)>(#l0);
+        $stack123 = new java.awt.geom.Line2D$Double;
+        $stack121 = virtualinvoke state.<org.jfree.chart.renderer.category.CategoryItemRendererState: double getBarWidth()>();
+        $stack122 = xx#1 + $stack121;
+        #l10 = (java.awt.geom.Line2D$Double) $stack123;
+        specialinvoke #l10.<java.awt.geom.Line2D$Double: void <init>(double,double,double,double)>(xx#1, yyMax#0, $stack122, yyMax#0);
+        #l16 = (java.awt.Shape) $stack123;
+        virtualinvoke g2.<java.awt.Graphics2D: void draw(java.awt.Shape)>(#l16);
+        $stack124 = new java.awt.geom.Line2D$Double;
+        #l4 = (java.awt.geom.Line2D$Double) $stack124;
+        specialinvoke #l4.<java.awt.geom.Line2D$Double: void <init>(double,double,double,double)>(xxmid#0, yyMin#0, xxmid#0, yyQ1#0);
+        #l6 = (java.awt.Shape) $stack124;
+        virtualinvoke g2.<java.awt.Graphics2D: void draw(java.awt.Shape)>(#l6);
+        $stack127 = new java.awt.geom.Line2D$Double;
+        $stack125 = virtualinvoke state.<org.jfree.chart.renderer.category.CategoryItemRendererState: double getBarWidth()>();
+        $stack126 = xx#1 + $stack125;
+        #l7 = (java.awt.geom.Line2D$Double) $stack127;
+        specialinvoke #l7.<java.awt.geom.Line2D$Double: void <init>(double,double,double,double)>(xx#1, yyMin#0, $stack126, yyMin#0);
+        #l9 = (java.awt.Shape) $stack127;
+        virtualinvoke g2.<java.awt.Graphics2D: void draw(java.awt.Shape)>(#l9);
+        $stack132 = new java.awt.geom.Rectangle2D$Double;
+        $stack131 = staticinvoke <java.lang.Math: double min(double,double)>(yyQ1#0, yyQ3#0);
+        $stack130 = virtualinvoke state.<org.jfree.chart.renderer.category.CategoryItemRendererState: double getBarWidth()>();
+        $stack128 = yyQ1#0 - yyQ3#0;
+        $stack129 = staticinvoke <java.lang.Math: double abs(double)>($stack128);
+        #l21 = (java.awt.geom.Rectangle2D$Double) $stack132;
+        specialinvoke #l21.<java.awt.geom.Rectangle2D$Double: void <init>(double,double,double,double)>(xx#1, $stack131, $stack130, $stack129);
+        box = $stack132;
+        $stack133 = this.<org.jfree.chart.renderer.category.BoxAndWhiskerRenderer: boolean fillBox>;
+    
+        if $stack133 == 0 goto label04;
+        #l1 = (java.awt.Shape) $stack132;
+        virtualinvoke g2.<java.awt.Graphics2D: void fill(java.awt.Shape)>(#l1);
+    
+      label04:
+        #l17 = (java.awt.Shape) $stack132;
+        virtualinvoke g2.<java.awt.Graphics2D: void draw(java.awt.Shape)>(#l17);
+    
+      label05:
+        $stack59 = this.<org.jfree.chart.renderer.category.BoxAndWhiskerRenderer: java.awt.Paint artifactPaint>;
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>($stack59);
+        yyQ1#1 = interfaceinvoke bawDataset.<org.jfree.data.statistics.BoxAndWhiskerCategoryDataset: java.lang.Number getMeanValue(int,int)>(row, column);
+    
+        if yyQ1#1 == null goto label06;
+        $stack107 = virtualinvoke yyQ1#1.<java.lang.Number: double doubleValue()>();
+        seriesGap#3 = virtualinvoke rangeAxis.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)>($stack107, dataArea, location);
+        $stack108 = virtualinvoke state.<org.jfree.chart.renderer.category.CategoryItemRendererState: double getBarWidth()>();
+        aRadius = $stack108 / 4.0;
+        $stack113 = new java.awt.geom.Ellipse2D$Double;
+        $stack112 = xx#1 + aRadius;
+        $stack111 = seriesGap#3 - aRadius;
+        $stack110 = aRadius * 2.0;
+        $stack109 = aRadius * 2.0;
+        #l14 = (java.awt.geom.Ellipse2D$Double) $stack113;
+        specialinvoke #l14.<java.awt.geom.Ellipse2D$Double: void <init>(double,double,double,double)>($stack112, $stack111, $stack110, $stack109);
+        avgEllipse#0 = (java.awt.geom.Ellipse2D$Double) $stack113;
+        #l20 = (java.awt.Shape) $stack113;
+        virtualinvoke g2.<java.awt.Graphics2D: void fill(java.awt.Shape)>(#l20);
+        #l2 = (java.awt.Shape) $stack113;
+        virtualinvoke g2.<java.awt.Graphics2D: void draw(java.awt.Shape)>(#l2);
+    
+      label06:
+        avgEllipse#1 = interfaceinvoke bawDataset.<org.jfree.data.statistics.BoxAndWhiskerCategoryDataset: java.lang.Number getMedianValue(int,int)>(row, column);
+    
+        if avgEllipse#1 == null goto label07;
+        $stack103 = virtualinvoke avgEllipse#1.<java.lang.Number: double doubleValue()>();
+        yyQ3#1 = virtualinvoke rangeAxis.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)>($stack103, dataArea, location);
+        $stack106 = new java.awt.geom.Line2D$Double;
+        $stack104 = virtualinvoke state.<org.jfree.chart.renderer.category.CategoryItemRendererState: double getBarWidth()>();
+        $stack105 = xx#1 + $stack104;
+        #l13 = (java.awt.geom.Line2D$Double) $stack106;
+        specialinvoke #l13.<java.awt.geom.Line2D$Double: void <init>(double,double,double,double)>(xx#1, yyQ3#1, $stack105, yyQ3#1);
+        #l12 = (java.awt.Shape) $stack106;
+        virtualinvoke g2.<java.awt.Graphics2D: void draw(java.awt.Shape)>(#l12);
+    
+      label07:
+        $stack60 = virtualinvoke rangeAxis.<org.jfree.chart.axis.ValueAxis: double getUpperBound()>();
+        $stack61 = virtualinvoke rangeAxis.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)>($stack60, dataArea, location);
+        yyQ3#2 = $stack61 + aRadius;
+        $stack62 = virtualinvoke rangeAxis.<org.jfree.chart.axis.ValueAxis: double getLowerBound()>();
+        $stack63 = virtualinvoke rangeAxis.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)>($stack62, dataArea, location);
+        yyMax#1 = $stack63 - aRadius;
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>(offset#1);
+        $stack64 = virtualinvoke state.<org.jfree.chart.renderer.category.CategoryItemRendererState: double getBarWidth()>();
+        yyMin#1 = $stack64 / 3.0;
+        $stack65 = new java.util.ArrayList;
+        #l18 = (java.util.ArrayList) $stack65;
+        specialinvoke #l18.<java.util.ArrayList: void <init>()>();
+        xxmid#1 = (java.util.ArrayList) $stack65;
+        $stack66 = new org.jfree.chart.renderer.OutlierListCollection;
+        specialinvoke $stack66.<org.jfree.chart.renderer.OutlierListCollection: void <init>()>();
+        outlierListCollection = $stack66;
+        yOutliers = interfaceinvoke bawDataset.<org.jfree.data.statistics.BoxAndWhiskerCategoryDataset: java.util.List getOutliers(int,int)>(row, column);
+    
+        if yOutliers == null goto label21;
+        i#0 = 0;
+    
+      label08:
+        $stack68 = interfaceinvoke yOutliers.<java.util.List: int size()>();
+    
+        if i#0 >= $stack68 goto label13;
+        $stack85 = interfaceinvoke yOutliers.<java.util.List: java.lang.Object get(int)>(i#0);
+        $stack86 = (java.lang.Number) $stack85;
+        outlier#0 = virtualinvoke $stack86.<java.lang.Number: double doubleValue()>();
+        minOutlier#0 = interfaceinvoke bawDataset.<org.jfree.data.statistics.BoxAndWhiskerCategoryDataset: java.lang.Number getMinOutlier(int,int)>(row, column);
+        maxOutlier = interfaceinvoke bawDataset.<org.jfree.data.statistics.BoxAndWhiskerCategoryDataset: java.lang.Number getMaxOutlier(int,int)>(row, column);
+        minRegular = interfaceinvoke bawDataset.<org.jfree.data.statistics.BoxAndWhiskerCategoryDataset: java.lang.Number getMinRegularValue(int,int)>(row, column);
+        maxRegular = interfaceinvoke bawDataset.<org.jfree.data.statistics.BoxAndWhiskerCategoryDataset: java.lang.Number getMaxRegularValue(int,int)>(row, column);
+        $stack87 = virtualinvoke maxOutlier.<java.lang.Number: double doubleValue()>();
+        $stack88 = outlier#0 cmpl $stack87;
+    
+        if $stack88 <= 0 goto label09;
+        virtualinvoke $stack66.<org.jfree.chart.renderer.OutlierListCollection: void setHighFarOut(boolean)>(1);
+    
+        goto label12;
+    
+      label09:
+        $stack89 = virtualinvoke minOutlier#0.<java.lang.Number: double doubleValue()>();
+        $stack90 = outlier#0 cmpg $stack89;
+    
+        if $stack90 >= 0 goto label10;
+        virtualinvoke $stack66.<org.jfree.chart.renderer.OutlierListCollection: void setLowFarOut(boolean)>(1);
+    
+        goto label12;
+    
+      label10:
+        $stack91 = virtualinvoke maxRegular.<java.lang.Number: double doubleValue()>();
+        $stack92 = outlier#0 cmpl $stack91;
+    
+        if $stack92 <= 0 goto label11;
+        usedWidth#1 = virtualinvoke rangeAxis.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)>(outlier#0, dataArea, location);
+        $stack102 = new org.jfree.chart.renderer.Outlier;
+        $stack99 = virtualinvoke state.<org.jfree.chart.renderer.category.CategoryItemRendererState: double getBarWidth()>();
+        $stack100 = $stack99 / 2.0;
+        $stack101 = xx#1 + $stack100;
+        specialinvoke $stack102.<org.jfree.chart.renderer.Outlier: void <init>(double,double,double)>($stack101, usedWidth#1, yyMin#1);
+        #l15 = (java.util.List) $stack65;
+        interfaceinvoke #l15.<java.util.List: boolean add(java.lang.Object)>($stack102);
+    
+        goto label12;
+    
+      label11:
+        $stack93 = virtualinvoke minRegular.<java.lang.Number: double doubleValue()>();
+        $stack94 = outlier#0 cmpg $stack93;
+    
+        if $stack94 >= 0 goto label12;
+        usedWidth#2 = virtualinvoke rangeAxis.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)>(outlier#0, dataArea, location);
+        $stack98 = new org.jfree.chart.renderer.Outlier;
+        $stack95 = virtualinvoke state.<org.jfree.chart.renderer.category.CategoryItemRendererState: double getBarWidth()>();
+        $stack96 = $stack95 / 2.0;
+        $stack97 = xx#1 + $stack96;
+        specialinvoke $stack98.<org.jfree.chart.renderer.Outlier: void <init>(double,double,double)>($stack97, usedWidth#2, yyMin#1);
+        #l11 = (java.util.List) $stack65;
+        interfaceinvoke #l11.<java.util.List: boolean add(java.lang.Object)>($stack98);
+    
+      label12:
+        #l5 = (java.util.List) $stack65;
+        staticinvoke <java.util.Collections: void sort(java.util.List)>(#l5);
+        i#0 = i#0 + 1;
+    
+        goto label08;
+    
+      label13:
+        #l19 = (java.util.List) $stack65;
+        i#1 = interfaceinvoke #l19.<java.util.List: java.util.Iterator iterator()>();
+    
+      label14:
+        $stack69 = interfaceinvoke i#1.<java.util.Iterator: boolean hasNext()>();
+    
+        if $stack69 == 0 goto label15;
+        $stack84 = interfaceinvoke i#1.<java.util.Iterator: java.lang.Object next()>();
+        outlier#1 = (org.jfree.chart.renderer.Outlier) $stack84;
+        virtualinvoke $stack66.<org.jfree.chart.renderer.OutlierListCollection: boolean add(org.jfree.chart.renderer.Outlier)>(outlier#1);
+    
+        goto label14;
+    
+      label15:
+        i#2 = virtualinvoke $stack66.<org.jfree.chart.renderer.OutlierListCollection: java.util.Iterator iterator()>();
+    
+      label16:
+        $stack70 = interfaceinvoke i#2.<java.util.Iterator: boolean hasNext()>();
+    
+        if $stack70 == 0 goto label19;
+        $stack81 = interfaceinvoke i#2.<java.util.Iterator: java.lang.Object next()>();
+        outlier#2 = (org.jfree.chart.renderer.OutlierList) $stack81;
+        outlier_1 = virtualinvoke outlier#2.<org.jfree.chart.renderer.OutlierList: org.jfree.chart.renderer.Outlier getAveragedOutlier()>();
+        minOutlier#1 = virtualinvoke outlier_1.<org.jfree.chart.renderer.Outlier: java.awt.geom.Point2D getPoint()>();
+        $stack82 = virtualinvoke outlier#2.<org.jfree.chart.renderer.OutlierList: boolean isMultiple()>();
+    
+        if $stack82 == 0 goto label17;
+        $stack83 = virtualinvoke state.<org.jfree.chart.renderer.category.CategoryItemRendererState: double getBarWidth()>();
+        specialinvoke this.<org.jfree.chart.renderer.category.BoxAndWhiskerRenderer: void drawMultipleEllipse(java.awt.geom.Point2D,double,double,java.awt.Graphics2D)>(minOutlier#1, $stack83, yyMin#1, g2);
+    
+        goto label18;
+    
+      label17:
+        specialinvoke this.<org.jfree.chart.renderer.category.BoxAndWhiskerRenderer: void drawEllipse(java.awt.geom.Point2D,double,java.awt.Graphics2D)>(minOutlier#1, yyMin#1, g2);
+    
+      label18:
+        goto label16;
+    
+      label19:
+        $stack71 = virtualinvoke $stack66.<org.jfree.chart.renderer.OutlierListCollection: boolean isHighFarOut()>();
+    
+        if $stack71 == 0 goto label20;
+        $stack80 = aRadius / 2.0;
+        $stack77 = virtualinvoke state.<org.jfree.chart.renderer.category.CategoryItemRendererState: double getBarWidth()>();
+        $stack78 = $stack77 / 2.0;
+        $stack79 = xx#1 + $stack78;
+        specialinvoke this.<org.jfree.chart.renderer.category.BoxAndWhiskerRenderer: void drawHighFarOut(double,java.awt.Graphics2D,double,double)>($stack80, g2, $stack79, yyQ3#2);
+    
+      label20:
+        $stack72 = virtualinvoke $stack66.<org.jfree.chart.renderer.OutlierListCollection: boolean isLowFarOut()>();
+    
+        if $stack72 == 0 goto label21;
+        $stack76 = aRadius / 2.0;
+        $stack73 = virtualinvoke state.<org.jfree.chart.renderer.category.CategoryItemRendererState: double getBarWidth()>();
+        $stack74 = $stack73 / 2.0;
+        $stack75 = xx#1 + $stack74;
+        specialinvoke this.<org.jfree.chart.renderer.category.BoxAndWhiskerRenderer: void drawLowFarOut(double,java.awt.Graphics2D,double,double)>($stack76, g2, $stack75, yyMax#1);
+    
+      label21:
+        $stack67 = virtualinvoke state.<org.jfree.chart.renderer.category.CategoryItemRendererState: org.jfree.chart.plot.PlotRenderingInfo getInfo()>();
+    
+        if $stack67 == null goto label22;
+    
+        if box == null goto label22;
+        i#3 = virtualinvoke state.<org.jfree.chart.renderer.category.CategoryItemRendererState: org.jfree.chart.entity.EntityCollection getEntityCollection()>();
+    
+        if i#3 == null goto label22;
+        #l8 = (java.awt.Shape) box;
+        virtualinvoke this.<org.jfree.chart.renderer.category.BoxAndWhiskerRenderer: void addItemEntity(org.jfree.chart.entity.EntityCollection,org.jfree.data.category.CategoryDataset,int,int,java.awt.Shape)>(i#3, dataset, row, column, #l8);
+    
+      label22:
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.category.BoxAndWhiskerRenderer: void drawMultipleEllipse(java.awt.geom.Point2D,double,double,java.awt.Graphics2D)> ----
+    {
+        double $stack10, $stack11, $stack12, $stack13, $stack15, $stack16, $stack17, $stack18, $stack9, boxWidth, oRadius;
+        java.awt.Graphics2D g2;
+        java.awt.Shape #l1, #l2;
+        java.awt.geom.Ellipse2D$Double #l0, #l3, dot1, dot2;
+        java.awt.geom.Point2D point;
+        java.lang.Object $stack14, $stack19;
+        org.jfree.chart.renderer.category.BoxAndWhiskerRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.category.BoxAndWhiskerRenderer;
+        point := @parameter0: java.awt.geom.Point2D;
+        boxWidth := @parameter1: double;
+        oRadius := @parameter2: double;
+        g2 := @parameter3: java.awt.Graphics2D;
+        $stack14 = new java.awt.geom.Ellipse2D$Double;
+        $stack9 = virtualinvoke point.<java.awt.geom.Point2D: double getX()>();
+        $stack10 = boxWidth / 2.0;
+        $stack11 = $stack9 - $stack10;
+        $stack13 = $stack11 + oRadius;
+        $stack12 = virtualinvoke point.<java.awt.geom.Point2D: double getY()>();
+        #l0 = (java.awt.geom.Ellipse2D$Double) $stack14;
+        specialinvoke #l0.<java.awt.geom.Ellipse2D$Double: void <init>(double,double,double,double)>($stack13, $stack12, oRadius, oRadius);
+        dot1 = (java.awt.geom.Ellipse2D$Double) $stack14;
+        $stack19 = new java.awt.geom.Ellipse2D$Double;
+        $stack15 = virtualinvoke point.<java.awt.geom.Point2D: double getX()>();
+        $stack16 = boxWidth / 2.0;
+        $stack18 = $stack15 + $stack16;
+        $stack17 = virtualinvoke point.<java.awt.geom.Point2D: double getY()>();
+        #l3 = (java.awt.geom.Ellipse2D$Double) $stack19;
+        specialinvoke #l3.<java.awt.geom.Ellipse2D$Double: void <init>(double,double,double,double)>($stack18, $stack17, oRadius, oRadius);
+        dot2 = (java.awt.geom.Ellipse2D$Double) $stack19;
+        #l1 = (java.awt.Shape) $stack14;
+        virtualinvoke g2.<java.awt.Graphics2D: void draw(java.awt.Shape)>(#l1);
+        #l2 = (java.awt.Shape) $stack19;
+        virtualinvoke g2.<java.awt.Graphics2D: void draw(java.awt.Shape)>(#l2);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.category.BoxAndWhiskerRenderer: double getItemMargin()> ----
+    {
+        double $stack1;
+        org.jfree.chart.renderer.category.BoxAndWhiskerRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.category.BoxAndWhiskerRenderer;
+        $stack1 = this.<org.jfree.chart.renderer.category.BoxAndWhiskerRenderer: double itemMargin>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.category.BoxAndWhiskerRenderer: void drawLowFarOut(double,java.awt.Graphics2D,double,double)> ----
+    {
+        double $stack10, $stack11, $stack12, $stack13, $stack15, $stack16, $stack18, $stack19, aRadius, m, side, xx;
+        java.awt.Graphics2D g2;
+        java.awt.Shape #l0, #l1, #l3;
+        java.awt.geom.Line2D$Double #l2, #l4, #l5;
+        java.lang.Object $stack14, $stack17, $stack20;
+        org.jfree.chart.renderer.category.BoxAndWhiskerRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.category.BoxAndWhiskerRenderer;
+        aRadius := @parameter0: double;
+        g2 := @parameter1: java.awt.Graphics2D;
+        xx := @parameter2: double;
+        m := @parameter3: double;
+        side = aRadius * 2.0;
+        $stack14 = new java.awt.geom.Line2D$Double;
+        $stack13 = xx - side;
+        $stack12 = m - side;
+        $stack11 = xx + side;
+        $stack10 = m - side;
+        #l2 = (java.awt.geom.Line2D$Double) $stack14;
+        specialinvoke #l2.<java.awt.geom.Line2D$Double: void <init>(double,double,double,double)>($stack13, $stack12, $stack11, $stack10);
+        #l3 = (java.awt.Shape) $stack14;
+        virtualinvoke g2.<java.awt.Graphics2D: void draw(java.awt.Shape)>(#l3);
+        $stack17 = new java.awt.geom.Line2D$Double;
+        $stack16 = xx - side;
+        $stack15 = m - side;
+        #l5 = (java.awt.geom.Line2D$Double) $stack17;
+        specialinvoke #l5.<java.awt.geom.Line2D$Double: void <init>(double,double,double,double)>($stack16, $stack15, xx, m);
+        #l1 = (java.awt.Shape) $stack17;
+        virtualinvoke g2.<java.awt.Graphics2D: void draw(java.awt.Shape)>(#l1);
+        $stack20 = new java.awt.geom.Line2D$Double;
+        $stack19 = xx + side;
+        $stack18 = m - side;
+        #l4 = (java.awt.geom.Line2D$Double) $stack20;
+        specialinvoke #l4.<java.awt.geom.Line2D$Double: void <init>(double,double,double,double)>($stack19, $stack18, xx, m);
+        #l0 = (java.awt.Shape) $stack20;
+        virtualinvoke g2.<java.awt.Graphics2D: void draw(java.awt.Shape)>(#l0);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.category.BoxAndWhiskerRenderer: void drawEllipse(java.awt.geom.Point2D,double,java.awt.Graphics2D)> ----
+    {
+        double $stack6, $stack7, $stack8, $stack9, oRadius;
+        java.awt.Graphics2D g2;
+        java.awt.Shape #l0;
+        java.awt.geom.Ellipse2D$Double #l1, dot;
+        java.awt.geom.Point2D point;
+        java.lang.Object $stack10;
+        org.jfree.chart.renderer.category.BoxAndWhiskerRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.category.BoxAndWhiskerRenderer;
+        point := @parameter0: java.awt.geom.Point2D;
+        oRadius := @parameter1: double;
+        g2 := @parameter2: java.awt.Graphics2D;
+        $stack10 = new java.awt.geom.Ellipse2D$Double;
+        $stack6 = virtualinvoke point.<java.awt.geom.Point2D: double getX()>();
+        $stack7 = oRadius / 2.0;
+        $stack9 = $stack6 + $stack7;
+        $stack8 = virtualinvoke point.<java.awt.geom.Point2D: double getY()>();
+        #l1 = (java.awt.geom.Ellipse2D$Double) $stack10;
+        specialinvoke #l1.<java.awt.geom.Ellipse2D$Double: void <init>(double,double,double,double)>($stack9, $stack8, oRadius, oRadius);
+        dot = (java.awt.geom.Ellipse2D$Double) $stack10;
+        #l0 = (java.awt.Shape) $stack10;
+        virtualinvoke g2.<java.awt.Graphics2D: void draw(java.awt.Shape)>(#l0);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.category.BoxAndWhiskerRenderer: java.awt.Paint getArtifactPaint()> ----
+    {
+        java.awt.Paint $stack1;
+        org.jfree.chart.renderer.category.BoxAndWhiskerRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.category.BoxAndWhiskerRenderer;
+        $stack1 = this.<org.jfree.chart.renderer.category.BoxAndWhiskerRenderer: java.awt.Paint artifactPaint>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.category.BoxAndWhiskerRenderer: void readObject(java.io.ObjectInputStream)> ----
+    {
+        java.awt.Paint $stack2;
+        java.io.ObjectInputStream stream;
+        org.jfree.chart.renderer.category.BoxAndWhiskerRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.category.BoxAndWhiskerRenderer;
+        stream := @parameter0: java.io.ObjectInputStream;
+        virtualinvoke stream.<java.io.ObjectInputStream: void defaultReadObject()>();
+        $stack2 = staticinvoke <org.jfree.chart.util.SerialUtilities: java.awt.Paint readPaint(java.io.ObjectInputStream)>(stream);
+        this.<org.jfree.chart.renderer.category.BoxAndWhiskerRenderer: java.awt.Paint artifactPaint> = $stack2;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.category.BoxAndWhiskerRenderer: void setArtifactPaint(java.awt.Paint)> ----
+    {
+        java.awt.Paint paint;
+        java.lang.IllegalArgumentException #l1;
+        java.lang.Object $stack3;
+        java.lang.Throwable #l0;
+        org.jfree.chart.event.RendererChangeEvent $stack2;
+        org.jfree.chart.renderer.category.BoxAndWhiskerRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.category.BoxAndWhiskerRenderer;
+        paint := @parameter0: java.awt.Paint;
+    
+        if paint != null goto label1;
+        $stack3 = new java.lang.IllegalArgumentException;
+        #l1 = (java.lang.IllegalArgumentException) $stack3;
+        specialinvoke #l1.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'paint\' argument.");
+        #l0 = (java.lang.Throwable) $stack3;
+    
+        throw #l0;
+    
+      label1:
+        this.<org.jfree.chart.renderer.category.BoxAndWhiskerRenderer: java.awt.Paint artifactPaint> = paint;
+        $stack2 = new org.jfree.chart.event.RendererChangeEvent;
+        specialinvoke $stack2.<org.jfree.chart.event.RendererChangeEvent: void <init>(java.lang.Object)>(this);
+        virtualinvoke this.<org.jfree.chart.renderer.category.BoxAndWhiskerRenderer: void notifyListeners(org.jfree.chart.event.RendererChangeEvent)>($stack2);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.category.BoxAndWhiskerRenderer: void setItemMargin(double)> ----
+    {
+        double margin;
+        org.jfree.chart.event.RendererChangeEvent $stack3;
+        org.jfree.chart.renderer.category.BoxAndWhiskerRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.category.BoxAndWhiskerRenderer;
+        margin := @parameter0: double;
+        this.<org.jfree.chart.renderer.category.BoxAndWhiskerRenderer: double itemMargin> = margin;
+        $stack3 = new org.jfree.chart.event.RendererChangeEvent;
+        specialinvoke $stack3.<org.jfree.chart.event.RendererChangeEvent: void <init>(java.lang.Object)>(this);
+        virtualinvoke this.<org.jfree.chart.renderer.category.BoxAndWhiskerRenderer: void notifyListeners(org.jfree.chart.event.RendererChangeEvent)>($stack3);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.category.BoxAndWhiskerRenderer: boolean getFillBox()> ----
+    {
+        boolean $stack1;
+        org.jfree.chart.renderer.category.BoxAndWhiskerRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.category.BoxAndWhiskerRenderer;
+        $stack1 = this.<org.jfree.chart.renderer.category.BoxAndWhiskerRenderer: boolean fillBox>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.category.BoxAndWhiskerRenderer: void writeObject(java.io.ObjectOutputStream)> ----
+    {
+        java.awt.Paint $stack2;
+        java.io.ObjectOutputStream stream;
+        org.jfree.chart.renderer.category.BoxAndWhiskerRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.category.BoxAndWhiskerRenderer;
+        stream := @parameter0: java.io.ObjectOutputStream;
+        virtualinvoke stream.<java.io.ObjectOutputStream: void defaultWriteObject()>();
+        $stack2 = this.<org.jfree.chart.renderer.category.BoxAndWhiskerRenderer: java.awt.Paint artifactPaint>;
+        staticinvoke <org.jfree.chart.util.SerialUtilities: void writePaint(java.awt.Paint,java.io.ObjectOutputStream)>($stack2, stream);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.category.BoxAndWhiskerRenderer: org.jfree.chart.renderer.category.CategoryItemRendererState initialise(java.awt.Graphics2D,java.awt.geom.Rectangle2D,org.jfree.chart.plot.CategoryPlot,int,org.jfree.chart.plot.PlotRenderingInfo)> ----
+    {
+        double $stack22, $stack23, $stack24, $stack25, $stack26, $stack27, $stack32, $stack33, categoryMargin, currentItemMargin, space, used;
+        int $stack28, $stack29, $stack30, $stack31, columns, rendererIndex, rows;
+        java.awt.Graphics2D g2;
+        java.awt.geom.Rectangle2D dataArea;
+        org.jfree.chart.axis.CategoryAxis domainAxis;
+        org.jfree.chart.plot.CategoryPlot plot;
+        org.jfree.chart.plot.PlotOrientation $stack20, $stack21, orientation;
+        org.jfree.chart.plot.PlotRenderingInfo info;
+        org.jfree.chart.renderer.category.BoxAndWhiskerRenderer this;
+        org.jfree.chart.renderer.category.CategoryItemRendererState state;
+        org.jfree.data.category.CategoryDataset dataset;
+    
+    
+        this := @this: org.jfree.chart.renderer.category.BoxAndWhiskerRenderer;
+        g2 := @parameter0: java.awt.Graphics2D;
+        dataArea := @parameter1: java.awt.geom.Rectangle2D;
+        plot := @parameter2: org.jfree.chart.plot.CategoryPlot;
+        rendererIndex := @parameter3: int;
+        info := @parameter4: org.jfree.chart.plot.PlotRenderingInfo;
+        state = specialinvoke this.<org.jfree.chart.renderer.category.AbstractCategoryItemRenderer: org.jfree.chart.renderer.category.CategoryItemRendererState initialise(java.awt.Graphics2D,java.awt.geom.Rectangle2D,org.jfree.chart.plot.CategoryPlot,int,org.jfree.chart.plot.PlotRenderingInfo)>(g2, dataArea, plot, rendererIndex, info);
+        domainAxis = virtualinvoke this.<org.jfree.chart.renderer.category.BoxAndWhiskerRenderer: org.jfree.chart.axis.CategoryAxis getDomainAxis(org.jfree.chart.plot.CategoryPlot,int)>(plot, rendererIndex);
+        dataset = virtualinvoke plot.<org.jfree.chart.plot.CategoryPlot: org.jfree.data.category.CategoryDataset getDataset(int)>(rendererIndex);
+    
+        if dataset == null goto label6;
+        columns = interfaceinvoke dataset.<org.jfree.data.category.CategoryDataset: int getColumnCount()>();
+        rows = interfaceinvoke dataset.<org.jfree.data.category.CategoryDataset: int getRowCount()>();
+        space = 0.0;
+        orientation = virtualinvoke plot.<org.jfree.chart.plot.CategoryPlot: org.jfree.chart.plot.PlotOrientation getOrientation()>();
+        $stack20 = <org.jfree.chart.plot.PlotOrientation: org.jfree.chart.plot.PlotOrientation HORIZONTAL>;
+    
+        if orientation != $stack20 goto label1;
+        space = virtualinvoke dataArea.<java.awt.geom.Rectangle2D: double getHeight()>();
+    
+        goto label2;
+    
+      label1:
+        $stack21 = <org.jfree.chart.plot.PlotOrientation: org.jfree.chart.plot.PlotOrientation VERTICAL>;
+    
+        if orientation != $stack21 goto label2;
+        space = virtualinvoke dataArea.<java.awt.geom.Rectangle2D: double getWidth()>();
+    
+      label2:
+        categoryMargin = 0.0;
+        currentItemMargin = 0.0;
+    
+        if columns <= 1 goto label3;
+        categoryMargin = virtualinvoke domainAxis.<org.jfree.chart.axis.CategoryAxis: double getCategoryMargin()>();
+    
+      label3:
+        if rows <= 1 goto label4;
+        currentItemMargin = virtualinvoke this.<org.jfree.chart.renderer.category.BoxAndWhiskerRenderer: double getItemMargin()>();
+    
+      label4:
+        $stack22 = virtualinvoke domainAxis.<org.jfree.chart.axis.CategoryAxis: double getLowerMargin()>();
+        $stack23 = 1.0 - $stack22;
+        $stack24 = virtualinvoke domainAxis.<org.jfree.chart.axis.CategoryAxis: double getUpperMargin()>();
+        $stack25 = $stack23 - $stack24;
+        $stack26 = $stack25 - categoryMargin;
+        $stack27 = $stack26 - currentItemMargin;
+        used = space * $stack27;
+        $stack28 = rows * columns;
+    
+        if $stack28 <= 0 goto label5;
+        $stack29 = interfaceinvoke dataset.<org.jfree.data.category.CategoryDataset: int getColumnCount()>();
+        $stack30 = interfaceinvoke dataset.<org.jfree.data.category.CategoryDataset: int getRowCount()>();
+        $stack31 = $stack29 * $stack30;
+        $stack32 = (double) $stack31;
+        $stack33 = used / $stack32;
+        virtualinvoke state.<org.jfree.chart.renderer.category.CategoryItemRendererState: void setBarWidth(double)>($stack33);
+    
+        goto label6;
+    
+      label5:
+        virtualinvoke state.<org.jfree.chart.renderer.category.CategoryItemRendererState: void setBarWidth(double)>(used);
+    
+      label6:
+        return state;
+    }
+
+}

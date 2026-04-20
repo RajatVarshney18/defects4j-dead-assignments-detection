@@ -1,0 +1,172 @@
+// ========================================================================
+// CLASS : org.jfree.chart.util.ShapeList
+// ========================================================================
+
+[PUBLIC, SUPER] class org.jfree.chart.util.ShapeList extends org.jfree.chart.util.AbstractObjectList {
+
+    // ---- method: <org.jfree.chart.util.ShapeList: void setShape(int,java.awt.Shape)> ----
+    {
+        int index;
+        java.awt.Shape shape;
+        org.jfree.chart.util.ShapeList this;
+    
+    
+        this := @this: org.jfree.chart.util.ShapeList;
+        index := @parameter0: int;
+        shape := @parameter1: java.awt.Shape;
+        virtualinvoke this.<org.jfree.chart.util.ShapeList: void set(int,java.lang.Object)>(index, shape);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.util.ShapeList: boolean equals(java.lang.Object)> ----
+    {
+        boolean $stack2, $stack3;
+        java.lang.Object obj;
+        org.jfree.chart.util.ShapeList this;
+    
+    
+        this := @this: org.jfree.chart.util.ShapeList;
+        obj := @parameter0: java.lang.Object;
+    
+        if obj != null goto label1;
+    
+        return 0;
+    
+      label1:
+        if obj != this goto label2;
+    
+        return 1;
+    
+      label2:
+        $stack2 = obj instanceof org.jfree.chart.util.ShapeList;
+    
+        if $stack2 == 0 goto label3;
+        $stack3 = specialinvoke this.<org.jfree.chart.util.AbstractObjectList: boolean equals(java.lang.Object)>(obj);
+    
+        return $stack3;
+    
+      label3:
+        return 0;
+    }
+
+    // ---- method: <org.jfree.chart.util.ShapeList: java.lang.Object clone()> ----
+    {
+        java.lang.Object $stack1;
+        org.jfree.chart.util.ShapeList this;
+    
+    
+        this := @this: org.jfree.chart.util.ShapeList;
+        $stack1 = specialinvoke this.<org.jfree.chart.util.AbstractObjectList: java.lang.Object clone()>();
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.util.ShapeList: void <init>()> ----
+    {
+        org.jfree.chart.util.ShapeList this;
+    
+    
+        this := @this: org.jfree.chart.util.ShapeList;
+        specialinvoke this.<org.jfree.chart.util.AbstractObjectList: void <init>()>();
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.util.ShapeList: int hashCode()> ----
+    {
+        int $stack1;
+        org.jfree.chart.util.ShapeList this;
+    
+    
+        this := @this: org.jfree.chart.util.ShapeList;
+        $stack1 = specialinvoke this.<org.jfree.chart.util.AbstractObjectList: int hashCode()>();
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.util.ShapeList: void writeObject(java.io.ObjectOutputStream)> ----
+    {
+        int count, i;
+        java.awt.Shape shape;
+        java.io.ObjectOutputStream stream;
+        org.jfree.chart.util.ShapeList this;
+    
+    
+        this := @this: org.jfree.chart.util.ShapeList;
+        stream := @parameter0: java.io.ObjectOutputStream;
+        virtualinvoke stream.<java.io.ObjectOutputStream: void defaultWriteObject()>();
+        count = virtualinvoke this.<org.jfree.chart.util.ShapeList: int size()>();
+        virtualinvoke stream.<java.io.ObjectOutputStream: void writeInt(int)>(count);
+        i = 0;
+    
+      label1:
+        if i >= count goto label4;
+        shape = virtualinvoke this.<org.jfree.chart.util.ShapeList: java.awt.Shape getShape(int)>(i);
+    
+        if shape == null goto label2;
+        virtualinvoke stream.<java.io.ObjectOutputStream: void writeInt(int)>(i);
+        staticinvoke <org.jfree.chart.util.SerialUtilities: void writeShape(java.awt.Shape,java.io.ObjectOutputStream)>(shape, stream);
+    
+        goto label3;
+    
+      label2:
+        virtualinvoke stream.<java.io.ObjectOutputStream: void writeInt(int)>(-1);
+    
+      label3:
+        i = i + 1;
+    
+        goto label1;
+    
+      label4:
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.util.ShapeList: void readObject(java.io.ObjectInputStream)> ----
+    {
+        int count, i, index;
+        java.awt.Shape $stack5;
+        java.io.ObjectInputStream stream;
+        org.jfree.chart.util.ShapeList this;
+    
+    
+        this := @this: org.jfree.chart.util.ShapeList;
+        stream := @parameter0: java.io.ObjectInputStream;
+        virtualinvoke stream.<java.io.ObjectInputStream: void defaultReadObject()>();
+        count = virtualinvoke stream.<java.io.ObjectInputStream: int readInt()>();
+        i = 0;
+    
+      label1:
+        if i >= count goto label3;
+        index = virtualinvoke stream.<java.io.ObjectInputStream: int readInt()>();
+    
+        if index == -1 goto label2;
+        $stack5 = staticinvoke <org.jfree.chart.util.SerialUtilities: java.awt.Shape readShape(java.io.ObjectInputStream)>(stream);
+        virtualinvoke this.<org.jfree.chart.util.ShapeList: void setShape(int,java.awt.Shape)>(index, $stack5);
+    
+      label2:
+        i = i + 1;
+    
+        goto label1;
+    
+      label3:
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.util.ShapeList: java.awt.Shape getShape(int)> ----
+    {
+        int index;
+        java.awt.Shape $stack3;
+        java.lang.Object $stack2;
+        org.jfree.chart.util.ShapeList this;
+    
+    
+        this := @this: org.jfree.chart.util.ShapeList;
+        index := @parameter0: int;
+        $stack2 = virtualinvoke this.<org.jfree.chart.util.ShapeList: java.lang.Object get(int)>(index);
+        $stack3 = (java.awt.Shape) $stack2;
+    
+        return $stack3;
+    }
+
+}

@@ -1,0 +1,163 @@
+// ========================================================================
+// CLASS : org.jfree.chart.renderer.OutlierListCollection
+// ========================================================================
+
+[PUBLIC, SUPER] class org.jfree.chart.renderer.OutlierListCollection extends java.lang.Object {
+
+    // ---- method: <org.jfree.chart.renderer.OutlierListCollection: boolean isHighFarOut()> ----
+    {
+        boolean $stack1;
+        org.jfree.chart.renderer.OutlierListCollection this;
+    
+    
+        this := @this: org.jfree.chart.renderer.OutlierListCollection;
+        $stack1 = this.<org.jfree.chart.renderer.OutlierListCollection: boolean highFarOut>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.OutlierListCollection: void setHighFarOut(boolean)> ----
+    {
+        boolean farOut;
+        org.jfree.chart.renderer.OutlierListCollection this;
+    
+    
+        this := @this: org.jfree.chart.renderer.OutlierListCollection;
+        farOut := @parameter0: boolean;
+        this.<org.jfree.chart.renderer.OutlierListCollection: boolean highFarOut> = farOut;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.OutlierListCollection: void <init>()> ----
+    {
+        java.lang.Object $stack1;
+        java.util.ArrayList #l0;
+        org.jfree.chart.renderer.OutlierListCollection this;
+    
+    
+        this := @this: org.jfree.chart.renderer.OutlierListCollection;
+        specialinvoke this.<java.lang.Object: void <init>()>();
+        this.<org.jfree.chart.renderer.OutlierListCollection: boolean highFarOut> = 0;
+        this.<org.jfree.chart.renderer.OutlierListCollection: boolean lowFarOut> = 0;
+        $stack1 = new java.util.ArrayList;
+        #l0 = (java.util.ArrayList) $stack1;
+        specialinvoke #l0.<java.util.ArrayList: void <init>()>();
+        this.<org.jfree.chart.renderer.OutlierListCollection: java.util.List outlierLists> = (java.util.List) $stack1;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.OutlierListCollection: boolean isLowFarOut()> ----
+    {
+        boolean $stack1;
+        org.jfree.chart.renderer.OutlierListCollection this;
+    
+    
+        this := @this: org.jfree.chart.renderer.OutlierListCollection;
+        $stack1 = this.<org.jfree.chart.renderer.OutlierListCollection: boolean lowFarOut>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.OutlierListCollection: void setLowFarOut(boolean)> ----
+    {
+        boolean farOut;
+        org.jfree.chart.renderer.OutlierListCollection this;
+    
+    
+        this := @this: org.jfree.chart.renderer.OutlierListCollection;
+        farOut := @parameter0: boolean;
+        this.<org.jfree.chart.renderer.OutlierListCollection: boolean lowFarOut> = farOut;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.OutlierListCollection: boolean add(org.jfree.chart.renderer.Outlier)> ----
+    {
+        boolean $stack12, $stack15, $stack6, $stack8, updated;
+        java.lang.Object $stack11;
+        java.util.Iterator iterator;
+        java.util.List $stack10, $stack14, $stack5, $stack7;
+        org.jfree.chart.renderer.Outlier outlier;
+        org.jfree.chart.renderer.OutlierList $stack13, $stack9, list;
+        org.jfree.chart.renderer.OutlierListCollection this;
+    
+    
+        this := @this: org.jfree.chart.renderer.OutlierListCollection;
+        outlier := @parameter0: org.jfree.chart.renderer.Outlier;
+        $stack5 = this.<org.jfree.chart.renderer.OutlierListCollection: java.util.List outlierLists>;
+        $stack6 = interfaceinvoke $stack5.<java.util.List: boolean isEmpty()>();
+    
+        if $stack6 == 0 goto label1;
+        $stack14 = this.<org.jfree.chart.renderer.OutlierListCollection: java.util.List outlierLists>;
+        $stack13 = new org.jfree.chart.renderer.OutlierList;
+        specialinvoke $stack13.<org.jfree.chart.renderer.OutlierList: void <init>(org.jfree.chart.renderer.Outlier)>(outlier);
+        $stack15 = interfaceinvoke $stack14.<java.util.List: boolean add(java.lang.Object)>($stack13);
+    
+        return $stack15;
+    
+      label1:
+        updated = 0;
+        $stack7 = this.<org.jfree.chart.renderer.OutlierListCollection: java.util.List outlierLists>;
+        iterator = interfaceinvoke $stack7.<java.util.List: java.util.Iterator iterator()>();
+    
+      label2:
+        $stack8 = interfaceinvoke iterator.<java.util.Iterator: boolean hasNext()>();
+    
+        if $stack8 == 0 goto label4;
+        $stack11 = interfaceinvoke iterator.<java.util.Iterator: java.lang.Object next()>();
+        list = (org.jfree.chart.renderer.OutlierList) $stack11;
+        $stack12 = virtualinvoke list.<org.jfree.chart.renderer.OutlierList: boolean isOverlapped(org.jfree.chart.renderer.Outlier)>(outlier);
+    
+        if $stack12 == 0 goto label3;
+        updated = specialinvoke this.<org.jfree.chart.renderer.OutlierListCollection: boolean updateOutlierList(org.jfree.chart.renderer.OutlierList,org.jfree.chart.renderer.Outlier)>(list, outlier);
+    
+      label3:
+        goto label2;
+    
+      label4:
+        if updated != 0 goto label5;
+        $stack10 = this.<org.jfree.chart.renderer.OutlierListCollection: java.util.List outlierLists>;
+        $stack9 = new org.jfree.chart.renderer.OutlierList;
+        specialinvoke $stack9.<org.jfree.chart.renderer.OutlierList: void <init>(org.jfree.chart.renderer.Outlier)>(outlier);
+        updated = interfaceinvoke $stack10.<java.util.List: boolean add(java.lang.Object)>($stack9);
+    
+      label5:
+        return updated;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.OutlierListCollection: java.util.Iterator iterator()> ----
+    {
+        java.util.Iterator $stack2;
+        java.util.List $stack1;
+        org.jfree.chart.renderer.OutlierListCollection this;
+    
+    
+        this := @this: org.jfree.chart.renderer.OutlierListCollection;
+        $stack1 = this.<org.jfree.chart.renderer.OutlierListCollection: java.util.List outlierLists>;
+        $stack2 = interfaceinvoke $stack1.<java.util.List: java.util.Iterator iterator()>();
+    
+        return $stack2;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.OutlierListCollection: boolean updateOutlierList(org.jfree.chart.renderer.OutlierList,org.jfree.chart.renderer.Outlier)> ----
+    {
+        boolean result#0, result#1;
+        org.jfree.chart.renderer.Outlier outlier;
+        org.jfree.chart.renderer.OutlierList list;
+        org.jfree.chart.renderer.OutlierListCollection this;
+    
+    
+        this := @this: org.jfree.chart.renderer.OutlierListCollection;
+        list := @parameter0: org.jfree.chart.renderer.OutlierList;
+        outlier := @parameter1: org.jfree.chart.renderer.Outlier;
+        result#0 = 0;
+        result#1 = virtualinvoke list.<org.jfree.chart.renderer.OutlierList: boolean add(org.jfree.chart.renderer.Outlier)>(outlier);
+        virtualinvoke list.<org.jfree.chart.renderer.OutlierList: void updateAveragedOutlier()>();
+        virtualinvoke list.<org.jfree.chart.renderer.OutlierList: void setMultiple(boolean)>(1);
+    
+        return result#1;
+    }
+
+}

@@ -1,0 +1,450 @@
+// ========================================================================
+// CLASS : org.jfree.data.xy.VectorSeriesCollection
+// ========================================================================
+
+[PUBLIC, SUPER] class org.jfree.data.xy.VectorSeriesCollection extends org.jfree.data.xy.AbstractXYDataset implements org.jfree.data.xy.VectorXYDataset, java.io.Serializable {
+
+    // ---- method: <org.jfree.data.xy.VectorSeriesCollection: java.lang.Number getX(int,int)> ----
+    {
+        double $stack3;
+        int item, series;
+        java.lang.Double #l1;
+        java.lang.Number #l0;
+        java.lang.Object $stack4;
+        org.jfree.data.xy.VectorSeriesCollection this;
+    
+    
+        this := @this: org.jfree.data.xy.VectorSeriesCollection;
+        series := @parameter0: int;
+        item := @parameter1: int;
+        $stack4 = new java.lang.Double;
+        $stack3 = virtualinvoke this.<org.jfree.data.xy.VectorSeriesCollection: double getXValue(int,int)>(series, item);
+        #l1 = (java.lang.Double) $stack4;
+        specialinvoke #l1.<java.lang.Double: void <init>(double)>($stack3);
+        #l0 = (java.lang.Number) $stack4;
+    
+        return #l0;
+    }
+
+    // ---- method: <org.jfree.data.xy.VectorSeriesCollection: java.lang.Object clone()> ----
+    {
+        java.lang.Object $stack2, $stack3;
+        java.util.Collection #l0, $stack4;
+        java.util.List $stack5;
+        org.jfree.data.xy.VectorSeriesCollection clone, this;
+    
+    
+        this := @this: org.jfree.data.xy.VectorSeriesCollection;
+        $stack2 = specialinvoke this.<org.jfree.data.xy.AbstractXYDataset: java.lang.Object clone()>();
+        clone = (org.jfree.data.xy.VectorSeriesCollection) $stack2;
+        $stack3 = this.<org.jfree.data.xy.VectorSeriesCollection: java.util.List data>;
+        #l0 = (java.util.Collection) $stack3;
+        $stack4 = staticinvoke <org.jfree.chart.util.ObjectUtilities: java.util.Collection deepClone(java.util.Collection)>(#l0);
+        $stack5 = (java.util.List) $stack4;
+        clone.<org.jfree.data.xy.VectorSeriesCollection: java.util.List data> = $stack5;
+    
+        return clone;
+    }
+
+    // ---- method: <org.jfree.data.xy.VectorSeriesCollection: void addSeries(org.jfree.data.xy.VectorSeries)> ----
+    {
+        java.lang.IllegalArgumentException #l1;
+        java.lang.Object $stack3;
+        java.lang.Throwable #l0;
+        java.util.List $stack2;
+        org.jfree.data.xy.VectorSeries series;
+        org.jfree.data.xy.VectorSeriesCollection this;
+    
+    
+        this := @this: org.jfree.data.xy.VectorSeriesCollection;
+        series := @parameter0: org.jfree.data.xy.VectorSeries;
+    
+        if series != null goto label1;
+        $stack3 = new java.lang.IllegalArgumentException;
+        #l1 = (java.lang.IllegalArgumentException) $stack3;
+        specialinvoke #l1.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'series\' argument.");
+        #l0 = (java.lang.Throwable) $stack3;
+    
+        throw #l0;
+    
+      label1:
+        $stack2 = this.<org.jfree.data.xy.VectorSeriesCollection: java.util.List data>;
+        interfaceinvoke $stack2.<java.util.List: boolean add(java.lang.Object)>(series);
+        virtualinvoke series.<org.jfree.data.xy.VectorSeries: void addChangeListener(org.jfree.data.general.SeriesChangeListener)>(this);
+        virtualinvoke this.<org.jfree.data.xy.VectorSeriesCollection: void fireDatasetChanged()>();
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.xy.VectorSeriesCollection: void <init>()> ----
+    {
+        java.lang.Object $stack1;
+        java.util.ArrayList #l0;
+        org.jfree.data.xy.VectorSeriesCollection this;
+    
+    
+        this := @this: org.jfree.data.xy.VectorSeriesCollection;
+        specialinvoke this.<org.jfree.data.xy.AbstractXYDataset: void <init>()>();
+        $stack1 = new java.util.ArrayList;
+        #l0 = (java.util.ArrayList) $stack1;
+        specialinvoke #l0.<java.util.ArrayList: void <init>()>();
+        this.<org.jfree.data.xy.VectorSeriesCollection: java.util.List data> = (java.util.List) $stack1;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.xy.VectorSeriesCollection: int getItemCount(int)> ----
+    {
+        int $stack3, series;
+        org.jfree.data.xy.VectorSeries $stack2;
+        org.jfree.data.xy.VectorSeriesCollection this;
+    
+    
+        this := @this: org.jfree.data.xy.VectorSeriesCollection;
+        series := @parameter0: int;
+        $stack2 = virtualinvoke this.<org.jfree.data.xy.VectorSeriesCollection: org.jfree.data.xy.VectorSeries getSeries(int)>(series);
+        $stack3 = virtualinvoke $stack2.<org.jfree.data.xy.VectorSeries: int getItemCount()>();
+    
+        return $stack3;
+    }
+
+    // ---- method: <org.jfree.data.xy.VectorSeriesCollection: java.lang.Comparable getSeriesKey(int)> ----
+    {
+        int series;
+        java.lang.Comparable $stack3;
+        org.jfree.data.xy.VectorSeries $stack2;
+        org.jfree.data.xy.VectorSeriesCollection this;
+    
+    
+        this := @this: org.jfree.data.xy.VectorSeriesCollection;
+        series := @parameter0: int;
+        $stack2 = virtualinvoke this.<org.jfree.data.xy.VectorSeriesCollection: org.jfree.data.xy.VectorSeries getSeries(int)>(series);
+        $stack3 = virtualinvoke $stack2.<org.jfree.data.xy.VectorSeries: java.lang.Comparable getKey()>();
+    
+        return $stack3;
+    }
+
+    // ---- method: <org.jfree.data.xy.VectorSeriesCollection: void removeAllSeries()> ----
+    {
+        int $stack4, i;
+        java.lang.Object $stack7;
+        java.util.List $stack3, $stack5, $stack6;
+        org.jfree.data.xy.VectorSeries series;
+        org.jfree.data.xy.VectorSeriesCollection this;
+    
+    
+        this := @this: org.jfree.data.xy.VectorSeriesCollection;
+        i = 0;
+    
+      label1:
+        $stack3 = this.<org.jfree.data.xy.VectorSeriesCollection: java.util.List data>;
+        $stack4 = interfaceinvoke $stack3.<java.util.List: int size()>();
+    
+        if i >= $stack4 goto label2;
+        $stack6 = this.<org.jfree.data.xy.VectorSeriesCollection: java.util.List data>;
+        $stack7 = interfaceinvoke $stack6.<java.util.List: java.lang.Object get(int)>(i);
+        series = (org.jfree.data.xy.VectorSeries) $stack7;
+        virtualinvoke series.<org.jfree.data.xy.VectorSeries: void removeChangeListener(org.jfree.data.general.SeriesChangeListener)>(this);
+        i = i + 1;
+    
+        goto label1;
+    
+      label2:
+        $stack5 = this.<org.jfree.data.xy.VectorSeriesCollection: java.util.List data>;
+        interfaceinvoke $stack5.<java.util.List: void clear()>();
+        virtualinvoke this.<org.jfree.data.xy.VectorSeriesCollection: void fireDatasetChanged()>();
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.xy.VectorSeriesCollection: double getVectorXValue(int,int)> ----
+    {
+        double $stack8;
+        int item, series;
+        java.lang.Object $stack6;
+        java.util.List $stack5;
+        org.jfree.data.ComparableObjectItem $stack7;
+        org.jfree.data.xy.VectorDataItem di;
+        org.jfree.data.xy.VectorSeries s;
+        org.jfree.data.xy.VectorSeriesCollection this;
+    
+    
+        this := @this: org.jfree.data.xy.VectorSeriesCollection;
+        series := @parameter0: int;
+        item := @parameter1: int;
+        $stack5 = this.<org.jfree.data.xy.VectorSeriesCollection: java.util.List data>;
+        $stack6 = interfaceinvoke $stack5.<java.util.List: java.lang.Object get(int)>(series);
+        s = (org.jfree.data.xy.VectorSeries) $stack6;
+        $stack7 = virtualinvoke s.<org.jfree.data.xy.VectorSeries: org.jfree.data.ComparableObjectItem getDataItem(int)>(item);
+        di = (org.jfree.data.xy.VectorDataItem) $stack7;
+        $stack8 = virtualinvoke di.<org.jfree.data.xy.VectorDataItem: double getVectorX()>();
+    
+        return $stack8;
+    }
+
+    // ---- method: <org.jfree.data.xy.VectorSeriesCollection: org.jfree.data.xy.Vector getVector(int,int)> ----
+    {
+        int item, series;
+        java.lang.Object $stack6;
+        java.util.List $stack5;
+        org.jfree.data.ComparableObjectItem $stack7;
+        org.jfree.data.xy.Vector $stack8;
+        org.jfree.data.xy.VectorDataItem di;
+        org.jfree.data.xy.VectorSeries s;
+        org.jfree.data.xy.VectorSeriesCollection this;
+    
+    
+        this := @this: org.jfree.data.xy.VectorSeriesCollection;
+        series := @parameter0: int;
+        item := @parameter1: int;
+        $stack5 = this.<org.jfree.data.xy.VectorSeriesCollection: java.util.List data>;
+        $stack6 = interfaceinvoke $stack5.<java.util.List: java.lang.Object get(int)>(series);
+        s = (org.jfree.data.xy.VectorSeries) $stack6;
+        $stack7 = virtualinvoke s.<org.jfree.data.xy.VectorSeries: org.jfree.data.ComparableObjectItem getDataItem(int)>(item);
+        di = (org.jfree.data.xy.VectorDataItem) $stack7;
+        $stack8 = virtualinvoke di.<org.jfree.data.xy.VectorDataItem: org.jfree.data.xy.Vector getVector()>();
+    
+        return $stack8;
+    }
+
+    // ---- method: <org.jfree.data.xy.VectorSeriesCollection: int getSeriesCount()> ----
+    {
+        int $stack2;
+        java.util.List $stack1;
+        org.jfree.data.xy.VectorSeriesCollection this;
+    
+    
+        this := @this: org.jfree.data.xy.VectorSeriesCollection;
+        $stack1 = this.<org.jfree.data.xy.VectorSeriesCollection: java.util.List data>;
+        $stack2 = interfaceinvoke $stack1.<java.util.List: int size()>();
+    
+        return $stack2;
+    }
+
+    // ---- method: <org.jfree.data.xy.VectorSeriesCollection: boolean removeSeries(org.jfree.data.xy.VectorSeries)> ----
+    {
+        boolean removed;
+        java.lang.IllegalArgumentException #l1;
+        java.lang.Object $stack4;
+        java.lang.Throwable #l0;
+        java.util.List $stack3;
+        org.jfree.data.xy.VectorSeries series;
+        org.jfree.data.xy.VectorSeriesCollection this;
+    
+    
+        this := @this: org.jfree.data.xy.VectorSeriesCollection;
+        series := @parameter0: org.jfree.data.xy.VectorSeries;
+    
+        if series != null goto label1;
+        $stack4 = new java.lang.IllegalArgumentException;
+        #l1 = (java.lang.IllegalArgumentException) $stack4;
+        specialinvoke #l1.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'series\' argument.");
+        #l0 = (java.lang.Throwable) $stack4;
+    
+        throw #l0;
+    
+      label1:
+        $stack3 = this.<org.jfree.data.xy.VectorSeriesCollection: java.util.List data>;
+        removed = interfaceinvoke $stack3.<java.util.List: boolean remove(java.lang.Object)>(series);
+    
+        if removed == 0 goto label2;
+        virtualinvoke series.<org.jfree.data.xy.VectorSeries: void removeChangeListener(org.jfree.data.general.SeriesChangeListener)>(this);
+        virtualinvoke this.<org.jfree.data.xy.VectorSeriesCollection: void fireDatasetChanged()>();
+    
+      label2:
+        return removed;
+    }
+
+    // ---- method: <org.jfree.data.xy.VectorSeriesCollection: double getYValue(int,int)> ----
+    {
+        double $stack8;
+        int item, series;
+        java.lang.Object $stack6;
+        java.util.List $stack5;
+        org.jfree.data.ComparableObjectItem $stack7;
+        org.jfree.data.xy.VectorDataItem di;
+        org.jfree.data.xy.VectorSeries s;
+        org.jfree.data.xy.VectorSeriesCollection this;
+    
+    
+        this := @this: org.jfree.data.xy.VectorSeriesCollection;
+        series := @parameter0: int;
+        item := @parameter1: int;
+        $stack5 = this.<org.jfree.data.xy.VectorSeriesCollection: java.util.List data>;
+        $stack6 = interfaceinvoke $stack5.<java.util.List: java.lang.Object get(int)>(series);
+        s = (org.jfree.data.xy.VectorSeries) $stack6;
+        $stack7 = virtualinvoke s.<org.jfree.data.xy.VectorSeries: org.jfree.data.ComparableObjectItem getDataItem(int)>(item);
+        di = (org.jfree.data.xy.VectorDataItem) $stack7;
+        $stack8 = virtualinvoke di.<org.jfree.data.xy.VectorDataItem: double getYValue()>();
+    
+        return $stack8;
+    }
+
+    // ---- method: <org.jfree.data.xy.VectorSeriesCollection: boolean equals(java.lang.Object)> ----
+    {
+        boolean $stack3, $stack6;
+        java.lang.Object obj;
+        java.util.List $stack4, $stack5;
+        org.jfree.data.xy.VectorSeriesCollection that, this;
+    
+    
+        this := @this: org.jfree.data.xy.VectorSeriesCollection;
+        obj := @parameter0: java.lang.Object;
+    
+        if obj != this goto label1;
+    
+        return 1;
+    
+      label1:
+        $stack3 = obj instanceof org.jfree.data.xy.VectorSeriesCollection;
+    
+        if $stack3 != 0 goto label2;
+    
+        return 0;
+    
+      label2:
+        that = (org.jfree.data.xy.VectorSeriesCollection) obj;
+        $stack5 = this.<org.jfree.data.xy.VectorSeriesCollection: java.util.List data>;
+        $stack4 = that.<org.jfree.data.xy.VectorSeriesCollection: java.util.List data>;
+        $stack6 = staticinvoke <org.jfree.chart.util.ObjectUtilities: boolean equal(java.lang.Object,java.lang.Object)>($stack5, $stack4);
+    
+        return $stack6;
+    }
+
+    // ---- method: <org.jfree.data.xy.VectorSeriesCollection: java.lang.Number getY(int,int)> ----
+    {
+        double $stack3;
+        int item, series;
+        java.lang.Double #l0;
+        java.lang.Number #l1;
+        java.lang.Object $stack4;
+        org.jfree.data.xy.VectorSeriesCollection this;
+    
+    
+        this := @this: org.jfree.data.xy.VectorSeriesCollection;
+        series := @parameter0: int;
+        item := @parameter1: int;
+        $stack4 = new java.lang.Double;
+        $stack3 = virtualinvoke this.<org.jfree.data.xy.VectorSeriesCollection: double getYValue(int,int)>(series, item);
+        #l0 = (java.lang.Double) $stack4;
+        specialinvoke #l0.<java.lang.Double: void <init>(double)>($stack3);
+        #l1 = (java.lang.Number) $stack4;
+    
+        return #l1;
+    }
+
+    // ---- method: <org.jfree.data.xy.VectorSeriesCollection: org.jfree.data.xy.VectorSeries getSeries(int)> ----
+    {
+        int $stack3, series;
+        java.lang.IllegalArgumentException #l1;
+        java.lang.Object $stack2, $stack5;
+        java.lang.Throwable #l0;
+        java.util.List $stack4;
+        org.jfree.data.xy.VectorSeries $stack6;
+        org.jfree.data.xy.VectorSeriesCollection this;
+    
+    
+        this := @this: org.jfree.data.xy.VectorSeriesCollection;
+        series := @parameter0: int;
+    
+        if series < 0 goto label1;
+        $stack3 = virtualinvoke this.<org.jfree.data.xy.VectorSeriesCollection: int getSeriesCount()>();
+    
+        if series < $stack3 goto label2;
+    
+      label1:
+        $stack2 = new java.lang.IllegalArgumentException;
+        #l1 = (java.lang.IllegalArgumentException) $stack2;
+        specialinvoke #l1.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Series index out of bounds");
+        #l0 = (java.lang.Throwable) $stack2;
+    
+        throw #l0;
+    
+      label2:
+        $stack4 = this.<org.jfree.data.xy.VectorSeriesCollection: java.util.List data>;
+        $stack5 = interfaceinvoke $stack4.<java.util.List: java.lang.Object get(int)>(series);
+        $stack6 = (org.jfree.data.xy.VectorSeries) $stack5;
+    
+        return $stack6;
+    }
+
+    // ---- method: <org.jfree.data.xy.VectorSeriesCollection: double getXValue(int,int)> ----
+    {
+        double $stack8;
+        int item, series;
+        java.lang.Object $stack6;
+        java.util.List $stack5;
+        org.jfree.data.ComparableObjectItem $stack7;
+        org.jfree.data.xy.VectorDataItem di;
+        org.jfree.data.xy.VectorSeries s;
+        org.jfree.data.xy.VectorSeriesCollection this;
+    
+    
+        this := @this: org.jfree.data.xy.VectorSeriesCollection;
+        series := @parameter0: int;
+        item := @parameter1: int;
+        $stack5 = this.<org.jfree.data.xy.VectorSeriesCollection: java.util.List data>;
+        $stack6 = interfaceinvoke $stack5.<java.util.List: java.lang.Object get(int)>(series);
+        s = (org.jfree.data.xy.VectorSeries) $stack6;
+        $stack7 = virtualinvoke s.<org.jfree.data.xy.VectorSeries: org.jfree.data.ComparableObjectItem getDataItem(int)>(item);
+        di = (org.jfree.data.xy.VectorDataItem) $stack7;
+        $stack8 = virtualinvoke di.<org.jfree.data.xy.VectorDataItem: double getXValue()>();
+    
+        return $stack8;
+    }
+
+    // ---- method: <org.jfree.data.xy.VectorSeriesCollection: int indexOf(org.jfree.data.xy.VectorSeries)> ----
+    {
+        int $stack3;
+        java.lang.IllegalArgumentException #l1;
+        java.lang.Object $stack4;
+        java.lang.Throwable #l0;
+        java.util.List $stack2;
+        org.jfree.data.xy.VectorSeries series;
+        org.jfree.data.xy.VectorSeriesCollection this;
+    
+    
+        this := @this: org.jfree.data.xy.VectorSeriesCollection;
+        series := @parameter0: org.jfree.data.xy.VectorSeries;
+    
+        if series != null goto label1;
+        $stack4 = new java.lang.IllegalArgumentException;
+        #l1 = (java.lang.IllegalArgumentException) $stack4;
+        specialinvoke #l1.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'series\' argument.");
+        #l0 = (java.lang.Throwable) $stack4;
+    
+        throw #l0;
+    
+      label1:
+        $stack2 = this.<org.jfree.data.xy.VectorSeriesCollection: java.util.List data>;
+        $stack3 = interfaceinvoke $stack2.<java.util.List: int indexOf(java.lang.Object)>(series);
+    
+        return $stack3;
+    }
+
+    // ---- method: <org.jfree.data.xy.VectorSeriesCollection: double getVectorYValue(int,int)> ----
+    {
+        double $stack8;
+        int item, series;
+        java.lang.Object $stack6;
+        java.util.List $stack5;
+        org.jfree.data.ComparableObjectItem $stack7;
+        org.jfree.data.xy.VectorDataItem di;
+        org.jfree.data.xy.VectorSeries s;
+        org.jfree.data.xy.VectorSeriesCollection this;
+    
+    
+        this := @this: org.jfree.data.xy.VectorSeriesCollection;
+        series := @parameter0: int;
+        item := @parameter1: int;
+        $stack5 = this.<org.jfree.data.xy.VectorSeriesCollection: java.util.List data>;
+        $stack6 = interfaceinvoke $stack5.<java.util.List: java.lang.Object get(int)>(series);
+        s = (org.jfree.data.xy.VectorSeries) $stack6;
+        $stack7 = virtualinvoke s.<org.jfree.data.xy.VectorSeries: org.jfree.data.ComparableObjectItem getDataItem(int)>(item);
+        di = (org.jfree.data.xy.VectorDataItem) $stack7;
+        $stack8 = virtualinvoke di.<org.jfree.data.xy.VectorDataItem: double getVectorY()>();
+    
+        return $stack8;
+    }
+
+}

@@ -1,0 +1,1355 @@
+// ========================================================================
+// CLASS : org.jfree.chart.plot.FastScatterPlot
+// ========================================================================
+
+[PUBLIC, SUPER] class org.jfree.chart.plot.FastScatterPlot extends org.jfree.chart.plot.Plot implements org.jfree.chart.plot.Zoomable, java.lang.Cloneable, java.io.Serializable, org.jfree.chart.plot.ValueAxisPlot {
+
+    // ---- method: <org.jfree.chart.plot.FastScatterPlot: boolean isRangeZoomable()> ----
+    {
+        org.jfree.chart.plot.FastScatterPlot this;
+    
+    
+        this := @this: org.jfree.chart.plot.FastScatterPlot;
+    
+        return 1;
+    }
+
+    // ---- method: <org.jfree.chart.plot.FastScatterPlot: void setDomainGridlinesVisible(boolean)> ----
+    {
+        boolean $stack2, visible;
+        org.jfree.chart.event.PlotChangeEvent $stack3;
+        org.jfree.chart.plot.FastScatterPlot this;
+    
+    
+        this := @this: org.jfree.chart.plot.FastScatterPlot;
+        visible := @parameter0: boolean;
+        $stack2 = this.<org.jfree.chart.plot.FastScatterPlot: boolean domainGridlinesVisible>;
+    
+        if $stack2 == visible goto label1;
+        this.<org.jfree.chart.plot.FastScatterPlot: boolean domainGridlinesVisible> = visible;
+        $stack3 = new org.jfree.chart.event.PlotChangeEvent;
+        specialinvoke $stack3.<org.jfree.chart.event.PlotChangeEvent: void <init>(org.jfree.chart.plot.Plot)>(this);
+        virtualinvoke this.<org.jfree.chart.plot.FastScatterPlot: void notifyListeners(org.jfree.chart.event.PlotChangeEvent)>($stack3);
+    
+      label1:
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.plot.FastScatterPlot: java.awt.Paint getPaint()> ----
+    {
+        java.awt.Paint $stack1;
+        org.jfree.chart.plot.FastScatterPlot this;
+    
+    
+        this := @this: org.jfree.chart.plot.FastScatterPlot;
+        $stack1 = this.<org.jfree.chart.plot.FastScatterPlot: java.awt.Paint paint>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.plot.FastScatterPlot: void zoomDomainAxes(double,double,org.jfree.chart.plot.PlotRenderingInfo,java.awt.geom.Point2D)> ----
+    {
+        double lowerPercent, upperPercent;
+        java.awt.geom.Point2D source;
+        org.jfree.chart.axis.ValueAxis $stack7;
+        org.jfree.chart.plot.FastScatterPlot this;
+        org.jfree.chart.plot.PlotRenderingInfo info;
+    
+    
+        this := @this: org.jfree.chart.plot.FastScatterPlot;
+        lowerPercent := @parameter0: double;
+        upperPercent := @parameter1: double;
+        info := @parameter2: org.jfree.chart.plot.PlotRenderingInfo;
+        source := @parameter3: java.awt.geom.Point2D;
+        $stack7 = this.<org.jfree.chart.plot.FastScatterPlot: org.jfree.chart.axis.ValueAxis domainAxis>;
+        virtualinvoke $stack7.<org.jfree.chart.axis.ValueAxis: void zoomRange(double,double)>(lowerPercent, upperPercent);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.plot.FastScatterPlot: java.awt.Paint getDomainGridlinePaint()> ----
+    {
+        java.awt.Paint $stack1;
+        org.jfree.chart.plot.FastScatterPlot this;
+    
+    
+        this := @this: org.jfree.chart.plot.FastScatterPlot;
+        $stack1 = this.<org.jfree.chart.plot.FastScatterPlot: java.awt.Paint domainGridlinePaint>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.plot.FastScatterPlot: boolean isRangeGridlinesVisible()> ----
+    {
+        boolean $stack1;
+        org.jfree.chart.plot.FastScatterPlot this;
+    
+    
+        this := @this: org.jfree.chart.plot.FastScatterPlot;
+        $stack1 = this.<org.jfree.chart.plot.FastScatterPlot: boolean rangeGridlinesVisible>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.plot.FastScatterPlot: org.jfree.chart.plot.PlotOrientation getOrientation()> ----
+    {
+        org.jfree.chart.plot.FastScatterPlot this;
+        org.jfree.chart.plot.PlotOrientation $stack1;
+    
+    
+        this := @this: org.jfree.chart.plot.FastScatterPlot;
+        $stack1 = <org.jfree.chart.plot.PlotOrientation: org.jfree.chart.plot.PlotOrientation VERTICAL>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.plot.FastScatterPlot: void setRangeGridlinesVisible(boolean)> ----
+    {
+        boolean $stack2, visible;
+        org.jfree.chart.event.PlotChangeEvent $stack3;
+        org.jfree.chart.plot.FastScatterPlot this;
+    
+    
+        this := @this: org.jfree.chart.plot.FastScatterPlot;
+        visible := @parameter0: boolean;
+        $stack2 = this.<org.jfree.chart.plot.FastScatterPlot: boolean rangeGridlinesVisible>;
+    
+        if $stack2 == visible goto label1;
+        this.<org.jfree.chart.plot.FastScatterPlot: boolean rangeGridlinesVisible> = visible;
+        $stack3 = new org.jfree.chart.event.PlotChangeEvent;
+        specialinvoke $stack3.<org.jfree.chart.event.PlotChangeEvent: void <init>(org.jfree.chart.plot.Plot)>(this);
+        virtualinvoke this.<org.jfree.chart.plot.FastScatterPlot: void notifyListeners(org.jfree.chart.event.PlotChangeEvent)>($stack3);
+    
+      label1:
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.plot.FastScatterPlot: void drawDomainGridlines(java.awt.Graphics2D,java.awt.geom.Rectangle2D,java.util.List)> ----
+    {
+        boolean $stack10, $stack9;
+        double $stack14, $stack15, $stack16, v;
+        java.awt.Graphics2D g2;
+        java.awt.Paint $stack18;
+        java.awt.Shape #l1;
+        java.awt.Stroke $stack19;
+        java.awt.geom.Line2D$Double #l0, line;
+        java.awt.geom.Rectangle2D dataArea;
+        java.lang.Object $stack11, $stack17;
+        java.util.Iterator iterator;
+        java.util.List ticks;
+        org.jfree.chart.axis.ValueAxis $stack12;
+        org.jfree.chart.axis.ValueTick tick;
+        org.jfree.chart.plot.FastScatterPlot this;
+        org.jfree.chart.util.RectangleEdge $stack13;
+    
+    
+        this := @this: org.jfree.chart.plot.FastScatterPlot;
+        g2 := @parameter0: java.awt.Graphics2D;
+        dataArea := @parameter1: java.awt.geom.Rectangle2D;
+        ticks := @parameter2: java.util.List;
+        $stack9 = virtualinvoke this.<org.jfree.chart.plot.FastScatterPlot: boolean isDomainGridlinesVisible()>();
+    
+        if $stack9 == 0 goto label2;
+        iterator = interfaceinvoke ticks.<java.util.List: java.util.Iterator iterator()>();
+    
+      label1:
+        $stack10 = interfaceinvoke iterator.<java.util.Iterator: boolean hasNext()>();
+    
+        if $stack10 == 0 goto label2;
+        $stack11 = interfaceinvoke iterator.<java.util.Iterator: java.lang.Object next()>();
+        tick = (org.jfree.chart.axis.ValueTick) $stack11;
+        $stack12 = this.<org.jfree.chart.plot.FastScatterPlot: org.jfree.chart.axis.ValueAxis domainAxis>;
+        $stack14 = virtualinvoke tick.<org.jfree.chart.axis.ValueTick: double getValue()>();
+        $stack13 = <org.jfree.chart.util.RectangleEdge: org.jfree.chart.util.RectangleEdge BOTTOM>;
+        v = virtualinvoke $stack12.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)>($stack14, dataArea, $stack13);
+        $stack17 = new java.awt.geom.Line2D$Double;
+        $stack16 = virtualinvoke dataArea.<java.awt.geom.Rectangle2D: double getMinY()>();
+        $stack15 = virtualinvoke dataArea.<java.awt.geom.Rectangle2D: double getMaxY()>();
+        #l0 = (java.awt.geom.Line2D$Double) $stack17;
+        specialinvoke #l0.<java.awt.geom.Line2D$Double: void <init>(double,double,double,double)>(v, $stack16, v, $stack15);
+        line = (java.awt.geom.Line2D$Double) $stack17;
+        $stack18 = virtualinvoke this.<org.jfree.chart.plot.FastScatterPlot: java.awt.Paint getDomainGridlinePaint()>();
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>($stack18);
+        $stack19 = virtualinvoke this.<org.jfree.chart.plot.FastScatterPlot: java.awt.Stroke getDomainGridlineStroke()>();
+        virtualinvoke g2.<java.awt.Graphics2D: void setStroke(java.awt.Stroke)>($stack19);
+        #l1 = (java.awt.Shape) $stack17;
+        virtualinvoke g2.<java.awt.Graphics2D: void draw(java.awt.Shape)>(#l1);
+    
+        goto label1;
+    
+      label2:
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.plot.FastScatterPlot: java.awt.Stroke getRangeGridlineStroke()> ----
+    {
+        java.awt.Stroke $stack1;
+        org.jfree.chart.plot.FastScatterPlot this;
+    
+    
+        this := @this: org.jfree.chart.plot.FastScatterPlot;
+        $stack1 = this.<org.jfree.chart.plot.FastScatterPlot: java.awt.Stroke rangeGridlineStroke>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.plot.FastScatterPlot: void zoomDomainAxes(double,org.jfree.chart.plot.PlotRenderingInfo,java.awt.geom.Point2D)> ----
+    {
+        double factor;
+        java.awt.geom.Point2D source;
+        org.jfree.chart.axis.ValueAxis $stack5;
+        org.jfree.chart.plot.FastScatterPlot this;
+        org.jfree.chart.plot.PlotRenderingInfo info;
+    
+    
+        this := @this: org.jfree.chart.plot.FastScatterPlot;
+        factor := @parameter0: double;
+        info := @parameter1: org.jfree.chart.plot.PlotRenderingInfo;
+        source := @parameter2: java.awt.geom.Point2D;
+        $stack5 = this.<org.jfree.chart.plot.FastScatterPlot: org.jfree.chart.axis.ValueAxis domainAxis>;
+        virtualinvoke $stack5.<org.jfree.chart.axis.ValueAxis: void resizeRange(double)>(factor);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.plot.FastScatterPlot: boolean equals(java.lang.Object)> ----
+    {
+        boolean $stack10, $stack13, $stack16, $stack17, $stack18, $stack21, $stack24, $stack25, $stack26, $stack29, $stack3, $stack32, $stack33, $stack4, $stack7;
+        float[][] $stack5, $stack6;
+        java.awt.Paint $stack14, $stack15, $stack19, $stack20, $stack27, $stack28;
+        java.awt.Stroke $stack22, $stack23, $stack30, $stack31;
+        java.lang.Object obj;
+        org.jfree.chart.axis.ValueAxis $stack11, $stack12, $stack8, $stack9;
+        org.jfree.chart.plot.FastScatterPlot that, this;
+    
+    
+        this := @this: org.jfree.chart.plot.FastScatterPlot;
+        obj := @parameter0: java.lang.Object;
+    
+        if obj != this goto label01;
+    
+        return 1;
+    
+      label01:
+        $stack3 = specialinvoke this.<org.jfree.chart.plot.Plot: boolean equals(java.lang.Object)>(obj);
+    
+        if $stack3 != 0 goto label02;
+    
+        return 0;
+    
+      label02:
+        $stack4 = obj instanceof org.jfree.chart.plot.FastScatterPlot;
+    
+        if $stack4 != 0 goto label03;
+    
+        return 0;
+    
+      label03:
+        that = (org.jfree.chart.plot.FastScatterPlot) obj;
+        $stack6 = this.<org.jfree.chart.plot.FastScatterPlot: float[][] data>;
+        $stack5 = that.<org.jfree.chart.plot.FastScatterPlot: float[][] data>;
+        $stack7 = staticinvoke <org.jfree.chart.util.ArrayUtilities: boolean equal(float[][],float[][])>($stack6, $stack5);
+    
+        if $stack7 != 0 goto label04;
+    
+        return 0;
+    
+      label04:
+        $stack9 = this.<org.jfree.chart.plot.FastScatterPlot: org.jfree.chart.axis.ValueAxis domainAxis>;
+        $stack8 = that.<org.jfree.chart.plot.FastScatterPlot: org.jfree.chart.axis.ValueAxis domainAxis>;
+        $stack10 = staticinvoke <org.jfree.chart.util.ObjectUtilities: boolean equal(java.lang.Object,java.lang.Object)>($stack9, $stack8);
+    
+        if $stack10 != 0 goto label05;
+    
+        return 0;
+    
+      label05:
+        $stack12 = this.<org.jfree.chart.plot.FastScatterPlot: org.jfree.chart.axis.ValueAxis rangeAxis>;
+        $stack11 = that.<org.jfree.chart.plot.FastScatterPlot: org.jfree.chart.axis.ValueAxis rangeAxis>;
+        $stack13 = staticinvoke <org.jfree.chart.util.ObjectUtilities: boolean equal(java.lang.Object,java.lang.Object)>($stack12, $stack11);
+    
+        if $stack13 != 0 goto label06;
+    
+        return 0;
+    
+      label06:
+        $stack15 = this.<org.jfree.chart.plot.FastScatterPlot: java.awt.Paint paint>;
+        $stack14 = that.<org.jfree.chart.plot.FastScatterPlot: java.awt.Paint paint>;
+        $stack16 = staticinvoke <org.jfree.chart.util.PaintUtilities: boolean equal(java.awt.Paint,java.awt.Paint)>($stack15, $stack14);
+    
+        if $stack16 != 0 goto label07;
+    
+        return 0;
+    
+      label07:
+        $stack18 = this.<org.jfree.chart.plot.FastScatterPlot: boolean domainGridlinesVisible>;
+        $stack17 = that.<org.jfree.chart.plot.FastScatterPlot: boolean domainGridlinesVisible>;
+    
+        if $stack18 == $stack17 goto label08;
+    
+        return 0;
+    
+      label08:
+        $stack20 = this.<org.jfree.chart.plot.FastScatterPlot: java.awt.Paint domainGridlinePaint>;
+        $stack19 = that.<org.jfree.chart.plot.FastScatterPlot: java.awt.Paint domainGridlinePaint>;
+        $stack21 = staticinvoke <org.jfree.chart.util.PaintUtilities: boolean equal(java.awt.Paint,java.awt.Paint)>($stack20, $stack19);
+    
+        if $stack21 != 0 goto label09;
+    
+        return 0;
+    
+      label09:
+        $stack23 = this.<org.jfree.chart.plot.FastScatterPlot: java.awt.Stroke domainGridlineStroke>;
+        $stack22 = that.<org.jfree.chart.plot.FastScatterPlot: java.awt.Stroke domainGridlineStroke>;
+        $stack24 = staticinvoke <org.jfree.chart.util.ObjectUtilities: boolean equal(java.lang.Object,java.lang.Object)>($stack23, $stack22);
+    
+        if $stack24 != 0 goto label10;
+    
+        return 0;
+    
+      label10:
+        $stack25 = this.<org.jfree.chart.plot.FastScatterPlot: boolean rangeGridlinesVisible>;
+    
+        if $stack25 != 0 goto label11;
+        $stack33 = 1;
+    
+        goto label12;
+    
+      label11:
+        $stack33 = 0;
+    
+      label12:
+        $stack26 = that.<org.jfree.chart.plot.FastScatterPlot: boolean rangeGridlinesVisible>;
+    
+        if $stack33 != $stack26 goto label13;
+    
+        return 0;
+    
+      label13:
+        $stack28 = this.<org.jfree.chart.plot.FastScatterPlot: java.awt.Paint rangeGridlinePaint>;
+        $stack27 = that.<org.jfree.chart.plot.FastScatterPlot: java.awt.Paint rangeGridlinePaint>;
+        $stack29 = staticinvoke <org.jfree.chart.util.PaintUtilities: boolean equal(java.awt.Paint,java.awt.Paint)>($stack28, $stack27);
+    
+        if $stack29 != 0 goto label14;
+    
+        return 0;
+    
+      label14:
+        $stack31 = this.<org.jfree.chart.plot.FastScatterPlot: java.awt.Stroke rangeGridlineStroke>;
+        $stack30 = that.<org.jfree.chart.plot.FastScatterPlot: java.awt.Stroke rangeGridlineStroke>;
+        $stack32 = staticinvoke <org.jfree.chart.util.ObjectUtilities: boolean equal(java.lang.Object,java.lang.Object)>($stack31, $stack30);
+    
+        if $stack32 != 0 goto label15;
+    
+        return 0;
+    
+      label15:
+        return 1;
+    }
+
+    // ---- method: <org.jfree.chart.plot.FastScatterPlot: void <init>()> ----
+    {
+        float[][] $stack3;
+        org.jfree.chart.axis.NumberAxis $stack1, $stack2;
+        org.jfree.chart.plot.FastScatterPlot this;
+    
+    
+        this := @this: org.jfree.chart.plot.FastScatterPlot;
+        $stack3 = (float[][]) null;
+        $stack1 = new org.jfree.chart.axis.NumberAxis;
+        specialinvoke $stack1.<org.jfree.chart.axis.NumberAxis: void <init>(java.lang.String)>("X");
+        $stack2 = new org.jfree.chart.axis.NumberAxis;
+        specialinvoke $stack2.<org.jfree.chart.axis.NumberAxis: void <init>(java.lang.String)>("Y");
+        specialinvoke this.<org.jfree.chart.plot.FastScatterPlot: void <init>(float[][],org.jfree.chart.axis.ValueAxis,org.jfree.chart.axis.ValueAxis)>($stack3, $stack1, $stack2);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.plot.FastScatterPlot: boolean isDomainGridlinesVisible()> ----
+    {
+        boolean $stack1;
+        org.jfree.chart.plot.FastScatterPlot this;
+    
+    
+        this := @this: org.jfree.chart.plot.FastScatterPlot;
+        $stack1 = this.<org.jfree.chart.plot.FastScatterPlot: boolean domainGridlinesVisible>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.plot.FastScatterPlot: void setRangeGridlinePaint(java.awt.Paint)> ----
+    {
+        java.awt.Paint paint;
+        java.lang.IllegalArgumentException #l1;
+        java.lang.Object $stack3;
+        java.lang.Throwable #l0;
+        org.jfree.chart.event.PlotChangeEvent $stack2;
+        org.jfree.chart.plot.FastScatterPlot this;
+    
+    
+        this := @this: org.jfree.chart.plot.FastScatterPlot;
+        paint := @parameter0: java.awt.Paint;
+    
+        if paint != null goto label1;
+        $stack3 = new java.lang.IllegalArgumentException;
+        #l1 = (java.lang.IllegalArgumentException) $stack3;
+        specialinvoke #l1.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'paint\' argument.");
+        #l0 = (java.lang.Throwable) $stack3;
+    
+        throw #l0;
+    
+      label1:
+        this.<org.jfree.chart.plot.FastScatterPlot: java.awt.Paint rangeGridlinePaint> = paint;
+        $stack2 = new org.jfree.chart.event.PlotChangeEvent;
+        specialinvoke $stack2.<org.jfree.chart.event.PlotChangeEvent: void <init>(org.jfree.chart.plot.Plot)>(this);
+        virtualinvoke this.<org.jfree.chart.plot.FastScatterPlot: void notifyListeners(org.jfree.chart.event.PlotChangeEvent)>($stack2);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.plot.FastScatterPlot: java.lang.Object clone()> ----
+    {
+        float[][] $stack16, $stack17, $stack3;
+        java.lang.Object $stack12, $stack2, $stack7;
+        org.jfree.chart.axis.ValueAxis $stack10, $stack11, $stack13, $stack14, $stack15, $stack4, $stack5, $stack6, $stack8, $stack9;
+        org.jfree.chart.plot.FastScatterPlot clone, this;
+    
+    
+        this := @this: org.jfree.chart.plot.FastScatterPlot;
+        $stack2 = specialinvoke this.<org.jfree.chart.plot.Plot: java.lang.Object clone()>();
+        clone = (org.jfree.chart.plot.FastScatterPlot) $stack2;
+        $stack3 = this.<org.jfree.chart.plot.FastScatterPlot: float[][] data>;
+    
+        if $stack3 == null goto label1;
+        $stack16 = this.<org.jfree.chart.plot.FastScatterPlot: float[][] data>;
+        $stack17 = staticinvoke <org.jfree.chart.util.ArrayUtilities: float[][] clone(float[][])>($stack16);
+        clone.<org.jfree.chart.plot.FastScatterPlot: float[][] data> = $stack17;
+    
+      label1:
+        $stack4 = this.<org.jfree.chart.plot.FastScatterPlot: org.jfree.chart.axis.ValueAxis domainAxis>;
+    
+        if $stack4 == null goto label2;
+        $stack11 = this.<org.jfree.chart.plot.FastScatterPlot: org.jfree.chart.axis.ValueAxis domainAxis>;
+        $stack12 = virtualinvoke $stack11.<org.jfree.chart.axis.ValueAxis: java.lang.Object clone()>();
+        $stack13 = (org.jfree.chart.axis.ValueAxis) $stack12;
+        clone.<org.jfree.chart.plot.FastScatterPlot: org.jfree.chart.axis.ValueAxis domainAxis> = $stack13;
+        $stack14 = clone.<org.jfree.chart.plot.FastScatterPlot: org.jfree.chart.axis.ValueAxis domainAxis>;
+        virtualinvoke $stack14.<org.jfree.chart.axis.ValueAxis: void setPlot(org.jfree.chart.plot.Plot)>(clone);
+        $stack15 = clone.<org.jfree.chart.plot.FastScatterPlot: org.jfree.chart.axis.ValueAxis domainAxis>;
+        virtualinvoke $stack15.<org.jfree.chart.axis.ValueAxis: void addChangeListener(org.jfree.chart.event.AxisChangeListener)>(clone);
+    
+      label2:
+        $stack5 = this.<org.jfree.chart.plot.FastScatterPlot: org.jfree.chart.axis.ValueAxis rangeAxis>;
+    
+        if $stack5 == null goto label3;
+        $stack6 = this.<org.jfree.chart.plot.FastScatterPlot: org.jfree.chart.axis.ValueAxis rangeAxis>;
+        $stack7 = virtualinvoke $stack6.<org.jfree.chart.axis.ValueAxis: java.lang.Object clone()>();
+        $stack8 = (org.jfree.chart.axis.ValueAxis) $stack7;
+        clone.<org.jfree.chart.plot.FastScatterPlot: org.jfree.chart.axis.ValueAxis rangeAxis> = $stack8;
+        $stack9 = clone.<org.jfree.chart.plot.FastScatterPlot: org.jfree.chart.axis.ValueAxis rangeAxis>;
+        virtualinvoke $stack9.<org.jfree.chart.axis.ValueAxis: void setPlot(org.jfree.chart.plot.Plot)>(clone);
+        $stack10 = clone.<org.jfree.chart.plot.FastScatterPlot: org.jfree.chart.axis.ValueAxis rangeAxis>;
+        virtualinvoke $stack10.<org.jfree.chart.axis.ValueAxis: void addChangeListener(org.jfree.chart.event.AxisChangeListener)>(clone);
+    
+      label3:
+        return clone;
+    }
+
+    // ---- method: <org.jfree.chart.plot.FastScatterPlot: void readObject(java.io.ObjectInputStream)> ----
+    {
+        java.awt.Paint $stack2, $stack4, $stack6;
+        java.awt.Stroke $stack3, $stack5;
+        java.io.ObjectInputStream stream;
+        org.jfree.chart.axis.ValueAxis $stack10, $stack7, $stack8, $stack9;
+        org.jfree.chart.plot.FastScatterPlot this;
+    
+    
+        this := @this: org.jfree.chart.plot.FastScatterPlot;
+        stream := @parameter0: java.io.ObjectInputStream;
+        virtualinvoke stream.<java.io.ObjectInputStream: void defaultReadObject()>();
+        $stack2 = staticinvoke <org.jfree.chart.util.SerialUtilities: java.awt.Paint readPaint(java.io.ObjectInputStream)>(stream);
+        this.<org.jfree.chart.plot.FastScatterPlot: java.awt.Paint paint> = $stack2;
+        $stack3 = staticinvoke <org.jfree.chart.util.SerialUtilities: java.awt.Stroke readStroke(java.io.ObjectInputStream)>(stream);
+        this.<org.jfree.chart.plot.FastScatterPlot: java.awt.Stroke domainGridlineStroke> = $stack3;
+        $stack4 = staticinvoke <org.jfree.chart.util.SerialUtilities: java.awt.Paint readPaint(java.io.ObjectInputStream)>(stream);
+        this.<org.jfree.chart.plot.FastScatterPlot: java.awt.Paint domainGridlinePaint> = $stack4;
+        $stack5 = staticinvoke <org.jfree.chart.util.SerialUtilities: java.awt.Stroke readStroke(java.io.ObjectInputStream)>(stream);
+        this.<org.jfree.chart.plot.FastScatterPlot: java.awt.Stroke rangeGridlineStroke> = $stack5;
+        $stack6 = staticinvoke <org.jfree.chart.util.SerialUtilities: java.awt.Paint readPaint(java.io.ObjectInputStream)>(stream);
+        this.<org.jfree.chart.plot.FastScatterPlot: java.awt.Paint rangeGridlinePaint> = $stack6;
+        $stack7 = this.<org.jfree.chart.plot.FastScatterPlot: org.jfree.chart.axis.ValueAxis domainAxis>;
+    
+        if $stack7 == null goto label1;
+        $stack10 = this.<org.jfree.chart.plot.FastScatterPlot: org.jfree.chart.axis.ValueAxis domainAxis>;
+        virtualinvoke $stack10.<org.jfree.chart.axis.ValueAxis: void addChangeListener(org.jfree.chart.event.AxisChangeListener)>(this);
+    
+      label1:
+        $stack8 = this.<org.jfree.chart.plot.FastScatterPlot: org.jfree.chart.axis.ValueAxis rangeAxis>;
+    
+        if $stack8 == null goto label2;
+        $stack9 = this.<org.jfree.chart.plot.FastScatterPlot: org.jfree.chart.axis.ValueAxis rangeAxis>;
+        virtualinvoke $stack9.<org.jfree.chart.axis.ValueAxis: void addChangeListener(org.jfree.chart.event.AxisChangeListener)>(this);
+    
+      label2:
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.plot.FastScatterPlot: void zoomRangeAxes(double,org.jfree.chart.plot.PlotRenderingInfo,java.awt.geom.Point2D,boolean)> ----
+    {
+        boolean useAnchor;
+        double anchorX, factor, sourceX;
+        java.awt.geom.Point2D source;
+        java.awt.geom.Rectangle2D $stack13;
+        org.jfree.chart.axis.ValueAxis $stack10, $stack11, $stack14;
+        org.jfree.chart.plot.FastScatterPlot this;
+        org.jfree.chart.plot.PlotRenderingInfo info;
+        org.jfree.chart.util.RectangleEdge $stack12;
+    
+    
+        this := @this: org.jfree.chart.plot.FastScatterPlot;
+        factor := @parameter0: double;
+        info := @parameter1: org.jfree.chart.plot.PlotRenderingInfo;
+        source := @parameter2: java.awt.geom.Point2D;
+        useAnchor := @parameter3: boolean;
+    
+        if useAnchor == 0 goto label1;
+        sourceX = virtualinvoke source.<java.awt.geom.Point2D: double getX()>();
+        $stack11 = this.<org.jfree.chart.plot.FastScatterPlot: org.jfree.chart.axis.ValueAxis rangeAxis>;
+        $stack13 = virtualinvoke info.<org.jfree.chart.plot.PlotRenderingInfo: java.awt.geom.Rectangle2D getDataArea()>();
+        $stack12 = <org.jfree.chart.util.RectangleEdge: org.jfree.chart.util.RectangleEdge LEFT>;
+        anchorX = virtualinvoke $stack11.<org.jfree.chart.axis.ValueAxis: double java2DToValue(double,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)>(sourceX, $stack13, $stack12);
+        $stack14 = this.<org.jfree.chart.plot.FastScatterPlot: org.jfree.chart.axis.ValueAxis rangeAxis>;
+        virtualinvoke $stack14.<org.jfree.chart.axis.ValueAxis: void resizeRange(double,double)>(factor, anchorX);
+    
+        goto label2;
+    
+      label1:
+        $stack10 = this.<org.jfree.chart.plot.FastScatterPlot: org.jfree.chart.axis.ValueAxis rangeAxis>;
+        virtualinvoke $stack10.<org.jfree.chart.axis.ValueAxis: void resizeRange(double)>(factor);
+    
+      label2:
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.plot.FastScatterPlot: org.jfree.data.Range calculateXDataRange(float[][])> ----
+    {
+        byte $stack14, $stack15, $stack9;
+        double $stack10, $stack11;
+        float highest, lowest, v;
+        float[] $stack13, $stack7;
+        float[][] data;
+        int $stack8, i;
+        org.jfree.chart.plot.FastScatterPlot this;
+        org.jfree.data.Range $stack12, result;
+    
+    
+        this := @this: org.jfree.chart.plot.FastScatterPlot;
+        data := @parameter0: float[][];
+        result = null;
+    
+        if data == null goto label5;
+        lowest = #InfinityF;
+        highest = #-InfinityF;
+        i = 0;
+    
+      label1:
+        $stack7 = data[0];
+        $stack8 = lengthof $stack7;
+    
+        if i >= $stack8 goto label4;
+        $stack13 = data[0];
+        v = $stack13[i];
+        $stack14 = v cmpg lowest;
+    
+        if $stack14 >= 0 goto label2;
+        lowest = v;
+    
+      label2:
+        $stack15 = v cmpl highest;
+    
+        if $stack15 <= 0 goto label3;
+        highest = v;
+    
+      label3:
+        i = i + 1;
+    
+        goto label1;
+    
+      label4:
+        $stack9 = lowest cmpg highest;
+    
+        if $stack9 > 0 goto label5;
+        $stack12 = new org.jfree.data.Range;
+        $stack11 = (double) lowest;
+        $stack10 = (double) highest;
+        specialinvoke $stack12.<org.jfree.data.Range: void <init>(double,double)>($stack11, $stack10);
+        result = $stack12;
+    
+      label5:
+        return result;
+    }
+
+    // ---- method: <org.jfree.chart.plot.FastScatterPlot: void <clinit>()> ----
+    {
+        float[] $stack0;
+        java.awt.BasicStroke #l0;
+        java.lang.Object $stack1, $stack2;
+        java.util.ResourceBundle $stack3;
+    
+    
+        $stack1 = new java.awt.BasicStroke;
+        $stack0 = newarray (float)[2];
+        $stack0[0] = 2.0F;
+        $stack0[1] = 2.0F;
+        #l0 = (java.awt.BasicStroke) $stack1;
+        specialinvoke #l0.<java.awt.BasicStroke: void <init>(float,int,int,float,float[],float)>(0.5F, 0, 2, 0.0F, $stack0, 0.0F);
+        <org.jfree.chart.plot.FastScatterPlot: java.awt.Stroke DEFAULT_GRIDLINE_STROKE> = (java.awt.Stroke) $stack1;
+        $stack2 = <java.awt.Color: java.awt.Color lightGray>;
+        <org.jfree.chart.plot.FastScatterPlot: java.awt.Paint DEFAULT_GRIDLINE_PAINT> = (java.awt.Paint) $stack2;
+        $stack3 = staticinvoke <java.util.ResourceBundle: java.util.ResourceBundle getBundle(java.lang.String)>("org.jfree.chart.plot.LocalizationBundle");
+        <org.jfree.chart.plot.FastScatterPlot: java.util.ResourceBundle localizationResources> = $stack3;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.plot.FastScatterPlot: void writeObject(java.io.ObjectOutputStream)> ----
+    {
+        java.awt.Paint $stack2, $stack4, $stack6;
+        java.awt.Stroke $stack3, $stack5;
+        java.io.ObjectOutputStream stream;
+        org.jfree.chart.plot.FastScatterPlot this;
+    
+    
+        this := @this: org.jfree.chart.plot.FastScatterPlot;
+        stream := @parameter0: java.io.ObjectOutputStream;
+        virtualinvoke stream.<java.io.ObjectOutputStream: void defaultWriteObject()>();
+        $stack2 = this.<org.jfree.chart.plot.FastScatterPlot: java.awt.Paint paint>;
+        staticinvoke <org.jfree.chart.util.SerialUtilities: void writePaint(java.awt.Paint,java.io.ObjectOutputStream)>($stack2, stream);
+        $stack3 = this.<org.jfree.chart.plot.FastScatterPlot: java.awt.Stroke domainGridlineStroke>;
+        staticinvoke <org.jfree.chart.util.SerialUtilities: void writeStroke(java.awt.Stroke,java.io.ObjectOutputStream)>($stack3, stream);
+        $stack4 = this.<org.jfree.chart.plot.FastScatterPlot: java.awt.Paint domainGridlinePaint>;
+        staticinvoke <org.jfree.chart.util.SerialUtilities: void writePaint(java.awt.Paint,java.io.ObjectOutputStream)>($stack4, stream);
+        $stack5 = this.<org.jfree.chart.plot.FastScatterPlot: java.awt.Stroke rangeGridlineStroke>;
+        staticinvoke <org.jfree.chart.util.SerialUtilities: void writeStroke(java.awt.Stroke,java.io.ObjectOutputStream)>($stack5, stream);
+        $stack6 = this.<org.jfree.chart.plot.FastScatterPlot: java.awt.Paint rangeGridlinePaint>;
+        staticinvoke <org.jfree.chart.util.SerialUtilities: void writePaint(java.awt.Paint,java.io.ObjectOutputStream)>($stack6, stream);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.plot.FastScatterPlot: float[][] getData()> ----
+    {
+        float[][] $stack1;
+        org.jfree.chart.plot.FastScatterPlot this;
+    
+    
+        this := @this: org.jfree.chart.plot.FastScatterPlot;
+        $stack1 = this.<org.jfree.chart.plot.FastScatterPlot: float[][] data>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.plot.FastScatterPlot: void zoomRangeAxes(double,double,org.jfree.chart.plot.PlotRenderingInfo,java.awt.geom.Point2D)> ----
+    {
+        double lowerPercent, upperPercent;
+        java.awt.geom.Point2D source;
+        org.jfree.chart.axis.ValueAxis $stack7;
+        org.jfree.chart.plot.FastScatterPlot this;
+        org.jfree.chart.plot.PlotRenderingInfo info;
+    
+    
+        this := @this: org.jfree.chart.plot.FastScatterPlot;
+        lowerPercent := @parameter0: double;
+        upperPercent := @parameter1: double;
+        info := @parameter2: org.jfree.chart.plot.PlotRenderingInfo;
+        source := @parameter3: java.awt.geom.Point2D;
+        $stack7 = this.<org.jfree.chart.plot.FastScatterPlot: org.jfree.chart.axis.ValueAxis rangeAxis>;
+        virtualinvoke $stack7.<org.jfree.chart.axis.ValueAxis: void zoomRange(double,double)>(lowerPercent, upperPercent);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.plot.FastScatterPlot: void setRangeGridlineStroke(java.awt.Stroke)> ----
+    {
+        java.awt.Stroke stroke;
+        java.lang.IllegalArgumentException #l1;
+        java.lang.Object $stack3;
+        java.lang.Throwable #l0;
+        org.jfree.chart.event.PlotChangeEvent $stack2;
+        org.jfree.chart.plot.FastScatterPlot this;
+    
+    
+        this := @this: org.jfree.chart.plot.FastScatterPlot;
+        stroke := @parameter0: java.awt.Stroke;
+    
+        if stroke != null goto label1;
+        $stack3 = new java.lang.IllegalArgumentException;
+        #l1 = (java.lang.IllegalArgumentException) $stack3;
+        specialinvoke #l1.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'stroke\' argument.");
+        #l0 = (java.lang.Throwable) $stack3;
+    
+        throw #l0;
+    
+      label1:
+        this.<org.jfree.chart.plot.FastScatterPlot: java.awt.Stroke rangeGridlineStroke> = stroke;
+        $stack2 = new org.jfree.chart.event.PlotChangeEvent;
+        specialinvoke $stack2.<org.jfree.chart.event.PlotChangeEvent: void <init>(org.jfree.chart.plot.Plot)>(this);
+        virtualinvoke this.<org.jfree.chart.plot.FastScatterPlot: void notifyListeners(org.jfree.chart.event.PlotChangeEvent)>($stack2);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.plot.FastScatterPlot: boolean isDomainZoomable()> ----
+    {
+        org.jfree.chart.plot.FastScatterPlot this;
+    
+    
+        this := @this: org.jfree.chart.plot.FastScatterPlot;
+    
+        return 1;
+    }
+
+    // ---- method: <org.jfree.chart.plot.FastScatterPlot: java.awt.Paint getRangeGridlinePaint()> ----
+    {
+        java.awt.Paint $stack1;
+        org.jfree.chart.plot.FastScatterPlot this;
+    
+    
+        this := @this: org.jfree.chart.plot.FastScatterPlot;
+        $stack1 = this.<org.jfree.chart.plot.FastScatterPlot: java.awt.Paint rangeGridlinePaint>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.plot.FastScatterPlot: void drawRangeGridlines(java.awt.Graphics2D,java.awt.geom.Rectangle2D,java.util.List)> ----
+    {
+        boolean $stack10, $stack9;
+        double $stack14, $stack15, $stack16, v;
+        java.awt.Graphics2D g2;
+        java.awt.Paint $stack18;
+        java.awt.Shape #l1;
+        java.awt.Stroke $stack19;
+        java.awt.geom.Line2D$Double #l0, line;
+        java.awt.geom.Rectangle2D dataArea;
+        java.lang.Object $stack11, $stack17;
+        java.util.Iterator iterator;
+        java.util.List ticks;
+        org.jfree.chart.axis.ValueAxis $stack12;
+        org.jfree.chart.axis.ValueTick tick;
+        org.jfree.chart.plot.FastScatterPlot this;
+        org.jfree.chart.util.RectangleEdge $stack13;
+    
+    
+        this := @this: org.jfree.chart.plot.FastScatterPlot;
+        g2 := @parameter0: java.awt.Graphics2D;
+        dataArea := @parameter1: java.awt.geom.Rectangle2D;
+        ticks := @parameter2: java.util.List;
+        $stack9 = virtualinvoke this.<org.jfree.chart.plot.FastScatterPlot: boolean isRangeGridlinesVisible()>();
+    
+        if $stack9 == 0 goto label2;
+        iterator = interfaceinvoke ticks.<java.util.List: java.util.Iterator iterator()>();
+    
+      label1:
+        $stack10 = interfaceinvoke iterator.<java.util.Iterator: boolean hasNext()>();
+    
+        if $stack10 == 0 goto label2;
+        $stack11 = interfaceinvoke iterator.<java.util.Iterator: java.lang.Object next()>();
+        tick = (org.jfree.chart.axis.ValueTick) $stack11;
+        $stack12 = this.<org.jfree.chart.plot.FastScatterPlot: org.jfree.chart.axis.ValueAxis rangeAxis>;
+        $stack14 = virtualinvoke tick.<org.jfree.chart.axis.ValueTick: double getValue()>();
+        $stack13 = <org.jfree.chart.util.RectangleEdge: org.jfree.chart.util.RectangleEdge LEFT>;
+        v = virtualinvoke $stack12.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)>($stack14, dataArea, $stack13);
+        $stack17 = new java.awt.geom.Line2D$Double;
+        $stack16 = virtualinvoke dataArea.<java.awt.geom.Rectangle2D: double getMinX()>();
+        $stack15 = virtualinvoke dataArea.<java.awt.geom.Rectangle2D: double getMaxX()>();
+        #l0 = (java.awt.geom.Line2D$Double) $stack17;
+        specialinvoke #l0.<java.awt.geom.Line2D$Double: void <init>(double,double,double,double)>($stack16, v, $stack15, v);
+        line = (java.awt.geom.Line2D$Double) $stack17;
+        $stack18 = virtualinvoke this.<org.jfree.chart.plot.FastScatterPlot: java.awt.Paint getRangeGridlinePaint()>();
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>($stack18);
+        $stack19 = virtualinvoke this.<org.jfree.chart.plot.FastScatterPlot: java.awt.Stroke getRangeGridlineStroke()>();
+        virtualinvoke g2.<java.awt.Graphics2D: void setStroke(java.awt.Stroke)>($stack19);
+        #l1 = (java.awt.Shape) $stack17;
+        virtualinvoke g2.<java.awt.Graphics2D: void draw(java.awt.Shape)>(#l1);
+    
+        goto label1;
+    
+      label2:
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.plot.FastScatterPlot: void zoomDomainAxes(double,org.jfree.chart.plot.PlotRenderingInfo,java.awt.geom.Point2D,boolean)> ----
+    {
+        boolean useAnchor;
+        double anchorX, factor, sourceX;
+        java.awt.geom.Point2D source;
+        java.awt.geom.Rectangle2D $stack13;
+        org.jfree.chart.axis.ValueAxis $stack10, $stack11, $stack14;
+        org.jfree.chart.plot.FastScatterPlot this;
+        org.jfree.chart.plot.PlotRenderingInfo info;
+        org.jfree.chart.util.RectangleEdge $stack12;
+    
+    
+        this := @this: org.jfree.chart.plot.FastScatterPlot;
+        factor := @parameter0: double;
+        info := @parameter1: org.jfree.chart.plot.PlotRenderingInfo;
+        source := @parameter2: java.awt.geom.Point2D;
+        useAnchor := @parameter3: boolean;
+    
+        if useAnchor == 0 goto label1;
+        sourceX = virtualinvoke source.<java.awt.geom.Point2D: double getX()>();
+        $stack11 = this.<org.jfree.chart.plot.FastScatterPlot: org.jfree.chart.axis.ValueAxis domainAxis>;
+        $stack13 = virtualinvoke info.<org.jfree.chart.plot.PlotRenderingInfo: java.awt.geom.Rectangle2D getDataArea()>();
+        $stack12 = <org.jfree.chart.util.RectangleEdge: org.jfree.chart.util.RectangleEdge BOTTOM>;
+        anchorX = virtualinvoke $stack11.<org.jfree.chart.axis.ValueAxis: double java2DToValue(double,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)>(sourceX, $stack13, $stack12);
+        $stack14 = this.<org.jfree.chart.plot.FastScatterPlot: org.jfree.chart.axis.ValueAxis domainAxis>;
+        virtualinvoke $stack14.<org.jfree.chart.axis.ValueAxis: void resizeRange(double,double)>(factor, anchorX);
+    
+        goto label2;
+    
+      label1:
+        $stack10 = this.<org.jfree.chart.plot.FastScatterPlot: org.jfree.chart.axis.ValueAxis domainAxis>;
+        virtualinvoke $stack10.<org.jfree.chart.axis.ValueAxis: void resizeRange(double)>(factor);
+    
+      label2:
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.plot.FastScatterPlot: org.jfree.data.Range getDataRange(org.jfree.chart.axis.ValueAxis)> ----
+    {
+        org.jfree.chart.axis.ValueAxis $stack3, $stack4, axis;
+        org.jfree.chart.plot.FastScatterPlot this;
+        org.jfree.data.Range result;
+    
+    
+        this := @this: org.jfree.chart.plot.FastScatterPlot;
+        axis := @parameter0: org.jfree.chart.axis.ValueAxis;
+        result = null;
+        $stack3 = this.<org.jfree.chart.plot.FastScatterPlot: org.jfree.chart.axis.ValueAxis domainAxis>;
+    
+        if axis != $stack3 goto label1;
+        result = this.<org.jfree.chart.plot.FastScatterPlot: org.jfree.data.Range xDataRange>;
+    
+        goto label2;
+    
+      label1:
+        $stack4 = this.<org.jfree.chart.plot.FastScatterPlot: org.jfree.chart.axis.ValueAxis rangeAxis>;
+    
+        if axis != $stack4 goto label2;
+        result = this.<org.jfree.chart.plot.FastScatterPlot: org.jfree.data.Range yDataRange>;
+    
+      label2:
+        return result;
+    }
+
+    // ---- method: <org.jfree.chart.plot.FastScatterPlot: org.jfree.chart.axis.ValueAxis getDomainAxis()> ----
+    {
+        org.jfree.chart.axis.ValueAxis $stack1;
+        org.jfree.chart.plot.FastScatterPlot this;
+    
+    
+        this := @this: org.jfree.chart.plot.FastScatterPlot;
+        $stack1 = this.<org.jfree.chart.plot.FastScatterPlot: org.jfree.chart.axis.ValueAxis domainAxis>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.plot.FastScatterPlot: void render(java.awt.Graphics2D,java.awt.geom.Rectangle2D,org.jfree.chart.plot.PlotRenderingInfo,org.jfree.chart.plot.CrosshairState)> ----
+    {
+        double $stack20, $stack22, $stack24, $stack26;
+        float x, y;
+        float[] $stack13, $stack16, $stack18;
+        float[][] $stack11, $stack12, $stack15, $stack17;
+        int $stack14, i, transX, transY;
+        java.awt.Graphics2D g2;
+        java.awt.Paint $stack10;
+        java.awt.geom.Rectangle2D dataArea;
+        org.jfree.chart.axis.ValueAxis $stack21, $stack25;
+        org.jfree.chart.plot.CrosshairState crosshairState;
+        org.jfree.chart.plot.FastScatterPlot this;
+        org.jfree.chart.plot.PlotRenderingInfo info;
+        org.jfree.chart.util.RectangleEdge $stack19, $stack23;
+    
+    
+        this := @this: org.jfree.chart.plot.FastScatterPlot;
+        g2 := @parameter0: java.awt.Graphics2D;
+        dataArea := @parameter1: java.awt.geom.Rectangle2D;
+        info := @parameter2: org.jfree.chart.plot.PlotRenderingInfo;
+        crosshairState := @parameter3: org.jfree.chart.plot.CrosshairState;
+        $stack10 = this.<org.jfree.chart.plot.FastScatterPlot: java.awt.Paint paint>;
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>($stack10);
+        $stack11 = this.<org.jfree.chart.plot.FastScatterPlot: float[][] data>;
+    
+        if $stack11 == null goto label2;
+        i = 0;
+    
+      label1:
+        $stack12 = this.<org.jfree.chart.plot.FastScatterPlot: float[][] data>;
+        $stack13 = $stack12[0];
+        $stack14 = lengthof $stack13;
+    
+        if i >= $stack14 goto label2;
+        $stack15 = this.<org.jfree.chart.plot.FastScatterPlot: float[][] data>;
+        $stack16 = $stack15[0];
+        x = $stack16[i];
+        $stack17 = this.<org.jfree.chart.plot.FastScatterPlot: float[][] data>;
+        $stack18 = $stack17[1];
+        y = $stack18[i];
+        $stack21 = this.<org.jfree.chart.plot.FastScatterPlot: org.jfree.chart.axis.ValueAxis domainAxis>;
+        $stack20 = (double) x;
+        $stack19 = <org.jfree.chart.util.RectangleEdge: org.jfree.chart.util.RectangleEdge BOTTOM>;
+        $stack22 = virtualinvoke $stack21.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)>($stack20, dataArea, $stack19);
+        transX = (int) $stack22;
+        $stack25 = this.<org.jfree.chart.plot.FastScatterPlot: org.jfree.chart.axis.ValueAxis rangeAxis>;
+        $stack24 = (double) y;
+        $stack23 = <org.jfree.chart.util.RectangleEdge: org.jfree.chart.util.RectangleEdge LEFT>;
+        $stack26 = virtualinvoke $stack25.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)>($stack24, dataArea, $stack23);
+        transY = (int) $stack26;
+        virtualinvoke g2.<java.awt.Graphics2D: void fillRect(int,int,int,int)>(transX, transY, 1, 1);
+        i = i + 1;
+    
+        goto label1;
+    
+      label2:
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.plot.FastScatterPlot: void setDomainAxis(org.jfree.chart.axis.ValueAxis)> ----
+    {
+        java.lang.IllegalArgumentException #l1;
+        java.lang.Object $stack3;
+        java.lang.Throwable #l0;
+        org.jfree.chart.axis.ValueAxis axis;
+        org.jfree.chart.event.PlotChangeEvent $stack2;
+        org.jfree.chart.plot.FastScatterPlot this;
+    
+    
+        this := @this: org.jfree.chart.plot.FastScatterPlot;
+        axis := @parameter0: org.jfree.chart.axis.ValueAxis;
+    
+        if axis != null goto label1;
+        $stack3 = new java.lang.IllegalArgumentException;
+        #l1 = (java.lang.IllegalArgumentException) $stack3;
+        specialinvoke #l1.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'axis\' argument.");
+        #l0 = (java.lang.Throwable) $stack3;
+    
+        throw #l0;
+    
+      label1:
+        this.<org.jfree.chart.plot.FastScatterPlot: org.jfree.chart.axis.ValueAxis domainAxis> = axis;
+        $stack2 = new org.jfree.chart.event.PlotChangeEvent;
+        specialinvoke $stack2.<org.jfree.chart.event.PlotChangeEvent: void <init>(org.jfree.chart.plot.Plot)>(this);
+        virtualinvoke this.<org.jfree.chart.plot.FastScatterPlot: void notifyListeners(org.jfree.chart.event.PlotChangeEvent)>($stack2);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.plot.FastScatterPlot: void setDomainGridlinePaint(java.awt.Paint)> ----
+    {
+        java.awt.Paint paint;
+        java.lang.IllegalArgumentException #l1;
+        java.lang.Object $stack3;
+        java.lang.Throwable #l0;
+        org.jfree.chart.event.PlotChangeEvent $stack2;
+        org.jfree.chart.plot.FastScatterPlot this;
+    
+    
+        this := @this: org.jfree.chart.plot.FastScatterPlot;
+        paint := @parameter0: java.awt.Paint;
+    
+        if paint != null goto label1;
+        $stack3 = new java.lang.IllegalArgumentException;
+        #l1 = (java.lang.IllegalArgumentException) $stack3;
+        specialinvoke #l1.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'paint\' argument.");
+        #l0 = (java.lang.Throwable) $stack3;
+    
+        throw #l0;
+    
+      label1:
+        this.<org.jfree.chart.plot.FastScatterPlot: java.awt.Paint domainGridlinePaint> = paint;
+        $stack2 = new org.jfree.chart.event.PlotChangeEvent;
+        specialinvoke $stack2.<org.jfree.chart.event.PlotChangeEvent: void <init>(org.jfree.chart.plot.Plot)>(this);
+        virtualinvoke this.<org.jfree.chart.plot.FastScatterPlot: void notifyListeners(org.jfree.chart.event.PlotChangeEvent)>($stack2);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.plot.FastScatterPlot: org.jfree.chart.axis.ValueAxis getRangeAxis()> ----
+    {
+        org.jfree.chart.axis.ValueAxis $stack1;
+        org.jfree.chart.plot.FastScatterPlot this;
+    
+    
+        this := @this: org.jfree.chart.plot.FastScatterPlot;
+        $stack1 = this.<org.jfree.chart.plot.FastScatterPlot: org.jfree.chart.axis.ValueAxis rangeAxis>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.plot.FastScatterPlot: void setRangeAxis(org.jfree.chart.axis.ValueAxis)> ----
+    {
+        java.lang.IllegalArgumentException #l1;
+        java.lang.Object $stack3;
+        java.lang.Throwable #l0;
+        org.jfree.chart.axis.ValueAxis axis;
+        org.jfree.chart.event.PlotChangeEvent $stack2;
+        org.jfree.chart.plot.FastScatterPlot this;
+    
+    
+        this := @this: org.jfree.chart.plot.FastScatterPlot;
+        axis := @parameter0: org.jfree.chart.axis.ValueAxis;
+    
+        if axis != null goto label1;
+        $stack3 = new java.lang.IllegalArgumentException;
+        #l1 = (java.lang.IllegalArgumentException) $stack3;
+        specialinvoke #l1.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'axis\' argument.");
+        #l0 = (java.lang.Throwable) $stack3;
+    
+        throw #l0;
+    
+      label1:
+        this.<org.jfree.chart.plot.FastScatterPlot: org.jfree.chart.axis.ValueAxis rangeAxis> = axis;
+        $stack2 = new org.jfree.chart.event.PlotChangeEvent;
+        specialinvoke $stack2.<org.jfree.chart.event.PlotChangeEvent: void <init>(org.jfree.chart.plot.Plot)>(this);
+        virtualinvoke this.<org.jfree.chart.plot.FastScatterPlot: void notifyListeners(org.jfree.chart.event.PlotChangeEvent)>($stack2);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.plot.FastScatterPlot: void draw(java.awt.Graphics2D,java.awt.geom.Rectangle2D,java.awt.geom.Point2D,org.jfree.chart.plot.PlotState,org.jfree.chart.plot.PlotRenderingInfo)> ----
+    {
+        double $stack20, $stack23;
+        float $stack26;
+        java.awt.Composite #l7, originalComposite;
+        java.awt.Graphics2D g2;
+        java.awt.Shape #l0, originalClip;
+        java.awt.geom.Point2D anchor;
+        java.awt.geom.Rectangle2D #l1, #l10, #l11, #l2, #l3, #l4, #l5, #l6, #l8, #l9, area;
+        java.lang.Object $stack27, dataArea;
+        java.util.List $stack24, $stack25;
+        org.jfree.chart.axis.AxisSpace $stack13, space#0, space#1, space#2;
+        org.jfree.chart.axis.AxisState domainAxisState, rangeAxisState;
+        org.jfree.chart.axis.ValueAxis $stack15, $stack17, $stack18, $stack21;
+        org.jfree.chart.plot.FastScatterPlot this;
+        org.jfree.chart.plot.PlotRenderingInfo info;
+        org.jfree.chart.plot.PlotState parentState;
+        org.jfree.chart.util.RectangleEdge $stack14, $stack16, $stack19, $stack22;
+        org.jfree.chart.util.RectangleInsets insets;
+    
+    
+        this := @this: org.jfree.chart.plot.FastScatterPlot;
+        g2 := @parameter0: java.awt.Graphics2D;
+        area := @parameter1: java.awt.geom.Rectangle2D;
+        anchor := @parameter2: java.awt.geom.Point2D;
+        parentState := @parameter3: org.jfree.chart.plot.PlotState;
+        info := @parameter4: org.jfree.chart.plot.PlotRenderingInfo;
+    
+        if info == null goto label1;
+        virtualinvoke info.<org.jfree.chart.plot.PlotRenderingInfo: void setPlotArea(java.awt.geom.Rectangle2D)>(area);
+    
+      label1:
+        insets = virtualinvoke this.<org.jfree.chart.plot.FastScatterPlot: org.jfree.chart.util.RectangleInsets getInsets()>();
+        virtualinvoke insets.<org.jfree.chart.util.RectangleInsets: void trim(java.awt.geom.Rectangle2D)>(area);
+        $stack13 = new org.jfree.chart.axis.AxisSpace;
+        specialinvoke $stack13.<org.jfree.chart.axis.AxisSpace: void <init>()>();
+        space#0 = $stack13;
+        $stack15 = this.<org.jfree.chart.plot.FastScatterPlot: org.jfree.chart.axis.ValueAxis domainAxis>;
+        $stack14 = <org.jfree.chart.util.RectangleEdge: org.jfree.chart.util.RectangleEdge BOTTOM>;
+        space#1 = virtualinvoke $stack15.<org.jfree.chart.axis.ValueAxis: org.jfree.chart.axis.AxisSpace reserveSpace(java.awt.Graphics2D,org.jfree.chart.plot.Plot,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge,org.jfree.chart.axis.AxisSpace)>(g2, this, area, $stack14, $stack13);
+        $stack17 = this.<org.jfree.chart.plot.FastScatterPlot: org.jfree.chart.axis.ValueAxis rangeAxis>;
+        $stack16 = <org.jfree.chart.util.RectangleEdge: org.jfree.chart.util.RectangleEdge LEFT>;
+        space#2 = virtualinvoke $stack17.<org.jfree.chart.axis.ValueAxis: org.jfree.chart.axis.AxisSpace reserveSpace(java.awt.Graphics2D,org.jfree.chart.plot.Plot,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge,org.jfree.chart.axis.AxisSpace)>(g2, this, area, $stack16, space#1);
+        dataArea = virtualinvoke space#2.<org.jfree.chart.axis.AxisSpace: java.awt.geom.Rectangle2D shrink(java.awt.geom.Rectangle2D,java.awt.geom.Rectangle2D)>(area, null);
+    
+        if info == null goto label2;
+        #l1 = (java.awt.geom.Rectangle2D) dataArea;
+        virtualinvoke info.<org.jfree.chart.plot.PlotRenderingInfo: void setDataArea(java.awt.geom.Rectangle2D)>(#l1);
+    
+      label2:
+        #l2 = (java.awt.geom.Rectangle2D) dataArea;
+        virtualinvoke this.<org.jfree.chart.plot.FastScatterPlot: void drawBackground(java.awt.Graphics2D,java.awt.geom.Rectangle2D)>(g2, #l2);
+        $stack18 = this.<org.jfree.chart.plot.FastScatterPlot: org.jfree.chart.axis.ValueAxis domainAxis>;
+        #l6 = (java.awt.geom.Rectangle2D) dataArea;
+        $stack20 = virtualinvoke #l6.<java.awt.geom.Rectangle2D: double getMaxY()>();
+        $stack19 = <org.jfree.chart.util.RectangleEdge: org.jfree.chart.util.RectangleEdge BOTTOM>;
+        #l10 = (java.awt.geom.Rectangle2D) dataArea;
+        domainAxisState = virtualinvoke $stack18.<org.jfree.chart.axis.ValueAxis: org.jfree.chart.axis.AxisState draw(java.awt.Graphics2D,double,java.awt.geom.Rectangle2D,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge,org.jfree.chart.plot.PlotRenderingInfo)>(g2, $stack20, area, #l10, $stack19, info);
+        $stack21 = this.<org.jfree.chart.plot.FastScatterPlot: org.jfree.chart.axis.ValueAxis rangeAxis>;
+        #l4 = (java.awt.geom.Rectangle2D) dataArea;
+        $stack23 = virtualinvoke #l4.<java.awt.geom.Rectangle2D: double getMinX()>();
+        $stack22 = <org.jfree.chart.util.RectangleEdge: org.jfree.chart.util.RectangleEdge LEFT>;
+        #l8 = (java.awt.geom.Rectangle2D) dataArea;
+        rangeAxisState = virtualinvoke $stack21.<org.jfree.chart.axis.ValueAxis: org.jfree.chart.axis.AxisState draw(java.awt.Graphics2D,double,java.awt.geom.Rectangle2D,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge,org.jfree.chart.plot.PlotRenderingInfo)>(g2, $stack23, area, #l8, $stack22, info);
+        $stack24 = virtualinvoke domainAxisState.<org.jfree.chart.axis.AxisState: java.util.List getTicks()>();
+        #l5 = (java.awt.geom.Rectangle2D) dataArea;
+        virtualinvoke this.<org.jfree.chart.plot.FastScatterPlot: void drawDomainGridlines(java.awt.Graphics2D,java.awt.geom.Rectangle2D,java.util.List)>(g2, #l5, $stack24);
+        $stack25 = virtualinvoke rangeAxisState.<org.jfree.chart.axis.AxisState: java.util.List getTicks()>();
+        #l11 = (java.awt.geom.Rectangle2D) dataArea;
+        virtualinvoke this.<org.jfree.chart.plot.FastScatterPlot: void drawRangeGridlines(java.awt.Graphics2D,java.awt.geom.Rectangle2D,java.util.List)>(g2, #l11, $stack25);
+        originalClip = virtualinvoke g2.<java.awt.Graphics2D: java.awt.Shape getClip()>();
+        originalComposite = virtualinvoke g2.<java.awt.Graphics2D: java.awt.Composite getComposite()>();
+        #l0 = (java.awt.Shape) dataArea;
+        virtualinvoke g2.<java.awt.Graphics2D: void clip(java.awt.Shape)>(#l0);
+        $stack26 = virtualinvoke this.<org.jfree.chart.plot.FastScatterPlot: float getForegroundAlpha()>();
+        $stack27 = staticinvoke <java.awt.AlphaComposite: java.awt.AlphaComposite getInstance(int,float)>(3, $stack26);
+        #l7 = (java.awt.Composite) $stack27;
+        virtualinvoke g2.<java.awt.Graphics2D: void setComposite(java.awt.Composite)>(#l7);
+        #l3 = (java.awt.geom.Rectangle2D) dataArea;
+        virtualinvoke this.<org.jfree.chart.plot.FastScatterPlot: void render(java.awt.Graphics2D,java.awt.geom.Rectangle2D,org.jfree.chart.plot.PlotRenderingInfo,org.jfree.chart.plot.CrosshairState)>(g2, #l3, info, null);
+        virtualinvoke g2.<java.awt.Graphics2D: void setClip(java.awt.Shape)>(originalClip);
+        virtualinvoke g2.<java.awt.Graphics2D: void setComposite(java.awt.Composite)>(originalComposite);
+        #l9 = (java.awt.geom.Rectangle2D) dataArea;
+        virtualinvoke this.<org.jfree.chart.plot.FastScatterPlot: void drawOutline(java.awt.Graphics2D,java.awt.geom.Rectangle2D)>(g2, #l9);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.plot.FastScatterPlot: void <init>(float[][],org.jfree.chart.axis.ValueAxis,org.jfree.chart.axis.ValueAxis)> ----
+    {
+        float[][] data;
+        java.awt.Paint $stack11, $stack13;
+        java.awt.Stroke $stack12, $stack14;
+        java.lang.IllegalArgumentException #l2, #l3;
+        java.lang.Object $stack10, $stack15, $stack16;
+        java.lang.Throwable #l0, #l1;
+        org.jfree.chart.axis.ValueAxis $stack6, $stack7, $stack8, $stack9, domainAxis, rangeAxis;
+        org.jfree.chart.plot.FastScatterPlot this;
+        org.jfree.data.Range $stack4, $stack5;
+    
+    
+        this := @this: org.jfree.chart.plot.FastScatterPlot;
+        data := @parameter0: float[][];
+        domainAxis := @parameter1: org.jfree.chart.axis.ValueAxis;
+        rangeAxis := @parameter2: org.jfree.chart.axis.ValueAxis;
+        specialinvoke this.<org.jfree.chart.plot.Plot: void <init>()>();
+    
+        if domainAxis != null goto label1;
+        $stack16 = new java.lang.IllegalArgumentException;
+        #l2 = (java.lang.IllegalArgumentException) $stack16;
+        specialinvoke #l2.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'domainAxis\' argument.");
+        #l1 = (java.lang.Throwable) $stack16;
+    
+        throw #l1;
+    
+      label1:
+        if rangeAxis != null goto label2;
+        $stack15 = new java.lang.IllegalArgumentException;
+        #l3 = (java.lang.IllegalArgumentException) $stack15;
+        specialinvoke #l3.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'rangeAxis\' argument.");
+        #l0 = (java.lang.Throwable) $stack15;
+    
+        throw #l0;
+    
+      label2:
+        this.<org.jfree.chart.plot.FastScatterPlot: float[][] data> = data;
+        $stack4 = specialinvoke this.<org.jfree.chart.plot.FastScatterPlot: org.jfree.data.Range calculateXDataRange(float[][])>(data);
+        this.<org.jfree.chart.plot.FastScatterPlot: org.jfree.data.Range xDataRange> = $stack4;
+        $stack5 = specialinvoke this.<org.jfree.chart.plot.FastScatterPlot: org.jfree.data.Range calculateYDataRange(float[][])>(data);
+        this.<org.jfree.chart.plot.FastScatterPlot: org.jfree.data.Range yDataRange> = $stack5;
+        this.<org.jfree.chart.plot.FastScatterPlot: org.jfree.chart.axis.ValueAxis domainAxis> = domainAxis;
+        $stack6 = this.<org.jfree.chart.plot.FastScatterPlot: org.jfree.chart.axis.ValueAxis domainAxis>;
+        virtualinvoke $stack6.<org.jfree.chart.axis.ValueAxis: void setPlot(org.jfree.chart.plot.Plot)>(this);
+        $stack7 = this.<org.jfree.chart.plot.FastScatterPlot: org.jfree.chart.axis.ValueAxis domainAxis>;
+        virtualinvoke $stack7.<org.jfree.chart.axis.ValueAxis: void addChangeListener(org.jfree.chart.event.AxisChangeListener)>(this);
+        this.<org.jfree.chart.plot.FastScatterPlot: org.jfree.chart.axis.ValueAxis rangeAxis> = rangeAxis;
+        $stack8 = this.<org.jfree.chart.plot.FastScatterPlot: org.jfree.chart.axis.ValueAxis rangeAxis>;
+        virtualinvoke $stack8.<org.jfree.chart.axis.ValueAxis: void setPlot(org.jfree.chart.plot.Plot)>(this);
+        $stack9 = this.<org.jfree.chart.plot.FastScatterPlot: org.jfree.chart.axis.ValueAxis rangeAxis>;
+        virtualinvoke $stack9.<org.jfree.chart.axis.ValueAxis: void addChangeListener(org.jfree.chart.event.AxisChangeListener)>(this);
+        $stack10 = <java.awt.Color: java.awt.Color red>;
+        this.<org.jfree.chart.plot.FastScatterPlot: java.awt.Paint paint> = (java.awt.Paint) $stack10;
+        this.<org.jfree.chart.plot.FastScatterPlot: boolean domainGridlinesVisible> = 1;
+        $stack11 = <org.jfree.chart.plot.FastScatterPlot: java.awt.Paint DEFAULT_GRIDLINE_PAINT>;
+        this.<org.jfree.chart.plot.FastScatterPlot: java.awt.Paint domainGridlinePaint> = $stack11;
+        $stack12 = <org.jfree.chart.plot.FastScatterPlot: java.awt.Stroke DEFAULT_GRIDLINE_STROKE>;
+        this.<org.jfree.chart.plot.FastScatterPlot: java.awt.Stroke domainGridlineStroke> = $stack12;
+        this.<org.jfree.chart.plot.FastScatterPlot: boolean rangeGridlinesVisible> = 1;
+        $stack13 = <org.jfree.chart.plot.FastScatterPlot: java.awt.Paint DEFAULT_GRIDLINE_PAINT>;
+        this.<org.jfree.chart.plot.FastScatterPlot: java.awt.Paint rangeGridlinePaint> = $stack13;
+        $stack14 = <org.jfree.chart.plot.FastScatterPlot: java.awt.Stroke DEFAULT_GRIDLINE_STROKE>;
+        this.<org.jfree.chart.plot.FastScatterPlot: java.awt.Stroke rangeGridlineStroke> = $stack14;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.plot.FastScatterPlot: void setPaint(java.awt.Paint)> ----
+    {
+        java.awt.Paint paint;
+        java.lang.IllegalArgumentException #l1;
+        java.lang.Object $stack3;
+        java.lang.Throwable #l0;
+        org.jfree.chart.event.PlotChangeEvent $stack2;
+        org.jfree.chart.plot.FastScatterPlot this;
+    
+    
+        this := @this: org.jfree.chart.plot.FastScatterPlot;
+        paint := @parameter0: java.awt.Paint;
+    
+        if paint != null goto label1;
+        $stack3 = new java.lang.IllegalArgumentException;
+        #l1 = (java.lang.IllegalArgumentException) $stack3;
+        specialinvoke #l1.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'paint\' argument.");
+        #l0 = (java.lang.Throwable) $stack3;
+    
+        throw #l0;
+    
+      label1:
+        this.<org.jfree.chart.plot.FastScatterPlot: java.awt.Paint paint> = paint;
+        $stack2 = new org.jfree.chart.event.PlotChangeEvent;
+        specialinvoke $stack2.<org.jfree.chart.event.PlotChangeEvent: void <init>(org.jfree.chart.plot.Plot)>(this);
+        virtualinvoke this.<org.jfree.chart.plot.FastScatterPlot: void notifyListeners(org.jfree.chart.event.PlotChangeEvent)>($stack2);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.plot.FastScatterPlot: void setDomainGridlineStroke(java.awt.Stroke)> ----
+    {
+        java.awt.Stroke stroke;
+        java.lang.IllegalArgumentException #l1;
+        java.lang.Object $stack3;
+        java.lang.Throwable #l0;
+        org.jfree.chart.event.PlotChangeEvent $stack2;
+        org.jfree.chart.plot.FastScatterPlot this;
+    
+    
+        this := @this: org.jfree.chart.plot.FastScatterPlot;
+        stroke := @parameter0: java.awt.Stroke;
+    
+        if stroke != null goto label1;
+        $stack3 = new java.lang.IllegalArgumentException;
+        #l1 = (java.lang.IllegalArgumentException) $stack3;
+        specialinvoke #l1.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'stroke\' argument.");
+        #l0 = (java.lang.Throwable) $stack3;
+    
+        throw #l0;
+    
+      label1:
+        this.<org.jfree.chart.plot.FastScatterPlot: java.awt.Stroke domainGridlineStroke> = stroke;
+        $stack2 = new org.jfree.chart.event.PlotChangeEvent;
+        specialinvoke $stack2.<org.jfree.chart.event.PlotChangeEvent: void <init>(org.jfree.chart.plot.Plot)>(this);
+        virtualinvoke this.<org.jfree.chart.plot.FastScatterPlot: void notifyListeners(org.jfree.chart.event.PlotChangeEvent)>($stack2);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.plot.FastScatterPlot: void setData(float[][])> ----
+    {
+        float[][] data;
+        org.jfree.chart.event.PlotChangeEvent $stack2;
+        org.jfree.chart.plot.FastScatterPlot this;
+    
+    
+        this := @this: org.jfree.chart.plot.FastScatterPlot;
+        data := @parameter0: float[][];
+        this.<org.jfree.chart.plot.FastScatterPlot: float[][] data> = data;
+        $stack2 = new org.jfree.chart.event.PlotChangeEvent;
+        specialinvoke $stack2.<org.jfree.chart.event.PlotChangeEvent: void <init>(org.jfree.chart.plot.Plot)>(this);
+        virtualinvoke this.<org.jfree.chart.plot.FastScatterPlot: void notifyListeners(org.jfree.chart.event.PlotChangeEvent)>($stack2);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.plot.FastScatterPlot: java.awt.Stroke getDomainGridlineStroke()> ----
+    {
+        java.awt.Stroke $stack1;
+        org.jfree.chart.plot.FastScatterPlot this;
+    
+    
+        this := @this: org.jfree.chart.plot.FastScatterPlot;
+        $stack1 = this.<org.jfree.chart.plot.FastScatterPlot: java.awt.Stroke domainGridlineStroke>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.plot.FastScatterPlot: org.jfree.data.Range calculateYDataRange(float[][])> ----
+    {
+        byte $stack14, $stack15, $stack9;
+        double $stack10, $stack11;
+        float highest, lowest, v;
+        float[] $stack13, $stack7;
+        float[][] data;
+        int $stack8, i;
+        org.jfree.chart.plot.FastScatterPlot this;
+        org.jfree.data.Range $stack12, result;
+    
+    
+        this := @this: org.jfree.chart.plot.FastScatterPlot;
+        data := @parameter0: float[][];
+        result = null;
+    
+        if data == null goto label5;
+        lowest = #InfinityF;
+        highest = #-InfinityF;
+        i = 0;
+    
+      label1:
+        $stack7 = data[0];
+        $stack8 = lengthof $stack7;
+    
+        if i >= $stack8 goto label4;
+        $stack13 = data[1];
+        v = $stack13[i];
+        $stack14 = v cmpg lowest;
+    
+        if $stack14 >= 0 goto label2;
+        lowest = v;
+    
+      label2:
+        $stack15 = v cmpl highest;
+    
+        if $stack15 <= 0 goto label3;
+        highest = v;
+    
+      label3:
+        i = i + 1;
+    
+        goto label1;
+    
+      label4:
+        $stack9 = lowest cmpg highest;
+    
+        if $stack9 > 0 goto label5;
+        $stack12 = new org.jfree.data.Range;
+        $stack11 = (double) lowest;
+        $stack10 = (double) highest;
+        specialinvoke $stack12.<org.jfree.data.Range: void <init>(double,double)>($stack11, $stack10);
+        result = $stack12;
+    
+      label5:
+        return result;
+    }
+
+    // ---- method: <org.jfree.chart.plot.FastScatterPlot: java.lang.String getPlotType()> ----
+    {
+        java.lang.String $stack2;
+        java.util.ResourceBundle $stack1;
+        org.jfree.chart.plot.FastScatterPlot this;
+    
+    
+        this := @this: org.jfree.chart.plot.FastScatterPlot;
+        $stack1 = <org.jfree.chart.plot.FastScatterPlot: java.util.ResourceBundle localizationResources>;
+        $stack2 = virtualinvoke $stack1.<java.util.ResourceBundle: java.lang.String getString(java.lang.String)>("Fast_Scatter_Plot");
+    
+        return $stack2;
+    }
+
+    // ---- method: <org.jfree.chart.plot.FastScatterPlot: void zoomRangeAxes(double,org.jfree.chart.plot.PlotRenderingInfo,java.awt.geom.Point2D)> ----
+    {
+        double factor;
+        java.awt.geom.Point2D source;
+        org.jfree.chart.axis.ValueAxis $stack5;
+        org.jfree.chart.plot.FastScatterPlot this;
+        org.jfree.chart.plot.PlotRenderingInfo info;
+    
+    
+        this := @this: org.jfree.chart.plot.FastScatterPlot;
+        factor := @parameter0: double;
+        info := @parameter1: org.jfree.chart.plot.PlotRenderingInfo;
+        source := @parameter2: java.awt.geom.Point2D;
+        $stack5 = this.<org.jfree.chart.plot.FastScatterPlot: org.jfree.chart.axis.ValueAxis rangeAxis>;
+        virtualinvoke $stack5.<org.jfree.chart.axis.ValueAxis: void resizeRange(double)>(factor);
+    
+        return;
+    }
+
+}

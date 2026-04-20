@@ -1,0 +1,280 @@
+// ========================================================================
+// CLASS : org.jfree.data.xy.MatrixSeries
+// ========================================================================
+
+[PUBLIC, SUPER] class org.jfree.data.xy.MatrixSeries extends org.jfree.data.general.Series implements java.io.Serializable {
+
+    // ---- method: <org.jfree.data.xy.MatrixSeries: void zeroAll()> ----
+    {
+        double[] $stack6;
+        double[][] $stack5;
+        int column, columns, row, rows;
+        org.jfree.data.xy.MatrixSeries this;
+    
+    
+        this := @this: org.jfree.data.xy.MatrixSeries;
+        rows = virtualinvoke this.<org.jfree.data.xy.MatrixSeries: int getRowCount()>();
+        columns = virtualinvoke this.<org.jfree.data.xy.MatrixSeries: int getColumnsCount()>();
+        row = 0;
+    
+      label1:
+        if row >= rows goto label4;
+        column = 0;
+    
+      label2:
+        if column >= columns goto label3;
+        $stack5 = this.<org.jfree.data.xy.MatrixSeries: double[][] data>;
+        $stack6 = $stack5[row];
+        $stack6[column] = 0.0;
+        column = column + 1;
+    
+        goto label2;
+    
+      label3:
+        row = row + 1;
+    
+        goto label1;
+    
+      label4:
+        virtualinvoke this.<org.jfree.data.xy.MatrixSeries: void fireSeriesChanged()>();
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.xy.MatrixSeries: java.lang.Number getItem(int)> ----
+    {
+        double $stack5;
+        int i, itemIndex, j;
+        java.lang.Double #l0, n;
+        java.lang.Number #l1;
+        java.lang.Object $stack6;
+        org.jfree.data.xy.MatrixSeries this;
+    
+    
+        this := @this: org.jfree.data.xy.MatrixSeries;
+        itemIndex := @parameter0: int;
+        i = virtualinvoke this.<org.jfree.data.xy.MatrixSeries: int getItemRow(int)>(itemIndex);
+        j = virtualinvoke this.<org.jfree.data.xy.MatrixSeries: int getItemColumn(int)>(itemIndex);
+        $stack6 = new java.lang.Double;
+        $stack5 = virtualinvoke this.<org.jfree.data.xy.MatrixSeries: double get(int,int)>(i, j);
+        #l0 = (java.lang.Double) $stack6;
+        specialinvoke #l0.<java.lang.Double: void <init>(double)>($stack5);
+        n = (java.lang.Double) $stack6;
+        #l1 = (java.lang.Number) $stack6;
+    
+        return #l1;
+    }
+
+    // ---- method: <org.jfree.data.xy.MatrixSeries: void update(int,int,double)> ----
+    {
+        double mij;
+        double[] $stack6;
+        double[][] $stack5;
+        int i, j;
+        org.jfree.data.xy.MatrixSeries this;
+    
+    
+        this := @this: org.jfree.data.xy.MatrixSeries;
+        i := @parameter0: int;
+        j := @parameter1: int;
+        mij := @parameter2: double;
+        $stack5 = this.<org.jfree.data.xy.MatrixSeries: double[][] data>;
+        $stack6 = $stack5[i];
+        $stack6[j] = mij;
+        virtualinvoke this.<org.jfree.data.xy.MatrixSeries: void fireSeriesChanged()>();
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.xy.MatrixSeries: int getItemColumn(int)> ----
+    {
+        int $stack2, $stack3, itemIndex;
+        org.jfree.data.xy.MatrixSeries this;
+    
+    
+        this := @this: org.jfree.data.xy.MatrixSeries;
+        itemIndex := @parameter0: int;
+        $stack2 = virtualinvoke this.<org.jfree.data.xy.MatrixSeries: int getColumnsCount()>();
+        $stack3 = itemIndex % $stack2;
+    
+        return $stack3;
+    }
+
+    // ---- method: <org.jfree.data.xy.MatrixSeries: double get(int,int)> ----
+    {
+        double $stack5;
+        double[] $stack4;
+        double[][] $stack3;
+        int i, j;
+        org.jfree.data.xy.MatrixSeries this;
+    
+    
+        this := @this: org.jfree.data.xy.MatrixSeries;
+        i := @parameter0: int;
+        j := @parameter1: int;
+        $stack3 = this.<org.jfree.data.xy.MatrixSeries: double[][] data>;
+        $stack4 = $stack3[i];
+        $stack5 = $stack4[j];
+    
+        return $stack5;
+    }
+
+    // ---- method: <org.jfree.data.xy.MatrixSeries: void <init>(java.lang.String,int,int)> ----
+    {
+        double[][] $stack4;
+        int columns, rows;
+        java.lang.Comparable #l0;
+        java.lang.Object name;
+        org.jfree.data.xy.MatrixSeries this;
+    
+    
+        this := @this: org.jfree.data.xy.MatrixSeries;
+        name := @parameter0: java.lang.String;
+        rows := @parameter1: int;
+        columns := @parameter2: int;
+        #l0 = (java.lang.Comparable) name;
+        specialinvoke this.<org.jfree.data.general.Series: void <init>(java.lang.Comparable)>(#l0);
+        $stack4 = newmultiarray (double)[rows][columns];
+        this.<org.jfree.data.xy.MatrixSeries: double[][] data> = $stack4;
+        virtualinvoke this.<org.jfree.data.xy.MatrixSeries: void zeroAll()>();
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.xy.MatrixSeries: boolean equals(java.lang.Object)> ----
+    {
+        boolean $stack11, $stack5;
+        byte $stack15;
+        double $stack13, $stack14;
+        int $stack10, $stack12, $stack6, $stack7, $stack8, $stack9, c, r;
+        java.lang.Object obj;
+        org.jfree.data.xy.MatrixSeries that, this;
+    
+    
+        this := @this: org.jfree.data.xy.MatrixSeries;
+        obj := @parameter0: java.lang.Object;
+    
+        if obj != this goto label1;
+    
+        return 1;
+    
+      label1:
+        $stack5 = obj instanceof org.jfree.data.xy.MatrixSeries;
+    
+        if $stack5 != 0 goto label2;
+    
+        return 0;
+    
+      label2:
+        that = (org.jfree.data.xy.MatrixSeries) obj;
+        $stack7 = virtualinvoke this.<org.jfree.data.xy.MatrixSeries: int getRowCount()>();
+        $stack6 = virtualinvoke that.<org.jfree.data.xy.MatrixSeries: int getRowCount()>();
+    
+        if $stack7 == $stack6 goto label3;
+    
+        return 0;
+    
+      label3:
+        $stack9 = virtualinvoke this.<org.jfree.data.xy.MatrixSeries: int getColumnsCount()>();
+        $stack8 = virtualinvoke that.<org.jfree.data.xy.MatrixSeries: int getColumnsCount()>();
+    
+        if $stack9 == $stack8 goto label4;
+    
+        return 0;
+    
+      label4:
+        r = 0;
+    
+      label5:
+        $stack10 = virtualinvoke this.<org.jfree.data.xy.MatrixSeries: int getRowCount()>();
+    
+        if r >= $stack10 goto label9;
+        c = 0;
+    
+      label6:
+        $stack12 = virtualinvoke this.<org.jfree.data.xy.MatrixSeries: int getColumnsCount()>();
+    
+        if c >= $stack12 goto label8;
+        $stack13 = virtualinvoke this.<org.jfree.data.xy.MatrixSeries: double get(int,int)>(r, c);
+        $stack14 = virtualinvoke that.<org.jfree.data.xy.MatrixSeries: double get(int,int)>(r, c);
+        $stack15 = $stack13 cmpl $stack14;
+    
+        if $stack15 == 0 goto label7;
+    
+        return 0;
+    
+      label7:
+        c = c + 1;
+    
+        goto label6;
+    
+      label8:
+        r = r + 1;
+    
+        goto label5;
+    
+      label9:
+        $stack11 = specialinvoke this.<org.jfree.data.general.Series: boolean equals(java.lang.Object)>(obj);
+    
+        return $stack11;
+    }
+
+    // ---- method: <org.jfree.data.xy.MatrixSeries: int getItemCount()> ----
+    {
+        int $stack1, $stack2, $stack3;
+        org.jfree.data.xy.MatrixSeries this;
+    
+    
+        this := @this: org.jfree.data.xy.MatrixSeries;
+        $stack1 = virtualinvoke this.<org.jfree.data.xy.MatrixSeries: int getRowCount()>();
+        $stack2 = virtualinvoke this.<org.jfree.data.xy.MatrixSeries: int getColumnsCount()>();
+        $stack3 = $stack1 * $stack2;
+    
+        return $stack3;
+    }
+
+    // ---- method: <org.jfree.data.xy.MatrixSeries: int getItemRow(int)> ----
+    {
+        int $stack2, $stack3, itemIndex;
+        org.jfree.data.xy.MatrixSeries this;
+    
+    
+        this := @this: org.jfree.data.xy.MatrixSeries;
+        itemIndex := @parameter0: int;
+        $stack2 = virtualinvoke this.<org.jfree.data.xy.MatrixSeries: int getColumnsCount()>();
+        $stack3 = itemIndex / $stack2;
+    
+        return $stack3;
+    }
+
+    // ---- method: <org.jfree.data.xy.MatrixSeries: int getRowCount()> ----
+    {
+        double[][] $stack1;
+        int $stack2;
+        org.jfree.data.xy.MatrixSeries this;
+    
+    
+        this := @this: org.jfree.data.xy.MatrixSeries;
+        $stack1 = this.<org.jfree.data.xy.MatrixSeries: double[][] data>;
+        $stack2 = lengthof $stack1;
+    
+        return $stack2;
+    }
+
+    // ---- method: <org.jfree.data.xy.MatrixSeries: int getColumnsCount()> ----
+    {
+        double[] $stack2;
+        double[][] $stack1;
+        int $stack3;
+        org.jfree.data.xy.MatrixSeries this;
+    
+    
+        this := @this: org.jfree.data.xy.MatrixSeries;
+        $stack1 = this.<org.jfree.data.xy.MatrixSeries: double[][] data>;
+        $stack2 = $stack1[0];
+        $stack3 = lengthof $stack2;
+    
+        return $stack3;
+    }
+
+}

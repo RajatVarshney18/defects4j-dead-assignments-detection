@@ -1,0 +1,483 @@
+// ========================================================================
+// CLASS : org.jfree.data.general.Series
+// ========================================================================
+
+[PUBLIC, SUPER, ABSTRACT] class org.jfree.data.general.Series extends java.lang.Object implements java.lang.Cloneable, java.io.Serializable {
+
+    // ---- method: <org.jfree.data.general.Series: int hashCode()> ----
+    {
+        int $stack4, $stack6, result#0, result#1;
+        java.lang.Comparable $stack2;
+        java.lang.String $stack3, $stack5;
+        org.jfree.data.general.Series this;
+    
+    
+        this := @this: org.jfree.data.general.Series;
+        $stack2 = this.<org.jfree.data.general.Series: java.lang.Comparable key>;
+        result#0 = virtualinvoke $stack2.<java.lang.Object: int hashCode()>();
+        $stack4 = 29 * result#0;
+        $stack3 = this.<org.jfree.data.general.Series: java.lang.String description>;
+    
+        if $stack3 == null goto label1;
+        $stack5 = this.<org.jfree.data.general.Series: java.lang.String description>;
+        $stack6 = virtualinvoke $stack5.<java.lang.String: int hashCode()>();
+    
+        goto label2;
+    
+      label1:
+        $stack6 = 0;
+    
+      label2:
+        result#1 = $stack4 + $stack6;
+    
+        return result#1;
+    }
+
+    // ---- method: <org.jfree.data.general.Series: void setKey(java.lang.Comparable)> ----
+    {
+        java.beans.PropertyChangeSupport $stack3;
+        java.lang.Comparable key, old;
+        java.lang.IllegalArgumentException #l1;
+        java.lang.Object $stack4;
+        java.lang.Throwable #l0;
+        org.jfree.data.general.Series this;
+    
+    
+        this := @this: org.jfree.data.general.Series;
+        key := @parameter0: java.lang.Comparable;
+    
+        if key != null goto label1;
+        $stack4 = new java.lang.IllegalArgumentException;
+        #l1 = (java.lang.IllegalArgumentException) $stack4;
+        specialinvoke #l1.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'key\' argument.");
+        #l0 = (java.lang.Throwable) $stack4;
+    
+        throw #l0;
+    
+      label1:
+        old = this.<org.jfree.data.general.Series: java.lang.Comparable key>;
+        this.<org.jfree.data.general.Series: java.lang.Comparable key> = key;
+        $stack3 = this.<org.jfree.data.general.Series: java.beans.PropertyChangeSupport propertyChangeSupport>;
+        virtualinvoke $stack3.<java.beans.PropertyChangeSupport: void firePropertyChange(java.lang.String,java.lang.Object,java.lang.Object)>("Key", old, key);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.general.Series: void addChangeListener(org.jfree.data.general.SeriesChangeListener)> ----
+    {
+        java.lang.Class $stack2, $stack3;
+        java.lang.Object $stack5;
+        javax.swing.event.EventListenerList $stack4;
+        org.jfree.data.general.Series this;
+        org.jfree.data.general.SeriesChangeListener listener;
+    
+    
+        this := @this: org.jfree.data.general.Series;
+        listener := @parameter0: org.jfree.data.general.SeriesChangeListener;
+        $stack4 = this.<org.jfree.data.general.Series: javax.swing.event.EventListenerList listeners>;
+        $stack2 = <org.jfree.data.general.Series: java.lang.Class class$org$jfree$data$general$SeriesChangeListener>;
+    
+        if $stack2 != null goto label1;
+        $stack3 = staticinvoke <org.jfree.data.general.Series: java.lang.Class class$(java.lang.String)>("org.jfree.data.general.SeriesChangeListener");
+        <org.jfree.data.general.Series: java.lang.Class class$org$jfree$data$general$SeriesChangeListener> = $stack3;
+    
+        goto label2;
+    
+      label1:
+        $stack3 = <org.jfree.data.general.Series: java.lang.Class class$org$jfree$data$general$SeriesChangeListener>;
+    
+      label2:
+        virtualinvoke $stack4.<javax.swing.event.EventListenerList: void add(java.lang.Class,java.util.EventListener)>($stack3, listener);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.general.Series: void notifyListeners(org.jfree.data.general.SeriesChangeEvent)> ----
+    {
+        int $stack5, $stack9, i;
+        java.lang.Class $stack6, $stack7;
+        java.lang.Object $stack10, $stack12, $stack8;
+        java.lang.Object[] listenerList;
+        javax.swing.event.EventListenerList $stack4;
+        org.jfree.data.general.Series this;
+        org.jfree.data.general.SeriesChangeEvent event;
+        org.jfree.data.general.SeriesChangeListener $stack11;
+    
+    
+        this := @this: org.jfree.data.general.Series;
+        event := @parameter0: org.jfree.data.general.SeriesChangeEvent;
+        $stack4 = this.<org.jfree.data.general.Series: javax.swing.event.EventListenerList listeners>;
+        listenerList = virtualinvoke $stack4.<javax.swing.event.EventListenerList: java.lang.Object[] getListenerList()>();
+        $stack5 = lengthof listenerList;
+        i = $stack5 - 2;
+    
+      label1:
+        if i < 0 goto label5;
+        $stack8 = listenerList[i];
+        $stack6 = <org.jfree.data.general.Series: java.lang.Class class$org$jfree$data$general$SeriesChangeListener>;
+    
+        if $stack6 != null goto label2;
+        $stack7 = staticinvoke <org.jfree.data.general.Series: java.lang.Class class$(java.lang.String)>("org.jfree.data.general.SeriesChangeListener");
+        <org.jfree.data.general.Series: java.lang.Class class$org$jfree$data$general$SeriesChangeListener> = $stack7;
+    
+        goto label3;
+    
+      label2:
+        $stack7 = <org.jfree.data.general.Series: java.lang.Class class$org$jfree$data$general$SeriesChangeListener>;
+    
+      label3:
+        if $stack8 != $stack7 goto label4;
+        $stack9 = i + 1;
+        $stack10 = listenerList[$stack9];
+        $stack11 = (org.jfree.data.general.SeriesChangeListener) $stack10;
+        interfaceinvoke $stack11.<org.jfree.data.general.SeriesChangeListener: void seriesChanged(org.jfree.data.general.SeriesChangeEvent)>(event);
+    
+      label4:
+        i = i + -2;
+    
+        goto label1;
+    
+      label5:
+        return;
+    }
+
+    // ---- method: <org.jfree.data.general.Series: void removePropertyChangeListener(java.beans.PropertyChangeListener)> ----
+    {
+        java.beans.PropertyChangeListener listener;
+        java.beans.PropertyChangeSupport $stack2;
+        org.jfree.data.general.Series this;
+    
+    
+        this := @this: org.jfree.data.general.Series;
+        listener := @parameter0: java.beans.PropertyChangeListener;
+        $stack2 = this.<org.jfree.data.general.Series: java.beans.PropertyChangeSupport propertyChangeSupport>;
+        virtualinvoke $stack2.<java.beans.PropertyChangeSupport: void removePropertyChangeListener(java.beans.PropertyChangeListener)>(listener);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.general.Series: void setDescription(java.lang.String)> ----
+    {
+        java.beans.PropertyChangeSupport $stack3;
+        java.lang.String description, old;
+        org.jfree.data.general.Series this;
+    
+    
+        this := @this: org.jfree.data.general.Series;
+        description := @parameter0: java.lang.String;
+        old = this.<org.jfree.data.general.Series: java.lang.String description>;
+        this.<org.jfree.data.general.Series: java.lang.String description> = description;
+        $stack3 = this.<org.jfree.data.general.Series: java.beans.PropertyChangeSupport propertyChangeSupport>;
+        virtualinvoke $stack3.<java.beans.PropertyChangeSupport: void firePropertyChange(java.lang.String,java.lang.Object,java.lang.Object)>("Description", old, description);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.general.Series: void removeChangeListener(org.jfree.data.general.SeriesChangeListener)> ----
+    {
+        java.lang.Class $stack2, $stack3;
+        java.lang.Object $stack5;
+        javax.swing.event.EventListenerList $stack4;
+        org.jfree.data.general.Series this;
+        org.jfree.data.general.SeriesChangeListener listener;
+    
+    
+        this := @this: org.jfree.data.general.Series;
+        listener := @parameter0: org.jfree.data.general.SeriesChangeListener;
+        $stack4 = this.<org.jfree.data.general.Series: javax.swing.event.EventListenerList listeners>;
+        $stack2 = <org.jfree.data.general.Series: java.lang.Class class$org$jfree$data$general$SeriesChangeListener>;
+    
+        if $stack2 != null goto label1;
+        $stack3 = staticinvoke <org.jfree.data.general.Series: java.lang.Class class$(java.lang.String)>("org.jfree.data.general.SeriesChangeListener");
+        <org.jfree.data.general.Series: java.lang.Class class$org$jfree$data$general$SeriesChangeListener> = $stack3;
+    
+        goto label2;
+    
+      label1:
+        $stack3 = <org.jfree.data.general.Series: java.lang.Class class$org$jfree$data$general$SeriesChangeListener>;
+    
+      label2:
+        virtualinvoke $stack4.<javax.swing.event.EventListenerList: void remove(java.lang.Class,java.util.EventListener)>($stack3, listener);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.general.Series: void fireSeriesChanged()> ----
+    {
+        boolean $stack1;
+        org.jfree.data.general.Series this;
+        org.jfree.data.general.SeriesChangeEvent $stack2;
+    
+    
+        this := @this: org.jfree.data.general.Series;
+        $stack1 = this.<org.jfree.data.general.Series: boolean notify>;
+    
+        if $stack1 == 0 goto label1;
+        $stack2 = new org.jfree.data.general.SeriesChangeEvent;
+        specialinvoke $stack2.<org.jfree.data.general.SeriesChangeEvent: void <init>(java.lang.Object)>(this);
+        virtualinvoke this.<org.jfree.data.general.Series: void notifyListeners(org.jfree.data.general.SeriesChangeEvent)>($stack2);
+    
+      label1:
+        return;
+    }
+
+    // ---- method: <org.jfree.data.general.Series: int getItemCount()> ----
+    // (abstract or native – no body)
+
+    // ---- method: <org.jfree.data.general.Series: void firePropertyChange(java.lang.String,java.lang.Object,java.lang.Object)> ----
+    {
+        java.beans.PropertyChangeSupport $stack4;
+        java.lang.Object newValue, oldValue;
+        java.lang.String property;
+        org.jfree.data.general.Series this;
+    
+    
+        this := @this: org.jfree.data.general.Series;
+        property := @parameter0: java.lang.String;
+        oldValue := @parameter1: java.lang.Object;
+        newValue := @parameter2: java.lang.Object;
+        $stack4 = this.<org.jfree.data.general.Series: java.beans.PropertyChangeSupport propertyChangeSupport>;
+        virtualinvoke $stack4.<java.beans.PropertyChangeSupport: void firePropertyChange(java.lang.String,java.lang.Object,java.lang.Object)>(property, oldValue, newValue);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.general.Series: java.lang.String getDescription()> ----
+    {
+        java.lang.String $stack1;
+        org.jfree.data.general.Series this;
+    
+    
+        this := @this: org.jfree.data.general.Series;
+        $stack1 = this.<org.jfree.data.general.Series: java.lang.String description>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.data.general.Series: void setNotify(boolean)> ----
+    {
+        boolean $stack2, notify;
+        org.jfree.data.general.Series this;
+    
+    
+        this := @this: org.jfree.data.general.Series;
+        notify := @parameter0: boolean;
+        $stack2 = this.<org.jfree.data.general.Series: boolean notify>;
+    
+        if $stack2 == notify goto label1;
+        this.<org.jfree.data.general.Series: boolean notify> = notify;
+        virtualinvoke this.<org.jfree.data.general.Series: void fireSeriesChanged()>();
+    
+      label1:
+        return;
+    }
+
+    // ---- method: <org.jfree.data.general.Series: java.lang.Object clone()> ----
+    {
+        java.beans.PropertyChangeSupport $stack4;
+        java.lang.Object $stack2;
+        javax.swing.event.EventListenerList $stack3;
+        org.jfree.data.general.Series clone, this;
+    
+    
+        this := @this: org.jfree.data.general.Series;
+        $stack2 = specialinvoke this.<java.lang.Object: java.lang.Object clone()>();
+        clone = (org.jfree.data.general.Series) $stack2;
+        $stack3 = new javax.swing.event.EventListenerList;
+        specialinvoke $stack3.<javax.swing.event.EventListenerList: void <init>()>();
+        clone.<org.jfree.data.general.Series: javax.swing.event.EventListenerList listeners> = $stack3;
+        $stack4 = new java.beans.PropertyChangeSupport;
+        specialinvoke $stack4.<java.beans.PropertyChangeSupport: void <init>(java.lang.Object)>(clone);
+        clone.<org.jfree.data.general.Series: java.beans.PropertyChangeSupport propertyChangeSupport> = $stack4;
+    
+        return clone;
+    }
+
+    // ---- method: <org.jfree.data.general.Series: void <init>(java.lang.Comparable)> ----
+    {
+        java.lang.Comparable key;
+        org.jfree.data.general.Series this;
+    
+    
+        this := @this: org.jfree.data.general.Series;
+        key := @parameter0: java.lang.Comparable;
+        specialinvoke this.<org.jfree.data.general.Series: void <init>(java.lang.Comparable,java.lang.String)>(key, null);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.general.Series: boolean isEmpty()> ----
+    {
+        boolean $stack2;
+        int $stack1;
+        org.jfree.data.general.Series this;
+    
+    
+        this := @this: org.jfree.data.general.Series;
+        $stack1 = virtualinvoke this.<org.jfree.data.general.Series: int getItemCount()>();
+    
+        if $stack1 != 0 goto label1;
+        $stack2 = 1;
+    
+        goto label2;
+    
+      label1:
+        $stack2 = 0;
+    
+      label2:
+        return $stack2;
+    }
+
+    // ---- method: <org.jfree.data.general.Series: java.lang.Class class$(java.lang.String)> ----
+    {
+        java.lang.Class $stack2;
+        java.lang.NoClassDefFoundError $stack4;
+        java.lang.String x0;
+        java.lang.Throwable $stack3, $stack5, x1;
+    
+    
+        x0 := @parameter0: java.lang.String;
+    
+      label1:
+        $stack2 = staticinvoke <java.lang.Class: java.lang.Class forName(java.lang.String)>(x0);
+    
+      label2:
+        return $stack2;
+    
+      label3:
+        $stack3 := @caughtexception;
+        x1 = $stack3;
+        $stack4 = new java.lang.NoClassDefFoundError;
+        specialinvoke $stack4.<java.lang.NoClassDefFoundError: void <init>()>();
+        $stack5 = virtualinvoke $stack4.<java.lang.NoClassDefFoundError: java.lang.Throwable initCause(java.lang.Throwable)>($stack3);
+    
+        throw $stack5;
+    
+     catch java.lang.ClassNotFoundException from label1 to label2 with label3;
+    }
+
+    // ---- method: <org.jfree.data.general.Series: boolean equals(java.lang.Object)> ----
+    {
+        boolean $stack3, $stack6, $stack9;
+        java.lang.Comparable $stack4, $stack5;
+        java.lang.Object obj;
+        java.lang.String $stack7, $stack8;
+        org.jfree.data.general.Series that, this;
+    
+    
+        this := @this: org.jfree.data.general.Series;
+        obj := @parameter0: java.lang.Object;
+    
+        if obj != this goto label1;
+    
+        return 1;
+    
+      label1:
+        $stack3 = obj instanceof org.jfree.data.general.Series;
+    
+        if $stack3 != 0 goto label2;
+    
+        return 0;
+    
+      label2:
+        that = (org.jfree.data.general.Series) obj;
+        $stack5 = virtualinvoke this.<org.jfree.data.general.Series: java.lang.Comparable getKey()>();
+        $stack4 = virtualinvoke that.<org.jfree.data.general.Series: java.lang.Comparable getKey()>();
+        $stack6 = virtualinvoke $stack5.<java.lang.Object: boolean equals(java.lang.Object)>($stack4);
+    
+        if $stack6 != 0 goto label3;
+    
+        return 0;
+    
+      label3:
+        $stack8 = virtualinvoke this.<org.jfree.data.general.Series: java.lang.String getDescription()>();
+        $stack7 = virtualinvoke that.<org.jfree.data.general.Series: java.lang.String getDescription()>();
+        $stack9 = staticinvoke <org.jfree.chart.util.ObjectUtilities: boolean equal(java.lang.Object,java.lang.Object)>($stack8, $stack7);
+    
+        if $stack9 != 0 goto label4;
+    
+        return 0;
+    
+      label4:
+        return 1;
+    }
+
+    // ---- method: <org.jfree.data.general.Series: void addPropertyChangeListener(java.beans.PropertyChangeListener)> ----
+    {
+        java.beans.PropertyChangeListener listener;
+        java.beans.PropertyChangeSupport $stack2;
+        org.jfree.data.general.Series this;
+    
+    
+        this := @this: org.jfree.data.general.Series;
+        listener := @parameter0: java.beans.PropertyChangeListener;
+        $stack2 = this.<org.jfree.data.general.Series: java.beans.PropertyChangeSupport propertyChangeSupport>;
+        virtualinvoke $stack2.<java.beans.PropertyChangeSupport: void addPropertyChangeListener(java.beans.PropertyChangeListener)>(listener);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.general.Series: java.lang.Comparable getKey()> ----
+    {
+        java.lang.Comparable $stack1;
+        org.jfree.data.general.Series this;
+    
+    
+        this := @this: org.jfree.data.general.Series;
+        $stack1 = this.<org.jfree.data.general.Series: java.lang.Comparable key>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.data.general.Series: boolean getNotify()> ----
+    {
+        boolean $stack1;
+        org.jfree.data.general.Series this;
+    
+    
+        this := @this: org.jfree.data.general.Series;
+        $stack1 = this.<org.jfree.data.general.Series: boolean notify>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.data.general.Series: void <init>(java.lang.Comparable,java.lang.String)> ----
+    {
+        java.beans.PropertyChangeSupport $stack4;
+        java.lang.Comparable key;
+        java.lang.IllegalArgumentException #l1;
+        java.lang.Object $stack5;
+        java.lang.String description;
+        java.lang.Throwable #l0;
+        javax.swing.event.EventListenerList $stack3;
+        org.jfree.data.general.Series this;
+    
+    
+        this := @this: org.jfree.data.general.Series;
+        key := @parameter0: java.lang.Comparable;
+        description := @parameter1: java.lang.String;
+        specialinvoke this.<java.lang.Object: void <init>()>();
+    
+        if key != null goto label1;
+        $stack5 = new java.lang.IllegalArgumentException;
+        #l1 = (java.lang.IllegalArgumentException) $stack5;
+        specialinvoke #l1.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'key\' argument.");
+        #l0 = (java.lang.Throwable) $stack5;
+    
+        throw #l0;
+    
+      label1:
+        this.<org.jfree.data.general.Series: java.lang.Comparable key> = key;
+        this.<org.jfree.data.general.Series: java.lang.String description> = description;
+        $stack3 = new javax.swing.event.EventListenerList;
+        specialinvoke $stack3.<javax.swing.event.EventListenerList: void <init>()>();
+        this.<org.jfree.data.general.Series: javax.swing.event.EventListenerList listeners> = $stack3;
+        $stack4 = new java.beans.PropertyChangeSupport;
+        specialinvoke $stack4.<java.beans.PropertyChangeSupport: void <init>(java.lang.Object)>(this);
+        this.<org.jfree.data.general.Series: java.beans.PropertyChangeSupport propertyChangeSupport> = $stack4;
+        this.<org.jfree.data.general.Series: boolean notify> = 1;
+    
+        return;
+    }
+
+}

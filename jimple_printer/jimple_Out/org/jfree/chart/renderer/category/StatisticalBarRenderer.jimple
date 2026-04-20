@@ -1,0 +1,745 @@
+// ========================================================================
+// CLASS : org.jfree.chart.renderer.category.StatisticalBarRenderer
+// ========================================================================
+
+[PUBLIC, SUPER] class org.jfree.chart.renderer.category.StatisticalBarRenderer extends org.jfree.chart.renderer.category.BarRenderer implements org.jfree.chart.util.PublicCloneable, java.lang.Cloneable, java.io.Serializable, org.jfree.chart.renderer.category.CategoryItemRenderer {
+
+    // ---- method: <org.jfree.chart.renderer.category.StatisticalBarRenderer: boolean equals(java.lang.Object)> ----
+    {
+        boolean $stack3, $stack4, $stack7;
+        java.awt.Paint $stack5, $stack6;
+        java.lang.Object obj;
+        org.jfree.chart.renderer.category.StatisticalBarRenderer that, this;
+    
+    
+        this := @this: org.jfree.chart.renderer.category.StatisticalBarRenderer;
+        obj := @parameter0: java.lang.Object;
+    
+        if obj != this goto label1;
+    
+        return 1;
+    
+      label1:
+        $stack3 = obj instanceof org.jfree.chart.renderer.category.StatisticalBarRenderer;
+    
+        if $stack3 != 0 goto label2;
+    
+        return 0;
+    
+      label2:
+        $stack4 = specialinvoke this.<org.jfree.chart.renderer.category.BarRenderer: boolean equals(java.lang.Object)>(obj);
+    
+        if $stack4 != 0 goto label3;
+    
+        return 0;
+    
+      label3:
+        that = (org.jfree.chart.renderer.category.StatisticalBarRenderer) obj;
+        $stack6 = this.<org.jfree.chart.renderer.category.StatisticalBarRenderer: java.awt.Paint errorIndicatorPaint>;
+        $stack5 = that.<org.jfree.chart.renderer.category.StatisticalBarRenderer: java.awt.Paint errorIndicatorPaint>;
+        $stack7 = staticinvoke <org.jfree.chart.util.PaintUtilities: boolean equal(java.awt.Paint,java.awt.Paint)>($stack6, $stack5);
+    
+        if $stack7 != 0 goto label4;
+    
+        return 0;
+    
+      label4:
+        return 1;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.category.StatisticalBarRenderer: void readObject(java.io.ObjectInputStream)> ----
+    {
+        java.awt.Paint $stack2;
+        java.awt.Stroke $stack3;
+        java.io.ObjectInputStream stream;
+        org.jfree.chart.renderer.category.StatisticalBarRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.category.StatisticalBarRenderer;
+        stream := @parameter0: java.io.ObjectInputStream;
+        virtualinvoke stream.<java.io.ObjectInputStream: void defaultReadObject()>();
+        $stack2 = staticinvoke <org.jfree.chart.util.SerialUtilities: java.awt.Paint readPaint(java.io.ObjectInputStream)>(stream);
+        this.<org.jfree.chart.renderer.category.StatisticalBarRenderer: java.awt.Paint errorIndicatorPaint> = $stack2;
+        $stack3 = staticinvoke <org.jfree.chart.util.SerialUtilities: java.awt.Stroke readStroke(java.io.ObjectInputStream)>(stream);
+        this.<org.jfree.chart.renderer.category.StatisticalBarRenderer: java.awt.Stroke errorIndicatorStroke> = $stack3;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.category.StatisticalBarRenderer: java.awt.Paint getErrorIndicatorPaint()> ----
+    {
+        java.awt.Paint $stack1;
+        org.jfree.chart.renderer.category.StatisticalBarRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.category.StatisticalBarRenderer;
+        $stack1 = this.<org.jfree.chart.renderer.category.StatisticalBarRenderer: java.awt.Paint errorIndicatorPaint>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.category.StatisticalBarRenderer: void drawHorizontalItem(java.awt.Graphics2D,org.jfree.chart.renderer.category.CategoryItemRendererState,java.awt.geom.Rectangle2D,org.jfree.chart.plot.CategoryPlot,org.jfree.chart.axis.CategoryAxis,org.jfree.chart.axis.ValueAxis,org.jfree.data.statistics.StatisticalCategoryDataset,int,int)> ----
+    {
+        boolean $stack55, $stack56, $stack58;
+        byte $stack49, $stack50, $stack51, $stack52, $stack57, $stack85, $stack88, $stack89, $stack90, $stack91;
+        double $stack100, $stack101, $stack46, $stack47, $stack48, $stack53, $stack59, $stack60, $stack61, $stack62, $stack67, $stack68, $stack69, $stack70, $stack72, $stack73, $stack74, $stack75, $stack77, $stack78, $stack79, $stack80, $stack84, $stack92, $stack93, $stack96, $stack97, $stack98, $stack99, base, highVal, lclip, lowVal, rectHeight, rectWidth, rectX, rectY#0, rectY#1, seriesGap#0, transY1, transY2, uclip, value, valueDelta#0;
+        int $stack45, $stack94, $stack95, categoryCount, column, row, seriesCount;
+        java.awt.Graphics2D g2;
+        java.awt.Paint $stack65, $stack66, $stack82, $stack87, seriesPaint;
+        java.awt.Shape #l1, #l2, #l3, #l6, #l8, #l9;
+        java.awt.Stroke $stack63, $stack64, $stack83, $stack86;
+        java.awt.geom.Line2D$Double #l10, #l4, #l5, line#1, line#2, line#3;
+        java.awt.geom.Rectangle2D #l7, dataArea;
+        java.awt.geom.Rectangle2D$Double #l0, bar;
+        java.lang.Number n, seriesGap#1;
+        java.lang.Object $stack54, $stack71, $stack76, $stack81, line#0;
+        org.jfree.chart.axis.CategoryAxis domainAxis;
+        org.jfree.chart.axis.ValueAxis rangeAxis;
+        org.jfree.chart.entity.EntityCollection entities;
+        org.jfree.chart.labels.CategoryItemLabelGenerator valueDelta#1;
+        org.jfree.chart.plot.CategoryPlot plot;
+        org.jfree.chart.renderer.category.CategoryItemRendererState state;
+        org.jfree.chart.renderer.category.StatisticalBarRenderer this;
+        org.jfree.chart.util.RectangleEdge xAxisLocation, yAxisLocation;
+        org.jfree.data.statistics.StatisticalCategoryDataset dataset;
+    
+    
+        this := @this: org.jfree.chart.renderer.category.StatisticalBarRenderer;
+        g2 := @parameter0: java.awt.Graphics2D;
+        state := @parameter1: org.jfree.chart.renderer.category.CategoryItemRendererState;
+        dataArea := @parameter2: java.awt.geom.Rectangle2D;
+        plot := @parameter3: org.jfree.chart.plot.CategoryPlot;
+        domainAxis := @parameter4: org.jfree.chart.axis.CategoryAxis;
+        rangeAxis := @parameter5: org.jfree.chart.axis.ValueAxis;
+        dataset := @parameter6: org.jfree.data.statistics.StatisticalCategoryDataset;
+        row := @parameter7: int;
+        column := @parameter8: int;
+        xAxisLocation = virtualinvoke plot.<org.jfree.chart.plot.CategoryPlot: org.jfree.chart.util.RectangleEdge getDomainAxisEdge()>();
+        $stack45 = virtualinvoke this.<org.jfree.chart.renderer.category.StatisticalBarRenderer: int getColumnCount()>();
+        rectY#0 = virtualinvoke domainAxis.<org.jfree.chart.axis.CategoryAxis: double getCategoryStart(int,int,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)>(column, $stack45, dataArea, xAxisLocation);
+        seriesCount = virtualinvoke this.<org.jfree.chart.renderer.category.StatisticalBarRenderer: int getRowCount()>();
+        categoryCount = virtualinvoke this.<org.jfree.chart.renderer.category.StatisticalBarRenderer: int getColumnCount()>();
+    
+        if seriesCount <= 1 goto label01;
+        $stack92 = virtualinvoke dataArea.<java.awt.geom.Rectangle2D: double getHeight()>();
+        $stack93 = virtualinvoke this.<org.jfree.chart.renderer.category.StatisticalBarRenderer: double getItemMargin()>();
+        $stack96 = $stack92 * $stack93;
+        $stack94 = seriesCount - 1;
+        $stack95 = categoryCount * $stack94;
+        $stack97 = (double) $stack95;
+        seriesGap#0 = $stack96 / $stack97;
+        $stack99 = (double) row;
+        $stack98 = virtualinvoke state.<org.jfree.chart.renderer.category.CategoryItemRendererState: double getBarWidth()>();
+        $stack100 = $stack98 + seriesGap#0;
+        $stack101 = $stack99 * $stack100;
+        rectY#1 = rectY#0 + $stack101;
+    
+        goto label02;
+    
+      label01:
+        $stack46 = (double) row;
+        $stack47 = virtualinvoke state.<org.jfree.chart.renderer.category.CategoryItemRendererState: double getBarWidth()>();
+        $stack48 = $stack46 * $stack47;
+        rectY#1 = rectY#0 + $stack48;
+    
+      label02:
+        seriesGap#1 = interfaceinvoke dataset.<org.jfree.data.statistics.StatisticalCategoryDataset: java.lang.Number getMeanValue(int,int)>(row, column);
+    
+        if seriesGap#1 != null goto label03;
+    
+        return;
+    
+      label03:
+        value = virtualinvoke seriesGap#1.<java.lang.Number: double doubleValue()>();
+        base = 0.0;
+        lclip = virtualinvoke this.<org.jfree.chart.renderer.category.StatisticalBarRenderer: double getLowerClip()>();
+        uclip = virtualinvoke this.<org.jfree.chart.renderer.category.StatisticalBarRenderer: double getUpperClip()>();
+        $stack49 = uclip cmpg 0.0;
+    
+        if $stack49 > 0 goto label17;
+        $stack90 = value cmpl uclip;
+    
+        if $stack90 < 0 goto label04;
+    
+        return;
+    
+      label04:
+        base = uclip;
+        $stack91 = value cmpg lclip;
+    
+        if $stack91 > 0 goto label06;
+        value = lclip;
+    
+        goto label06;
+    
+      label05:
+        base = virtualinvoke this.<org.jfree.chart.renderer.category.StatisticalBarRenderer: double getLowerClip()>();
+        $stack52 = value cmpl uclip;
+    
+        if $stack52 < 0 goto label06;
+        value = uclip;
+    
+      label06:
+        yAxisLocation = virtualinvoke plot.<org.jfree.chart.plot.CategoryPlot: org.jfree.chart.util.RectangleEdge getRangeAxisEdge()>();
+        transY1 = virtualinvoke rangeAxis.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)>(base, dataArea, yAxisLocation);
+        transY2 = virtualinvoke rangeAxis.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)>(value, dataArea, yAxisLocation);
+        rectX = staticinvoke <java.lang.Math: double min(double,double)>(transY2, transY1);
+        rectHeight = virtualinvoke state.<org.jfree.chart.renderer.category.CategoryItemRendererState: double getBarWidth()>();
+        $stack53 = transY2 - transY1;
+        rectWidth = staticinvoke <java.lang.Math: double abs(double)>($stack53);
+        $stack54 = new java.awt.geom.Rectangle2D$Double;
+        #l0 = (java.awt.geom.Rectangle2D$Double) $stack54;
+        specialinvoke #l0.<java.awt.geom.Rectangle2D$Double: void <init>(double,double,double,double)>(rectX, rectY#1, rectWidth, rectHeight);
+        bar = (java.awt.geom.Rectangle2D$Double) $stack54;
+        seriesPaint = virtualinvoke this.<org.jfree.chart.renderer.category.StatisticalBarRenderer: java.awt.Paint getItemPaint(int,int)>(row, column);
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>(seriesPaint);
+        #l6 = (java.awt.Shape) $stack54;
+        virtualinvoke g2.<java.awt.Graphics2D: void fill(java.awt.Shape)>(#l6);
+        $stack55 = virtualinvoke this.<org.jfree.chart.renderer.category.StatisticalBarRenderer: boolean isDrawBarOutline()>();
+    
+        if $stack55 == 0 goto label07;
+        $stack84 = virtualinvoke state.<org.jfree.chart.renderer.category.CategoryItemRendererState: double getBarWidth()>();
+        $stack85 = $stack84 cmpl 3.0;
+    
+        if $stack85 <= 0 goto label07;
+        $stack86 = virtualinvoke this.<org.jfree.chart.renderer.category.StatisticalBarRenderer: java.awt.Stroke getItemStroke(int,int)>(row, column);
+        virtualinvoke g2.<java.awt.Graphics2D: void setStroke(java.awt.Stroke)>($stack86);
+        $stack87 = virtualinvoke this.<org.jfree.chart.renderer.category.StatisticalBarRenderer: java.awt.Paint getItemOutlinePaint(int,int)>(row, column);
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>($stack87);
+        #l2 = (java.awt.Shape) $stack54;
+        virtualinvoke g2.<java.awt.Graphics2D: void draw(java.awt.Shape)>(#l2);
+    
+      label07:
+        n = interfaceinvoke dataset.<org.jfree.data.statistics.StatisticalCategoryDataset: java.lang.Number getStdDevValue(int,int)>(row, column);
+    
+        if n == null goto label12;
+        valueDelta#0 = virtualinvoke n.<java.lang.Number: double doubleValue()>();
+        $stack59 = virtualinvoke seriesGap#1.<java.lang.Number: double doubleValue()>();
+        $stack60 = $stack59 + valueDelta#0;
+        highVal = virtualinvoke rangeAxis.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)>($stack60, dataArea, yAxisLocation);
+        $stack61 = virtualinvoke seriesGap#1.<java.lang.Number: double doubleValue()>();
+        $stack62 = $stack61 - valueDelta#0;
+        lowVal = virtualinvoke rangeAxis.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)>($stack62, dataArea, yAxisLocation);
+        $stack63 = this.<org.jfree.chart.renderer.category.StatisticalBarRenderer: java.awt.Stroke errorIndicatorStroke>;
+    
+        if $stack63 == null goto label08;
+        $stack83 = this.<org.jfree.chart.renderer.category.StatisticalBarRenderer: java.awt.Stroke errorIndicatorStroke>;
+        virtualinvoke g2.<java.awt.Graphics2D: void setStroke(java.awt.Stroke)>($stack83);
+    
+        goto label09;
+    
+      label08:
+        $stack64 = virtualinvoke this.<org.jfree.chart.renderer.category.StatisticalBarRenderer: java.awt.Stroke getItemOutlineStroke(int,int)>(row, column);
+        virtualinvoke g2.<java.awt.Graphics2D: void setStroke(java.awt.Stroke)>($stack64);
+    
+      label09:
+        $stack65 = this.<org.jfree.chart.renderer.category.StatisticalBarRenderer: java.awt.Paint errorIndicatorPaint>;
+    
+        if $stack65 == null goto label10;
+        $stack82 = this.<org.jfree.chart.renderer.category.StatisticalBarRenderer: java.awt.Paint errorIndicatorPaint>;
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>($stack82);
+    
+        goto label11;
+    
+      label10:
+        $stack66 = virtualinvoke this.<org.jfree.chart.renderer.category.StatisticalBarRenderer: java.awt.Paint getItemOutlinePaint(int,int)>(row, column);
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>($stack66);
+    
+      label11:
+        line#0 = null;
+        $stack71 = new java.awt.geom.Line2D$Double;
+        $stack67 = rectHeight / 2.0;
+        $stack70 = rectY#1 + $stack67;
+        $stack68 = rectHeight / 2.0;
+        $stack69 = rectY#1 + $stack68;
+        #l10 = (java.awt.geom.Line2D$Double) $stack71;
+        specialinvoke #l10.<java.awt.geom.Line2D$Double: void <init>(double,double,double,double)>(lowVal, $stack70, highVal, $stack69);
+        line#1 = (java.awt.geom.Line2D$Double) $stack71;
+        #l9 = (java.awt.Shape) $stack71;
+        virtualinvoke g2.<java.awt.Graphics2D: void draw(java.awt.Shape)>(#l9);
+        $stack76 = new java.awt.geom.Line2D$Double;
+        $stack72 = rectHeight * 0.25;
+        $stack75 = rectY#1 + $stack72;
+        $stack73 = rectHeight * 0.75;
+        $stack74 = rectY#1 + $stack73;
+        #l4 = (java.awt.geom.Line2D$Double) $stack76;
+        specialinvoke #l4.<java.awt.geom.Line2D$Double: void <init>(double,double,double,double)>(highVal, $stack75, highVal, $stack74);
+        line#2 = (java.awt.geom.Line2D$Double) $stack76;
+        #l3 = (java.awt.Shape) $stack76;
+        virtualinvoke g2.<java.awt.Graphics2D: void draw(java.awt.Shape)>(#l3);
+        $stack81 = new java.awt.geom.Line2D$Double;
+        $stack77 = rectHeight * 0.25;
+        $stack80 = rectY#1 + $stack77;
+        $stack78 = rectHeight * 0.75;
+        $stack79 = rectY#1 + $stack78;
+        #l5 = (java.awt.geom.Line2D$Double) $stack81;
+        specialinvoke #l5.<java.awt.geom.Line2D$Double: void <init>(double,double,double,double)>(lowVal, $stack80, lowVal, $stack79);
+        line#3 = (java.awt.geom.Line2D$Double) $stack81;
+        #l1 = (java.awt.Shape) $stack81;
+        virtualinvoke g2.<java.awt.Graphics2D: void draw(java.awt.Shape)>(#l1);
+    
+      label12:
+        valueDelta#1 = virtualinvoke this.<org.jfree.chart.renderer.category.StatisticalBarRenderer: org.jfree.chart.labels.CategoryItemLabelGenerator getItemLabelGenerator(int,int)>(row, column);
+    
+        if valueDelta#1 == null goto label15;
+        $stack56 = virtualinvoke this.<org.jfree.chart.renderer.category.StatisticalBarRenderer: boolean isItemLabelVisible(int,int)>(row, column);
+    
+        if $stack56 == 0 goto label15;
+        $stack57 = value cmpg 0.0;
+    
+        if $stack57 >= 0 goto label13;
+        $stack58 = 1;
+    
+        goto label14;
+    
+      label13:
+        $stack58 = 0;
+    
+      label14:
+        #l7 = (java.awt.geom.Rectangle2D) $stack54;
+        virtualinvoke this.<org.jfree.chart.renderer.category.StatisticalBarRenderer: void drawItemLabel(java.awt.Graphics2D,org.jfree.data.category.CategoryDataset,int,int,org.jfree.chart.plot.CategoryPlot,org.jfree.chart.labels.CategoryItemLabelGenerator,java.awt.geom.Rectangle2D,boolean)>(g2, dataset, row, column, plot, valueDelta#1, #l7, $stack58);
+    
+      label15:
+        entities = virtualinvoke state.<org.jfree.chart.renderer.category.CategoryItemRendererState: org.jfree.chart.entity.EntityCollection getEntityCollection()>();
+    
+        if entities == null goto label16;
+        #l8 = (java.awt.Shape) $stack54;
+        virtualinvoke this.<org.jfree.chart.renderer.category.StatisticalBarRenderer: void addItemEntity(org.jfree.chart.entity.EntityCollection,org.jfree.data.category.CategoryDataset,int,int,java.awt.Shape)>(entities, dataset, row, column, #l8);
+    
+      label16:
+        return;
+    
+      label17:
+        $stack50 = lclip cmpg 0.0;
+    
+        if $stack50 > 0 goto label19;
+        $stack88 = value cmpl uclip;
+    
+        if $stack88 < 0 goto label18;
+        value = uclip;
+    
+        goto label06;
+    
+      label18:
+        $stack89 = value cmpg lclip;
+    
+        if $stack89 > 0 goto label06;
+        value = lclip;
+    
+        goto label06;
+    
+      label19:
+        $stack51 = value cmpg lclip;
+    
+        if $stack51 > 0 goto label05;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.category.StatisticalBarRenderer: void <init>()> ----
+    {
+        java.awt.BasicStroke #l0;
+        java.lang.Object $stack1, $stack2;
+        org.jfree.chart.renderer.category.StatisticalBarRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.category.StatisticalBarRenderer;
+        specialinvoke this.<org.jfree.chart.renderer.category.BarRenderer: void <init>()>();
+        $stack1 = <java.awt.Color: java.awt.Color gray>;
+        this.<org.jfree.chart.renderer.category.StatisticalBarRenderer: java.awt.Paint errorIndicatorPaint> = (java.awt.Paint) $stack1;
+        $stack2 = new java.awt.BasicStroke;
+        #l0 = (java.awt.BasicStroke) $stack2;
+        specialinvoke #l0.<java.awt.BasicStroke: void <init>(float)>(0.5F);
+        this.<org.jfree.chart.renderer.category.StatisticalBarRenderer: java.awt.Stroke errorIndicatorStroke> = (java.awt.Stroke) $stack2;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.category.StatisticalBarRenderer: void drawVerticalItem(java.awt.Graphics2D,org.jfree.chart.renderer.category.CategoryItemRendererState,java.awt.geom.Rectangle2D,org.jfree.chart.plot.CategoryPlot,org.jfree.chart.axis.CategoryAxis,org.jfree.chart.axis.ValueAxis,org.jfree.data.statistics.StatisticalCategoryDataset,int,int)> ----
+    {
+        boolean $stack55, $stack56, $stack58;
+        byte $stack49, $stack50, $stack51, $stack52, $stack57, $stack89, $stack92, $stack93, $stack94, $stack95;
+        double $stack100, $stack101, $stack102, $stack103, $stack104, $stack105, $stack46, $stack47, $stack48, $stack53, $stack59, $stack60, $stack61, $stack62, $stack67, $stack68, $stack69, $stack70, $stack72, $stack73, $stack74, $stack75, $stack76, $stack77, $stack79, $stack80, $stack81, $stack82, $stack83, $stack84, $stack88, $stack96, $stack97, base, highVal, lclip, lowVal, rectHeight, rectWidth, rectX#0, rectX#1, rectY, seriesGap#0, transY1, transY2, uclip, value, valueDelta#0;
+        int $stack45, $stack98, $stack99, categoryCount, column, row, seriesCount;
+        java.awt.Graphics2D g2;
+        java.awt.Paint $stack65, $stack66, $stack86, $stack91, seriesPaint;
+        java.awt.Shape #l1, #l10, #l2, #l5, #l6, #l8;
+        java.awt.Stroke $stack63, $stack64, $stack87, $stack90;
+        java.awt.geom.Line2D$Double #l0, #l7, #l9, line#1, line#2, line#3;
+        java.awt.geom.Rectangle2D #l4, dataArea;
+        java.awt.geom.Rectangle2D$Double #l3, bar;
+        java.lang.Number n, seriesGap#1;
+        java.lang.Object $stack54, $stack71, $stack78, $stack85, line#0;
+        org.jfree.chart.axis.CategoryAxis domainAxis;
+        org.jfree.chart.axis.ValueAxis rangeAxis;
+        org.jfree.chart.entity.EntityCollection entities;
+        org.jfree.chart.labels.CategoryItemLabelGenerator valueDelta#1;
+        org.jfree.chart.plot.CategoryPlot plot;
+        org.jfree.chart.renderer.category.CategoryItemRendererState state;
+        org.jfree.chart.renderer.category.StatisticalBarRenderer this;
+        org.jfree.chart.util.RectangleEdge xAxisLocation, yAxisLocation;
+        org.jfree.data.statistics.StatisticalCategoryDataset dataset;
+    
+    
+        this := @this: org.jfree.chart.renderer.category.StatisticalBarRenderer;
+        g2 := @parameter0: java.awt.Graphics2D;
+        state := @parameter1: org.jfree.chart.renderer.category.CategoryItemRendererState;
+        dataArea := @parameter2: java.awt.geom.Rectangle2D;
+        plot := @parameter3: org.jfree.chart.plot.CategoryPlot;
+        domainAxis := @parameter4: org.jfree.chart.axis.CategoryAxis;
+        rangeAxis := @parameter5: org.jfree.chart.axis.ValueAxis;
+        dataset := @parameter6: org.jfree.data.statistics.StatisticalCategoryDataset;
+        row := @parameter7: int;
+        column := @parameter8: int;
+        xAxisLocation = virtualinvoke plot.<org.jfree.chart.plot.CategoryPlot: org.jfree.chart.util.RectangleEdge getDomainAxisEdge()>();
+        $stack45 = virtualinvoke this.<org.jfree.chart.renderer.category.StatisticalBarRenderer: int getColumnCount()>();
+        rectX#0 = virtualinvoke domainAxis.<org.jfree.chart.axis.CategoryAxis: double getCategoryStart(int,int,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)>(column, $stack45, dataArea, xAxisLocation);
+        seriesCount = virtualinvoke this.<org.jfree.chart.renderer.category.StatisticalBarRenderer: int getRowCount()>();
+        categoryCount = virtualinvoke this.<org.jfree.chart.renderer.category.StatisticalBarRenderer: int getColumnCount()>();
+    
+        if seriesCount <= 1 goto label01;
+        $stack96 = virtualinvoke dataArea.<java.awt.geom.Rectangle2D: double getWidth()>();
+        $stack97 = virtualinvoke this.<org.jfree.chart.renderer.category.StatisticalBarRenderer: double getItemMargin()>();
+        $stack100 = $stack96 * $stack97;
+        $stack98 = seriesCount - 1;
+        $stack99 = categoryCount * $stack98;
+        $stack101 = (double) $stack99;
+        seriesGap#0 = $stack100 / $stack101;
+        $stack103 = (double) row;
+        $stack102 = virtualinvoke state.<org.jfree.chart.renderer.category.CategoryItemRendererState: double getBarWidth()>();
+        $stack104 = $stack102 + seriesGap#0;
+        $stack105 = $stack103 * $stack104;
+        rectX#1 = rectX#0 + $stack105;
+    
+        goto label02;
+    
+      label01:
+        $stack46 = (double) row;
+        $stack47 = virtualinvoke state.<org.jfree.chart.renderer.category.CategoryItemRendererState: double getBarWidth()>();
+        $stack48 = $stack46 * $stack47;
+        rectX#1 = rectX#0 + $stack48;
+    
+      label02:
+        seriesGap#1 = interfaceinvoke dataset.<org.jfree.data.statistics.StatisticalCategoryDataset: java.lang.Number getMeanValue(int,int)>(row, column);
+    
+        if seriesGap#1 != null goto label03;
+    
+        return;
+    
+      label03:
+        value = virtualinvoke seriesGap#1.<java.lang.Number: double doubleValue()>();
+        base = 0.0;
+        lclip = virtualinvoke this.<org.jfree.chart.renderer.category.StatisticalBarRenderer: double getLowerClip()>();
+        uclip = virtualinvoke this.<org.jfree.chart.renderer.category.StatisticalBarRenderer: double getUpperClip()>();
+        $stack49 = uclip cmpg 0.0;
+    
+        if $stack49 > 0 goto label17;
+        $stack94 = value cmpl uclip;
+    
+        if $stack94 < 0 goto label04;
+    
+        return;
+    
+      label04:
+        base = uclip;
+        $stack95 = value cmpg lclip;
+    
+        if $stack95 > 0 goto label06;
+        value = lclip;
+    
+        goto label06;
+    
+      label05:
+        base = virtualinvoke this.<org.jfree.chart.renderer.category.StatisticalBarRenderer: double getLowerClip()>();
+        $stack52 = value cmpl uclip;
+    
+        if $stack52 < 0 goto label06;
+        value = uclip;
+    
+      label06:
+        yAxisLocation = virtualinvoke plot.<org.jfree.chart.plot.CategoryPlot: org.jfree.chart.util.RectangleEdge getRangeAxisEdge()>();
+        transY1 = virtualinvoke rangeAxis.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)>(base, dataArea, yAxisLocation);
+        transY2 = virtualinvoke rangeAxis.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)>(value, dataArea, yAxisLocation);
+        rectY = staticinvoke <java.lang.Math: double min(double,double)>(transY2, transY1);
+        rectWidth = virtualinvoke state.<org.jfree.chart.renderer.category.CategoryItemRendererState: double getBarWidth()>();
+        $stack53 = transY2 - transY1;
+        rectHeight = staticinvoke <java.lang.Math: double abs(double)>($stack53);
+        $stack54 = new java.awt.geom.Rectangle2D$Double;
+        #l3 = (java.awt.geom.Rectangle2D$Double) $stack54;
+        specialinvoke #l3.<java.awt.geom.Rectangle2D$Double: void <init>(double,double,double,double)>(rectX#1, rectY, rectWidth, rectHeight);
+        bar = (java.awt.geom.Rectangle2D$Double) $stack54;
+        seriesPaint = virtualinvoke this.<org.jfree.chart.renderer.category.StatisticalBarRenderer: java.awt.Paint getItemPaint(int,int)>(row, column);
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>(seriesPaint);
+        #l1 = (java.awt.Shape) $stack54;
+        virtualinvoke g2.<java.awt.Graphics2D: void fill(java.awt.Shape)>(#l1);
+        $stack55 = virtualinvoke this.<org.jfree.chart.renderer.category.StatisticalBarRenderer: boolean isDrawBarOutline()>();
+    
+        if $stack55 == 0 goto label07;
+        $stack88 = virtualinvoke state.<org.jfree.chart.renderer.category.CategoryItemRendererState: double getBarWidth()>();
+        $stack89 = $stack88 cmpl 3.0;
+    
+        if $stack89 <= 0 goto label07;
+        $stack90 = virtualinvoke this.<org.jfree.chart.renderer.category.StatisticalBarRenderer: java.awt.Stroke getItemStroke(int,int)>(row, column);
+        virtualinvoke g2.<java.awt.Graphics2D: void setStroke(java.awt.Stroke)>($stack90);
+        $stack91 = virtualinvoke this.<org.jfree.chart.renderer.category.StatisticalBarRenderer: java.awt.Paint getItemOutlinePaint(int,int)>(row, column);
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>($stack91);
+        #l8 = (java.awt.Shape) $stack54;
+        virtualinvoke g2.<java.awt.Graphics2D: void draw(java.awt.Shape)>(#l8);
+    
+      label07:
+        n = interfaceinvoke dataset.<org.jfree.data.statistics.StatisticalCategoryDataset: java.lang.Number getStdDevValue(int,int)>(row, column);
+    
+        if n == null goto label12;
+        valueDelta#0 = virtualinvoke n.<java.lang.Number: double doubleValue()>();
+        $stack59 = virtualinvoke seriesGap#1.<java.lang.Number: double doubleValue()>();
+        $stack60 = $stack59 + valueDelta#0;
+        highVal = virtualinvoke rangeAxis.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)>($stack60, dataArea, yAxisLocation);
+        $stack61 = virtualinvoke seriesGap#1.<java.lang.Number: double doubleValue()>();
+        $stack62 = $stack61 - valueDelta#0;
+        lowVal = virtualinvoke rangeAxis.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)>($stack62, dataArea, yAxisLocation);
+        $stack63 = this.<org.jfree.chart.renderer.category.StatisticalBarRenderer: java.awt.Stroke errorIndicatorStroke>;
+    
+        if $stack63 == null goto label08;
+        $stack87 = this.<org.jfree.chart.renderer.category.StatisticalBarRenderer: java.awt.Stroke errorIndicatorStroke>;
+        virtualinvoke g2.<java.awt.Graphics2D: void setStroke(java.awt.Stroke)>($stack87);
+    
+        goto label09;
+    
+      label08:
+        $stack64 = virtualinvoke this.<org.jfree.chart.renderer.category.StatisticalBarRenderer: java.awt.Stroke getItemOutlineStroke(int,int)>(row, column);
+        virtualinvoke g2.<java.awt.Graphics2D: void setStroke(java.awt.Stroke)>($stack64);
+    
+      label09:
+        $stack65 = this.<org.jfree.chart.renderer.category.StatisticalBarRenderer: java.awt.Paint errorIndicatorPaint>;
+    
+        if $stack65 == null goto label10;
+        $stack86 = this.<org.jfree.chart.renderer.category.StatisticalBarRenderer: java.awt.Paint errorIndicatorPaint>;
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>($stack86);
+    
+        goto label11;
+    
+      label10:
+        $stack66 = virtualinvoke this.<org.jfree.chart.renderer.category.StatisticalBarRenderer: java.awt.Paint getItemOutlinePaint(int,int)>(row, column);
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>($stack66);
+    
+      label11:
+        line#0 = null;
+        $stack71 = new java.awt.geom.Line2D$Double;
+        $stack67 = rectWidth / 2.0;
+        $stack70 = rectX#1 + $stack67;
+        $stack68 = rectWidth / 2.0;
+        $stack69 = rectX#1 + $stack68;
+        #l7 = (java.awt.geom.Line2D$Double) $stack71;
+        specialinvoke #l7.<java.awt.geom.Line2D$Double: void <init>(double,double,double,double)>($stack70, lowVal, $stack69, highVal);
+        line#1 = (java.awt.geom.Line2D$Double) $stack71;
+        #l5 = (java.awt.Shape) $stack71;
+        virtualinvoke g2.<java.awt.Graphics2D: void draw(java.awt.Shape)>(#l5);
+        $stack78 = new java.awt.geom.Line2D$Double;
+        $stack72 = rectWidth / 2.0;
+        $stack73 = rectX#1 + $stack72;
+        $stack77 = $stack73 - 5.0;
+        $stack74 = rectWidth / 2.0;
+        $stack75 = rectX#1 + $stack74;
+        $stack76 = $stack75 + 5.0;
+        #l0 = (java.awt.geom.Line2D$Double) $stack78;
+        specialinvoke #l0.<java.awt.geom.Line2D$Double: void <init>(double,double,double,double)>($stack77, highVal, $stack76, highVal);
+        line#2 = (java.awt.geom.Line2D$Double) $stack78;
+        #l2 = (java.awt.Shape) $stack78;
+        virtualinvoke g2.<java.awt.Graphics2D: void draw(java.awt.Shape)>(#l2);
+        $stack85 = new java.awt.geom.Line2D$Double;
+        $stack79 = rectWidth / 2.0;
+        $stack80 = rectX#1 + $stack79;
+        $stack84 = $stack80 - 5.0;
+        $stack81 = rectWidth / 2.0;
+        $stack82 = rectX#1 + $stack81;
+        $stack83 = $stack82 + 5.0;
+        #l9 = (java.awt.geom.Line2D$Double) $stack85;
+        specialinvoke #l9.<java.awt.geom.Line2D$Double: void <init>(double,double,double,double)>($stack84, lowVal, $stack83, lowVal);
+        line#3 = (java.awt.geom.Line2D$Double) $stack85;
+        #l6 = (java.awt.Shape) $stack85;
+        virtualinvoke g2.<java.awt.Graphics2D: void draw(java.awt.Shape)>(#l6);
+    
+      label12:
+        valueDelta#1 = virtualinvoke this.<org.jfree.chart.renderer.category.StatisticalBarRenderer: org.jfree.chart.labels.CategoryItemLabelGenerator getItemLabelGenerator(int,int)>(row, column);
+    
+        if valueDelta#1 == null goto label15;
+        $stack56 = virtualinvoke this.<org.jfree.chart.renderer.category.StatisticalBarRenderer: boolean isItemLabelVisible(int,int)>(row, column);
+    
+        if $stack56 == 0 goto label15;
+        $stack57 = value cmpg 0.0;
+    
+        if $stack57 >= 0 goto label13;
+        $stack58 = 1;
+    
+        goto label14;
+    
+      label13:
+        $stack58 = 0;
+    
+      label14:
+        #l4 = (java.awt.geom.Rectangle2D) $stack54;
+        virtualinvoke this.<org.jfree.chart.renderer.category.StatisticalBarRenderer: void drawItemLabel(java.awt.Graphics2D,org.jfree.data.category.CategoryDataset,int,int,org.jfree.chart.plot.CategoryPlot,org.jfree.chart.labels.CategoryItemLabelGenerator,java.awt.geom.Rectangle2D,boolean)>(g2, dataset, row, column, plot, valueDelta#1, #l4, $stack58);
+    
+      label15:
+        entities = virtualinvoke state.<org.jfree.chart.renderer.category.CategoryItemRendererState: org.jfree.chart.entity.EntityCollection getEntityCollection()>();
+    
+        if entities == null goto label16;
+        #l10 = (java.awt.Shape) $stack54;
+        virtualinvoke this.<org.jfree.chart.renderer.category.StatisticalBarRenderer: void addItemEntity(org.jfree.chart.entity.EntityCollection,org.jfree.data.category.CategoryDataset,int,int,java.awt.Shape)>(entities, dataset, row, column, #l10);
+    
+      label16:
+        return;
+    
+      label17:
+        $stack50 = lclip cmpg 0.0;
+    
+        if $stack50 > 0 goto label19;
+        $stack92 = value cmpl uclip;
+    
+        if $stack92 < 0 goto label18;
+        value = uclip;
+    
+        goto label06;
+    
+      label18:
+        $stack93 = value cmpg lclip;
+    
+        if $stack93 > 0 goto label06;
+        value = lclip;
+    
+        goto label06;
+    
+      label19:
+        $stack51 = value cmpg lclip;
+    
+        if $stack51 > 0 goto label05;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.category.StatisticalBarRenderer: java.awt.Stroke getErrorIndicatorStroke()> ----
+    {
+        java.awt.Stroke $stack1;
+        org.jfree.chart.renderer.category.StatisticalBarRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.category.StatisticalBarRenderer;
+        $stack1 = this.<org.jfree.chart.renderer.category.StatisticalBarRenderer: java.awt.Stroke errorIndicatorStroke>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.category.StatisticalBarRenderer: void setErrorIndicatorPaint(java.awt.Paint)> ----
+    {
+        java.awt.Paint paint;
+        org.jfree.chart.event.RendererChangeEvent $stack2;
+        org.jfree.chart.renderer.category.StatisticalBarRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.category.StatisticalBarRenderer;
+        paint := @parameter0: java.awt.Paint;
+        this.<org.jfree.chart.renderer.category.StatisticalBarRenderer: java.awt.Paint errorIndicatorPaint> = paint;
+        $stack2 = new org.jfree.chart.event.RendererChangeEvent;
+        specialinvoke $stack2.<org.jfree.chart.event.RendererChangeEvent: void <init>(java.lang.Object)>(this);
+        virtualinvoke this.<org.jfree.chart.renderer.category.StatisticalBarRenderer: void notifyListeners(org.jfree.chart.event.RendererChangeEvent)>($stack2);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.category.StatisticalBarRenderer: void drawItem(java.awt.Graphics2D,org.jfree.chart.renderer.category.CategoryItemRendererState,java.awt.geom.Rectangle2D,org.jfree.chart.plot.CategoryPlot,org.jfree.chart.axis.CategoryAxis,org.jfree.chart.axis.ValueAxis,org.jfree.data.category.CategoryDataset,int,int,int)> ----
+    {
+        boolean $stack13;
+        int column, pass, row;
+        java.awt.Graphics2D g2;
+        java.awt.geom.Rectangle2D dataArea;
+        java.lang.IllegalArgumentException #l0;
+        java.lang.Object $stack16;
+        java.lang.Throwable #l1;
+        org.jfree.chart.axis.CategoryAxis domainAxis;
+        org.jfree.chart.axis.ValueAxis rangeAxis;
+        org.jfree.chart.plot.CategoryPlot plot;
+        org.jfree.chart.plot.PlotOrientation $stack14, $stack15, orientation;
+        org.jfree.chart.renderer.category.CategoryItemRendererState state;
+        org.jfree.chart.renderer.category.StatisticalBarRenderer this;
+        org.jfree.data.category.CategoryDataset data;
+        org.jfree.data.statistics.StatisticalCategoryDataset statData;
+    
+    
+        this := @this: org.jfree.chart.renderer.category.StatisticalBarRenderer;
+        g2 := @parameter0: java.awt.Graphics2D;
+        state := @parameter1: org.jfree.chart.renderer.category.CategoryItemRendererState;
+        dataArea := @parameter2: java.awt.geom.Rectangle2D;
+        plot := @parameter3: org.jfree.chart.plot.CategoryPlot;
+        domainAxis := @parameter4: org.jfree.chart.axis.CategoryAxis;
+        rangeAxis := @parameter5: org.jfree.chart.axis.ValueAxis;
+        data := @parameter6: org.jfree.data.category.CategoryDataset;
+        row := @parameter7: int;
+        column := @parameter8: int;
+        pass := @parameter9: int;
+        $stack13 = data instanceof org.jfree.data.statistics.StatisticalCategoryDataset;
+    
+        if $stack13 != 0 goto label1;
+        $stack16 = new java.lang.IllegalArgumentException;
+        #l0 = (java.lang.IllegalArgumentException) $stack16;
+        specialinvoke #l0.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Requires StatisticalCategoryDataset.");
+        #l1 = (java.lang.Throwable) $stack16;
+    
+        throw #l1;
+    
+      label1:
+        statData = (org.jfree.data.statistics.StatisticalCategoryDataset) data;
+        orientation = virtualinvoke plot.<org.jfree.chart.plot.CategoryPlot: org.jfree.chart.plot.PlotOrientation getOrientation()>();
+        $stack14 = <org.jfree.chart.plot.PlotOrientation: org.jfree.chart.plot.PlotOrientation HORIZONTAL>;
+    
+        if orientation != $stack14 goto label2;
+        virtualinvoke this.<org.jfree.chart.renderer.category.StatisticalBarRenderer: void drawHorizontalItem(java.awt.Graphics2D,org.jfree.chart.renderer.category.CategoryItemRendererState,java.awt.geom.Rectangle2D,org.jfree.chart.plot.CategoryPlot,org.jfree.chart.axis.CategoryAxis,org.jfree.chart.axis.ValueAxis,org.jfree.data.statistics.StatisticalCategoryDataset,int,int)>(g2, state, dataArea, plot, domainAxis, rangeAxis, statData, row, column);
+    
+        goto label3;
+    
+      label2:
+        $stack15 = <org.jfree.chart.plot.PlotOrientation: org.jfree.chart.plot.PlotOrientation VERTICAL>;
+    
+        if orientation != $stack15 goto label3;
+        virtualinvoke this.<org.jfree.chart.renderer.category.StatisticalBarRenderer: void drawVerticalItem(java.awt.Graphics2D,org.jfree.chart.renderer.category.CategoryItemRendererState,java.awt.geom.Rectangle2D,org.jfree.chart.plot.CategoryPlot,org.jfree.chart.axis.CategoryAxis,org.jfree.chart.axis.ValueAxis,org.jfree.data.statistics.StatisticalCategoryDataset,int,int)>(g2, state, dataArea, plot, domainAxis, rangeAxis, statData, row, column);
+    
+      label3:
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.category.StatisticalBarRenderer: void writeObject(java.io.ObjectOutputStream)> ----
+    {
+        java.awt.Paint $stack2;
+        java.awt.Stroke $stack3;
+        java.io.ObjectOutputStream stream;
+        org.jfree.chart.renderer.category.StatisticalBarRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.category.StatisticalBarRenderer;
+        stream := @parameter0: java.io.ObjectOutputStream;
+        virtualinvoke stream.<java.io.ObjectOutputStream: void defaultWriteObject()>();
+        $stack2 = this.<org.jfree.chart.renderer.category.StatisticalBarRenderer: java.awt.Paint errorIndicatorPaint>;
+        staticinvoke <org.jfree.chart.util.SerialUtilities: void writePaint(java.awt.Paint,java.io.ObjectOutputStream)>($stack2, stream);
+        $stack3 = this.<org.jfree.chart.renderer.category.StatisticalBarRenderer: java.awt.Stroke errorIndicatorStroke>;
+        staticinvoke <org.jfree.chart.util.SerialUtilities: void writeStroke(java.awt.Stroke,java.io.ObjectOutputStream)>($stack3, stream);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.category.StatisticalBarRenderer: void setErrorIndicatorStroke(java.awt.Stroke)> ----
+    {
+        java.awt.Stroke stroke;
+        org.jfree.chart.event.RendererChangeEvent $stack2;
+        org.jfree.chart.renderer.category.StatisticalBarRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.category.StatisticalBarRenderer;
+        stroke := @parameter0: java.awt.Stroke;
+        this.<org.jfree.chart.renderer.category.StatisticalBarRenderer: java.awt.Stroke errorIndicatorStroke> = stroke;
+        $stack2 = new org.jfree.chart.event.RendererChangeEvent;
+        specialinvoke $stack2.<org.jfree.chart.event.RendererChangeEvent: void <init>(java.lang.Object)>(this);
+        virtualinvoke this.<org.jfree.chart.renderer.category.StatisticalBarRenderer: void notifyListeners(org.jfree.chart.event.RendererChangeEvent)>($stack2);
+    
+        return;
+    }
+
+}

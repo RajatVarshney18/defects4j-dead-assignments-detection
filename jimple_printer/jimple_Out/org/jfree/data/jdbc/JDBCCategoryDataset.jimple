@@ -1,0 +1,395 @@
+// ========================================================================
+// CLASS : org.jfree.data.jdbc.JDBCCategoryDataset
+// ========================================================================
+
+[PUBLIC, SUPER] class org.jfree.data.jdbc.JDBCCategoryDataset extends org.jfree.data.category.DefaultCategoryDataset {
+
+    // ---- method: <org.jfree.data.jdbc.JDBCCategoryDataset: void <init>(java.sql.Connection)> ----
+    {
+        java.lang.NullPointerException #l0;
+        java.lang.Object $stack2;
+        java.lang.Throwable #l1;
+        java.sql.Connection connection;
+        org.jfree.data.jdbc.JDBCCategoryDataset this;
+    
+    
+        this := @this: org.jfree.data.jdbc.JDBCCategoryDataset;
+        connection := @parameter0: java.sql.Connection;
+        specialinvoke this.<org.jfree.data.category.DefaultCategoryDataset: void <init>()>();
+        this.<org.jfree.data.jdbc.JDBCCategoryDataset: boolean transpose> = 1;
+    
+        if connection != null goto label1;
+        $stack2 = new java.lang.NullPointerException;
+        #l0 = (java.lang.NullPointerException) $stack2;
+        specialinvoke #l0.<java.lang.NullPointerException: void <init>(java.lang.String)>("A connection must be supplied.");
+        #l1 = (java.lang.Throwable) $stack2;
+    
+        throw #l1;
+    
+      label1:
+        this.<org.jfree.data.jdbc.JDBCCategoryDataset: java.sql.Connection connection> = connection;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.jdbc.JDBCCategoryDataset: void <init>(java.sql.Connection,java.lang.String)> ----
+    {
+        java.lang.String query;
+        java.sql.Connection connection;
+        org.jfree.data.jdbc.JDBCCategoryDataset this;
+    
+    
+        this := @this: org.jfree.data.jdbc.JDBCCategoryDataset;
+        connection := @parameter0: java.sql.Connection;
+        query := @parameter1: java.lang.String;
+        specialinvoke this.<org.jfree.data.jdbc.JDBCCategoryDataset: void <init>(java.sql.Connection)>(connection);
+        virtualinvoke this.<org.jfree.data.jdbc.JDBCCategoryDataset: void executeQuery(java.lang.String)>(query);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.jdbc.JDBCCategoryDataset: boolean getTranspose()> ----
+    {
+        boolean $stack1;
+        org.jfree.data.jdbc.JDBCCategoryDataset this;
+    
+    
+        this := @this: org.jfree.data.jdbc.JDBCCategoryDataset;
+        $stack1 = this.<org.jfree.data.jdbc.JDBCCategoryDataset: boolean transpose>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.data.jdbc.JDBCCategoryDataset: void setTranspose(boolean)> ----
+    {
+        boolean transpose;
+        org.jfree.data.jdbc.JDBCCategoryDataset this;
+    
+    
+        this := @this: org.jfree.data.jdbc.JDBCCategoryDataset;
+        transpose := @parameter0: boolean;
+        this.<org.jfree.data.jdbc.JDBCCategoryDataset: boolean transpose> = transpose;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.jdbc.JDBCCategoryDataset: void executeQuery(java.sql.Connection,java.lang.String)> ----
+    {
+        boolean $stack16, $stack20, $stack22, $stack24;
+        int column, columnCount, columnType, i;
+        java.lang.Comparable #l10, #l12, #l13, #l16, #l17, #l2, #l3, #l4, #l5, #l6, #l7, #l9;
+        java.lang.Long #l0, value_1#2;
+        java.lang.Number #l1, #l11, #l15, #l8, value#0;
+        java.lang.Object $stack17, $stack19, $stack21, $stack23, $stack25, columnKey, rowKey, statement#0, value_1#0;
+        java.lang.String query, value#1;
+        java.lang.Throwable #l14, $stack26, $stack27, $stack28, $stack29, $stack30, $stack31, e#0, e#1, l14, metaData#1, metaData#2, value_1#1;
+        java.sql.Connection con;
+        java.sql.Date value#2;
+        java.sql.ResultSet resultSet;
+        java.sql.ResultSetMetaData metaData#0;
+        java.sql.SQLException #l18;
+        java.sql.Statement statement#1;
+        long $stack18;
+        org.jfree.data.jdbc.JDBCCategoryDataset this;
+    
+    
+        this := @this: org.jfree.data.jdbc.JDBCCategoryDataset;
+        con := @parameter0: java.sql.Connection;
+        query := @parameter1: java.lang.String;
+        statement#0 = null;
+        resultSet = null;
+    
+      label01:
+        statement#1 = interfaceinvoke con.<java.sql.Connection: java.sql.Statement createStatement()>();
+        resultSet = interfaceinvoke statement#1.<java.sql.Statement: java.sql.ResultSet executeQuery(java.lang.String)>(query);
+        metaData#0 = interfaceinvoke resultSet.<java.sql.ResultSet: java.sql.ResultSetMetaData getMetaData()>();
+        columnCount = interfaceinvoke metaData#0.<java.sql.ResultSetMetaData: int getColumnCount()>();
+    
+        if columnCount >= 2 goto label16;
+        $stack25 = new java.sql.SQLException;
+    
+      label02:
+        #l18 = (java.sql.SQLException) $stack25;
+    
+      label03:
+        specialinvoke #l18.<java.sql.SQLException: void <init>(java.lang.String)>("JDBCCategoryDataset.executeQuery() : insufficient columns returned from the database.");
+    
+      label04:
+        #l14 = (java.lang.Throwable) $stack25;
+    
+      label05:
+        throw #l14;
+    
+      label06:
+        $stack28 := @caughtexception;
+        l14 = $stack28;
+    
+      label07:
+        if resultSet == null goto label11;
+    
+      label08:
+        interfaceinvoke resultSet.<java.sql.ResultSet: void close()>();
+    
+      label09:
+        goto label11;
+    
+      label10:
+        $stack27 := @caughtexception;
+        e#0 = $stack27;
+    
+      label11:
+        if statement#1 == null goto label15;
+    
+      label12:
+        interfaceinvoke statement#1.<java.sql.Statement: void close()>();
+    
+      label13:
+        goto label15;
+    
+      label14:
+        $stack26 := @caughtexception;
+        e#1 = $stack26;
+    
+      label15:
+        throw $stack28;
+    
+      label16:
+        i = virtualinvoke this.<org.jfree.data.jdbc.JDBCCategoryDataset: int getRowCount()>();
+    
+      label17:
+        i = i + -1;
+    
+        if i < 0 goto label18;
+        virtualinvoke this.<org.jfree.data.jdbc.JDBCCategoryDataset: void removeRow(int)>(i);
+    
+        goto label17;
+    
+      label18:
+        $stack16 = interfaceinvoke resultSet.<java.sql.ResultSet: boolean next()>();
+    
+        if $stack16 == 0 goto label42;
+        rowKey = interfaceinvoke resultSet.<java.sql.ResultSet: java.lang.String getString(int)>(1);
+        column = 2;
+    
+      label19:
+        if column > columnCount goto label41;
+        columnKey = interfaceinvoke metaData#0.<java.sql.ResultSetMetaData: java.lang.String getColumnName(int)>(column);
+        columnType = interfaceinvoke metaData#0.<java.sql.ResultSetMetaData: int getColumnType(int)>(column);
+    
+        switch(columnType)
+            {
+            case -6: goto label20;
+            case -5: goto label20;
+            case -1: goto label25;
+            case 1: goto label25;
+            case 2: goto label20;
+            case 3: goto label20;
+            case 4: goto label20;
+            case 5: goto label20;
+            case 6: goto label20;
+            case 7: goto label20;
+            case 8: goto label20;
+            case 12: goto label25;
+            case 91: goto label33;
+            case 92: goto label33;
+            case 93: goto label33;
+            default: goto label40;
+        };
+    
+      label20:
+        $stack23 = interfaceinvoke resultSet.<java.sql.ResultSet: java.lang.Object getObject(int)>(column);
+        value#0 = (java.lang.Number) $stack23;
+        $stack24 = this.<org.jfree.data.jdbc.JDBCCategoryDataset: boolean transpose>;
+    
+        if $stack24 == 0 goto label23;
+    
+      label21:
+        #l7 = (java.lang.Comparable) rowKey;
+        #l6 = (java.lang.Comparable) columnKey;
+    
+      label22:
+        virtualinvoke this.<org.jfree.data.jdbc.JDBCCategoryDataset: void setValue(java.lang.Number,java.lang.Comparable,java.lang.Comparable)>(value#0, #l6, #l7);
+    
+        goto label40;
+    
+      label23:
+        #l4 = (java.lang.Comparable) rowKey;
+        #l5 = (java.lang.Comparable) columnKey;
+    
+      label24:
+        virtualinvoke this.<org.jfree.data.jdbc.JDBCCategoryDataset: void setValue(java.lang.Number,java.lang.Comparable,java.lang.Comparable)>(value#0, #l4, #l5);
+    
+        goto label40;
+    
+      label25:
+        $stack21 = interfaceinvoke resultSet.<java.sql.ResultSet: java.lang.Object getObject(int)>(column);
+        value#1 = (java.lang.String) $stack21;
+    
+      label26:
+        value_1#0 = staticinvoke <java.lang.Double: java.lang.Double valueOf(java.lang.String)>(value#1);
+        $stack22 = this.<org.jfree.data.jdbc.JDBCCategoryDataset: boolean transpose>;
+    
+        if $stack22 == 0 goto label30;
+    
+      label27:
+        #l13 = (java.lang.Comparable) rowKey;
+        #l12 = (java.lang.Comparable) columnKey;
+        #l11 = (java.lang.Number) value_1#0;
+    
+      label28:
+        virtualinvoke this.<org.jfree.data.jdbc.JDBCCategoryDataset: void setValue(java.lang.Number,java.lang.Comparable,java.lang.Comparable)>(#l11, #l12, #l13);
+    
+        goto label32;
+    
+      label29:
+        $stack31 := @caughtexception;
+        value_1#1 = $stack31;
+    
+        goto label40;
+    
+      label30:
+        #l15 = (java.lang.Number) value_1#0;
+        #l16 = (java.lang.Comparable) rowKey;
+        #l17 = (java.lang.Comparable) columnKey;
+    
+      label31:
+        virtualinvoke this.<org.jfree.data.jdbc.JDBCCategoryDataset: void setValue(java.lang.Number,java.lang.Comparable,java.lang.Comparable)>(#l15, #l16, #l17);
+    
+      label32:
+        goto label40;
+    
+      label33:
+        $stack17 = interfaceinvoke resultSet.<java.sql.ResultSet: java.lang.Object getObject(int)>(column);
+        value#2 = (java.sql.Date) $stack17;
+        $stack19 = new java.lang.Long;
+        $stack18 = virtualinvoke value#2.<java.sql.Date: long getTime()>();
+    
+      label34:
+        #l0 = (java.lang.Long) $stack19;
+    
+      label35:
+        specialinvoke #l0.<java.lang.Long: void <init>(long)>($stack18);
+        value_1#2 = (java.lang.Long) $stack19;
+        $stack20 = this.<org.jfree.data.jdbc.JDBCCategoryDataset: boolean transpose>;
+    
+        if $stack20 == 0 goto label38;
+    
+      label36:
+        #l3 = (java.lang.Comparable) rowKey;
+        #l2 = (java.lang.Comparable) columnKey;
+        #l1 = (java.lang.Number) $stack19;
+    
+      label37:
+        virtualinvoke this.<org.jfree.data.jdbc.JDBCCategoryDataset: void setValue(java.lang.Number,java.lang.Comparable,java.lang.Comparable)>(#l1, #l2, #l3);
+    
+        goto label40;
+    
+      label38:
+        #l10 = (java.lang.Comparable) columnKey;
+        #l8 = (java.lang.Number) $stack19;
+        #l9 = (java.lang.Comparable) rowKey;
+    
+      label39:
+        virtualinvoke this.<org.jfree.data.jdbc.JDBCCategoryDataset: void setValue(java.lang.Number,java.lang.Comparable,java.lang.Comparable)>(#l8, #l9, #l10);
+    
+        goto label40;
+    
+      label40:
+        column = column + 1;
+    
+        goto label19;
+    
+      label41:
+        goto label18;
+    
+      label42:
+        virtualinvoke this.<org.jfree.data.jdbc.JDBCCategoryDataset: void fireDatasetChanged()>();
+    
+      label43:
+        if resultSet == null goto label47;
+    
+      label44:
+        interfaceinvoke resultSet.<java.sql.ResultSet: void close()>();
+    
+      label45:
+        goto label47;
+    
+      label46:
+        $stack30 := @caughtexception;
+        metaData#1 = $stack30;
+    
+      label47:
+        if statement#1 == null goto label51;
+    
+      label48:
+        interfaceinvoke statement#1.<java.sql.Statement: void close()>();
+    
+      label49:
+        goto label51;
+    
+      label50:
+        $stack29 := @caughtexception;
+        metaData#2 = $stack29;
+    
+        goto label51;
+    
+      label51:
+        return;
+    
+     catch java.lang.Throwable from label01 to label02 with label06;
+     catch java.lang.Throwable from label03 to label04 with label06;
+     catch java.lang.Throwable from label05 to label07 with label06;
+     catch java.lang.Exception from label08 to label09 with label10;
+     catch java.lang.Exception from label12 to label13 with label14;
+     catch java.lang.Throwable from label16 to label21 with label06;
+     catch java.lang.Throwable from label22 to label23 with label06;
+     catch java.lang.Throwable from label24 to label27 with label06;
+     catch java.lang.NumberFormatException from label26 to label27 with label29;
+     catch java.lang.NumberFormatException from label28 to label29 with label29;
+     catch java.lang.Throwable from label28 to label30 with label06;
+     catch java.lang.NumberFormatException from label31 to label32 with label29;
+     catch java.lang.Throwable from label31 to label34 with label06;
+     catch java.lang.Throwable from label35 to label36 with label06;
+     catch java.lang.Throwable from label37 to label38 with label06;
+     catch java.lang.Throwable from label39 to label43 with label06;
+     catch java.lang.Exception from label44 to label45 with label46;
+     catch java.lang.Exception from label48 to label49 with label50;
+    }
+
+    // ---- method: <org.jfree.data.jdbc.JDBCCategoryDataset: void executeQuery(java.lang.String)> ----
+    {
+        java.lang.String query;
+        java.sql.Connection $stack2;
+        org.jfree.data.jdbc.JDBCCategoryDataset this;
+    
+    
+        this := @this: org.jfree.data.jdbc.JDBCCategoryDataset;
+        query := @parameter0: java.lang.String;
+        $stack2 = this.<org.jfree.data.jdbc.JDBCCategoryDataset: java.sql.Connection connection>;
+        virtualinvoke this.<org.jfree.data.jdbc.JDBCCategoryDataset: void executeQuery(java.sql.Connection,java.lang.String)>($stack2, query);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.jdbc.JDBCCategoryDataset: void <init>(java.lang.String,java.lang.String,java.lang.String,java.lang.String)> ----
+    {
+        java.lang.String driverName, passwd, url, user;
+        java.sql.Connection $stack5;
+        org.jfree.data.jdbc.JDBCCategoryDataset this;
+    
+    
+        this := @this: org.jfree.data.jdbc.JDBCCategoryDataset;
+        url := @parameter0: java.lang.String;
+        driverName := @parameter1: java.lang.String;
+        user := @parameter2: java.lang.String;
+        passwd := @parameter3: java.lang.String;
+        specialinvoke this.<org.jfree.data.category.DefaultCategoryDataset: void <init>()>();
+        this.<org.jfree.data.jdbc.JDBCCategoryDataset: boolean transpose> = 1;
+        staticinvoke <java.lang.Class: java.lang.Class forName(java.lang.String)>(driverName);
+        $stack5 = staticinvoke <java.sql.DriverManager: java.sql.Connection getConnection(java.lang.String,java.lang.String,java.lang.String)>(url, user, passwd);
+        this.<org.jfree.data.jdbc.JDBCCategoryDataset: java.sql.Connection connection> = $stack5;
+    
+        return;
+    }
+
+}

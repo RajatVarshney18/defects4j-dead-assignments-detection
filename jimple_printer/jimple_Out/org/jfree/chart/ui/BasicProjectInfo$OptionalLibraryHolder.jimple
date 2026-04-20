@@ -1,0 +1,155 @@
+// ========================================================================
+// CLASS : org.jfree.chart.ui.BasicProjectInfo$OptionalLibraryHolder
+// ========================================================================
+
+[SUPER] class org.jfree.chart.ui.BasicProjectInfo$OptionalLibraryHolder extends java.lang.Object {
+
+    // ---- method: <org.jfree.chart.ui.BasicProjectInfo$OptionalLibraryHolder: void <init>(java.lang.String)> ----
+    {
+        java.lang.NullPointerException #l1;
+        java.lang.Object $stack2;
+        java.lang.String libraryClass;
+        java.lang.Throwable #l0;
+        org.jfree.chart.ui.BasicProjectInfo$OptionalLibraryHolder this;
+    
+    
+        this := @this: org.jfree.chart.ui.BasicProjectInfo$OptionalLibraryHolder;
+        libraryClass := @parameter0: java.lang.String;
+        specialinvoke this.<java.lang.Object: void <init>()>();
+    
+        if libraryClass != null goto label1;
+        $stack2 = new java.lang.NullPointerException;
+        #l1 = (java.lang.NullPointerException) $stack2;
+        specialinvoke #l1.<java.lang.NullPointerException: void <init>(java.lang.String)>("LibraryClass must not be null.");
+        #l0 = (java.lang.Throwable) $stack2;
+    
+        throw #l0;
+    
+      label1:
+        this.<org.jfree.chart.ui.BasicProjectInfo$OptionalLibraryHolder: java.lang.String libraryClass> = libraryClass;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.ui.BasicProjectInfo$OptionalLibraryHolder: java.lang.String getLibraryClass()> ----
+    {
+        java.lang.String $stack1;
+        org.jfree.chart.ui.BasicProjectInfo$OptionalLibraryHolder this;
+    
+    
+        this := @this: org.jfree.chart.ui.BasicProjectInfo$OptionalLibraryHolder;
+        $stack1 = this.<org.jfree.chart.ui.BasicProjectInfo$OptionalLibraryHolder: java.lang.String libraryClass>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.ui.BasicProjectInfo$OptionalLibraryHolder: void <init>(org.jfree.chart.ui.Library)> ----
+    {
+        java.lang.Class $stack2;
+        java.lang.NullPointerException #l0;
+        java.lang.Object $stack4;
+        java.lang.String $stack3;
+        java.lang.Throwable #l1;
+        org.jfree.chart.ui.BasicProjectInfo$OptionalLibraryHolder this;
+        org.jfree.chart.ui.Library library;
+    
+    
+        this := @this: org.jfree.chart.ui.BasicProjectInfo$OptionalLibraryHolder;
+        library := @parameter0: org.jfree.chart.ui.Library;
+        specialinvoke this.<java.lang.Object: void <init>()>();
+    
+        if library != null goto label1;
+        $stack4 = new java.lang.NullPointerException;
+        #l0 = (java.lang.NullPointerException) $stack4;
+        specialinvoke #l0.<java.lang.NullPointerException: void <init>(java.lang.String)>("Library must not be null.");
+        #l1 = (java.lang.Throwable) $stack4;
+    
+        throw #l1;
+    
+      label1:
+        this.<org.jfree.chart.ui.BasicProjectInfo$OptionalLibraryHolder: org.jfree.chart.ui.Library library> = library;
+        $stack2 = virtualinvoke library.<java.lang.Object: java.lang.Class getClass()>();
+        $stack3 = virtualinvoke $stack2.<java.lang.Class: java.lang.String getName()>();
+        this.<org.jfree.chart.ui.BasicProjectInfo$OptionalLibraryHolder: java.lang.String libraryClass> = $stack3;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.ui.BasicProjectInfo$OptionalLibraryHolder: org.jfree.chart.ui.Library loadLibrary(java.lang.String)> ----
+    {
+        java.lang.Class $stack4, c#0;
+        java.lang.ClassLoader $stack5;
+        java.lang.Class[] $stack6;
+        java.lang.Object $stack12, $stack8;
+        java.lang.Object[] $stack7;
+        java.lang.String classname;
+        java.lang.Throwable $stack10, $stack11, c#1, m#1;
+        java.lang.reflect.Method m#0;
+        org.jfree.chart.ui.BasicProjectInfo$OptionalLibraryHolder this;
+        org.jfree.chart.ui.Library $stack13, $stack9;
+    
+    
+        this := @this: org.jfree.chart.ui.BasicProjectInfo$OptionalLibraryHolder;
+        classname := @parameter0: java.lang.String;
+    
+        if classname != null goto label1;
+    
+        return null;
+    
+      label1:
+        $stack4 = virtualinvoke this.<java.lang.Object: java.lang.Class getClass()>();
+        $stack5 = staticinvoke <org.jfree.chart.util.ObjectUtilities: java.lang.ClassLoader getClassLoader(java.lang.Class)>($stack4);
+        c#0 = virtualinvoke $stack5.<java.lang.ClassLoader: java.lang.Class loadClass(java.lang.String)>(classname);
+    
+      label2:
+        $stack6 = (java.lang.Class[]) null;
+        m#0 = virtualinvoke c#0.<java.lang.Class: java.lang.reflect.Method getMethod(java.lang.String,java.lang.Class[])>("getInstance", $stack6);
+        $stack7 = (java.lang.Object[]) null;
+        $stack8 = virtualinvoke m#0.<java.lang.reflect.Method: java.lang.Object invoke(java.lang.Object,java.lang.Object[])>(null, $stack7);
+        $stack9 = (org.jfree.chart.ui.Library) $stack8;
+    
+      label3:
+        return $stack9;
+    
+      label4:
+        $stack11 := @caughtexception;
+        m#1 = $stack11;
+        $stack12 = virtualinvoke c#0.<java.lang.Class: java.lang.Object newInstance()>();
+        $stack13 = (org.jfree.chart.ui.Library) $stack12;
+    
+      label5:
+        return $stack13;
+    
+      label6:
+        $stack10 := @caughtexception;
+        c#1 = $stack10;
+    
+        return null;
+    
+     catch java.lang.Exception from label1 to label2 with label6;
+     catch java.lang.Exception from label2 to label3 with label4;
+     catch java.lang.Exception from label4 to label5 with label6;
+    }
+
+    // ---- method: <org.jfree.chart.ui.BasicProjectInfo$OptionalLibraryHolder: org.jfree.chart.ui.Library getLibrary()> ----
+    {
+        java.lang.String $stack3;
+        org.jfree.chart.ui.BasicProjectInfo$OptionalLibraryHolder this;
+        org.jfree.chart.ui.Library $stack1, $stack2, $stack4;
+    
+    
+        this := @this: org.jfree.chart.ui.BasicProjectInfo$OptionalLibraryHolder;
+        $stack1 = this.<org.jfree.chart.ui.BasicProjectInfo$OptionalLibraryHolder: org.jfree.chart.ui.Library library>;
+    
+        if $stack1 != null goto label1;
+        $stack3 = this.<org.jfree.chart.ui.BasicProjectInfo$OptionalLibraryHolder: java.lang.String libraryClass>;
+        $stack4 = virtualinvoke this.<org.jfree.chart.ui.BasicProjectInfo$OptionalLibraryHolder: org.jfree.chart.ui.Library loadLibrary(java.lang.String)>($stack3);
+        this.<org.jfree.chart.ui.BasicProjectInfo$OptionalLibraryHolder: org.jfree.chart.ui.Library library> = $stack4;
+    
+      label1:
+        $stack2 = this.<org.jfree.chart.ui.BasicProjectInfo$OptionalLibraryHolder: org.jfree.chart.ui.Library library>;
+    
+        return $stack2;
+    }
+
+}

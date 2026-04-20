@@ -1,0 +1,484 @@
+// ========================================================================
+// CLASS : org.jfree.data.Range
+// ========================================================================
+
+[PUBLIC, SUPER] class org.jfree.data.Range extends java.lang.Object implements java.io.Serializable {
+
+    // ---- method: <org.jfree.data.Range: double shiftWithNoZeroCrossing(double,double)> ----
+    {
+        byte $stack4, $stack5;
+        double $stack10, $stack6, $stack7, $stack8, $stack9, delta, value;
+    
+    
+        value := @parameter0: double;
+        delta := @parameter1: double;
+        $stack4 = value cmpl 0.0;
+    
+        if $stack4 <= 0 goto label1;
+        $stack9 = value + delta;
+        $stack10 = staticinvoke <java.lang.Math: double max(double,double)>($stack9, 0.0);
+    
+        return $stack10;
+    
+      label1:
+        $stack5 = value cmpg 0.0;
+    
+        if $stack5 >= 0 goto label2;
+        $stack7 = value + delta;
+        $stack8 = staticinvoke <java.lang.Math: double min(double,double)>($stack7, 0.0);
+    
+        return $stack8;
+    
+      label2:
+        $stack6 = value + delta;
+    
+        return $stack6;
+    }
+
+    // ---- method: <org.jfree.data.Range: int hashCode()> ----
+    {
+        double $stack4, $stack7;
+        int $stack10, $stack11, result#0, result#1;
+        long $stack5, $stack6, $stack8, $stack9, temp#0, temp#1;
+        org.jfree.data.Range this;
+    
+    
+        this := @this: org.jfree.data.Range;
+        $stack4 = this.<org.jfree.data.Range: double lower>;
+        temp#0 = staticinvoke <java.lang.Double: long doubleToLongBits(double)>($stack4);
+        $stack5 = temp#0 >>> 32;
+        $stack6 = temp#0 ^ $stack5;
+        result#0 = (int) $stack6;
+        $stack7 = this.<org.jfree.data.Range: double upper>;
+        temp#1 = staticinvoke <java.lang.Double: long doubleToLongBits(double)>($stack7);
+        $stack10 = 29 * result#0;
+        $stack8 = temp#1 >>> 32;
+        $stack9 = temp#1 ^ $stack8;
+        $stack11 = (int) $stack9;
+        result#1 = $stack10 + $stack11;
+    
+        return result#1;
+    }
+
+    // ---- method: <org.jfree.data.Range: double getLowerBound()> ----
+    {
+        double $stack1;
+        org.jfree.data.Range this;
+    
+    
+        this := @this: org.jfree.data.Range;
+        $stack1 = this.<org.jfree.data.Range: double lower>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.data.Range: void <init>(double,double)> ----
+    {
+        byte $stack6;
+        double lower, upper;
+        java.lang.IllegalArgumentException #l1;
+        java.lang.Object $stack13;
+        java.lang.String msg;
+        java.lang.StringBuffer $stack10, $stack11, $stack12, $stack7, $stack8, $stack9;
+        java.lang.Throwable #l0;
+        org.jfree.data.Range this;
+    
+    
+        this := @this: org.jfree.data.Range;
+        lower := @parameter0: double;
+        upper := @parameter1: double;
+        specialinvoke this.<java.lang.Object: void <init>()>();
+        $stack6 = lower cmpl upper;
+    
+        if $stack6 <= 0 goto label1;
+        $stack7 = new java.lang.StringBuffer;
+        specialinvoke $stack7.<java.lang.StringBuffer: void <init>()>();
+        $stack8 = virtualinvoke $stack7.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>("Range(double, double): require lower (");
+        $stack9 = virtualinvoke $stack8.<java.lang.StringBuffer: java.lang.StringBuffer append(double)>(lower);
+        $stack10 = virtualinvoke $stack9.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>(") <= upper (");
+        $stack11 = virtualinvoke $stack10.<java.lang.StringBuffer: java.lang.StringBuffer append(double)>(upper);
+        $stack12 = virtualinvoke $stack11.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>(").");
+        msg = virtualinvoke $stack12.<java.lang.StringBuffer: java.lang.String toString()>();
+        $stack13 = new java.lang.IllegalArgumentException;
+        #l1 = (java.lang.IllegalArgumentException) $stack13;
+        specialinvoke #l1.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>(msg);
+        #l0 = (java.lang.Throwable) $stack13;
+    
+        throw #l0;
+    
+      label1:
+        this.<org.jfree.data.Range: double lower> = lower;
+        this.<org.jfree.data.Range: double upper> = upper;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.Range: double constrain(double)> ----
+    {
+        boolean $stack5;
+        byte $stack7, $stack9;
+        double $stack6, $stack8, result, value;
+        org.jfree.data.Range this;
+    
+    
+        this := @this: org.jfree.data.Range;
+        value := @parameter0: double;
+        result = value;
+        $stack5 = virtualinvoke this.<org.jfree.data.Range: boolean contains(double)>(value);
+    
+        if $stack5 != 0 goto label2;
+        $stack6 = this.<org.jfree.data.Range: double upper>;
+        $stack7 = value cmpl $stack6;
+    
+        if $stack7 <= 0 goto label1;
+        result = this.<org.jfree.data.Range: double upper>;
+    
+        goto label2;
+    
+      label1:
+        $stack8 = this.<org.jfree.data.Range: double lower>;
+        $stack9 = value cmpg $stack8;
+    
+        if $stack9 >= 0 goto label2;
+        result = this.<org.jfree.data.Range: double lower>;
+    
+      label2:
+        return result;
+    }
+
+    // ---- method: <org.jfree.data.Range: org.jfree.data.Range expandToInclude(org.jfree.data.Range,double)> ----
+    {
+        byte $stack4, $stack6;
+        double $stack3, $stack5, $stack7, $stack9, value;
+        org.jfree.data.Range $stack10, $stack11, $stack8, range;
+    
+    
+        range := @parameter0: org.jfree.data.Range;
+        value := @parameter1: double;
+    
+        if range != null goto label1;
+        $stack11 = new org.jfree.data.Range;
+        specialinvoke $stack11.<org.jfree.data.Range: void <init>(double,double)>(value, value);
+    
+        return $stack11;
+    
+      label1:
+        $stack3 = virtualinvoke range.<org.jfree.data.Range: double getLowerBound()>();
+        $stack4 = value cmpg $stack3;
+    
+        if $stack4 >= 0 goto label2;
+        $stack10 = new org.jfree.data.Range;
+        $stack9 = virtualinvoke range.<org.jfree.data.Range: double getUpperBound()>();
+        specialinvoke $stack10.<org.jfree.data.Range: void <init>(double,double)>(value, $stack9);
+    
+        return $stack10;
+    
+      label2:
+        $stack5 = virtualinvoke range.<org.jfree.data.Range: double getUpperBound()>();
+        $stack6 = value cmpl $stack5;
+    
+        if $stack6 <= 0 goto label3;
+        $stack8 = new org.jfree.data.Range;
+        $stack7 = virtualinvoke range.<org.jfree.data.Range: double getLowerBound()>();
+        specialinvoke $stack8.<org.jfree.data.Range: void <init>(double,double)>($stack7, value);
+    
+        return $stack8;
+    
+      label3:
+        return range;
+    }
+
+    // ---- method: <org.jfree.data.Range: double getUpperBound()> ----
+    {
+        double $stack1;
+        org.jfree.data.Range this;
+    
+    
+        this := @this: org.jfree.data.Range;
+        $stack1 = this.<org.jfree.data.Range: double upper>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.data.Range: org.jfree.data.Range shift(org.jfree.data.Range,double)> ----
+    {
+        double delta;
+        org.jfree.data.Range $stack3, base;
+    
+    
+        base := @parameter0: org.jfree.data.Range;
+        delta := @parameter1: double;
+        $stack3 = staticinvoke <org.jfree.data.Range: org.jfree.data.Range shift(org.jfree.data.Range,double,boolean)>(base, delta, 0);
+    
+        return $stack3;
+    }
+
+    // ---- method: <org.jfree.data.Range: boolean equals(java.lang.Object)> ----
+    {
+        boolean $stack3;
+        byte $stack6, $stack9;
+        double $stack4, $stack5, $stack7, $stack8;
+        java.lang.Object obj;
+        org.jfree.data.Range range, this;
+    
+    
+        this := @this: org.jfree.data.Range;
+        obj := @parameter0: java.lang.Object;
+        $stack3 = obj instanceof org.jfree.data.Range;
+    
+        if $stack3 != 0 goto label1;
+    
+        return 0;
+    
+      label1:
+        range = (org.jfree.data.Range) obj;
+        $stack4 = this.<org.jfree.data.Range: double lower>;
+        $stack5 = range.<org.jfree.data.Range: double lower>;
+        $stack6 = $stack4 cmpl $stack5;
+    
+        if $stack6 == 0 goto label2;
+    
+        return 0;
+    
+      label2:
+        $stack7 = this.<org.jfree.data.Range: double upper>;
+        $stack8 = range.<org.jfree.data.Range: double upper>;
+        $stack9 = $stack7 cmpl $stack8;
+    
+        if $stack9 == 0 goto label3;
+    
+        return 0;
+    
+      label3:
+        return 1;
+    }
+
+    // ---- method: <org.jfree.data.Range: boolean contains(double)> ----
+    {
+        boolean $stack7;
+        byte $stack4, $stack6;
+        double $stack3, $stack5, value;
+        org.jfree.data.Range this;
+    
+    
+        this := @this: org.jfree.data.Range;
+        value := @parameter0: double;
+        $stack3 = this.<org.jfree.data.Range: double lower>;
+        $stack4 = value cmpl $stack3;
+    
+        if $stack4 < 0 goto label1;
+        $stack5 = this.<org.jfree.data.Range: double upper>;
+        $stack6 = value cmpg $stack5;
+    
+        if $stack6 > 0 goto label1;
+        $stack7 = 1;
+    
+        goto label2;
+    
+      label1:
+        $stack7 = 0;
+    
+      label2:
+        return $stack7;
+    }
+
+    // ---- method: <org.jfree.data.Range: org.jfree.data.Range shift(org.jfree.data.Range,double,boolean)> ----
+    {
+        boolean allowZeroCrossing;
+        double $stack10, $stack11, $stack12, $stack4, $stack5, $stack6, $stack7, $stack9, delta;
+        org.jfree.data.Range $stack13, $stack8, base;
+    
+    
+        base := @parameter0: org.jfree.data.Range;
+        delta := @parameter1: double;
+        allowZeroCrossing := @parameter2: boolean;
+    
+        if allowZeroCrossing == 0 goto label1;
+        $stack13 = new org.jfree.data.Range;
+        $stack9 = virtualinvoke base.<org.jfree.data.Range: double getLowerBound()>();
+        $stack12 = $stack9 + delta;
+        $stack10 = virtualinvoke base.<org.jfree.data.Range: double getUpperBound()>();
+        $stack11 = $stack10 + delta;
+        specialinvoke $stack13.<org.jfree.data.Range: void <init>(double,double)>($stack12, $stack11);
+    
+        return $stack13;
+    
+      label1:
+        $stack8 = new org.jfree.data.Range;
+        $stack4 = virtualinvoke base.<org.jfree.data.Range: double getLowerBound()>();
+        $stack7 = staticinvoke <org.jfree.data.Range: double shiftWithNoZeroCrossing(double,double)>($stack4, delta);
+        $stack5 = virtualinvoke base.<org.jfree.data.Range: double getUpperBound()>();
+        $stack6 = staticinvoke <org.jfree.data.Range: double shiftWithNoZeroCrossing(double,double)>($stack5, delta);
+        specialinvoke $stack8.<org.jfree.data.Range: void <init>(double,double)>($stack7, $stack6);
+    
+        return $stack8;
+    }
+
+    // ---- method: <org.jfree.data.Range: double getLength()> ----
+    {
+        double $stack1, $stack2, $stack3;
+        org.jfree.data.Range this;
+    
+    
+        this := @this: org.jfree.data.Range;
+        $stack1 = this.<org.jfree.data.Range: double upper>;
+        $stack2 = this.<org.jfree.data.Range: double lower>;
+        $stack3 = $stack1 - $stack2;
+    
+        return $stack3;
+    }
+
+    // ---- method: <org.jfree.data.Range: java.lang.String toString()> ----
+    {
+        double $stack2, $stack5;
+        java.lang.String $stack9;
+        java.lang.StringBuffer $stack1, $stack3, $stack4, $stack6, $stack7, $stack8;
+        org.jfree.data.Range this;
+    
+    
+        this := @this: org.jfree.data.Range;
+        $stack1 = new java.lang.StringBuffer;
+        specialinvoke $stack1.<java.lang.StringBuffer: void <init>()>();
+        $stack3 = virtualinvoke $stack1.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>("Range[");
+        $stack2 = this.<org.jfree.data.Range: double lower>;
+        $stack4 = virtualinvoke $stack3.<java.lang.StringBuffer: java.lang.StringBuffer append(double)>($stack2);
+        $stack6 = virtualinvoke $stack4.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>(",");
+        $stack5 = this.<org.jfree.data.Range: double upper>;
+        $stack7 = virtualinvoke $stack6.<java.lang.StringBuffer: java.lang.StringBuffer append(double)>($stack5);
+        $stack8 = virtualinvoke $stack7.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>("]");
+        $stack9 = virtualinvoke $stack8.<java.lang.StringBuffer: java.lang.String toString()>();
+    
+        return $stack9;
+    }
+
+    // ---- method: <org.jfree.data.Range: boolean intersects(double,double)> ----
+    {
+        boolean $stack10, $stack13;
+        byte $stack12, $stack6, $stack8, $stack9;
+        double $stack11, $stack5, $stack7, b0, b1;
+        org.jfree.data.Range this;
+    
+    
+        this := @this: org.jfree.data.Range;
+        b0 := @parameter0: double;
+        b1 := @parameter1: double;
+        $stack5 = this.<org.jfree.data.Range: double lower>;
+        $stack6 = b0 cmpg $stack5;
+    
+        if $stack6 > 0 goto label3;
+        $stack11 = this.<org.jfree.data.Range: double lower>;
+        $stack12 = b1 cmpl $stack11;
+    
+        if $stack12 <= 0 goto label1;
+        $stack13 = 1;
+    
+        goto label2;
+    
+      label1:
+        $stack13 = 0;
+    
+      label2:
+        return $stack13;
+    
+      label3:
+        $stack7 = this.<org.jfree.data.Range: double upper>;
+        $stack8 = b0 cmpg $stack7;
+    
+        if $stack8 >= 0 goto label4;
+        $stack9 = b1 cmpl b0;
+    
+        if $stack9 < 0 goto label4;
+        $stack10 = 1;
+    
+        goto label5;
+    
+      label4:
+        $stack10 = 0;
+    
+      label5:
+        return $stack10;
+    }
+
+    // ---- method: <org.jfree.data.Range: org.jfree.data.Range combine(org.jfree.data.Range,org.jfree.data.Range)> ----
+    {
+        double $stack6, $stack7, $stack8, $stack9, l, u;
+        org.jfree.data.Range $stack10, range1, range2;
+    
+    
+        range1 := @parameter0: org.jfree.data.Range;
+        range2 := @parameter1: org.jfree.data.Range;
+    
+        if range1 != null goto label1;
+    
+        return range2;
+    
+      label1:
+        if range2 != null goto label2;
+    
+        return range1;
+    
+      label2:
+        $stack7 = virtualinvoke range1.<org.jfree.data.Range: double getLowerBound()>();
+        $stack6 = virtualinvoke range2.<org.jfree.data.Range: double getLowerBound()>();
+        l = staticinvoke <java.lang.Math: double min(double,double)>($stack7, $stack6);
+        $stack9 = virtualinvoke range1.<org.jfree.data.Range: double getUpperBound()>();
+        $stack8 = virtualinvoke range2.<org.jfree.data.Range: double getUpperBound()>();
+        u = staticinvoke <java.lang.Math: double max(double,double)>($stack9, $stack8);
+        $stack10 = new org.jfree.data.Range;
+        specialinvoke $stack10.<org.jfree.data.Range: void <init>(double,double)>(l, u);
+    
+        return $stack10;
+    }
+
+    // ---- method: <org.jfree.data.Range: double getCentralValue()> ----
+    {
+        double $stack1, $stack2, $stack3, $stack4, $stack5;
+        org.jfree.data.Range this;
+    
+    
+        this := @this: org.jfree.data.Range;
+        $stack1 = this.<org.jfree.data.Range: double lower>;
+        $stack3 = $stack1 / 2.0;
+        $stack2 = this.<org.jfree.data.Range: double upper>;
+        $stack4 = $stack2 / 2.0;
+        $stack5 = $stack3 + $stack4;
+    
+        return $stack5;
+    }
+
+    // ---- method: <org.jfree.data.Range: org.jfree.data.Range expand(org.jfree.data.Range,double,double)> ----
+    {
+        double $stack11, $stack12, $stack13, $stack14, length, lower, lowerMargin, upper, upperMargin;
+        java.lang.IllegalArgumentException #l1;
+        java.lang.Object $stack16;
+        java.lang.Throwable #l0;
+        org.jfree.data.Range $stack15, range;
+    
+    
+        range := @parameter0: org.jfree.data.Range;
+        lowerMargin := @parameter1: double;
+        upperMargin := @parameter2: double;
+    
+        if range != null goto label1;
+        $stack16 = new java.lang.IllegalArgumentException;
+        #l1 = (java.lang.IllegalArgumentException) $stack16;
+        specialinvoke #l1.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'range\' argument.");
+        #l0 = (java.lang.Throwable) $stack16;
+    
+        throw #l0;
+    
+      label1:
+        length = virtualinvoke range.<org.jfree.data.Range: double getLength()>();
+        lower = length * lowerMargin;
+        upper = length * upperMargin;
+        $stack15 = new org.jfree.data.Range;
+        $stack11 = virtualinvoke range.<org.jfree.data.Range: double getLowerBound()>();
+        $stack14 = $stack11 - lower;
+        $stack12 = virtualinvoke range.<org.jfree.data.Range: double getUpperBound()>();
+        $stack13 = $stack12 + upper;
+        specialinvoke $stack15.<org.jfree.data.Range: void <init>(double,double)>($stack14, $stack13);
+    
+        return $stack15;
+    }
+
+}

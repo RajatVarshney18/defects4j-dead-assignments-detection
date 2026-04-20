@@ -3,34 +3,25 @@ package com.ipaco.analysis;
 import sootup.core.graph.StmtGraph;
 import sootup.core.jimple.basic.Local;
 import sootup.core.jimple.basic.Value;
-import sootup.core.jimple.common.expr.AbstractInvokeExpr;
-import sootup.core.jimple.common.expr.JCastExpr;
-import sootup.core.jimple.common.expr.JInstanceOfExpr;
+import sootup.core.jimple.common.constant.*;
+import sootup.core.jimple.common.expr.*;
 import sootup.core.jimple.common.ref.JArrayRef;
 import sootup.core.jimple.common.ref.JFieldRef;
-import sootup.core.jimple.common.stmt.JAssignStmt;
-import sootup.core.jimple.common.stmt.JIdentityStmt;
-import sootup.core.jimple.common.stmt.Stmt;
+import sootup.core.jimple.common.stmt.*;
 import sootup.core.model.Body;
 import sootup.core.model.SootMethod;
-import sootup.core.jimple.common.constant.*;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class DeadVariableAnalysis {
-    
-    private final SootMethod  method; 
-    private final Body body;
-    private final StmtGraph<?> cfg;
-    
-    // Pass-1 liveness maps:
-    // LiveIN(s)  = set of locals live just BEFORE s
-    // LiveOUT(s) = set of locals live just AFTER s
+
+    private final SootMethod    method;
+    private final Body          body;
+    private final StmtGraph<?>  cfg;
+
     private final Map<Stmt, Set<Local>> liveIn  = new HashMap<>();
     private final Map<Stmt, Set<Local>> liveOut = new HashMap<>();
-
-    // Pass-2 constant propagation maps:
-    private ConstantPropagationAnalysis constAnalysis;
 
     public DeadVariableAnalysis(SootMethod method) {
         this.method = method;
@@ -38,96 +29,61 @@ public class DeadVariableAnalysis {
         this.cfg    = body.getStmtGraph();
     }
 
-     // public entry point
+    // ----------------------------------------------------------------
+    // entry point
     // ----------------------------------------------------------------
     public AnalysisResult run(String className, String sourceFile) {
-
-      // Step 1: forward constant propagation
-        constAnalysis = new ConstantPropagationAnalysis(method);
-        constAnalysis.run();
-
-      // Step 2: backward liveness and dead assignment detection
         initialise();
         computeLiveness();
         return detectDeadAssignments(className, sourceFile);
     }
 
-     // ----------------------------------------------------------------
-    // A: initialise all sets to empty
     // ----------------------------------------------------------------
-   private void initialise() {
-        for (Stmt stmt : getStatements()) {
-            liveIn.put(stmt,  new HashSet<Local>());
-            liveOut.put(stmt, new HashSet<Local>());
+    // initialise liveness maps
+    // ----------------------------------------------------------------
+    private void initialise() {
+        for (Stmt s : getStatements()) {
+            liveIn.put(s,  new HashSet<Local>());
+            liveOut.put(s, new HashSet<Local>());
         }
     }
 
-    private List<Stmt> getStatements() {
-        List<Stmt> stmts = new ArrayList<Stmt>();
-        for (Stmt s : cfg.getNodes()) {
-            stmts.add(s);
-        }
-        return stmts;
-    }
-
     // ----------------------------------------------------------------
-    // B: backward fixpoint — liveness computation
-    // Equation:
-    //   LiveOUT(s) = union of LiveIN(succ) for all successors of s
-    //   LiveIN(s)  = USE(s) union (LiveOUT(s) minus DEF(s))
-    //
-    // We iterate until no LiveIN set changes.
+    // backward liveness fixpoint
     // ----------------------------------------------------------------
     private void computeLiveness() {
-
-        // start with all statements in the worklist
-        Deque<Stmt> worklist = new ArrayDeque<Stmt>(getStatements());
+        Deque<Stmt> worklist = new ArrayDeque<>(getStatements());
 
         while (!worklist.isEmpty()) {
-
             Stmt s = worklist.poll();
 
-            // --- recompute LiveOUT(s) ---
-            // = union of LiveIN of every successor
             Set<Local> newOut = new HashSet<Local>();
             for (Stmt succ : cfg.successors(s)) {
-                Set<Local> succIn = liveIn.get(succ);
-                if (succIn != null) {
-                    newOut.addAll(succIn);
-                }
+                Set<Local> si = liveIn.get(succ);
+                if (si != null) newOut.addAll(si);
             }
 
-            // --- recompute LiveIN(s) ---
-            // = USE(s) union (LiveOUT(s) minus DEF(s))
             Set<Local> use = computeUse(s);
             Set<Local> def = computeDef(s);
 
             Set<Local> newIn = new HashSet<Local>(newOut);
-            newIn.removeAll(def);   // kill what s defines
-            newIn.addAll(use);      // gen what s reads
+            newIn.removeAll(def);
+            newIn.addAll(use);
 
-            // --- check if LiveIN changed ---
             if (!newIn.equals(liveIn.get(s))) {
-
                 liveIn.put(s,  newIn);
                 liveOut.put(s, newOut);
-
-                // re-add all predecessors — their LiveOUT depends on our LiveIN
                 for (Stmt pred : cfg.predecessors(s)) {
-                    if (!worklist.contains(pred)) {
-                        worklist.add(pred);
-                    }
+                    if (!worklist.contains(pred)) worklist.add(pred);
                 }
-
             } else {
-                // LiveIN unchanged but still update LiveOUT
                 liveOut.put(s, newOut);
             }
         }
     }
 
     // ----------------------------------------------------------------
-    // detect dead assignments — now uses BOTH analyses
+    // detect dead assignments
     // ----------------------------------------------------------------
     private AnalysisResult detectDeadAssignments(String className,
                                                   String sourceFile) {
@@ -135,136 +91,222 @@ public class DeadVariableAnalysis {
         result.setContext(className,
                 method.getSignature().toString(), sourceFile);
 
-        for (Stmt s : getStatements()) {
+        List<Stmt> stmts = getStatements();
 
+        for (int idx = 0; idx < stmts.size(); idx++) {
+            Stmt s = stmts.get(idx);
+
+            // only JAssignStmt can produce a dead local definition
             if (!(s instanceof JAssignStmt)) continue;
 
             JAssignStmt assign = (JAssignStmt) s;
             Value lhs = assign.getLeftOp();
             Value rhs = assign.getRightOp();
 
+            // only care about writes to local variables
+            // (not field writes / array stores which have no Local LHS)
             if (!(lhs instanceof Local)) continue;
 
             Local definedVar = (Local) lhs;
 
-            // ---- Check 1: standard liveness (original) ----
-            Set<Local> out = liveOut.get(s);
-            if (out != null && !out.contains(definedVar)) {
-                String reason = classifyDeadAssignment(rhs);
-                result.addDead(s, reason);
-                continue; // already dead — no need for check 2
+            // --------------------------------------------------------
+            // FILTER 1: skip Jimple synthetic temporaries
+            // Jimple names these $stack0, $stack1, etc.
+            // They are IR artefacts — not programmer variables.
+            // --------------------------------------------------------
+            if (isJimpleTemporary(definedVar)) continue;
+
+            // --------------------------------------------------------
+            // FILTER 2: skip zero/null initialisations
+            // Jimple emits $v = 0 / $v = null before conditional
+            // assignments as IR setup. These look dead but are artefacts.
+            // --------------------------------------------------------
+            if (isJimpleZeroInit(rhs)) continue;
+
+            // --------------------------------------------------------
+            // FILTER 3: skip invoke RHS entirely
+            // "$v = invoke(...)" — the interesting finding is whether
+            // the *invocation* is needed, not whether $v is live.
+            // Reporting these creates enormous noise because Jimple
+            // materialises every call result into a local even when
+            // the Java source discards it.
+            // --------------------------------------------------------
+            if (rhs instanceof AbstractInvokeExpr) continue;
+
+            // --------------------------------------------------------
+            // FILTER 4: skip cast expressions
+            // The cast must survive for its ClassCastException side
+            // effect regardless of whether $v is live.
+            // --------------------------------------------------------
+            if (rhs instanceof JCastExpr) continue;
+
+            // --------------------------------------------------------
+            // FILTER 4b: skip alias copies from Jimple stack temps.
+            // Pattern: userLocal = $stackN, where subsequent uses stay
+            // on $stackN. This is an IR artefact, not a source bug.
+            // --------------------------------------------------------
+            if (rhs instanceof Local && isJimpleTemporary((Local) rhs)) {
+                continue;
             }
 
-            // ---- Check 2: constant-value deadness (new) ----
-            // Variable IS live (check 1 passed) but we check whether
-            // the constant value being written is already present
-            // i.e., the assignment is a redundant constant write
-            String constReason = checkConstantValueDead(s, definedVar, rhs);
-            if (constReason != null) {
-                result.addDead(s, constReason);
-            }
+            // --------------------------------------------------------
+            // core liveness check: is the defined variable dead?
+            // --------------------------------------------------------
+            Set<Local> out = liveOut.get(s);
+            if (out == null || out.contains(definedVar)) continue;
+
+            // --------------------------------------------------------
+            // FILTER 5: skip constant zero/false assignments that are
+            // dead — these are Jimple boolean/int initialisations
+            // for control flow, not real programmer assignments.
+            // We already caught zero-init in FILTER 2 but some appear
+            // as arithmetic results too.
+            // --------------------------------------------------------
+
+            // --------------------------------------------------------
+            // classify what kind of dead assignment this is
+            // --------------------------------------------------------
+            String reason = classify(definedVar, rhs);
+            if (reason == null) continue; // filtered by classify
+
+            result.addDead(s, reason, idx + 1);
         }
 
         return result;
     }
 
     // ----------------------------------------------------------------
-    // NEW: check if a live assignment is a redundant constant write
-    //
-    // A statement $v = C is constant-value dead if:
-    //   (a) C is a literal constant (or folds to one)
-    //   AND
-    //   (b) the constant propagation analysis tells us that
-    //       $v already holds value C just BEFORE this statement
-    //
-    // In that case, the assignment writes a value that $v
-    // already contains — completely redundant.
-    //
-    // Returns a description string if dead, null if not.
+    // classify a confirmed-dead assignment
+    // Returns a human-readable reason, or null to suppress this entry.
     // ----------------------------------------------------------------
-    private String checkConstantValueDead(Stmt s, Local definedVar,
-                                           Value rhs) {
+    private String classify(Local definedVar, Value rhs) {
 
-        // extract the constant being written (if the RHS is one)
-        Object rhsConstant = extractConstant(rhs);
-
-        if (rhsConstant == null) {
-            // RHS is not a simple constant or foldable expression
-            return null;
+        // dead field read — programmer read a field but never used result
+        if (rhs instanceof JFieldRef) {
+            return "Dead field read: result of field access never used";
         }
 
-        // what does constant propagation say $v holds BEFORE s?
-        Object valueBefore =
-                constAnalysis.getConstantValueBefore(s, definedVar);
-
-        if (valueBefore == null) {
-            // $v is not known to be constant before s
-            return null;
+        // dead array read
+        if (rhs instanceof JArrayRef) {
+            return "Dead array read: result of array access never used";
         }
 
-        // are they the same?
-        if (rhsConstant.equals(valueBefore)) {
-            return "constant-value dead: $" + definedVar.getName()
-                    + " already holds " + rhsConstant
-                    + " before this assignment — fully eliminable";
+        // dead instanceof — programmer checked a type but never used result
+        if (rhs instanceof JInstanceOfExpr) {
+            return "Dead instanceof: type check result never used";
         }
 
+        // dead arithmetic / comparison
+        if (rhs instanceof AbstractBinopExpr) {
+            return "Dead computation: result of expression '"
+                    + rhs + "' never used";
+        }
+
+        // dead unary
+        if (rhs instanceof JNegExpr) {
+            return "Dead negation: result never used";
+        }
+
+        // dead copy: $v = $u where $v is never read
+        if (rhs instanceof Local) {
+            return "Dead copy: " + definedVar.getName()
+                + " = " + ((Local) rhs).getName()
+                    + " never read after assignment";
+        }
+
+        // dead literal constant assignment (non-zero, non-null)
+        // zero and null were already filtered above
+        if (isNonTrivialConstant(rhs)) {
+            return "Dead constant assignment: $"
+                    + definedVar.getName()
+                    + " = " + rhs + " never read";
+        }
+
+        // dead new-object allocation where result is never used
+        if (rhs instanceof JNewExpr) {
+            // new without reading the object = wasted allocation
+            // BUT: the constructor call (specialinvoke) is a separate
+            // JInvokeStmt and will survive — only the $v = new T
+            // portion is dead
+            return "Dead allocation: new "
+                    + ((JNewExpr) rhs).getType()
+                    + " result never used";
+        }
+
+        // suppress everything else — safer to under-report
         return null;
     }
 
     // ----------------------------------------------------------------
-    // Extract a constant value from a simple RHS value.
-    // Returns the constant object, or null if RHS is not constant.
-    // We only handle literal constants here — the full folding
-    // is done inside ConstantPropagationAnalysis.evaluateRhs.
+    // FILTER: is this local a Jimple synthetic temporary?
+    //
+    // SootUp names Jimple-generated temporaries with a $ prefix
+    // followed by "stack" — e.g. $stack0, $stack1, $stack2.
+    // Method parameters and user locals also start with $ in Jimple
+    // (e.g. $r0, $r1, $i0) but these are parameter/type-derived names.
+    //
+    // We filter the stack temporaries only — not $r0/$i0 style locals.
     // ----------------------------------------------------------------
-    private Object extractConstant(Value rhs) {
+    private boolean isJimpleTemporary(Local local) {
+        String name = local.getName();
+        // "$stackN" pattern — pure IR temporaries
+        if (name.startsWith("$stack")) return true;
+        // "stack" without $ (some SootUp versions)
+        if (name.startsWith("stack") && name.length() > 5
+                && Character.isDigit(name.charAt(5))) return true;
+        return false;
+    }
+
+    // ----------------------------------------------------------------
+    // FILTER: is the RHS a zero/null/false initialisation?
+    //
+    // Jimple emits these as default-value assignments before
+    // conditional assignments and try-catch entry points.
+    // They look dead but are IR artefacts, not programmer bugs.
+    // ----------------------------------------------------------------
+    private boolean isJimpleZeroInit(Value rhs) {
+        if (rhs instanceof IntConstant) {
+            return ((IntConstant) rhs).getValue() == 0;
+        }
+        if (rhs instanceof LongConstant) {
+            return ((LongConstant) rhs).getValue() == 0L;
+        }
+        if (rhs instanceof FloatConstant) {
+            return ((FloatConstant) rhs).getValue() == 0.0f;
+        }
+        if (rhs instanceof DoubleConstant) {
+            return ((DoubleConstant) rhs).getValue() == 0.0;
+        }
+        if (rhs instanceof NullConstant) {
+            return true;
+        }
+        return false;
+    }
+
+    // ----------------------------------------------------------------
+    // is RHS a non-trivial constant (not zero, not null)?
+    // Used to identify genuine constant assignments worth reporting.
+    // ----------------------------------------------------------------
+    private boolean isNonTrivialConstant(Value rhs) {
         if (rhs instanceof IntConstant)
-            return ((IntConstant) rhs).getValue();
+            return ((IntConstant) rhs).getValue() != 0;
         if (rhs instanceof LongConstant)
-            return ((LongConstant) rhs).getValue();
+            return ((LongConstant) rhs).getValue() != 0L;
         if (rhs instanceof FloatConstant)
-            return ((FloatConstant) rhs).getValue();
+            return ((FloatConstant) rhs).getValue() != 0.0f;
         if (rhs instanceof DoubleConstant)
-            return ((DoubleConstant) rhs).getValue();
-        if (rhs instanceof StringConstant)
-            return ((StringConstant) rhs).getValue();
-        if (rhs instanceof NullConstant)
-            return null; // null is a special case — skip
-        return null;
+            return ((DoubleConstant) rhs).getValue() != 0.0;
+        if (rhs instanceof StringConstant) return true;
+        return false;
     }
 
     // ----------------------------------------------------------------
-    // classify dead RHS — unchanged from before
-    // ----------------------------------------------------------------
-    private String classifyDeadAssignment(Value rhs) {
-        if (rhs instanceof JCastExpr)
-            return "dead cast result — transform to bare checkcast, do not eliminate";
-        if (rhs instanceof JInstanceOfExpr)
-            return "dead instanceof result — fully eliminable";
-        if (rhs instanceof AbstractInvokeExpr)
-            return "dead invoke result — transform to bare invoke, keep side effects";
-        if (rhs instanceof JFieldRef)
-            return "dead field read — eliminable (verify not volatile)";
-        if (rhs instanceof JArrayRef)
-            return "dead array read — fully eliminable";
-        return "dead assignment — fully eliminable";
-    }
-
-    // ----------------------------------------------------------------
-    // E: USE(s) — locals READ by statement s
-    //    SootUp's getUses() returns all Values used in the statement.
-    //    We filter to keep only Local instances.
+    // USE, DEF, helper — unchanged
     // ----------------------------------------------------------------
     private Set<Local> computeUse(Stmt s) {
         Set<Local> uses = new HashSet<Local>();
-        Collection<Value> useValues = s.getUses().collect(java.util.stream.Collectors.toList());
-        if (useValues != null) {
-            for (Value v : useValues) {
-                if (v instanceof Local) {
-                    uses.add((Local) v);
-                }
-            }
+        for (Value v : s.getUses().collect(Collectors.toList())) {
+            if (v instanceof Local) uses.add((Local) v);
         }
         return uses;
     }
@@ -279,5 +321,11 @@ public class DeadVariableAnalysis {
             if (lhs instanceof Local) defs.add((Local) lhs);
         }
         return defs;
+    }
+
+    private List<Stmt> getStatements() {
+        List<Stmt> stmts = new ArrayList<>();
+        for (Stmt s : cfg.getNodes()) stmts.add(s);
+        return stmts;
     }
 }

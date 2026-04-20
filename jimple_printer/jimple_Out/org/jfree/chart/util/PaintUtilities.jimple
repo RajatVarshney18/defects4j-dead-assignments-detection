@@ -1,0 +1,295 @@
+// ========================================================================
+// CLASS : org.jfree.chart.util.PaintUtilities
+// ========================================================================
+
+[PUBLIC, SUPER] class org.jfree.chart.util.PaintUtilities extends java.lang.Object {
+
+    // ---- method: <org.jfree.chart.util.PaintUtilities: void <init>()> ----
+    {
+        org.jfree.chart.util.PaintUtilities this;
+    
+    
+        this := @this: org.jfree.chart.util.PaintUtilities;
+        specialinvoke this.<java.lang.Object: void <init>()>();
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.util.PaintUtilities: boolean equal(java.awt.Paint,java.awt.Paint)> ----
+    {
+        boolean $stack12, $stack15, $stack18, $stack19, $stack20, $stack23, $stack5, $stack6, $stack9, result#0, result#1;
+        int $stack21, $stack22;
+        java.awt.Color $stack10, $stack11, $stack7, $stack8;
+        java.awt.GradientPaint gp1, gp2;
+        java.awt.Paint p1, p2;
+        java.awt.geom.Point2D $stack13, $stack14, $stack16, $stack17;
+    
+    
+        p1 := @parameter0: java.awt.Paint;
+        p2 := @parameter1: java.awt.Paint;
+    
+        if p1 != null goto label3;
+    
+        if p2 != null goto label1;
+        $stack23 = 1;
+    
+        goto label2;
+    
+      label1:
+        $stack23 = 0;
+    
+      label2:
+        return $stack23;
+    
+      label3:
+        if p2 != null goto label4;
+    
+        return 0;
+    
+      label4:
+        result#0 = 0;
+        $stack5 = p1 instanceof java.awt.GradientPaint;
+    
+        if $stack5 == 0 goto label7;
+        $stack6 = p2 instanceof java.awt.GradientPaint;
+    
+        if $stack6 == 0 goto label7;
+        gp1 = (java.awt.GradientPaint) p1;
+        gp2 = (java.awt.GradientPaint) p2;
+        $stack8 = virtualinvoke gp1.<java.awt.GradientPaint: java.awt.Color getColor1()>();
+        $stack7 = virtualinvoke gp2.<java.awt.GradientPaint: java.awt.Color getColor1()>();
+        $stack9 = virtualinvoke $stack8.<java.awt.Color: boolean equals(java.lang.Object)>($stack7);
+    
+        if $stack9 == 0 goto label5;
+        $stack11 = virtualinvoke gp1.<java.awt.GradientPaint: java.awt.Color getColor2()>();
+        $stack10 = virtualinvoke gp2.<java.awt.GradientPaint: java.awt.Color getColor2()>();
+        $stack12 = virtualinvoke $stack11.<java.awt.Color: boolean equals(java.lang.Object)>($stack10);
+    
+        if $stack12 == 0 goto label5;
+        $stack14 = virtualinvoke gp1.<java.awt.GradientPaint: java.awt.geom.Point2D getPoint1()>();
+        $stack13 = virtualinvoke gp2.<java.awt.GradientPaint: java.awt.geom.Point2D getPoint1()>();
+        $stack15 = virtualinvoke $stack14.<java.awt.geom.Point2D: boolean equals(java.lang.Object)>($stack13);
+    
+        if $stack15 == 0 goto label5;
+        $stack17 = virtualinvoke gp1.<java.awt.GradientPaint: java.awt.geom.Point2D getPoint2()>();
+        $stack16 = virtualinvoke gp2.<java.awt.GradientPaint: java.awt.geom.Point2D getPoint2()>();
+        $stack18 = virtualinvoke $stack17.<java.awt.geom.Point2D: boolean equals(java.lang.Object)>($stack16);
+    
+        if $stack18 == 0 goto label5;
+        $stack20 = virtualinvoke gp1.<java.awt.GradientPaint: boolean isCyclic()>();
+        $stack19 = virtualinvoke gp2.<java.awt.GradientPaint: boolean isCyclic()>();
+    
+        if $stack20 != $stack19 goto label5;
+        $stack22 = virtualinvoke gp1.<java.awt.GradientPaint: int getTransparency()>();
+        $stack21 = virtualinvoke gp1.<java.awt.GradientPaint: int getTransparency()>();
+    
+        if $stack22 != $stack21 goto label5;
+        result#1 = 1;
+    
+        goto label6;
+    
+      label5:
+        result#1 = 0;
+    
+      label6:
+        goto label8;
+    
+      label7:
+        result#1 = virtualinvoke p1.<java.lang.Object: boolean equals(java.lang.Object)>(p2);
+    
+      label8:
+        return result#1;
+    }
+
+    // ---- method: <org.jfree.chart.util.PaintUtilities: java.lang.String colorToString(java.awt.Color)> ----
+    {
+        boolean $stack15, $stack17, $stack19, $stack20, $stack21;
+        int $stack10, $stack12, $stack14, $stack16, $stack18, $stack8, $stack9, f#0, i#1, name#0;
+        java.awt.Color c;
+        java.lang.Class $stack6, $stack7;
+        java.lang.Object $stack23, oColor;
+        java.lang.String $stack13, $stack22, fields#1, name#1;
+        java.lang.StringBuffer $stack11, i#0;
+        java.lang.Throwable $stack24, fields#0;
+        java.lang.reflect.Field f#1;
+        java.lang.reflect.Field[] fields#2;
+    
+    
+        c := @parameter0: java.awt.Color;
+    
+      label01:
+        $stack6 = <org.jfree.chart.util.PaintUtilities: java.lang.Class class$java$awt$Color>;
+    
+        if $stack6 != null goto label05;
+        $stack7 = staticinvoke <org.jfree.chart.util.PaintUtilities: java.lang.Class class$(java.lang.String)>("java.awt.Color");
+        <org.jfree.chart.util.PaintUtilities: java.lang.Class class$java$awt$Color> = $stack7;
+    
+        goto label06;
+    
+      label02:
+        $stack24 := @caughtexception;
+        fields#0 = $stack24;
+    
+      label03:
+        $stack9 = virtualinvoke c.<java.awt.Color: int getRGB()>();
+        $stack10 = $stack9 & 16777215;
+        fields#1 = staticinvoke <java.lang.Integer: java.lang.String toHexString(int)>($stack10);
+        $stack11 = new java.lang.StringBuffer;
+        specialinvoke $stack11.<java.lang.StringBuffer: void <init>(int)>(7);
+        i#0 = $stack11;
+        virtualinvoke $stack11.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>("#");
+        $stack12 = virtualinvoke fields#1.<java.lang.String: int length()>();
+        f#0 = 6 - $stack12;
+        name#0 = 0;
+    
+      label04:
+        if name#0 >= f#0 goto label11;
+        virtualinvoke $stack11.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>("0");
+        name#0 = name#0 + 1;
+    
+        goto label04;
+    
+      label05:
+        $stack7 = <org.jfree.chart.util.PaintUtilities: java.lang.Class class$java$awt$Color>;
+    
+      label06:
+        fields#2 = virtualinvoke $stack7.<java.lang.Class: java.lang.reflect.Field[] getFields()>();
+        i#1 = 0;
+    
+      label07:
+        $stack8 = lengthof fields#2;
+    
+        if i#1 >= $stack8 goto label10;
+        f#1 = fields#2[i#1];
+        $stack14 = virtualinvoke f#1.<java.lang.reflect.Field: int getModifiers()>();
+        $stack15 = staticinvoke <java.lang.reflect.Modifier: boolean isPublic(int)>($stack14);
+    
+        if $stack15 == 0 goto label09;
+        $stack16 = virtualinvoke f#1.<java.lang.reflect.Field: int getModifiers()>();
+        $stack17 = staticinvoke <java.lang.reflect.Modifier: boolean isFinal(int)>($stack16);
+    
+        if $stack17 == 0 goto label09;
+        $stack18 = virtualinvoke f#1.<java.lang.reflect.Field: int getModifiers()>();
+        $stack19 = staticinvoke <java.lang.reflect.Modifier: boolean isStatic(int)>($stack18);
+    
+        if $stack19 == 0 goto label09;
+        name#1 = virtualinvoke f#1.<java.lang.reflect.Field: java.lang.String getName()>();
+        oColor = virtualinvoke f#1.<java.lang.reflect.Field: java.lang.Object get(java.lang.Object)>(null);
+        $stack20 = oColor instanceof java.awt.Color;
+    
+        if $stack20 == 0 goto label09;
+        $stack21 = virtualinvoke c.<java.awt.Color: boolean equals(java.lang.Object)>(oColor);
+    
+        if $stack21 == 0 goto label09;
+        $stack22 = name#1;
+    
+      label08:
+        return name#1;
+    
+      label09:
+        i#1 = i#1 + 1;
+    
+        goto label07;
+    
+      label10:
+        goto label03;
+    
+      label11:
+        virtualinvoke $stack11.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>(fields#1);
+        $stack13 = virtualinvoke $stack11.<java.lang.StringBuffer: java.lang.String toString()>();
+    
+        return $stack13;
+    
+     catch java.lang.Exception from label01 to label02 with label02;
+     catch java.lang.Exception from label05 to label08 with label02;
+     catch java.lang.Exception from label09 to label10 with label02;
+    }
+
+    // ---- method: <org.jfree.chart.util.PaintUtilities: java.awt.Color stringToColor(java.lang.String)> ----
+    {
+        java.awt.Color $stack11, $stack3, $stack4, $stack6;
+        java.lang.Class $stack8, $stack9;
+        java.lang.Object $stack10, $stack12;
+        java.lang.String value;
+        java.lang.Throwable $stack5, $stack7, f#0, nfe;
+        java.lang.reflect.Field f#1;
+    
+    
+        value := @parameter0: java.lang.String;
+    
+        if value != null goto label1;
+        $stack4 = <java.awt.Color: java.awt.Color black>;
+    
+        return $stack4;
+    
+      label1:
+        $stack3 = staticinvoke <java.awt.Color: java.awt.Color decode(java.lang.String)>(value);
+    
+      label2:
+        return $stack3;
+    
+      label3:
+        $stack7 := @caughtexception;
+        nfe = $stack7;
+    
+      label4:
+        $stack8 = <org.jfree.chart.util.PaintUtilities: java.lang.Class class$java$awt$Color>;
+    
+        if $stack8 != null goto label6;
+        $stack9 = staticinvoke <org.jfree.chart.util.PaintUtilities: java.lang.Class class$(java.lang.String)>("java.awt.Color");
+        <org.jfree.chart.util.PaintUtilities: java.lang.Class class$java$awt$Color> = $stack9;
+    
+        goto label7;
+    
+      label5:
+        $stack5 := @caughtexception;
+        f#0 = $stack5;
+        $stack6 = <java.awt.Color: java.awt.Color black>;
+    
+        return $stack6;
+    
+      label6:
+        $stack9 = <org.jfree.chart.util.PaintUtilities: java.lang.Class class$java$awt$Color>;
+    
+      label7:
+        f#1 = virtualinvoke $stack9.<java.lang.Class: java.lang.reflect.Field getField(java.lang.String)>(value);
+        $stack10 = virtualinvoke f#1.<java.lang.reflect.Field: java.lang.Object get(java.lang.Object)>(null);
+        $stack11 = (java.awt.Color) $stack10;
+    
+      label8:
+        return $stack11;
+    
+     catch java.lang.NumberFormatException from label1 to label2 with label3;
+     catch java.lang.Exception from label4 to label5 with label5;
+     catch java.lang.Exception from label6 to label8 with label5;
+    }
+
+    // ---- method: <org.jfree.chart.util.PaintUtilities: java.lang.Class class$(java.lang.String)> ----
+    {
+        java.lang.Class $stack2;
+        java.lang.NoClassDefFoundError $stack4;
+        java.lang.String x0;
+        java.lang.Throwable $stack3, $stack5, x1;
+    
+    
+        x0 := @parameter0: java.lang.String;
+    
+      label1:
+        $stack2 = staticinvoke <java.lang.Class: java.lang.Class forName(java.lang.String)>(x0);
+    
+      label2:
+        return $stack2;
+    
+      label3:
+        $stack3 := @caughtexception;
+        x1 = $stack3;
+        $stack4 = new java.lang.NoClassDefFoundError;
+        specialinvoke $stack4.<java.lang.NoClassDefFoundError: void <init>()>();
+        $stack5 = virtualinvoke $stack4.<java.lang.NoClassDefFoundError: java.lang.Throwable initCause(java.lang.Throwable)>($stack3);
+    
+        throw $stack5;
+    
+     catch java.lang.ClassNotFoundException from label1 to label2 with label3;
+    }
+
+}

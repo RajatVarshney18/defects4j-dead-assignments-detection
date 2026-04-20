@@ -1,0 +1,709 @@
+// ========================================================================
+// CLASS : org.jfree.data.statistics.HistogramDataset
+// ========================================================================
+
+[PUBLIC, SUPER] class org.jfree.data.statistics.HistogramDataset extends org.jfree.data.xy.AbstractIntervalXYDataset implements org.jfree.chart.util.PublicCloneable, org.jfree.data.xy.IntervalXYDataset, java.lang.Cloneable, java.io.Serializable {
+
+    // ---- method: <org.jfree.data.statistics.HistogramDataset: void setType(org.jfree.data.statistics.HistogramType)> ----
+    {
+        java.lang.IllegalArgumentException #l0;
+        java.lang.Object $stack3;
+        java.lang.Throwable #l1;
+        org.jfree.data.general.DatasetChangeEvent $stack2;
+        org.jfree.data.statistics.HistogramDataset this;
+        org.jfree.data.statistics.HistogramType type;
+    
+    
+        this := @this: org.jfree.data.statistics.HistogramDataset;
+        type := @parameter0: org.jfree.data.statistics.HistogramType;
+    
+        if type != null goto label1;
+        $stack3 = new java.lang.IllegalArgumentException;
+        #l0 = (java.lang.IllegalArgumentException) $stack3;
+        specialinvoke #l0.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'type\' argument");
+        #l1 = (java.lang.Throwable) $stack3;
+    
+        throw #l1;
+    
+      label1:
+        this.<org.jfree.data.statistics.HistogramDataset: org.jfree.data.statistics.HistogramType type> = type;
+        $stack2 = new org.jfree.data.general.DatasetChangeEvent;
+        specialinvoke $stack2.<org.jfree.data.general.DatasetChangeEvent: void <init>(java.lang.Object,org.jfree.data.general.Dataset)>(this, this);
+        virtualinvoke this.<org.jfree.data.statistics.HistogramDataset: void notifyListeners(org.jfree.data.general.DatasetChangeEvent)>($stack2);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.statistics.HistogramDataset: double getBinWidth(int)> ----
+    {
+        double $stack7;
+        int series;
+        java.lang.Double $stack6;
+        java.lang.Object $stack4, $stack5;
+        java.util.List $stack3;
+        java.util.Map map;
+        org.jfree.data.statistics.HistogramDataset this;
+    
+    
+        this := @this: org.jfree.data.statistics.HistogramDataset;
+        series := @parameter0: int;
+        $stack3 = this.<org.jfree.data.statistics.HistogramDataset: java.util.List list>;
+        $stack4 = interfaceinvoke $stack3.<java.util.List: java.lang.Object get(int)>(series);
+        map = (java.util.Map) $stack4;
+        $stack5 = interfaceinvoke map.<java.util.Map: java.lang.Object get(java.lang.Object)>("bin width");
+        $stack6 = (java.lang.Double) $stack5;
+        $stack7 = virtualinvoke $stack6.<java.lang.Double: double doubleValue()>();
+    
+        return $stack7;
+    }
+
+    // ---- method: <org.jfree.data.statistics.HistogramDataset: void addSeries(java.lang.Comparable,double[],int,double,double)> ----
+    {
+        byte $stack29, $stack34;
+        double $stack19, $stack20, $stack28, $stack31, $stack32, $stack33, $stack35, $stack36, $stack39, $stack40, binWidth, fraction#0, lower, maximum, minimum, upper;
+        double[] values;
+        int $stack22, $stack24, $stack37, $stack38, bin#1, bins, i#0, i#1;
+        java.lang.Comparable key;
+        java.lang.Double $stack26;
+        java.lang.IllegalArgumentException #l0, #l5, #l6;
+        java.lang.Integer $stack25;
+        java.lang.Object $stack21, $stack23, $stack30, $stack43, $stack44, $stack45;
+        java.lang.Throwable #l1, #l2, #l8;
+        java.util.ArrayList #l7, binList;
+        java.util.HashMap #l12, i#2;
+        java.util.List #l4, #l9, $stack27;
+        java.util.Map #l10, #l11, #l13, #l3;
+        org.jfree.data.statistics.HistogramBin $stack41, $stack42, bin#0, fraction#1;
+        org.jfree.data.statistics.HistogramDataset this;
+    
+    
+        this := @this: org.jfree.data.statistics.HistogramDataset;
+        key := @parameter0: java.lang.Comparable;
+        values := @parameter1: double[];
+        bins := @parameter2: int;
+        minimum := @parameter3: double;
+        maximum := @parameter4: double;
+    
+        if key != null goto label01;
+        $stack45 = new java.lang.IllegalArgumentException;
+        #l6 = (java.lang.IllegalArgumentException) $stack45;
+        specialinvoke #l6.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'key\' argument.");
+        #l2 = (java.lang.Throwable) $stack45;
+    
+        throw #l2;
+    
+      label01:
+        if values != null goto label02;
+        $stack44 = new java.lang.IllegalArgumentException;
+        #l0 = (java.lang.IllegalArgumentException) $stack44;
+        specialinvoke #l0.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'values\' argument.");
+        #l1 = (java.lang.Throwable) $stack44;
+    
+        throw #l1;
+    
+      label02:
+        if bins >= 1 goto label03;
+        $stack43 = new java.lang.IllegalArgumentException;
+        #l5 = (java.lang.IllegalArgumentException) $stack43;
+        specialinvoke #l5.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("The \'bins\' value must be at least 1.");
+        #l8 = (java.lang.Throwable) $stack43;
+    
+        throw #l8;
+    
+      label03:
+        $stack19 = maximum - minimum;
+        $stack20 = (double) bins;
+        binWidth = $stack19 / $stack20;
+        lower = minimum;
+        $stack21 = new java.util.ArrayList;
+        #l7 = (java.util.ArrayList) $stack21;
+        specialinvoke #l7.<java.util.ArrayList: void <init>(int)>(bins);
+        binList = (java.util.ArrayList) $stack21;
+        i#0 = 0;
+    
+      label04:
+        if i#0 >= bins goto label07;
+        $stack37 = bins - 1;
+    
+        if i#0 != $stack37 goto label05;
+        $stack42 = new org.jfree.data.statistics.HistogramBin;
+        specialinvoke $stack42.<org.jfree.data.statistics.HistogramBin: void <init>(double,double)>(lower, maximum);
+        bin#0 = $stack42;
+    
+        goto label06;
+    
+      label05:
+        $stack38 = i#0 + 1;
+        $stack39 = (double) $stack38;
+        $stack40 = $stack39 * binWidth;
+        upper = minimum + $stack40;
+        $stack41 = new org.jfree.data.statistics.HistogramBin;
+        specialinvoke $stack41.<org.jfree.data.statistics.HistogramBin: void <init>(double,double)>(lower, upper);
+        bin#0 = $stack41;
+        lower = upper;
+    
+      label06:
+        #l4 = (java.util.List) $stack21;
+        interfaceinvoke #l4.<java.util.List: boolean add(java.lang.Object)>(bin#0);
+        i#0 = i#0 + 1;
+    
+        goto label04;
+    
+      label07:
+        i#1 = 0;
+    
+      label08:
+        $stack22 = lengthof values;
+    
+        if i#1 >= $stack22 goto label11;
+        bin#1 = bins - 1;
+        $stack28 = values[i#1];
+        $stack29 = $stack28 cmpg maximum;
+    
+        if $stack29 >= 0 goto label10;
+        $stack31 = values[i#1];
+        $stack32 = $stack31 - minimum;
+        $stack33 = maximum - minimum;
+        fraction#0 = $stack32 / $stack33;
+        $stack34 = fraction#0 cmpg 0.0;
+    
+        if $stack34 >= 0 goto label09;
+        fraction#0 = 0.0;
+    
+      label09:
+        $stack35 = (double) bins;
+        $stack36 = fraction#0 * $stack35;
+        bin#1 = (int) $stack36;
+    
+        if bin#1 < bins goto label10;
+        bin#1 = bins - 1;
+    
+      label10:
+        #l9 = (java.util.List) $stack21;
+        $stack30 = interfaceinvoke #l9.<java.util.List: java.lang.Object get(int)>(bin#1);
+        fraction#1 = (org.jfree.data.statistics.HistogramBin) $stack30;
+        virtualinvoke fraction#1.<org.jfree.data.statistics.HistogramBin: void incrementCount()>();
+        i#1 = i#1 + 1;
+    
+        goto label08;
+    
+      label11:
+        $stack23 = new java.util.HashMap;
+        #l12 = (java.util.HashMap) $stack23;
+        specialinvoke #l12.<java.util.HashMap: void <init>()>();
+        i#2 = (java.util.HashMap) $stack23;
+        #l13 = (java.util.Map) $stack23;
+        interfaceinvoke #l13.<java.util.Map: java.lang.Object put(java.lang.Object,java.lang.Object)>("key", key);
+        #l3 = (java.util.Map) $stack23;
+        interfaceinvoke #l3.<java.util.Map: java.lang.Object put(java.lang.Object,java.lang.Object)>("bins", $stack21);
+        $stack25 = new java.lang.Integer;
+        $stack24 = lengthof values;
+        specialinvoke $stack25.<java.lang.Integer: void <init>(int)>($stack24);
+        #l10 = (java.util.Map) $stack23;
+        interfaceinvoke #l10.<java.util.Map: java.lang.Object put(java.lang.Object,java.lang.Object)>("values.length", $stack25);
+        $stack26 = new java.lang.Double;
+        specialinvoke $stack26.<java.lang.Double: void <init>(double)>(binWidth);
+        #l11 = (java.util.Map) $stack23;
+        interfaceinvoke #l11.<java.util.Map: java.lang.Object put(java.lang.Object,java.lang.Object)>("bin width", $stack26);
+        $stack27 = this.<org.jfree.data.statistics.HistogramDataset: java.util.List list>;
+        interfaceinvoke $stack27.<java.util.List: boolean add(java.lang.Object)>($stack23);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.statistics.HistogramDataset: double getMaximum(double[])> ----
+    {
+        byte $stack9;
+        double $stack8, max;
+        double[] values;
+        int $stack6, $stack7, i;
+        java.lang.IllegalArgumentException #l0;
+        java.lang.Object $stack5;
+        java.lang.Throwable #l1;
+        org.jfree.data.statistics.HistogramDataset this;
+    
+    
+        this := @this: org.jfree.data.statistics.HistogramDataset;
+        values := @parameter0: double[];
+    
+        if values == null goto label1;
+        $stack6 = lengthof values;
+    
+        if $stack6 >= 1 goto label2;
+    
+      label1:
+        $stack5 = new java.lang.IllegalArgumentException;
+        #l0 = (java.lang.IllegalArgumentException) $stack5;
+        specialinvoke #l0.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null or zero length \'values\' argument.");
+        #l1 = (java.lang.Throwable) $stack5;
+    
+        throw #l1;
+    
+      label2:
+        max = -1.7976931348623157E308;
+        i = 0;
+    
+      label3:
+        $stack7 = lengthof values;
+    
+        if i >= $stack7 goto label5;
+        $stack8 = values[i];
+        $stack9 = $stack8 cmpl max;
+    
+        if $stack9 <= 0 goto label4;
+        max = values[i];
+    
+      label4:
+        i = i + 1;
+    
+        goto label3;
+    
+      label5:
+        return max;
+    }
+
+    // ---- method: <org.jfree.data.statistics.HistogramDataset: int getTotal(int)> ----
+    {
+        int $stack7, series;
+        java.lang.Integer $stack6;
+        java.lang.Object $stack4, $stack5;
+        java.util.List $stack3;
+        java.util.Map map;
+        org.jfree.data.statistics.HistogramDataset this;
+    
+    
+        this := @this: org.jfree.data.statistics.HistogramDataset;
+        series := @parameter0: int;
+        $stack3 = this.<org.jfree.data.statistics.HistogramDataset: java.util.List list>;
+        $stack4 = interfaceinvoke $stack3.<java.util.List: java.lang.Object get(int)>(series);
+        map = (java.util.Map) $stack4;
+        $stack5 = interfaceinvoke map.<java.util.Map: java.lang.Object get(java.lang.Object)>("values.length");
+        $stack6 = (java.lang.Integer) $stack5;
+        $stack7 = virtualinvoke $stack6.<java.lang.Integer: int intValue()>();
+    
+        return $stack7;
+    }
+
+    // ---- method: <org.jfree.data.statistics.HistogramDataset: java.lang.Object clone()> ----
+    {
+        java.lang.Object $stack1;
+        org.jfree.data.statistics.HistogramDataset this;
+    
+    
+        this := @this: org.jfree.data.statistics.HistogramDataset;
+        $stack1 = specialinvoke this.<org.jfree.data.xy.AbstractIntervalXYDataset: java.lang.Object clone()>();
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.data.statistics.HistogramDataset: java.util.List getBins(int)> ----
+    {
+        int series;
+        java.lang.Object $stack4, $stack5;
+        java.util.List $stack3, $stack6;
+        java.util.Map map;
+        org.jfree.data.statistics.HistogramDataset this;
+    
+    
+        this := @this: org.jfree.data.statistics.HistogramDataset;
+        series := @parameter0: int;
+        $stack3 = this.<org.jfree.data.statistics.HistogramDataset: java.util.List list>;
+        $stack4 = interfaceinvoke $stack3.<java.util.List: java.lang.Object get(int)>(series);
+        map = (java.util.Map) $stack4;
+        $stack5 = interfaceinvoke map.<java.util.Map: java.lang.Object get(java.lang.Object)>("bins");
+        $stack6 = (java.util.List) $stack5;
+    
+        return $stack6;
+    }
+
+    // ---- method: <org.jfree.data.statistics.HistogramDataset: java.lang.Comparable getSeriesKey(int)> ----
+    {
+        int series;
+        java.lang.Comparable $stack6;
+        java.lang.Object $stack4, $stack5;
+        java.util.List $stack3;
+        java.util.Map map;
+        org.jfree.data.statistics.HistogramDataset this;
+    
+    
+        this := @this: org.jfree.data.statistics.HistogramDataset;
+        series := @parameter0: int;
+        $stack3 = this.<org.jfree.data.statistics.HistogramDataset: java.util.List list>;
+        $stack4 = interfaceinvoke $stack3.<java.util.List: java.lang.Object get(int)>(series);
+        map = (java.util.Map) $stack4;
+        $stack5 = interfaceinvoke map.<java.util.Map: java.lang.Object get(java.lang.Object)>("key");
+        $stack6 = (java.lang.Comparable) $stack5;
+    
+        return $stack6;
+    }
+
+    // ---- method: <org.jfree.data.statistics.HistogramDataset: void addSeries(java.lang.Comparable,double[],int)> ----
+    {
+        double maximum, minimum;
+        double[] values;
+        int bins;
+        java.lang.Comparable key;
+        org.jfree.data.statistics.HistogramDataset this;
+    
+    
+        this := @this: org.jfree.data.statistics.HistogramDataset;
+        key := @parameter0: java.lang.Comparable;
+        values := @parameter1: double[];
+        bins := @parameter2: int;
+        minimum = specialinvoke this.<org.jfree.data.statistics.HistogramDataset: double getMinimum(double[])>(values);
+        maximum = specialinvoke this.<org.jfree.data.statistics.HistogramDataset: double getMaximum(double[])>(values);
+        virtualinvoke this.<org.jfree.data.statistics.HistogramDataset: void addSeries(java.lang.Comparable,double[],int,double,double)>(key, values, bins, minimum, maximum);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.statistics.HistogramDataset: int getItemCount(int)> ----
+    {
+        int $stack3, series;
+        java.util.List $stack2;
+        org.jfree.data.statistics.HistogramDataset this;
+    
+    
+        this := @this: org.jfree.data.statistics.HistogramDataset;
+        series := @parameter0: int;
+        $stack2 = virtualinvoke this.<org.jfree.data.statistics.HistogramDataset: java.util.List getBins(int)>(series);
+        $stack3 = interfaceinvoke $stack2.<java.util.List: int size()>();
+    
+        return $stack3;
+    }
+
+    // ---- method: <org.jfree.data.statistics.HistogramDataset: java.lang.Number getY(int,int)> ----
+    {
+        double $stack19, $stack20, $stack21, $stack24, $stack25, $stack28, binWidth, total;
+        int $stack10, $stack18, $stack23, $stack27, item, series;
+        java.lang.Double #l3, #l5, #l6;
+        java.lang.IllegalStateException #l2;
+        java.lang.Number #l0, #l1, #l4;
+        java.lang.Object $stack17, $stack22, $stack26, $stack29, $stack9;
+        java.lang.Throwable #l7;
+        java.util.List bins;
+        org.jfree.data.statistics.HistogramBin bin;
+        org.jfree.data.statistics.HistogramDataset this;
+        org.jfree.data.statistics.HistogramType $stack11, $stack12, $stack13, $stack14, $stack15, $stack16;
+    
+    
+        this := @this: org.jfree.data.statistics.HistogramDataset;
+        series := @parameter0: int;
+        item := @parameter1: int;
+        bins = virtualinvoke this.<org.jfree.data.statistics.HistogramDataset: java.util.List getBins(int)>(series);
+        $stack9 = interfaceinvoke bins.<java.util.List: java.lang.Object get(int)>(item);
+        bin = (org.jfree.data.statistics.HistogramBin) $stack9;
+        $stack10 = specialinvoke this.<org.jfree.data.statistics.HistogramDataset: int getTotal(int)>(series);
+        total = (double) $stack10;
+        binWidth = specialinvoke this.<org.jfree.data.statistics.HistogramDataset: double getBinWidth(int)>(series);
+        $stack12 = this.<org.jfree.data.statistics.HistogramDataset: org.jfree.data.statistics.HistogramType type>;
+        $stack11 = <org.jfree.data.statistics.HistogramType: org.jfree.data.statistics.HistogramType FREQUENCY>;
+    
+        if $stack12 != $stack11 goto label1;
+        $stack29 = new java.lang.Double;
+        $stack27 = virtualinvoke bin.<org.jfree.data.statistics.HistogramBin: int getCount()>();
+        $stack28 = (double) $stack27;
+        #l5 = (java.lang.Double) $stack29;
+        specialinvoke #l5.<java.lang.Double: void <init>(double)>($stack28);
+        #l4 = (java.lang.Number) $stack29;
+    
+        return #l4;
+    
+      label1:
+        $stack14 = this.<org.jfree.data.statistics.HistogramDataset: org.jfree.data.statistics.HistogramType type>;
+        $stack13 = <org.jfree.data.statistics.HistogramType: org.jfree.data.statistics.HistogramType RELATIVE_FREQUENCY>;
+    
+        if $stack14 != $stack13 goto label2;
+        $stack26 = new java.lang.Double;
+        $stack23 = virtualinvoke bin.<org.jfree.data.statistics.HistogramBin: int getCount()>();
+        $stack24 = (double) $stack23;
+        $stack25 = $stack24 / total;
+        #l3 = (java.lang.Double) $stack26;
+        specialinvoke #l3.<java.lang.Double: void <init>(double)>($stack25);
+        #l0 = (java.lang.Number) $stack26;
+    
+        return #l0;
+    
+      label2:
+        $stack16 = this.<org.jfree.data.statistics.HistogramDataset: org.jfree.data.statistics.HistogramType type>;
+        $stack15 = <org.jfree.data.statistics.HistogramType: org.jfree.data.statistics.HistogramType SCALE_AREA_TO_1>;
+    
+        if $stack16 != $stack15 goto label3;
+        $stack22 = new java.lang.Double;
+        $stack18 = virtualinvoke bin.<org.jfree.data.statistics.HistogramBin: int getCount()>();
+        $stack19 = (double) $stack18;
+        $stack20 = binWidth * total;
+        $stack21 = $stack19 / $stack20;
+        #l6 = (java.lang.Double) $stack22;
+        specialinvoke #l6.<java.lang.Double: void <init>(double)>($stack21);
+        #l1 = (java.lang.Number) $stack22;
+    
+        return #l1;
+    
+      label3:
+        $stack17 = new java.lang.IllegalStateException;
+        #l2 = (java.lang.IllegalStateException) $stack17;
+        specialinvoke #l2.<java.lang.IllegalStateException: void <init>()>();
+        #l7 = (java.lang.Throwable) $stack17;
+    
+        throw #l7;
+    }
+
+    // ---- method: <org.jfree.data.statistics.HistogramDataset: java.lang.Number getStartX(int,int)> ----
+    {
+        double $stack6;
+        int item, series;
+        java.lang.Double #l0;
+        java.lang.Number #l1;
+        java.lang.Object $stack5, $stack7;
+        java.util.List bins;
+        org.jfree.data.statistics.HistogramBin bin;
+        org.jfree.data.statistics.HistogramDataset this;
+    
+    
+        this := @this: org.jfree.data.statistics.HistogramDataset;
+        series := @parameter0: int;
+        item := @parameter1: int;
+        bins = virtualinvoke this.<org.jfree.data.statistics.HistogramDataset: java.util.List getBins(int)>(series);
+        $stack5 = interfaceinvoke bins.<java.util.List: java.lang.Object get(int)>(item);
+        bin = (org.jfree.data.statistics.HistogramBin) $stack5;
+        $stack7 = new java.lang.Double;
+        $stack6 = virtualinvoke bin.<org.jfree.data.statistics.HistogramBin: double getStartBoundary()>();
+        #l0 = (java.lang.Double) $stack7;
+        specialinvoke #l0.<java.lang.Double: void <init>(double)>($stack6);
+        #l1 = (java.lang.Number) $stack7;
+    
+        return #l1;
+    }
+
+    // ---- method: <org.jfree.data.statistics.HistogramDataset: int getSeriesCount()> ----
+    {
+        int $stack2;
+        java.util.List $stack1;
+        org.jfree.data.statistics.HistogramDataset this;
+    
+    
+        this := @this: org.jfree.data.statistics.HistogramDataset;
+        $stack1 = this.<org.jfree.data.statistics.HistogramDataset: java.util.List list>;
+        $stack2 = interfaceinvoke $stack1.<java.util.List: int size()>();
+    
+        return $stack2;
+    }
+
+    // ---- method: <org.jfree.data.statistics.HistogramDataset: java.lang.Number getX(int,int)> ----
+    {
+        double $stack10, $stack8, $stack9, x;
+        int item, series;
+        java.lang.Double #l1;
+        java.lang.Number #l0;
+        java.lang.Object $stack11, $stack7;
+        java.util.List bins;
+        org.jfree.data.statistics.HistogramBin bin;
+        org.jfree.data.statistics.HistogramDataset this;
+    
+    
+        this := @this: org.jfree.data.statistics.HistogramDataset;
+        series := @parameter0: int;
+        item := @parameter1: int;
+        bins = virtualinvoke this.<org.jfree.data.statistics.HistogramDataset: java.util.List getBins(int)>(series);
+        $stack7 = interfaceinvoke bins.<java.util.List: java.lang.Object get(int)>(item);
+        bin = (org.jfree.data.statistics.HistogramBin) $stack7;
+        $stack8 = virtualinvoke bin.<org.jfree.data.statistics.HistogramBin: double getStartBoundary()>();
+        $stack9 = virtualinvoke bin.<org.jfree.data.statistics.HistogramBin: double getEndBoundary()>();
+        $stack10 = $stack8 + $stack9;
+        x = $stack10 / 2.0;
+        $stack11 = new java.lang.Double;
+        #l1 = (java.lang.Double) $stack11;
+        specialinvoke #l1.<java.lang.Double: void <init>(double)>(x);
+        #l0 = (java.lang.Number) $stack11;
+    
+        return #l0;
+    }
+
+    // ---- method: <org.jfree.data.statistics.HistogramDataset: boolean equals(java.lang.Object)> ----
+    {
+        boolean $stack3, $stack6, $stack9;
+        java.lang.Object obj;
+        java.util.List $stack7, $stack8;
+        org.jfree.data.statistics.HistogramDataset that, this;
+        org.jfree.data.statistics.HistogramType $stack4, $stack5;
+    
+    
+        this := @this: org.jfree.data.statistics.HistogramDataset;
+        obj := @parameter0: java.lang.Object;
+    
+        if obj != this goto label1;
+    
+        return 1;
+    
+      label1:
+        $stack3 = obj instanceof org.jfree.data.statistics.HistogramDataset;
+    
+        if $stack3 != 0 goto label2;
+    
+        return 0;
+    
+      label2:
+        that = (org.jfree.data.statistics.HistogramDataset) obj;
+        $stack5 = this.<org.jfree.data.statistics.HistogramDataset: org.jfree.data.statistics.HistogramType type>;
+        $stack4 = that.<org.jfree.data.statistics.HistogramDataset: org.jfree.data.statistics.HistogramType type>;
+        $stack6 = staticinvoke <org.jfree.chart.util.ObjectUtilities: boolean equal(java.lang.Object,java.lang.Object)>($stack5, $stack4);
+    
+        if $stack6 != 0 goto label3;
+    
+        return 0;
+    
+      label3:
+        $stack8 = this.<org.jfree.data.statistics.HistogramDataset: java.util.List list>;
+        $stack7 = that.<org.jfree.data.statistics.HistogramDataset: java.util.List list>;
+        $stack9 = staticinvoke <org.jfree.chart.util.ObjectUtilities: boolean equal(java.lang.Object,java.lang.Object)>($stack8, $stack7);
+    
+        if $stack9 != 0 goto label4;
+    
+        return 0;
+    
+      label4:
+        return 1;
+    }
+
+    // ---- method: <org.jfree.data.statistics.HistogramDataset: java.lang.Number getEndY(int,int)> ----
+    {
+        int item, series;
+        java.lang.Number $stack3;
+        org.jfree.data.statistics.HistogramDataset this;
+    
+    
+        this := @this: org.jfree.data.statistics.HistogramDataset;
+        series := @parameter0: int;
+        item := @parameter1: int;
+        $stack3 = virtualinvoke this.<org.jfree.data.statistics.HistogramDataset: java.lang.Number getY(int,int)>(series, item);
+    
+        return $stack3;
+    }
+
+    // ---- method: <org.jfree.data.statistics.HistogramDataset: void <init>()> ----
+    {
+        java.lang.Object $stack1;
+        java.util.ArrayList #l0;
+        org.jfree.data.statistics.HistogramDataset this;
+        org.jfree.data.statistics.HistogramType $stack2;
+    
+    
+        this := @this: org.jfree.data.statistics.HistogramDataset;
+        specialinvoke this.<org.jfree.data.xy.AbstractIntervalXYDataset: void <init>()>();
+        $stack1 = new java.util.ArrayList;
+        #l0 = (java.util.ArrayList) $stack1;
+        specialinvoke #l0.<java.util.ArrayList: void <init>()>();
+        this.<org.jfree.data.statistics.HistogramDataset: java.util.List list> = (java.util.List) $stack1;
+        $stack2 = <org.jfree.data.statistics.HistogramType: org.jfree.data.statistics.HistogramType FREQUENCY>;
+        this.<org.jfree.data.statistics.HistogramDataset: org.jfree.data.statistics.HistogramType type> = $stack2;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.statistics.HistogramDataset: org.jfree.data.statistics.HistogramType getType()> ----
+    {
+        org.jfree.data.statistics.HistogramDataset this;
+        org.jfree.data.statistics.HistogramType $stack1;
+    
+    
+        this := @this: org.jfree.data.statistics.HistogramDataset;
+        $stack1 = this.<org.jfree.data.statistics.HistogramDataset: org.jfree.data.statistics.HistogramType type>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.data.statistics.HistogramDataset: double getMinimum(double[])> ----
+    {
+        byte $stack9;
+        double $stack8, min;
+        double[] values;
+        int $stack6, $stack7, i;
+        java.lang.IllegalArgumentException #l0;
+        java.lang.Object $stack5;
+        java.lang.Throwable #l1;
+        org.jfree.data.statistics.HistogramDataset this;
+    
+    
+        this := @this: org.jfree.data.statistics.HistogramDataset;
+        values := @parameter0: double[];
+    
+        if values == null goto label1;
+        $stack6 = lengthof values;
+    
+        if $stack6 >= 1 goto label2;
+    
+      label1:
+        $stack5 = new java.lang.IllegalArgumentException;
+        #l0 = (java.lang.IllegalArgumentException) $stack5;
+        specialinvoke #l0.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null or zero length \'values\' argument.");
+        #l1 = (java.lang.Throwable) $stack5;
+    
+        throw #l1;
+    
+      label2:
+        min = 1.7976931348623157E308;
+        i = 0;
+    
+      label3:
+        $stack7 = lengthof values;
+    
+        if i >= $stack7 goto label5;
+        $stack8 = values[i];
+        $stack9 = $stack8 cmpg min;
+    
+        if $stack9 >= 0 goto label4;
+        min = values[i];
+    
+      label4:
+        i = i + 1;
+    
+        goto label3;
+    
+      label5:
+        return min;
+    }
+
+    // ---- method: <org.jfree.data.statistics.HistogramDataset: java.lang.Number getEndX(int,int)> ----
+    {
+        double $stack6;
+        int item, series;
+        java.lang.Double #l0;
+        java.lang.Number #l1;
+        java.lang.Object $stack5, $stack7;
+        java.util.List bins;
+        org.jfree.data.statistics.HistogramBin bin;
+        org.jfree.data.statistics.HistogramDataset this;
+    
+    
+        this := @this: org.jfree.data.statistics.HistogramDataset;
+        series := @parameter0: int;
+        item := @parameter1: int;
+        bins = virtualinvoke this.<org.jfree.data.statistics.HistogramDataset: java.util.List getBins(int)>(series);
+        $stack5 = interfaceinvoke bins.<java.util.List: java.lang.Object get(int)>(item);
+        bin = (org.jfree.data.statistics.HistogramBin) $stack5;
+        $stack7 = new java.lang.Double;
+        $stack6 = virtualinvoke bin.<org.jfree.data.statistics.HistogramBin: double getEndBoundary()>();
+        #l0 = (java.lang.Double) $stack7;
+        specialinvoke #l0.<java.lang.Double: void <init>(double)>($stack6);
+        #l1 = (java.lang.Number) $stack7;
+    
+        return #l1;
+    }
+
+    // ---- method: <org.jfree.data.statistics.HistogramDataset: java.lang.Number getStartY(int,int)> ----
+    {
+        int item, series;
+        java.lang.Number $stack3;
+        org.jfree.data.statistics.HistogramDataset this;
+    
+    
+        this := @this: org.jfree.data.statistics.HistogramDataset;
+        series := @parameter0: int;
+        item := @parameter1: int;
+        $stack3 = virtualinvoke this.<org.jfree.data.statistics.HistogramDataset: java.lang.Number getY(int,int)>(series, item);
+    
+        return $stack3;
+    }
+
+}

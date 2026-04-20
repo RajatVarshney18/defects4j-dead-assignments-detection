@@ -1,0 +1,988 @@
+// ========================================================================
+// CLASS : org.jfree.data.time.SerialDate
+// ========================================================================
+
+[PUBLIC, SUPER, ABSTRACT] class org.jfree.data.time.SerialDate extends java.lang.Object implements java.lang.Comparable, org.jfree.data.time.MonthConstants, java.io.Serializable {
+
+    // ---- method: <org.jfree.data.time.SerialDate: java.lang.String toString()> ----
+    {
+        int $stack2, $stack4, $stack8;
+        java.lang.String $stack11, $stack5;
+        java.lang.StringBuffer $stack1, $stack10, $stack3, $stack6, $stack7, $stack9;
+        org.jfree.data.time.SerialDate this;
+    
+    
+        this := @this: org.jfree.data.time.SerialDate;
+        $stack1 = new java.lang.StringBuffer;
+        specialinvoke $stack1.<java.lang.StringBuffer: void <init>()>();
+        $stack2 = virtualinvoke this.<org.jfree.data.time.SerialDate: int getDayOfMonth()>();
+        $stack3 = virtualinvoke $stack1.<java.lang.StringBuffer: java.lang.StringBuffer append(int)>($stack2);
+        $stack6 = virtualinvoke $stack3.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>("-");
+        $stack4 = virtualinvoke this.<org.jfree.data.time.SerialDate: int getMonth()>();
+        $stack5 = staticinvoke <org.jfree.data.time.SerialDate: java.lang.String monthCodeToString(int)>($stack4);
+        $stack7 = virtualinvoke $stack6.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>($stack5);
+        $stack9 = virtualinvoke $stack7.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>("-");
+        $stack8 = virtualinvoke this.<org.jfree.data.time.SerialDate: int getYYYY()>();
+        $stack10 = virtualinvoke $stack9.<java.lang.StringBuffer: java.lang.StringBuffer append(int)>($stack8);
+        $stack11 = virtualinvoke $stack10.<java.lang.StringBuffer: java.lang.String toString()>();
+    
+        return $stack11;
+    }
+
+    // ---- method: <org.jfree.data.time.SerialDate: org.jfree.data.time.SerialDate getNearestDayOfWeek(int,org.jfree.data.time.SerialDate)> ----
+    {
+        boolean $stack4;
+        int $stack5, $stack6, adjust, baseDOW, targetDOW;
+        java.lang.IllegalArgumentException #l0;
+        java.lang.Object $stack8;
+        java.lang.Throwable #l1;
+        org.jfree.data.time.SerialDate $stack7, base;
+    
+    
+        targetDOW := @parameter0: int;
+        base := @parameter1: org.jfree.data.time.SerialDate;
+        $stack4 = staticinvoke <org.jfree.data.time.SerialDate: boolean isValidWeekdayCode(int)>(targetDOW);
+    
+        if $stack4 != 0 goto label1;
+        $stack8 = new java.lang.IllegalArgumentException;
+        #l0 = (java.lang.IllegalArgumentException) $stack8;
+        specialinvoke #l0.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Invalid day-of-the-week code.");
+        #l1 = (java.lang.Throwable) $stack8;
+    
+        throw #l1;
+    
+      label1:
+        baseDOW = virtualinvoke base.<org.jfree.data.time.SerialDate: int getDayOfWeek()>();
+        $stack5 = targetDOW - baseDOW;
+        $stack6 = staticinvoke <java.lang.Math: int abs(int)>($stack5);
+        adjust = neg $stack6;
+    
+        if adjust < 4 goto label2;
+        adjust = 7 - adjust;
+    
+      label2:
+        if adjust > -4 goto label3;
+        adjust = 7 + adjust;
+    
+      label3:
+        $stack7 = staticinvoke <org.jfree.data.time.SerialDate: org.jfree.data.time.SerialDate addDays(int,org.jfree.data.time.SerialDate)>(adjust, base);
+    
+        return $stack7;
+    }
+
+    // ---- method: <org.jfree.data.time.SerialDate: org.jfree.data.time.SerialDate addMonths(int,org.jfree.data.time.SerialDate)> ----
+    {
+        int $stack10, $stack11, $stack12, $stack13, $stack14, $stack15, $stack16, $stack17, $stack18, $stack19, $stack5, $stack6, $stack7, $stack8, $stack9, dd, mm, months, yy;
+        org.jfree.data.time.SerialDate $stack20, base;
+    
+    
+        months := @parameter0: int;
+        base := @parameter1: org.jfree.data.time.SerialDate;
+        $stack5 = virtualinvoke base.<org.jfree.data.time.SerialDate: int getYYYY()>();
+        $stack6 = 12 * $stack5;
+        $stack7 = virtualinvoke base.<org.jfree.data.time.SerialDate: int getMonth()>();
+        $stack8 = $stack6 + $stack7;
+        $stack9 = $stack8 + months;
+        $stack10 = $stack9 - 1;
+        yy = $stack10 / 12;
+        $stack11 = virtualinvoke base.<org.jfree.data.time.SerialDate: int getYYYY()>();
+        $stack12 = 12 * $stack11;
+        $stack13 = virtualinvoke base.<org.jfree.data.time.SerialDate: int getMonth()>();
+        $stack14 = $stack12 + $stack13;
+        $stack15 = $stack14 + months;
+        $stack16 = $stack15 - 1;
+        $stack17 = $stack16 % 12;
+        mm = $stack17 + 1;
+        $stack19 = virtualinvoke base.<org.jfree.data.time.SerialDate: int getDayOfMonth()>();
+        $stack18 = staticinvoke <org.jfree.data.time.SerialDate: int lastDayOfMonth(int,int)>(mm, yy);
+        dd = staticinvoke <java.lang.Math: int min(int,int)>($stack19, $stack18);
+        $stack20 = staticinvoke <org.jfree.data.time.SerialDate: org.jfree.data.time.SerialDate createInstance(int,int,int)>(dd, mm, yy);
+    
+        return $stack20;
+    }
+
+    // ---- method: <org.jfree.data.time.SerialDate: org.jfree.data.time.SerialDate createInstance(int)> ----
+    {
+        int serial;
+        org.jfree.data.time.SpreadsheetDate $stack1;
+    
+    
+        serial := @parameter0: int;
+        $stack1 = new org.jfree.data.time.SpreadsheetDate;
+        specialinvoke $stack1.<org.jfree.data.time.SpreadsheetDate: void <init>(int)>(serial);
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.data.time.SerialDate: org.jfree.data.time.SerialDate createInstance(int,int,int)> ----
+    {
+        int day, month, yyyy;
+        org.jfree.data.time.SpreadsheetDate $stack3;
+    
+    
+        day := @parameter0: int;
+        month := @parameter1: int;
+        yyyy := @parameter2: int;
+        $stack3 = new org.jfree.data.time.SpreadsheetDate;
+        specialinvoke $stack3.<org.jfree.data.time.SpreadsheetDate: void <init>(int,int,int)>(day, month, yyyy);
+    
+        return $stack3;
+    }
+
+    // ---- method: <org.jfree.data.time.SerialDate: org.jfree.data.time.SerialDate createInstance(java.util.Date)> ----
+    {
+        int $stack3, $stack4, $stack5, $stack6;
+        java.util.Date date;
+        java.util.GregorianCalendar $stack2, calendar;
+        org.jfree.data.time.SpreadsheetDate $stack7;
+    
+    
+        date := @parameter0: java.util.Date;
+        $stack2 = new java.util.GregorianCalendar;
+        specialinvoke $stack2.<java.util.GregorianCalendar: void <init>()>();
+        calendar = $stack2;
+        virtualinvoke $stack2.<java.util.GregorianCalendar: void setTime(java.util.Date)>(date);
+        $stack7 = new org.jfree.data.time.SpreadsheetDate;
+        $stack6 = virtualinvoke $stack2.<java.util.GregorianCalendar: int get(int)>(5);
+        $stack3 = virtualinvoke $stack2.<java.util.GregorianCalendar: int get(int)>(2);
+        $stack5 = $stack3 + 1;
+        $stack4 = virtualinvoke $stack2.<java.util.GregorianCalendar: int get(int)>(1);
+        specialinvoke $stack7.<org.jfree.data.time.SpreadsheetDate: void <init>(int,int,int)>($stack6, $stack5, $stack4);
+    
+        return $stack7;
+    }
+
+    // ---- method: <org.jfree.data.time.SerialDate: org.jfree.data.time.SerialDate getFollowingDayOfWeek(int)> ----
+    {
+        int targetDOW;
+        org.jfree.data.time.SerialDate $stack2, this;
+    
+    
+        this := @this: org.jfree.data.time.SerialDate;
+        targetDOW := @parameter0: int;
+        $stack2 = staticinvoke <org.jfree.data.time.SerialDate: org.jfree.data.time.SerialDate getFollowingDayOfWeek(int,org.jfree.data.time.SerialDate)>(targetDOW, this);
+    
+        return $stack2;
+    }
+
+    // ---- method: <org.jfree.data.time.SerialDate: void setDescription(java.lang.String)> ----
+    {
+        java.lang.String description;
+        org.jfree.data.time.SerialDate this;
+    
+    
+        this := @this: org.jfree.data.time.SerialDate;
+        description := @parameter0: java.lang.String;
+        this.<org.jfree.data.time.SerialDate: java.lang.String description> = description;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.time.SerialDate: boolean isLeapYear(int)> ----
+    {
+        int $stack1, $stack2, $stack3, yyyy;
+    
+    
+        yyyy := @parameter0: int;
+        $stack1 = yyyy % 4;
+    
+        if $stack1 == 0 goto label1;
+    
+        return 0;
+    
+      label1:
+        $stack2 = yyyy % 400;
+    
+        if $stack2 != 0 goto label2;
+    
+        return 1;
+    
+      label2:
+        $stack3 = yyyy % 100;
+    
+        if $stack3 != 0 goto label3;
+    
+        return 0;
+    
+      label3:
+        return 1;
+    }
+
+    // ---- method: <org.jfree.data.time.SerialDate: boolean isOnOrBefore(org.jfree.data.time.SerialDate)> ----
+    // (abstract or native – no body)
+
+    // ---- method: <org.jfree.data.time.SerialDate: java.lang.String relativeToString(int)> ----
+    {
+        int relative;
+    
+    
+        relative := @parameter0: int;
+    
+        switch(relative)
+            {
+            case -1: goto label4;
+            case 0: goto label3;
+            case 1: goto label2;
+            default: goto label1;
+        };
+    
+      label1:
+        return "ERROR : Relative To String";
+    
+      label2:
+        return "Following";
+    
+      label3:
+        return "Nearest";
+    
+      label4:
+        return "Preceding";
+    }
+
+    // ---- method: <org.jfree.data.time.SerialDate: int getMonth()> ----
+    // (abstract or native – no body)
+
+    // ---- method: <org.jfree.data.time.SerialDate: boolean isBefore(org.jfree.data.time.SerialDate)> ----
+    // (abstract or native – no body)
+
+    // ---- method: <org.jfree.data.time.SerialDate: boolean isInRange(org.jfree.data.time.SerialDate,org.jfree.data.time.SerialDate)> ----
+    // (abstract or native – no body)
+
+    // ---- method: <org.jfree.data.time.SerialDate: int getDayOfMonth()> ----
+    // (abstract or native – no body)
+
+    // ---- method: <org.jfree.data.time.SerialDate: org.jfree.data.time.SerialDate getPreviousDayOfWeek(int)> ----
+    {
+        int targetDOW;
+        org.jfree.data.time.SerialDate $stack2, this;
+    
+    
+        this := @this: org.jfree.data.time.SerialDate;
+        targetDOW := @parameter0: int;
+        $stack2 = staticinvoke <org.jfree.data.time.SerialDate: org.jfree.data.time.SerialDate getPreviousDayOfWeek(int,org.jfree.data.time.SerialDate)>(targetDOW, this);
+    
+        return $stack2;
+    }
+
+    // ---- method: <org.jfree.data.time.SerialDate: void <clinit>()> ----
+    {
+        int[] $stack2, $stack3, $stack4, $stack5, $stack6;
+        java.text.DateFormatSymbols $stack1;
+        java.text.SimpleDateFormat $stack0;
+    
+    
+        $stack0 = new java.text.SimpleDateFormat;
+        specialinvoke $stack0.<java.text.SimpleDateFormat: void <init>()>();
+        $stack1 = virtualinvoke $stack0.<java.text.SimpleDateFormat: java.text.DateFormatSymbols getDateFormatSymbols()>();
+        <org.jfree.data.time.SerialDate: java.text.DateFormatSymbols DATE_FORMAT_SYMBOLS> = $stack1;
+        $stack2 = newarray (int)[13];
+        $stack2[0] = 0;
+        $stack2[1] = 31;
+        $stack2[2] = 28;
+        $stack2[3] = 31;
+        $stack2[4] = 30;
+        $stack2[5] = 31;
+        $stack2[6] = 30;
+        $stack2[7] = 31;
+        $stack2[8] = 31;
+        $stack2[9] = 30;
+        $stack2[10] = 31;
+        $stack2[11] = 30;
+        $stack2[12] = 31;
+        <org.jfree.data.time.SerialDate: int[] LAST_DAY_OF_MONTH> = $stack2;
+        $stack3 = newarray (int)[13];
+        $stack3[0] = 0;
+        $stack3[1] = 31;
+        $stack3[2] = 59;
+        $stack3[3] = 90;
+        $stack3[4] = 120;
+        $stack3[5] = 151;
+        $stack3[6] = 181;
+        $stack3[7] = 212;
+        $stack3[8] = 243;
+        $stack3[9] = 273;
+        $stack3[10] = 304;
+        $stack3[11] = 334;
+        $stack3[12] = 365;
+        <org.jfree.data.time.SerialDate: int[] AGGREGATE_DAYS_TO_END_OF_MONTH> = $stack3;
+        $stack4 = newarray (int)[14];
+        $stack4[0] = 0;
+        $stack4[1] = 0;
+        $stack4[2] = 31;
+        $stack4[3] = 59;
+        $stack4[4] = 90;
+        $stack4[5] = 120;
+        $stack4[6] = 151;
+        $stack4[7] = 181;
+        $stack4[8] = 212;
+        $stack4[9] = 243;
+        $stack4[10] = 273;
+        $stack4[11] = 304;
+        $stack4[12] = 334;
+        $stack4[13] = 365;
+        <org.jfree.data.time.SerialDate: int[] AGGREGATE_DAYS_TO_END_OF_PRECEDING_MONTH> = $stack4;
+        $stack5 = newarray (int)[13];
+        $stack5[0] = 0;
+        $stack5[1] = 31;
+        $stack5[2] = 60;
+        $stack5[3] = 91;
+        $stack5[4] = 121;
+        $stack5[5] = 152;
+        $stack5[6] = 182;
+        $stack5[7] = 213;
+        $stack5[8] = 244;
+        $stack5[9] = 274;
+        $stack5[10] = 305;
+        $stack5[11] = 335;
+        $stack5[12] = 366;
+        <org.jfree.data.time.SerialDate: int[] LEAP_YEAR_AGGREGATE_DAYS_TO_END_OF_MONTH> = $stack5;
+        $stack6 = newarray (int)[14];
+        $stack6[0] = 0;
+        $stack6[1] = 0;
+        $stack6[2] = 31;
+        $stack6[3] = 60;
+        $stack6[4] = 91;
+        $stack6[5] = 121;
+        $stack6[6] = 152;
+        $stack6[7] = 182;
+        $stack6[8] = 213;
+        $stack6[9] = 244;
+        $stack6[10] = 274;
+        $stack6[11] = 305;
+        $stack6[12] = 335;
+        $stack6[13] = 366;
+        <org.jfree.data.time.SerialDate: int[] LEAP_YEAR_AGGREGATE_DAYS_TO_END_OF_PRECEDING_MONTH> = $stack6;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.time.SerialDate: boolean isValidMonthCode(int)> ----
+    {
+        int code;
+    
+    
+        code := @parameter0: int;
+    
+        switch(code)
+            {
+            case 1: goto label2;
+            case 2: goto label2;
+            case 3: goto label2;
+            case 4: goto label2;
+            case 5: goto label2;
+            case 6: goto label2;
+            case 7: goto label2;
+            case 8: goto label2;
+            case 9: goto label2;
+            case 10: goto label2;
+            case 11: goto label2;
+            case 12: goto label2;
+            default: goto label1;
+        };
+    
+      label1:
+        return 0;
+    
+      label2:
+        return 1;
+    }
+
+    // ---- method: <org.jfree.data.time.SerialDate: org.jfree.data.time.SerialDate addYears(int,org.jfree.data.time.SerialDate)> ----
+    {
+        int $stack7, baseD, baseM, baseY, targetD, targetY, years;
+        org.jfree.data.time.SerialDate $stack8, base;
+    
+    
+        years := @parameter0: int;
+        base := @parameter1: org.jfree.data.time.SerialDate;
+        baseY = virtualinvoke base.<org.jfree.data.time.SerialDate: int getYYYY()>();
+        baseM = virtualinvoke base.<org.jfree.data.time.SerialDate: int getMonth()>();
+        baseD = virtualinvoke base.<org.jfree.data.time.SerialDate: int getDayOfMonth()>();
+        targetY = baseY + years;
+        $stack7 = staticinvoke <org.jfree.data.time.SerialDate: int lastDayOfMonth(int,int)>(baseM, targetY);
+        targetD = staticinvoke <java.lang.Math: int min(int,int)>(baseD, $stack7);
+        $stack8 = staticinvoke <org.jfree.data.time.SerialDate: org.jfree.data.time.SerialDate createInstance(int,int,int)>(targetD, baseM, targetY);
+    
+        return $stack8;
+    }
+
+    // ---- method: <org.jfree.data.time.SerialDate: java.util.Date toDate()> ----
+    // (abstract or native – no body)
+
+    // ---- method: <org.jfree.data.time.SerialDate: boolean isAfter(org.jfree.data.time.SerialDate)> ----
+    // (abstract or native – no body)
+
+    // ---- method: <org.jfree.data.time.SerialDate: int getDayOfWeek()> ----
+    // (abstract or native – no body)
+
+    // ---- method: <org.jfree.data.time.SerialDate: boolean isOnOrAfter(org.jfree.data.time.SerialDate)> ----
+    // (abstract or native – no body)
+
+    // ---- method: <org.jfree.data.time.SerialDate: org.jfree.data.time.SerialDate getNearestDayOfWeek(int)> ----
+    {
+        int targetDOW;
+        org.jfree.data.time.SerialDate $stack2, this;
+    
+    
+        this := @this: org.jfree.data.time.SerialDate;
+        targetDOW := @parameter0: int;
+        $stack2 = staticinvoke <org.jfree.data.time.SerialDate: org.jfree.data.time.SerialDate getNearestDayOfWeek(int,org.jfree.data.time.SerialDate)>(targetDOW, this);
+    
+        return $stack2;
+    }
+
+    // ---- method: <org.jfree.data.time.SerialDate: int leapYearCount(int)> ----
+    {
+        int $stack4, $stack5, $stack6, $stack7, $stack8, leap100, leap4, leap400, yyyy;
+    
+    
+        yyyy := @parameter0: int;
+        $stack4 = yyyy - 1896;
+        leap4 = $stack4 / 4;
+        $stack5 = yyyy - 1800;
+        leap100 = $stack5 / 100;
+        $stack6 = yyyy - 1600;
+        leap400 = $stack6 / 400;
+        $stack7 = leap4 - leap100;
+        $stack8 = $stack7 + leap400;
+    
+        return $stack8;
+    }
+
+    // ---- method: <org.jfree.data.time.SerialDate: org.jfree.data.time.SerialDate addDays(int,org.jfree.data.time.SerialDate)> ----
+    {
+        int $stack3, days, serialDayNumber;
+        org.jfree.data.time.SerialDate $stack4, base;
+    
+    
+        days := @parameter0: int;
+        base := @parameter1: org.jfree.data.time.SerialDate;
+        $stack3 = virtualinvoke base.<org.jfree.data.time.SerialDate: int toSerial()>();
+        serialDayNumber = $stack3 + days;
+        $stack4 = staticinvoke <org.jfree.data.time.SerialDate: org.jfree.data.time.SerialDate createInstance(int)>(serialDayNumber);
+    
+        return $stack4;
+    }
+
+    // ---- method: <org.jfree.data.time.SerialDate: int getYYYY()> ----
+    // (abstract or native – no body)
+
+    // ---- method: <org.jfree.data.time.SerialDate: void <init>()> ----
+    {
+        org.jfree.data.time.SerialDate this;
+    
+    
+        this := @this: org.jfree.data.time.SerialDate;
+        specialinvoke this.<java.lang.Object: void <init>()>();
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.time.SerialDate: int monthCodeToQuarter(int)> ----
+    {
+        int code;
+        java.lang.IllegalArgumentException #l1;
+        java.lang.Object $stack1;
+        java.lang.Throwable #l0;
+    
+    
+        code := @parameter0: int;
+    
+        switch(code)
+            {
+            case 1: goto label5;
+            case 2: goto label5;
+            case 3: goto label5;
+            case 4: goto label4;
+            case 5: goto label4;
+            case 6: goto label4;
+            case 7: goto label3;
+            case 8: goto label3;
+            case 9: goto label3;
+            case 10: goto label2;
+            case 11: goto label2;
+            case 12: goto label2;
+            default: goto label1;
+        };
+    
+      label1:
+        $stack1 = new java.lang.IllegalArgumentException;
+        #l1 = (java.lang.IllegalArgumentException) $stack1;
+        specialinvoke #l1.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("SerialDate.monthCodeToQuarter: invalid month code.");
+        #l0 = (java.lang.Throwable) $stack1;
+    
+        throw #l0;
+    
+      label2:
+        return 4;
+    
+      label3:
+        return 3;
+    
+      label4:
+        return 2;
+    
+      label5:
+        return 1;
+    }
+
+    // ---- method: <org.jfree.data.time.SerialDate: org.jfree.data.time.SerialDate getPreviousDayOfWeek(int,org.jfree.data.time.SerialDate)> ----
+    {
+        boolean $stack4;
+        int $stack5, $stack6, $stack8, adjust, baseDOW, targetWeekday;
+        java.lang.IllegalArgumentException #l0;
+        java.lang.Object $stack9;
+        java.lang.Throwable #l1;
+        org.jfree.data.time.SerialDate $stack7, base;
+    
+    
+        targetWeekday := @parameter0: int;
+        base := @parameter1: org.jfree.data.time.SerialDate;
+        $stack4 = staticinvoke <org.jfree.data.time.SerialDate: boolean isValidWeekdayCode(int)>(targetWeekday);
+    
+        if $stack4 != 0 goto label1;
+        $stack9 = new java.lang.IllegalArgumentException;
+        #l0 = (java.lang.IllegalArgumentException) $stack9;
+        specialinvoke #l0.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Invalid day-of-the-week code.");
+        #l1 = (java.lang.Throwable) $stack9;
+    
+        throw #l1;
+    
+      label1:
+        baseDOW = virtualinvoke base.<org.jfree.data.time.SerialDate: int getDayOfWeek()>();
+    
+        if baseDOW <= targetWeekday goto label2;
+        $stack8 = targetWeekday - baseDOW;
+        adjust = staticinvoke <java.lang.Math: int min(int,int)>(0, $stack8);
+    
+        goto label3;
+    
+      label2:
+        $stack5 = targetWeekday - baseDOW;
+        $stack6 = staticinvoke <java.lang.Math: int max(int,int)>(0, $stack5);
+        adjust = -7 + $stack6;
+    
+      label3:
+        $stack7 = staticinvoke <org.jfree.data.time.SerialDate: org.jfree.data.time.SerialDate addDays(int,org.jfree.data.time.SerialDate)>(adjust, base);
+    
+        return $stack7;
+    }
+
+    // ---- method: <org.jfree.data.time.SerialDate: boolean isOn(org.jfree.data.time.SerialDate)> ----
+    // (abstract or native – no body)
+
+    // ---- method: <org.jfree.data.time.SerialDate: java.lang.String weekInMonthToString(int)> ----
+    {
+        int count;
+    
+    
+        count := @parameter0: int;
+    
+        switch(count)
+            {
+            case 0: goto label6;
+            case 1: goto label5;
+            case 2: goto label4;
+            case 3: goto label3;
+            case 4: goto label2;
+            default: goto label1;
+        };
+    
+      label1:
+        return "SerialDate.weekInMonthToString(): invalid code.";
+    
+      label2:
+        return "Fourth";
+    
+      label3:
+        return "Third";
+    
+      label4:
+        return "Second";
+    
+      label5:
+        return "First";
+    
+      label6:
+        return "Last";
+    }
+
+    // ---- method: <org.jfree.data.time.SerialDate: int stringToMonthCode(java.lang.String)> ----
+    {
+        boolean $stack11, $stack9;
+        byte result#0;
+        int $stack7, e#1, result#1;
+        java.lang.String $stack10, $stack8, s#0, s#1;
+        java.lang.String[] monthNames, shortMonthNames;
+        java.lang.Throwable $stack12, e#0;
+        java.text.DateFormatSymbols $stack5, $stack6;
+    
+    
+        s#0 := @parameter0: java.lang.String;
+        $stack5 = <org.jfree.data.time.SerialDate: java.text.DateFormatSymbols DATE_FORMAT_SYMBOLS>;
+        shortMonthNames = virtualinvoke $stack5.<java.text.DateFormatSymbols: java.lang.String[] getShortMonths()>();
+        $stack6 = <org.jfree.data.time.SerialDate: java.text.DateFormatSymbols DATE_FORMAT_SYMBOLS>;
+        monthNames = virtualinvoke $stack6.<java.text.DateFormatSymbols: java.lang.String[] getMonths()>();
+        result#0 = -1;
+        s#1 = virtualinvoke s#0.<java.lang.String: java.lang.String trim()>();
+    
+      label1:
+        result#1 = staticinvoke <java.lang.Integer: int parseInt(java.lang.String)>(s#1);
+    
+      label2:
+        goto label4;
+    
+      label3:
+        $stack12 := @caughtexception;
+        e#0 = $stack12;
+    
+      label4:
+        if result#1 < 1 goto label5;
+    
+        if result#1 <= 12 goto label9;
+    
+      label5:
+        e#1 = 0;
+    
+      label6:
+        $stack7 = lengthof monthNames;
+    
+        if e#1 >= $stack7 goto label9;
+        $stack8 = shortMonthNames[e#1];
+        $stack9 = virtualinvoke s#1.<java.lang.String: boolean equals(java.lang.Object)>($stack8);
+    
+        if $stack9 == 0 goto label7;
+        result#1 = e#1 + 1;
+    
+        goto label9;
+    
+      label7:
+        $stack10 = monthNames[e#1];
+        $stack11 = virtualinvoke s#1.<java.lang.String: boolean equals(java.lang.Object)>($stack10);
+    
+        if $stack11 == 0 goto label8;
+        result#1 = e#1 + 1;
+    
+        goto label9;
+    
+      label8:
+        e#1 = e#1 + 1;
+    
+        goto label6;
+    
+      label9:
+        return result#1;
+    
+     catch java.lang.NumberFormatException from label1 to label2 with label3;
+    }
+
+    // ---- method: <org.jfree.data.time.SerialDate: int stringToWeekdayCode(java.lang.String)> ----
+    {
+        boolean $stack11, $stack9;
+        int $stack7, i, result;
+        java.lang.String $stack10, $stack8, s#0, s#1;
+        java.lang.String[] shortWeekdayNames, weekDayNames;
+        java.text.DateFormatSymbols $stack5, $stack6;
+    
+    
+        s#0 := @parameter0: java.lang.String;
+        $stack5 = <org.jfree.data.time.SerialDate: java.text.DateFormatSymbols DATE_FORMAT_SYMBOLS>;
+        shortWeekdayNames = virtualinvoke $stack5.<java.text.DateFormatSymbols: java.lang.String[] getShortWeekdays()>();
+        $stack6 = <org.jfree.data.time.SerialDate: java.text.DateFormatSymbols DATE_FORMAT_SYMBOLS>;
+        weekDayNames = virtualinvoke $stack6.<java.text.DateFormatSymbols: java.lang.String[] getWeekdays()>();
+        result = -1;
+        s#1 = virtualinvoke s#0.<java.lang.String: java.lang.String trim()>();
+        i = 0;
+    
+      label1:
+        $stack7 = lengthof weekDayNames;
+    
+        if i >= $stack7 goto label4;
+        $stack8 = shortWeekdayNames[i];
+        $stack9 = virtualinvoke s#1.<java.lang.String: boolean equals(java.lang.Object)>($stack8);
+    
+        if $stack9 == 0 goto label2;
+        result = i;
+    
+        goto label4;
+    
+      label2:
+        $stack10 = weekDayNames[i];
+        $stack11 = virtualinvoke s#1.<java.lang.String: boolean equals(java.lang.Object)>($stack10);
+    
+        if $stack11 == 0 goto label3;
+        result = i;
+    
+        goto label4;
+    
+      label3:
+        i = i + 1;
+    
+        goto label1;
+    
+      label4:
+        return result;
+    }
+
+    // ---- method: <org.jfree.data.time.SerialDate: java.lang.String monthCodeToString(int,boolean)> ----
+    {
+        boolean $stack3, shortened;
+        int $stack5, month;
+        java.lang.IllegalArgumentException #l0;
+        java.lang.Object $stack8;
+        java.lang.String $stack6;
+        java.lang.String[] months;
+        java.lang.Throwable #l1;
+        java.text.DateFormatSymbols $stack4, $stack7;
+    
+    
+        month := @parameter0: int;
+        shortened := @parameter1: boolean;
+        $stack3 = staticinvoke <org.jfree.data.time.SerialDate: boolean isValidMonthCode(int)>(month);
+    
+        if $stack3 != 0 goto label1;
+        $stack8 = new java.lang.IllegalArgumentException;
+        #l0 = (java.lang.IllegalArgumentException) $stack8;
+        specialinvoke #l0.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("SerialDate.monthCodeToString: month outside valid range.");
+        #l1 = (java.lang.Throwable) $stack8;
+    
+        throw #l1;
+    
+      label1:
+        if shortened == 0 goto label2;
+        $stack7 = <org.jfree.data.time.SerialDate: java.text.DateFormatSymbols DATE_FORMAT_SYMBOLS>;
+        months = virtualinvoke $stack7.<java.text.DateFormatSymbols: java.lang.String[] getShortMonths()>();
+    
+        goto label3;
+    
+      label2:
+        $stack4 = <org.jfree.data.time.SerialDate: java.text.DateFormatSymbols DATE_FORMAT_SYMBOLS>;
+        months = virtualinvoke $stack4.<java.text.DateFormatSymbols: java.lang.String[] getMonths()>();
+    
+      label3:
+        $stack5 = month - 1;
+        $stack6 = months[$stack5];
+    
+        return $stack6;
+    }
+
+    // ---- method: <org.jfree.data.time.SerialDate: java.lang.String getDescription()> ----
+    {
+        java.lang.String $stack1;
+        org.jfree.data.time.SerialDate this;
+    
+    
+        this := @this: org.jfree.data.time.SerialDate;
+        $stack1 = this.<org.jfree.data.time.SerialDate: java.lang.String description>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.data.time.SerialDate: int lastDayOfMonth(int,int)> ----
+    {
+        boolean $stack4;
+        int $stack5, month, result, yyyy;
+        int[] $stack3;
+    
+    
+        month := @parameter0: int;
+        yyyy := @parameter1: int;
+        $stack3 = <org.jfree.data.time.SerialDate: int[] LAST_DAY_OF_MONTH>;
+        result = $stack3[month];
+    
+        if month == 2 goto label1;
+    
+        return result;
+    
+      label1:
+        $stack4 = staticinvoke <org.jfree.data.time.SerialDate: boolean isLeapYear(int)>(yyyy);
+    
+        if $stack4 == 0 goto label2;
+        $stack5 = result + 1;
+    
+        return $stack5;
+    
+      label2:
+        return result;
+    }
+
+    // ---- method: <org.jfree.data.time.SerialDate: java.lang.String weekdayCodeToString(int)> ----
+    {
+        int weekday;
+        java.lang.String $stack3;
+        java.lang.String[] weekdays;
+        java.text.DateFormatSymbols $stack2;
+    
+    
+        weekday := @parameter0: int;
+        $stack2 = <org.jfree.data.time.SerialDate: java.text.DateFormatSymbols DATE_FORMAT_SYMBOLS>;
+        weekdays = virtualinvoke $stack2.<java.text.DateFormatSymbols: java.lang.String[] getWeekdays()>();
+        $stack3 = weekdays[weekday];
+    
+        return $stack3;
+    }
+
+    // ---- method: <org.jfree.data.time.SerialDate: boolean isInRange(org.jfree.data.time.SerialDate,org.jfree.data.time.SerialDate,int)> ----
+    // (abstract or native – no body)
+
+    // ---- method: <org.jfree.data.time.SerialDate: java.lang.String monthCodeToString(int)> ----
+    {
+        int month;
+        java.lang.String $stack1;
+    
+    
+        month := @parameter0: int;
+        $stack1 = staticinvoke <org.jfree.data.time.SerialDate: java.lang.String monthCodeToString(int,boolean)>(month, 0);
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.data.time.SerialDate: org.jfree.data.time.SerialDate getFollowingDayOfWeek(int,org.jfree.data.time.SerialDate)> ----
+    {
+        boolean $stack4;
+        int $stack5, $stack7, $stack8, adjust, baseDOW, targetWeekday;
+        java.lang.IllegalArgumentException #l1;
+        java.lang.Object $stack9;
+        java.lang.Throwable #l0;
+        org.jfree.data.time.SerialDate $stack6, base;
+    
+    
+        targetWeekday := @parameter0: int;
+        base := @parameter1: org.jfree.data.time.SerialDate;
+        $stack4 = staticinvoke <org.jfree.data.time.SerialDate: boolean isValidWeekdayCode(int)>(targetWeekday);
+    
+        if $stack4 != 0 goto label1;
+        $stack9 = new java.lang.IllegalArgumentException;
+        #l1 = (java.lang.IllegalArgumentException) $stack9;
+        specialinvoke #l1.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Invalid day-of-the-week code.");
+        #l0 = (java.lang.Throwable) $stack9;
+    
+        throw #l0;
+    
+      label1:
+        baseDOW = virtualinvoke base.<org.jfree.data.time.SerialDate: int getDayOfWeek()>();
+    
+        if baseDOW <= targetWeekday goto label2;
+        $stack7 = targetWeekday - baseDOW;
+        $stack8 = staticinvoke <java.lang.Math: int min(int,int)>(0, $stack7);
+        adjust = 7 + $stack8;
+    
+        goto label3;
+    
+      label2:
+        $stack5 = targetWeekday - baseDOW;
+        adjust = staticinvoke <java.lang.Math: int max(int,int)>(0, $stack5);
+    
+      label3:
+        $stack6 = staticinvoke <org.jfree.data.time.SerialDate: org.jfree.data.time.SerialDate addDays(int,org.jfree.data.time.SerialDate)>(adjust, base);
+    
+        return $stack6;
+    }
+
+    // ---- method: <org.jfree.data.time.SerialDate: java.lang.String[] getMonths()> ----
+    {
+        java.lang.String[] $stack0;
+    
+    
+        $stack0 = staticinvoke <org.jfree.data.time.SerialDate: java.lang.String[] getMonths(boolean)>(0);
+    
+        return $stack0;
+    }
+
+    // ---- method: <org.jfree.data.time.SerialDate: boolean isValidWeekInMonthCode(int)> ----
+    {
+        int code;
+    
+    
+        code := @parameter0: int;
+    
+        switch(code)
+            {
+            case 0: goto label2;
+            case 1: goto label2;
+            case 2: goto label2;
+            case 3: goto label2;
+            case 4: goto label2;
+            default: goto label1;
+        };
+    
+      label1:
+        return 0;
+    
+      label2:
+        return 1;
+    }
+
+    // ---- method: <org.jfree.data.time.SerialDate: boolean isValidWeekdayCode(int)> ----
+    {
+        int code;
+    
+    
+        code := @parameter0: int;
+    
+        switch(code)
+            {
+            case 1: goto label2;
+            case 2: goto label2;
+            case 3: goto label2;
+            case 4: goto label2;
+            case 5: goto label2;
+            case 6: goto label2;
+            case 7: goto label2;
+            default: goto label1;
+        };
+    
+      label1:
+        return 0;
+    
+      label2:
+        return 1;
+    }
+
+    // ---- method: <org.jfree.data.time.SerialDate: org.jfree.data.time.SerialDate getEndOfCurrentMonth(org.jfree.data.time.SerialDate)> ----
+    {
+        int $stack3, $stack4, $stack5, $stack6, last;
+        org.jfree.data.time.SerialDate $stack7, base, this;
+    
+    
+        this := @this: org.jfree.data.time.SerialDate;
+        base := @parameter0: org.jfree.data.time.SerialDate;
+        $stack4 = virtualinvoke base.<org.jfree.data.time.SerialDate: int getMonth()>();
+        $stack3 = virtualinvoke base.<org.jfree.data.time.SerialDate: int getYYYY()>();
+        last = staticinvoke <org.jfree.data.time.SerialDate: int lastDayOfMonth(int,int)>($stack4, $stack3);
+        $stack6 = virtualinvoke base.<org.jfree.data.time.SerialDate: int getMonth()>();
+        $stack5 = virtualinvoke base.<org.jfree.data.time.SerialDate: int getYYYY()>();
+        $stack7 = staticinvoke <org.jfree.data.time.SerialDate: org.jfree.data.time.SerialDate createInstance(int,int,int)>(last, $stack6, $stack5);
+    
+        return $stack7;
+    }
+
+    // ---- method: <org.jfree.data.time.SerialDate: int toSerial()> ----
+    // (abstract or native – no body)
+
+    // ---- method: <org.jfree.data.time.SerialDate: java.lang.String[] getMonths(boolean)> ----
+    {
+        boolean shortened;
+        java.lang.String[] $stack2, $stack4;
+        java.text.DateFormatSymbols $stack1, $stack3;
+    
+    
+        shortened := @parameter0: boolean;
+    
+        if shortened == 0 goto label1;
+        $stack3 = <org.jfree.data.time.SerialDate: java.text.DateFormatSymbols DATE_FORMAT_SYMBOLS>;
+        $stack4 = virtualinvoke $stack3.<java.text.DateFormatSymbols: java.lang.String[] getShortMonths()>();
+    
+        return $stack4;
+    
+      label1:
+        $stack1 = <org.jfree.data.time.SerialDate: java.text.DateFormatSymbols DATE_FORMAT_SYMBOLS>;
+        $stack2 = virtualinvoke $stack1.<java.text.DateFormatSymbols: java.lang.String[] getMonths()>();
+    
+        return $stack2;
+    }
+
+    // ---- method: <org.jfree.data.time.SerialDate: int compare(org.jfree.data.time.SerialDate)> ----
+    // (abstract or native – no body)
+
+}

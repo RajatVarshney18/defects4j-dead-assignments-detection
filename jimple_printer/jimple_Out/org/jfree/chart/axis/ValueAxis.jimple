@@ -1,0 +1,2091 @@
+// ========================================================================
+// CLASS : org.jfree.chart.axis.ValueAxis
+// ========================================================================
+
+[PUBLIC, SUPER, ABSTRACT] class org.jfree.chart.axis.ValueAxis extends org.jfree.chart.axis.Axis implements org.jfree.chart.util.PublicCloneable, java.lang.Cloneable, java.io.Serializable {
+
+    // ---- method: <org.jfree.chart.axis.ValueAxis: void setLeftArrow(java.awt.Shape)> ----
+    {
+        java.awt.Shape arrow;
+        java.lang.IllegalArgumentException #l0;
+        java.lang.Object $stack3;
+        java.lang.Throwable #l1;
+        org.jfree.chart.axis.ValueAxis this;
+        org.jfree.chart.event.AxisChangeEvent $stack2;
+    
+    
+        this := @this: org.jfree.chart.axis.ValueAxis;
+        arrow := @parameter0: java.awt.Shape;
+    
+        if arrow != null goto label1;
+        $stack3 = new java.lang.IllegalArgumentException;
+        #l0 = (java.lang.IllegalArgumentException) $stack3;
+        specialinvoke #l0.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'arrow\' argument.");
+        #l1 = (java.lang.Throwable) $stack3;
+    
+        throw #l1;
+    
+      label1:
+        this.<org.jfree.chart.axis.ValueAxis: java.awt.Shape leftArrow> = arrow;
+        $stack2 = new org.jfree.chart.event.AxisChangeEvent;
+        specialinvoke $stack2.<org.jfree.chart.event.AxisChangeEvent: void <init>(org.jfree.chart.axis.Axis)>(this);
+        virtualinvoke this.<org.jfree.chart.axis.ValueAxis: void notifyListeners(org.jfree.chart.event.AxisChangeEvent)>($stack2);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.axis.ValueAxis: void resizeRange(double)> ----
+    {
+        double $stack4, percent;
+        org.jfree.chart.axis.ValueAxis this;
+        org.jfree.data.Range $stack3;
+    
+    
+        this := @this: org.jfree.chart.axis.ValueAxis;
+        percent := @parameter0: double;
+        $stack3 = this.<org.jfree.chart.axis.ValueAxis: org.jfree.data.Range range>;
+        $stack4 = virtualinvoke $stack3.<org.jfree.data.Range: double getCentralValue()>();
+        virtualinvoke this.<org.jfree.chart.axis.ValueAxis: void resizeRange(double,double)>(percent, $stack4);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.axis.ValueAxis: void resizeRange(double,double)> ----
+    {
+        byte $stack8;
+        double $stack10, $stack11, $stack12, $stack13, anchorValue, halfLength, percent;
+        org.jfree.chart.axis.ValueAxis this;
+        org.jfree.data.Range $stack14, $stack9, adjusted;
+    
+    
+        this := @this: org.jfree.chart.axis.ValueAxis;
+        percent := @parameter0: double;
+        anchorValue := @parameter1: double;
+        $stack8 = percent cmpl 0.0;
+    
+        if $stack8 <= 0 goto label1;
+        $stack9 = this.<org.jfree.chart.axis.ValueAxis: org.jfree.data.Range range>;
+        $stack10 = virtualinvoke $stack9.<org.jfree.data.Range: double getLength()>();
+        $stack11 = $stack10 * percent;
+        halfLength = $stack11 / 2.0;
+        $stack14 = new org.jfree.data.Range;
+        $stack13 = anchorValue - halfLength;
+        $stack12 = anchorValue + halfLength;
+        specialinvoke $stack14.<org.jfree.data.Range: void <init>(double,double)>($stack13, $stack12);
+        adjusted = $stack14;
+        virtualinvoke this.<org.jfree.chart.axis.ValueAxis: void setRange(org.jfree.data.Range)>($stack14);
+    
+        goto label2;
+    
+      label1:
+        virtualinvoke this.<org.jfree.chart.axis.ValueAxis: void setAutoRange(boolean)>(1);
+    
+      label2:
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.axis.ValueAxis: java.awt.Shape getUpArrow()> ----
+    {
+        java.awt.Shape $stack1;
+        org.jfree.chart.axis.ValueAxis this;
+    
+    
+        this := @this: org.jfree.chart.axis.ValueAxis;
+        $stack1 = this.<org.jfree.chart.axis.ValueAxis: java.awt.Shape upArrow>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.axis.ValueAxis: org.jfree.chart.axis.AxisState drawTickMarksAndLabels(java.awt.Graphics2D,double,java.awt.geom.Rectangle2D,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge,org.jfree.chart.plot.PlotRenderingInfo)> ----
+    {
+        boolean $stack19, $stack23, $stack24, $stack29, $stack30, $stack31, $stack32, $stack35, $stack36, $stack39;
+        double $stack33, $stack40, $stack41, $stack48, $stack49, $stack50, $stack51, $stack53, $stack54, $stack55, $stack56, $stack58, $stack59, $stack60, $stack61, $stack63, $stack64, $stack65, $stack66, $stack72, cursor, il, ol, tick#1, tick#2, tick#3, tick#4, tick#5;
+        float $stack20, $stack21, $stack69, $stack70, anchorPoint#1;
+        float[] anchorPoint#0;
+        java.awt.Font $stack22;
+        java.awt.Graphics2D g2;
+        java.awt.Paint $stack43, $stack68;
+        java.awt.Shape #l0;
+        java.awt.Stroke $stack42;
+        java.awt.geom.Line2D$Double $stack52, $stack57, $stack62, $stack67;
+        java.awt.geom.Rectangle2D dataArea, plotArea;
+        java.lang.Object $stack34, mark;
+        java.lang.String $stack74;
+        java.util.Iterator iterator;
+        java.util.List ticks;
+        org.jfree.chart.axis.AxisState $stack18, state;
+        org.jfree.chart.axis.TickType $stack37, $stack38;
+        org.jfree.chart.axis.ValueAxis this;
+        org.jfree.chart.axis.ValueTick tick#0;
+        org.jfree.chart.plot.PlotRenderingInfo info;
+        org.jfree.chart.text.TextAnchor $stack71, $stack73;
+        org.jfree.chart.util.RectangleEdge $stack25, $stack26, $stack27, $stack28, $stack44, $stack45, $stack46, $stack47, edge;
+    
+    
+        this := @this: org.jfree.chart.axis.ValueAxis;
+        g2 := @parameter0: java.awt.Graphics2D;
+        cursor := @parameter1: double;
+        plotArea := @parameter2: java.awt.geom.Rectangle2D;
+        dataArea := @parameter3: java.awt.geom.Rectangle2D;
+        edge := @parameter4: org.jfree.chart.util.RectangleEdge;
+        info := @parameter5: org.jfree.chart.plot.PlotRenderingInfo;
+        $stack18 = new org.jfree.chart.axis.AxisState;
+        specialinvoke $stack18.<org.jfree.chart.axis.AxisState: void <init>(double)>(cursor);
+        state = $stack18;
+        $stack19 = virtualinvoke this.<org.jfree.chart.axis.ValueAxis: boolean isAxisLineVisible()>();
+    
+        if $stack19 == 0 goto label01;
+        virtualinvoke this.<org.jfree.chart.axis.ValueAxis: void drawAxisLine(java.awt.Graphics2D,double,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)>(g2, cursor, dataArea, edge);
+    
+      label01:
+        $stack20 = virtualinvoke this.<org.jfree.chart.axis.ValueAxis: float getTickMarkOutsideLength()>();
+        ol = (double) $stack20;
+        $stack21 = virtualinvoke this.<org.jfree.chart.axis.ValueAxis: float getTickMarkInsideLength()>();
+        il = (double) $stack21;
+        ticks = virtualinvoke this.<org.jfree.chart.axis.ValueAxis: java.util.List refreshTicks(java.awt.Graphics2D,org.jfree.chart.axis.AxisState,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)>(g2, $stack18, dataArea, edge);
+        virtualinvoke $stack18.<org.jfree.chart.axis.AxisState: void setTicks(java.util.List)>(ticks);
+        $stack22 = virtualinvoke this.<org.jfree.chart.axis.ValueAxis: java.awt.Font getTickLabelFont()>();
+        virtualinvoke g2.<java.awt.Graphics2D: void setFont(java.awt.Font)>($stack22);
+        iterator = interfaceinvoke ticks.<java.util.List: java.util.Iterator iterator()>();
+    
+      label02:
+        $stack23 = interfaceinvoke iterator.<java.util.Iterator: boolean hasNext()>();
+    
+        if $stack23 == 0 goto label09;
+        $stack34 = interfaceinvoke iterator.<java.util.Iterator: java.lang.Object next()>();
+        tick#0 = (org.jfree.chart.axis.ValueTick) $stack34;
+        $stack35 = virtualinvoke this.<org.jfree.chart.axis.ValueAxis: boolean isTickLabelsVisible()>();
+    
+        if $stack35 == 0 goto label03;
+        $stack68 = virtualinvoke this.<org.jfree.chart.axis.ValueAxis: java.awt.Paint getTickLabelPaint()>();
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>($stack68);
+        anchorPoint#0 = virtualinvoke this.<org.jfree.chart.axis.ValueAxis: float[] calculateAnchorPoint(org.jfree.chart.axis.ValueTick,double,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)>(tick#0, cursor, dataArea, edge);
+        $stack74 = virtualinvoke tick#0.<org.jfree.chart.axis.ValueTick: java.lang.String getText()>();
+        $stack69 = anchorPoint#0[0];
+        $stack70 = anchorPoint#0[1];
+        $stack73 = virtualinvoke tick#0.<org.jfree.chart.axis.ValueTick: org.jfree.chart.text.TextAnchor getTextAnchor()>();
+        $stack72 = virtualinvoke tick#0.<org.jfree.chart.axis.ValueTick: double getAngle()>();
+        $stack71 = virtualinvoke tick#0.<org.jfree.chart.axis.ValueTick: org.jfree.chart.text.TextAnchor getRotationAnchor()>();
+        staticinvoke <org.jfree.chart.text.TextUtilities: void drawRotatedString(java.lang.String,java.awt.Graphics2D,float,float,org.jfree.chart.text.TextAnchor,double,org.jfree.chart.text.TextAnchor)>($stack74, g2, $stack69, $stack70, $stack73, $stack72, $stack71);
+    
+      label03:
+        $stack36 = virtualinvoke this.<org.jfree.chart.axis.ValueAxis: boolean isTickMarksVisible()>();
+    
+        if $stack36 == 0 goto label08;
+        $stack38 = virtualinvoke tick#0.<org.jfree.chart.axis.ValueTick: org.jfree.chart.axis.TickType getTickType()>();
+        $stack37 = <org.jfree.chart.axis.TickType: org.jfree.chart.axis.TickType MAJOR>;
+        $stack39 = virtualinvoke $stack38.<org.jfree.chart.axis.TickType: boolean equals(java.lang.Object)>($stack37);
+    
+        if $stack39 == 0 goto label08;
+        $stack40 = virtualinvoke tick#0.<org.jfree.chart.axis.ValueTick: double getValue()>();
+        $stack41 = virtualinvoke this.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)>($stack40, dataArea, edge);
+        anchorPoint#1 = (float) $stack41;
+        mark = null;
+        $stack42 = virtualinvoke this.<org.jfree.chart.axis.ValueAxis: java.awt.Stroke getTickMarkStroke()>();
+        virtualinvoke g2.<java.awt.Graphics2D: void setStroke(java.awt.Stroke)>($stack42);
+        $stack43 = virtualinvoke this.<org.jfree.chart.axis.ValueAxis: java.awt.Paint getTickMarkPaint()>();
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>($stack43);
+        $stack44 = <org.jfree.chart.util.RectangleEdge: org.jfree.chart.util.RectangleEdge LEFT>;
+    
+        if edge != $stack44 goto label04;
+        $stack67 = new java.awt.geom.Line2D$Double;
+        $stack66 = cursor - ol;
+        $stack65 = (double) anchorPoint#1;
+        $stack64 = cursor + il;
+        $stack63 = (double) anchorPoint#1;
+        specialinvoke $stack67.<java.awt.geom.Line2D$Double: void <init>(double,double,double,double)>($stack66, $stack65, $stack64, $stack63);
+        mark = $stack67;
+    
+        goto label07;
+    
+      label04:
+        $stack45 = <org.jfree.chart.util.RectangleEdge: org.jfree.chart.util.RectangleEdge RIGHT>;
+    
+        if edge != $stack45 goto label05;
+        $stack62 = new java.awt.geom.Line2D$Double;
+        $stack61 = cursor + ol;
+        $stack60 = (double) anchorPoint#1;
+        $stack59 = cursor - il;
+        $stack58 = (double) anchorPoint#1;
+        specialinvoke $stack62.<java.awt.geom.Line2D$Double: void <init>(double,double,double,double)>($stack61, $stack60, $stack59, $stack58);
+        mark = $stack62;
+    
+        goto label07;
+    
+      label05:
+        $stack46 = <org.jfree.chart.util.RectangleEdge: org.jfree.chart.util.RectangleEdge TOP>;
+    
+        if edge != $stack46 goto label06;
+        $stack57 = new java.awt.geom.Line2D$Double;
+        $stack56 = (double) anchorPoint#1;
+        $stack55 = cursor - ol;
+        $stack54 = (double) anchorPoint#1;
+        $stack53 = cursor + il;
+        specialinvoke $stack57.<java.awt.geom.Line2D$Double: void <init>(double,double,double,double)>($stack56, $stack55, $stack54, $stack53);
+        mark = $stack57;
+    
+        goto label07;
+    
+      label06:
+        $stack47 = <org.jfree.chart.util.RectangleEdge: org.jfree.chart.util.RectangleEdge BOTTOM>;
+    
+        if edge != $stack47 goto label07;
+        $stack52 = new java.awt.geom.Line2D$Double;
+        $stack51 = (double) anchorPoint#1;
+        $stack50 = cursor + ol;
+        $stack49 = (double) anchorPoint#1;
+        $stack48 = cursor - il;
+        specialinvoke $stack52.<java.awt.geom.Line2D$Double: void <init>(double,double,double,double)>($stack51, $stack50, $stack49, $stack48);
+        mark = $stack52;
+    
+      label07:
+        #l0 = (java.awt.Shape) mark;
+        virtualinvoke g2.<java.awt.Graphics2D: void draw(java.awt.Shape)>(#l0);
+    
+      label08:
+        goto label02;
+    
+      label09:
+        tick#1 = 0.0;
+        $stack24 = virtualinvoke this.<org.jfree.chart.axis.ValueAxis: boolean isTickLabelsVisible()>();
+    
+        if $stack24 == 0 goto label13;
+        $stack25 = <org.jfree.chart.util.RectangleEdge: org.jfree.chart.util.RectangleEdge LEFT>;
+    
+        if edge != $stack25 goto label10;
+        $stack32 = virtualinvoke this.<org.jfree.chart.axis.ValueAxis: boolean isVerticalTickLabels()>();
+        $stack33 = virtualinvoke this.<org.jfree.chart.axis.ValueAxis: double findMaximumTickLabelWidth(java.util.List,java.awt.Graphics2D,java.awt.geom.Rectangle2D,boolean)>(ticks, g2, plotArea, $stack32);
+        tick#2 = 0.0 + $stack33;
+        virtualinvoke $stack18.<org.jfree.chart.axis.AxisState: void cursorLeft(double)>(tick#2);
+    
+        goto label13;
+    
+      label10:
+        $stack26 = <org.jfree.chart.util.RectangleEdge: org.jfree.chart.util.RectangleEdge RIGHT>;
+    
+        if edge != $stack26 goto label11;
+        $stack31 = virtualinvoke this.<org.jfree.chart.axis.ValueAxis: boolean isVerticalTickLabels()>();
+        tick#3 = virtualinvoke this.<org.jfree.chart.axis.ValueAxis: double findMaximumTickLabelWidth(java.util.List,java.awt.Graphics2D,java.awt.geom.Rectangle2D,boolean)>(ticks, g2, plotArea, $stack31);
+        virtualinvoke $stack18.<org.jfree.chart.axis.AxisState: void cursorRight(double)>(tick#3);
+    
+        goto label13;
+    
+      label11:
+        $stack27 = <org.jfree.chart.util.RectangleEdge: org.jfree.chart.util.RectangleEdge TOP>;
+    
+        if edge != $stack27 goto label12;
+        $stack30 = virtualinvoke this.<org.jfree.chart.axis.ValueAxis: boolean isVerticalTickLabels()>();
+        tick#4 = virtualinvoke this.<org.jfree.chart.axis.ValueAxis: double findMaximumTickLabelHeight(java.util.List,java.awt.Graphics2D,java.awt.geom.Rectangle2D,boolean)>(ticks, g2, plotArea, $stack30);
+        virtualinvoke $stack18.<org.jfree.chart.axis.AxisState: void cursorUp(double)>(tick#4);
+    
+        goto label13;
+    
+      label12:
+        $stack28 = <org.jfree.chart.util.RectangleEdge: org.jfree.chart.util.RectangleEdge BOTTOM>;
+    
+        if edge != $stack28 goto label13;
+        $stack29 = virtualinvoke this.<org.jfree.chart.axis.ValueAxis: boolean isVerticalTickLabels()>();
+        tick#5 = virtualinvoke this.<org.jfree.chart.axis.ValueAxis: double findMaximumTickLabelHeight(java.util.List,java.awt.Graphics2D,java.awt.geom.Rectangle2D,boolean)>(ticks, g2, plotArea, $stack29);
+        virtualinvoke $stack18.<org.jfree.chart.axis.AxisState: void cursorDown(double)>(tick#5);
+    
+      label13:
+        return $stack18;
+    }
+
+    // ---- method: <org.jfree.chart.axis.ValueAxis: void setAutoTickIndex(int)> ----
+    {
+        int index;
+        org.jfree.chart.axis.ValueAxis this;
+    
+    
+        this := @this: org.jfree.chart.axis.ValueAxis;
+        index := @parameter0: int;
+        this.<org.jfree.chart.axis.ValueAxis: int autoTickIndex> = index;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.axis.ValueAxis: void setStandardTickUnits(org.jfree.chart.axis.TickUnitSource)> ----
+    {
+        org.jfree.chart.axis.TickUnitSource source;
+        org.jfree.chart.axis.ValueAxis this;
+        org.jfree.chart.event.AxisChangeEvent $stack2;
+    
+    
+        this := @this: org.jfree.chart.axis.ValueAxis;
+        source := @parameter0: org.jfree.chart.axis.TickUnitSource;
+        this.<org.jfree.chart.axis.ValueAxis: org.jfree.chart.axis.TickUnitSource standardTickUnits> = source;
+        $stack2 = new org.jfree.chart.event.AxisChangeEvent;
+        specialinvoke $stack2.<org.jfree.chart.event.AxisChangeEvent: void <init>(org.jfree.chart.axis.Axis)>(this);
+        virtualinvoke this.<org.jfree.chart.axis.ValueAxis: void notifyListeners(org.jfree.chart.event.AxisChangeEvent)>($stack2);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.axis.ValueAxis: void setInverted(boolean)> ----
+    {
+        boolean $stack2, flag;
+        org.jfree.chart.axis.ValueAxis this;
+        org.jfree.chart.event.AxisChangeEvent $stack3;
+    
+    
+        this := @this: org.jfree.chart.axis.ValueAxis;
+        flag := @parameter0: boolean;
+        $stack2 = this.<org.jfree.chart.axis.ValueAxis: boolean inverted>;
+    
+        if $stack2 == flag goto label1;
+        this.<org.jfree.chart.axis.ValueAxis: boolean inverted> = flag;
+        $stack3 = new org.jfree.chart.event.AxisChangeEvent;
+        specialinvoke $stack3.<org.jfree.chart.event.AxisChangeEvent: void <init>(org.jfree.chart.axis.Axis)>(this);
+        virtualinvoke this.<org.jfree.chart.axis.ValueAxis: void notifyListeners(org.jfree.chart.event.AxisChangeEvent)>($stack3);
+    
+      label1:
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.axis.ValueAxis: void setRangeWithMargins(double,double)> ----
+    {
+        double lower, upper;
+        org.jfree.chart.axis.ValueAxis this;
+        org.jfree.data.Range $stack5;
+    
+    
+        this := @this: org.jfree.chart.axis.ValueAxis;
+        lower := @parameter0: double;
+        upper := @parameter1: double;
+        $stack5 = new org.jfree.data.Range;
+        specialinvoke $stack5.<org.jfree.data.Range: void <init>(double,double)>(lower, upper);
+        virtualinvoke this.<org.jfree.chart.axis.ValueAxis: void setRangeWithMargins(org.jfree.data.Range)>($stack5);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.axis.ValueAxis: void setRangeWithMargins(org.jfree.data.Range,boolean,boolean)> ----
+    {
+        boolean notify, turnOffAutoRange;
+        double $stack4, $stack5;
+        java.lang.IllegalArgumentException #l1;
+        java.lang.Object $stack7;
+        java.lang.Throwable #l0;
+        org.jfree.chart.axis.ValueAxis this;
+        org.jfree.data.Range $stack6, range;
+    
+    
+        this := @this: org.jfree.chart.axis.ValueAxis;
+        range := @parameter0: org.jfree.data.Range;
+        turnOffAutoRange := @parameter1: boolean;
+        notify := @parameter2: boolean;
+    
+        if range != null goto label1;
+        $stack7 = new java.lang.IllegalArgumentException;
+        #l1 = (java.lang.IllegalArgumentException) $stack7;
+        specialinvoke #l1.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'range\' argument.");
+        #l0 = (java.lang.Throwable) $stack7;
+    
+        throw #l0;
+    
+      label1:
+        $stack5 = virtualinvoke this.<org.jfree.chart.axis.ValueAxis: double getLowerMargin()>();
+        $stack4 = virtualinvoke this.<org.jfree.chart.axis.ValueAxis: double getUpperMargin()>();
+        $stack6 = staticinvoke <org.jfree.data.Range: org.jfree.data.Range expand(org.jfree.data.Range,double,double)>(range, $stack5, $stack4);
+        virtualinvoke this.<org.jfree.chart.axis.ValueAxis: void setRange(org.jfree.data.Range,boolean,boolean)>($stack6, turnOffAutoRange, notify);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.axis.ValueAxis: void setUpperMargin(double)> ----
+    {
+        boolean $stack3;
+        double margin;
+        org.jfree.chart.axis.ValueAxis this;
+        org.jfree.chart.event.AxisChangeEvent $stack4;
+    
+    
+        this := @this: org.jfree.chart.axis.ValueAxis;
+        margin := @parameter0: double;
+        this.<org.jfree.chart.axis.ValueAxis: double upperMargin> = margin;
+        $stack3 = virtualinvoke this.<org.jfree.chart.axis.ValueAxis: boolean isAutoRange()>();
+    
+        if $stack3 == 0 goto label1;
+        virtualinvoke this.<org.jfree.chart.axis.ValueAxis: void autoAdjustRange()>();
+    
+      label1:
+        $stack4 = new org.jfree.chart.event.AxisChangeEvent;
+        specialinvoke $stack4.<org.jfree.chart.event.AxisChangeEvent: void <init>(org.jfree.chart.axis.Axis)>(this);
+        virtualinvoke this.<org.jfree.chart.axis.ValueAxis: void notifyListeners(org.jfree.chart.event.AxisChangeEvent)>($stack4);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.axis.ValueAxis: void setDefaultAutoRange(org.jfree.data.Range)> ----
+    {
+        java.lang.IllegalArgumentException #l0;
+        java.lang.Object $stack3;
+        java.lang.Throwable #l1;
+        org.jfree.chart.axis.ValueAxis this;
+        org.jfree.chart.event.AxisChangeEvent $stack2;
+        org.jfree.data.Range range;
+    
+    
+        this := @this: org.jfree.chart.axis.ValueAxis;
+        range := @parameter0: org.jfree.data.Range;
+    
+        if range != null goto label1;
+        $stack3 = new java.lang.IllegalArgumentException;
+        #l0 = (java.lang.IllegalArgumentException) $stack3;
+        specialinvoke #l0.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'range\' argument.");
+        #l1 = (java.lang.Throwable) $stack3;
+    
+        throw #l1;
+    
+      label1:
+        this.<org.jfree.chart.axis.ValueAxis: org.jfree.data.Range defaultAutoRange> = range;
+        $stack2 = new org.jfree.chart.event.AxisChangeEvent;
+        specialinvoke $stack2.<org.jfree.chart.event.AxisChangeEvent: void <init>(org.jfree.chart.axis.Axis)>(this);
+        virtualinvoke this.<org.jfree.chart.axis.ValueAxis: void notifyListeners(org.jfree.chart.event.AxisChangeEvent)>($stack2);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.axis.ValueAxis: int getAutoTickIndex()> ----
+    {
+        int $stack1;
+        org.jfree.chart.axis.ValueAxis this;
+    
+    
+        this := @this: org.jfree.chart.axis.ValueAxis;
+        $stack1 = this.<org.jfree.chart.axis.ValueAxis: int autoTickIndex>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.axis.ValueAxis: void setDownArrow(java.awt.Shape)> ----
+    {
+        java.awt.Shape arrow;
+        java.lang.IllegalArgumentException #l0;
+        java.lang.Object $stack3;
+        java.lang.Throwable #l1;
+        org.jfree.chart.axis.ValueAxis this;
+        org.jfree.chart.event.AxisChangeEvent $stack2;
+    
+    
+        this := @this: org.jfree.chart.axis.ValueAxis;
+        arrow := @parameter0: java.awt.Shape;
+    
+        if arrow != null goto label1;
+        $stack3 = new java.lang.IllegalArgumentException;
+        #l0 = (java.lang.IllegalArgumentException) $stack3;
+        specialinvoke #l0.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'arrow\' argument.");
+        #l1 = (java.lang.Throwable) $stack3;
+    
+        throw #l1;
+    
+      label1:
+        this.<org.jfree.chart.axis.ValueAxis: java.awt.Shape downArrow> = arrow;
+        $stack2 = new org.jfree.chart.event.AxisChangeEvent;
+        specialinvoke $stack2.<org.jfree.chart.event.AxisChangeEvent: void <init>(org.jfree.chart.axis.Axis)>(this);
+        virtualinvoke this.<org.jfree.chart.axis.ValueAxis: void notifyListeners(org.jfree.chart.event.AxisChangeEvent)>($stack2);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.axis.ValueAxis: double getUpperMargin()> ----
+    {
+        double $stack1;
+        org.jfree.chart.axis.ValueAxis this;
+    
+    
+        this := @this: org.jfree.chart.axis.ValueAxis;
+        $stack1 = this.<org.jfree.chart.axis.ValueAxis: double upperMargin>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.axis.ValueAxis: void <init>(java.lang.String,org.jfree.chart.axis.TickUnitSource)> ----
+    {
+        java.awt.Polygon #l0, #l1, #l10, #l11, #l12, #l13, #l14, #l15, #l2, #l3, #l4, #l5, #l6, #l7, #l8, #l9, p1, p2, p3, p4;
+        java.lang.Object $stack10, $stack11, $stack12, $stack9;
+        java.lang.String label;
+        org.jfree.chart.axis.TickUnitSource standardTickUnits;
+        org.jfree.chart.axis.ValueAxis this;
+        org.jfree.data.Range $stack7, $stack8;
+    
+    
+        this := @this: org.jfree.chart.axis.ValueAxis;
+        label := @parameter0: java.lang.String;
+        standardTickUnits := @parameter1: org.jfree.chart.axis.TickUnitSource;
+        specialinvoke this.<org.jfree.chart.axis.Axis: void <init>(java.lang.String)>(label);
+        this.<org.jfree.chart.axis.ValueAxis: boolean positiveArrowVisible> = 0;
+        this.<org.jfree.chart.axis.ValueAxis: boolean negativeArrowVisible> = 0;
+        $stack7 = <org.jfree.chart.axis.ValueAxis: org.jfree.data.Range DEFAULT_RANGE>;
+        this.<org.jfree.chart.axis.ValueAxis: org.jfree.data.Range range> = $stack7;
+        this.<org.jfree.chart.axis.ValueAxis: boolean autoRange> = 1;
+        $stack8 = <org.jfree.chart.axis.ValueAxis: org.jfree.data.Range DEFAULT_RANGE>;
+        this.<org.jfree.chart.axis.ValueAxis: org.jfree.data.Range defaultAutoRange> = $stack8;
+        this.<org.jfree.chart.axis.ValueAxis: boolean inverted> = 0;
+        this.<org.jfree.chart.axis.ValueAxis: double autoRangeMinimumSize> = 1.0E-8;
+        this.<org.jfree.chart.axis.ValueAxis: double lowerMargin> = 0.05;
+        this.<org.jfree.chart.axis.ValueAxis: double upperMargin> = 0.05;
+        this.<org.jfree.chart.axis.ValueAxis: double fixedAutoRange> = 0.0;
+        this.<org.jfree.chart.axis.ValueAxis: boolean autoTickUnitSelection> = 1;
+        this.<org.jfree.chart.axis.ValueAxis: org.jfree.chart.axis.TickUnitSource standardTickUnits> = standardTickUnits;
+        $stack9 = new java.awt.Polygon;
+        #l4 = (java.awt.Polygon) $stack9;
+        specialinvoke #l4.<java.awt.Polygon: void <init>()>();
+        p1 = (java.awt.Polygon) $stack9;
+        #l0 = (java.awt.Polygon) $stack9;
+        virtualinvoke #l0.<java.awt.Polygon: void addPoint(int,int)>(0, 0);
+        #l3 = (java.awt.Polygon) $stack9;
+        virtualinvoke #l3.<java.awt.Polygon: void addPoint(int,int)>(-2, 2);
+        #l1 = (java.awt.Polygon) $stack9;
+        virtualinvoke #l1.<java.awt.Polygon: void addPoint(int,int)>(2, 2);
+        this.<org.jfree.chart.axis.ValueAxis: java.awt.Shape upArrow> = (java.awt.Shape) $stack9;
+        $stack10 = new java.awt.Polygon;
+        #l11 = (java.awt.Polygon) $stack10;
+        specialinvoke #l11.<java.awt.Polygon: void <init>()>();
+        p2 = (java.awt.Polygon) $stack10;
+        #l14 = (java.awt.Polygon) $stack10;
+        virtualinvoke #l14.<java.awt.Polygon: void addPoint(int,int)>(0, 0);
+        #l12 = (java.awt.Polygon) $stack10;
+        virtualinvoke #l12.<java.awt.Polygon: void addPoint(int,int)>(-2, -2);
+        #l7 = (java.awt.Polygon) $stack10;
+        virtualinvoke #l7.<java.awt.Polygon: void addPoint(int,int)>(2, -2);
+        this.<org.jfree.chart.axis.ValueAxis: java.awt.Shape downArrow> = (java.awt.Shape) $stack10;
+        $stack11 = new java.awt.Polygon;
+        #l9 = (java.awt.Polygon) $stack11;
+        specialinvoke #l9.<java.awt.Polygon: void <init>()>();
+        p3 = (java.awt.Polygon) $stack11;
+        #l2 = (java.awt.Polygon) $stack11;
+        virtualinvoke #l2.<java.awt.Polygon: void addPoint(int,int)>(0, 0);
+        #l15 = (java.awt.Polygon) $stack11;
+        virtualinvoke #l15.<java.awt.Polygon: void addPoint(int,int)>(-2, -2);
+        #l6 = (java.awt.Polygon) $stack11;
+        virtualinvoke #l6.<java.awt.Polygon: void addPoint(int,int)>(-2, 2);
+        this.<org.jfree.chart.axis.ValueAxis: java.awt.Shape rightArrow> = (java.awt.Shape) $stack11;
+        $stack12 = new java.awt.Polygon;
+        #l5 = (java.awt.Polygon) $stack12;
+        specialinvoke #l5.<java.awt.Polygon: void <init>()>();
+        p4 = (java.awt.Polygon) $stack12;
+        #l8 = (java.awt.Polygon) $stack12;
+        virtualinvoke #l8.<java.awt.Polygon: void addPoint(int,int)>(0, 0);
+        #l13 = (java.awt.Polygon) $stack12;
+        virtualinvoke #l13.<java.awt.Polygon: void addPoint(int,int)>(2, -2);
+        #l10 = (java.awt.Polygon) $stack12;
+        virtualinvoke #l10.<java.awt.Polygon: void addPoint(int,int)>(2, 2);
+        this.<org.jfree.chart.axis.ValueAxis: java.awt.Shape leftArrow> = (java.awt.Shape) $stack12;
+        this.<org.jfree.chart.axis.ValueAxis: boolean verticalTickLabels> = 0;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.axis.ValueAxis: void setRange(org.jfree.data.Range)> ----
+    {
+        org.jfree.chart.axis.ValueAxis this;
+        org.jfree.data.Range range;
+    
+    
+        this := @this: org.jfree.chart.axis.ValueAxis;
+        range := @parameter0: org.jfree.data.Range;
+        virtualinvoke this.<org.jfree.chart.axis.ValueAxis: void setRange(org.jfree.data.Range,boolean,boolean)>(range, 1, 1);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.axis.ValueAxis: void setUpArrow(java.awt.Shape)> ----
+    {
+        java.awt.Shape arrow;
+        java.lang.IllegalArgumentException #l0;
+        java.lang.Object $stack3;
+        java.lang.Throwable #l1;
+        org.jfree.chart.axis.ValueAxis this;
+        org.jfree.chart.event.AxisChangeEvent $stack2;
+    
+    
+        this := @this: org.jfree.chart.axis.ValueAxis;
+        arrow := @parameter0: java.awt.Shape;
+    
+        if arrow != null goto label1;
+        $stack3 = new java.lang.IllegalArgumentException;
+        #l0 = (java.lang.IllegalArgumentException) $stack3;
+        specialinvoke #l0.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'arrow\' argument.");
+        #l1 = (java.lang.Throwable) $stack3;
+    
+        throw #l1;
+    
+      label1:
+        this.<org.jfree.chart.axis.ValueAxis: java.awt.Shape upArrow> = arrow;
+        $stack2 = new org.jfree.chart.event.AxisChangeEvent;
+        specialinvoke $stack2.<org.jfree.chart.event.AxisChangeEvent: void <init>(org.jfree.chart.axis.Axis)>(this);
+        virtualinvoke this.<org.jfree.chart.axis.ValueAxis: void notifyListeners(org.jfree.chart.event.AxisChangeEvent)>($stack2);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.axis.ValueAxis: java.awt.Shape getLeftArrow()> ----
+    {
+        java.awt.Shape $stack1;
+        org.jfree.chart.axis.ValueAxis this;
+    
+    
+        this := @this: org.jfree.chart.axis.ValueAxis;
+        $stack1 = this.<org.jfree.chart.axis.ValueAxis: java.awt.Shape leftArrow>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.axis.ValueAxis: void setAutoRangeMinimumSize(double,boolean)> ----
+    {
+        boolean $stack7, notify;
+        byte $stack4, $stack6;
+        double $stack5, size;
+        java.lang.IllegalArgumentException #l0;
+        java.lang.Object $stack9;
+        java.lang.Throwable #l1;
+        org.jfree.chart.axis.ValueAxis this;
+        org.jfree.chart.event.AxisChangeEvent $stack8;
+    
+    
+        this := @this: org.jfree.chart.axis.ValueAxis;
+        size := @parameter0: double;
+        notify := @parameter1: boolean;
+        $stack4 = size cmpg 0.0;
+    
+        if $stack4 > 0 goto label1;
+        $stack9 = new java.lang.IllegalArgumentException;
+        #l0 = (java.lang.IllegalArgumentException) $stack9;
+        specialinvoke #l0.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("NumberAxis.setAutoRangeMinimumSize(double): must be > 0.0.");
+        #l1 = (java.lang.Throwable) $stack9;
+    
+        throw #l1;
+    
+      label1:
+        $stack5 = this.<org.jfree.chart.axis.ValueAxis: double autoRangeMinimumSize>;
+        $stack6 = $stack5 cmpl size;
+    
+        if $stack6 == 0 goto label3;
+        this.<org.jfree.chart.axis.ValueAxis: double autoRangeMinimumSize> = size;
+        $stack7 = this.<org.jfree.chart.axis.ValueAxis: boolean autoRange>;
+    
+        if $stack7 == 0 goto label2;
+        virtualinvoke this.<org.jfree.chart.axis.ValueAxis: void autoAdjustRange()>();
+    
+      label2:
+        if notify == 0 goto label3;
+        $stack8 = new org.jfree.chart.event.AxisChangeEvent;
+        specialinvoke $stack8.<org.jfree.chart.event.AxisChangeEvent: void <init>(org.jfree.chart.axis.Axis)>(this);
+        virtualinvoke this.<org.jfree.chart.axis.ValueAxis: void notifyListeners(org.jfree.chart.event.AxisChangeEvent)>($stack8);
+    
+      label3:
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.axis.ValueAxis: void readObject(java.io.ObjectInputStream)> ----
+    {
+        java.awt.Shape $stack2, $stack3, $stack4, $stack5;
+        java.io.ObjectInputStream stream;
+        org.jfree.chart.axis.ValueAxis this;
+    
+    
+        this := @this: org.jfree.chart.axis.ValueAxis;
+        stream := @parameter0: java.io.ObjectInputStream;
+        virtualinvoke stream.<java.io.ObjectInputStream: void defaultReadObject()>();
+        $stack2 = staticinvoke <org.jfree.chart.util.SerialUtilities: java.awt.Shape readShape(java.io.ObjectInputStream)>(stream);
+        this.<org.jfree.chart.axis.ValueAxis: java.awt.Shape upArrow> = $stack2;
+        $stack3 = staticinvoke <org.jfree.chart.util.SerialUtilities: java.awt.Shape readShape(java.io.ObjectInputStream)>(stream);
+        this.<org.jfree.chart.axis.ValueAxis: java.awt.Shape downArrow> = $stack3;
+        $stack4 = staticinvoke <org.jfree.chart.util.SerialUtilities: java.awt.Shape readShape(java.io.ObjectInputStream)>(stream);
+        this.<org.jfree.chart.axis.ValueAxis: java.awt.Shape leftArrow> = $stack4;
+        $stack5 = staticinvoke <org.jfree.chart.util.SerialUtilities: java.awt.Shape readShape(java.io.ObjectInputStream)>(stream);
+        this.<org.jfree.chart.axis.ValueAxis: java.awt.Shape rightArrow> = $stack5;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.axis.ValueAxis: void drawAxisLine(java.awt.Graphics2D,double,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)> ----
+    {
+        boolean $stack22, $stack23, $stack34, $stack35, drawDownOrLeft, drawUpOrRight;
+        double $stack36, $stack37, $stack39, $stack40, $stack42, $stack43, $stack45, $stack46, cursor, x#0, x#1, y#0, y#1;
+        java.awt.Graphics2D g2;
+        java.awt.Paint $stack20;
+        java.awt.Shape #l0, arrow#0, arrow#1, shape#0, shape#1;
+        java.awt.Stroke $stack21;
+        java.awt.geom.AffineTransform $stack25, $stack30, transformer#0, transformer#1;
+        java.awt.geom.Line2D$Double $stack38, $stack41, $stack44, $stack47;
+        java.awt.geom.Rectangle2D dataArea;
+        java.lang.Object axisLine;
+        org.jfree.chart.axis.ValueAxis this;
+        org.jfree.chart.util.RectangleEdge $stack16, $stack17, $stack18, $stack19, $stack24, $stack26, $stack27, $stack28, $stack29, $stack31, $stack32, $stack33, edge;
+    
+    
+        this := @this: org.jfree.chart.axis.ValueAxis;
+        g2 := @parameter0: java.awt.Graphics2D;
+        cursor := @parameter1: double;
+        dataArea := @parameter2: java.awt.geom.Rectangle2D;
+        edge := @parameter3: org.jfree.chart.util.RectangleEdge;
+        axisLine = null;
+        $stack16 = <org.jfree.chart.util.RectangleEdge: org.jfree.chart.util.RectangleEdge TOP>;
+    
+        if edge != $stack16 goto label01;
+        $stack47 = new java.awt.geom.Line2D$Double;
+        $stack46 = virtualinvoke dataArea.<java.awt.geom.Rectangle2D: double getX()>();
+        $stack45 = virtualinvoke dataArea.<java.awt.geom.Rectangle2D: double getMaxX()>();
+        specialinvoke $stack47.<java.awt.geom.Line2D$Double: void <init>(double,double,double,double)>($stack46, cursor, $stack45, cursor);
+        axisLine = $stack47;
+    
+        goto label04;
+    
+      label01:
+        $stack17 = <org.jfree.chart.util.RectangleEdge: org.jfree.chart.util.RectangleEdge BOTTOM>;
+    
+        if edge != $stack17 goto label02;
+        $stack44 = new java.awt.geom.Line2D$Double;
+        $stack43 = virtualinvoke dataArea.<java.awt.geom.Rectangle2D: double getX()>();
+        $stack42 = virtualinvoke dataArea.<java.awt.geom.Rectangle2D: double getMaxX()>();
+        specialinvoke $stack44.<java.awt.geom.Line2D$Double: void <init>(double,double,double,double)>($stack43, cursor, $stack42, cursor);
+        axisLine = $stack44;
+    
+        goto label04;
+    
+      label02:
+        $stack18 = <org.jfree.chart.util.RectangleEdge: org.jfree.chart.util.RectangleEdge LEFT>;
+    
+        if edge != $stack18 goto label03;
+        $stack41 = new java.awt.geom.Line2D$Double;
+        $stack40 = virtualinvoke dataArea.<java.awt.geom.Rectangle2D: double getY()>();
+        $stack39 = virtualinvoke dataArea.<java.awt.geom.Rectangle2D: double getMaxY()>();
+        specialinvoke $stack41.<java.awt.geom.Line2D$Double: void <init>(double,double,double,double)>(cursor, $stack40, cursor, $stack39);
+        axisLine = $stack41;
+    
+        goto label04;
+    
+      label03:
+        $stack19 = <org.jfree.chart.util.RectangleEdge: org.jfree.chart.util.RectangleEdge RIGHT>;
+    
+        if edge != $stack19 goto label04;
+        $stack38 = new java.awt.geom.Line2D$Double;
+        $stack37 = virtualinvoke dataArea.<java.awt.geom.Rectangle2D: double getY()>();
+        $stack36 = virtualinvoke dataArea.<java.awt.geom.Rectangle2D: double getMaxY()>();
+        specialinvoke $stack38.<java.awt.geom.Line2D$Double: void <init>(double,double,double,double)>(cursor, $stack37, cursor, $stack36);
+        axisLine = $stack38;
+    
+      label04:
+        $stack20 = virtualinvoke this.<org.jfree.chart.axis.ValueAxis: java.awt.Paint getAxisLinePaint()>();
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>($stack20);
+        $stack21 = virtualinvoke this.<org.jfree.chart.axis.ValueAxis: java.awt.Stroke getAxisLineStroke()>();
+        virtualinvoke g2.<java.awt.Graphics2D: void setStroke(java.awt.Stroke)>($stack21);
+        #l0 = (java.awt.Shape) axisLine;
+        virtualinvoke g2.<java.awt.Graphics2D: void draw(java.awt.Shape)>(#l0);
+        drawUpOrRight = 0;
+        drawDownOrLeft = 0;
+        $stack22 = this.<org.jfree.chart.axis.ValueAxis: boolean positiveArrowVisible>;
+    
+        if $stack22 == 0 goto label06;
+        $stack35 = this.<org.jfree.chart.axis.ValueAxis: boolean inverted>;
+    
+        if $stack35 == 0 goto label05;
+        drawDownOrLeft = 1;
+    
+        goto label06;
+    
+      label05:
+        drawUpOrRight = 1;
+    
+      label06:
+        $stack23 = this.<org.jfree.chart.axis.ValueAxis: boolean negativeArrowVisible>;
+    
+        if $stack23 == 0 goto label08;
+        $stack34 = this.<org.jfree.chart.axis.ValueAxis: boolean inverted>;
+    
+        if $stack34 == 0 goto label07;
+        drawUpOrRight = 1;
+    
+        goto label08;
+    
+      label07:
+        drawDownOrLeft = 1;
+    
+      label08:
+        if drawUpOrRight == 0 goto label13;
+        x#0 = 0.0;
+        y#0 = 0.0;
+        arrow#0 = null;
+        $stack29 = <org.jfree.chart.util.RectangleEdge: org.jfree.chart.util.RectangleEdge TOP>;
+    
+        if edge == $stack29 goto label09;
+        $stack31 = <org.jfree.chart.util.RectangleEdge: org.jfree.chart.util.RectangleEdge BOTTOM>;
+    
+        if edge != $stack31 goto label10;
+    
+      label09:
+        x#0 = virtualinvoke dataArea.<java.awt.geom.Rectangle2D: double getMaxX()>();
+        y#0 = cursor;
+        arrow#0 = this.<org.jfree.chart.axis.ValueAxis: java.awt.Shape rightArrow>;
+    
+        goto label12;
+    
+      label10:
+        $stack32 = <org.jfree.chart.util.RectangleEdge: org.jfree.chart.util.RectangleEdge LEFT>;
+    
+        if edge == $stack32 goto label11;
+        $stack33 = <org.jfree.chart.util.RectangleEdge: org.jfree.chart.util.RectangleEdge RIGHT>;
+    
+        if edge != $stack33 goto label12;
+    
+      label11:
+        x#0 = cursor;
+        y#0 = virtualinvoke dataArea.<java.awt.geom.Rectangle2D: double getMinY()>();
+        arrow#0 = this.<org.jfree.chart.axis.ValueAxis: java.awt.Shape upArrow>;
+    
+      label12:
+        $stack30 = new java.awt.geom.AffineTransform;
+        specialinvoke $stack30.<java.awt.geom.AffineTransform: void <init>()>();
+        transformer#0 = $stack30;
+        virtualinvoke $stack30.<java.awt.geom.AffineTransform: void setToTranslation(double,double)>(x#0, y#0);
+        shape#0 = virtualinvoke $stack30.<java.awt.geom.AffineTransform: java.awt.Shape createTransformedShape(java.awt.Shape)>(arrow#0);
+        virtualinvoke g2.<java.awt.Graphics2D: void fill(java.awt.Shape)>(shape#0);
+        virtualinvoke g2.<java.awt.Graphics2D: void draw(java.awt.Shape)>(shape#0);
+    
+      label13:
+        if drawDownOrLeft == 0 goto label18;
+        x#1 = 0.0;
+        y#1 = 0.0;
+        arrow#1 = null;
+        $stack24 = <org.jfree.chart.util.RectangleEdge: org.jfree.chart.util.RectangleEdge TOP>;
+    
+        if edge == $stack24 goto label14;
+        $stack26 = <org.jfree.chart.util.RectangleEdge: org.jfree.chart.util.RectangleEdge BOTTOM>;
+    
+        if edge != $stack26 goto label15;
+    
+      label14:
+        x#1 = virtualinvoke dataArea.<java.awt.geom.Rectangle2D: double getMinX()>();
+        y#1 = cursor;
+        arrow#1 = this.<org.jfree.chart.axis.ValueAxis: java.awt.Shape leftArrow>;
+    
+        goto label17;
+    
+      label15:
+        $stack27 = <org.jfree.chart.util.RectangleEdge: org.jfree.chart.util.RectangleEdge LEFT>;
+    
+        if edge == $stack27 goto label16;
+        $stack28 = <org.jfree.chart.util.RectangleEdge: org.jfree.chart.util.RectangleEdge RIGHT>;
+    
+        if edge != $stack28 goto label17;
+    
+      label16:
+        x#1 = cursor;
+        y#1 = virtualinvoke dataArea.<java.awt.geom.Rectangle2D: double getMaxY()>();
+        arrow#1 = this.<org.jfree.chart.axis.ValueAxis: java.awt.Shape downArrow>;
+    
+      label17:
+        $stack25 = new java.awt.geom.AffineTransform;
+        specialinvoke $stack25.<java.awt.geom.AffineTransform: void <init>()>();
+        transformer#1 = $stack25;
+        virtualinvoke $stack25.<java.awt.geom.AffineTransform: void setToTranslation(double,double)>(x#1, y#1);
+        shape#1 = virtualinvoke $stack25.<java.awt.geom.AffineTransform: java.awt.Shape createTransformedShape(java.awt.Shape)>(arrow#1);
+        virtualinvoke g2.<java.awt.Graphics2D: void fill(java.awt.Shape)>(shape#1);
+        virtualinvoke g2.<java.awt.Graphics2D: void draw(java.awt.Shape)>(shape#1);
+    
+      label18:
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.axis.ValueAxis: void writeObject(java.io.ObjectOutputStream)> ----
+    {
+        java.awt.Shape $stack2, $stack3, $stack4, $stack5;
+        java.io.ObjectOutputStream stream;
+        org.jfree.chart.axis.ValueAxis this;
+    
+    
+        this := @this: org.jfree.chart.axis.ValueAxis;
+        stream := @parameter0: java.io.ObjectOutputStream;
+        virtualinvoke stream.<java.io.ObjectOutputStream: void defaultWriteObject()>();
+        $stack2 = this.<org.jfree.chart.axis.ValueAxis: java.awt.Shape upArrow>;
+        staticinvoke <org.jfree.chart.util.SerialUtilities: void writeShape(java.awt.Shape,java.io.ObjectOutputStream)>($stack2, stream);
+        $stack3 = this.<org.jfree.chart.axis.ValueAxis: java.awt.Shape downArrow>;
+        staticinvoke <org.jfree.chart.util.SerialUtilities: void writeShape(java.awt.Shape,java.io.ObjectOutputStream)>($stack3, stream);
+        $stack4 = this.<org.jfree.chart.axis.ValueAxis: java.awt.Shape leftArrow>;
+        staticinvoke <org.jfree.chart.util.SerialUtilities: void writeShape(java.awt.Shape,java.io.ObjectOutputStream)>($stack4, stream);
+        $stack5 = this.<org.jfree.chart.axis.ValueAxis: java.awt.Shape rightArrow>;
+        staticinvoke <org.jfree.chart.util.SerialUtilities: void writeShape(java.awt.Shape,java.io.ObjectOutputStream)>($stack5, stream);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.axis.ValueAxis: double getUpperBound()> ----
+    {
+        double $stack2;
+        org.jfree.chart.axis.ValueAxis this;
+        org.jfree.data.Range $stack1;
+    
+    
+        this := @this: org.jfree.chart.axis.ValueAxis;
+        $stack1 = this.<org.jfree.chart.axis.ValueAxis: org.jfree.data.Range range>;
+        $stack2 = virtualinvoke $stack1.<org.jfree.data.Range: double getUpperBound()>();
+    
+        return $stack2;
+    }
+
+    // ---- method: <org.jfree.chart.axis.ValueAxis: org.jfree.chart.axis.TickUnitSource getStandardTickUnits()> ----
+    {
+        org.jfree.chart.axis.TickUnitSource $stack1;
+        org.jfree.chart.axis.ValueAxis this;
+    
+    
+        this := @this: org.jfree.chart.axis.ValueAxis;
+        $stack1 = this.<org.jfree.chart.axis.ValueAxis: org.jfree.chart.axis.TickUnitSource standardTickUnits>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.axis.ValueAxis: void setAutoRange(boolean)> ----
+    {
+        boolean auto;
+        org.jfree.chart.axis.ValueAxis this;
+    
+    
+        this := @this: org.jfree.chart.axis.ValueAxis;
+        auto := @parameter0: boolean;
+        virtualinvoke this.<org.jfree.chart.axis.ValueAxis: void setAutoRange(boolean,boolean)>(auto, 1);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.axis.ValueAxis: boolean isAutoTickUnitSelection()> ----
+    {
+        boolean $stack1;
+        org.jfree.chart.axis.ValueAxis this;
+    
+    
+        this := @this: org.jfree.chart.axis.ValueAxis;
+        $stack1 = this.<org.jfree.chart.axis.ValueAxis: boolean autoTickUnitSelection>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.axis.ValueAxis: void setRightArrow(java.awt.Shape)> ----
+    {
+        java.awt.Shape arrow;
+        java.lang.IllegalArgumentException #l0;
+        java.lang.Object $stack3;
+        java.lang.Throwable #l1;
+        org.jfree.chart.axis.ValueAxis this;
+        org.jfree.chart.event.AxisChangeEvent $stack2;
+    
+    
+        this := @this: org.jfree.chart.axis.ValueAxis;
+        arrow := @parameter0: java.awt.Shape;
+    
+        if arrow != null goto label1;
+        $stack3 = new java.lang.IllegalArgumentException;
+        #l0 = (java.lang.IllegalArgumentException) $stack3;
+        specialinvoke #l0.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'arrow\' argument.");
+        #l1 = (java.lang.Throwable) $stack3;
+    
+        throw #l1;
+    
+      label1:
+        this.<org.jfree.chart.axis.ValueAxis: java.awt.Shape rightArrow> = arrow;
+        $stack2 = new org.jfree.chart.event.AxisChangeEvent;
+        specialinvoke $stack2.<org.jfree.chart.event.AxisChangeEvent: void <init>(org.jfree.chart.axis.Axis)>(this);
+        virtualinvoke this.<org.jfree.chart.axis.ValueAxis: void notifyListeners(org.jfree.chart.event.AxisChangeEvent)>($stack2);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.axis.ValueAxis: void setFixedAutoRange(double)> ----
+    {
+        boolean $stack3;
+        double length;
+        org.jfree.chart.axis.ValueAxis this;
+        org.jfree.chart.event.AxisChangeEvent $stack4;
+    
+    
+        this := @this: org.jfree.chart.axis.ValueAxis;
+        length := @parameter0: double;
+        this.<org.jfree.chart.axis.ValueAxis: double fixedAutoRange> = length;
+        $stack3 = virtualinvoke this.<org.jfree.chart.axis.ValueAxis: boolean isAutoRange()>();
+    
+        if $stack3 == 0 goto label1;
+        virtualinvoke this.<org.jfree.chart.axis.ValueAxis: void autoAdjustRange()>();
+    
+      label1:
+        $stack4 = new org.jfree.chart.event.AxisChangeEvent;
+        specialinvoke $stack4.<org.jfree.chart.event.AxisChangeEvent: void <init>(org.jfree.chart.axis.Axis)>(this);
+        virtualinvoke this.<org.jfree.chart.axis.ValueAxis: void notifyListeners(org.jfree.chart.event.AxisChangeEvent)>($stack4);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.axis.ValueAxis: void centerRange(double)> ----
+    {
+        double $stack11, $stack12, $stack13, $stack14, $stack8, $stack9, central, value;
+        org.jfree.chart.axis.ValueAxis this;
+        org.jfree.data.Range $stack10, $stack15, $stack6, $stack7, adjusted;
+    
+    
+        this := @this: org.jfree.chart.axis.ValueAxis;
+        value := @parameter0: double;
+        $stack6 = this.<org.jfree.chart.axis.ValueAxis: org.jfree.data.Range range>;
+        central = virtualinvoke $stack6.<org.jfree.data.Range: double getCentralValue()>();
+        $stack15 = new org.jfree.data.Range;
+        $stack7 = this.<org.jfree.chart.axis.ValueAxis: org.jfree.data.Range range>;
+        $stack8 = virtualinvoke $stack7.<org.jfree.data.Range: double getLowerBound()>();
+        $stack9 = $stack8 + value;
+        $stack14 = $stack9 - central;
+        $stack10 = this.<org.jfree.chart.axis.ValueAxis: org.jfree.data.Range range>;
+        $stack11 = virtualinvoke $stack10.<org.jfree.data.Range: double getUpperBound()>();
+        $stack12 = $stack11 + value;
+        $stack13 = $stack12 - central;
+        specialinvoke $stack15.<org.jfree.data.Range: void <init>(double,double)>($stack14, $stack13);
+        adjusted = $stack15;
+        virtualinvoke this.<org.jfree.chart.axis.ValueAxis: void setRange(org.jfree.data.Range)>($stack15);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.axis.ValueAxis: java.awt.Shape getDownArrow()> ----
+    {
+        java.awt.Shape $stack1;
+        org.jfree.chart.axis.ValueAxis this;
+    
+    
+        this := @this: org.jfree.chart.axis.ValueAxis;
+        $stack1 = this.<org.jfree.chart.axis.ValueAxis: java.awt.Shape downArrow>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.axis.ValueAxis: double findMaximumTickLabelWidth(java.util.List,java.awt.Graphics2D,java.awt.geom.Rectangle2D,boolean)> ----
+    {
+        boolean $stack19, vertical;
+        byte $stack27;
+        double $stack15, $stack16, $stack17, $stack18, $stack22, $stack23, $stack24, $stack25, $stack26, $stack28, $stack29, $stack30, $stack31, maxWidth;
+        float $stack14;
+        java.awt.Font font;
+        java.awt.FontMetrics fm#0;
+        java.awt.Graphics2D g2;
+        java.awt.font.FontRenderContext $stack13;
+        java.awt.font.LineMetrics fm#1;
+        java.awt.geom.Rectangle2D drawArea, labelBounds;
+        java.lang.Object $stack20;
+        java.lang.String $stack21;
+        java.util.Iterator iterator;
+        java.util.List ticks;
+        org.jfree.chart.axis.Tick tick;
+        org.jfree.chart.axis.ValueAxis this;
+        org.jfree.chart.util.RectangleInsets insets;
+    
+    
+        this := @this: org.jfree.chart.axis.ValueAxis;
+        ticks := @parameter0: java.util.List;
+        g2 := @parameter1: java.awt.Graphics2D;
+        drawArea := @parameter2: java.awt.geom.Rectangle2D;
+        vertical := @parameter3: boolean;
+        insets = virtualinvoke this.<org.jfree.chart.axis.ValueAxis: org.jfree.chart.util.RectangleInsets getTickLabelInsets()>();
+        font = virtualinvoke this.<org.jfree.chart.axis.ValueAxis: java.awt.Font getTickLabelFont()>();
+        maxWidth = 0.0;
+    
+        if vertical != 0 goto label4;
+        fm#0 = virtualinvoke g2.<java.awt.Graphics2D: java.awt.FontMetrics getFontMetrics(java.awt.Font)>(font);
+        iterator = interfaceinvoke ticks.<java.util.List: java.util.Iterator iterator()>();
+    
+      label1:
+        $stack19 = interfaceinvoke iterator.<java.util.Iterator: boolean hasNext()>();
+    
+        if $stack19 == 0 goto label3;
+        $stack20 = interfaceinvoke iterator.<java.util.Iterator: java.lang.Object next()>();
+        tick = (org.jfree.chart.axis.Tick) $stack20;
+        $stack21 = virtualinvoke tick.<org.jfree.chart.axis.Tick: java.lang.String getText()>();
+        labelBounds = staticinvoke <org.jfree.chart.text.TextUtilities: java.awt.geom.Rectangle2D getTextBounds(java.lang.String,java.awt.Graphics2D,java.awt.FontMetrics)>($stack21, g2, fm#0);
+        $stack22 = virtualinvoke labelBounds.<java.awt.geom.Rectangle2D: double getWidth()>();
+        $stack23 = virtualinvoke insets.<org.jfree.chart.util.RectangleInsets: double getLeft()>();
+        $stack24 = $stack22 + $stack23;
+        $stack25 = virtualinvoke insets.<org.jfree.chart.util.RectangleInsets: double getRight()>();
+        $stack26 = $stack24 + $stack25;
+        $stack27 = $stack26 cmpl maxWidth;
+    
+        if $stack27 <= 0 goto label2;
+        $stack28 = virtualinvoke labelBounds.<java.awt.geom.Rectangle2D: double getWidth()>();
+        $stack29 = virtualinvoke insets.<org.jfree.chart.util.RectangleInsets: double getLeft()>();
+        $stack30 = $stack28 + $stack29;
+        $stack31 = virtualinvoke insets.<org.jfree.chart.util.RectangleInsets: double getRight()>();
+        maxWidth = $stack30 + $stack31;
+    
+      label2:
+        goto label1;
+    
+      label3:
+        goto label5;
+    
+      label4:
+        $stack13 = virtualinvoke g2.<java.awt.Graphics2D: java.awt.font.FontRenderContext getFontRenderContext()>();
+        fm#1 = virtualinvoke font.<java.awt.Font: java.awt.font.LineMetrics getLineMetrics(java.lang.String,java.awt.font.FontRenderContext)>("ABCxyz", $stack13);
+        $stack14 = virtualinvoke fm#1.<java.awt.font.LineMetrics: float getHeight()>();
+        $stack15 = (double) $stack14;
+        $stack16 = virtualinvoke insets.<org.jfree.chart.util.RectangleInsets: double getTop()>();
+        $stack17 = $stack15 + $stack16;
+        $stack18 = virtualinvoke insets.<org.jfree.chart.util.RectangleInsets: double getBottom()>();
+        maxWidth = $stack17 + $stack18;
+    
+      label5:
+        return maxWidth;
+    }
+
+    // ---- method: <org.jfree.chart.axis.ValueAxis: void setPositiveArrowVisible(boolean)> ----
+    {
+        boolean visible;
+        org.jfree.chart.axis.ValueAxis this;
+        org.jfree.chart.event.AxisChangeEvent $stack2;
+    
+    
+        this := @this: org.jfree.chart.axis.ValueAxis;
+        visible := @parameter0: boolean;
+        this.<org.jfree.chart.axis.ValueAxis: boolean positiveArrowVisible> = visible;
+        $stack2 = new org.jfree.chart.event.AxisChangeEvent;
+        specialinvoke $stack2.<org.jfree.chart.event.AxisChangeEvent: void <init>(org.jfree.chart.axis.Axis)>(this);
+        virtualinvoke this.<org.jfree.chart.axis.ValueAxis: void notifyListeners(org.jfree.chart.event.AxisChangeEvent)>($stack2);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.axis.ValueAxis: void setLowerBound(double)> ----
+    {
+        byte $stack5;
+        double $stack4, $stack6, $stack9, min;
+        org.jfree.chart.axis.ValueAxis this;
+        org.jfree.data.Range $stack10, $stack3, $stack7, $stack8;
+    
+    
+        this := @this: org.jfree.chart.axis.ValueAxis;
+        min := @parameter0: double;
+        $stack3 = this.<org.jfree.chart.axis.ValueAxis: org.jfree.data.Range range>;
+        $stack4 = virtualinvoke $stack3.<org.jfree.data.Range: double getUpperBound()>();
+        $stack5 = $stack4 cmpl min;
+    
+        if $stack5 <= 0 goto label1;
+        $stack10 = new org.jfree.data.Range;
+        $stack8 = this.<org.jfree.chart.axis.ValueAxis: org.jfree.data.Range range>;
+        $stack9 = virtualinvoke $stack8.<org.jfree.data.Range: double getUpperBound()>();
+        specialinvoke $stack10.<org.jfree.data.Range: void <init>(double,double)>(min, $stack9);
+        virtualinvoke this.<org.jfree.chart.axis.ValueAxis: void setRange(org.jfree.data.Range)>($stack10);
+    
+        goto label2;
+    
+      label1:
+        $stack7 = new org.jfree.data.Range;
+        $stack6 = min + 1.0;
+        specialinvoke $stack7.<org.jfree.data.Range: void <init>(double,double)>(min, $stack6);
+        virtualinvoke this.<org.jfree.chart.axis.ValueAxis: void setRange(org.jfree.data.Range)>($stack7);
+    
+      label2:
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.axis.ValueAxis: void zoomRange(double,double)> ----
+    {
+        boolean $stack12;
+        double $stack13, $stack14, $stack15, $stack16, $stack18, $stack19, $stack20, $stack21, $stack22, $stack23, length, lowerPercent, start, upperPercent;
+        java.lang.Object adjusted#0;
+        org.jfree.chart.axis.ValueAxis this;
+        org.jfree.data.Range $stack10, $stack11, $stack17, $stack24, adjusted#1;
+    
+    
+        this := @this: org.jfree.chart.axis.ValueAxis;
+        lowerPercent := @parameter0: double;
+        upperPercent := @parameter1: double;
+        $stack10 = this.<org.jfree.chart.axis.ValueAxis: org.jfree.data.Range range>;
+        start = virtualinvoke $stack10.<org.jfree.data.Range: double getLowerBound()>();
+        $stack11 = this.<org.jfree.chart.axis.ValueAxis: org.jfree.data.Range range>;
+        length = virtualinvoke $stack11.<org.jfree.data.Range: double getLength()>();
+        adjusted#0 = null;
+        $stack12 = virtualinvoke this.<org.jfree.chart.axis.ValueAxis: boolean isInverted()>();
+    
+        if $stack12 == 0 goto label1;
+        $stack24 = new org.jfree.data.Range;
+        $stack18 = 1.0 - upperPercent;
+        $stack19 = length * $stack18;
+        $stack23 = start + $stack19;
+        $stack20 = 1.0 - lowerPercent;
+        $stack21 = length * $stack20;
+        $stack22 = start + $stack21;
+        specialinvoke $stack24.<org.jfree.data.Range: void <init>(double,double)>($stack23, $stack22);
+        adjusted#1 = $stack24;
+    
+        goto label2;
+    
+      label1:
+        $stack17 = new org.jfree.data.Range;
+        $stack13 = length * lowerPercent;
+        $stack16 = start + $stack13;
+        $stack14 = length * upperPercent;
+        $stack15 = start + $stack14;
+        specialinvoke $stack17.<org.jfree.data.Range: void <init>(double,double)>($stack16, $stack15);
+        adjusted#1 = $stack17;
+    
+      label2:
+        virtualinvoke this.<org.jfree.chart.axis.ValueAxis: void setRange(org.jfree.data.Range)>(adjusted#1);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.axis.ValueAxis: boolean equals(java.lang.Object)> ----
+    {
+        boolean $stack12, $stack13, $stack14, $stack20, $stack3, $stack30, $stack31, $stack34, $stack35, $stack36, $stack37, $stack4, $stack5, $stack6, $stack7, $stack8, $stack9;
+        byte $stack17, $stack23, $stack26, $stack29;
+        double $stack15, $stack16, $stack21, $stack22, $stack24, $stack25, $stack27, $stack28;
+        java.lang.Object obj;
+        org.jfree.chart.axis.TickUnitSource $stack32, $stack33;
+        org.jfree.chart.axis.ValueAxis that, this;
+        org.jfree.data.Range $stack10, $stack11, $stack18, $stack19;
+    
+    
+        this := @this: org.jfree.chart.axis.ValueAxis;
+        obj := @parameter0: java.lang.Object;
+    
+        if obj != this goto label01;
+    
+        return 1;
+    
+      label01:
+        $stack3 = obj instanceof org.jfree.chart.axis.ValueAxis;
+    
+        if $stack3 != 0 goto label02;
+    
+        return 0;
+    
+      label02:
+        that = (org.jfree.chart.axis.ValueAxis) obj;
+        $stack5 = this.<org.jfree.chart.axis.ValueAxis: boolean positiveArrowVisible>;
+        $stack4 = that.<org.jfree.chart.axis.ValueAxis: boolean positiveArrowVisible>;
+    
+        if $stack5 == $stack4 goto label03;
+    
+        return 0;
+    
+      label03:
+        $stack7 = this.<org.jfree.chart.axis.ValueAxis: boolean negativeArrowVisible>;
+        $stack6 = that.<org.jfree.chart.axis.ValueAxis: boolean negativeArrowVisible>;
+    
+        if $stack7 == $stack6 goto label04;
+    
+        return 0;
+    
+      label04:
+        $stack9 = this.<org.jfree.chart.axis.ValueAxis: boolean inverted>;
+        $stack8 = that.<org.jfree.chart.axis.ValueAxis: boolean inverted>;
+    
+        if $stack9 == $stack8 goto label05;
+    
+        return 0;
+    
+      label05:
+        $stack11 = this.<org.jfree.chart.axis.ValueAxis: org.jfree.data.Range range>;
+        $stack10 = that.<org.jfree.chart.axis.ValueAxis: org.jfree.data.Range range>;
+        $stack12 = staticinvoke <org.jfree.chart.util.ObjectUtilities: boolean equal(java.lang.Object,java.lang.Object)>($stack11, $stack10);
+    
+        if $stack12 != 0 goto label06;
+    
+        return 0;
+    
+      label06:
+        $stack14 = this.<org.jfree.chart.axis.ValueAxis: boolean autoRange>;
+        $stack13 = that.<org.jfree.chart.axis.ValueAxis: boolean autoRange>;
+    
+        if $stack14 == $stack13 goto label07;
+    
+        return 0;
+    
+      label07:
+        $stack15 = this.<org.jfree.chart.axis.ValueAxis: double autoRangeMinimumSize>;
+        $stack16 = that.<org.jfree.chart.axis.ValueAxis: double autoRangeMinimumSize>;
+        $stack17 = $stack15 cmpl $stack16;
+    
+        if $stack17 == 0 goto label08;
+    
+        return 0;
+    
+      label08:
+        $stack19 = this.<org.jfree.chart.axis.ValueAxis: org.jfree.data.Range defaultAutoRange>;
+        $stack18 = that.<org.jfree.chart.axis.ValueAxis: org.jfree.data.Range defaultAutoRange>;
+        $stack20 = virtualinvoke $stack19.<org.jfree.data.Range: boolean equals(java.lang.Object)>($stack18);
+    
+        if $stack20 != 0 goto label09;
+    
+        return 0;
+    
+      label09:
+        $stack21 = this.<org.jfree.chart.axis.ValueAxis: double upperMargin>;
+        $stack22 = that.<org.jfree.chart.axis.ValueAxis: double upperMargin>;
+        $stack23 = $stack21 cmpl $stack22;
+    
+        if $stack23 == 0 goto label10;
+    
+        return 0;
+    
+      label10:
+        $stack24 = this.<org.jfree.chart.axis.ValueAxis: double lowerMargin>;
+        $stack25 = that.<org.jfree.chart.axis.ValueAxis: double lowerMargin>;
+        $stack26 = $stack24 cmpl $stack25;
+    
+        if $stack26 == 0 goto label11;
+    
+        return 0;
+    
+      label11:
+        $stack27 = this.<org.jfree.chart.axis.ValueAxis: double fixedAutoRange>;
+        $stack28 = that.<org.jfree.chart.axis.ValueAxis: double fixedAutoRange>;
+        $stack29 = $stack27 cmpl $stack28;
+    
+        if $stack29 == 0 goto label12;
+    
+        return 0;
+    
+      label12:
+        $stack31 = this.<org.jfree.chart.axis.ValueAxis: boolean autoTickUnitSelection>;
+        $stack30 = that.<org.jfree.chart.axis.ValueAxis: boolean autoTickUnitSelection>;
+    
+        if $stack31 == $stack30 goto label13;
+    
+        return 0;
+    
+      label13:
+        $stack33 = this.<org.jfree.chart.axis.ValueAxis: org.jfree.chart.axis.TickUnitSource standardTickUnits>;
+        $stack32 = that.<org.jfree.chart.axis.ValueAxis: org.jfree.chart.axis.TickUnitSource standardTickUnits>;
+        $stack34 = staticinvoke <org.jfree.chart.util.ObjectUtilities: boolean equal(java.lang.Object,java.lang.Object)>($stack33, $stack32);
+    
+        if $stack34 != 0 goto label14;
+    
+        return 0;
+    
+      label14:
+        $stack36 = this.<org.jfree.chart.axis.ValueAxis: boolean verticalTickLabels>;
+        $stack35 = that.<org.jfree.chart.axis.ValueAxis: boolean verticalTickLabels>;
+    
+        if $stack36 == $stack35 goto label15;
+    
+        return 0;
+    
+      label15:
+        $stack37 = specialinvoke this.<org.jfree.chart.axis.Axis: boolean equals(java.lang.Object)>(obj);
+    
+        return $stack37;
+    }
+
+    // ---- method: <org.jfree.chart.axis.ValueAxis: boolean isVerticalTickLabels()> ----
+    {
+        boolean $stack1;
+        org.jfree.chart.axis.ValueAxis this;
+    
+    
+        this := @this: org.jfree.chart.axis.ValueAxis;
+        $stack1 = this.<org.jfree.chart.axis.ValueAxis: boolean verticalTickLabels>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.axis.ValueAxis: void setRangeAboutValue(double,double)> ----
+    {
+        double $stack5, $stack6, $stack7, $stack8, length, value;
+        org.jfree.chart.axis.ValueAxis this;
+        org.jfree.data.Range $stack9;
+    
+    
+        this := @this: org.jfree.chart.axis.ValueAxis;
+        value := @parameter0: double;
+        length := @parameter1: double;
+        $stack9 = new org.jfree.data.Range;
+        $stack5 = length / 2.0;
+        $stack8 = value - $stack5;
+        $stack6 = length / 2.0;
+        $stack7 = value + $stack6;
+        specialinvoke $stack9.<org.jfree.data.Range: void <init>(double,double)>($stack8, $stack7);
+        virtualinvoke this.<org.jfree.chart.axis.ValueAxis: void setRange(org.jfree.data.Range)>($stack9);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.axis.ValueAxis: double getLowerMargin()> ----
+    {
+        double $stack1;
+        org.jfree.chart.axis.ValueAxis this;
+    
+    
+        this := @this: org.jfree.chart.axis.ValueAxis;
+        $stack1 = this.<org.jfree.chart.axis.ValueAxis: double lowerMargin>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.axis.ValueAxis: void setAutoTickUnitSelection(boolean)> ----
+    {
+        boolean flag;
+        org.jfree.chart.axis.ValueAxis this;
+    
+    
+        this := @this: org.jfree.chart.axis.ValueAxis;
+        flag := @parameter0: boolean;
+        virtualinvoke this.<org.jfree.chart.axis.ValueAxis: void setAutoTickUnitSelection(boolean,boolean)>(flag, 1);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.axis.ValueAxis: double java2DToValue(double,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)> ----
+    // (abstract or native – no body)
+
+    // ---- method: <org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)> ----
+    // (abstract or native – no body)
+
+    // ---- method: <org.jfree.chart.axis.ValueAxis: double lengthToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)> ----
+    {
+        double $stack10, $stack9, l, length, zero;
+        java.awt.geom.Rectangle2D area;
+        org.jfree.chart.axis.ValueAxis this;
+        org.jfree.chart.util.RectangleEdge edge;
+    
+    
+        this := @this: org.jfree.chart.axis.ValueAxis;
+        length := @parameter0: double;
+        area := @parameter1: java.awt.geom.Rectangle2D;
+        edge := @parameter2: org.jfree.chart.util.RectangleEdge;
+        zero = virtualinvoke this.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)>(0.0, area, edge);
+        l = virtualinvoke this.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)>(length, area, edge);
+        $stack9 = l - zero;
+        $stack10 = staticinvoke <java.lang.Math: double abs(double)>($stack9);
+    
+        return $stack10;
+    }
+
+    // ---- method: <org.jfree.chart.axis.ValueAxis: void setAutoTickUnitSelection(boolean,boolean)> ----
+    {
+        boolean $stack3, flag, notify;
+        org.jfree.chart.axis.ValueAxis this;
+        org.jfree.chart.event.AxisChangeEvent $stack4;
+    
+    
+        this := @this: org.jfree.chart.axis.ValueAxis;
+        flag := @parameter0: boolean;
+        notify := @parameter1: boolean;
+        $stack3 = this.<org.jfree.chart.axis.ValueAxis: boolean autoTickUnitSelection>;
+    
+        if $stack3 == flag goto label1;
+        this.<org.jfree.chart.axis.ValueAxis: boolean autoTickUnitSelection> = flag;
+    
+        if notify == 0 goto label1;
+        $stack4 = new org.jfree.chart.event.AxisChangeEvent;
+        specialinvoke $stack4.<org.jfree.chart.event.AxisChangeEvent: void <init>(org.jfree.chart.axis.Axis)>(this);
+        virtualinvoke this.<org.jfree.chart.axis.ValueAxis: void notifyListeners(org.jfree.chart.event.AxisChangeEvent)>($stack4);
+    
+      label1:
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.axis.ValueAxis: java.awt.Shape getRightArrow()> ----
+    {
+        java.awt.Shape $stack1;
+        org.jfree.chart.axis.ValueAxis this;
+    
+    
+        this := @this: org.jfree.chart.axis.ValueAxis;
+        $stack1 = this.<org.jfree.chart.axis.ValueAxis: java.awt.Shape rightArrow>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.axis.ValueAxis: void setRange(double,double)> ----
+    {
+        double lower, upper;
+        org.jfree.chart.axis.ValueAxis this;
+        org.jfree.data.Range $stack5;
+    
+    
+        this := @this: org.jfree.chart.axis.ValueAxis;
+        lower := @parameter0: double;
+        upper := @parameter1: double;
+        $stack5 = new org.jfree.data.Range;
+        specialinvoke $stack5.<org.jfree.data.Range: void <init>(double,double)>(lower, upper);
+        virtualinvoke this.<org.jfree.chart.axis.ValueAxis: void setRange(org.jfree.data.Range)>($stack5);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.axis.ValueAxis: double getAutoRangeMinimumSize()> ----
+    {
+        double $stack1;
+        org.jfree.chart.axis.ValueAxis this;
+    
+    
+        this := @this: org.jfree.chart.axis.ValueAxis;
+        $stack1 = this.<org.jfree.chart.axis.ValueAxis: double autoRangeMinimumSize>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.axis.ValueAxis: java.lang.Object clone()> ----
+    {
+        java.lang.Object $stack2;
+        org.jfree.chart.axis.ValueAxis clone, this;
+    
+    
+        this := @this: org.jfree.chart.axis.ValueAxis;
+        $stack2 = specialinvoke this.<org.jfree.chart.axis.Axis: java.lang.Object clone()>();
+        clone = (org.jfree.chart.axis.ValueAxis) $stack2;
+    
+        return clone;
+    }
+
+    // ---- method: <org.jfree.chart.axis.ValueAxis: float[] calculateAnchorPoint(org.jfree.chart.axis.ValueTick,double,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)> ----
+    {
+        double $stack12, $stack13, $stack14, $stack16, $stack17, $stack19, $stack20, $stack21, $stack23, $stack24, $stack26, $stack27, $stack29, $stack30, $stack31, $stack33, $stack34, $stack36, $stack37, $stack38, cursor;
+        float $stack15, $stack18, $stack22, $stack25, $stack28, $stack32, $stack35, $stack39;
+        float[] result;
+        java.awt.geom.Rectangle2D dataArea;
+        org.jfree.chart.axis.ValueAxis this;
+        org.jfree.chart.axis.ValueTick tick;
+        org.jfree.chart.util.RectangleEdge $stack10, $stack11, $stack8, $stack9, edge;
+        org.jfree.chart.util.RectangleInsets insets;
+    
+    
+        this := @this: org.jfree.chart.axis.ValueAxis;
+        tick := @parameter0: org.jfree.chart.axis.ValueTick;
+        cursor := @parameter1: double;
+        dataArea := @parameter2: java.awt.geom.Rectangle2D;
+        edge := @parameter3: org.jfree.chart.util.RectangleEdge;
+        insets = virtualinvoke this.<org.jfree.chart.axis.ValueAxis: org.jfree.chart.util.RectangleInsets getTickLabelInsets()>();
+        result = newarray (float)[2];
+        $stack8 = <org.jfree.chart.util.RectangleEdge: org.jfree.chart.util.RectangleEdge TOP>;
+    
+        if edge != $stack8 goto label1;
+        $stack33 = virtualinvoke tick.<org.jfree.chart.axis.ValueTick: double getValue()>();
+        $stack34 = virtualinvoke this.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)>($stack33, dataArea, edge);
+        $stack35 = (float) $stack34;
+        result[0] = $stack35;
+        $stack36 = virtualinvoke insets.<org.jfree.chart.util.RectangleInsets: double getBottom()>();
+        $stack37 = cursor - $stack36;
+        $stack38 = $stack37 - 2.0;
+        $stack39 = (float) $stack38;
+        result[1] = $stack39;
+    
+        goto label4;
+    
+      label1:
+        $stack9 = <org.jfree.chart.util.RectangleEdge: org.jfree.chart.util.RectangleEdge BOTTOM>;
+    
+        if edge != $stack9 goto label2;
+        $stack26 = virtualinvoke tick.<org.jfree.chart.axis.ValueTick: double getValue()>();
+        $stack27 = virtualinvoke this.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)>($stack26, dataArea, edge);
+        $stack28 = (float) $stack27;
+        result[0] = $stack28;
+        $stack29 = virtualinvoke insets.<org.jfree.chart.util.RectangleInsets: double getTop()>();
+        $stack30 = cursor + $stack29;
+        $stack31 = $stack30 + 2.0;
+        $stack32 = (float) $stack31;
+        result[1] = $stack32;
+    
+        goto label4;
+    
+      label2:
+        $stack10 = <org.jfree.chart.util.RectangleEdge: org.jfree.chart.util.RectangleEdge LEFT>;
+    
+        if edge != $stack10 goto label3;
+        $stack19 = virtualinvoke insets.<org.jfree.chart.util.RectangleInsets: double getLeft()>();
+        $stack20 = cursor - $stack19;
+        $stack21 = $stack20 - 2.0;
+        $stack22 = (float) $stack21;
+        result[0] = $stack22;
+        $stack23 = virtualinvoke tick.<org.jfree.chart.axis.ValueTick: double getValue()>();
+        $stack24 = virtualinvoke this.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)>($stack23, dataArea, edge);
+        $stack25 = (float) $stack24;
+        result[1] = $stack25;
+    
+        goto label4;
+    
+      label3:
+        $stack11 = <org.jfree.chart.util.RectangleEdge: org.jfree.chart.util.RectangleEdge RIGHT>;
+    
+        if edge != $stack11 goto label4;
+        $stack12 = virtualinvoke insets.<org.jfree.chart.util.RectangleInsets: double getRight()>();
+        $stack13 = cursor + $stack12;
+        $stack14 = $stack13 + 2.0;
+        $stack15 = (float) $stack14;
+        result[0] = $stack15;
+        $stack16 = virtualinvoke tick.<org.jfree.chart.axis.ValueTick: double getValue()>();
+        $stack17 = virtualinvoke this.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)>($stack16, dataArea, edge);
+        $stack18 = (float) $stack17;
+        result[1] = $stack18;
+    
+      label4:
+        return result;
+    }
+
+    // ---- method: <org.jfree.chart.axis.ValueAxis: void setLowerMargin(double)> ----
+    {
+        boolean $stack3;
+        double margin;
+        org.jfree.chart.axis.ValueAxis this;
+        org.jfree.chart.event.AxisChangeEvent $stack4;
+    
+    
+        this := @this: org.jfree.chart.axis.ValueAxis;
+        margin := @parameter0: double;
+        this.<org.jfree.chart.axis.ValueAxis: double lowerMargin> = margin;
+        $stack3 = virtualinvoke this.<org.jfree.chart.axis.ValueAxis: boolean isAutoRange()>();
+    
+        if $stack3 == 0 goto label1;
+        virtualinvoke this.<org.jfree.chart.axis.ValueAxis: void autoAdjustRange()>();
+    
+      label1:
+        $stack4 = new org.jfree.chart.event.AxisChangeEvent;
+        specialinvoke $stack4.<org.jfree.chart.event.AxisChangeEvent: void <init>(org.jfree.chart.axis.Axis)>(this);
+        virtualinvoke this.<org.jfree.chart.axis.ValueAxis: void notifyListeners(org.jfree.chart.event.AxisChangeEvent)>($stack4);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.axis.ValueAxis: org.jfree.data.Range getRange()> ----
+    {
+        org.jfree.chart.axis.ValueAxis this;
+        org.jfree.data.Range $stack1;
+    
+    
+        this := @this: org.jfree.chart.axis.ValueAxis;
+        $stack1 = this.<org.jfree.chart.axis.ValueAxis: org.jfree.data.Range range>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.axis.ValueAxis: boolean isInverted()> ----
+    {
+        boolean $stack1;
+        org.jfree.chart.axis.ValueAxis this;
+    
+    
+        this := @this: org.jfree.chart.axis.ValueAxis;
+        $stack1 = this.<org.jfree.chart.axis.ValueAxis: boolean inverted>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.axis.ValueAxis: boolean isAutoRange()> ----
+    {
+        boolean $stack1;
+        org.jfree.chart.axis.ValueAxis this;
+    
+    
+        this := @this: org.jfree.chart.axis.ValueAxis;
+        $stack1 = this.<org.jfree.chart.axis.ValueAxis: boolean autoRange>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.axis.ValueAxis: void setRangeWithMargins(org.jfree.data.Range)> ----
+    {
+        org.jfree.chart.axis.ValueAxis this;
+        org.jfree.data.Range range;
+    
+    
+        this := @this: org.jfree.chart.axis.ValueAxis;
+        range := @parameter0: org.jfree.data.Range;
+        virtualinvoke this.<org.jfree.chart.axis.ValueAxis: void setRangeWithMargins(org.jfree.data.Range,boolean,boolean)>(range, 1, 1);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.axis.ValueAxis: void <clinit>()> ----
+    {
+        org.jfree.data.Range $stack0;
+    
+    
+        $stack0 = new org.jfree.data.Range;
+        specialinvoke $stack0.<org.jfree.data.Range: void <init>(double,double)>(0.0, 1.0);
+        <org.jfree.chart.axis.ValueAxis: org.jfree.data.Range DEFAULT_RANGE> = $stack0;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.axis.ValueAxis: double getLowerBound()> ----
+    {
+        double $stack2;
+        org.jfree.chart.axis.ValueAxis this;
+        org.jfree.data.Range $stack1;
+    
+    
+        this := @this: org.jfree.chart.axis.ValueAxis;
+        $stack1 = this.<org.jfree.chart.axis.ValueAxis: org.jfree.data.Range range>;
+        $stack2 = virtualinvoke $stack1.<org.jfree.data.Range: double getLowerBound()>();
+    
+        return $stack2;
+    }
+
+    // ---- method: <org.jfree.chart.axis.ValueAxis: double findMaximumTickLabelHeight(java.util.List,java.awt.Graphics2D,java.awt.geom.Rectangle2D,boolean)> ----
+    {
+        boolean $stack19, vertical;
+        byte $stack27;
+        double $stack15, $stack16, $stack17, $stack18, $stack22, $stack23, $stack24, $stack25, $stack26, $stack28, $stack29, $stack30, $stack31, maxHeight;
+        float $stack14;
+        java.awt.Font font;
+        java.awt.FontMetrics fm#0;
+        java.awt.Graphics2D g2;
+        java.awt.font.FontRenderContext $stack13;
+        java.awt.font.LineMetrics fm#1;
+        java.awt.geom.Rectangle2D drawArea, labelBounds;
+        java.lang.Object $stack20;
+        java.lang.String $stack21;
+        java.util.Iterator iterator;
+        java.util.List ticks;
+        org.jfree.chart.axis.Tick tick;
+        org.jfree.chart.axis.ValueAxis this;
+        org.jfree.chart.util.RectangleInsets insets;
+    
+    
+        this := @this: org.jfree.chart.axis.ValueAxis;
+        ticks := @parameter0: java.util.List;
+        g2 := @parameter1: java.awt.Graphics2D;
+        drawArea := @parameter2: java.awt.geom.Rectangle2D;
+        vertical := @parameter3: boolean;
+        insets = virtualinvoke this.<org.jfree.chart.axis.ValueAxis: org.jfree.chart.util.RectangleInsets getTickLabelInsets()>();
+        font = virtualinvoke this.<org.jfree.chart.axis.ValueAxis: java.awt.Font getTickLabelFont()>();
+        maxHeight = 0.0;
+    
+        if vertical == 0 goto label4;
+        fm#0 = virtualinvoke g2.<java.awt.Graphics2D: java.awt.FontMetrics getFontMetrics(java.awt.Font)>(font);
+        iterator = interfaceinvoke ticks.<java.util.List: java.util.Iterator iterator()>();
+    
+      label1:
+        $stack19 = interfaceinvoke iterator.<java.util.Iterator: boolean hasNext()>();
+    
+        if $stack19 == 0 goto label3;
+        $stack20 = interfaceinvoke iterator.<java.util.Iterator: java.lang.Object next()>();
+        tick = (org.jfree.chart.axis.Tick) $stack20;
+        $stack21 = virtualinvoke tick.<org.jfree.chart.axis.Tick: java.lang.String getText()>();
+        labelBounds = staticinvoke <org.jfree.chart.text.TextUtilities: java.awt.geom.Rectangle2D getTextBounds(java.lang.String,java.awt.Graphics2D,java.awt.FontMetrics)>($stack21, g2, fm#0);
+        $stack22 = virtualinvoke labelBounds.<java.awt.geom.Rectangle2D: double getWidth()>();
+        $stack23 = virtualinvoke insets.<org.jfree.chart.util.RectangleInsets: double getTop()>();
+        $stack24 = $stack22 + $stack23;
+        $stack25 = virtualinvoke insets.<org.jfree.chart.util.RectangleInsets: double getBottom()>();
+        $stack26 = $stack24 + $stack25;
+        $stack27 = $stack26 cmpl maxHeight;
+    
+        if $stack27 <= 0 goto label2;
+        $stack28 = virtualinvoke labelBounds.<java.awt.geom.Rectangle2D: double getWidth()>();
+        $stack29 = virtualinvoke insets.<org.jfree.chart.util.RectangleInsets: double getTop()>();
+        $stack30 = $stack28 + $stack29;
+        $stack31 = virtualinvoke insets.<org.jfree.chart.util.RectangleInsets: double getBottom()>();
+        maxHeight = $stack30 + $stack31;
+    
+      label2:
+        goto label1;
+    
+      label3:
+        goto label5;
+    
+      label4:
+        $stack13 = virtualinvoke g2.<java.awt.Graphics2D: java.awt.font.FontRenderContext getFontRenderContext()>();
+        fm#1 = virtualinvoke font.<java.awt.Font: java.awt.font.LineMetrics getLineMetrics(java.lang.String,java.awt.font.FontRenderContext)>("ABCxyz", $stack13);
+        $stack14 = virtualinvoke fm#1.<java.awt.font.LineMetrics: float getHeight()>();
+        $stack15 = (double) $stack14;
+        $stack16 = virtualinvoke insets.<org.jfree.chart.util.RectangleInsets: double getTop()>();
+        $stack17 = $stack15 + $stack16;
+        $stack18 = virtualinvoke insets.<org.jfree.chart.util.RectangleInsets: double getBottom()>();
+        maxHeight = $stack17 + $stack18;
+    
+      label5:
+        return maxHeight;
+    }
+
+    // ---- method: <org.jfree.chart.axis.ValueAxis: void autoAdjustRange()> ----
+    // (abstract or native – no body)
+
+    // ---- method: <org.jfree.chart.axis.ValueAxis: void setAutoRangeMinimumSize(double)> ----
+    {
+        double size;
+        org.jfree.chart.axis.ValueAxis this;
+    
+    
+        this := @this: org.jfree.chart.axis.ValueAxis;
+        size := @parameter0: double;
+        virtualinvoke this.<org.jfree.chart.axis.ValueAxis: void setAutoRangeMinimumSize(double,boolean)>(size, 1);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.axis.ValueAxis: void setUpperBound(double)> ----
+    {
+        byte $stack5;
+        double $stack4, $stack6, $stack8, max;
+        org.jfree.chart.axis.ValueAxis this;
+        org.jfree.data.Range $stack3, $stack7, $stack9;
+    
+    
+        this := @this: org.jfree.chart.axis.ValueAxis;
+        max := @parameter0: double;
+        $stack3 = this.<org.jfree.chart.axis.ValueAxis: org.jfree.data.Range range>;
+        $stack4 = virtualinvoke $stack3.<org.jfree.data.Range: double getLowerBound()>();
+        $stack5 = $stack4 cmpg max;
+    
+        if $stack5 >= 0 goto label1;
+        $stack9 = new org.jfree.data.Range;
+        $stack7 = this.<org.jfree.chart.axis.ValueAxis: org.jfree.data.Range range>;
+        $stack8 = virtualinvoke $stack7.<org.jfree.data.Range: double getLowerBound()>();
+        specialinvoke $stack9.<org.jfree.data.Range: void <init>(double,double)>($stack8, max);
+        virtualinvoke this.<org.jfree.chart.axis.ValueAxis: void setRange(org.jfree.data.Range)>($stack9);
+    
+        goto label2;
+    
+      label1:
+        $stack6 = max - 1.0;
+        virtualinvoke this.<org.jfree.chart.axis.ValueAxis: void setRange(double,double)>($stack6, max);
+    
+      label2:
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.axis.ValueAxis: double getFixedAutoRange()> ----
+    {
+        double $stack1;
+        org.jfree.chart.axis.ValueAxis this;
+    
+    
+        this := @this: org.jfree.chart.axis.ValueAxis;
+        $stack1 = this.<org.jfree.chart.axis.ValueAxis: double fixedAutoRange>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.axis.ValueAxis: void setAutoRange(boolean,boolean)> ----
+    {
+        boolean $stack3, $stack4, auto, notify;
+        org.jfree.chart.axis.ValueAxis this;
+        org.jfree.chart.event.AxisChangeEvent $stack5;
+    
+    
+        this := @this: org.jfree.chart.axis.ValueAxis;
+        auto := @parameter0: boolean;
+        notify := @parameter1: boolean;
+        $stack3 = this.<org.jfree.chart.axis.ValueAxis: boolean autoRange>;
+    
+        if $stack3 == auto goto label2;
+        this.<org.jfree.chart.axis.ValueAxis: boolean autoRange> = auto;
+        $stack4 = this.<org.jfree.chart.axis.ValueAxis: boolean autoRange>;
+    
+        if $stack4 == 0 goto label1;
+        virtualinvoke this.<org.jfree.chart.axis.ValueAxis: void autoAdjustRange()>();
+    
+      label1:
+        if notify == 0 goto label2;
+        $stack5 = new org.jfree.chart.event.AxisChangeEvent;
+        specialinvoke $stack5.<org.jfree.chart.event.AxisChangeEvent: void <init>(org.jfree.chart.axis.Axis)>(this);
+        virtualinvoke this.<org.jfree.chart.axis.ValueAxis: void notifyListeners(org.jfree.chart.event.AxisChangeEvent)>($stack5);
+    
+      label2:
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.axis.ValueAxis: org.jfree.data.Range getDefaultAutoRange()> ----
+    {
+        org.jfree.chart.axis.ValueAxis this;
+        org.jfree.data.Range $stack1;
+    
+    
+        this := @this: org.jfree.chart.axis.ValueAxis;
+        $stack1 = this.<org.jfree.chart.axis.ValueAxis: org.jfree.data.Range defaultAutoRange>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.axis.ValueAxis: boolean isPositiveArrowVisible()> ----
+    {
+        boolean $stack1;
+        org.jfree.chart.axis.ValueAxis this;
+    
+    
+        this := @this: org.jfree.chart.axis.ValueAxis;
+        $stack1 = this.<org.jfree.chart.axis.ValueAxis: boolean positiveArrowVisible>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.axis.ValueAxis: boolean isNegativeArrowVisible()> ----
+    {
+        boolean $stack1;
+        org.jfree.chart.axis.ValueAxis this;
+    
+    
+        this := @this: org.jfree.chart.axis.ValueAxis;
+        $stack1 = this.<org.jfree.chart.axis.ValueAxis: boolean negativeArrowVisible>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.axis.ValueAxis: void setNegativeArrowVisible(boolean)> ----
+    {
+        boolean visible;
+        org.jfree.chart.axis.ValueAxis this;
+        org.jfree.chart.event.AxisChangeEvent $stack2;
+    
+    
+        this := @this: org.jfree.chart.axis.ValueAxis;
+        visible := @parameter0: boolean;
+        this.<org.jfree.chart.axis.ValueAxis: boolean negativeArrowVisible> = visible;
+        $stack2 = new org.jfree.chart.event.AxisChangeEvent;
+        specialinvoke $stack2.<org.jfree.chart.event.AxisChangeEvent: void <init>(org.jfree.chart.axis.Axis)>(this);
+        virtualinvoke this.<org.jfree.chart.axis.ValueAxis: void notifyListeners(org.jfree.chart.event.AxisChangeEvent)>($stack2);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.axis.ValueAxis: void setRange(org.jfree.data.Range,boolean,boolean)> ----
+    {
+        boolean notify, turnOffAutoRange;
+        java.lang.IllegalArgumentException #l0;
+        java.lang.Object $stack5;
+        java.lang.Throwable #l1;
+        org.jfree.chart.axis.ValueAxis this;
+        org.jfree.chart.event.AxisChangeEvent $stack4;
+        org.jfree.data.Range range;
+    
+    
+        this := @this: org.jfree.chart.axis.ValueAxis;
+        range := @parameter0: org.jfree.data.Range;
+        turnOffAutoRange := @parameter1: boolean;
+        notify := @parameter2: boolean;
+    
+        if range != null goto label1;
+        $stack5 = new java.lang.IllegalArgumentException;
+        #l0 = (java.lang.IllegalArgumentException) $stack5;
+        specialinvoke #l0.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'range\' argument.");
+        #l1 = (java.lang.Throwable) $stack5;
+    
+        throw #l1;
+    
+      label1:
+        if turnOffAutoRange == 0 goto label2;
+        this.<org.jfree.chart.axis.ValueAxis: boolean autoRange> = 0;
+    
+      label2:
+        this.<org.jfree.chart.axis.ValueAxis: org.jfree.data.Range range> = range;
+    
+        if notify == 0 goto label3;
+        $stack4 = new org.jfree.chart.event.AxisChangeEvent;
+        specialinvoke $stack4.<org.jfree.chart.event.AxisChangeEvent: void <init>(org.jfree.chart.axis.Axis)>(this);
+        virtualinvoke this.<org.jfree.chart.axis.ValueAxis: void notifyListeners(org.jfree.chart.event.AxisChangeEvent)>($stack4);
+    
+      label3:
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.axis.ValueAxis: void setVerticalTickLabels(boolean)> ----
+    {
+        boolean $stack2, flag;
+        org.jfree.chart.axis.ValueAxis this;
+        org.jfree.chart.event.AxisChangeEvent $stack3;
+    
+    
+        this := @this: org.jfree.chart.axis.ValueAxis;
+        flag := @parameter0: boolean;
+        $stack2 = this.<org.jfree.chart.axis.ValueAxis: boolean verticalTickLabels>;
+    
+        if $stack2 == flag goto label1;
+        this.<org.jfree.chart.axis.ValueAxis: boolean verticalTickLabels> = flag;
+        $stack3 = new org.jfree.chart.event.AxisChangeEvent;
+        specialinvoke $stack3.<org.jfree.chart.event.AxisChangeEvent: void <init>(org.jfree.chart.axis.Axis)>(this);
+        virtualinvoke this.<org.jfree.chart.axis.ValueAxis: void notifyListeners(org.jfree.chart.event.AxisChangeEvent)>($stack3);
+    
+      label1:
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.axis.ValueAxis: org.jfree.chart.axis.AxisSpace reserveSpace(java.awt.Graphics2D,org.jfree.chart.plot.Plot,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge,org.jfree.chart.axis.AxisSpace)> ----
+    {
+        boolean $stack17, $stack19, $stack20, $stack21, $stack26, $stack27, $stack28, $stack29;
+        byte $stack18;
+        double $stack22, $stack23, dimension, labelHeight#0, labelHeight#1, labelWidth#0, labelWidth#1, tickLabelHeight, tickLabelWidth;
+        java.awt.Font $stack24;
+        java.awt.Graphics2D g2;
+        java.awt.geom.Rectangle2D plotArea, ticks#1;
+        java.util.List ticks#0;
+        org.jfree.chart.axis.AxisSpace $stack30, space;
+        org.jfree.chart.axis.AxisState $stack25;
+        org.jfree.chart.axis.ValueAxis this;
+        org.jfree.chart.plot.Plot plot;
+        org.jfree.chart.util.RectangleEdge edge;
+    
+    
+        this := @this: org.jfree.chart.axis.ValueAxis;
+        g2 := @parameter0: java.awt.Graphics2D;
+        plot := @parameter1: org.jfree.chart.plot.Plot;
+        plotArea := @parameter2: java.awt.geom.Rectangle2D;
+        edge := @parameter3: org.jfree.chart.util.RectangleEdge;
+        space := @parameter4: org.jfree.chart.axis.AxisSpace;
+    
+        if space != null goto label1;
+        $stack30 = new org.jfree.chart.axis.AxisSpace;
+        specialinvoke $stack30.<org.jfree.chart.axis.AxisSpace: void <init>()>();
+        space = $stack30;
+    
+      label1:
+        $stack17 = virtualinvoke this.<org.jfree.chart.axis.ValueAxis: boolean isVisible()>();
+    
+        if $stack17 != 0 goto label2;
+    
+        return space;
+    
+      label2:
+        dimension = virtualinvoke this.<org.jfree.chart.axis.ValueAxis: double getFixedDimension()>();
+        $stack18 = dimension cmpl 0.0;
+    
+        if $stack18 <= 0 goto label3;
+        virtualinvoke space.<org.jfree.chart.axis.AxisSpace: void ensureAtLeast(double,org.jfree.chart.util.RectangleEdge)>(dimension, edge);
+    
+      label3:
+        tickLabelHeight = 0.0;
+        tickLabelWidth = 0.0;
+        $stack19 = virtualinvoke this.<org.jfree.chart.axis.ValueAxis: boolean isTickLabelsVisible()>();
+    
+        if $stack19 == 0 goto label5;
+        $stack24 = virtualinvoke this.<org.jfree.chart.axis.ValueAxis: java.awt.Font getTickLabelFont()>();
+        virtualinvoke g2.<java.awt.Graphics2D: void setFont(java.awt.Font)>($stack24);
+        $stack25 = new org.jfree.chart.axis.AxisState;
+        specialinvoke $stack25.<org.jfree.chart.axis.AxisState: void <init>()>();
+        ticks#0 = virtualinvoke this.<org.jfree.chart.axis.ValueAxis: java.util.List refreshTicks(java.awt.Graphics2D,org.jfree.chart.axis.AxisState,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)>(g2, $stack25, plotArea, edge);
+        $stack26 = staticinvoke <org.jfree.chart.util.RectangleEdge: boolean isTopOrBottom(org.jfree.chart.util.RectangleEdge)>(edge);
+    
+        if $stack26 == 0 goto label4;
+        $stack29 = virtualinvoke this.<org.jfree.chart.axis.ValueAxis: boolean isVerticalTickLabels()>();
+        tickLabelHeight = virtualinvoke this.<org.jfree.chart.axis.ValueAxis: double findMaximumTickLabelHeight(java.util.List,java.awt.Graphics2D,java.awt.geom.Rectangle2D,boolean)>(ticks#0, g2, plotArea, $stack29);
+    
+        goto label5;
+    
+      label4:
+        $stack27 = staticinvoke <org.jfree.chart.util.RectangleEdge: boolean isLeftOrRight(org.jfree.chart.util.RectangleEdge)>(edge);
+    
+        if $stack27 == 0 goto label5;
+        $stack28 = virtualinvoke this.<org.jfree.chart.axis.ValueAxis: boolean isVerticalTickLabels()>();
+        tickLabelWidth = virtualinvoke this.<org.jfree.chart.axis.ValueAxis: double findMaximumTickLabelWidth(java.util.List,java.awt.Graphics2D,java.awt.geom.Rectangle2D,boolean)>(ticks#0, g2, plotArea, $stack28);
+    
+      label5:
+        ticks#1 = virtualinvoke this.<org.jfree.chart.axis.ValueAxis: java.awt.geom.Rectangle2D getLabelEnclosure(java.awt.Graphics2D,org.jfree.chart.util.RectangleEdge)>(g2, edge);
+        labelHeight#0 = 0.0;
+        labelWidth#0 = 0.0;
+        $stack20 = staticinvoke <org.jfree.chart.util.RectangleEdge: boolean isTopOrBottom(org.jfree.chart.util.RectangleEdge)>(edge);
+    
+        if $stack20 == 0 goto label6;
+        labelHeight#1 = virtualinvoke ticks#1.<java.awt.geom.Rectangle2D: double getHeight()>();
+        $stack23 = labelHeight#1 + tickLabelHeight;
+        virtualinvoke space.<org.jfree.chart.axis.AxisSpace: void add(double,org.jfree.chart.util.RectangleEdge)>($stack23, edge);
+    
+        goto label7;
+    
+      label6:
+        $stack21 = staticinvoke <org.jfree.chart.util.RectangleEdge: boolean isLeftOrRight(org.jfree.chart.util.RectangleEdge)>(edge);
+    
+        if $stack21 == 0 goto label7;
+        labelWidth#1 = virtualinvoke ticks#1.<java.awt.geom.Rectangle2D: double getWidth()>();
+        $stack22 = labelWidth#1 + tickLabelWidth;
+        virtualinvoke space.<org.jfree.chart.axis.AxisSpace: void add(double,org.jfree.chart.util.RectangleEdge)>($stack22, edge);
+    
+      label7:
+        return space;
+    }
+
+}

@@ -1,0 +1,732 @@
+// ========================================================================
+// CLASS : org.jfree.chart.renderer.category.GanttRenderer
+// ========================================================================
+
+[PUBLIC, SUPER] class org.jfree.chart.renderer.category.GanttRenderer extends org.jfree.chart.renderer.category.IntervalBarRenderer implements java.io.Serializable {
+
+    // ---- method: <org.jfree.chart.renderer.category.GanttRenderer: java.awt.Paint getCompletePaint()> ----
+    {
+        java.awt.Paint $stack1;
+        org.jfree.chart.renderer.category.GanttRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.category.GanttRenderer;
+        $stack1 = this.<org.jfree.chart.renderer.category.GanttRenderer: java.awt.Paint completePaint>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.category.GanttRenderer: void writeObject(java.io.ObjectOutputStream)> ----
+    {
+        java.awt.Paint $stack2, $stack3;
+        java.io.ObjectOutputStream stream;
+        org.jfree.chart.renderer.category.GanttRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.category.GanttRenderer;
+        stream := @parameter0: java.io.ObjectOutputStream;
+        virtualinvoke stream.<java.io.ObjectOutputStream: void defaultWriteObject()>();
+        $stack2 = this.<org.jfree.chart.renderer.category.GanttRenderer: java.awt.Paint completePaint>;
+        staticinvoke <org.jfree.chart.util.SerialUtilities: void writePaint(java.awt.Paint,java.io.ObjectOutputStream)>($stack2, stream);
+        $stack3 = this.<org.jfree.chart.renderer.category.GanttRenderer: java.awt.Paint incompletePaint>;
+        staticinvoke <org.jfree.chart.util.SerialUtilities: void writePaint(java.awt.Paint,java.io.ObjectOutputStream)>($stack3, stream);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.category.GanttRenderer: double getStartPercent()> ----
+    {
+        double $stack1;
+        org.jfree.chart.renderer.category.GanttRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.category.GanttRenderer;
+        $stack1 = this.<org.jfree.chart.renderer.category.GanttRenderer: double startPercent>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.category.GanttRenderer: void readObject(java.io.ObjectInputStream)> ----
+    {
+        java.awt.Paint $stack2, $stack3;
+        java.io.ObjectInputStream stream;
+        org.jfree.chart.renderer.category.GanttRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.category.GanttRenderer;
+        stream := @parameter0: java.io.ObjectInputStream;
+        virtualinvoke stream.<java.io.ObjectInputStream: void defaultReadObject()>();
+        $stack2 = staticinvoke <org.jfree.chart.util.SerialUtilities: java.awt.Paint readPaint(java.io.ObjectInputStream)>(stream);
+        this.<org.jfree.chart.renderer.category.GanttRenderer: java.awt.Paint completePaint> = $stack2;
+        $stack3 = staticinvoke <org.jfree.chart.util.SerialUtilities: java.awt.Paint readPaint(java.io.ObjectInputStream)>(stream);
+        this.<org.jfree.chart.renderer.category.GanttRenderer: java.awt.Paint incompletePaint> = $stack3;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.category.GanttRenderer: boolean equals(java.lang.Object)> ----
+    {
+        boolean $stack16, $stack3, $stack6, $stack9;
+        byte $stack12, $stack15;
+        double $stack10, $stack11, $stack13, $stack14;
+        java.awt.Paint $stack4, $stack5, $stack7, $stack8;
+        java.lang.Object obj;
+        org.jfree.chart.renderer.category.GanttRenderer that, this;
+    
+    
+        this := @this: org.jfree.chart.renderer.category.GanttRenderer;
+        obj := @parameter0: java.lang.Object;
+    
+        if obj != this goto label1;
+    
+        return 1;
+    
+      label1:
+        $stack3 = obj instanceof org.jfree.chart.renderer.category.GanttRenderer;
+    
+        if $stack3 != 0 goto label2;
+    
+        return 0;
+    
+      label2:
+        that = (org.jfree.chart.renderer.category.GanttRenderer) obj;
+        $stack5 = this.<org.jfree.chart.renderer.category.GanttRenderer: java.awt.Paint completePaint>;
+        $stack4 = that.<org.jfree.chart.renderer.category.GanttRenderer: java.awt.Paint completePaint>;
+        $stack6 = staticinvoke <org.jfree.chart.util.PaintUtilities: boolean equal(java.awt.Paint,java.awt.Paint)>($stack5, $stack4);
+    
+        if $stack6 != 0 goto label3;
+    
+        return 0;
+    
+      label3:
+        $stack8 = this.<org.jfree.chart.renderer.category.GanttRenderer: java.awt.Paint incompletePaint>;
+        $stack7 = that.<org.jfree.chart.renderer.category.GanttRenderer: java.awt.Paint incompletePaint>;
+        $stack9 = staticinvoke <org.jfree.chart.util.PaintUtilities: boolean equal(java.awt.Paint,java.awt.Paint)>($stack8, $stack7);
+    
+        if $stack9 != 0 goto label4;
+    
+        return 0;
+    
+      label4:
+        $stack10 = this.<org.jfree.chart.renderer.category.GanttRenderer: double startPercent>;
+        $stack11 = that.<org.jfree.chart.renderer.category.GanttRenderer: double startPercent>;
+        $stack12 = $stack10 cmpl $stack11;
+    
+        if $stack12 == 0 goto label5;
+    
+        return 0;
+    
+      label5:
+        $stack13 = this.<org.jfree.chart.renderer.category.GanttRenderer: double endPercent>;
+        $stack14 = that.<org.jfree.chart.renderer.category.GanttRenderer: double endPercent>;
+        $stack15 = $stack13 cmpl $stack14;
+    
+        if $stack15 == 0 goto label6;
+    
+        return 0;
+    
+      label6:
+        $stack16 = specialinvoke this.<org.jfree.chart.renderer.category.IntervalBarRenderer: boolean equals(java.lang.Object)>(obj);
+    
+        return $stack16;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.category.GanttRenderer: void setStartPercent(double)> ----
+    {
+        double percent;
+        org.jfree.chart.event.RendererChangeEvent $stack3;
+        org.jfree.chart.renderer.category.GanttRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.category.GanttRenderer;
+        percent := @parameter0: double;
+        this.<org.jfree.chart.renderer.category.GanttRenderer: double startPercent> = percent;
+        $stack3 = new org.jfree.chart.event.RendererChangeEvent;
+        specialinvoke $stack3.<org.jfree.chart.event.RendererChangeEvent: void <init>(java.lang.Object)>(this);
+        virtualinvoke this.<org.jfree.chart.renderer.category.GanttRenderer: void notifyListeners(org.jfree.chart.event.RendererChangeEvent)>($stack3);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.category.GanttRenderer: void <init>()> ----
+    {
+        java.lang.Object $stack1, $stack2;
+        org.jfree.chart.renderer.category.GanttRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.category.GanttRenderer;
+        specialinvoke this.<org.jfree.chart.renderer.category.IntervalBarRenderer: void <init>()>();
+        virtualinvoke this.<org.jfree.chart.renderer.category.GanttRenderer: void setIncludeBaseInRange(boolean)>(0);
+        $stack1 = <java.awt.Color: java.awt.Color green>;
+        this.<org.jfree.chart.renderer.category.GanttRenderer: java.awt.Paint completePaint> = (java.awt.Paint) $stack1;
+        $stack2 = <java.awt.Color: java.awt.Color red>;
+        this.<org.jfree.chart.renderer.category.GanttRenderer: java.awt.Paint incompletePaint> = (java.awt.Paint) $stack2;
+        this.<org.jfree.chart.renderer.category.GanttRenderer: double startPercent> = 0.35;
+        this.<org.jfree.chart.renderer.category.GanttRenderer: double endPercent> = 0.65;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.category.GanttRenderer: double getEndPercent()> ----
+    {
+        double $stack1;
+        org.jfree.chart.renderer.category.GanttRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.category.GanttRenderer;
+        $stack1 = this.<org.jfree.chart.renderer.category.GanttRenderer: double endPercent>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.category.GanttRenderer: void drawTask(java.awt.Graphics2D,org.jfree.chart.renderer.category.CategoryItemRendererState,java.awt.geom.Rectangle2D,org.jfree.chart.plot.CategoryPlot,org.jfree.chart.axis.CategoryAxis,org.jfree.chart.axis.ValueAxis,org.jfree.data.gantt.GanttCategoryDataset,int,int)> ----
+    {
+        boolean $stack41, $stack42;
+        byte $stack37, $stack44;
+        double $stack35, $stack36, $stack38, $stack43, $stack51, $stack52, $stack53, $stack54, $stack55, $stack56, $stack57, $stack58, $stack60, $stack61, $stack62, $stack63, $stack64, $stack65, $stack67, $stack68, $stack69, $stack70, $stack71, $stack73, $stack74, $stack75, $stack76, $stack77, $stack78, $stack79, $stack80, end, java2dValue0, java2dValue1, p#0, rectLength, start, temp#0, temp#1, tempNum#1;
+        int column, row;
+        java.awt.Graphics2D g2;
+        java.awt.Paint $stack45, $stack46, p#1, paint#0;
+        java.awt.Shape #l0, #l1, #l2, #l3, #l4;
+        java.awt.Stroke stroke#0;
+        java.awt.geom.Rectangle2D #l5, dataArea;
+        java.awt.geom.Rectangle2D$Double $stack59, $stack66, $stack72, $stack81, $stack82, $stack83;
+        java.lang.Number percent, value0#0, value0#1, value1#0, value1#1;
+        java.lang.Object bar, completeBar, incompleteBar;
+        org.jfree.chart.axis.CategoryAxis domainAxis;
+        org.jfree.chart.axis.ValueAxis rangeAxis;
+        org.jfree.chart.entity.EntityCollection paint#1;
+        org.jfree.chart.labels.CategoryItemLabelGenerator stroke#1;
+        org.jfree.chart.plot.CategoryPlot plot;
+        org.jfree.chart.plot.PlotOrientation $stack39, $stack40, $stack47, $stack48, $stack49, $stack50, orientation;
+        org.jfree.chart.renderer.category.CategoryItemRendererState state;
+        org.jfree.chart.renderer.category.GanttRenderer this;
+        org.jfree.chart.util.RectangleEdge rangeAxisLocation;
+        org.jfree.data.gantt.GanttCategoryDataset dataset;
+    
+    
+        this := @this: org.jfree.chart.renderer.category.GanttRenderer;
+        g2 := @parameter0: java.awt.Graphics2D;
+        state := @parameter1: org.jfree.chart.renderer.category.CategoryItemRendererState;
+        dataArea := @parameter2: java.awt.geom.Rectangle2D;
+        plot := @parameter3: org.jfree.chart.plot.CategoryPlot;
+        domainAxis := @parameter4: org.jfree.chart.axis.CategoryAxis;
+        rangeAxis := @parameter5: org.jfree.chart.axis.ValueAxis;
+        dataset := @parameter6: org.jfree.data.gantt.GanttCategoryDataset;
+        row := @parameter7: int;
+        column := @parameter8: int;
+        orientation = virtualinvoke plot.<org.jfree.chart.plot.CategoryPlot: org.jfree.chart.plot.PlotOrientation getOrientation()>();
+        rangeAxisLocation = virtualinvoke plot.<org.jfree.chart.plot.CategoryPlot: org.jfree.chart.util.RectangleEdge getRangeAxisEdge()>();
+        value0#0 = interfaceinvoke dataset.<org.jfree.data.gantt.GanttCategoryDataset: java.lang.Number getEndValue(int,int)>(row, column);
+    
+        if value0#0 != null goto label01;
+    
+        return;
+    
+      label01:
+        $stack35 = virtualinvoke value0#0.<java.lang.Number: double doubleValue()>();
+        java2dValue0 = virtualinvoke rangeAxis.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)>($stack35, dataArea, rangeAxisLocation);
+        value1#0 = interfaceinvoke dataset.<org.jfree.data.gantt.GanttCategoryDataset: java.lang.Number getStartValue(int,int)>(row, column);
+    
+        if value1#0 != null goto label02;
+    
+        return;
+    
+      label02:
+        $stack36 = virtualinvoke value1#0.<java.lang.Number: double doubleValue()>();
+        java2dValue1 = virtualinvoke rangeAxis.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)>($stack36, dataArea, rangeAxisLocation);
+        $stack37 = java2dValue1 cmpg java2dValue0;
+    
+        if $stack37 >= 0 goto label03;
+        temp#0 = java2dValue1;
+        java2dValue1 = java2dValue0;
+        java2dValue0 = temp#0;
+        value1#1 = value0#0;
+        value0#1 = value1#0;
+    
+      label03:
+        temp#1 = virtualinvoke this.<org.jfree.chart.renderer.category.GanttRenderer: double calculateBarW0(org.jfree.chart.plot.CategoryPlot,org.jfree.chart.plot.PlotOrientation,java.awt.geom.Rectangle2D,org.jfree.chart.axis.CategoryAxis,org.jfree.chart.renderer.category.CategoryItemRendererState,int,int)>(plot, orientation, dataArea, domainAxis, state, row, column);
+        tempNum#1 = virtualinvoke state.<org.jfree.chart.renderer.category.CategoryItemRendererState: double getBarWidth()>();
+        $stack38 = java2dValue1 - java2dValue0;
+        rectLength = staticinvoke <java.lang.Math: double abs(double)>($stack38);
+        bar = null;
+        $stack39 = <org.jfree.chart.plot.PlotOrientation: org.jfree.chart.plot.PlotOrientation HORIZONTAL>;
+    
+        if orientation != $stack39 goto label04;
+        $stack83 = new java.awt.geom.Rectangle2D$Double;
+        specialinvoke $stack83.<java.awt.geom.Rectangle2D$Double: void <init>(double,double,double,double)>(java2dValue0, temp#1, rectLength, tempNum#1);
+        bar = $stack83;
+    
+        goto label05;
+    
+      label04:
+        $stack40 = <org.jfree.chart.plot.PlotOrientation: org.jfree.chart.plot.PlotOrientation VERTICAL>;
+    
+        if orientation != $stack40 goto label05;
+        $stack82 = new java.awt.geom.Rectangle2D$Double;
+        specialinvoke $stack82.<java.awt.geom.Rectangle2D$Double: void <init>(double,double,double,double)>(temp#1, java2dValue1, tempNum#1, rectLength);
+        bar = $stack82;
+    
+      label05:
+        completeBar = null;
+        incompleteBar = null;
+        percent = interfaceinvoke dataset.<org.jfree.data.gantt.GanttCategoryDataset: java.lang.Number getPercentComplete(int,int)>(row, column);
+        start = virtualinvoke this.<org.jfree.chart.renderer.category.GanttRenderer: double getStartPercent()>();
+        end = virtualinvoke this.<org.jfree.chart.renderer.category.GanttRenderer: double getEndPercent()>();
+    
+        if percent == null goto label07;
+        p#0 = virtualinvoke percent.<java.lang.Number: double doubleValue()>();
+        $stack48 = virtualinvoke plot.<org.jfree.chart.plot.CategoryPlot: org.jfree.chart.plot.PlotOrientation getOrientation()>();
+        $stack47 = <org.jfree.chart.plot.PlotOrientation: org.jfree.chart.plot.PlotOrientation HORIZONTAL>;
+    
+        if $stack48 != $stack47 goto label06;
+        $stack72 = new java.awt.geom.Rectangle2D$Double;
+        $stack67 = start * tempNum#1;
+        $stack71 = temp#1 + $stack67;
+        $stack70 = rectLength * p#0;
+        $stack68 = end - start;
+        $stack69 = tempNum#1 * $stack68;
+        specialinvoke $stack72.<java.awt.geom.Rectangle2D$Double: void <init>(double,double,double,double)>(java2dValue0, $stack71, $stack70, $stack69);
+        completeBar = $stack72;
+        $stack81 = new java.awt.geom.Rectangle2D$Double;
+        $stack73 = rectLength * p#0;
+        $stack80 = java2dValue0 + $stack73;
+        $stack74 = start * tempNum#1;
+        $stack79 = temp#1 + $stack74;
+        $stack75 = 1.0 - p#0;
+        $stack78 = rectLength * $stack75;
+        $stack76 = end - start;
+        $stack77 = tempNum#1 * $stack76;
+        specialinvoke $stack81.<java.awt.geom.Rectangle2D$Double: void <init>(double,double,double,double)>($stack80, $stack79, $stack78, $stack77);
+        incompleteBar = $stack81;
+    
+        goto label07;
+    
+      label06:
+        $stack50 = virtualinvoke plot.<org.jfree.chart.plot.CategoryPlot: org.jfree.chart.plot.PlotOrientation getOrientation()>();
+        $stack49 = <org.jfree.chart.plot.PlotOrientation: org.jfree.chart.plot.PlotOrientation VERTICAL>;
+    
+        if $stack50 != $stack49 goto label07;
+        $stack59 = new java.awt.geom.Rectangle2D$Double;
+        $stack51 = start * tempNum#1;
+        $stack58 = temp#1 + $stack51;
+        $stack52 = 1.0 - p#0;
+        $stack53 = rectLength * $stack52;
+        $stack57 = java2dValue1 + $stack53;
+        $stack54 = end - start;
+        $stack56 = tempNum#1 * $stack54;
+        $stack55 = rectLength * p#0;
+        specialinvoke $stack59.<java.awt.geom.Rectangle2D$Double: void <init>(double,double,double,double)>($stack58, $stack57, $stack56, $stack55);
+        completeBar = $stack59;
+        $stack66 = new java.awt.geom.Rectangle2D$Double;
+        $stack60 = start * tempNum#1;
+        $stack65 = temp#1 + $stack60;
+        $stack61 = end - start;
+        $stack64 = tempNum#1 * $stack61;
+        $stack62 = 1.0 - p#0;
+        $stack63 = rectLength * $stack62;
+        specialinvoke $stack66.<java.awt.geom.Rectangle2D$Double: void <init>(double,double,double,double)>($stack65, java2dValue1, $stack64, $stack63);
+        incompleteBar = $stack66;
+    
+      label07:
+        p#1 = virtualinvoke this.<org.jfree.chart.renderer.category.GanttRenderer: java.awt.Paint getItemPaint(int,int)>(row, column);
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>(p#1);
+        #l4 = (java.awt.Shape) bar;
+        virtualinvoke g2.<java.awt.Graphics2D: void fill(java.awt.Shape)>(#l4);
+    
+        if completeBar == null goto label08;
+        $stack46 = virtualinvoke this.<org.jfree.chart.renderer.category.GanttRenderer: java.awt.Paint getCompletePaint()>();
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>($stack46);
+        #l3 = (java.awt.Shape) completeBar;
+        virtualinvoke g2.<java.awt.Graphics2D: void fill(java.awt.Shape)>(#l3);
+    
+      label08:
+        if incompleteBar == null goto label09;
+        $stack45 = virtualinvoke this.<org.jfree.chart.renderer.category.GanttRenderer: java.awt.Paint getIncompletePaint()>();
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>($stack45);
+        #l1 = (java.awt.Shape) incompleteBar;
+        virtualinvoke g2.<java.awt.Graphics2D: void fill(java.awt.Shape)>(#l1);
+    
+      label09:
+        $stack41 = virtualinvoke this.<org.jfree.chart.renderer.category.GanttRenderer: boolean isDrawBarOutline()>();
+    
+        if $stack41 == 0 goto label10;
+        $stack43 = virtualinvoke state.<org.jfree.chart.renderer.category.CategoryItemRendererState: double getBarWidth()>();
+        $stack44 = $stack43 cmpl 3.0;
+    
+        if $stack44 <= 0 goto label10;
+        stroke#0 = virtualinvoke this.<org.jfree.chart.renderer.category.GanttRenderer: java.awt.Stroke getItemOutlineStroke(int,int)>(row, column);
+        paint#0 = virtualinvoke this.<org.jfree.chart.renderer.category.GanttRenderer: java.awt.Paint getItemOutlinePaint(int,int)>(row, column);
+    
+        if stroke#0 == null goto label10;
+    
+        if paint#0 == null goto label10;
+        virtualinvoke g2.<java.awt.Graphics2D: void setStroke(java.awt.Stroke)>(stroke#0);
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>(paint#0);
+        #l0 = (java.awt.Shape) bar;
+        virtualinvoke g2.<java.awt.Graphics2D: void draw(java.awt.Shape)>(#l0);
+    
+      label10:
+        stroke#1 = virtualinvoke this.<org.jfree.chart.renderer.category.GanttRenderer: org.jfree.chart.labels.CategoryItemLabelGenerator getItemLabelGenerator(int,int)>(row, column);
+    
+        if stroke#1 == null goto label11;
+        $stack42 = virtualinvoke this.<org.jfree.chart.renderer.category.GanttRenderer: boolean isItemLabelVisible(int,int)>(row, column);
+    
+        if $stack42 == 0 goto label11;
+        #l5 = (java.awt.geom.Rectangle2D) bar;
+        virtualinvoke this.<org.jfree.chart.renderer.category.GanttRenderer: void drawItemLabel(java.awt.Graphics2D,org.jfree.data.category.CategoryDataset,int,int,org.jfree.chart.plot.CategoryPlot,org.jfree.chart.labels.CategoryItemLabelGenerator,java.awt.geom.Rectangle2D,boolean)>(g2, dataset, row, column, plot, stroke#1, #l5, 0);
+    
+      label11:
+        paint#1 = virtualinvoke state.<org.jfree.chart.renderer.category.CategoryItemRendererState: org.jfree.chart.entity.EntityCollection getEntityCollection()>();
+    
+        if paint#1 == null goto label12;
+        #l2 = (java.awt.Shape) bar;
+        virtualinvoke this.<org.jfree.chart.renderer.category.GanttRenderer: void addItemEntity(org.jfree.chart.entity.EntityCollection,org.jfree.data.category.CategoryDataset,int,int,java.awt.Shape)>(paint#1, dataset, row, column, #l2);
+    
+      label12:
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.category.GanttRenderer: java.awt.Paint getIncompletePaint()> ----
+    {
+        java.awt.Paint $stack1;
+        org.jfree.chart.renderer.category.GanttRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.category.GanttRenderer;
+        $stack1 = this.<org.jfree.chart.renderer.category.GanttRenderer: java.awt.Paint incompletePaint>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.category.GanttRenderer: void setEndPercent(double)> ----
+    {
+        double percent;
+        org.jfree.chart.event.RendererChangeEvent $stack3;
+        org.jfree.chart.renderer.category.GanttRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.category.GanttRenderer;
+        percent := @parameter0: double;
+        this.<org.jfree.chart.renderer.category.GanttRenderer: double endPercent> = percent;
+        $stack3 = new org.jfree.chart.event.RendererChangeEvent;
+        specialinvoke $stack3.<org.jfree.chart.event.RendererChangeEvent: void <init>(java.lang.Object)>(this);
+        virtualinvoke this.<org.jfree.chart.renderer.category.GanttRenderer: void notifyListeners(org.jfree.chart.event.RendererChangeEvent)>($stack3);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.category.GanttRenderer: void setCompletePaint(java.awt.Paint)> ----
+    {
+        java.awt.Paint paint;
+        java.lang.IllegalArgumentException #l1;
+        java.lang.Object $stack3;
+        java.lang.Throwable #l0;
+        org.jfree.chart.event.RendererChangeEvent $stack2;
+        org.jfree.chart.renderer.category.GanttRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.category.GanttRenderer;
+        paint := @parameter0: java.awt.Paint;
+    
+        if paint != null goto label1;
+        $stack3 = new java.lang.IllegalArgumentException;
+        #l1 = (java.lang.IllegalArgumentException) $stack3;
+        specialinvoke #l1.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'paint\' argument.");
+        #l0 = (java.lang.Throwable) $stack3;
+    
+        throw #l0;
+    
+      label1:
+        this.<org.jfree.chart.renderer.category.GanttRenderer: java.awt.Paint completePaint> = paint;
+        $stack2 = new org.jfree.chart.event.RendererChangeEvent;
+        specialinvoke $stack2.<org.jfree.chart.event.RendererChangeEvent: void <init>(java.lang.Object)>(this);
+        virtualinvoke this.<org.jfree.chart.renderer.category.GanttRenderer: void notifyListeners(org.jfree.chart.event.RendererChangeEvent)>($stack2);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.category.GanttRenderer: void setIncompletePaint(java.awt.Paint)> ----
+    {
+        java.awt.Paint paint;
+        java.lang.IllegalArgumentException #l1;
+        java.lang.Object $stack3;
+        java.lang.Throwable #l0;
+        org.jfree.chart.event.RendererChangeEvent $stack2;
+        org.jfree.chart.renderer.category.GanttRenderer this;
+    
+    
+        this := @this: org.jfree.chart.renderer.category.GanttRenderer;
+        paint := @parameter0: java.awt.Paint;
+    
+        if paint != null goto label1;
+        $stack3 = new java.lang.IllegalArgumentException;
+        #l1 = (java.lang.IllegalArgumentException) $stack3;
+        specialinvoke #l1.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'paint\' argument.");
+        #l0 = (java.lang.Throwable) $stack3;
+    
+        throw #l0;
+    
+      label1:
+        this.<org.jfree.chart.renderer.category.GanttRenderer: java.awt.Paint incompletePaint> = paint;
+        $stack2 = new org.jfree.chart.event.RendererChangeEvent;
+        specialinvoke $stack2.<org.jfree.chart.event.RendererChangeEvent: void <init>(java.lang.Object)>(this);
+        virtualinvoke this.<org.jfree.chart.renderer.category.GanttRenderer: void notifyListeners(org.jfree.chart.event.RendererChangeEvent)>($stack2);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.category.GanttRenderer: void drawItem(java.awt.Graphics2D,org.jfree.chart.renderer.category.CategoryItemRendererState,java.awt.geom.Rectangle2D,org.jfree.chart.plot.CategoryPlot,org.jfree.chart.axis.CategoryAxis,org.jfree.chart.axis.ValueAxis,org.jfree.data.category.CategoryDataset,int,int,int)> ----
+    {
+        boolean $stack12;
+        int column, pass, row;
+        java.awt.Graphics2D g2;
+        java.awt.geom.Rectangle2D dataArea;
+        org.jfree.chart.axis.CategoryAxis domainAxis;
+        org.jfree.chart.axis.ValueAxis rangeAxis;
+        org.jfree.chart.plot.CategoryPlot plot;
+        org.jfree.chart.renderer.category.CategoryItemRendererState state;
+        org.jfree.chart.renderer.category.GanttRenderer this;
+        org.jfree.data.category.CategoryDataset dataset;
+        org.jfree.data.gantt.GanttCategoryDataset gcd;
+    
+    
+        this := @this: org.jfree.chart.renderer.category.GanttRenderer;
+        g2 := @parameter0: java.awt.Graphics2D;
+        state := @parameter1: org.jfree.chart.renderer.category.CategoryItemRendererState;
+        dataArea := @parameter2: java.awt.geom.Rectangle2D;
+        plot := @parameter3: org.jfree.chart.plot.CategoryPlot;
+        domainAxis := @parameter4: org.jfree.chart.axis.CategoryAxis;
+        rangeAxis := @parameter5: org.jfree.chart.axis.ValueAxis;
+        dataset := @parameter6: org.jfree.data.category.CategoryDataset;
+        row := @parameter7: int;
+        column := @parameter8: int;
+        pass := @parameter9: int;
+        $stack12 = dataset instanceof org.jfree.data.gantt.GanttCategoryDataset;
+    
+        if $stack12 == 0 goto label1;
+        gcd = (org.jfree.data.gantt.GanttCategoryDataset) dataset;
+        virtualinvoke this.<org.jfree.chart.renderer.category.GanttRenderer: void drawTasks(java.awt.Graphics2D,org.jfree.chart.renderer.category.CategoryItemRendererState,java.awt.geom.Rectangle2D,org.jfree.chart.plot.CategoryPlot,org.jfree.chart.axis.CategoryAxis,org.jfree.chart.axis.ValueAxis,org.jfree.data.gantt.GanttCategoryDataset,int,int)>(g2, state, dataArea, plot, domainAxis, rangeAxis, gcd, row, column);
+    
+        goto label2;
+    
+      label1:
+        specialinvoke this.<org.jfree.chart.renderer.category.IntervalBarRenderer: void drawItem(java.awt.Graphics2D,org.jfree.chart.renderer.category.CategoryItemRendererState,java.awt.geom.Rectangle2D,org.jfree.chart.plot.CategoryPlot,org.jfree.chart.axis.CategoryAxis,org.jfree.chart.axis.ValueAxis,org.jfree.data.category.CategoryDataset,int,int,int)>(g2, state, dataArea, plot, domainAxis, rangeAxis, dataset, row, column, pass);
+    
+      label2:
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.category.GanttRenderer: void drawTasks(java.awt.Graphics2D,org.jfree.chart.renderer.category.CategoryItemRendererState,java.awt.geom.Rectangle2D,org.jfree.chart.plot.CategoryPlot,org.jfree.chart.axis.CategoryAxis,org.jfree.chart.axis.ValueAxis,org.jfree.data.gantt.GanttCategoryDataset,int,int)> ----
+    {
+        boolean $stack44;
+        byte $stack37, $stack47;
+        double $stack35, $stack36, $stack39, $stack46, $stack56, $stack57, $stack58, $stack59, $stack60, $stack61, $stack62, $stack63, $stack65, $stack66, $stack67, $stack68, $stack69, $stack70, $stack72, $stack73, $stack74, $stack75, $stack76, $stack78, $stack79, $stack80, $stack81, $stack82, $stack83, $stack84, $stack85, end, p#0, rectBreadth, rectLength, start, temp#0, temp#1, translatedValue0, translatedValue1;
+        int column, count, row, subinterval;
+        java.awt.Graphics2D g2;
+        java.awt.Paint $stack49, $stack50, $stack51, p#1;
+        java.awt.Shape #l0, #l1, #l2, #l3, #l4;
+        java.awt.Stroke $stack48;
+        java.awt.geom.Rectangle2D dataArea;
+        java.awt.geom.Rectangle2D$Double $stack64, $stack71, $stack77, $stack86, $stack87, $stack88;
+        java.lang.Number percent, value0, value1;
+        java.lang.Object bar, completeBar, incompleteBar;
+        org.jfree.chart.axis.CategoryAxis domainAxis;
+        org.jfree.chart.axis.ValueAxis rangeAxis;
+        org.jfree.chart.entity.EntityCollection entities;
+        org.jfree.chart.plot.CategoryPlot plot;
+        org.jfree.chart.plot.PlotOrientation $stack38, $stack40, $stack41, $stack42, $stack43, $stack52, $stack53, $stack54, $stack55;
+        org.jfree.chart.plot.PlotRenderingInfo $stack45;
+        org.jfree.chart.renderer.category.CategoryItemRendererState state;
+        org.jfree.chart.renderer.category.GanttRenderer this;
+        org.jfree.chart.util.RectangleEdge rangeAxisLocation;
+        org.jfree.data.gantt.GanttCategoryDataset dataset;
+    
+    
+        this := @this: org.jfree.chart.renderer.category.GanttRenderer;
+        g2 := @parameter0: java.awt.Graphics2D;
+        state := @parameter1: org.jfree.chart.renderer.category.CategoryItemRendererState;
+        dataArea := @parameter2: java.awt.geom.Rectangle2D;
+        plot := @parameter3: org.jfree.chart.plot.CategoryPlot;
+        domainAxis := @parameter4: org.jfree.chart.axis.CategoryAxis;
+        rangeAxis := @parameter5: org.jfree.chart.axis.ValueAxis;
+        dataset := @parameter6: org.jfree.data.gantt.GanttCategoryDataset;
+        row := @parameter7: int;
+        column := @parameter8: int;
+        count = interfaceinvoke dataset.<org.jfree.data.gantt.GanttCategoryDataset: int getSubIntervalCount(int,int)>(row, column);
+    
+        if count != 0 goto label01;
+        virtualinvoke this.<org.jfree.chart.renderer.category.GanttRenderer: void drawTask(java.awt.Graphics2D,org.jfree.chart.renderer.category.CategoryItemRendererState,java.awt.geom.Rectangle2D,org.jfree.chart.plot.CategoryPlot,org.jfree.chart.axis.CategoryAxis,org.jfree.chart.axis.ValueAxis,org.jfree.data.gantt.GanttCategoryDataset,int,int)>(g2, state, dataArea, plot, domainAxis, rangeAxis, dataset, row, column);
+    
+      label01:
+        subinterval = 0;
+    
+      label02:
+        if subinterval >= count goto label14;
+        rangeAxisLocation = virtualinvoke plot.<org.jfree.chart.plot.CategoryPlot: org.jfree.chart.util.RectangleEdge getRangeAxisEdge()>();
+        value0 = interfaceinvoke dataset.<org.jfree.data.gantt.GanttCategoryDataset: java.lang.Number getStartValue(int,int,int)>(row, column, subinterval);
+    
+        if value0 != null goto label03;
+    
+        return;
+    
+      label03:
+        $stack35 = virtualinvoke value0.<java.lang.Number: double doubleValue()>();
+        translatedValue0 = virtualinvoke rangeAxis.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)>($stack35, dataArea, rangeAxisLocation);
+        value1 = interfaceinvoke dataset.<org.jfree.data.gantt.GanttCategoryDataset: java.lang.Number getEndValue(int,int,int)>(row, column, subinterval);
+    
+        if value1 != null goto label04;
+    
+        return;
+    
+      label04:
+        $stack36 = virtualinvoke value1.<java.lang.Number: double doubleValue()>();
+        translatedValue1 = virtualinvoke rangeAxis.<org.jfree.chart.axis.ValueAxis: double valueToJava2D(double,java.awt.geom.Rectangle2D,org.jfree.chart.util.RectangleEdge)>($stack36, dataArea, rangeAxisLocation);
+        $stack37 = translatedValue1 cmpg translatedValue0;
+    
+        if $stack37 >= 0 goto label05;
+        temp#0 = translatedValue1;
+        translatedValue1 = translatedValue0;
+        translatedValue0 = temp#0;
+    
+      label05:
+        $stack38 = virtualinvoke plot.<org.jfree.chart.plot.CategoryPlot: org.jfree.chart.plot.PlotOrientation getOrientation()>();
+        temp#1 = virtualinvoke this.<org.jfree.chart.renderer.category.GanttRenderer: double calculateBarW0(org.jfree.chart.plot.CategoryPlot,org.jfree.chart.plot.PlotOrientation,java.awt.geom.Rectangle2D,org.jfree.chart.axis.CategoryAxis,org.jfree.chart.renderer.category.CategoryItemRendererState,int,int)>(plot, $stack38, dataArea, domainAxis, state, row, column);
+        $stack39 = translatedValue1 - translatedValue0;
+        rectLength = staticinvoke <java.lang.Math: double abs(double)>($stack39);
+        rectBreadth = virtualinvoke state.<org.jfree.chart.renderer.category.CategoryItemRendererState: double getBarWidth()>();
+        bar = null;
+        $stack41 = virtualinvoke plot.<org.jfree.chart.plot.CategoryPlot: org.jfree.chart.plot.PlotOrientation getOrientation()>();
+        $stack40 = <org.jfree.chart.plot.PlotOrientation: org.jfree.chart.plot.PlotOrientation HORIZONTAL>;
+    
+        if $stack41 != $stack40 goto label06;
+        $stack88 = new java.awt.geom.Rectangle2D$Double;
+        specialinvoke $stack88.<java.awt.geom.Rectangle2D$Double: void <init>(double,double,double,double)>(translatedValue0, temp#1, rectLength, rectBreadth);
+        bar = $stack88;
+    
+        goto label07;
+    
+      label06:
+        $stack43 = virtualinvoke plot.<org.jfree.chart.plot.CategoryPlot: org.jfree.chart.plot.PlotOrientation getOrientation()>();
+        $stack42 = <org.jfree.chart.plot.PlotOrientation: org.jfree.chart.plot.PlotOrientation VERTICAL>;
+    
+        if $stack43 != $stack42 goto label07;
+        $stack87 = new java.awt.geom.Rectangle2D$Double;
+        specialinvoke $stack87.<java.awt.geom.Rectangle2D$Double: void <init>(double,double,double,double)>(temp#1, translatedValue0, rectBreadth, rectLength);
+        bar = $stack87;
+    
+      label07:
+        completeBar = null;
+        incompleteBar = null;
+        percent = interfaceinvoke dataset.<org.jfree.data.gantt.GanttCategoryDataset: java.lang.Number getPercentComplete(int,int,int)>(row, column, subinterval);
+        start = virtualinvoke this.<org.jfree.chart.renderer.category.GanttRenderer: double getStartPercent()>();
+        end = virtualinvoke this.<org.jfree.chart.renderer.category.GanttRenderer: double getEndPercent()>();
+    
+        if percent == null goto label09;
+        p#0 = virtualinvoke percent.<java.lang.Number: double doubleValue()>();
+        $stack53 = virtualinvoke plot.<org.jfree.chart.plot.CategoryPlot: org.jfree.chart.plot.PlotOrientation getOrientation()>();
+        $stack52 = <org.jfree.chart.plot.PlotOrientation: org.jfree.chart.plot.PlotOrientation HORIZONTAL>;
+    
+        if $stack53 != $stack52 goto label08;
+        $stack77 = new java.awt.geom.Rectangle2D$Double;
+        $stack72 = start * rectBreadth;
+        $stack76 = temp#1 + $stack72;
+        $stack75 = rectLength * p#0;
+        $stack73 = end - start;
+        $stack74 = rectBreadth * $stack73;
+        specialinvoke $stack77.<java.awt.geom.Rectangle2D$Double: void <init>(double,double,double,double)>(translatedValue0, $stack76, $stack75, $stack74);
+        completeBar = $stack77;
+        $stack86 = new java.awt.geom.Rectangle2D$Double;
+        $stack78 = rectLength * p#0;
+        $stack85 = translatedValue0 + $stack78;
+        $stack79 = start * rectBreadth;
+        $stack84 = temp#1 + $stack79;
+        $stack80 = 1.0 - p#0;
+        $stack83 = rectLength * $stack80;
+        $stack81 = end - start;
+        $stack82 = rectBreadth * $stack81;
+        specialinvoke $stack86.<java.awt.geom.Rectangle2D$Double: void <init>(double,double,double,double)>($stack85, $stack84, $stack83, $stack82);
+        incompleteBar = $stack86;
+    
+        goto label09;
+    
+      label08:
+        $stack55 = virtualinvoke plot.<org.jfree.chart.plot.CategoryPlot: org.jfree.chart.plot.PlotOrientation getOrientation()>();
+        $stack54 = <org.jfree.chart.plot.PlotOrientation: org.jfree.chart.plot.PlotOrientation VERTICAL>;
+    
+        if $stack55 != $stack54 goto label09;
+        $stack64 = new java.awt.geom.Rectangle2D$Double;
+        $stack56 = start * rectBreadth;
+        $stack63 = temp#1 + $stack56;
+        $stack57 = 1.0 - p#0;
+        $stack58 = rectLength * $stack57;
+        $stack62 = translatedValue0 + $stack58;
+        $stack59 = end - start;
+        $stack61 = rectBreadth * $stack59;
+        $stack60 = rectLength * p#0;
+        specialinvoke $stack64.<java.awt.geom.Rectangle2D$Double: void <init>(double,double,double,double)>($stack63, $stack62, $stack61, $stack60);
+        completeBar = $stack64;
+        $stack71 = new java.awt.geom.Rectangle2D$Double;
+        $stack65 = start * rectBreadth;
+        $stack70 = temp#1 + $stack65;
+        $stack66 = end - start;
+        $stack69 = rectBreadth * $stack66;
+        $stack67 = 1.0 - p#0;
+        $stack68 = rectLength * $stack67;
+        specialinvoke $stack71.<java.awt.geom.Rectangle2D$Double: void <init>(double,double,double,double)>($stack70, translatedValue0, $stack69, $stack68);
+        incompleteBar = $stack71;
+    
+      label09:
+        p#1 = virtualinvoke this.<org.jfree.chart.renderer.category.GanttRenderer: java.awt.Paint getItemPaint(int,int)>(row, column);
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>(p#1);
+        #l0 = (java.awt.Shape) bar;
+        virtualinvoke g2.<java.awt.Graphics2D: void fill(java.awt.Shape)>(#l0);
+    
+        if completeBar == null goto label10;
+        $stack51 = virtualinvoke this.<org.jfree.chart.renderer.category.GanttRenderer: java.awt.Paint getCompletePaint()>();
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>($stack51);
+        #l4 = (java.awt.Shape) completeBar;
+        virtualinvoke g2.<java.awt.Graphics2D: void fill(java.awt.Shape)>(#l4);
+    
+      label10:
+        if incompleteBar == null goto label11;
+        $stack50 = virtualinvoke this.<org.jfree.chart.renderer.category.GanttRenderer: java.awt.Paint getIncompletePaint()>();
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>($stack50);
+        #l2 = (java.awt.Shape) incompleteBar;
+        virtualinvoke g2.<java.awt.Graphics2D: void fill(java.awt.Shape)>(#l2);
+    
+      label11:
+        $stack44 = virtualinvoke this.<org.jfree.chart.renderer.category.GanttRenderer: boolean isDrawBarOutline()>();
+    
+        if $stack44 == 0 goto label12;
+        $stack46 = virtualinvoke state.<org.jfree.chart.renderer.category.CategoryItemRendererState: double getBarWidth()>();
+        $stack47 = $stack46 cmpl 3.0;
+    
+        if $stack47 <= 0 goto label12;
+        $stack48 = virtualinvoke this.<org.jfree.chart.renderer.category.GanttRenderer: java.awt.Stroke getItemStroke(int,int)>(row, column);
+        virtualinvoke g2.<java.awt.Graphics2D: void setStroke(java.awt.Stroke)>($stack48);
+        $stack49 = virtualinvoke this.<org.jfree.chart.renderer.category.GanttRenderer: java.awt.Paint getItemOutlinePaint(int,int)>(row, column);
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>($stack49);
+        #l3 = (java.awt.Shape) bar;
+        virtualinvoke g2.<java.awt.Graphics2D: void draw(java.awt.Shape)>(#l3);
+    
+      label12:
+        $stack45 = virtualinvoke state.<org.jfree.chart.renderer.category.CategoryItemRendererState: org.jfree.chart.plot.PlotRenderingInfo getInfo()>();
+    
+        if $stack45 == null goto label13;
+        entities = virtualinvoke state.<org.jfree.chart.renderer.category.CategoryItemRendererState: org.jfree.chart.entity.EntityCollection getEntityCollection()>();
+    
+        if entities == null goto label13;
+        #l1 = (java.awt.Shape) bar;
+        virtualinvoke this.<org.jfree.chart.renderer.category.GanttRenderer: void addItemEntity(org.jfree.chart.entity.EntityCollection,org.jfree.data.category.CategoryDataset,int,int,java.awt.Shape)>(entities, dataset, row, column, #l1);
+    
+      label13:
+        subinterval = subinterval + 1;
+    
+        goto label02;
+    
+      label14:
+        return;
+    }
+
+}

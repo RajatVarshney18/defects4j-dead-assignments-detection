@@ -1,0 +1,124 @@
+// ========================================================================
+// CLASS : org.jfree.chart.encoders.SunPNGEncoderAdapter
+// ========================================================================
+
+[PUBLIC, SUPER] class org.jfree.chart.encoders.SunPNGEncoderAdapter extends java.lang.Object implements org.jfree.chart.encoders.ImageEncoder {
+
+    // ---- method: <org.jfree.chart.encoders.SunPNGEncoderAdapter: void setQuality(float)> ----
+    {
+        float quality;
+        org.jfree.chart.encoders.SunPNGEncoderAdapter this;
+    
+    
+        this := @this: org.jfree.chart.encoders.SunPNGEncoderAdapter;
+        quality := @parameter0: float;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.encoders.SunPNGEncoderAdapter: void encode(java.awt.image.BufferedImage,java.io.OutputStream)> ----
+    {
+        java.awt.image.RenderedImage #l1;
+        java.io.OutputStream outputStream;
+        java.lang.IllegalArgumentException #l3, #l4;
+        java.lang.Object $stack3, $stack4, bufferedImage;
+        java.lang.Throwable #l0, #l2;
+        org.jfree.chart.encoders.SunPNGEncoderAdapter this;
+    
+    
+        this := @this: org.jfree.chart.encoders.SunPNGEncoderAdapter;
+        bufferedImage := @parameter0: java.awt.image.BufferedImage;
+        outputStream := @parameter1: java.io.OutputStream;
+    
+        if bufferedImage != null goto label1;
+        $stack4 = new java.lang.IllegalArgumentException;
+        #l3 = (java.lang.IllegalArgumentException) $stack4;
+        specialinvoke #l3.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'image\' argument.");
+        #l0 = (java.lang.Throwable) $stack4;
+    
+        throw #l0;
+    
+      label1:
+        if outputStream != null goto label2;
+        $stack3 = new java.lang.IllegalArgumentException;
+        #l4 = (java.lang.IllegalArgumentException) $stack3;
+        specialinvoke #l4.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'outputStream\' argument.");
+        #l2 = (java.lang.Throwable) $stack3;
+    
+        throw #l2;
+    
+      label2:
+        #l1 = (java.awt.image.RenderedImage) bufferedImage;
+        staticinvoke <javax.imageio.ImageIO: boolean write(java.awt.image.RenderedImage,java.lang.String,java.io.OutputStream)>(#l1, "png", outputStream);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.encoders.SunPNGEncoderAdapter: boolean isEncodingAlpha()> ----
+    {
+        org.jfree.chart.encoders.SunPNGEncoderAdapter this;
+    
+    
+        this := @this: org.jfree.chart.encoders.SunPNGEncoderAdapter;
+    
+        return 0;
+    }
+
+    // ---- method: <org.jfree.chart.encoders.SunPNGEncoderAdapter: float getQuality()> ----
+    {
+        org.jfree.chart.encoders.SunPNGEncoderAdapter this;
+    
+    
+        this := @this: org.jfree.chart.encoders.SunPNGEncoderAdapter;
+    
+        return 0.0F;
+    }
+
+    // ---- method: <org.jfree.chart.encoders.SunPNGEncoderAdapter: void <init>()> ----
+    {
+        org.jfree.chart.encoders.SunPNGEncoderAdapter this;
+    
+    
+        this := @this: org.jfree.chart.encoders.SunPNGEncoderAdapter;
+        specialinvoke this.<java.lang.Object: void <init>()>();
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.encoders.SunPNGEncoderAdapter: void setEncodingAlpha(boolean)> ----
+    {
+        boolean encodingAlpha;
+        org.jfree.chart.encoders.SunPNGEncoderAdapter this;
+    
+    
+        this := @this: org.jfree.chart.encoders.SunPNGEncoderAdapter;
+        encodingAlpha := @parameter0: boolean;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.encoders.SunPNGEncoderAdapter: byte[] encode(java.awt.image.BufferedImage)> ----
+    {
+        byte[] $stack4;
+        java.awt.image.BufferedImage bufferedImage;
+        java.io.ByteArrayOutputStream #l0, #l1, outputStream;
+        java.io.OutputStream #l2;
+        java.lang.Object $stack3;
+        org.jfree.chart.encoders.SunPNGEncoderAdapter this;
+    
+    
+        this := @this: org.jfree.chart.encoders.SunPNGEncoderAdapter;
+        bufferedImage := @parameter0: java.awt.image.BufferedImage;
+        $stack3 = new java.io.ByteArrayOutputStream;
+        #l0 = (java.io.ByteArrayOutputStream) $stack3;
+        specialinvoke #l0.<java.io.ByteArrayOutputStream: void <init>()>();
+        outputStream = (java.io.ByteArrayOutputStream) $stack3;
+        #l2 = (java.io.OutputStream) $stack3;
+        virtualinvoke this.<org.jfree.chart.encoders.SunPNGEncoderAdapter: void encode(java.awt.image.BufferedImage,java.io.OutputStream)>(bufferedImage, #l2);
+        #l1 = (java.io.ByteArrayOutputStream) $stack3;
+        $stack4 = virtualinvoke #l1.<java.io.ByteArrayOutputStream: byte[] toByteArray()>();
+    
+        return $stack4;
+    }
+
+}

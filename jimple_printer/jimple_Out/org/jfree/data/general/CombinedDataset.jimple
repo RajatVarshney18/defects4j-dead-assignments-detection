@@ -1,0 +1,792 @@
+// ========================================================================
+// CLASS : org.jfree.data.general.CombinedDataset
+// ========================================================================
+
+[PUBLIC, SUPER] class org.jfree.data.general.CombinedDataset extends org.jfree.data.xy.AbstractIntervalXYDataset implements org.jfree.data.xy.OHLCDataset, org.jfree.data.xy.IntervalXYDataset, org.jfree.data.general.CombinationDataset, org.jfree.data.xy.XYDataset {
+
+    // ---- method: <org.jfree.data.general.CombinedDataset: java.lang.Number getEndY(int,int)> ----
+    {
+        boolean $stack5;
+        int $stack8, item, series;
+        java.lang.Number $stack10, $stack6;
+        org.jfree.data.general.CombinedDataset this;
+        org.jfree.data.general.CombinedDataset$DatasetInfo di;
+        org.jfree.data.general.SeriesDataset $stack4, $stack7;
+        org.jfree.data.xy.IntervalXYDataset $stack9;
+    
+    
+        this := @this: org.jfree.data.general.CombinedDataset;
+        series := @parameter0: int;
+        item := @parameter1: int;
+        di = specialinvoke this.<org.jfree.data.general.CombinedDataset: org.jfree.data.general.CombinedDataset$DatasetInfo getDatasetInfo(int)>(series);
+        $stack4 = staticinvoke <org.jfree.data.general.CombinedDataset$DatasetInfo: org.jfree.data.general.SeriesDataset access$100(org.jfree.data.general.CombinedDataset$DatasetInfo)>(di);
+        $stack5 = $stack4 instanceof org.jfree.data.xy.IntervalXYDataset;
+    
+        if $stack5 == 0 goto label1;
+        $stack7 = staticinvoke <org.jfree.data.general.CombinedDataset$DatasetInfo: org.jfree.data.general.SeriesDataset access$100(org.jfree.data.general.CombinedDataset$DatasetInfo)>(di);
+        $stack9 = (org.jfree.data.xy.IntervalXYDataset) $stack7;
+        $stack8 = staticinvoke <org.jfree.data.general.CombinedDataset$DatasetInfo: int access$000(org.jfree.data.general.CombinedDataset$DatasetInfo)>(di);
+        $stack10 = interfaceinvoke $stack9.<org.jfree.data.xy.IntervalXYDataset: java.lang.Number getEndY(int,int)>($stack8, item);
+    
+        return $stack10;
+    
+      label1:
+        $stack6 = virtualinvoke this.<org.jfree.data.general.CombinedDataset: java.lang.Number getY(int,int)>(series, item);
+    
+        return $stack6;
+    }
+
+    // ---- method: <org.jfree.data.general.CombinedDataset: int[] getMap()> ----
+    {
+        boolean $stack8;
+        int $stack6, i;
+        int[] childMap, map;
+        java.util.List $stack5;
+        org.jfree.data.general.CombinationDataset $stack9;
+        org.jfree.data.general.CombinedDataset this;
+        org.jfree.data.general.CombinedDataset$DatasetInfo $stack7;
+        org.jfree.data.general.SeriesDataset child;
+    
+    
+        this := @this: org.jfree.data.general.CombinedDataset;
+        map = null;
+        i = 0;
+    
+      label1:
+        $stack5 = this.<org.jfree.data.general.CombinedDataset: java.util.List datasetInfo>;
+        $stack6 = interfaceinvoke $stack5.<java.util.List: int size()>();
+    
+        if i >= $stack6 goto label3;
+        $stack7 = specialinvoke this.<org.jfree.data.general.CombinedDataset: org.jfree.data.general.CombinedDataset$DatasetInfo getDatasetInfo(int)>(i);
+        child = staticinvoke <org.jfree.data.general.CombinedDataset$DatasetInfo: org.jfree.data.general.SeriesDataset access$100(org.jfree.data.general.CombinedDataset$DatasetInfo)>($stack7);
+        $stack8 = child instanceof org.jfree.data.general.CombinationDataset;
+    
+        if $stack8 == 0 goto label4;
+        $stack9 = (org.jfree.data.general.CombinationDataset) child;
+        childMap = interfaceinvoke $stack9.<org.jfree.data.general.CombinationDataset: int[] getMap()>();
+    
+        if childMap != null goto label2;
+    
+        return null;
+    
+      label2:
+        map = specialinvoke this.<org.jfree.data.general.CombinedDataset: int[] joinMap(int[],int[])>(map, childMap);
+    
+        goto label5;
+    
+      label3:
+        return map;
+    
+      label4:
+        return null;
+    
+      label5:
+        i = i + 1;
+    
+        goto label1;
+    }
+
+    // ---- method: <org.jfree.data.general.CombinedDataset: void <init>(org.jfree.data.general.SeriesDataset[])> ----
+    {
+        java.lang.Object $stack2;
+        java.util.ArrayList #l0;
+        org.jfree.data.general.CombinedDataset this;
+        org.jfree.data.general.SeriesDataset[] data;
+    
+    
+        this := @this: org.jfree.data.general.CombinedDataset;
+        data := @parameter0: org.jfree.data.general.SeriesDataset[];
+        specialinvoke this.<org.jfree.data.xy.AbstractIntervalXYDataset: void <init>()>();
+        $stack2 = new java.util.ArrayList;
+        #l0 = (java.util.ArrayList) $stack2;
+        specialinvoke #l0.<java.util.ArrayList: void <init>()>();
+        this.<org.jfree.data.general.CombinedDataset: java.util.List datasetInfo> = (java.util.List) $stack2;
+        virtualinvoke this.<org.jfree.data.general.CombinedDataset: void add(org.jfree.data.general.SeriesDataset[])>(data);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.general.CombinedDataset: double getLowValue(int,int)> ----
+    {
+        double result;
+        int item, series;
+        java.lang.Number low;
+        org.jfree.data.general.CombinedDataset this;
+    
+    
+        this := @this: org.jfree.data.general.CombinedDataset;
+        series := @parameter0: int;
+        item := @parameter1: int;
+        result = #NaN;
+        low = virtualinvoke this.<org.jfree.data.general.CombinedDataset: java.lang.Number getLow(int,int)>(series, item);
+    
+        if low == null goto label1;
+        result = virtualinvoke low.<java.lang.Number: double doubleValue()>();
+    
+      label1:
+        return result;
+    }
+
+    // ---- method: <org.jfree.data.general.CombinedDataset: double getOpenValue(int,int)> ----
+    {
+        double result;
+        int item, series;
+        java.lang.Number open;
+        org.jfree.data.general.CombinedDataset this;
+    
+    
+        this := @this: org.jfree.data.general.CombinedDataset;
+        series := @parameter0: int;
+        item := @parameter1: int;
+        result = #NaN;
+        open = virtualinvoke this.<org.jfree.data.general.CombinedDataset: java.lang.Number getOpen(int,int)>(series, item);
+    
+        if open == null goto label1;
+        result = virtualinvoke open.<java.lang.Number: double doubleValue()>();
+    
+      label1:
+        return result;
+    }
+
+    // ---- method: <org.jfree.data.general.CombinedDataset: java.lang.Number getVolume(int,int)> ----
+    {
+        int $stack5, item, series;
+        java.lang.Number $stack7;
+        org.jfree.data.general.CombinedDataset this;
+        org.jfree.data.general.CombinedDataset$DatasetInfo di;
+        org.jfree.data.general.SeriesDataset $stack4;
+        org.jfree.data.xy.OHLCDataset $stack6;
+    
+    
+        this := @this: org.jfree.data.general.CombinedDataset;
+        series := @parameter0: int;
+        item := @parameter1: int;
+        di = specialinvoke this.<org.jfree.data.general.CombinedDataset: org.jfree.data.general.CombinedDataset$DatasetInfo getDatasetInfo(int)>(series);
+        $stack4 = staticinvoke <org.jfree.data.general.CombinedDataset$DatasetInfo: org.jfree.data.general.SeriesDataset access$100(org.jfree.data.general.CombinedDataset$DatasetInfo)>(di);
+        $stack6 = (org.jfree.data.xy.OHLCDataset) $stack4;
+        $stack5 = staticinvoke <org.jfree.data.general.CombinedDataset$DatasetInfo: int access$000(org.jfree.data.general.CombinedDataset$DatasetInfo)>(di);
+        $stack7 = interfaceinvoke $stack6.<org.jfree.data.xy.OHLCDataset: java.lang.Number getVolume(int,int)>($stack5, item);
+    
+        return $stack7;
+    }
+
+    // ---- method: <org.jfree.data.general.CombinedDataset: void add(org.jfree.data.general.SeriesDataset)> ----
+    {
+        org.jfree.data.general.CombinedDataset this;
+        org.jfree.data.general.DatasetChangeEvent $stack3, event;
+        org.jfree.data.general.SeriesDataset data;
+    
+    
+        this := @this: org.jfree.data.general.CombinedDataset;
+        data := @parameter0: org.jfree.data.general.SeriesDataset;
+        specialinvoke this.<org.jfree.data.general.CombinedDataset: void fastAdd(org.jfree.data.general.SeriesDataset)>(data);
+        $stack3 = new org.jfree.data.general.DatasetChangeEvent;
+        specialinvoke $stack3.<org.jfree.data.general.DatasetChangeEvent: void <init>(java.lang.Object,org.jfree.data.general.Dataset)>(this, this);
+        event = $stack3;
+        virtualinvoke this.<org.jfree.data.general.CombinedDataset: void notifyListeners(org.jfree.data.general.DatasetChangeEvent)>($stack3);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.general.CombinedDataset: double getCloseValue(int,int)> ----
+    {
+        double result;
+        int item, series;
+        java.lang.Number close;
+        org.jfree.data.general.CombinedDataset this;
+    
+    
+        this := @this: org.jfree.data.general.CombinedDataset;
+        series := @parameter0: int;
+        item := @parameter1: int;
+        result = #NaN;
+        close = virtualinvoke this.<org.jfree.data.general.CombinedDataset: java.lang.Number getClose(int,int)>(series, item);
+    
+        if close == null goto label1;
+        result = virtualinvoke close.<java.lang.Number: double doubleValue()>();
+    
+      label1:
+        return result;
+    }
+
+    // ---- method: <org.jfree.data.general.CombinedDataset: java.lang.Number getEndX(int,int)> ----
+    {
+        boolean $stack5;
+        int $stack8, item, series;
+        java.lang.Number $stack10, $stack6;
+        org.jfree.data.general.CombinedDataset this;
+        org.jfree.data.general.CombinedDataset$DatasetInfo di;
+        org.jfree.data.general.SeriesDataset $stack4, $stack7;
+        org.jfree.data.xy.IntervalXYDataset $stack9;
+    
+    
+        this := @this: org.jfree.data.general.CombinedDataset;
+        series := @parameter0: int;
+        item := @parameter1: int;
+        di = specialinvoke this.<org.jfree.data.general.CombinedDataset: org.jfree.data.general.CombinedDataset$DatasetInfo getDatasetInfo(int)>(series);
+        $stack4 = staticinvoke <org.jfree.data.general.CombinedDataset$DatasetInfo: org.jfree.data.general.SeriesDataset access$100(org.jfree.data.general.CombinedDataset$DatasetInfo)>(di);
+        $stack5 = $stack4 instanceof org.jfree.data.xy.IntervalXYDataset;
+    
+        if $stack5 == 0 goto label1;
+        $stack7 = staticinvoke <org.jfree.data.general.CombinedDataset$DatasetInfo: org.jfree.data.general.SeriesDataset access$100(org.jfree.data.general.CombinedDataset$DatasetInfo)>(di);
+        $stack9 = (org.jfree.data.xy.IntervalXYDataset) $stack7;
+        $stack8 = staticinvoke <org.jfree.data.general.CombinedDataset$DatasetInfo: int access$000(org.jfree.data.general.CombinedDataset$DatasetInfo)>(di);
+        $stack10 = interfaceinvoke $stack9.<org.jfree.data.xy.IntervalXYDataset: java.lang.Number getEndX(int,int)>($stack8, item);
+    
+        return $stack10;
+    
+      label1:
+        $stack6 = virtualinvoke this.<org.jfree.data.general.CombinedDataset: java.lang.Number getX(int,int)>(series, item);
+    
+        return $stack6;
+    }
+
+    // ---- method: <org.jfree.data.general.CombinedDataset: java.lang.Number getStartY(int,int)> ----
+    {
+        boolean $stack5;
+        int $stack8, item, series;
+        java.lang.Number $stack10, $stack6;
+        org.jfree.data.general.CombinedDataset this;
+        org.jfree.data.general.CombinedDataset$DatasetInfo di;
+        org.jfree.data.general.SeriesDataset $stack4, $stack7;
+        org.jfree.data.xy.IntervalXYDataset $stack9;
+    
+    
+        this := @this: org.jfree.data.general.CombinedDataset;
+        series := @parameter0: int;
+        item := @parameter1: int;
+        di = specialinvoke this.<org.jfree.data.general.CombinedDataset: org.jfree.data.general.CombinedDataset$DatasetInfo getDatasetInfo(int)>(series);
+        $stack4 = staticinvoke <org.jfree.data.general.CombinedDataset$DatasetInfo: org.jfree.data.general.SeriesDataset access$100(org.jfree.data.general.CombinedDataset$DatasetInfo)>(di);
+        $stack5 = $stack4 instanceof org.jfree.data.xy.IntervalXYDataset;
+    
+        if $stack5 == 0 goto label1;
+        $stack7 = staticinvoke <org.jfree.data.general.CombinedDataset$DatasetInfo: org.jfree.data.general.SeriesDataset access$100(org.jfree.data.general.CombinedDataset$DatasetInfo)>(di);
+        $stack9 = (org.jfree.data.xy.IntervalXYDataset) $stack7;
+        $stack8 = staticinvoke <org.jfree.data.general.CombinedDataset$DatasetInfo: int access$000(org.jfree.data.general.CombinedDataset$DatasetInfo)>(di);
+        $stack10 = interfaceinvoke $stack9.<org.jfree.data.xy.IntervalXYDataset: java.lang.Number getStartY(int,int)>($stack8, item);
+    
+        return $stack10;
+    
+      label1:
+        $stack6 = virtualinvoke this.<org.jfree.data.general.CombinedDataset: java.lang.Number getY(int,int)>(series, item);
+    
+        return $stack6;
+    }
+
+    // ---- method: <org.jfree.data.general.CombinedDataset: int getItemCount(int)> ----
+    {
+        int $stack4, $stack6, series;
+        org.jfree.data.general.CombinedDataset this;
+        org.jfree.data.general.CombinedDataset$DatasetInfo di;
+        org.jfree.data.general.SeriesDataset $stack3;
+        org.jfree.data.xy.XYDataset $stack5;
+    
+    
+        this := @this: org.jfree.data.general.CombinedDataset;
+        series := @parameter0: int;
+        di = specialinvoke this.<org.jfree.data.general.CombinedDataset: org.jfree.data.general.CombinedDataset$DatasetInfo getDatasetInfo(int)>(series);
+        $stack3 = staticinvoke <org.jfree.data.general.CombinedDataset$DatasetInfo: org.jfree.data.general.SeriesDataset access$100(org.jfree.data.general.CombinedDataset$DatasetInfo)>(di);
+        $stack5 = (org.jfree.data.xy.XYDataset) $stack3;
+        $stack4 = staticinvoke <org.jfree.data.general.CombinedDataset$DatasetInfo: int access$000(org.jfree.data.general.CombinedDataset$DatasetInfo)>(di);
+        $stack6 = interfaceinvoke $stack5.<org.jfree.data.xy.XYDataset: int getItemCount(int)>($stack4);
+    
+        return $stack6;
+    }
+
+    // ---- method: <org.jfree.data.general.CombinedDataset: void fastAdd(org.jfree.data.general.SeriesDataset)> ----
+    {
+        int $stack3, i;
+        java.util.List $stack5;
+        org.jfree.data.general.CombinedDataset this;
+        org.jfree.data.general.CombinedDataset$DatasetInfo $stack4;
+        org.jfree.data.general.SeriesDataset data;
+    
+    
+        this := @this: org.jfree.data.general.CombinedDataset;
+        data := @parameter0: org.jfree.data.general.SeriesDataset;
+        i = 0;
+    
+      label1:
+        $stack3 = interfaceinvoke data.<org.jfree.data.general.SeriesDataset: int getSeriesCount()>();
+    
+        if i >= $stack3 goto label2;
+        $stack5 = this.<org.jfree.data.general.CombinedDataset: java.util.List datasetInfo>;
+        $stack4 = new org.jfree.data.general.CombinedDataset$DatasetInfo;
+        specialinvoke $stack4.<org.jfree.data.general.CombinedDataset$DatasetInfo: void <init>(org.jfree.data.general.CombinedDataset,org.jfree.data.general.SeriesDataset,int)>(this, data, i);
+        interfaceinvoke $stack5.<java.util.List: boolean add(java.lang.Object)>($stack4);
+        i = i + 1;
+    
+        goto label1;
+    
+      label2:
+        return;
+    }
+
+    // ---- method: <org.jfree.data.general.CombinedDataset: int getSeriesCount()> ----
+    {
+        int $stack2;
+        java.util.List $stack1;
+        org.jfree.data.general.CombinedDataset this;
+    
+    
+        this := @this: org.jfree.data.general.CombinedDataset;
+        $stack1 = this.<org.jfree.data.general.CombinedDataset: java.util.List datasetInfo>;
+        $stack2 = interfaceinvoke $stack1.<java.util.List: int size()>();
+    
+        return $stack2;
+    }
+
+    // ---- method: <org.jfree.data.general.CombinedDataset: double getHighValue(int,int)> ----
+    {
+        double result;
+        int item, series;
+        java.lang.Number high;
+        org.jfree.data.general.CombinedDataset this;
+    
+    
+        this := @this: org.jfree.data.general.CombinedDataset;
+        series := @parameter0: int;
+        item := @parameter1: int;
+        result = #NaN;
+        high = virtualinvoke this.<org.jfree.data.general.CombinedDataset: java.lang.Number getHigh(int,int)>(series, item);
+    
+        if high == null goto label1;
+        result = virtualinvoke high.<java.lang.Number: double doubleValue()>();
+    
+      label1:
+        return result;
+    }
+
+    // ---- method: <org.jfree.data.general.CombinedDataset: double getVolumeValue(int,int)> ----
+    {
+        double result;
+        int item, series;
+        java.lang.Number volume;
+        org.jfree.data.general.CombinedDataset this;
+    
+    
+        this := @this: org.jfree.data.general.CombinedDataset;
+        series := @parameter0: int;
+        item := @parameter1: int;
+        result = #NaN;
+        volume = virtualinvoke this.<org.jfree.data.general.CombinedDataset: java.lang.Number getVolume(int,int)>(series, item);
+    
+        if volume == null goto label1;
+        result = virtualinvoke volume.<java.lang.Number: double doubleValue()>();
+    
+      label1:
+        return result;
+    }
+
+    // ---- method: <org.jfree.data.general.CombinedDataset: java.lang.Number getClose(int,int)> ----
+    {
+        int $stack5, item, series;
+        java.lang.Number $stack7;
+        org.jfree.data.general.CombinedDataset this;
+        org.jfree.data.general.CombinedDataset$DatasetInfo di;
+        org.jfree.data.general.SeriesDataset $stack4;
+        org.jfree.data.xy.OHLCDataset $stack6;
+    
+    
+        this := @this: org.jfree.data.general.CombinedDataset;
+        series := @parameter0: int;
+        item := @parameter1: int;
+        di = specialinvoke this.<org.jfree.data.general.CombinedDataset: org.jfree.data.general.CombinedDataset$DatasetInfo getDatasetInfo(int)>(series);
+        $stack4 = staticinvoke <org.jfree.data.general.CombinedDataset$DatasetInfo: org.jfree.data.general.SeriesDataset access$100(org.jfree.data.general.CombinedDataset$DatasetInfo)>(di);
+        $stack6 = (org.jfree.data.xy.OHLCDataset) $stack4;
+        $stack5 = staticinvoke <org.jfree.data.general.CombinedDataset$DatasetInfo: int access$000(org.jfree.data.general.CombinedDataset$DatasetInfo)>(di);
+        $stack7 = interfaceinvoke $stack6.<org.jfree.data.xy.OHLCDataset: java.lang.Number getClose(int,int)>($stack5, item);
+    
+        return $stack7;
+    }
+
+    // ---- method: <org.jfree.data.general.CombinedDataset: java.lang.Number getHigh(int,int)> ----
+    {
+        int $stack5, item, series;
+        java.lang.Number $stack7;
+        org.jfree.data.general.CombinedDataset this;
+        org.jfree.data.general.CombinedDataset$DatasetInfo di;
+        org.jfree.data.general.SeriesDataset $stack4;
+        org.jfree.data.xy.OHLCDataset $stack6;
+    
+    
+        this := @this: org.jfree.data.general.CombinedDataset;
+        series := @parameter0: int;
+        item := @parameter1: int;
+        di = specialinvoke this.<org.jfree.data.general.CombinedDataset: org.jfree.data.general.CombinedDataset$DatasetInfo getDatasetInfo(int)>(series);
+        $stack4 = staticinvoke <org.jfree.data.general.CombinedDataset$DatasetInfo: org.jfree.data.general.SeriesDataset access$100(org.jfree.data.general.CombinedDataset$DatasetInfo)>(di);
+        $stack6 = (org.jfree.data.xy.OHLCDataset) $stack4;
+        $stack5 = staticinvoke <org.jfree.data.general.CombinedDataset$DatasetInfo: int access$000(org.jfree.data.general.CombinedDataset$DatasetInfo)>(di);
+        $stack7 = interfaceinvoke $stack6.<org.jfree.data.xy.OHLCDataset: java.lang.Number getHigh(int,int)>($stack5, item);
+    
+        return $stack7;
+    }
+
+    // ---- method: <org.jfree.data.general.CombinedDataset: org.jfree.data.general.CombinedDataset$DatasetInfo getDatasetInfo(int)> ----
+    {
+        int series;
+        java.lang.Object $stack3;
+        java.util.List $stack2;
+        org.jfree.data.general.CombinedDataset this;
+        org.jfree.data.general.CombinedDataset$DatasetInfo $stack4;
+    
+    
+        this := @this: org.jfree.data.general.CombinedDataset;
+        series := @parameter0: int;
+        $stack2 = this.<org.jfree.data.general.CombinedDataset: java.util.List datasetInfo>;
+        $stack3 = interfaceinvoke $stack2.<java.util.List: java.lang.Object get(int)>(series);
+        $stack4 = (org.jfree.data.general.CombinedDataset$DatasetInfo) $stack3;
+    
+        return $stack4;
+    }
+
+    // ---- method: <org.jfree.data.general.CombinedDataset: java.lang.Number getOpen(int,int)> ----
+    {
+        int $stack5, item, series;
+        java.lang.Number $stack7;
+        org.jfree.data.general.CombinedDataset this;
+        org.jfree.data.general.CombinedDataset$DatasetInfo di;
+        org.jfree.data.general.SeriesDataset $stack4;
+        org.jfree.data.xy.OHLCDataset $stack6;
+    
+    
+        this := @this: org.jfree.data.general.CombinedDataset;
+        series := @parameter0: int;
+        item := @parameter1: int;
+        di = specialinvoke this.<org.jfree.data.general.CombinedDataset: org.jfree.data.general.CombinedDataset$DatasetInfo getDatasetInfo(int)>(series);
+        $stack4 = staticinvoke <org.jfree.data.general.CombinedDataset$DatasetInfo: org.jfree.data.general.SeriesDataset access$100(org.jfree.data.general.CombinedDataset$DatasetInfo)>(di);
+        $stack6 = (org.jfree.data.xy.OHLCDataset) $stack4;
+        $stack5 = staticinvoke <org.jfree.data.general.CombinedDataset$DatasetInfo: int access$000(org.jfree.data.general.CombinedDataset$DatasetInfo)>(di);
+        $stack7 = interfaceinvoke $stack6.<org.jfree.data.xy.OHLCDataset: java.lang.Number getOpen(int,int)>($stack5, item);
+    
+        return $stack7;
+    }
+
+    // ---- method: <org.jfree.data.general.CombinedDataset: void <init>()> ----
+    {
+        java.lang.Object $stack1;
+        java.util.ArrayList #l0;
+        org.jfree.data.general.CombinedDataset this;
+    
+    
+        this := @this: org.jfree.data.general.CombinedDataset;
+        specialinvoke this.<org.jfree.data.xy.AbstractIntervalXYDataset: void <init>()>();
+        $stack1 = new java.util.ArrayList;
+        #l0 = (java.util.ArrayList) $stack1;
+        specialinvoke #l0.<java.util.ArrayList: void <init>()>();
+        this.<org.jfree.data.general.CombinedDataset: java.util.List datasetInfo> = (java.util.List) $stack1;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.general.CombinedDataset: void add(org.jfree.data.general.SeriesDataset,int)> ----
+    {
+        int series;
+        org.jfree.data.general.CombinedDataset this;
+        org.jfree.data.general.SeriesDataset data;
+        org.jfree.data.general.SubSeriesDataset $stack3;
+    
+    
+        this := @this: org.jfree.data.general.CombinedDataset;
+        data := @parameter0: org.jfree.data.general.SeriesDataset;
+        series := @parameter1: int;
+        $stack3 = new org.jfree.data.general.SubSeriesDataset;
+        specialinvoke $stack3.<org.jfree.data.general.SubSeriesDataset: void <init>(org.jfree.data.general.SeriesDataset,int)>(data, series);
+        virtualinvoke this.<org.jfree.data.general.CombinedDataset: void add(org.jfree.data.general.SeriesDataset)>($stack3);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.general.CombinedDataset: java.lang.Comparable getSeriesKey(int)> ----
+    {
+        int $stack3, series;
+        java.lang.Comparable $stack5;
+        org.jfree.data.general.CombinedDataset this;
+        org.jfree.data.general.CombinedDataset$DatasetInfo di;
+        org.jfree.data.general.SeriesDataset $stack4;
+    
+    
+        this := @this: org.jfree.data.general.CombinedDataset;
+        series := @parameter0: int;
+        di = specialinvoke this.<org.jfree.data.general.CombinedDataset: org.jfree.data.general.CombinedDataset$DatasetInfo getDatasetInfo(int)>(series);
+        $stack4 = staticinvoke <org.jfree.data.general.CombinedDataset$DatasetInfo: org.jfree.data.general.SeriesDataset access$100(org.jfree.data.general.CombinedDataset$DatasetInfo)>(di);
+        $stack3 = staticinvoke <org.jfree.data.general.CombinedDataset$DatasetInfo: int access$000(org.jfree.data.general.CombinedDataset$DatasetInfo)>(di);
+        $stack5 = interfaceinvoke $stack4.<org.jfree.data.general.SeriesDataset: java.lang.Comparable getSeriesKey(int)>($stack3);
+    
+        return $stack5;
+    }
+
+    // ---- method: <org.jfree.data.general.CombinedDataset: java.lang.Number getY(int,int)> ----
+    {
+        int $stack5, item, series;
+        java.lang.Number $stack7;
+        org.jfree.data.general.CombinedDataset this;
+        org.jfree.data.general.CombinedDataset$DatasetInfo di;
+        org.jfree.data.general.SeriesDataset $stack4;
+        org.jfree.data.xy.XYDataset $stack6;
+    
+    
+        this := @this: org.jfree.data.general.CombinedDataset;
+        series := @parameter0: int;
+        item := @parameter1: int;
+        di = specialinvoke this.<org.jfree.data.general.CombinedDataset: org.jfree.data.general.CombinedDataset$DatasetInfo getDatasetInfo(int)>(series);
+        $stack4 = staticinvoke <org.jfree.data.general.CombinedDataset$DatasetInfo: org.jfree.data.general.SeriesDataset access$100(org.jfree.data.general.CombinedDataset$DatasetInfo)>(di);
+        $stack6 = (org.jfree.data.xy.XYDataset) $stack4;
+        $stack5 = staticinvoke <org.jfree.data.general.CombinedDataset$DatasetInfo: int access$000(org.jfree.data.general.CombinedDataset$DatasetInfo)>(di);
+        $stack7 = interfaceinvoke $stack6.<org.jfree.data.xy.XYDataset: java.lang.Number getY(int,int)>($stack5, item);
+    
+        return $stack7;
+    }
+
+    // ---- method: <org.jfree.data.general.CombinedDataset: void add(org.jfree.data.general.SeriesDataset[])> ----
+    {
+        int $stack3, i#0;
+        org.jfree.data.general.CombinedDataset this;
+        org.jfree.data.general.DatasetChangeEvent $stack4, i#1;
+        org.jfree.data.general.SeriesDataset $stack5;
+        org.jfree.data.general.SeriesDataset[] data;
+    
+    
+        this := @this: org.jfree.data.general.CombinedDataset;
+        data := @parameter0: org.jfree.data.general.SeriesDataset[];
+        i#0 = 0;
+    
+      label1:
+        $stack3 = lengthof data;
+    
+        if i#0 >= $stack3 goto label2;
+        $stack5 = data[i#0];
+        specialinvoke this.<org.jfree.data.general.CombinedDataset: void fastAdd(org.jfree.data.general.SeriesDataset)>($stack5);
+        i#0 = i#0 + 1;
+    
+        goto label1;
+    
+      label2:
+        $stack4 = new org.jfree.data.general.DatasetChangeEvent;
+        specialinvoke $stack4.<org.jfree.data.general.DatasetChangeEvent: void <init>(java.lang.Object,org.jfree.data.general.Dataset)>(this, this);
+        i#1 = $stack4;
+        virtualinvoke this.<org.jfree.data.general.CombinedDataset: void notifyListeners(org.jfree.data.general.DatasetChangeEvent)>($stack4);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.general.CombinedDataset: java.lang.Number getLow(int,int)> ----
+    {
+        int $stack5, item, series;
+        java.lang.Number $stack7;
+        org.jfree.data.general.CombinedDataset this;
+        org.jfree.data.general.CombinedDataset$DatasetInfo di;
+        org.jfree.data.general.SeriesDataset $stack4;
+        org.jfree.data.xy.OHLCDataset $stack6;
+    
+    
+        this := @this: org.jfree.data.general.CombinedDataset;
+        series := @parameter0: int;
+        item := @parameter1: int;
+        di = specialinvoke this.<org.jfree.data.general.CombinedDataset: org.jfree.data.general.CombinedDataset$DatasetInfo getDatasetInfo(int)>(series);
+        $stack4 = staticinvoke <org.jfree.data.general.CombinedDataset$DatasetInfo: org.jfree.data.general.SeriesDataset access$100(org.jfree.data.general.CombinedDataset$DatasetInfo)>(di);
+        $stack6 = (org.jfree.data.xy.OHLCDataset) $stack4;
+        $stack5 = staticinvoke <org.jfree.data.general.CombinedDataset$DatasetInfo: int access$000(org.jfree.data.general.CombinedDataset$DatasetInfo)>(di);
+        $stack7 = interfaceinvoke $stack6.<org.jfree.data.xy.OHLCDataset: java.lang.Number getLow(int,int)>($stack5, item);
+    
+        return $stack7;
+    }
+
+    // ---- method: <org.jfree.data.general.CombinedDataset: java.lang.Number getX(int,int)> ----
+    {
+        int $stack5, item, series;
+        java.lang.Number $stack7;
+        org.jfree.data.general.CombinedDataset this;
+        org.jfree.data.general.CombinedDataset$DatasetInfo di;
+        org.jfree.data.general.SeriesDataset $stack4;
+        org.jfree.data.xy.XYDataset $stack6;
+    
+    
+        this := @this: org.jfree.data.general.CombinedDataset;
+        series := @parameter0: int;
+        item := @parameter1: int;
+        di = specialinvoke this.<org.jfree.data.general.CombinedDataset: org.jfree.data.general.CombinedDataset$DatasetInfo getDatasetInfo(int)>(series);
+        $stack4 = staticinvoke <org.jfree.data.general.CombinedDataset$DatasetInfo: org.jfree.data.general.SeriesDataset access$100(org.jfree.data.general.CombinedDataset$DatasetInfo)>(di);
+        $stack6 = (org.jfree.data.xy.XYDataset) $stack4;
+        $stack5 = staticinvoke <org.jfree.data.general.CombinedDataset$DatasetInfo: int access$000(org.jfree.data.general.CombinedDataset$DatasetInfo)>(di);
+        $stack7 = interfaceinvoke $stack6.<org.jfree.data.xy.XYDataset: java.lang.Number getX(int,int)>($stack5, item);
+    
+        return $stack7;
+    }
+
+    // ---- method: <org.jfree.data.general.CombinedDataset: org.jfree.data.general.SeriesDataset getParent()> ----
+    {
+        boolean $stack8;
+        int $stack6, i;
+        java.util.List $stack5;
+        org.jfree.data.general.CombinationDataset $stack9;
+        org.jfree.data.general.CombinedDataset this;
+        org.jfree.data.general.CombinedDataset$DatasetInfo $stack7;
+        org.jfree.data.general.SeriesDataset child, childParent, parent;
+    
+    
+        this := @this: org.jfree.data.general.CombinedDataset;
+        parent = null;
+        i = 0;
+    
+      label1:
+        $stack5 = this.<org.jfree.data.general.CombinedDataset: java.util.List datasetInfo>;
+        $stack6 = interfaceinvoke $stack5.<java.util.List: int size()>();
+    
+        if i >= $stack6 goto label4;
+        $stack7 = specialinvoke this.<org.jfree.data.general.CombinedDataset: org.jfree.data.general.CombinedDataset$DatasetInfo getDatasetInfo(int)>(i);
+        child = staticinvoke <org.jfree.data.general.CombinedDataset$DatasetInfo: org.jfree.data.general.SeriesDataset access$100(org.jfree.data.general.CombinedDataset$DatasetInfo)>($stack7);
+        $stack8 = child instanceof org.jfree.data.general.CombinationDataset;
+    
+        if $stack8 == 0 goto label5;
+        $stack9 = (org.jfree.data.general.CombinationDataset) child;
+        childParent = interfaceinvoke $stack9.<org.jfree.data.general.CombinationDataset: org.jfree.data.general.SeriesDataset getParent()>();
+    
+        if parent != null goto label2;
+        parent = childParent;
+    
+        goto label3;
+    
+      label2:
+        if parent == childParent goto label3;
+    
+        return null;
+    
+      label3:
+        goto label6;
+    
+      label4:
+        return parent;
+    
+      label5:
+        return null;
+    
+      label6:
+        i = i + 1;
+    
+        goto label1;
+    }
+
+    // ---- method: <org.jfree.data.general.CombinedDataset: int getChildPosition(org.jfree.data.general.Dataset)> ----
+    {
+        boolean $stack9;
+        int $stack11, $stack7, i, m, n;
+        java.util.List $stack6;
+        org.jfree.data.general.CombinedDataset $stack10, this;
+        org.jfree.data.general.CombinedDataset$DatasetInfo $stack8;
+        org.jfree.data.general.Dataset child;
+        org.jfree.data.general.SeriesDataset childDataset;
+    
+    
+        this := @this: org.jfree.data.general.CombinedDataset;
+        child := @parameter0: org.jfree.data.general.Dataset;
+        n = 0;
+        i = 0;
+    
+      label1:
+        $stack6 = this.<org.jfree.data.general.CombinedDataset: java.util.List datasetInfo>;
+        $stack7 = interfaceinvoke $stack6.<java.util.List: int size()>();
+    
+        if i >= $stack7 goto label6;
+        $stack8 = specialinvoke this.<org.jfree.data.general.CombinedDataset: org.jfree.data.general.CombinedDataset$DatasetInfo getDatasetInfo(int)>(i);
+        childDataset = staticinvoke <org.jfree.data.general.CombinedDataset$DatasetInfo: org.jfree.data.general.SeriesDataset access$100(org.jfree.data.general.CombinedDataset$DatasetInfo)>($stack8);
+        $stack9 = childDataset instanceof org.jfree.data.general.CombinedDataset;
+    
+        if $stack9 == 0 goto label3;
+        $stack10 = (org.jfree.data.general.CombinedDataset) childDataset;
+        m = virtualinvoke $stack10.<org.jfree.data.general.CombinedDataset: int getChildPosition(org.jfree.data.general.Dataset)>(child);
+    
+        if m < 0 goto label2;
+        $stack11 = n + m;
+    
+        return $stack11;
+    
+      label2:
+        n = n + 1;
+    
+        goto label5;
+    
+      label3:
+        if child != childDataset goto label4;
+    
+        return n;
+    
+      label4:
+        n = n + 1;
+    
+      label5:
+        i = i + 1;
+    
+        goto label1;
+    
+      label6:
+        return -1;
+    }
+
+    // ---- method: <org.jfree.data.general.CombinedDataset: java.lang.Number getStartX(int,int)> ----
+    {
+        boolean $stack5;
+        int $stack8, item, series;
+        java.lang.Number $stack10, $stack6;
+        org.jfree.data.general.CombinedDataset this;
+        org.jfree.data.general.CombinedDataset$DatasetInfo di;
+        org.jfree.data.general.SeriesDataset $stack4, $stack7;
+        org.jfree.data.xy.IntervalXYDataset $stack9;
+    
+    
+        this := @this: org.jfree.data.general.CombinedDataset;
+        series := @parameter0: int;
+        item := @parameter1: int;
+        di = specialinvoke this.<org.jfree.data.general.CombinedDataset: org.jfree.data.general.CombinedDataset$DatasetInfo getDatasetInfo(int)>(series);
+        $stack4 = staticinvoke <org.jfree.data.general.CombinedDataset$DatasetInfo: org.jfree.data.general.SeriesDataset access$100(org.jfree.data.general.CombinedDataset$DatasetInfo)>(di);
+        $stack5 = $stack4 instanceof org.jfree.data.xy.IntervalXYDataset;
+    
+        if $stack5 == 0 goto label1;
+        $stack7 = staticinvoke <org.jfree.data.general.CombinedDataset$DatasetInfo: org.jfree.data.general.SeriesDataset access$100(org.jfree.data.general.CombinedDataset$DatasetInfo)>(di);
+        $stack9 = (org.jfree.data.xy.IntervalXYDataset) $stack7;
+        $stack8 = staticinvoke <org.jfree.data.general.CombinedDataset$DatasetInfo: int access$000(org.jfree.data.general.CombinedDataset$DatasetInfo)>(di);
+        $stack10 = interfaceinvoke $stack9.<org.jfree.data.xy.IntervalXYDataset: java.lang.Number getStartX(int,int)>($stack8, item);
+    
+        return $stack10;
+    
+      label1:
+        $stack6 = virtualinvoke this.<org.jfree.data.general.CombinedDataset: java.lang.Number getX(int,int)>(series, item);
+    
+        return $stack6;
+    }
+
+    // ---- method: <org.jfree.data.general.CombinedDataset: int[] joinMap(int[],int[])> ----
+    {
+        int $stack4, $stack5, $stack6, $stack7, $stack8, $stack9;
+        int[] a, b, result;
+        org.jfree.data.general.CombinedDataset this;
+    
+    
+        this := @this: org.jfree.data.general.CombinedDataset;
+        a := @parameter0: int[];
+        b := @parameter1: int[];
+    
+        if a != null goto label1;
+    
+        return b;
+    
+      label1:
+        if b != null goto label2;
+    
+        return a;
+    
+      label2:
+        $stack4 = lengthof a;
+        $stack5 = lengthof b;
+        $stack6 = $stack4 + $stack5;
+        result = newarray (int)[$stack6];
+        $stack7 = lengthof a;
+        staticinvoke <java.lang.System: void arraycopy(java.lang.Object,int,java.lang.Object,int,int)>(a, 0, result, 0, $stack7);
+        $stack9 = lengthof a;
+        $stack8 = lengthof b;
+        staticinvoke <java.lang.System: void arraycopy(java.lang.Object,int,java.lang.Object,int,int)>(b, 0, result, $stack9, $stack8);
+    
+        return result;
+    }
+
+}

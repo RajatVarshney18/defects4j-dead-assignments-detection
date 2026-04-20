@@ -1,0 +1,312 @@
+// ========================================================================
+// CLASS : org.jfree.chart.renderer.RendererUtilities
+// ========================================================================
+
+[PUBLIC, SUPER] class org.jfree.chart.renderer.RendererUtilities extends java.lang.Object {
+
+    // ---- method: <org.jfree.chart.renderer.RendererUtilities: int[] findLiveItems(org.jfree.data.xy.XYDataset,int,double,double)> ----
+    {
+        double xHigh, xLow;
+        int i0, i1, series;
+        int[] $stack8;
+        org.jfree.data.xy.XYDataset dataset;
+    
+    
+        dataset := @parameter0: org.jfree.data.xy.XYDataset;
+        series := @parameter1: int;
+        xLow := @parameter2: double;
+        xHigh := @parameter3: double;
+        i0 = staticinvoke <org.jfree.chart.renderer.RendererUtilities: int findLiveItemsLowerBound(org.jfree.data.xy.XYDataset,int,double,double)>(dataset, series, xLow, xHigh);
+        i1 = staticinvoke <org.jfree.chart.renderer.RendererUtilities: int findLiveItemsUpperBound(org.jfree.data.xy.XYDataset,int,double,double)>(dataset, series, xLow, xHigh);
+        $stack8 = newarray (int)[2];
+        $stack8[0] = i0;
+        $stack8[1] = i1;
+    
+        return $stack8;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.RendererUtilities: int findLiveItemsLowerBound(org.jfree.data.xy.XYDataset,int,double,double)> ----
+    {
+        byte $stack23, $stack25, $stack26, $stack28, $stack31, $stack32, $stack34;
+        double $stack22, highValue#0, highValue#1, lowValue#0, lowValue#1, midV#0, midV#1, xHigh, xLow;
+        int $stack20, $stack21, $stack24, $stack27, $stack29, $stack30, $stack33, $stack35, high#0, high#1, itemCount, low#0, low#1, low#2, mid#0, mid#1, series;
+        org.jfree.data.DomainOrder $stack16, $stack17, $stack18, $stack19;
+        org.jfree.data.xy.XYDataset dataset;
+    
+    
+        dataset := @parameter0: org.jfree.data.xy.XYDataset;
+        series := @parameter1: int;
+        xLow := @parameter2: double;
+        xHigh := @parameter3: double;
+        itemCount = interfaceinvoke dataset.<org.jfree.data.xy.XYDataset: int getItemCount(int)>(series);
+    
+        if itemCount > 1 goto label01;
+    
+        return 0;
+    
+      label01:
+        $stack17 = interfaceinvoke dataset.<org.jfree.data.xy.XYDataset: org.jfree.data.DomainOrder getDomainOrder()>();
+        $stack16 = <org.jfree.data.DomainOrder: org.jfree.data.DomainOrder ASCENDING>;
+    
+        if $stack17 != $stack16 goto label06;
+        low#0 = 0;
+        high#0 = itemCount - 1;
+        $stack30 = 0 + high#0;
+        mid#0 = $stack30 / 2;
+        lowValue#0 = interfaceinvoke dataset.<org.jfree.data.xy.XYDataset: double getXValue(int,int)>(series, 0);
+        $stack31 = lowValue#0 cmpl xLow;
+    
+        if $stack31 < 0 goto label02;
+    
+        return 0;
+    
+      label02:
+        highValue#0 = interfaceinvoke dataset.<org.jfree.data.xy.XYDataset: double getXValue(int,int)>(series, high#0);
+        $stack32 = highValue#0 cmpg xLow;
+    
+        if $stack32 >= 0 goto label03;
+    
+        return high#0;
+    
+      label03:
+        $stack33 = high#0 - low#0;
+    
+        if $stack33 <= 1 goto label13;
+        midV#0 = interfaceinvoke dataset.<org.jfree.data.xy.XYDataset: double getXValue(int,int)>(series, mid#0);
+        $stack34 = midV#0 cmpl xLow;
+    
+        if $stack34 < 0 goto label04;
+        high#0 = mid#0;
+    
+        goto label05;
+    
+      label04:
+        low#0 = mid#0;
+    
+      label05:
+        $stack35 = low#0 + high#0;
+        mid#0 = $stack35 / 2;
+    
+        goto label03;
+    
+      label06:
+        $stack19 = interfaceinvoke dataset.<org.jfree.data.xy.XYDataset: org.jfree.data.DomainOrder getDomainOrder()>();
+        $stack18 = <org.jfree.data.DomainOrder: org.jfree.data.DomainOrder DESCENDING>;
+    
+        if $stack19 != $stack18 goto label11;
+        low#1 = 0;
+        high#1 = itemCount - 1;
+        $stack24 = 0 + high#1;
+        mid#1 = $stack24 / 2;
+        lowValue#1 = interfaceinvoke dataset.<org.jfree.data.xy.XYDataset: double getXValue(int,int)>(series, 0);
+        $stack25 = lowValue#1 cmpg xHigh;
+    
+        if $stack25 > 0 goto label07;
+    
+        return 0;
+    
+      label07:
+        highValue#1 = interfaceinvoke dataset.<org.jfree.data.xy.XYDataset: double getXValue(int,int)>(series, high#1);
+        $stack26 = highValue#1 cmpl xHigh;
+    
+        if $stack26 <= 0 goto label08;
+    
+        return high#1;
+    
+      label08:
+        $stack27 = high#1 - low#1;
+    
+        if $stack27 <= 1 goto label14;
+        midV#1 = interfaceinvoke dataset.<org.jfree.data.xy.XYDataset: double getXValue(int,int)>(series, mid#1);
+        $stack28 = midV#1 cmpl xHigh;
+    
+        if $stack28 <= 0 goto label09;
+        low#1 = mid#1;
+    
+        goto label10;
+    
+      label09:
+        high#1 = mid#1;
+    
+      label10:
+        $stack29 = low#1 + high#1;
+        mid#1 = $stack29 / 2;
+    
+        goto label08;
+    
+      label11:
+        low#2 = 0;
+    
+      label12:
+        if low#2 >= itemCount goto label15;
+        $stack22 = interfaceinvoke dataset.<org.jfree.data.xy.XYDataset: double getXValue(int,int)>(series, low#2);
+        $stack23 = $stack22 cmpg xLow;
+    
+        if $stack23 >= 0 goto label15;
+        low#2 = low#2 + 1;
+    
+        goto label12;
+    
+      label13:
+        return mid#0;
+    
+      label14:
+        return mid#1;
+    
+      label15:
+        $stack20 = low#2 - 1;
+        $stack21 = staticinvoke <java.lang.Math: int max(int,int)>(0, $stack20);
+    
+        return $stack21;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.RendererUtilities: int findLiveItemsUpperBound(org.jfree.data.xy.XYDataset,int,double,double)> ----
+    {
+        byte $stack24, $stack26, $stack27, $stack29, $stack33, $stack34, $stack36;
+        double $stack23, highValue#0, highValue#1, lowValue#0, lowValue#1, midV#0, midV#1, xHigh, xLow;
+        int $stack20, $stack21, $stack22, $stack25, $stack28, $stack30, $stack31, $stack32, $stack35, $stack37, $stack38, high#0, high#1, itemCount, low#0, low#1, low#2, mid#0, mid#1, series;
+        org.jfree.data.DomainOrder $stack16, $stack17, $stack18, $stack19;
+        org.jfree.data.xy.XYDataset dataset;
+    
+    
+        dataset := @parameter0: org.jfree.data.xy.XYDataset;
+        series := @parameter1: int;
+        xLow := @parameter2: double;
+        xHigh := @parameter3: double;
+        itemCount = interfaceinvoke dataset.<org.jfree.data.xy.XYDataset: int getItemCount(int)>(series);
+    
+        if itemCount > 1 goto label01;
+    
+        return 0;
+    
+      label01:
+        $stack17 = interfaceinvoke dataset.<org.jfree.data.xy.XYDataset: org.jfree.data.DomainOrder getDomainOrder()>();
+        $stack16 = <org.jfree.data.DomainOrder: org.jfree.data.DomainOrder ASCENDING>;
+    
+        if $stack17 != $stack16 goto label06;
+        low#0 = 0;
+        high#0 = itemCount - 1;
+        $stack31 = 0 + high#0;
+        $stack32 = $stack31 + 1;
+        mid#0 = $stack32 / 2;
+        lowValue#0 = interfaceinvoke dataset.<org.jfree.data.xy.XYDataset: double getXValue(int,int)>(series, 0);
+        $stack33 = lowValue#0 cmpl xHigh;
+    
+        if $stack33 <= 0 goto label02;
+    
+        return 0;
+    
+      label02:
+        highValue#0 = interfaceinvoke dataset.<org.jfree.data.xy.XYDataset: double getXValue(int,int)>(series, high#0);
+        $stack34 = highValue#0 cmpg xHigh;
+    
+        if $stack34 > 0 goto label03;
+    
+        return high#0;
+    
+      label03:
+        $stack35 = high#0 - low#0;
+    
+        if $stack35 <= 1 goto label13;
+        midV#0 = interfaceinvoke dataset.<org.jfree.data.xy.XYDataset: double getXValue(int,int)>(series, mid#0);
+        $stack36 = midV#0 cmpg xHigh;
+    
+        if $stack36 > 0 goto label04;
+        low#0 = mid#0;
+    
+        goto label05;
+    
+      label04:
+        high#0 = mid#0;
+    
+      label05:
+        $stack37 = low#0 + high#0;
+        $stack38 = $stack37 + 1;
+        mid#0 = $stack38 / 2;
+    
+        goto label03;
+    
+      label06:
+        $stack19 = interfaceinvoke dataset.<org.jfree.data.xy.XYDataset: org.jfree.data.DomainOrder getDomainOrder()>();
+        $stack18 = <org.jfree.data.DomainOrder: org.jfree.data.DomainOrder DESCENDING>;
+    
+        if $stack19 != $stack18 goto label11;
+        low#1 = 0;
+        high#1 = itemCount - 1;
+        $stack25 = 0 + high#1;
+        mid#1 = $stack25 / 2;
+        lowValue#1 = interfaceinvoke dataset.<org.jfree.data.xy.XYDataset: double getXValue(int,int)>(series, 0);
+        $stack26 = lowValue#1 cmpg xLow;
+    
+        if $stack26 >= 0 goto label07;
+    
+        return 0;
+    
+      label07:
+        highValue#1 = interfaceinvoke dataset.<org.jfree.data.xy.XYDataset: double getXValue(int,int)>(series, high#1);
+        $stack27 = highValue#1 cmpl xLow;
+    
+        if $stack27 < 0 goto label08;
+    
+        return high#1;
+    
+      label08:
+        $stack28 = high#1 - low#1;
+    
+        if $stack28 <= 1 goto label14;
+        midV#1 = interfaceinvoke dataset.<org.jfree.data.xy.XYDataset: double getXValue(int,int)>(series, mid#1);
+        $stack29 = midV#1 cmpl xLow;
+    
+        if $stack29 < 0 goto label09;
+        low#1 = mid#1;
+    
+        goto label10;
+    
+      label09:
+        high#1 = mid#1;
+    
+      label10:
+        $stack30 = low#1 + high#1;
+        mid#1 = $stack30 / 2;
+    
+        goto label08;
+    
+      label11:
+        low#2 = itemCount - 1;
+    
+      label12:
+        if low#2 < 0 goto label15;
+        $stack23 = interfaceinvoke dataset.<org.jfree.data.xy.XYDataset: double getXValue(int,int)>(series, low#2);
+        $stack24 = $stack23 cmpl xHigh;
+    
+        if $stack24 <= 0 goto label15;
+        low#2 = low#2 + -1;
+    
+        goto label12;
+    
+      label13:
+        return mid#0;
+    
+      label14:
+        return mid#1;
+    
+      label15:
+        $stack21 = itemCount - 1;
+        $stack20 = low#2 + 1;
+        $stack22 = staticinvoke <java.lang.Math: int min(int,int)>($stack21, $stack20);
+    
+        return $stack22;
+    }
+
+    // ---- method: <org.jfree.chart.renderer.RendererUtilities: void <init>()> ----
+    {
+        org.jfree.chart.renderer.RendererUtilities this;
+    
+    
+        this := @this: org.jfree.chart.renderer.RendererUtilities;
+        specialinvoke this.<java.lang.Object: void <init>()>();
+    
+        return;
+    }
+
+}

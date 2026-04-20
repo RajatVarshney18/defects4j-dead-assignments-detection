@@ -1,0 +1,166 @@
+// ========================================================================
+// CLASS : org.jfree.chart.labels.SymbolicXYItemLabelGenerator
+// ========================================================================
+
+[PUBLIC, SUPER] class org.jfree.chart.labels.SymbolicXYItemLabelGenerator extends java.lang.Object implements org.jfree.chart.util.PublicCloneable, org.jfree.chart.labels.XYToolTipGenerator, org.jfree.chart.labels.XYItemLabelGenerator, java.lang.Cloneable, java.io.Serializable {
+
+    // ---- method: <org.jfree.chart.labels.SymbolicXYItemLabelGenerator: void <init>()> ----
+    {
+        org.jfree.chart.labels.SymbolicXYItemLabelGenerator this;
+    
+    
+        this := @this: org.jfree.chart.labels.SymbolicXYItemLabelGenerator;
+        specialinvoke this.<java.lang.Object: void <init>()>();
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.labels.SymbolicXYItemLabelGenerator: boolean equals(java.lang.Object)> ----
+    {
+        boolean $stack2;
+        java.lang.Object obj;
+        org.jfree.chart.labels.SymbolicXYItemLabelGenerator this;
+    
+    
+        this := @this: org.jfree.chart.labels.SymbolicXYItemLabelGenerator;
+        obj := @parameter0: java.lang.Object;
+    
+        if obj != this goto label1;
+    
+        return 1;
+    
+      label1:
+        $stack2 = obj instanceof org.jfree.chart.labels.SymbolicXYItemLabelGenerator;
+    
+        if $stack2 == 0 goto label2;
+    
+        return 1;
+    
+      label2:
+        return 0;
+    }
+
+    // ---- method: <org.jfree.chart.labels.SymbolicXYItemLabelGenerator: java.lang.String generateToolTip(org.jfree.data.xy.XYDataset,int,int)> ----
+    {
+        boolean $stack10, $stack11, $stack8;
+        double $stack12, $stack9, y#0, y#2;
+        int item, series;
+        java.lang.String $stack18, xStr, yStr;
+        java.lang.StringBuffer $stack13, $stack14, $stack15, $stack16, $stack17;
+        org.jfree.chart.labels.SymbolicXYItemLabelGenerator this;
+        org.jfree.data.time.RegularTimePeriod y#1;
+        org.jfree.data.time.TimeSeries $stack20;
+        org.jfree.data.time.TimeSeriesCollection $stack19;
+        org.jfree.data.xy.XYDataset data;
+        org.jfree.data.xy.XisSymbolic $stack21;
+        org.jfree.data.xy.YisSymbolic $stack22;
+    
+    
+        this := @this: org.jfree.chart.labels.SymbolicXYItemLabelGenerator;
+        data := @parameter0: org.jfree.data.xy.XYDataset;
+        series := @parameter1: int;
+        item := @parameter2: int;
+        $stack8 = data instanceof org.jfree.data.xy.YisSymbolic;
+    
+        if $stack8 == 0 goto label1;
+        $stack22 = (org.jfree.data.xy.YisSymbolic) data;
+        yStr = interfaceinvoke $stack22.<org.jfree.data.xy.YisSymbolic: java.lang.String getYSymbolicValue(int,int)>(series, item);
+    
+        goto label2;
+    
+      label1:
+        y#0 = interfaceinvoke data.<org.jfree.data.xy.XYDataset: double getYValue(int,int)>(series, item);
+        $stack9 = staticinvoke <org.jfree.chart.labels.SymbolicXYItemLabelGenerator: double round(double,int)>(y#0, 2);
+        yStr = staticinvoke <java.lang.Double: java.lang.String toString(double)>($stack9);
+    
+      label2:
+        $stack10 = data instanceof org.jfree.data.xy.XisSymbolic;
+    
+        if $stack10 == 0 goto label3;
+        $stack21 = (org.jfree.data.xy.XisSymbolic) data;
+        xStr = interfaceinvoke $stack21.<org.jfree.data.xy.XisSymbolic: java.lang.String getXSymbolicValue(int,int)>(series, item);
+    
+        goto label5;
+    
+      label3:
+        $stack11 = data instanceof org.jfree.data.time.TimeSeriesCollection;
+    
+        if $stack11 == 0 goto label4;
+        $stack19 = (org.jfree.data.time.TimeSeriesCollection) data;
+        $stack20 = virtualinvoke $stack19.<org.jfree.data.time.TimeSeriesCollection: org.jfree.data.time.TimeSeries getSeries(int)>(series);
+        y#1 = virtualinvoke $stack20.<org.jfree.data.time.TimeSeries: org.jfree.data.time.RegularTimePeriod getTimePeriod(int)>(item);
+        xStr = virtualinvoke y#1.<org.jfree.data.time.RegularTimePeriod: java.lang.String toString()>();
+    
+        goto label5;
+    
+      label4:
+        y#2 = interfaceinvoke data.<org.jfree.data.xy.XYDataset: double getXValue(int,int)>(series, item);
+        $stack12 = staticinvoke <org.jfree.chart.labels.SymbolicXYItemLabelGenerator: double round(double,int)>(y#2, 2);
+        xStr = staticinvoke <java.lang.Double: java.lang.String toString(double)>($stack12);
+    
+      label5:
+        $stack13 = new java.lang.StringBuffer;
+        specialinvoke $stack13.<java.lang.StringBuffer: void <init>()>();
+        $stack14 = virtualinvoke $stack13.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>("X: ");
+        $stack15 = virtualinvoke $stack14.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>(xStr);
+        $stack16 = virtualinvoke $stack15.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>(", Y: ");
+        $stack17 = virtualinvoke $stack16.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>(yStr);
+        $stack18 = virtualinvoke $stack17.<java.lang.StringBuffer: java.lang.String toString()>();
+    
+        return $stack18;
+    }
+
+    // ---- method: <org.jfree.chart.labels.SymbolicXYItemLabelGenerator: java.lang.String generateLabel(org.jfree.data.xy.XYDataset,int,int)> ----
+    {
+        int category, series;
+        org.jfree.chart.labels.SymbolicXYItemLabelGenerator this;
+        org.jfree.data.xy.XYDataset dataset;
+    
+    
+        this := @this: org.jfree.chart.labels.SymbolicXYItemLabelGenerator;
+        dataset := @parameter0: org.jfree.data.xy.XYDataset;
+        series := @parameter1: int;
+        category := @parameter2: int;
+    
+        return null;
+    }
+
+    // ---- method: <org.jfree.chart.labels.SymbolicXYItemLabelGenerator: java.lang.Object clone()> ----
+    {
+        java.lang.Object $stack1;
+        org.jfree.chart.labels.SymbolicXYItemLabelGenerator this;
+    
+    
+        this := @this: org.jfree.chart.labels.SymbolicXYItemLabelGenerator;
+        $stack1 = specialinvoke this.<java.lang.Object: java.lang.Object clone()>();
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.labels.SymbolicXYItemLabelGenerator: double round(double,int)> ----
+    {
+        double $stack10, $stack11, $stack12, $stack7, $stack8, $stack9, p, tempval, value;
+        int nb;
+    
+    
+        value := @parameter0: double;
+        nb := @parameter1: int;
+    
+        if nb > 0 goto label1;
+        $stack11 = value + 0.5;
+        $stack12 = staticinvoke <java.lang.Math: double floor(double)>($stack11);
+    
+        return $stack12;
+    
+      label1:
+        $stack7 = (double) nb;
+        p = staticinvoke <java.lang.Math: double pow(double,double)>(10.0, $stack7);
+        $stack8 = value * p;
+        $stack9 = $stack8 + 0.5;
+        tempval = staticinvoke <java.lang.Math: double floor(double)>($stack9);
+        $stack10 = tempval / p;
+    
+        return $stack10;
+    }
+
+}

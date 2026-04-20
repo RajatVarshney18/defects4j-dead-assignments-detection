@@ -1,0 +1,577 @@
+// ========================================================================
+// CLASS : org.jfree.data.time.Minute
+// ========================================================================
+
+[PUBLIC, SUPER] class org.jfree.data.time.Minute extends org.jfree.data.time.RegularTimePeriod implements java.io.Serializable {
+
+    // ---- method: <org.jfree.data.time.Minute: void <init>(java.util.Date,java.util.TimeZone)> ----
+    {
+        byte $stack5, $stack7;
+        int $stack6, min;
+        java.lang.IllegalArgumentException #l1, #l3;
+        java.lang.Object $stack10, $stack9;
+        java.lang.Throwable #l0, #l2;
+        java.util.Calendar calendar;
+        java.util.Date time;
+        java.util.TimeZone zone;
+        org.jfree.data.time.Day $stack8;
+        org.jfree.data.time.Minute this;
+    
+    
+        this := @this: org.jfree.data.time.Minute;
+        time := @parameter0: java.util.Date;
+        zone := @parameter1: java.util.TimeZone;
+        specialinvoke this.<org.jfree.data.time.RegularTimePeriod: void <init>()>();
+    
+        if time != null goto label1;
+        $stack10 = new java.lang.IllegalArgumentException;
+        #l1 = (java.lang.IllegalArgumentException) $stack10;
+        specialinvoke #l1.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'time\' argument.");
+        #l0 = (java.lang.Throwable) $stack10;
+    
+        throw #l0;
+    
+      label1:
+        if zone != null goto label2;
+        $stack9 = new java.lang.IllegalArgumentException;
+        #l3 = (java.lang.IllegalArgumentException) $stack9;
+        specialinvoke #l3.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'zone\' argument.");
+        #l2 = (java.lang.Throwable) $stack9;
+    
+        throw #l2;
+    
+      label2:
+        calendar = staticinvoke <java.util.Calendar: java.util.Calendar getInstance(java.util.TimeZone)>(zone);
+        virtualinvoke calendar.<java.util.Calendar: void setTime(java.util.Date)>(time);
+        min = virtualinvoke calendar.<java.util.Calendar: int get(int)>(12);
+        $stack5 = (byte) min;
+        this.<org.jfree.data.time.Minute: byte minute> = $stack5;
+        $stack6 = virtualinvoke calendar.<java.util.Calendar: int get(int)>(11);
+        $stack7 = (byte) $stack6;
+        this.<org.jfree.data.time.Minute: byte hour> = $stack7;
+        $stack8 = new org.jfree.data.time.Day;
+        specialinvoke $stack8.<org.jfree.data.time.Day: void <init>(java.util.Date,java.util.TimeZone)>(time, zone);
+        this.<org.jfree.data.time.Minute: org.jfree.data.time.Day day> = $stack8;
+        virtualinvoke this.<org.jfree.data.time.Minute: void peg(java.util.Calendar)>(calendar);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.time.Minute: long getFirstMillisecond(java.util.Calendar)> ----
+    {
+        byte $stack10, $stack9;
+        int $stack7, day, month, year;
+        java.util.Calendar calendar;
+        java.util.Date $stack11;
+        long $stack12;
+        org.jfree.data.time.Day $stack5, $stack6, $stack8;
+        org.jfree.data.time.Minute this;
+    
+    
+        this := @this: org.jfree.data.time.Minute;
+        calendar := @parameter0: java.util.Calendar;
+        $stack5 = this.<org.jfree.data.time.Minute: org.jfree.data.time.Day day>;
+        year = virtualinvoke $stack5.<org.jfree.data.time.Day: int getYear()>();
+        $stack6 = this.<org.jfree.data.time.Minute: org.jfree.data.time.Day day>;
+        $stack7 = virtualinvoke $stack6.<org.jfree.data.time.Day: int getMonth()>();
+        month = $stack7 - 1;
+        $stack8 = this.<org.jfree.data.time.Minute: org.jfree.data.time.Day day>;
+        day = virtualinvoke $stack8.<org.jfree.data.time.Day: int getDayOfMonth()>();
+        virtualinvoke calendar.<java.util.Calendar: void clear()>();
+        $stack10 = this.<org.jfree.data.time.Minute: byte hour>;
+        $stack9 = this.<org.jfree.data.time.Minute: byte minute>;
+        virtualinvoke calendar.<java.util.Calendar: void set(int,int,int,int,int,int)>(year, month, day, $stack10, $stack9, 0);
+        virtualinvoke calendar.<java.util.Calendar: void set(int,int)>(14, 0);
+        $stack11 = virtualinvoke calendar.<java.util.Calendar: java.util.Date getTime()>();
+        $stack12 = virtualinvoke $stack11.<java.util.Date: long getTime()>();
+    
+        return $stack12;
+    }
+
+    // ---- method: <org.jfree.data.time.Minute: void <init>()> ----
+    {
+        java.util.Date $stack1;
+        org.jfree.data.time.Minute this;
+    
+    
+        this := @this: org.jfree.data.time.Minute;
+        $stack1 = new java.util.Date;
+        specialinvoke $stack1.<java.util.Date: void <init>()>();
+        specialinvoke this.<org.jfree.data.time.Minute: void <init>(java.util.Date)>($stack1);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.time.Minute: int compareTo(java.lang.Object)> ----
+    {
+        boolean $stack4, $stack5;
+        byte $stack8;
+        int $stack9, result;
+        java.lang.Object o1;
+        org.jfree.data.time.Hour $stack6, $stack7;
+        org.jfree.data.time.Minute m, this;
+    
+    
+        this := @this: org.jfree.data.time.Minute;
+        o1 := @parameter0: java.lang.Object;
+        $stack4 = o1 instanceof org.jfree.data.time.Minute;
+    
+        if $stack4 == 0 goto label2;
+        m = (org.jfree.data.time.Minute) o1;
+        $stack7 = virtualinvoke this.<org.jfree.data.time.Minute: org.jfree.data.time.Hour getHour()>();
+        $stack6 = virtualinvoke m.<org.jfree.data.time.Minute: org.jfree.data.time.Hour getHour()>();
+        result = virtualinvoke $stack7.<org.jfree.data.time.Hour: int compareTo(java.lang.Object)>($stack6);
+    
+        if result != 0 goto label1;
+        $stack8 = this.<org.jfree.data.time.Minute: byte minute>;
+        $stack9 = virtualinvoke m.<org.jfree.data.time.Minute: int getMinute()>();
+        result = $stack8 - $stack9;
+    
+      label1:
+        goto label4;
+    
+      label2:
+        $stack5 = o1 instanceof org.jfree.data.time.RegularTimePeriod;
+    
+        if $stack5 == 0 goto label3;
+        result = 0;
+    
+        goto label4;
+    
+      label3:
+        result = 1;
+    
+      label4:
+        return result;
+    }
+
+    // ---- method: <org.jfree.data.time.Minute: void <init>(int,int,int,int,int)> ----
+    {
+        int day, hour, minute, month, year;
+        org.jfree.data.time.Day $stack6;
+        org.jfree.data.time.Hour $stack7;
+        org.jfree.data.time.Minute this;
+    
+    
+        this := @this: org.jfree.data.time.Minute;
+        minute := @parameter0: int;
+        hour := @parameter1: int;
+        day := @parameter2: int;
+        month := @parameter3: int;
+        year := @parameter4: int;
+        $stack7 = new org.jfree.data.time.Hour;
+        $stack6 = new org.jfree.data.time.Day;
+        specialinvoke $stack6.<org.jfree.data.time.Day: void <init>(int,int,int)>(day, month, year);
+        specialinvoke $stack7.<org.jfree.data.time.Hour: void <init>(int,org.jfree.data.time.Day)>(hour, $stack6);
+        specialinvoke this.<org.jfree.data.time.Minute: void <init>(int,org.jfree.data.time.Hour)>(minute, $stack7);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.time.Minute: org.jfree.data.time.Minute parseMinute(java.lang.String)> ----
+    {
+        int $stack10, $stack11, $stack12, $stack13, $stack14, $stack15, $stack16, $stack17, $stack18, $stack19, $stack20, $stack21, $stack22, $stack9, hour, minute;
+        java.lang.String daystr, hmstr#0, hmstr#1, hourstr, minstr, s#0, s#1;
+        org.jfree.data.time.Day day;
+        org.jfree.data.time.Hour $stack23;
+        org.jfree.data.time.Minute $stack24, result;
+    
+    
+        s#0 := @parameter0: java.lang.String;
+        result = null;
+        s#1 = virtualinvoke s#0.<java.lang.String: java.lang.String trim()>();
+        $stack9 = virtualinvoke s#1.<java.lang.String: int length()>();
+        $stack10 = staticinvoke <java.lang.Math: int min(int,int)>(10, $stack9);
+        daystr = virtualinvoke s#1.<java.lang.String: java.lang.String substring(int,int)>(0, $stack10);
+        day = staticinvoke <org.jfree.data.time.Day: org.jfree.data.time.Day parseDay(java.lang.String)>(daystr);
+    
+        if day == null goto label1;
+        $stack11 = virtualinvoke daystr.<java.lang.String: int length()>();
+        $stack13 = $stack11 + 1;
+        $stack12 = virtualinvoke s#1.<java.lang.String: int length()>();
+        $stack15 = staticinvoke <java.lang.Math: int min(int,int)>($stack13, $stack12);
+        $stack14 = virtualinvoke s#1.<java.lang.String: int length()>();
+        hmstr#0 = virtualinvoke s#1.<java.lang.String: java.lang.String substring(int,int)>($stack15, $stack14);
+        hmstr#1 = virtualinvoke hmstr#0.<java.lang.String: java.lang.String trim()>();
+        $stack16 = virtualinvoke hmstr#1.<java.lang.String: int length()>();
+        $stack17 = staticinvoke <java.lang.Math: int min(int,int)>(2, $stack16);
+        hourstr = virtualinvoke hmstr#1.<java.lang.String: java.lang.String substring(int,int)>(0, $stack17);
+        hour = staticinvoke <java.lang.Integer: int parseInt(java.lang.String)>(hourstr);
+    
+        if hour < 0 goto label1;
+    
+        if hour > 23 goto label1;
+        $stack18 = virtualinvoke hourstr.<java.lang.String: int length()>();
+        $stack20 = $stack18 + 1;
+        $stack19 = virtualinvoke hmstr#1.<java.lang.String: int length()>();
+        $stack22 = staticinvoke <java.lang.Math: int min(int,int)>($stack20, $stack19);
+        $stack21 = virtualinvoke hmstr#1.<java.lang.String: int length()>();
+        minstr = virtualinvoke hmstr#1.<java.lang.String: java.lang.String substring(int,int)>($stack22, $stack21);
+        minute = staticinvoke <java.lang.Integer: int parseInt(java.lang.String)>(minstr);
+    
+        if minute < 0 goto label1;
+    
+        if minute > 59 goto label1;
+        $stack24 = new org.jfree.data.time.Minute;
+        $stack23 = new org.jfree.data.time.Hour;
+        specialinvoke $stack23.<org.jfree.data.time.Hour: void <init>(int,org.jfree.data.time.Day)>(hour, day);
+        specialinvoke $stack24.<org.jfree.data.time.Minute: void <init>(int,org.jfree.data.time.Hour)>(minute, $stack23);
+        result = $stack24;
+    
+      label1:
+        return result;
+    }
+
+    // ---- method: <org.jfree.data.time.Minute: org.jfree.data.time.Day getDay()> ----
+    {
+        org.jfree.data.time.Day $stack1;
+        org.jfree.data.time.Minute this;
+    
+    
+        this := @this: org.jfree.data.time.Minute;
+        $stack1 = this.<org.jfree.data.time.Minute: org.jfree.data.time.Day day>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.data.time.Minute: org.jfree.data.time.RegularTimePeriod next()> ----
+    {
+        byte $stack3, $stack7;
+        int $stack9;
+        org.jfree.data.time.Hour $stack4, $stack8, nextHour;
+        org.jfree.data.time.Minute $stack10, $stack6, result, this;
+        org.jfree.data.time.RegularTimePeriod $stack5;
+    
+    
+        this := @this: org.jfree.data.time.Minute;
+        $stack3 = this.<org.jfree.data.time.Minute: byte minute>;
+    
+        if $stack3 == 59 goto label1;
+        $stack10 = new org.jfree.data.time.Minute;
+        $stack7 = this.<org.jfree.data.time.Minute: byte minute>;
+        $stack9 = $stack7 + 1;
+        $stack8 = virtualinvoke this.<org.jfree.data.time.Minute: org.jfree.data.time.Hour getHour()>();
+        specialinvoke $stack10.<org.jfree.data.time.Minute: void <init>(int,org.jfree.data.time.Hour)>($stack9, $stack8);
+        result = $stack10;
+    
+        goto label3;
+    
+      label1:
+        $stack4 = virtualinvoke this.<org.jfree.data.time.Minute: org.jfree.data.time.Hour getHour()>();
+        $stack5 = virtualinvoke $stack4.<org.jfree.data.time.Hour: org.jfree.data.time.RegularTimePeriod next()>();
+        nextHour = (org.jfree.data.time.Hour) $stack5;
+    
+        if nextHour == null goto label2;
+        $stack6 = new org.jfree.data.time.Minute;
+        specialinvoke $stack6.<org.jfree.data.time.Minute: void <init>(int,org.jfree.data.time.Hour)>(0, nextHour);
+        result = $stack6;
+    
+        goto label3;
+    
+      label2:
+        result = null;
+    
+      label3:
+        return result;
+    }
+
+    // ---- method: <org.jfree.data.time.Minute: int getHourValue()> ----
+    {
+        byte $stack1;
+        org.jfree.data.time.Minute this;
+    
+    
+        this := @this: org.jfree.data.time.Minute;
+        $stack1 = this.<org.jfree.data.time.Minute: byte hour>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.data.time.Minute: long getLastMillisecond(java.util.Calendar)> ----
+    {
+        byte $stack10, $stack9;
+        int $stack7, day, month, year;
+        java.util.Calendar calendar;
+        java.util.Date $stack11;
+        long $stack12;
+        org.jfree.data.time.Day $stack5, $stack6, $stack8;
+        org.jfree.data.time.Minute this;
+    
+    
+        this := @this: org.jfree.data.time.Minute;
+        calendar := @parameter0: java.util.Calendar;
+        $stack5 = this.<org.jfree.data.time.Minute: org.jfree.data.time.Day day>;
+        year = virtualinvoke $stack5.<org.jfree.data.time.Day: int getYear()>();
+        $stack6 = this.<org.jfree.data.time.Minute: org.jfree.data.time.Day day>;
+        $stack7 = virtualinvoke $stack6.<org.jfree.data.time.Day: int getMonth()>();
+        month = $stack7 - 1;
+        $stack8 = this.<org.jfree.data.time.Minute: org.jfree.data.time.Day day>;
+        day = virtualinvoke $stack8.<org.jfree.data.time.Day: int getDayOfMonth()>();
+        virtualinvoke calendar.<java.util.Calendar: void clear()>();
+        $stack10 = this.<org.jfree.data.time.Minute: byte hour>;
+        $stack9 = this.<org.jfree.data.time.Minute: byte minute>;
+        virtualinvoke calendar.<java.util.Calendar: void set(int,int,int,int,int,int)>(year, month, day, $stack10, $stack9, 59);
+        virtualinvoke calendar.<java.util.Calendar: void set(int,int)>(14, 999);
+        $stack11 = virtualinvoke calendar.<java.util.Calendar: java.util.Date getTime()>();
+        $stack12 = virtualinvoke $stack11.<java.util.Date: long getTime()>();
+    
+        return $stack12;
+    }
+
+    // ---- method: <org.jfree.data.time.Minute: long getSerialIndex()> ----
+    {
+        byte $stack5, $stack8;
+        long $stack10, $stack11, $stack4, $stack6, $stack7, $stack9, hourIndex;
+        org.jfree.data.time.Day $stack3;
+        org.jfree.data.time.Minute this;
+    
+    
+        this := @this: org.jfree.data.time.Minute;
+        $stack3 = this.<org.jfree.data.time.Minute: org.jfree.data.time.Day day>;
+        $stack4 = virtualinvoke $stack3.<org.jfree.data.time.Day: long getSerialIndex()>();
+        $stack6 = $stack4 * 24L;
+        $stack5 = this.<org.jfree.data.time.Minute: byte hour>;
+        $stack7 = (long) $stack5;
+        hourIndex = $stack6 + $stack7;
+        $stack9 = hourIndex * 60L;
+        $stack8 = this.<org.jfree.data.time.Minute: byte minute>;
+        $stack10 = (long) $stack8;
+        $stack11 = $stack9 + $stack10;
+    
+        return $stack11;
+    }
+
+    // ---- method: <org.jfree.data.time.Minute: void peg(java.util.Calendar)> ----
+    {
+        java.util.Calendar calendar;
+        long $stack2, $stack3;
+        org.jfree.data.time.Minute this;
+    
+    
+        this := @this: org.jfree.data.time.Minute;
+        calendar := @parameter0: java.util.Calendar;
+        $stack2 = virtualinvoke this.<org.jfree.data.time.Minute: long getFirstMillisecond(java.util.Calendar)>(calendar);
+        this.<org.jfree.data.time.Minute: long firstMillisecond> = $stack2;
+        $stack3 = virtualinvoke this.<org.jfree.data.time.Minute: long getLastMillisecond(java.util.Calendar)>(calendar);
+        this.<org.jfree.data.time.Minute: long lastMillisecond> = $stack3;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.time.Minute: void <init>(int,org.jfree.data.time.Hour)> ----
+    {
+        byte $stack3, $stack5;
+        int $stack4, minute;
+        java.lang.IllegalArgumentException #l1;
+        java.lang.Object $stack8;
+        java.lang.Throwable #l0;
+        java.util.Calendar $stack7;
+        org.jfree.data.time.Day $stack6;
+        org.jfree.data.time.Hour hour;
+        org.jfree.data.time.Minute this;
+    
+    
+        this := @this: org.jfree.data.time.Minute;
+        minute := @parameter0: int;
+        hour := @parameter1: org.jfree.data.time.Hour;
+        specialinvoke this.<org.jfree.data.time.RegularTimePeriod: void <init>()>();
+    
+        if hour != null goto label1;
+        $stack8 = new java.lang.IllegalArgumentException;
+        #l1 = (java.lang.IllegalArgumentException) $stack8;
+        specialinvoke #l1.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'hour\' argument.");
+        #l0 = (java.lang.Throwable) $stack8;
+    
+        throw #l0;
+    
+      label1:
+        $stack3 = (byte) minute;
+        this.<org.jfree.data.time.Minute: byte minute> = $stack3;
+        $stack4 = virtualinvoke hour.<org.jfree.data.time.Hour: int getHour()>();
+        $stack5 = (byte) $stack4;
+        this.<org.jfree.data.time.Minute: byte hour> = $stack5;
+        $stack6 = virtualinvoke hour.<org.jfree.data.time.Hour: org.jfree.data.time.Day getDay()>();
+        this.<org.jfree.data.time.Minute: org.jfree.data.time.Day day> = $stack6;
+        $stack7 = staticinvoke <java.util.Calendar: java.util.Calendar getInstance()>();
+        virtualinvoke this.<org.jfree.data.time.Minute: void peg(java.util.Calendar)>($stack7);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.time.Minute: long getFirstMillisecond()> ----
+    {
+        long $stack1;
+        org.jfree.data.time.Minute this;
+    
+    
+        this := @this: org.jfree.data.time.Minute;
+        $stack1 = this.<org.jfree.data.time.Minute: long firstMillisecond>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.data.time.Minute: void <init>(java.util.Date)> ----
+    {
+        java.util.Date time;
+        java.util.TimeZone $stack2;
+        org.jfree.data.time.Minute this;
+    
+    
+        this := @this: org.jfree.data.time.Minute;
+        time := @parameter0: java.util.Date;
+        $stack2 = <org.jfree.data.time.RegularTimePeriod: java.util.TimeZone DEFAULT_TIME_ZONE>;
+        specialinvoke this.<org.jfree.data.time.Minute: void <init>(java.util.Date,java.util.TimeZone)>(time, $stack2);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.time.Minute: org.jfree.data.time.Hour getHour()> ----
+    {
+        byte $stack2;
+        org.jfree.data.time.Day $stack1;
+        org.jfree.data.time.Hour $stack3;
+        org.jfree.data.time.Minute this;
+    
+    
+        this := @this: org.jfree.data.time.Minute;
+        $stack3 = new org.jfree.data.time.Hour;
+        $stack2 = this.<org.jfree.data.time.Minute: byte hour>;
+        $stack1 = this.<org.jfree.data.time.Minute: org.jfree.data.time.Day day>;
+        specialinvoke $stack3.<org.jfree.data.time.Hour: void <init>(int,org.jfree.data.time.Day)>($stack2, $stack1);
+    
+        return $stack3;
+    }
+
+    // ---- method: <org.jfree.data.time.Minute: int hashCode()> ----
+    {
+        byte $stack3, $stack5;
+        int $stack4, $stack7, $stack8, result#1, result#2, result#3;
+        org.jfree.data.time.Day $stack6;
+        org.jfree.data.time.Minute this;
+        short $stack2;
+    
+    
+        this := @this: org.jfree.data.time.Minute;
+        $stack2 = 629;
+        $stack3 = this.<org.jfree.data.time.Minute: byte minute>;
+        result#1 = $stack2 + $stack3;
+        $stack4 = 37 * result#1;
+        $stack5 = this.<org.jfree.data.time.Minute: byte hour>;
+        result#2 = $stack4 + $stack5;
+        $stack7 = 37 * result#2;
+        $stack6 = this.<org.jfree.data.time.Minute: org.jfree.data.time.Day day>;
+        $stack8 = virtualinvoke $stack6.<org.jfree.data.time.Day: int hashCode()>();
+        result#3 = $stack7 + $stack8;
+    
+        return result#3;
+    }
+
+    // ---- method: <org.jfree.data.time.Minute: boolean equals(java.lang.Object)> ----
+    {
+        boolean $stack3;
+        byte $stack4, $stack5, $stack6, $stack7;
+        java.lang.Object obj;
+        org.jfree.data.time.Minute that, this;
+    
+    
+        this := @this: org.jfree.data.time.Minute;
+        obj := @parameter0: java.lang.Object;
+    
+        if obj != this goto label1;
+    
+        return 1;
+    
+      label1:
+        $stack3 = obj instanceof org.jfree.data.time.Minute;
+    
+        if $stack3 != 0 goto label2;
+    
+        return 0;
+    
+      label2:
+        that = (org.jfree.data.time.Minute) obj;
+        $stack5 = this.<org.jfree.data.time.Minute: byte minute>;
+        $stack4 = that.<org.jfree.data.time.Minute: byte minute>;
+    
+        if $stack5 == $stack4 goto label3;
+    
+        return 0;
+    
+      label3:
+        $stack7 = this.<org.jfree.data.time.Minute: byte hour>;
+        $stack6 = that.<org.jfree.data.time.Minute: byte hour>;
+    
+        if $stack7 == $stack6 goto label4;
+    
+        return 0;
+    
+      label4:
+        return 1;
+    }
+
+    // ---- method: <org.jfree.data.time.Minute: int getMinute()> ----
+    {
+        byte $stack1;
+        org.jfree.data.time.Minute this;
+    
+    
+        this := @this: org.jfree.data.time.Minute;
+        $stack1 = this.<org.jfree.data.time.Minute: byte minute>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.data.time.Minute: org.jfree.data.time.RegularTimePeriod previous()> ----
+    {
+        byte $stack3, $stack7;
+        int $stack9;
+        org.jfree.data.time.Hour $stack4, $stack8, h;
+        org.jfree.data.time.Minute $stack10, $stack6, result, this;
+        org.jfree.data.time.RegularTimePeriod $stack5;
+    
+    
+        this := @this: org.jfree.data.time.Minute;
+        $stack3 = this.<org.jfree.data.time.Minute: byte minute>;
+    
+        if $stack3 == 0 goto label1;
+        $stack10 = new org.jfree.data.time.Minute;
+        $stack7 = this.<org.jfree.data.time.Minute: byte minute>;
+        $stack9 = $stack7 - 1;
+        $stack8 = virtualinvoke this.<org.jfree.data.time.Minute: org.jfree.data.time.Hour getHour()>();
+        specialinvoke $stack10.<org.jfree.data.time.Minute: void <init>(int,org.jfree.data.time.Hour)>($stack9, $stack8);
+        result = $stack10;
+    
+        goto label3;
+    
+      label1:
+        $stack4 = virtualinvoke this.<org.jfree.data.time.Minute: org.jfree.data.time.Hour getHour()>();
+        $stack5 = virtualinvoke $stack4.<org.jfree.data.time.Hour: org.jfree.data.time.RegularTimePeriod previous()>();
+        h = (org.jfree.data.time.Hour) $stack5;
+    
+        if h == null goto label2;
+        $stack6 = new org.jfree.data.time.Minute;
+        specialinvoke $stack6.<org.jfree.data.time.Minute: void <init>(int,org.jfree.data.time.Hour)>(59, h);
+        result = $stack6;
+    
+        goto label3;
+    
+      label2:
+        result = null;
+    
+      label3:
+        return result;
+    }
+
+    // ---- method: <org.jfree.data.time.Minute: long getLastMillisecond()> ----
+    {
+        long $stack1;
+        org.jfree.data.time.Minute this;
+    
+    
+        this := @this: org.jfree.data.time.Minute;
+        $stack1 = this.<org.jfree.data.time.Minute: long lastMillisecond>;
+    
+        return $stack1;
+    }
+
+}

@@ -1,0 +1,423 @@
+// ========================================================================
+// CLASS : org.jfree.data.category.CategoryToPieDataset
+// ========================================================================
+
+[PUBLIC, SUPER] class org.jfree.data.category.CategoryToPieDataset extends org.jfree.data.general.AbstractDataset implements org.jfree.data.general.PieDataset, org.jfree.data.general.DatasetChangeListener {
+
+    // ---- method: <org.jfree.data.category.CategoryToPieDataset: void <init>(org.jfree.data.category.CategoryDataset,org.jfree.chart.util.TableOrder,int)> ----
+    {
+        int index;
+        java.lang.IllegalArgumentException #l0;
+        java.lang.Object $stack6;
+        java.lang.Throwable #l1;
+        org.jfree.chart.util.TableOrder extract;
+        org.jfree.data.category.CategoryDataset $stack4, $stack5, source;
+        org.jfree.data.category.CategoryToPieDataset this;
+    
+    
+        this := @this: org.jfree.data.category.CategoryToPieDataset;
+        source := @parameter0: org.jfree.data.category.CategoryDataset;
+        extract := @parameter1: org.jfree.chart.util.TableOrder;
+        index := @parameter2: int;
+        specialinvoke this.<org.jfree.data.general.AbstractDataset: void <init>()>();
+    
+        if extract != null goto label1;
+        $stack6 = new java.lang.IllegalArgumentException;
+        #l0 = (java.lang.IllegalArgumentException) $stack6;
+        specialinvoke #l0.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'extract\' argument.");
+        #l1 = (java.lang.Throwable) $stack6;
+    
+        throw #l1;
+    
+      label1:
+        this.<org.jfree.data.category.CategoryToPieDataset: org.jfree.data.category.CategoryDataset source> = source;
+        $stack4 = this.<org.jfree.data.category.CategoryToPieDataset: org.jfree.data.category.CategoryDataset source>;
+    
+        if $stack4 == null goto label2;
+        $stack5 = this.<org.jfree.data.category.CategoryToPieDataset: org.jfree.data.category.CategoryDataset source>;
+        interfaceinvoke $stack5.<org.jfree.data.category.CategoryDataset: void addChangeListener(org.jfree.data.general.DatasetChangeListener)>(this);
+    
+      label2:
+        this.<org.jfree.data.category.CategoryToPieDataset: org.jfree.chart.util.TableOrder extract> = extract;
+        this.<org.jfree.data.category.CategoryToPieDataset: int index> = index;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.category.CategoryToPieDataset: int getItemCount()> ----
+    {
+        int result;
+        org.jfree.chart.util.TableOrder $stack3, $stack4, $stack5, $stack6;
+        org.jfree.data.category.CategoryDataset $stack2, $stack7, $stack8;
+        org.jfree.data.category.CategoryToPieDataset this;
+    
+    
+        this := @this: org.jfree.data.category.CategoryToPieDataset;
+        result = 0;
+        $stack2 = this.<org.jfree.data.category.CategoryToPieDataset: org.jfree.data.category.CategoryDataset source>;
+    
+        if $stack2 == null goto label2;
+        $stack4 = this.<org.jfree.data.category.CategoryToPieDataset: org.jfree.chart.util.TableOrder extract>;
+        $stack3 = <org.jfree.chart.util.TableOrder: org.jfree.chart.util.TableOrder BY_ROW>;
+    
+        if $stack4 != $stack3 goto label1;
+        $stack8 = this.<org.jfree.data.category.CategoryToPieDataset: org.jfree.data.category.CategoryDataset source>;
+        result = interfaceinvoke $stack8.<org.jfree.data.category.CategoryDataset: int getColumnCount()>();
+    
+        goto label2;
+    
+      label1:
+        $stack6 = this.<org.jfree.data.category.CategoryToPieDataset: org.jfree.chart.util.TableOrder extract>;
+        $stack5 = <org.jfree.chart.util.TableOrder: org.jfree.chart.util.TableOrder BY_COLUMN>;
+    
+        if $stack6 != $stack5 goto label2;
+        $stack7 = this.<org.jfree.data.category.CategoryToPieDataset: org.jfree.data.category.CategoryDataset source>;
+        result = interfaceinvoke $stack7.<org.jfree.data.category.CategoryDataset: int getRowCount()>();
+    
+      label2:
+        return result;
+    }
+
+    // ---- method: <org.jfree.data.category.CategoryToPieDataset: java.lang.Comparable getKey(int)> ----
+    {
+        int $stack8, index;
+        java.lang.Comparable result;
+        java.lang.IndexOutOfBoundsException #l1;
+        java.lang.Object $stack7;
+        java.lang.String $stack6;
+        java.lang.StringBuffer $stack3, $stack4, $stack5;
+        java.lang.Throwable #l0;
+        org.jfree.chart.util.TableOrder $stack10, $stack11, $stack12, $stack9;
+        org.jfree.data.category.CategoryDataset $stack13, $stack14;
+        org.jfree.data.category.CategoryToPieDataset this;
+    
+    
+        this := @this: org.jfree.data.category.CategoryToPieDataset;
+        index := @parameter0: int;
+        result = null;
+    
+        if index < 0 goto label1;
+        $stack8 = virtualinvoke this.<org.jfree.data.category.CategoryToPieDataset: int getItemCount()>();
+    
+        if index < $stack8 goto label2;
+    
+      label1:
+        $stack7 = new java.lang.IndexOutOfBoundsException;
+        $stack3 = new java.lang.StringBuffer;
+        specialinvoke $stack3.<java.lang.StringBuffer: void <init>()>();
+        $stack4 = virtualinvoke $stack3.<java.lang.StringBuffer: java.lang.StringBuffer append(java.lang.String)>("Invalid \'index\': ");
+        $stack5 = virtualinvoke $stack4.<java.lang.StringBuffer: java.lang.StringBuffer append(int)>(index);
+        $stack6 = virtualinvoke $stack5.<java.lang.StringBuffer: java.lang.String toString()>();
+        #l1 = (java.lang.IndexOutOfBoundsException) $stack7;
+        specialinvoke #l1.<java.lang.IndexOutOfBoundsException: void <init>(java.lang.String)>($stack6);
+        #l0 = (java.lang.Throwable) $stack7;
+    
+        throw #l0;
+    
+      label2:
+        $stack10 = this.<org.jfree.data.category.CategoryToPieDataset: org.jfree.chart.util.TableOrder extract>;
+        $stack9 = <org.jfree.chart.util.TableOrder: org.jfree.chart.util.TableOrder BY_ROW>;
+    
+        if $stack10 != $stack9 goto label3;
+        $stack14 = this.<org.jfree.data.category.CategoryToPieDataset: org.jfree.data.category.CategoryDataset source>;
+        result = interfaceinvoke $stack14.<org.jfree.data.category.CategoryDataset: java.lang.Comparable getColumnKey(int)>(index);
+    
+        goto label4;
+    
+      label3:
+        $stack12 = this.<org.jfree.data.category.CategoryToPieDataset: org.jfree.chart.util.TableOrder extract>;
+        $stack11 = <org.jfree.chart.util.TableOrder: org.jfree.chart.util.TableOrder BY_COLUMN>;
+    
+        if $stack12 != $stack11 goto label4;
+        $stack13 = this.<org.jfree.data.category.CategoryToPieDataset: org.jfree.data.category.CategoryDataset source>;
+        result = interfaceinvoke $stack13.<org.jfree.data.category.CategoryDataset: java.lang.Comparable getRowKey(int)>(index);
+    
+      label4:
+        return result;
+    }
+
+    // ---- method: <org.jfree.data.category.CategoryToPieDataset: java.util.List getKeys()> ----
+    {
+        java.util.List result;
+        org.jfree.chart.util.TableOrder $stack3, $stack4, $stack5, $stack6;
+        org.jfree.data.category.CategoryDataset $stack2, $stack7, $stack8;
+        org.jfree.data.category.CategoryToPieDataset this;
+    
+    
+        this := @this: org.jfree.data.category.CategoryToPieDataset;
+        result = <java.util.Collections: java.util.List EMPTY_LIST>;
+        $stack2 = this.<org.jfree.data.category.CategoryToPieDataset: org.jfree.data.category.CategoryDataset source>;
+    
+        if $stack2 == null goto label2;
+        $stack4 = this.<org.jfree.data.category.CategoryToPieDataset: org.jfree.chart.util.TableOrder extract>;
+        $stack3 = <org.jfree.chart.util.TableOrder: org.jfree.chart.util.TableOrder BY_ROW>;
+    
+        if $stack4 != $stack3 goto label1;
+        $stack8 = this.<org.jfree.data.category.CategoryToPieDataset: org.jfree.data.category.CategoryDataset source>;
+        result = interfaceinvoke $stack8.<org.jfree.data.category.CategoryDataset: java.util.List getColumnKeys()>();
+    
+        goto label2;
+    
+      label1:
+        $stack6 = this.<org.jfree.data.category.CategoryToPieDataset: org.jfree.chart.util.TableOrder extract>;
+        $stack5 = <org.jfree.chart.util.TableOrder: org.jfree.chart.util.TableOrder BY_COLUMN>;
+    
+        if $stack6 != $stack5 goto label2;
+        $stack7 = this.<org.jfree.data.category.CategoryToPieDataset: org.jfree.data.category.CategoryDataset source>;
+        result = interfaceinvoke $stack7.<org.jfree.data.category.CategoryDataset: java.util.List getRowKeys()>();
+    
+      label2:
+        return result;
+    }
+
+    // ---- method: <org.jfree.data.category.CategoryToPieDataset: java.lang.Number getValue(int)> ----
+    {
+        int $stack11, $stack4, $stack9, item;
+        java.lang.IndexOutOfBoundsException #l0;
+        java.lang.Number result;
+        java.lang.Object $stack3;
+        java.lang.Throwable #l1;
+        org.jfree.chart.util.TableOrder $stack5, $stack6, $stack7, $stack8;
+        org.jfree.data.category.CategoryDataset $stack10, $stack12;
+        org.jfree.data.category.CategoryToPieDataset this;
+    
+    
+        this := @this: org.jfree.data.category.CategoryToPieDataset;
+        item := @parameter0: int;
+        result = null;
+    
+        if item < 0 goto label1;
+        $stack4 = virtualinvoke this.<org.jfree.data.category.CategoryToPieDataset: int getItemCount()>();
+    
+        if item < $stack4 goto label2;
+    
+      label1:
+        $stack3 = new java.lang.IndexOutOfBoundsException;
+        #l0 = (java.lang.IndexOutOfBoundsException) $stack3;
+        specialinvoke #l0.<java.lang.IndexOutOfBoundsException: void <init>(java.lang.String)>("The \'item\' index is out of bounds.");
+        #l1 = (java.lang.Throwable) $stack3;
+    
+        throw #l1;
+    
+      label2:
+        $stack6 = this.<org.jfree.data.category.CategoryToPieDataset: org.jfree.chart.util.TableOrder extract>;
+        $stack5 = <org.jfree.chart.util.TableOrder: org.jfree.chart.util.TableOrder BY_ROW>;
+    
+        if $stack6 != $stack5 goto label3;
+        $stack12 = this.<org.jfree.data.category.CategoryToPieDataset: org.jfree.data.category.CategoryDataset source>;
+        $stack11 = this.<org.jfree.data.category.CategoryToPieDataset: int index>;
+        result = interfaceinvoke $stack12.<org.jfree.data.category.CategoryDataset: java.lang.Number getValue(int,int)>($stack11, item);
+    
+        goto label4;
+    
+      label3:
+        $stack8 = this.<org.jfree.data.category.CategoryToPieDataset: org.jfree.chart.util.TableOrder extract>;
+        $stack7 = <org.jfree.chart.util.TableOrder: org.jfree.chart.util.TableOrder BY_COLUMN>;
+    
+        if $stack8 != $stack7 goto label4;
+        $stack10 = this.<org.jfree.data.category.CategoryToPieDataset: org.jfree.data.category.CategoryDataset source>;
+        $stack9 = this.<org.jfree.data.category.CategoryToPieDataset: int index>;
+        result = interfaceinvoke $stack10.<org.jfree.data.category.CategoryDataset: java.lang.Number getValue(int,int)>(item, $stack9);
+    
+      label4:
+        return result;
+    }
+
+    // ---- method: <org.jfree.data.category.CategoryToPieDataset: org.jfree.chart.util.TableOrder getExtractType()> ----
+    {
+        org.jfree.chart.util.TableOrder $stack1;
+        org.jfree.data.category.CategoryToPieDataset this;
+    
+    
+        this := @this: org.jfree.data.category.CategoryToPieDataset;
+        $stack1 = this.<org.jfree.data.category.CategoryToPieDataset: org.jfree.chart.util.TableOrder extract>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.data.category.CategoryToPieDataset: void datasetChanged(org.jfree.data.general.DatasetChangeEvent)> ----
+    {
+        org.jfree.data.category.CategoryToPieDataset this;
+        org.jfree.data.general.DatasetChangeEvent event;
+    
+    
+        this := @this: org.jfree.data.category.CategoryToPieDataset;
+        event := @parameter0: org.jfree.data.general.DatasetChangeEvent;
+        virtualinvoke this.<org.jfree.data.category.CategoryToPieDataset: void fireDatasetChanged()>();
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.data.category.CategoryToPieDataset: int getIndex(java.lang.Comparable)> ----
+    {
+        int result;
+        java.lang.Comparable key;
+        org.jfree.chart.util.TableOrder $stack4, $stack5, $stack6, $stack7;
+        org.jfree.data.category.CategoryDataset $stack3, $stack8, $stack9;
+        org.jfree.data.category.CategoryToPieDataset this;
+    
+    
+        this := @this: org.jfree.data.category.CategoryToPieDataset;
+        key := @parameter0: java.lang.Comparable;
+        result = -1;
+        $stack3 = this.<org.jfree.data.category.CategoryToPieDataset: org.jfree.data.category.CategoryDataset source>;
+    
+        if $stack3 == null goto label2;
+        $stack5 = this.<org.jfree.data.category.CategoryToPieDataset: org.jfree.chart.util.TableOrder extract>;
+        $stack4 = <org.jfree.chart.util.TableOrder: org.jfree.chart.util.TableOrder BY_ROW>;
+    
+        if $stack5 != $stack4 goto label1;
+        $stack9 = this.<org.jfree.data.category.CategoryToPieDataset: org.jfree.data.category.CategoryDataset source>;
+        result = interfaceinvoke $stack9.<org.jfree.data.category.CategoryDataset: int getColumnIndex(java.lang.Comparable)>(key);
+    
+        goto label2;
+    
+      label1:
+        $stack7 = this.<org.jfree.data.category.CategoryToPieDataset: org.jfree.chart.util.TableOrder extract>;
+        $stack6 = <org.jfree.chart.util.TableOrder: org.jfree.chart.util.TableOrder BY_COLUMN>;
+    
+        if $stack7 != $stack6 goto label2;
+        $stack8 = this.<org.jfree.data.category.CategoryToPieDataset: org.jfree.data.category.CategoryDataset source>;
+        result = interfaceinvoke $stack8.<org.jfree.data.category.CategoryDataset: int getRowIndex(java.lang.Comparable)>(key);
+    
+      label2:
+        return result;
+    }
+
+    // ---- method: <org.jfree.data.category.CategoryToPieDataset: int getExtractIndex()> ----
+    {
+        int $stack1;
+        org.jfree.data.category.CategoryToPieDataset this;
+    
+    
+        this := @this: org.jfree.data.category.CategoryToPieDataset;
+        $stack1 = this.<org.jfree.data.category.CategoryToPieDataset: int index>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.data.category.CategoryToPieDataset: org.jfree.data.category.CategoryDataset getUnderlyingDataset()> ----
+    {
+        org.jfree.data.category.CategoryDataset $stack1;
+        org.jfree.data.category.CategoryToPieDataset this;
+    
+    
+        this := @this: org.jfree.data.category.CategoryToPieDataset;
+        $stack1 = this.<org.jfree.data.category.CategoryToPieDataset: org.jfree.data.category.CategoryDataset source>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.data.category.CategoryToPieDataset: java.lang.Number getValue(java.lang.Comparable)> ----
+    {
+        int $stack10, $stack8, keyIndex;
+        java.lang.Comparable key;
+        java.lang.Number result;
+        org.jfree.chart.util.TableOrder $stack4, $stack5, $stack6, $stack7;
+        org.jfree.data.category.CategoryDataset $stack11, $stack9;
+        org.jfree.data.category.CategoryToPieDataset this;
+    
+    
+        this := @this: org.jfree.data.category.CategoryToPieDataset;
+        key := @parameter0: java.lang.Comparable;
+        result = null;
+        keyIndex = virtualinvoke this.<org.jfree.data.category.CategoryToPieDataset: int getIndex(java.lang.Comparable)>(key);
+    
+        if keyIndex == -1 goto label2;
+        $stack5 = this.<org.jfree.data.category.CategoryToPieDataset: org.jfree.chart.util.TableOrder extract>;
+        $stack4 = <org.jfree.chart.util.TableOrder: org.jfree.chart.util.TableOrder BY_ROW>;
+    
+        if $stack5 != $stack4 goto label1;
+        $stack11 = this.<org.jfree.data.category.CategoryToPieDataset: org.jfree.data.category.CategoryDataset source>;
+        $stack10 = this.<org.jfree.data.category.CategoryToPieDataset: int index>;
+        result = interfaceinvoke $stack11.<org.jfree.data.category.CategoryDataset: java.lang.Number getValue(int,int)>($stack10, keyIndex);
+    
+        goto label2;
+    
+      label1:
+        $stack7 = this.<org.jfree.data.category.CategoryToPieDataset: org.jfree.chart.util.TableOrder extract>;
+        $stack6 = <org.jfree.chart.util.TableOrder: org.jfree.chart.util.TableOrder BY_COLUMN>;
+    
+        if $stack7 != $stack6 goto label2;
+        $stack9 = this.<org.jfree.data.category.CategoryToPieDataset: org.jfree.data.category.CategoryDataset source>;
+        $stack8 = this.<org.jfree.data.category.CategoryToPieDataset: int index>;
+        result = interfaceinvoke $stack9.<org.jfree.data.category.CategoryDataset: java.lang.Number getValue(int,int)>(keyIndex, $stack8);
+    
+      label2:
+        return result;
+    }
+
+    // ---- method: <org.jfree.data.category.CategoryToPieDataset: boolean equals(java.lang.Object)> ----
+    {
+        boolean $stack11, $stack12, $stack9;
+        int $stack10, count, i;
+        java.lang.Comparable k1, k2;
+        java.lang.Number v1, v2;
+        java.lang.Object obj;
+        org.jfree.data.category.CategoryToPieDataset this;
+        org.jfree.data.general.PieDataset that;
+    
+    
+        this := @this: org.jfree.data.category.CategoryToPieDataset;
+        obj := @parameter0: java.lang.Object;
+    
+        if obj != this goto label1;
+    
+        return 1;
+    
+      label1:
+        $stack9 = obj instanceof org.jfree.data.general.PieDataset;
+    
+        if $stack9 != 0 goto label2;
+    
+        return 0;
+    
+      label2:
+        that = (org.jfree.data.general.PieDataset) obj;
+        count = virtualinvoke this.<org.jfree.data.category.CategoryToPieDataset: int getItemCount()>();
+        $stack10 = interfaceinvoke that.<org.jfree.data.general.PieDataset: int getItemCount()>();
+    
+        if $stack10 == count goto label3;
+    
+        return 0;
+    
+      label3:
+        i = 0;
+    
+      label4:
+        if i >= count goto label8;
+        k1 = virtualinvoke this.<org.jfree.data.category.CategoryToPieDataset: java.lang.Comparable getKey(int)>(i);
+        k2 = interfaceinvoke that.<org.jfree.data.general.PieDataset: java.lang.Comparable getKey(int)>(i);
+        $stack11 = virtualinvoke k1.<java.lang.Object: boolean equals(java.lang.Object)>(k2);
+    
+        if $stack11 != 0 goto label5;
+    
+        return 0;
+    
+      label5:
+        v1 = virtualinvoke this.<org.jfree.data.category.CategoryToPieDataset: java.lang.Number getValue(int)>(i);
+        v2 = interfaceinvoke that.<org.jfree.data.general.PieDataset: java.lang.Number getValue(int)>(i);
+    
+        if v1 != null goto label7;
+    
+        if v2 == null goto label6;
+    
+        return 0;
+    
+      label6:
+        i = i + 1;
+    
+        goto label4;
+    
+      label7:
+        $stack12 = virtualinvoke v1.<java.lang.Object: boolean equals(java.lang.Object)>(v2);
+    
+        if $stack12 != 0 goto label6;
+    
+        return 0;
+    
+      label8:
+        return 1;
+    }
+
+}

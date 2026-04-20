@@ -1,0 +1,682 @@
+// ========================================================================
+// CLASS : org.jfree.chart.plot.RingPlot
+// ========================================================================
+
+[PUBLIC, SUPER] class org.jfree.chart.plot.RingPlot extends org.jfree.chart.plot.PiePlot implements java.lang.Cloneable, java.io.Serializable {
+
+    // ---- method: <org.jfree.chart.plot.RingPlot: void <init>(org.jfree.data.general.PieDataset)> ----
+    {
+        java.awt.BasicStroke #l0;
+        java.lang.Object $stack2, $stack3;
+        org.jfree.chart.plot.RingPlot this;
+        org.jfree.data.general.PieDataset dataset;
+    
+    
+        this := @this: org.jfree.chart.plot.RingPlot;
+        dataset := @parameter0: org.jfree.data.general.PieDataset;
+        specialinvoke this.<org.jfree.chart.plot.PiePlot: void <init>(org.jfree.data.general.PieDataset)>(dataset);
+        this.<org.jfree.chart.plot.RingPlot: boolean separatorsVisible> = 1;
+        $stack2 = new java.awt.BasicStroke;
+        #l0 = (java.awt.BasicStroke) $stack2;
+        specialinvoke #l0.<java.awt.BasicStroke: void <init>(float)>(0.5F);
+        this.<org.jfree.chart.plot.RingPlot: java.awt.Stroke separatorStroke> = (java.awt.Stroke) $stack2;
+        $stack3 = <java.awt.Color: java.awt.Color gray>;
+        this.<org.jfree.chart.plot.RingPlot: java.awt.Paint separatorPaint> = (java.awt.Paint) $stack3;
+        this.<org.jfree.chart.plot.RingPlot: double innerSeparatorExtension> = 0.2;
+        this.<org.jfree.chart.plot.RingPlot: double outerSeparatorExtension> = 0.2;
+        this.<org.jfree.chart.plot.RingPlot: double sectionDepth> = 0.2;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.plot.RingPlot: java.awt.Paint getSeparatorPaint()> ----
+    {
+        java.awt.Paint $stack1;
+        org.jfree.chart.plot.RingPlot this;
+    
+    
+        this := @this: org.jfree.chart.plot.RingPlot;
+        $stack1 = this.<org.jfree.chart.plot.RingPlot: java.awt.Paint separatorPaint>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.plot.RingPlot: void setSeparatorPaint(java.awt.Paint)> ----
+    {
+        java.awt.Paint paint;
+        java.lang.IllegalArgumentException #l1;
+        java.lang.Object $stack3;
+        java.lang.Throwable #l0;
+        org.jfree.chart.event.PlotChangeEvent $stack2;
+        org.jfree.chart.plot.RingPlot this;
+    
+    
+        this := @this: org.jfree.chart.plot.RingPlot;
+        paint := @parameter0: java.awt.Paint;
+    
+        if paint != null goto label1;
+        $stack3 = new java.lang.IllegalArgumentException;
+        #l1 = (java.lang.IllegalArgumentException) $stack3;
+        specialinvoke #l1.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'paint\' argument.");
+        #l0 = (java.lang.Throwable) $stack3;
+    
+        throw #l0;
+    
+      label1:
+        this.<org.jfree.chart.plot.RingPlot: java.awt.Paint separatorPaint> = paint;
+        $stack2 = new org.jfree.chart.event.PlotChangeEvent;
+        specialinvoke $stack2.<org.jfree.chart.event.PlotChangeEvent: void <init>(org.jfree.chart.plot.Plot)>(this);
+        virtualinvoke this.<org.jfree.chart.plot.RingPlot: void notifyListeners(org.jfree.chart.event.PlotChangeEvent)>($stack2);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.plot.RingPlot: double getSectionDepth()> ----
+    {
+        double $stack1;
+        org.jfree.chart.plot.RingPlot this;
+    
+    
+        this := @this: org.jfree.chart.plot.RingPlot;
+        $stack1 = this.<org.jfree.chart.plot.RingPlot: double sectionDepth>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.plot.RingPlot: boolean equals(java.lang.Object)> ----
+    {
+        boolean $stack11, $stack21, $stack3, $stack4, $stack5, $stack8;
+        byte $stack14, $stack17, $stack20;
+        double $stack12, $stack13, $stack15, $stack16, $stack18, $stack19;
+        java.awt.Paint $stack10, $stack9;
+        java.awt.Stroke $stack6, $stack7;
+        java.lang.Object obj;
+        org.jfree.chart.plot.RingPlot that, this;
+    
+    
+        this := @this: org.jfree.chart.plot.RingPlot;
+        obj := @parameter0: java.lang.Object;
+    
+        if this != obj goto label1;
+    
+        return 1;
+    
+      label1:
+        $stack3 = obj instanceof org.jfree.chart.plot.RingPlot;
+    
+        if $stack3 != 0 goto label2;
+    
+        return 0;
+    
+      label2:
+        that = (org.jfree.chart.plot.RingPlot) obj;
+        $stack5 = this.<org.jfree.chart.plot.RingPlot: boolean separatorsVisible>;
+        $stack4 = that.<org.jfree.chart.plot.RingPlot: boolean separatorsVisible>;
+    
+        if $stack5 == $stack4 goto label3;
+    
+        return 0;
+    
+      label3:
+        $stack7 = this.<org.jfree.chart.plot.RingPlot: java.awt.Stroke separatorStroke>;
+        $stack6 = that.<org.jfree.chart.plot.RingPlot: java.awt.Stroke separatorStroke>;
+        $stack8 = staticinvoke <org.jfree.chart.util.ObjectUtilities: boolean equal(java.lang.Object,java.lang.Object)>($stack7, $stack6);
+    
+        if $stack8 != 0 goto label4;
+    
+        return 0;
+    
+      label4:
+        $stack10 = this.<org.jfree.chart.plot.RingPlot: java.awt.Paint separatorPaint>;
+        $stack9 = that.<org.jfree.chart.plot.RingPlot: java.awt.Paint separatorPaint>;
+        $stack11 = staticinvoke <org.jfree.chart.util.PaintUtilities: boolean equal(java.awt.Paint,java.awt.Paint)>($stack10, $stack9);
+    
+        if $stack11 != 0 goto label5;
+    
+        return 0;
+    
+      label5:
+        $stack12 = this.<org.jfree.chart.plot.RingPlot: double innerSeparatorExtension>;
+        $stack13 = that.<org.jfree.chart.plot.RingPlot: double innerSeparatorExtension>;
+        $stack14 = $stack12 cmpl $stack13;
+    
+        if $stack14 == 0 goto label6;
+    
+        return 0;
+    
+      label6:
+        $stack15 = this.<org.jfree.chart.plot.RingPlot: double outerSeparatorExtension>;
+        $stack16 = that.<org.jfree.chart.plot.RingPlot: double outerSeparatorExtension>;
+        $stack17 = $stack15 cmpl $stack16;
+    
+        if $stack17 == 0 goto label7;
+    
+        return 0;
+    
+      label7:
+        $stack18 = this.<org.jfree.chart.plot.RingPlot: double sectionDepth>;
+        $stack19 = that.<org.jfree.chart.plot.RingPlot: double sectionDepth>;
+        $stack20 = $stack18 cmpl $stack19;
+    
+        if $stack20 == 0 goto label8;
+    
+        return 0;
+    
+      label8:
+        $stack21 = specialinvoke this.<org.jfree.chart.plot.PiePlot: boolean equals(java.lang.Object)>(obj);
+    
+        return $stack21;
+    }
+
+    // ---- method: <org.jfree.chart.plot.RingPlot: void writeObject(java.io.ObjectOutputStream)> ----
+    {
+        java.awt.Paint $stack3;
+        java.awt.Stroke $stack2;
+        java.io.ObjectOutputStream stream;
+        org.jfree.chart.plot.RingPlot this;
+    
+    
+        this := @this: org.jfree.chart.plot.RingPlot;
+        stream := @parameter0: java.io.ObjectOutputStream;
+        virtualinvoke stream.<java.io.ObjectOutputStream: void defaultWriteObject()>();
+        $stack2 = this.<org.jfree.chart.plot.RingPlot: java.awt.Stroke separatorStroke>;
+        staticinvoke <org.jfree.chart.util.SerialUtilities: void writeStroke(java.awt.Stroke,java.io.ObjectOutputStream)>($stack2, stream);
+        $stack3 = this.<org.jfree.chart.plot.RingPlot: java.awt.Paint separatorPaint>;
+        staticinvoke <org.jfree.chart.util.SerialUtilities: void writePaint(java.awt.Paint,java.io.ObjectOutputStream)>($stack3, stream);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.plot.RingPlot: double getInnerSeparatorExtension()> ----
+    {
+        double $stack1;
+        org.jfree.chart.plot.RingPlot this;
+    
+    
+        this := @this: org.jfree.chart.plot.RingPlot;
+        $stack1 = this.<org.jfree.chart.plot.RingPlot: double innerSeparatorExtension>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.plot.RingPlot: void setOuterSeparatorExtension(double)> ----
+    {
+        double percent;
+        org.jfree.chart.event.PlotChangeEvent $stack3;
+        org.jfree.chart.plot.RingPlot this;
+    
+    
+        this := @this: org.jfree.chart.plot.RingPlot;
+        percent := @parameter0: double;
+        this.<org.jfree.chart.plot.RingPlot: double outerSeparatorExtension> = percent;
+        $stack3 = new org.jfree.chart.event.PlotChangeEvent;
+        specialinvoke $stack3.<org.jfree.chart.event.PlotChangeEvent: void <init>(org.jfree.chart.plot.Plot)>(this);
+        virtualinvoke this.<org.jfree.chart.plot.RingPlot: void notifyListeners(org.jfree.chart.event.PlotChangeEvent)>($stack3);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.plot.RingPlot: void setSeparatorStroke(java.awt.Stroke)> ----
+    {
+        java.awt.Stroke stroke;
+        java.lang.IllegalArgumentException #l1;
+        java.lang.Object $stack3;
+        java.lang.Throwable #l0;
+        org.jfree.chart.event.PlotChangeEvent $stack2;
+        org.jfree.chart.plot.RingPlot this;
+    
+    
+        this := @this: org.jfree.chart.plot.RingPlot;
+        stroke := @parameter0: java.awt.Stroke;
+    
+        if stroke != null goto label1;
+        $stack3 = new java.lang.IllegalArgumentException;
+        #l1 = (java.lang.IllegalArgumentException) $stack3;
+        specialinvoke #l1.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'stroke\' argument.");
+        #l0 = (java.lang.Throwable) $stack3;
+    
+        throw #l0;
+    
+      label1:
+        this.<org.jfree.chart.plot.RingPlot: java.awt.Stroke separatorStroke> = stroke;
+        $stack2 = new org.jfree.chart.event.PlotChangeEvent;
+        specialinvoke $stack2.<org.jfree.chart.event.PlotChangeEvent: void <init>(org.jfree.chart.plot.Plot)>(this);
+        virtualinvoke this.<org.jfree.chart.plot.RingPlot: void notifyListeners(org.jfree.chart.event.PlotChangeEvent)>($stack2);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.plot.RingPlot: void setSeparatorsVisible(boolean)> ----
+    {
+        boolean visible;
+        org.jfree.chart.event.PlotChangeEvent $stack2;
+        org.jfree.chart.plot.RingPlot this;
+    
+    
+        this := @this: org.jfree.chart.plot.RingPlot;
+        visible := @parameter0: boolean;
+        this.<org.jfree.chart.plot.RingPlot: boolean separatorsVisible> = visible;
+        $stack2 = new org.jfree.chart.event.PlotChangeEvent;
+        specialinvoke $stack2.<org.jfree.chart.event.PlotChangeEvent: void <init>(org.jfree.chart.plot.Plot)>(this);
+        virtualinvoke this.<org.jfree.chart.plot.RingPlot: void notifyListeners(org.jfree.chart.event.PlotChangeEvent)>($stack2);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.plot.RingPlot: void drawItem(java.awt.Graphics2D,int,java.awt.geom.Rectangle2D,org.jfree.chart.plot.PiePlotState,int)> ----
+    {
+        boolean $stack72;
+        byte $stack48, $stack49;
+        double $stack43, $stack44, $stack45, $stack46, $stack47, $stack53, $stack57, $stack58, $stack62, $stack64, $stack73, $stack74, $stack83, $stack84, $stack85, $stack86, $stack87, $stack88, angle, angle1#0, angle1#1, angle2#0, angle2#1, depth, ep, mep, shadowXOffset#0, shadowYOffset#0, value;
+        float $stack65, $stack66, $stack81, $stack82;
+        int $stack78, $stack80, currentPass, section;
+        java.awt.Graphics2D g2;
+        java.awt.Paint $stack76, shadowPaint#0, shadowPaint#1, shadowXOffset#1;
+        java.awt.Shape #l14, #l15, #l7, #l8, #l9, shadowArc#0;
+        java.awt.Stroke $stack75, outlineStroke;
+        java.awt.geom.Arc2D$Double $stack52, $stack59, arc, arc2;
+        java.awt.geom.GeneralPath #l10, #l13, #l16, #l17, #l6, path;
+        java.awt.geom.Line2D #l0;
+        java.awt.geom.Line2D$Double #l11, separator;
+        java.awt.geom.PathIterator $stack67, $stack68;
+        java.awt.geom.Point2D $stack61, $stack63, $stack69, $stack70;
+        java.awt.geom.Rectangle2D #l1, #l12, #l4, $stack50, $stack51, arcBounds, dataArea;
+        java.awt.geom.Rectangle2D$Double #l2, innerArcBounds;
+        java.lang.Comparable key;
+        java.lang.IllegalStateException #l5;
+        java.lang.Number n;
+        java.lang.Object $stack42, $stack56, $stack60, $stack71, shadowPaint#2;
+        java.lang.String tip, url;
+        java.lang.Throwable #l3;
+        org.jfree.chart.entity.EntityCollection shadowYOffset#1;
+        org.jfree.chart.entity.PieSectionEntity $stack79, entity;
+        org.jfree.chart.labels.PieToolTipGenerator shadowArc#1;
+        org.jfree.chart.plot.PiePlotState state;
+        org.jfree.chart.plot.PlotRenderingInfo $stack77;
+        org.jfree.chart.plot.RingPlot this;
+        org.jfree.chart.urls.PieURLGenerator urlGenerator;
+        org.jfree.chart.util.RectangleInsets $stack55, s;
+        org.jfree.chart.util.Rotation $stack40, $stack41, direction;
+        org.jfree.chart.util.UnitType $stack54;
+        org.jfree.data.general.PieDataset dataset;
+    
+    
+        this := @this: org.jfree.chart.plot.RingPlot;
+        g2 := @parameter0: java.awt.Graphics2D;
+        section := @parameter1: int;
+        dataArea := @parameter2: java.awt.geom.Rectangle2D;
+        state := @parameter3: org.jfree.chart.plot.PiePlotState;
+        currentPass := @parameter4: int;
+        dataset = virtualinvoke this.<org.jfree.chart.plot.RingPlot: org.jfree.data.general.PieDataset getDataset()>();
+        n = interfaceinvoke dataset.<org.jfree.data.general.PieDataset: java.lang.Number getValue(int)>(section);
+    
+        if n != null goto label01;
+    
+        return;
+    
+      label01:
+        value = virtualinvoke n.<java.lang.Number: double doubleValue()>();
+        angle1#0 = 0.0;
+        angle2#0 = 0.0;
+        direction = virtualinvoke this.<org.jfree.chart.plot.RingPlot: org.jfree.chart.util.Rotation getDirection()>();
+        $stack40 = <org.jfree.chart.util.Rotation: org.jfree.chart.util.Rotation CLOCKWISE>;
+    
+        if direction != $stack40 goto label02;
+        angle1#1 = virtualinvoke state.<org.jfree.chart.plot.PiePlotState: double getLatestAngle()>();
+        $stack86 = virtualinvoke state.<org.jfree.chart.plot.PiePlotState: double getTotal()>();
+        $stack87 = value / $stack86;
+        $stack88 = $stack87 * 360.0;
+        angle2#1 = angle1#1 - $stack88;
+    
+        goto label04;
+    
+      label02:
+        $stack41 = <org.jfree.chart.util.Rotation: org.jfree.chart.util.Rotation ANTICLOCKWISE>;
+    
+        if direction != $stack41 goto label03;
+        angle1#1 = virtualinvoke state.<org.jfree.chart.plot.PiePlotState: double getLatestAngle()>();
+        $stack43 = virtualinvoke state.<org.jfree.chart.plot.PiePlotState: double getTotal()>();
+        $stack44 = value / $stack43;
+        $stack45 = $stack44 * 360.0;
+        angle2#1 = angle1#1 + $stack45;
+    
+        goto label04;
+    
+      label03:
+        $stack42 = new java.lang.IllegalStateException;
+        #l5 = (java.lang.IllegalStateException) $stack42;
+        specialinvoke #l5.<java.lang.IllegalStateException: void <init>(java.lang.String)>("Rotation type not recognised.");
+        #l3 = (java.lang.Throwable) $stack42;
+    
+        throw #l3;
+    
+      label04:
+        angle = angle2#1 - angle1#1;
+        $stack46 = staticinvoke <java.lang.Math: double abs(double)>(angle);
+        $stack47 = virtualinvoke this.<org.jfree.chart.plot.RingPlot: double getMinimumArcAngleToDraw()>();
+        $stack48 = $stack46 cmpl $stack47;
+    
+        if $stack48 <= 0 goto label13;
+        key = virtualinvoke this.<org.jfree.chart.plot.RingPlot: java.lang.Comparable getSectionKey(int)>(section);
+        ep = 0.0;
+        mep = virtualinvoke this.<org.jfree.chart.plot.RingPlot: double getMaximumExplodePercent()>();
+        $stack49 = mep cmpl 0.0;
+    
+        if $stack49 <= 0 goto label05;
+        $stack85 = virtualinvoke this.<org.jfree.chart.plot.RingPlot: double getExplodePercent(java.lang.Comparable)>(key);
+        ep = $stack85 / mep;
+    
+      label05:
+        $stack51 = virtualinvoke state.<org.jfree.chart.plot.PiePlotState: java.awt.geom.Rectangle2D getPieArea()>();
+        $stack50 = virtualinvoke state.<org.jfree.chart.plot.PiePlotState: java.awt.geom.Rectangle2D getExplodedPieArea()>();
+        arcBounds = virtualinvoke this.<org.jfree.chart.plot.RingPlot: java.awt.geom.Rectangle2D getArcBounds(java.awt.geom.Rectangle2D,java.awt.geom.Rectangle2D,double,double,double)>($stack51, $stack50, angle1#1, angle, ep);
+        $stack52 = new java.awt.geom.Arc2D$Double;
+        specialinvoke $stack52.<java.awt.geom.Arc2D$Double: void <init>(java.awt.geom.Rectangle2D,double,double,int)>(arcBounds, angle1#1, angle, 0);
+        arc = $stack52;
+        $stack53 = this.<org.jfree.chart.plot.RingPlot: double sectionDepth>;
+        depth = $stack53 / 2.0;
+        $stack55 = new org.jfree.chart.util.RectangleInsets;
+        $stack54 = <org.jfree.chart.util.UnitType: org.jfree.chart.util.UnitType RELATIVE>;
+        specialinvoke $stack55.<org.jfree.chart.util.RectangleInsets: void <init>(org.jfree.chart.util.UnitType,double,double,double,double)>($stack54, depth, depth, depth, depth);
+        s = $stack55;
+        $stack56 = new java.awt.geom.Rectangle2D$Double;
+        #l2 = (java.awt.geom.Rectangle2D$Double) $stack56;
+        specialinvoke #l2.<java.awt.geom.Rectangle2D$Double: void <init>()>();
+        innerArcBounds = (java.awt.geom.Rectangle2D$Double) $stack56;
+        #l12 = (java.awt.geom.Rectangle2D) $stack56;
+        virtualinvoke #l12.<java.awt.geom.Rectangle2D: void setRect(java.awt.geom.Rectangle2D)>(arcBounds);
+        #l1 = (java.awt.geom.Rectangle2D) $stack56;
+        virtualinvoke $stack55.<org.jfree.chart.util.RectangleInsets: void trim(java.awt.geom.Rectangle2D)>(#l1);
+        $stack59 = new java.awt.geom.Arc2D$Double;
+        $stack58 = angle1#1 + angle;
+        $stack57 = neg angle;
+        #l4 = (java.awt.geom.Rectangle2D) $stack56;
+        specialinvoke $stack59.<java.awt.geom.Arc2D$Double: void <init>(java.awt.geom.Rectangle2D,double,double,int)>(#l4, $stack58, $stack57, 0);
+        arc2 = $stack59;
+        $stack60 = new java.awt.geom.GeneralPath;
+        #l10 = (java.awt.geom.GeneralPath) $stack60;
+        specialinvoke #l10.<java.awt.geom.GeneralPath: void <init>()>();
+        path = (java.awt.geom.GeneralPath) $stack60;
+        $stack61 = virtualinvoke $stack52.<java.awt.geom.Arc2D$Double: java.awt.geom.Point2D getStartPoint()>();
+        $stack62 = virtualinvoke $stack61.<java.awt.geom.Point2D: double getX()>();
+        $stack66 = (float) $stack62;
+        $stack63 = virtualinvoke $stack52.<java.awt.geom.Arc2D$Double: java.awt.geom.Point2D getStartPoint()>();
+        $stack64 = virtualinvoke $stack63.<java.awt.geom.Point2D: double getY()>();
+        $stack65 = (float) $stack64;
+        #l6 = (java.awt.geom.GeneralPath) $stack60;
+        virtualinvoke #l6.<java.awt.geom.GeneralPath: void moveTo(float,float)>($stack66, $stack65);
+        $stack67 = virtualinvoke $stack52.<java.awt.geom.Arc2D$Double: java.awt.geom.PathIterator getPathIterator(java.awt.geom.AffineTransform)>(null);
+        #l17 = (java.awt.geom.GeneralPath) $stack60;
+        virtualinvoke #l17.<java.awt.geom.GeneralPath: void append(java.awt.geom.PathIterator,boolean)>($stack67, 0);
+        $stack68 = virtualinvoke $stack59.<java.awt.geom.Arc2D$Double: java.awt.geom.PathIterator getPathIterator(java.awt.geom.AffineTransform)>(null);
+        #l13 = (java.awt.geom.GeneralPath) $stack60;
+        virtualinvoke #l13.<java.awt.geom.GeneralPath: void append(java.awt.geom.PathIterator,boolean)>($stack68, 1);
+        #l16 = (java.awt.geom.GeneralPath) $stack60;
+        virtualinvoke #l16.<java.awt.geom.GeneralPath: void closePath()>();
+        $stack71 = new java.awt.geom.Line2D$Double;
+        $stack70 = virtualinvoke $stack59.<java.awt.geom.Arc2D$Double: java.awt.geom.Point2D getEndPoint()>();
+        $stack69 = virtualinvoke $stack52.<java.awt.geom.Arc2D$Double: java.awt.geom.Point2D getStartPoint()>();
+        #l11 = (java.awt.geom.Line2D$Double) $stack71;
+        specialinvoke #l11.<java.awt.geom.Line2D$Double: void <init>(java.awt.geom.Point2D,java.awt.geom.Point2D)>($stack70, $stack69);
+        separator = (java.awt.geom.Line2D$Double) $stack71;
+    
+        if currentPass != 0 goto label07;
+        shadowPaint#0 = virtualinvoke this.<org.jfree.chart.plot.RingPlot: java.awt.Paint getShadowPaint()>();
+        shadowXOffset#0 = virtualinvoke this.<org.jfree.chart.plot.RingPlot: double getShadowXOffset()>();
+        shadowYOffset#0 = virtualinvoke this.<org.jfree.chart.plot.RingPlot: double getShadowYOffset()>();
+    
+        if shadowPaint#0 == null goto label06;
+        $stack81 = (float) shadowXOffset#0;
+        $stack84 = (double) $stack81;
+        $stack82 = (float) shadowYOffset#0;
+        $stack83 = (double) $stack82;
+        #l8 = (java.awt.Shape) $stack60;
+        shadowArc#0 = staticinvoke <org.jfree.chart.util.ShapeUtilities: java.awt.Shape createTranslatedShape(java.awt.Shape,double,double)>(#l8, $stack84, $stack83);
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>(shadowPaint#0);
+        virtualinvoke g2.<java.awt.Graphics2D: void fill(java.awt.Shape)>(shadowArc#0);
+    
+      label06:
+        goto label13;
+    
+      label07:
+        if currentPass != 1 goto label12;
+        shadowPaint#1 = virtualinvoke this.<org.jfree.chart.plot.RingPlot: java.awt.Paint lookupSectionPaint(java.lang.Comparable,boolean)>(key, 1);
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>(shadowPaint#1);
+        #l7 = (java.awt.Shape) $stack60;
+        virtualinvoke g2.<java.awt.Graphics2D: void fill(java.awt.Shape)>(#l7);
+        shadowXOffset#1 = virtualinvoke this.<org.jfree.chart.plot.RingPlot: java.awt.Paint lookupSectionOutlinePaint(java.lang.Comparable)>(key);
+        outlineStroke = virtualinvoke this.<org.jfree.chart.plot.RingPlot: java.awt.Stroke lookupSectionOutlineStroke(java.lang.Comparable)>(key);
+    
+        if shadowXOffset#1 == null goto label08;
+    
+        if outlineStroke == null goto label08;
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>(shadowXOffset#1);
+        virtualinvoke g2.<java.awt.Graphics2D: void setStroke(java.awt.Stroke)>(outlineStroke);
+        #l14 = (java.awt.Shape) $stack60;
+        virtualinvoke g2.<java.awt.Graphics2D: void draw(java.awt.Shape)>(#l14);
+    
+      label08:
+        $stack77 = virtualinvoke state.<org.jfree.chart.plot.PiePlotState: org.jfree.chart.plot.PlotRenderingInfo getInfo()>();
+    
+        if $stack77 == null goto label11;
+        shadowYOffset#1 = virtualinvoke state.<org.jfree.chart.plot.PiePlotState: org.jfree.chart.entity.EntityCollection getEntityCollection()>();
+    
+        if shadowYOffset#1 == null goto label11;
+        tip = null;
+        shadowArc#1 = virtualinvoke this.<org.jfree.chart.plot.RingPlot: org.jfree.chart.labels.PieToolTipGenerator getToolTipGenerator()>();
+    
+        if shadowArc#1 == null goto label09;
+        tip = interfaceinvoke shadowArc#1.<org.jfree.chart.labels.PieToolTipGenerator: java.lang.String generateToolTip(org.jfree.data.general.PieDataset,java.lang.Comparable)>(dataset, key);
+    
+      label09:
+        url = null;
+        urlGenerator = virtualinvoke this.<org.jfree.chart.plot.RingPlot: org.jfree.chart.urls.PieURLGenerator getURLGenerator()>();
+    
+        if urlGenerator == null goto label10;
+        $stack80 = virtualinvoke this.<org.jfree.chart.plot.RingPlot: int getPieIndex()>();
+        url = interfaceinvoke urlGenerator.<org.jfree.chart.urls.PieURLGenerator: java.lang.String generateURL(org.jfree.data.general.PieDataset,java.lang.Comparable,int)>(dataset, key, $stack80);
+    
+      label10:
+        $stack79 = new org.jfree.chart.entity.PieSectionEntity;
+        $stack78 = virtualinvoke this.<org.jfree.chart.plot.RingPlot: int getPieIndex()>();
+        #l15 = (java.awt.Shape) $stack60;
+        specialinvoke $stack79.<org.jfree.chart.entity.PieSectionEntity: void <init>(java.awt.Shape,org.jfree.data.general.PieDataset,int,int,java.lang.Comparable,java.lang.String,java.lang.String)>(#l15, dataset, $stack78, section, key, tip, url);
+        entity = $stack79;
+        interfaceinvoke shadowYOffset#1.<org.jfree.chart.entity.EntityCollection: void add(org.jfree.chart.entity.ChartEntity)>($stack79);
+    
+      label11:
+        goto label13;
+    
+      label12:
+        if currentPass != 2 goto label13;
+        $stack72 = this.<org.jfree.chart.plot.RingPlot: boolean separatorsVisible>;
+    
+        if $stack72 == 0 goto label13;
+        $stack74 = this.<org.jfree.chart.plot.RingPlot: double innerSeparatorExtension>;
+        $stack73 = this.<org.jfree.chart.plot.RingPlot: double outerSeparatorExtension>;
+        #l0 = (java.awt.geom.Line2D) $stack71;
+        shadowPaint#2 = specialinvoke this.<org.jfree.chart.plot.RingPlot: java.awt.geom.Line2D extendLine(java.awt.geom.Line2D,double,double)>(#l0, $stack74, $stack73);
+        $stack75 = this.<org.jfree.chart.plot.RingPlot: java.awt.Stroke separatorStroke>;
+        virtualinvoke g2.<java.awt.Graphics2D: void setStroke(java.awt.Stroke)>($stack75);
+        $stack76 = this.<org.jfree.chart.plot.RingPlot: java.awt.Paint separatorPaint>;
+        virtualinvoke g2.<java.awt.Graphics2D: void setPaint(java.awt.Paint)>($stack76);
+        #l9 = (java.awt.Shape) shadowPaint#2;
+        virtualinvoke g2.<java.awt.Graphics2D: void draw(java.awt.Shape)>(#l9);
+    
+      label13:
+        virtualinvoke state.<org.jfree.chart.plot.PiePlotState: void setLatestAngle(double)>(angle2#1);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.plot.RingPlot: void <init>()> ----
+    {
+        org.jfree.chart.plot.RingPlot this;
+    
+    
+        this := @this: org.jfree.chart.plot.RingPlot;
+        specialinvoke this.<org.jfree.chart.plot.RingPlot: void <init>(org.jfree.data.general.PieDataset)>(null);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.plot.RingPlot: org.jfree.chart.plot.PiePlotState initialise(java.awt.Graphics2D,java.awt.geom.Rectangle2D,org.jfree.chart.plot.PiePlot,java.lang.Integer,org.jfree.chart.plot.PlotRenderingInfo)> ----
+    {
+        java.awt.Graphics2D g2;
+        java.awt.geom.Rectangle2D plotArea;
+        java.lang.Integer index;
+        org.jfree.chart.plot.PiePlot plot;
+        org.jfree.chart.plot.PiePlotState state;
+        org.jfree.chart.plot.PlotRenderingInfo info;
+        org.jfree.chart.plot.RingPlot this;
+    
+    
+        this := @this: org.jfree.chart.plot.RingPlot;
+        g2 := @parameter0: java.awt.Graphics2D;
+        plotArea := @parameter1: java.awt.geom.Rectangle2D;
+        plot := @parameter2: org.jfree.chart.plot.PiePlot;
+        index := @parameter3: java.lang.Integer;
+        info := @parameter4: org.jfree.chart.plot.PlotRenderingInfo;
+        state = specialinvoke this.<org.jfree.chart.plot.PiePlot: org.jfree.chart.plot.PiePlotState initialise(java.awt.Graphics2D,java.awt.geom.Rectangle2D,org.jfree.chart.plot.PiePlot,java.lang.Integer,org.jfree.chart.plot.PlotRenderingInfo)>(g2, plotArea, plot, index, info);
+        virtualinvoke state.<org.jfree.chart.plot.PiePlotState: void setPassesRequired(int)>(3);
+    
+        return state;
+    }
+
+    // ---- method: <org.jfree.chart.plot.RingPlot: java.awt.Stroke getSeparatorStroke()> ----
+    {
+        java.awt.Stroke $stack1;
+        org.jfree.chart.plot.RingPlot this;
+    
+    
+        this := @this: org.jfree.chart.plot.RingPlot;
+        $stack1 = this.<org.jfree.chart.plot.RingPlot: java.awt.Stroke separatorStroke>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.plot.RingPlot: boolean getSeparatorsVisible()> ----
+    {
+        boolean $stack1;
+        org.jfree.chart.plot.RingPlot this;
+    
+    
+        this := @this: org.jfree.chart.plot.RingPlot;
+        $stack1 = this.<org.jfree.chart.plot.RingPlot: boolean separatorsVisible>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.plot.RingPlot: void setInnerSeparatorExtension(double)> ----
+    {
+        double percent;
+        org.jfree.chart.event.PlotChangeEvent $stack3;
+        org.jfree.chart.plot.RingPlot this;
+    
+    
+        this := @this: org.jfree.chart.plot.RingPlot;
+        percent := @parameter0: double;
+        this.<org.jfree.chart.plot.RingPlot: double innerSeparatorExtension> = percent;
+        $stack3 = new org.jfree.chart.event.PlotChangeEvent;
+        specialinvoke $stack3.<org.jfree.chart.event.PlotChangeEvent: void <init>(org.jfree.chart.plot.Plot)>(this);
+        virtualinvoke this.<org.jfree.chart.plot.RingPlot: void notifyListeners(org.jfree.chart.event.PlotChangeEvent)>($stack3);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.plot.RingPlot: double getOuterSeparatorExtension()> ----
+    {
+        double $stack1;
+        org.jfree.chart.plot.RingPlot this;
+    
+    
+        this := @this: org.jfree.chart.plot.RingPlot;
+        $stack1 = this.<org.jfree.chart.plot.RingPlot: double outerSeparatorExtension>;
+    
+        return $stack1;
+    }
+
+    // ---- method: <org.jfree.chart.plot.RingPlot: void readObject(java.io.ObjectInputStream)> ----
+    {
+        java.awt.Paint $stack3;
+        java.awt.Stroke $stack2;
+        java.io.ObjectInputStream stream;
+        org.jfree.chart.plot.RingPlot this;
+    
+    
+        this := @this: org.jfree.chart.plot.RingPlot;
+        stream := @parameter0: java.io.ObjectInputStream;
+        virtualinvoke stream.<java.io.ObjectInputStream: void defaultReadObject()>();
+        $stack2 = staticinvoke <org.jfree.chart.util.SerialUtilities: java.awt.Stroke readStroke(java.io.ObjectInputStream)>(stream);
+        this.<org.jfree.chart.plot.RingPlot: java.awt.Stroke separatorStroke> = $stack2;
+        $stack3 = staticinvoke <org.jfree.chart.util.SerialUtilities: java.awt.Paint readPaint(java.io.ObjectInputStream)>(stream);
+        this.<org.jfree.chart.plot.RingPlot: java.awt.Paint separatorPaint> = $stack3;
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.plot.RingPlot: void setSectionDepth(double)> ----
+    {
+        double sectionDepth;
+        org.jfree.chart.event.PlotChangeEvent $stack3;
+        org.jfree.chart.plot.RingPlot this;
+    
+    
+        this := @this: org.jfree.chart.plot.RingPlot;
+        sectionDepth := @parameter0: double;
+        this.<org.jfree.chart.plot.RingPlot: double sectionDepth> = sectionDepth;
+        $stack3 = new org.jfree.chart.event.PlotChangeEvent;
+        specialinvoke $stack3.<org.jfree.chart.event.PlotChangeEvent: void <init>(org.jfree.chart.plot.Plot)>(this);
+        virtualinvoke this.<org.jfree.chart.plot.RingPlot: void notifyListeners(org.jfree.chart.event.PlotChangeEvent)>($stack3);
+    
+        return;
+    }
+
+    // ---- method: <org.jfree.chart.plot.RingPlot: java.awt.geom.Line2D extendLine(java.awt.geom.Line2D,double,double)> ----
+    {
+        double $stack18, $stack19, $stack20, $stack21, deltaX, deltaY, endPercent, startPercent, x1#0, x1#1, x2#0, x2#1, y1#0, y1#1, y2#0, y2#1;
+        java.awt.geom.Line2D #l2, line;
+        java.awt.geom.Line2D$Double #l1;
+        java.lang.IllegalArgumentException #l3;
+        java.lang.Object $stack22, $stack23;
+        java.lang.Throwable #l0;
+        org.jfree.chart.plot.RingPlot this;
+    
+    
+        this := @this: org.jfree.chart.plot.RingPlot;
+        line := @parameter0: java.awt.geom.Line2D;
+        startPercent := @parameter1: double;
+        endPercent := @parameter2: double;
+    
+        if line != null goto label1;
+        $stack23 = new java.lang.IllegalArgumentException;
+        #l3 = (java.lang.IllegalArgumentException) $stack23;
+        specialinvoke #l3.<java.lang.IllegalArgumentException: void <init>(java.lang.String)>("Null \'line\' argument.");
+        #l0 = (java.lang.Throwable) $stack23;
+    
+        throw #l0;
+    
+      label1:
+        x1#0 = virtualinvoke line.<java.awt.geom.Line2D: double getX1()>();
+        x2#0 = virtualinvoke line.<java.awt.geom.Line2D: double getX2()>();
+        deltaX = x2#0 - x1#0;
+        y1#0 = virtualinvoke line.<java.awt.geom.Line2D: double getY1()>();
+        y2#0 = virtualinvoke line.<java.awt.geom.Line2D: double getY2()>();
+        deltaY = y2#0 - y1#0;
+        $stack18 = startPercent * deltaX;
+        x1#1 = x1#0 - $stack18;
+        $stack19 = startPercent * deltaY;
+        y1#1 = y1#0 - $stack19;
+        $stack20 = endPercent * deltaX;
+        x2#1 = x2#0 + $stack20;
+        $stack21 = endPercent * deltaY;
+        y2#1 = y2#0 + $stack21;
+        $stack22 = new java.awt.geom.Line2D$Double;
+        #l1 = (java.awt.geom.Line2D$Double) $stack22;
+        specialinvoke #l1.<java.awt.geom.Line2D$Double: void <init>(double,double,double,double)>(x1#1, y1#1, x2#1, y2#1);
+        #l2 = (java.awt.geom.Line2D) $stack22;
+    
+        return #l2;
+    }
+
+}
